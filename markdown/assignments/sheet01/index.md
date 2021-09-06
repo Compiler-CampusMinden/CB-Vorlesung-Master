@@ -1,12 +1,12 @@
 ---
-title: "Blatt 01"
-author: "Carsten Gips (FH Bielefeld)"
-disableToc: true
+title: "Blatt 01: Scanner und Parser"
+author: "BC George, Carsten Gips (FH Bielefeld)"
 hidden: true
+weight: 1
 ---
 
 
-Hier kommt der Inhalt für Blatt 01 hin ...
+Hier kommt der Inhalt für Blatt 01 hin ... allgemeine einleitende Worte ...
 
 ## Aufgabe 1: XYZ (2P)
 
@@ -15,6 +15,7 @@ tbd
 ## Aufgabe 2: XYZ (3P)
 
 tbd
+
 
 
 {{% challenges %}}

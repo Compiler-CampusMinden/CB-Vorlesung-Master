@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Interpreter"
+weight: 7
 ---
 
 
-# Praktikum
+# Interpreter
 
 allgemeine einleitende Worte ...
 

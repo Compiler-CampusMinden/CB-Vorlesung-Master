@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Zwischencode"
+weight: 5
 ---
 
 
-# Praktikum
+# Zwischencode
 
 allgemeine einleitende Worte ...
 

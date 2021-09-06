@@ -2,19 +2,158 @@
 - week: "KW40"
   lecture:
     - topic: "/misc/syllabus"
-  misc:
-    - page: "/misc/resources"
-      notes: "Vortrag Thema I"
-    - notes: "Coden mit Edmonton"
-    - page: "/misc/schedule"
+      leader: "BC, cagi"
+      notes: "Kick-Off (Zoom)"
+    - topic: "/intro/overview"
+      leader: "cagi"
+    - topic: "/intro/languages"
+      leader: "cagi"
+    - topic: "/intro/applications"
+      leader: "cagi"
 
 - week: "KW41"
   lecture:
-    - topic: "/misc/syllabus"
+    - topic: "/lexing/regular"
+      leader: "BC"
+    - topic: "/lexing/implementation"
       leader: "cagi"
-      notes: "Classes go all-virtual"
-    - topic: "/misc/syllabus"
+    - topic: "/lexing/flex"
+      leader: "cagi"
+  misc:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
+
+- week: "KW42"
+  lecture:
+    - topic: "/parsing/cfg"
+      leader: "BC"
+    - topic: "/parsing/ll-parser"
+      leader: "cagi"
+    - topic: "/parsing/ll-advanced"
+      leader: "cagi"
+  misc:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
+
+- week: "KW43"
+  lecture:
+    - topic: "/parsing/lr-part1"
+      leader: "BC"
+    - topic: "/parsing/lr-part2"
+      leader: "BC"
+    - topic: "/parsing/recovery"
+      leader: "cagi"
+    - topic: "/parsing/finalwords"
+      leader: "cagi"
+  misc:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
+    - notes: "**COIL**: ANTLR + Coden (CAN)"
+
+- week: "KW44"
+  lecture:
+    - topic: "/semantics/symboltables/intro"
+      leader: "cagi"
+    - topic: "/semantics/symboltables/scopes"
+      leader: "cagi"
+    - topic: "/semantics/symboltables/functions"
+      leader: "cagi"
+    - topic: "/semantics/symboltables/classes"
+      leader: "cagi"
+
+- week: "KW45"
+  lecture:
+    - topic: "/semantics/types"
+      leader: "BC"
+    - topic: "/semantics/attribgrammars"
+      leader: "BC"
   assignment:
     - topic: "sheet01"
-      due: "14.10."
+      due: "XX.XX."
+
+- week: "KW46"
+  misc:
+    - notes: "**mdl. Prüfung I**"
+    - notes: "**COIL** / **Vortrag (2P)**: Yacc vs. Bison + Coden (DE)"
+
+- week: "KW47"
+  lecture:
+    - topic: "/optimization/optimization"
+      leader: "BC"
+    - topic: "/optimization/dataflow"
+      leader: "BC"
+  assignment:
+    - topic: "sheet02"
+      due: "XX.XX."
+
+- week: "KW48"
+  lecture:
+    - topic: "/intermediate/intro"
+      leader: "cagi"
+    - topic: "/intermediate/llvm-ir"
+      leader: "BC"
+  assignment:
+    - topic: "sheet03"
+      due: "XX.XX."
+
+- week: "KW49"
+  misc:
+    - notes: "**Vortrag**: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
+    - notes: "**COIL**: Optimierung (CAN)"
+
+- week: "KW50"
+  lecture:
+    - topic: "/interpretation/syntaxdriven"
+      leader: "cagi"
+    - topic: "/interpretation/astdriven-part1"
+      leader: "cagi"
+    - topic: "/interpretation/astdriven-part2"
+      leader: "cagi"
+  assignment:
+    - topic: "sheet04"
+      due: "XX.XX."
+
+- week: "KW51"
+  misc:
+    - notes: "*Weihnachten*"
+
+- week: "KW52"
+  misc:
+    - notes: "*Neujahr*"
+
+- week: "KW01"
+  lecture:
+    - topic: "/interpretation/vm/bytecode"
+      leader: "cagi"
+    - topic: "/interpretation/vm/consts"
+      leader: "cagi"
+    - topic: "/interpretation/vm/variables"
+      leader: "cagi"
+    - topic: "/interpretation/vm/functions"
+      leader: "cagi"
+    - topic: "/interpretation/vm/classes"
+      leader: "cagi"
+    - topic: "/interpretation/vm/garbage"
+      leader: "cagi"
+      notes: "TODO: entfällt evtl. -- Vortrag stattdessen?!"
+  misc:
+    - notes: "**Vortrag**: JIT, ???"
+
+- week: "KW02"
+  misc:
+    - notes: "**Vortrag**: GC (Varianten, Rust), ???"
+    - notes: "**Vortrag**: Paradigmen und Einfluss auf Strukturen/Laufzeitsystem, ???"
+    - notes: "**Vortrag**: Generierung von Maschinencode, ???"
+  assignment:
+    - topic: "sheet05"
+      due: "XX.XX."
+
+- week: "KW03"
+  misc:
+    - notes: "**mdl. Prüfung II**"
+
+- week: "KW04"
+  misc:
+    - notes: "(Prüfungsphase)"
+
+- week: "KW05"
+  misc:
+    - notes: "(Prüfungsphase)"
 ---

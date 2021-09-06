@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Semantische Analyse"
+weight: 4
 ---
 
 
-# Praktikum
+# Semantische Analyse
 
 allgemeine einleitende Worte ...
 

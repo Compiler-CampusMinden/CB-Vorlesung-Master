@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Symboltabellen"
+weight: 1
 ---
 
 
-# Praktikum
+# Symboltabellen
 
 allgemeine einleitende Worte ...
 

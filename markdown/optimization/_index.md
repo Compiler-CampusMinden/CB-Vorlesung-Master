@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Optimierung"
+weight: 6
 ---
 
 
-# Praktikum
+# Optimierung
 
 allgemeine einleitende Worte ...
 

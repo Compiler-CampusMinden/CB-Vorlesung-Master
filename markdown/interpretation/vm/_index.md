@@ -1,11 +1,11 @@
 ---
 chapter: true
-title: "Praktikum"
-hidden: true
+title: "Bytecode und Virtuelle Maschinen"
+weight: 4
 ---
 
 
-# Praktikum
+# Bytecode und Virtuelle Maschinen
 
 allgemeine einleitende Worte ...
 

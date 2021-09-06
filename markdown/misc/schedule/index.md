@@ -8,15 +8,16 @@ hidden: true
 {{< schedule >}}
 
 
-**Legende**:
+#### Legende
 
 *   leeres Feld: keine Vorlesung bzw. kein Praktikum
-*   Vorlesung: Durchführung und Bereitstellung der Unterlagen gemeinsam für FHB und TDU
-    *   KW45 bis KW51: FHB (Carsten Gips)
-    *   KW01 bis KW04: TDU (Canan Yıldız)
-    *   Rückblick und Klausurvorbereitung in KW04 für FHB durch FHB
-*   Praktika: Durchführung jeweils getrennt nach FHB und TDU; Bereitstellung der Aufgabenblätter:
-    *   KW45 bis KW51: FHB (Carsten Gips)
-    *   KW02 bis KW04: TDU (Canan Yıldız)
+*   Vorlesung:
+    -   BC: Live-Vorlesungen via Zoom
+    -   cagix: Flipped-Classroom (Sprechstunde in VL-Slot via Zoom)
+*   Praktikum: via Zoom
+*   Sonstiges:
+    -   Vortrag: findet VL- bzw. Praktikumsslot statt
+    -   COIL: Veranstaltungsteil findet in den Abendstunden statt, Sprache: englisch
+    -   mdl. Prüfung: im VL- und Praktikumsslot, Abstimmung vor dem Termin
 
 *Hinweis*: Die Planung wird bei Bedarf aktualisiert!
