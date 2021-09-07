@@ -63,7 +63,38 @@ RESOURCES    = resources
 ## The "topic/subtopic/lecture" is also a make target for creating the lecture slides
 ## for this page.
 SRC    =
-SRC   +=
+SRC   += intro/overview
+SRC   += intro/languages
+SRC   += intro/applications
+SRC   += lexing/regular
+SRC   += lexing/implementation
+SRC   += lexing/flex
+SRC   += parsing/cfg
+SRC   += parsing/ll-parser
+SRC   += parsing/ll-advanced
+SRC   += parsing/lr-part1
+SRC   += parsing/lr-part2
+SRC   += parsing/recovery
+SRC   += parsing/finalwords
+SRC   += semantics/symboltables/intro
+SRC   += semantics/symboltables/scopes
+SRC   += semantics/symboltables/functions
+SRC   += semantics/symboltables/classes
+SRC   += semantics/attribgrammars
+SRC   += semantics/types
+SRC   += intermediate/intro
+SRC   += intermediate/llvm-ir
+SRC   += optimization/dataflow
+SRC   += optimization/optimization
+SRC   += interpretation/syntaxdriven
+SRC   += interpretation/astdriven-part1
+SRC   += interpretation/astdriven-part2
+SRC   += interpretation/vm/bytecode
+SRC   += interpretation/vm/consts
+SRC   += interpretation/vm/variables
+SRC   += interpretation/vm/functions
+SRC   += interpretation/vm/classes
+SRC   += interpretation/vm/garbage
 
 ## Use different file extensions so Make can distinguish these targets
 SLIDES = $(patsubst %,$(TMP_CONTENT)/%/$(PAGE_PDF),$(SRC))
