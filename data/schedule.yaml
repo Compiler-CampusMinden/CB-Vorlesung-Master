@@ -19,7 +19,7 @@
       leader: "cagi"
     - topic: "/lexing/flex"
       leader: "cagi"
-  misc:
+  misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW42"
@@ -30,7 +30,7 @@
       leader: "cagi"
     - topic: "/parsing/ll-advanced"
       leader: "cagi"
-  misc:
+  misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW43"
@@ -43,8 +43,9 @@
       leader: "cagi"
     - topic: "/parsing/finalwords"
       leader: "cagi"
-  misc:
+  misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
+  misc_column:
     - notes: "**COIL**: ANTLR + Coden (CAN)"
 
 - week: "KW44"
@@ -69,8 +70,11 @@
       due: "XX.XX."
 
 - week: "KW46"
-  misc:
+  misc_lecture:
     - notes: "**mdl. Prüfung I**"
+  misc_assignment:
+    - notes: "**mdl. Prüfung I**"
+  misc_column:
     - notes: "**COIL** / **Vortrag (2P)**: Yacc vs. Bison + Coden (DE)"
 
 - week: "KW47"
@@ -94,8 +98,9 @@
       due: "XX.XX."
 
 - week: "KW49"
-  misc:
+  misc_lecture:
     - notes: "**Vortrag**: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
+  misc_column:
     - notes: "**COIL**: Optimierung (CAN)"
 
 - week: "KW50"
@@ -111,11 +116,11 @@
       due: "XX.XX."
 
 - week: "KW51"
-  misc:
+  misc_column:
     - notes: "*Weihnachten*"
 
 - week: "KW52"
-  misc:
+  misc_column:
     - notes: "*Neujahr*"
 
 - week: "KW01"
@@ -133,11 +138,11 @@
     - topic: "/interpretation/vm/garbage"
       leader: "cagi"
       notes: "TODO: entfällt evtl. -- Vortrag stattdessen?!"
-  misc:
+  misc_assignment:
     - notes: "**Vortrag**: JIT, ???"
 
 - week: "KW02"
-  misc:
+  misc_lecture:
     - notes: "**Vortrag**: GC (Varianten, Rust), ???"
     - notes: "**Vortrag**: Paradigmen und Einfluss auf Strukturen/Laufzeitsystem, ???"
     - notes: "**Vortrag**: Generierung von Maschinencode, ???"
@@ -146,14 +151,16 @@
       due: "XX.XX."
 
 - week: "KW03"
-  misc:
+  misc_lecture:
+    - notes: "**mdl. Prüfung II**"
+  misc_assignment:
     - notes: "**mdl. Prüfung II**"
 
 - week: "KW04"
-  misc:
+  misc_column:
     - notes: "(Prüfungsphase)"
 
 - week: "KW05"
-  misc:
+  misc_column:
     - notes: "(Prüfungsphase)"
 ---
