@@ -46,7 +46,7 @@
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
   misc_column:
-    - notes: "**COIL**: ANTLR + Coden (CAN)"
+    - notes: "COIL: ANTLR + Coden (CAN)"
 
 - week: "KW44"
   lecture:
@@ -71,11 +71,11 @@
 
 - week: "KW46"
   misc_lecture:
-    - notes: "**mdl. Prüfung I**"
+    - notes: "mdl. Prüfung I"
   misc_assignment:
-    - notes: "**mdl. Prüfung I**"
+    - notes: "mdl. Prüfung I"
   misc_column:
-    - notes: "**COIL** / **Vortrag (2P)**: Yacc vs. Bison + Coden (DE)"
+    - notes: "COIL / Vortrag (2P): Yacc vs. Bison + Coden (DE)"
 
 - week: "KW47"
   lecture:
@@ -99,9 +99,9 @@
 
 - week: "KW49"
   misc_lecture:
-    - notes: "**Vortrag**: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
+    - notes: "Vortrag: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
   misc_column:
-    - notes: "**COIL**: Optimierung (CAN)"
+    - notes: "COIL: Optimierung (CAN)"
 
 - week: "KW50"
   lecture:
@@ -117,11 +117,11 @@
 
 - week: "KW51"
   misc_column:
-    - notes: "*Weihnachten*"
+    - notes: "Weihnachten"
 
 - week: "KW52"
   misc_column:
-    - notes: "*Neujahr*"
+    - notes: "Neujahr"
 
 - week: "KW01"
   lecture:
@@ -139,22 +139,22 @@
       leader: "cagi"
       notes: "TODO: entfällt evtl. -- Vortrag stattdessen?!"
   misc_assignment:
-    - notes: "**Vortrag**: JIT, ???"
+    - notes: "Vortrag: JIT, ???"
 
 - week: "KW02"
   misc_lecture:
-    - notes: "**Vortrag**: GC (Varianten, Rust), ???"
-    - notes: "**Vortrag**: Paradigmen und Einfluss auf Strukturen/Laufzeitsystem, ???"
-    - notes: "**Vortrag**: Generierung von Maschinencode, ???"
+    - notes: "Vortrag: GC (Varianten, Rust), ???"
+    - notes: "Vortrag: Paradigmen und Einfluss auf Strukturen/Laufzeitsystem, ???"
+    - notes: "Vortrag: Generierung von Maschinencode, ???"
   assignment:
     - topic: "sheet05"
       due: "XX.XX."
 
 - week: "KW03"
   misc_lecture:
-    - notes: "**mdl. Prüfung II**"
+    - notes: "mdl. Prüfung II"
   misc_assignment:
-    - notes: "**mdl. Prüfung II**"
+    - notes: "mdl. Prüfung II"
 
 - week: "KW04"
   misc_column:
