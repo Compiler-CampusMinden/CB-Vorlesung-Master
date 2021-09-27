@@ -1,4 +1,3 @@
----
 - week: "KW40"
   lecture:
     - topic: "/misc/syllabus"
@@ -47,6 +46,10 @@
     - notes: "COIL: ANTLR + Coden (CAN)"
 
 - week: "KW44"
+  misc_column:
+    - notes: ">> Happy Feiertach (01.11.)"
+
+- week: "KW45"
   lecture:
     - topic: "/semantics/symboltables/intro"
       leader: "cagi"
@@ -56,32 +59,28 @@
       leader: "cagi"
     - topic: "/semantics/symboltables/classes"
       leader: "cagi"
-
-- week: "KW45"
-  lecture:
     - topic: "/semantics/types"
       leader: "BC"
     - topic: "/semantics/attribgrammars"
       leader: "BC"
-  assignment:
-    - topic: "sheet01"
-      due: "XX.XX."
+  misc_assignment:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW46"
-  misc_lecture:
-    - notes: "mdl. Prüfung I"
-  misc_assignment:
-    - notes: "mdl. Prüfung I"
-  misc_column:
-    - notes: "COIL / Vortrag (2P): Yacc vs. Bison + Coden (DE)"
-
-- week: "KW47"
   lecture:
     - topic: "/optimization"
       leader: "BC"
   assignment:
-    - topic: "sheet02"
+    - topic: "sheet01"
       due: "XX.XX."
+  misc_column:
+    - notes: "COIL / Vortrag (2P): Yacc vs. Bison + Coden (DE)"
+
+- week: "KW47"
+  misc_lecture:
+    - notes: "mdl. Prüfung I"
+  misc_assignment:
+    - notes: "mdl. Prüfung I"
 
 - week: "KW48"
   lecture:
@@ -90,12 +89,15 @@
     - topic: "/intermediate/llvm-ir"
       leader: "BC"
   assignment:
-    - topic: "sheet03"
+    - topic: "sheet02"
       due: "XX.XX."
 
 - week: "KW49"
   misc_lecture:
     - notes: "Vortrag: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
+  assignment:
+    - topic: "sheet03"
+      due: "XX.XX."
   misc_column:
     - notes: "COIL: Optimierung (CAN)"
 
@@ -113,11 +115,11 @@
 
 - week: "KW51"
   misc_column:
-    - notes: "Weihnachten"
+    - notes: ">> Weihnachten"
 
 - week: "KW52"
   misc_column:
-    - notes: "Neujahr"
+    - notes: ">> Neujahr"
 
 - week: "KW01"
   lecture:
@@ -159,4 +161,3 @@
 - week: "KW05"
   misc_column:
     - notes: "(Prüfungsphase)"
----
