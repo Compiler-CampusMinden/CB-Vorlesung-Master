@@ -43,10 +43,10 @@
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
   misc_column:
-    - notes: "COIL: ANTLR + Coden (CAN)"
+    - notes: "COIL: ANTLR + Live-Coding (CA): Mo, 25.10.21, 17:00-18:30 Uhr"
 
 - week: "KW44"
-  misc_column:
+  misc_lecture:
     - notes: ">> Happy Feiertach (01.11.)"
 
 - week: "KW45"
@@ -72,9 +72,9 @@
       leader: "BC"
   assignment:
     - topic: "sheet01"
-      due: "XX.XX."
+      due: "15.11.21, BC"
   misc_column:
-    - notes: "COIL / Vortrag (2P): Yacc vs. Bison + Coden (DE)"
+    - notes: "COIL / Vortrag (2P): YACC und Bison + Live-Coding (DE): Mo, 15.11.21, 17:00-18:30 Uhr"
 
 - week: "KW47"
   misc_lecture:
@@ -86,20 +86,20 @@
   lecture:
     - topic: "/intermediate/intro"
       leader: "cagi"
-    - topic: "/intermediate/llvm-ir"
-      leader: "BC"
+  misc_lecture:
+    - notes: "Vortrag: LLVM: Überblick, LLVM-IR, Möglichkeiten der Optimierung"
   assignment:
     - topic: "sheet02"
-      due: "XX.XX."
+      due: "29.11.21, cagi"
 
 - week: "KW49"
   misc_lecture:
-    - notes: "Vortrag: Sprachen und Parser (manuell/Generator), Parser-Kombinatoren, PEG-Parser, ???"
+    - notes: "Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators"
   assignment:
     - topic: "sheet03"
-      due: "XX.XX."
+      due: "06.12.21, BC"
   misc_column:
-    - notes: "COIL: Optimierung (CAN)"
+    - notes: "COIL: Optimierung (CA): Mo, 06.12.21, 17:00-18:30 Uhr"
 
 - week: "KW50"
   lecture:
@@ -111,53 +111,31 @@
       leader: "cagi"
   assignment:
     - topic: "sheet04"
-      due: "XX.XX."
+      due: "13.12.21, BC"
 
 - week: "KW51"
-  misc_column:
-    - notes: ">> Weihnachten"
+  misc_lecture:
+    - notes: ">> Frohe Weihnachten!"
 
 - week: "KW52"
-  misc_column:
-    - notes: ">> Neujahr"
+  misc_lecture:
+    - notes: ">> Weihnachtsferien!"
 
 - week: "KW01"
-  lecture:
-    - topic: "/interpretation/vm/bytecode"
-      leader: "cagi"
-    - topic: "/interpretation/vm/consts"
-      leader: "cagi"
-    - topic: "/interpretation/vm/variables"
-      leader: "cagi"
-    - topic: "/interpretation/vm/functions"
-      leader: "cagi"
-    - topic: "/interpretation/vm/classes"
-      leader: "cagi"
-    - topic: "/interpretation/vm/garbage"
-      leader: "cagi"
-      notes: "TODO: entfällt evtl. -- Vortrag stattdessen?!"
-  misc_assignment:
-    - notes: "Vortrag: JIT, ???"
+  misc_lecture:
+    - notes: "Vortrag: Generierung von Maschinencode"
+    - notes: ">> Alles Gute im neuen Jahr!"
+  assignment:
+    - topic: "sheet05"
+      due: "03.01.22, cagi"
 
 - week: "KW02"
   misc_lecture:
-    - notes: "Vortrag: GC (Varianten, Rust), ???"
-    - notes: "Vortrag: Paradigmen und Einfluss auf Strukturen/Laufzeitsystem, ???"
-    - notes: "Vortrag: Generierung von Maschinencode, ???"
-  assignment:
-    - topic: "sheet05"
-      due: "XX.XX."
+    - notes: "Vortrag: VM und Bytecode"
+    - notes: "Vortrag: Garbage Collection"
 
 - week: "KW03"
   misc_lecture:
     - notes: "mdl. Prüfung II"
   misc_assignment:
     - notes: "mdl. Prüfung II"
-
-- week: "KW04"
-  misc_column:
-    - notes: "(Prüfungsphase)"
-
-- week: "KW05"
-  misc_column:
-    - notes: "(Prüfungsphase)"

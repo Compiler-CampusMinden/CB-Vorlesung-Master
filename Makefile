@@ -99,6 +99,7 @@ SRC   += interpretation/vm/variables
 SRC   += interpretation/vm/functions
 SRC   += interpretation/vm/classes
 SRC   += interpretation/vm/garbage
+SRC   += misc/resources
 
 ## Use different file extensions so Make can distinguish these targets
 SLIDES = $(patsubst %,$(TMP_CONTENT)/%/$(PAGE_PDF),$(SRC))
