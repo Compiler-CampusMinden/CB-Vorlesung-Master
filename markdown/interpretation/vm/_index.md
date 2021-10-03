@@ -1,13 +1,11 @@
 ---
 chapter: true
 title: "Bytecode und Virtuelle Maschinen"
+menuTitle: "Bytecode/VM"
 weight: 4
 ---
 
 
 # Bytecode und Virtuelle Maschinen
 
-allgemeine einleitende Worte ...
-
-
-{{< children showhidden="true" >}}
+-- Vortragsthema --

@@ -2,7 +2,7 @@
 type: lecture-cg
 title: "Grenze Lexer und Parser"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 7
+weight: 9
 readings:
   - key: "Russell2020"
     comment: "Kapitel 2 und 3"

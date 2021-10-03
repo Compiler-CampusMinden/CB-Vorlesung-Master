@@ -2,7 +2,7 @@
 type: lecture-cg
 title: "Error-Recovery"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 6
+weight: 8
 readings:
   - key: "Russell2020"
     comment: "Kapitel 2 und 3"

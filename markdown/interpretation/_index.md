@@ -1,7 +1,7 @@
 ---
 chapter: true
 title: "Interpreter"
-weight: 7
+weight: 6
 ---
 
 

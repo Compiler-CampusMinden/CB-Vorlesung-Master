@@ -88,17 +88,10 @@ SRC   += semantics/symboltables/classes
 SRC   += semantics/attribgrammars
 SRC   += semantics/types
 SRC   += intermediate/intro
-SRC   += intermediate/llvm-ir
 SRC   += optimization
 SRC   += interpretation/syntaxdriven
 SRC   += interpretation/astdriven-part1
 SRC   += interpretation/astdriven-part2
-SRC   += interpretation/vm/bytecode
-SRC   += interpretation/vm/consts
-SRC   += interpretation/vm/variables
-SRC   += interpretation/vm/functions
-SRC   += interpretation/vm/classes
-SRC   += interpretation/vm/garbage
 SRC   += misc/resources
 
 ## Use different file extensions so Make can distinguish these targets

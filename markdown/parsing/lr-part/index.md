@@ -3,7 +3,7 @@ type: lecture-bc
 title: "Syntaxanalyse: LR-Parser"
 menuTitle: "LR-Parser"
 author: "BC George (FH Bielefeld)"
-weight: 4
+weight: 5
 readings:
   - key: "aho2013compilers"
     comment: "Kapitel 2 und 3"
