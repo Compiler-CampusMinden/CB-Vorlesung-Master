@@ -7,4 +7,4 @@ weight: 6
 
 # YACC und Bison (Parsergeneratoren)
 
--- Vortragsthema --
+-- Vortragsthema -- (gehört zu ["Flex: Lexer generieren)"]({{<ref "/lexing/flex" >}}))

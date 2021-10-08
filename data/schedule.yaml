@@ -18,8 +18,6 @@
       leader: "cagi"
     - topic: "/lexing/recursive"
       leader: "cagi"
-    - topic: "/lexing/flex"
-      leader: "cagi"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
@@ -76,7 +74,7 @@
     - topic: "sheet01"
       due: "15.11.21, BC"
   misc_column:
-    - notes: "COIL / Vortrag (2P): YACC und Bison + Live-Coding (DE): Mo, 15.11.21, 17:00-18:30 Uhr"
+    - notes: "COIL / Vortrag (2P): Flex und YACC/Bison + Live-Coding (DE): Mo, 15.11.21, 17:00-18:30 Uhr"
 
 - week: "KW47"
   misc_lecture:
