@@ -1,0 +1,39 @@
+// dot -Tpdf delta.dot -o delta.pdf  &&   dot -Tpng delta.dot -o delta.png
+
+digraph delta {
+    Delta [shape=none, margin=0, label=<
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+            <tr>
+                <td bgcolor="lightgrey">&nbsp;</td>
+                <td bgcolor="lightgrey">0</td>
+                <td bgcolor="lightgrey">1,..,9</td>
+                <td bgcolor="lightgrey">R, L</td>
+                <td bgcolor="lightgrey">*</td>
+            </tr><tr>
+                <td>s0</td>
+                <td>se</td>
+                <td>s1</td>
+                <td>se</td>
+                <td>se</td>
+            </tr><tr>
+                <td>s1</td>
+                <td>s1</td>
+                <td>s1</td>
+                <td>s2</td>
+                <td>se</td>
+            </tr><tr>
+                <td>s2</td>
+                <td>se</td>
+                <td>se</td>
+                <td>s2</td>
+                <td>se</td>
+            </tr><tr>
+                <td>se</td>
+                <td>se</td>
+                <td>se</td>
+                <td>se</td>
+                <td>se</td>
+            </tr>
+        </table>>];
+}
+

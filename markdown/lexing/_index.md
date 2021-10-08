@@ -7,7 +7,9 @@ weight: 2
 
 # Lexer
 
-allgemeine einleitende Worte ...
+Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token
+zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke
+verwendet.
 
 
 {{< children showhidden="true" >}}

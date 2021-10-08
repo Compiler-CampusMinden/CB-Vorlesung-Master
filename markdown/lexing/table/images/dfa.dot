@@ -1,0 +1,16 @@
+// dot -Tpdf dfa.dot -o dfa.pdf  &&   dot -Tpng dfa.dot -o dfa.png
+
+digraph dfa {
+    rankdir=LR;
+    node [shape=circle, fixedsize=true];
+
+    s  -> s0
+    s0 -> s1 [label="1..9"];
+    s1 -> s1 [label="0..9"];
+    s1 -> s2 [label="R,L"];
+    s2 -> s2 [label="R,L"];
+
+    s  [style=invis];
+    s2 [shape=doublecircle];
+}
+

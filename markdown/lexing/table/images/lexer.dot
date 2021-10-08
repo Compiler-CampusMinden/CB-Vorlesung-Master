@@ -1,0 +1,16 @@
+// dot -Tpdf lexer.dot -o lexer.pdf  &&  dot -Tpng lexer.dot -o lexer.png
+
+digraph lexer {
+    rankdir=LR;
+    node [shape=circle, fixedsize=true];
+
+    //RE  -> DFA [dir=back, label="Kleene's Construction"];
+    RE  -> NFA [label="Thompson's Construction"];
+    NFA -> DFA [label="Subset Construction"];
+    DFA -> DFA [label="DFA Minimization\n(Hopcroft's Algorithm)"];
+    DFA -> Code:sw;
+    DFA -> RE [label="Kleene's Construction"];
+
+    Code [shape=plaintext, label="Code for\nScanner"];
+}
+

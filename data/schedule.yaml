@@ -14,7 +14,9 @@
   lecture:
     - topic: "/lexing/regular"
       leader: "BC"
-    - topic: "/lexing/implementation"
+    - topic: "/lexing/table"
+      leader: "cagi"
+    - topic: "/lexing/recursive"
       leader: "cagi"
     - topic: "/lexing/flex"
       leader: "cagi"
