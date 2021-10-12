@@ -10,6 +10,9 @@ readings:
   - key: "Torczon2012"
     comment: "Kapitel 2"
   - key: "Parr2014"
+attachments:
+  - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/a5f6c9f70413034acabfc9e81c108fdec193f006/lexing_regular.ann.pdf"
+    name: "Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke"
 ---
 
 
