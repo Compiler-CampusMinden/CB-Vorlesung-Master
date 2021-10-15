@@ -5,20 +5,14 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
 {{% k2 %}}
--   foo
--   bar
+*   Prinzipieller Aufbau von LL-Parsern
 {{% /k2 %}}
 
 {{% k3 %}}
-hammwanich
+
+*   Implementierung von LL(1)- und LL(k)-Parsern
+*   Implementierung von Vorrang und Assoziativität
+*   Umgang mit Linksrekursion, insbesondere bei ANTLR4
 {{% /k3 %}}
 
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}
