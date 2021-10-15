@@ -5,20 +5,8 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
-{{% k2 %}}
--   foo
--   bar
-{{% /k2 %}}
-
 {{% k3 %}}
-hammwanich
+*   Implementierung von LL(1)- und LL(k)-Parsern
+*   Dynamischer Lookahead mittels Backtracking; Verbesserung der Laufzeiteigenschaften mit Packrat
+*   Einsatz von semantischen Prädikaten zum (De-) Aktivieren von Regeln oder Token
 {{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}
