@@ -1,0 +1,23 @@
+\documentclass[
+    border=0.2cm,
+    convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{lstlisting} [mathescape, backgroundcolor=\color{lightgray},
+basicstyle=\scriptsize\ttfamily]
+
+RecursiveDescent$(X, a)\  // X \in N, a \in T$
+    for a production, $X \rightarrow Y_1 Y_2 \ldots Y_n$
+        for i = 1 to n
+            if $Y_i \in N$
+                RecursiveDescent$(Y_i,a)$
+            else if $Y_i \neq a$
+                error
+\end{lstlisting}
+\end{document}

@@ -1,0 +1,26 @@
+\documentclass[
+    border=0.2cm,
+    convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+
+
+\begin{lstlisting}[mathescape,backgroundcolor=\color{lightgray},basicstyle=\scriptsize\ttfamily]
+
+for each production $X \rightarrow\alpha$
+   for each $a \in First(\alpha)$
+      add $X \rightarrow\alpha$ to $P[X, a]$
+   
+   if $\epsilon \in First(\alpha)$
+      for each $b \in Follow(\alpha)$
+         add $X \rightarrow\alpha$  to $P[X, b]$
+         if $\epsilon  \in First(\alpha)$ and  $\perp \  \in \ Follow(X)$
+            add $X \rightarrow\alpha$ to $P[A, \perp]$            
+            
+\end{lstlisting}
+\end{document}

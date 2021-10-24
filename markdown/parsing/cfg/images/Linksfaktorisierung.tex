@@ -1,0 +1,41 @@
+\documentclass[
+    border=0.2cm,
+    convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+
+%%
+%% 1. Copy this template into an image folder of your page: "images/my-algorithm.tex".
+%% 2. Paste the algorithm or listing with math escaping here and replace this comment.
+%% 3. Include the image with the same name in your page "index.md": "[My Algorithm](images/my-algorithm.png)".
+%%
+%% When generating the slide sets and the website, "images/my-algorithm.png" is
+%% automatically generated from "images/my-algorithm.tex" during pre-processing.
+%%
+\begin{lstlisting} [mathescape, backgroundcolor=\color{lightgray},
+	basicstyle=\scriptsize\ttfamily]
+	
+repeat
+   for each $X \in N$ 
+      find the longest prefix $\alpha \in (N \cup T)^*$ common to at least two 
+         of its productions
+
+      if $\alpha \neq \epsilon$ exists
+         replace all $X$-productions
+
+              $X \rightarrow \alpha\ {\beta}_1 \mid \alpha\ {\beta}_2 \mid \ldots \mid \alpha\ {\beta}_n \mid \gamma$ 
+              (with $\gamma \neq \alpha \delta$ for a $\delta \in (N \cup T)^*$)
+             
+	        by the following rules with a new nonterminal $Y$:
+
+                  $X \rightarrow \alpha\ Y \mid \gamma$
+                  $Y\rightarrow {\beta}_1 \mid {\beta}_2 \mid \ldots \mid {\beta}_n$
+
+  until there are no two $X \in N$ with productions with common prefixes
+\end{lstlisting}
+\end{document}

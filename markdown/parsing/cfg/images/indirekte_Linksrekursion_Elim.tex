@@ -1,0 +1,27 @@
+\documentclass[
+    border=0.2cm,
+    convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+\begin{lstlisting} [mathescape, backgroundcolor=\color{lightgray},
+	basicstyle=\scriptsize\ttfamily]
+
+for i = 1 to n
+   for j = 1 to i-1
+      
+      replace each $X \rightarrow X_j\alpha$ by the productions
+            
+         $X_i \rightarrow \beta_1 \alpha \mid \beta_2 \alpha \mid \ldots \mid \beta_k \alpha$
+         with $X_j \rightarrow \beta_1 \mid \beta_2 \mid \ldots \mid \beta_k$ are all the
+            $X_j$-productions
+
+      remove all $X_i$ - productions with direct left recursion
+      
+\end{lstlisting}
+
+\end{document}
