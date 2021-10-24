@@ -5,20 +5,6 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
 {{% k2 %}}
--   foo
--   bar
+*   Grenze zwischen Lexer und Parser: Was mache ich auf welcher Stufe?
 {{% /k2 %}}
-
-{{% k3 %}}
-hammwanich
-{{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}
