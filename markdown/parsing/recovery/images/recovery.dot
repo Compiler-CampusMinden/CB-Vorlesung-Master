@@ -1,0 +1,17 @@
+// dot -Tpdf recovery.dot -o recovery.pdf  &&   dot -Tpng recovery.dot -o recovery.png
+
+digraph recovery {
+    node [shape=plaintext];
+
+    r  -> t
+    r  -> p
+    t  -> d
+    t  -> i
+
+    r  [label="Recovery"];
+    t  [label="Inline\nSingle Token"];
+    d  [label="Deletion"];
+    i  [label="Insertion"];
+    p  [label="Panic Mode\nSync-and-Return"];
+}
+

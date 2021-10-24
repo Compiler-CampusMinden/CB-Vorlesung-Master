@@ -1,0 +1,8 @@
+# Startregel `stmt`
+int x1;
+int x y;
+int x y z;
+int ;
+
+Startregel `alt`
+int ;
