@@ -11,6 +11,9 @@ readings:
   - key: "hopcroft2003"
   - key: "Kunert2018"
   - key: "Wagenknecht2014"
+attachments:
+  - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_lr-part.ann.pdf"
+    name: "Annotierte Folien: LR-Parser"
 ---
 
 
