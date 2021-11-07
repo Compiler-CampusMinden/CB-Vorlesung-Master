@@ -1,0 +1,21 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>610</x><y>220</y><w>130</w><h>90</h></coordinates><panel_attributes>*Symbol*
+--
+name: String
+type: Type
+scope: Scope
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>370</y><w>100</w><h>30</h></coordinates><panel_attributes>*Variable*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>560</x><y>370</y><w>100</w><h>30</h></coordinates><panel_attributes>*BuiltIn*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>370</y><w>80</w><h>30</h></coordinates><panel_attributes>*Type*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>110</y><w>230</w><h>100</h></coordinates><panel_attributes>*Scope*
+--
+enclosingScope: Scope
+symbols: Map&lt;String, Symbol&gt;
+--
+bind(symbol: Symbol): void
+resolve(name: String): Symbol</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>690</x><y>300</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;70</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>300</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>250</y><w>280</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>260;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>270</y><w>300</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>280;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>370</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>250</y><w>100</w><h>30</h></coordinates><panel_attributes>*Function*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>310</y><w>260</w><h>50</h></coordinates><panel_attributes>*Struct*
+--
+--
+resolveMember(name: String): Symbol</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>200</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>410</y><w>260</w><h>90</h></coordinates><panel_attributes>*Clazz*
+--
+parentClazz: Clazz
+--
+resolve(name: String): Symbol
+resolveMember(name: String): Symbol
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>350</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>340</y><w>110</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>200</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element></diagram>
