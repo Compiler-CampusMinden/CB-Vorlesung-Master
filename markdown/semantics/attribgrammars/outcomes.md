@@ -5,20 +5,12 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
 {{% k2 %}}
--   foo
--   bar
+*   Konzept der attributierten Grammatiken: Anreicherung mit Attributen und semantischen Regeln
+*   Unterschied zwischen geerbten und berechneten Attributen
+*   Umsetzung von SDD mit Hilfe von SDT
 {{% /k2 %}}
 
 {{% k3 %}}
-hammwanich
+*   Einfache semantische Analyse mit Hilfe von attributierten Grammatiken
 {{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}

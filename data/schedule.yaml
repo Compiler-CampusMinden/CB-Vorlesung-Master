@@ -59,8 +59,6 @@
       leader: "cagi"
     - topic: "/semantics/symboltables/classes"
       leader: "cagi"
-    - topic: "/semantics/types"
-      leader: "BC"
     - topic: "/semantics/attribgrammars"
       leader: "BC"
   misc_assignment:

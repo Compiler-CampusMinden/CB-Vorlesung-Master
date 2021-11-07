@@ -86,7 +86,6 @@ SRC   += semantics/symboltables/scopes
 SRC   += semantics/symboltables/functions
 SRC   += semantics/symboltables/classes
 SRC   += semantics/attribgrammars
-SRC   += semantics/types
 SRC   += intermediate/intro
 SRC   += optimization
 SRC   += interpretation/syntaxdriven
