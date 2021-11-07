@@ -1,0 +1,12 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>560</x><y>240</y><w>130</w><h>90</h></coordinates><panel_attributes>*Symbol*
+--
+name: String
+type: Type
+scope: Scope
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>390</y><w>100</w><h>30</h></coordinates><panel_attributes>*Variable*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>390</y><w>100</w><h>30</h></coordinates><panel_attributes>*BuiltIn*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>390</y><w>80</w><h>30</h></coordinates><panel_attributes>*Type*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>220</y><w>230</w><h>100</h></coordinates><panel_attributes>*Scope*
+--
+enclosingScope: Scope
+symbols: Map&lt;String, Symbol&gt;
+--
+bind(symbol: Symbol): void
+resolve(name: String): Symbol</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>320</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;70</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>320</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>270</y><w>290</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>270;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>390</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>390</y><w>100</w><h>30</h></coordinates><panel_attributes>*Function*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>310</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element></diagram>
