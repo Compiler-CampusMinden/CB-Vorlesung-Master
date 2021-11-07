@@ -7,7 +7,10 @@ weight: 1
 
 # Symboltabellen
 
-allgemeine einleitende Worte ...
+Zur semantischen Analyse gehört die Identifikation und Sammlung von Bezeichnern und die
+Zuordnung zur richtigen Ebene (Scopes). Das Werkzeug hierfür sind die Symboltabellen.
+
+![](images/architektur_cb.png)
 
 
 {{< children showhidden="true" >}}
