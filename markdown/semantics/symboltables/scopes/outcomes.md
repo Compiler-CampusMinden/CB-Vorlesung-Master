@@ -5,20 +5,8 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
-{{% k2 %}}
--   foo
--   bar
-{{% /k2 %}}
-
 {{% k3 %}}
-hammwanich
+*   Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener
+*   Auflösen von Symbolen über die Scopes
+*   Einfache statische Prüfungen anhand der Symboltabellen
 {{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}
