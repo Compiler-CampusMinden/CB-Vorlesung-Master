@@ -1,0 +1,16 @@
+digraph G {
+	rankdir="LR";
+
+	code [shape=oval, label="C Code"];
+	pre  [shape=box, style="rounded", label="Pre-\nProcessor"];
+	comp [shape=box, style="rounded", label="Compiler"];
+	asm  [shape=box, style="rounded", label="Assembler"];
+	lnk  [shape=box, style="rounded", label="Linker"];
+	exe  [shape=oval, label="Executable"];
+
+	code -> pre  [label=".c\l.h\l"];
+	pre  -> comp [label=".i\l.ii\l"];
+	comp -> asm  [label=".asm\l.s\l"];
+	asm  -> lnk  [label=".obj\l.o\l"];
+	lnk  -> exe  [label=".out\l.exe\l"];
+}

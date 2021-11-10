@@ -1,0 +1,14 @@
+digraph G {
+	rankdir="LR";
+
+	code   [shape=oval, label="C++ Code"];
+	pre    [shape=box, style="rounded", label="Pre-\nProcessor"];
+	cfront [shape=box, style="rounded", label="cfront\n(C++ to C)"];
+	cpipe  [shape=box, style="rounded", label="C-Pipeline"];
+	exe    [shape=oval, label="Executable"];
+
+	code   -> pre;
+	pre    -> cfront [label="C++"];
+	cfront -> cpipe  [label="C"];
+	cpipe  -> exe;
+}

@@ -1,0 +1,14 @@
+digraph G {
+	rankdir="LR";
+
+	java [shape=oval, label="Java"];
+	scan [shape=box, style="rounded", label="Scan\nParse"];
+	sem  [shape=box, style="rounded", label="Semant. Analysis\n\n- define Symbols\l- find Bugs\l- find Patterns\l"];
+	gen  [shape=box, style="rounded", label="Report-\nGenerator"];
+	rep  [shape=oval, label="Report"];
+
+	java -> scan;
+	scan -> sem [label="IR\nAST"];
+	sem  -> gen;
+	gen  -> rep;
+}
