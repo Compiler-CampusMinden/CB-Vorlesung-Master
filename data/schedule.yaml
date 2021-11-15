@@ -91,8 +91,11 @@
       due: "29.11.21, cagi"
 
 - week: "KW49"
+  lecture:
+    - topic: "/parsing/parsercombinator"
+      leader: "BC"
   misc_lecture:
-    - notes: "Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators"
+    - notes: "~~Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators~~"
   assignment:
     - topic: "sheet03"
       due: "06.12.21, BC"
@@ -121,7 +124,8 @@
 
 - week: "KW01"
   misc_lecture:
-    - notes: "Vortrag: Generierung von Maschinencode"
+    - notes: "~~Vortrag: Generierung von Maschinencode~~"
+    - notes: "Wiederholung (BC, cagi)"
     - notes: ">> Alles Gute im neuen Jahr!"
   assignment:
     - topic: "sheet05"
@@ -130,8 +134,13 @@
 - week: "KW02"
   misc_lecture:
     - notes: "Vortrag: VM und Bytecode"
-    - notes: "Vortrag: Garbage Collection"
-
+    - notes: "~~Vortrag: Garbage Collection~~"
+  lecture:
+    - topic: "/interpretation/gc"
+      leader: "cagi"
+    - topic: "/machinecode"
+      leader: "cagi"
+      
 - week: "KW03"
   misc_lecture:
     - notes: "mdl. Prüfung II"
