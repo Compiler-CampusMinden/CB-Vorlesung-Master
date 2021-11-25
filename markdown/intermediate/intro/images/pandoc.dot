@@ -1,0 +1,51 @@
+// dot -Tpdf pandoc.dot -o pandoc.pdf  &&   dot -Tpng pandoc.dot -o pandoc.png
+
+digraph pandoc {
+    node [shape=ellipse, fixedsize=true];
+
+    s01 -> ast
+    s02 -> ast
+    s03 -> ast
+    s04 -> ast
+    s05 -> ast
+    s06 -> ast
+    s07 -> ast
+    
+    ast -> z01
+    ast -> z02
+    ast -> z03
+    ast -> z04
+    ast -> z05
+    ast -> z06
+    ast -> z07
+    ast -> z08
+    ast -> z09
+    ast -> z10
+    ast -> z11
+    ast -> z12
+    
+    s01 [label="gfm"];
+    s02 [label="latex"];
+    s03 [label="html"];
+    s04 [label="docx"];
+    s05 [label="docbook"];
+    s06 [label="org"];
+    s07 [label="odt"];
+    
+    z01 [label="gfm"];
+    z02 [label="latex"];
+    z03 [label="html"];
+    z04 [label="docx"];
+    z05 [label="docbook"];
+    z06 [label="org"];
+    z07 [label="odt"];
+    z08 [label="beamer"];
+    z09 [label="revealjs"];
+    z10 [label="epub"];
+    z11 [label="rtf"];
+    z12 [label="pptx"];
+    
+    ast [label="AST"];
+
+}
+
