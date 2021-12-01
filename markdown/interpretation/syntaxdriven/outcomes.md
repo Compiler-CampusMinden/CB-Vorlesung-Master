@@ -5,20 +5,8 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
-{{% k2 %}}
--   foo
--   bar
-{{% /k2 %}}
-
 {{% k3 %}}
-hammwanich
+*   Attribute und eingebettete Aktionen in Bison und ANTLR
+*   Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns
+*   Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns
 {{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}

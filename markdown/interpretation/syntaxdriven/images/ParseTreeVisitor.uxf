@@ -1,0 +1,22 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>380</x><y>240</y><w>320</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+calcVisitor&lt;T&gt;
+--
+--
+visitS(calcParser.SContext ctx): T
+visitADD(calcParser.ADDContext ctx): T
+visitZAHL(calcParser.ZAHLContext ctx): T
+visitMULT(calcParser.MULTContext ctx): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>170</y><w>210</w><h>40</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ParseTreeVisitor&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>200</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>390</y><w>320</w><h>110</h></coordinates><panel_attributes>calcBaseVisitor&lt;T&gt;
+--
+--
+visitS(calcParser.SContext ctx): T
+visitADD(calcParser.ADDContext ctx): T
+visitZAHL(calcParser.ZAHLContext ctx): T
+visitMULT(calcParser.MULTContext ctx): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>350</y><w>120</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>600</y><w>320</w><h>90</h></coordinates><panel_attributes>MyVisitor
+--
+--
+visitMULT(calcParser.MULTContext ctx)
+visitADD(calcParser.ADDContext ctx)
+visitZAHL(calcParser.ZAHLContext ctx)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>490</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>170</y><w>220</w><h>30</h></coordinates><panel_attributes>/AbstractParseTreeVisitor&lt;T&gt;/
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>190</y><w>30</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;200</additional_attributes></element></diagram>
