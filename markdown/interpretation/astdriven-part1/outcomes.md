@@ -5,20 +5,8 @@ hidden: true
 ---
 
 
-{{% k1 %}}
--   Wuppie
--   Fluppie
-{{% /k1 %}}
-
-{{% k2 %}}
--   foo
--   bar
-{{% /k2 %}}
-
 {{% k3 %}}
-hammwanich
+*   Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns
+*   Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog zu den Symboltabellen
+*   Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung mit einem Visitor
 {{% /k3 %}}
-
-{{% k4 %}}
-gibbetsooch
-{{% /k4 %}}
