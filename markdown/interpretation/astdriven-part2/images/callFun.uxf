@@ -1,0 +1,18 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>150</x><y>60</y><w>400</w><h>70</h></coordinates><panel_attributes>/Callable/
+--
+--
+call(interpr: Interpreter, args: List&lt;Object&gt;): Object</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>120</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>180</y><w>400</w><h>90</h></coordinates><panel_attributes>Fun
+--
+decl: AST
+closure: Environment
+--
+call(interpr: Interpreter, args: List&lt;Object&gt;): Object</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>160</y><w>110</w><h>90</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;70;90;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>630</x><y>70</y><w>370</w><h>150</h></coordinates><panel_attributes>Note..
+bg=light_gray
+
+def call(Interpreter interpr, List&lt;Object&gt; args):
+    prev = interpr.env 
+    interpr.env = Environment(closure)
+    for i in range(args.size()):
+        interpr.env.define(decl.params()[i].getText(), args[i])
+    interpr.eval(decl.block())
+    interpr.env = prev</panel_attributes><additional_attributes></additional_attributes></element></diagram>
