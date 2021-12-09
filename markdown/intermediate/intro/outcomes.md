@@ -5,6 +5,6 @@ hidden: true
 ---
 
 
-{{% k1 %}}
+`{{% k1 %}}`{=markdown}
 *   Varianten von Zwischencode, Vor- und Nachteile
-{{% /k1 %}}
+`{{% /k1 %}}`{=markdown}

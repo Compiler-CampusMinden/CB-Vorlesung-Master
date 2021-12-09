@@ -12,4 +12,4 @@ Dieses Kapitel betrachtet verschiedene Optimierungen auf dem Zwischencode sowie
 verschiedene Varianten der Datenflussanalyse.
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

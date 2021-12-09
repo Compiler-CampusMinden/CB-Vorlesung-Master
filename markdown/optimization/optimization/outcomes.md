@@ -5,10 +5,10 @@ hidden: true
 ---
 
 
-{{% k1 %}}
+`{{% k1 %}}`{=markdown}
 Verfahren für:
 *   Algebraische Optimierungen
 *   Maschinenunabhängige Optiierungen
 *   Maschinenabhängige Optimierungen
 *   Datenflussanalyse auf 3-Adress-Code
-{{% /k1 %}}
+`{{% /k1 %}}`{=markdown}

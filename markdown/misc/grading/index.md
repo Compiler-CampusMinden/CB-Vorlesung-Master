@@ -10,9 +10,7 @@ hidden: true
 -   Station 6+7: Mündliche Prüfung mit je 30 Minuten Dauer
 -   Station 8: Vortrag mit 45 Minuten Dauer
 
-<!--  -->
-
--   **Gesamtnote: Mittelwert(mdl. Prüfung I, mdl. Prüfung II, Vortrag)**
+**Gesamtnote: Mittelwert(mdl. Prüfung I, mdl. Prüfung II, Vortrag)**
 
 
 ### Parcours-Prüfung: Was ist das?
@@ -58,7 +56,7 @@ bekommt das gesamte Übungsblatt als "nicht bestanden" testiert!
 
 ### Stationen 6+7: "mdl. Prüfung"
 
-Die beiden mündlichen Prüfungen (Termine siehe [Fahrplan]({{<ref "/misc/schedule" >}})) werden
+Die beiden mündlichen Prüfungen (Termine siehe `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}) werden
 einzeln pro Teilnehmer durchgeführt und dauern ca. 30 Minuten. Wir vereinbaren rechtzeitig
 vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfungen erfolgen
 über Zoom.
@@ -69,7 +67,7 @@ Aufgabenblätter erarbeitet wurde.
 ### Stationen 8: "Vortrag"
 
 <!-- TODO -->
-Es stehen verschiedene Vortragsthemen zur Auswahl (Termine siehe [Fahrplan]({{<ref "/misc/schedule" >}})).
+Es stehen verschiedene Vortragsthemen zur Auswahl (Termine siehe `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}).
 
 Die Vorträge werden in der Regel als Einzelvortrag mit ca. 45 Minuten Dauer in deutscher Sprache
 gehalten. Ausnahme ist der Vortrag zu Bison, der von zwei Personen in englischer Sprache und mit

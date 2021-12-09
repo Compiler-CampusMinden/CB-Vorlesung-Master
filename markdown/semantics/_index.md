@@ -12,4 +12,4 @@ Parsen steht fest, dass ein Programm syntaktisch korrekt ist. Nun muss geprüft 
 es auch semantisch korrekt ist.
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

@@ -34,7 +34,7 @@ oder Visitor-Pattern. Die in dieser Sitzung gezeigten einfachen Beispiele der
 syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung mit
 dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber
 zusätzlich noch Speicherstrukturen, die wir in
-["AST-basierte Interpreter: Basics"]({{<ref "/interpretation/astdriven-part1" >}})
+`["AST-basierte Interpreter: Basics"]({{<ref "/interpretation/astdriven-part1" >}})`{=markdown}
 und
-["AST-basierte Interpreter: Funktionen und Klassen"]({{<ref "/interpretation/astdriven-part2" >}})
+`["AST-basierte Interpreter: Funktionen und Klassen"]({{<ref "/interpretation/astdriven-part2" >}})`{=markdown}
 betrachten.

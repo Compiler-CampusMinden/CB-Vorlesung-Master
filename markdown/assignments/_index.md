@@ -15,4 +15,4 @@ Machen Sie sich mit **Small C**  vertraut:
 [https://medium.com/\@efutch/a-small-c-language-definition-for-teaching-compiler-design-b70198531a2f](https://medium.com/\@efutch/a-small-c-language-definition-for-teaching-compiler-design-b70198531a2f)
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

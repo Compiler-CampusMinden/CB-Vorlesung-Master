@@ -13,4 +13,4 @@ Zuordnung zur richtigen Ebene (Scopes). Das Werkzeug hierfür sind die Symboltab
 ![](images/architektur_cb.png)
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

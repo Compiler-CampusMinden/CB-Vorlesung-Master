@@ -21,11 +21,9 @@ folgendermaßen:
     *   den "Elvis"-Operator `?:` (ternäre Abfrage)
     *   die Auto-Inkrement-/-Dekrement-Operatoren `++` und `--`
 
-<!--  -->
 
 2.  Bestimmen Sie die terminalen Symbole Ihrer Grammatik und deren Aufbau.
 
-<!--  -->
 
 3.  Erklären Sie, wo in der Grammatik das Konzept der Zuweisung auftaucht und welche Auswirkungen
     dies auf die erlaubten Programme hat.

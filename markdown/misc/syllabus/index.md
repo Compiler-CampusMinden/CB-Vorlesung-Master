@@ -18,7 +18,7 @@ hidden: true
 
 ## Überblick Modulinhalte
 
-*   Lexikalische Analyse: Scanner/Lexer
+1.  Lexikalische Analyse: Scanner/Lexer
     *   Reguläre Ausdrücke
     *   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction),
         NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
@@ -26,9 +26,8 @@ hidden: true
     *   Generierung mit ANTLR und Flex
     *   Error Recovery
 
-<!--  -->
 
-*   Syntaxanalyse: Parser
+2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG), Chomsky
     *   LL-Parser (Top-Down-Parser)
         *   FIRST, FOLLOW
@@ -45,34 +44,30 @@ hidden: true
     *   Error Recovery
     *   Grenze Lexer und Parser (aus praktischen Gesichtspunkten)
 
-<!--  -->
 
-*   Symboltabellen
+3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
     *   Typen, Klassen, Polymorphie
     *   Namen und Scopes
 
-<!--  -->
 
-*   Semantische Analyse und Optimierungen
+4.  Semantische Analyse und Optimierungen
     *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
     *   Typen, Typ-Inferenz, Type Checking
     *   Datenfluss-Analyse
     *   Optimierungen: Peephole u.a.
 
-<!--  -->
 
-*   Zwischencode: Intermediate Representation (IR), LLVM
+5.  Zwischencode: Intermediate Representation (IR), LLVM
 
-<!--  -->
 
-*   Interpreter
+6.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
     *   Resolver: Beschleunigung bei der Interpretation
-<!--  -->
 
-*   Compiler
+
+7.  Compiler
     *   Speicherlayout
     *   Erzeugen von Byte-Code
     *   Ausführen in einer Virtuellen Maschine

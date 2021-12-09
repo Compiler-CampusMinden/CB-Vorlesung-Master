@@ -5,11 +5,11 @@ hidden: true
 ---
 
 
-{{% k1 %}}
+`{{% k1 %}}`{=markdown}
 *   Aufgaben eines Lexers
-{{% /k1 %}}
+`{{% /k1 %}}`{=markdown}
 
-{{% k2 %}}
+`{{% k2 %}}`{=markdown}
 *   Erkennen von Lexemen mit RE und DFA
 *   DFA-nahe Implementierung: Tabellenbasiert und direkt codiert
-{{% /k2 %}}
+`{{% /k2 %}}`{=markdown}

@@ -5,6 +5,6 @@ hidden: true
 ---
 
 
-{{% k1 %}}
+`{{% k1 %}}`{=markdown}
 *   Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen
-{{% /k1 %}}
+`{{% /k1 %}}`{=markdown}

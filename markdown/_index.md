@@ -37,7 +37,7 @@ Diese Termine werden deshalb in englischer Sprache durchgeführt, ansonsten ist 
 Unterrichtssprache Deutsch. Die Unterlagen werden als *Open Educational Resources* über
 [Github](https://github.com/Compilerbau/Lecture) entwickelt und bereitgestellt.
 
-Zur Verteilung der Themen siehe auch den ["Fahrplan"]({{<ref "/misc/schedule" >}}).
+Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/misc/schedule" >}})`{=markdown}.
 
 
 ## Kursformat
@@ -63,13 +63,13 @@ Zur Verteilung der Themen siehe auch den ["Fahrplan"]({{<ref "/misc/schedule" >}
 In ausgewählten Wochen finden statt der Praktika zusätzliche Vorlesungen statt
 (Durchführungsmodus dann wie bei den Vorlesungen).
 
-Siehe auch ["Hinweise zum Praktikum FHB"]({{<ref "/misc/grading" >}})
+Siehe auch `["Hinweise zum Praktikum FHB"]({{<ref "/misc/grading" >}})`{=markdown}
 
 
 ## Wichtige Seiten
 
-*   [Fahrplan]({{<ref "/misc/schedule" >}})
-*   [Praktikum]({{<ref "/assignments" >}})
-*   [Note und Credits]({{<ref "/misc/grading" >}})
-*   [Syllabus]({{<ref "/misc/syllabus" >}})
-*   [Ressourcen]({{<ref "/misc/resources" >}})
+*   `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}
+*   `[Praktikum]({{<ref "/assignments" >}})`{=markdown}
+*   `[Note und Credits]({{<ref "/misc/grading" >}})`{=markdown}
+*   `[Syllabus]({{<ref "/misc/syllabus" >}})`{=markdown}
+*   `[Ressourcen]({{<ref "/misc/resources" >}})`{=markdown}

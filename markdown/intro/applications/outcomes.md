@@ -5,6 +5,6 @@ hidden: true
 ---
 
 
-{{% k1 %}}
+`{{% k1 %}}`{=markdown}
 *   Verschiedene Anwendungen für Compiler durch Einsatz bestimmter Stufen der Compiler-Pipeline
-{{% /k1 %}}
+`{{% /k1 %}}`{=markdown}

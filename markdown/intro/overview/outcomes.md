@@ -5,6 +5,6 @@ hidden: true
 ---
 
 
-{{% k2 %}}
+`{{% k2 %}}`{=markdown}
 *   Struktur eines Compilers: Phasen und deren Aufgaben
-{{% /k2 %}}
+`{{% /k2 %}}`{=markdown}

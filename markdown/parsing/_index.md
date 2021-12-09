@@ -12,4 +12,4 @@ geprüft, ob hier gültige Sätze im Sinne der Sprache/Grammatik gebildet wurden
 erzeugt dabei den Parse-Tree.
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

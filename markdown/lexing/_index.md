@@ -12,4 +12,4 @@ zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke
 verwendet.
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

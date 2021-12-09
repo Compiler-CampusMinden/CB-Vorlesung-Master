@@ -426,7 +426,9 @@ t' : e {t'.syn = t'.inh;} ;
     *   Geerbte Attribute sind Parameter für die Funktionen für die Nicht-Terminalsymbole
     *   berechnete Attribute sind Rückgabewerte dieser Funktionen.
 
-```
+\smallskip
+
+```c
 T t'(T inh) {
     match('*');
     T t1inh = inh * match(D);

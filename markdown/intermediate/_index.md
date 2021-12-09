@@ -14,4 +14,4 @@ Für den Zwischencode gibt es kein allgemein definiertes Format. In der Praxis
 trifft man auf eine große Bandbreite an verschiedenen Formaten.
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}

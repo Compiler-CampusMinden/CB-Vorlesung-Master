@@ -14,4 +14,4 @@ mit dem Visitor-Pattern. (Register- und Stack-basierte Interpreter betrachten wi
 Veranstaltung aktuell nicht.)
 
 
-{{< children showhidden="true" >}}
+`{{< children showhidden="true" >}}`{=markdown}
