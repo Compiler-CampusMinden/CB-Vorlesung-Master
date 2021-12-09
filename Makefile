@@ -76,7 +76,8 @@ HUGO_ARGS  = --config config.yaml,$(HUGO_LOCAL)
 SRC_DIR = markdown
 
 ## Top level directory for temporary files
-TEMP_DIR = temp
+TEMP_DIR      = temp
+HUGO_TEMP_DIR = resources
 
 ## Top level directory for generated image files
 IMAGES_OUTPUT_DIR = $(TEMP_DIR)/images
@@ -200,7 +201,7 @@ clean-all: clean-temp ## Clean up all generated files and directories
 
 .PHONY: clean-temp
 clean-temp: ## Clean up all intermediate files and directories
-	rm -rf $(TEMP_DIR)
+	rm -rf $(TEMP_DIR) $(HUGO_TEMP_DIR)
 
 .PHONY: distclean
 distclean: clean-all ## Same as clean-all
