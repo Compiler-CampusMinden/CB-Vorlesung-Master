@@ -64,8 +64,8 @@ vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfu
 Beide Prüfungen können sich auch auf Stoff beziehen, der durch die Bearbeitung der vorangegangenen
 Aufgabenblätter erarbeitet wurde.
 
-**Hinweis**: Die zweite mündliche Prüfung kann abweichend vom `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}
-auch im zweiten Prüfungszeitraum durchgeführt werden.
+**Hinweis**: **Die zweite mündliche Prüfung kann abweichend vom `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}
+auch im zweiten Prüfungszeitraum durchgeführt werden.**
 
 ### Stationen 8: "Vortrag"
 
