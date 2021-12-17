@@ -56,17 +56,19 @@ bekommt das gesamte Übungsblatt als "nicht bestanden" testiert!
 
 ### Stationen 6+7: "mdl. Prüfung"
 
-Die beiden mündlichen Prüfungen (Termine siehe `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}) werden
-einzeln pro Teilnehmer durchgeführt und dauern ca. 30 Minuten. Wir vereinbaren rechtzeitig
+Die beiden mündlichen Prüfungen (Termine siehe `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown})
+werden einzeln pro Teilnehmer durchgeführt und dauern ca. 30 Minuten. Wir vereinbaren rechtzeitig
 vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfungen erfolgen
 über Zoom.
 
 Beide Prüfungen können sich auch auf Stoff beziehen, der durch die Bearbeitung der vorangegangenen
 Aufgabenblätter erarbeitet wurde.
 
+**Hinweis**: Die zweite mündliche Prüfung kann abweichend vom `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}
+auch im zweiten Prüfungszeitraum durchgeführt werden.
+
 ### Stationen 8: "Vortrag"
 
-<!-- TODO -->
 Es stehen verschiedene Vortragsthemen zur Auswahl (Termine siehe `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}).
 
 Die Vorträge werden in der Regel als Einzelvortrag mit ca. 45 Minuten Dauer in deutscher Sprache
