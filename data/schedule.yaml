@@ -132,6 +132,9 @@
       due: "03.01.22, cagi"
 
 - week: "KW02"
+  lecture:
+    - topic: "/interpretation/gc"
+      leader: "cagi"
   misc_lecture:
     - notes: "Vortrag: VM und Bytecode"
     - notes: "~~Vortrag: Garbage Collection~~"
