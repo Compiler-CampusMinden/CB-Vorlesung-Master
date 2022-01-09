@@ -8,4 +8,7 @@ weight: 7
 
 # Generierung von Maschinencode
 
--- Vortragsthema --
+Dieses Kapitel betrachtet verschiedene Aspekte bei der Generierung von Maschinencode.
+
+
+`{{< children showhidden="true" >}}`{=markdown}

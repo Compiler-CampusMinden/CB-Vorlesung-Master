@@ -123,6 +123,9 @@
     - notes: ">> Weihnachtsferien!"
 
 - week: "KW01"
+  lecture:
+    - topic: "/machinecode"
+      leader: "cagi"
   misc_lecture:
     - notes: "~~Vortrag: Generierung von Maschinencode~~"
     - notes: "Wiederholung (BC, cagi)"
