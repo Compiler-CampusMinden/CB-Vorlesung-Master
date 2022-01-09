@@ -123,9 +123,6 @@
     - notes: ">> Weihnachtsferien!"
 
 - week: "KW01"
-  lecture:
-    - topic: "/machinecode"
-      leader: "cagi"
   misc_lecture:
     - notes: "~~Vortrag: Generierung von Maschinencode~~"
     - notes: "Wiederholung (BC, cagi)"
@@ -135,16 +132,13 @@
       due: "03.01.22, cagi"
 
 - week: "KW02"
-  lecture:
-    - topic: "/interpretation/gc"
-      leader: "cagi"
   misc_lecture:
     - notes: "Vortrag: VM und Bytecode"
     - notes: "~~Vortrag: Garbage Collection~~"
   lecture:
     - topic: "/interpretation/gc"
       leader: "cagi"
-    - topic: "/machinecode"
+    - topic: "/machinecode/machinecode"
       leader: "cagi"
 
 - week: "KW03"
