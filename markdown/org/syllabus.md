@@ -1,5 +1,8 @@
 ---
+type: lecture-cg
 title: "Syllabus"
+author: "Carsten Gips (FH Bielefeld)"
+weight: 3
 hidden: true
 ---
 
@@ -75,7 +78,7 @@ hidden: true
 
 ## Erwartungen an Sie
 
-![](images/modulbeschreibung.png)
+![](images/modulbeschreibung.png){width="80%"}
 
 *   90h Selbststudium => ca. 6h Arbeitszeit pro Woche!
 

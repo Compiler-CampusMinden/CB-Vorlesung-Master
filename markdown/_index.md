@@ -37,14 +37,14 @@ Diese Termine werden deshalb in englischer Sprache durchgeführt, ansonsten ist 
 Unterrichtssprache Deutsch. Die Unterlagen werden als *Open Educational Resources* über
 [Github](https://github.com/Compilerbau/Lecture) entwickelt und bereitgestellt.
 
-Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/misc/schedule" >}})`{=markdown}.
+Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/org/schedule" >}})`{=markdown}.
 
 
 ## Kursformat
 
 ### Vorlesung: 2 SWS
 
-=> Vorlesungszeit: Mo, 14:00 - 15:30 Uhr (D320)
+=> Mo, 14:00 - 15:30 Uhr (D320)
 
 *   **BC**: Durchführung als **hybride Vorlesung**
 *   **cagi**: Durchführung als **Flipped Classroom**:
@@ -54,7 +54,7 @@ Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/misc/schedule" >
 
 ### Praktikum: 2 SWS
 
-=> Vorlesungszeit: Mo, 15:45 - 17:15 Uhr (D320)
+=> Mo, 15:45 - 17:15 Uhr (D320)
 
 -   Bearbeitung der Aufgaben in **2er Teams** vor dem Praktikum
 -   Abgabe der gelösten Aufgaben **vor** der Deadline im ILIAS
@@ -63,13 +63,10 @@ Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/misc/schedule" >
 In ausgewählten Wochen finden statt der Praktika zusätzliche Vorlesungen statt
 (Durchführungsmodus dann wie bei den Vorlesungen).
 
-Siehe auch `["Hinweise zum Praktikum FHB"]({{<ref "/misc/grading" >}})`{=markdown}
+Siehe auch `["Hinweise zum Praktikum"]({{< ref "/org/grading" >}})`{=markdown}
 
+### Prüfungsform
 
-## Wichtige Seiten
+**Performanzprüfung**, 7 ECTS
 
-*   `[Fahrplan]({{<ref "/misc/schedule" >}})`{=markdown}
-*   `[Praktikum]({{<ref "/assignments" >}})`{=markdown}
-*   `[Note und Credits]({{<ref "/misc/grading" >}})`{=markdown}
-*   `[Syllabus]({{<ref "/misc/syllabus" >}})`{=markdown}
-*   `[Ressourcen]({{<ref "/misc/resources" >}})`{=markdown}
+Siehe auch `["Hinweise zur Prüfung"]({{< ref "/org/grading" >}})`{=markdown}

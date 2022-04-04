@@ -1,5 +1,8 @@
 ---
+type: lecture-cg
 title: "Fahrplan"
+author: "Carsten Gips (FH Bielefeld)"
+weight: 1
 disableToc: true
 hidden: true
 ---
@@ -8,9 +11,11 @@ hidden: true
 `{{< schedule >}}`{=markdown}
 
 
-**Legende**:
+#### Legende
 
-*   leeres Feld: keine Vorlesung bzw. kein Praktikum
+*   Leeres Feld: keine Vorlesung bzw. kein Praktikum
+*   Vorlesung: Flipped Classroom (Sprechstunde via Zoom in VL-Slot)
+*   Praktika: Vorstellung der Lösung des Aufgabenblattes
 *   Durchführung der Vorlesungen und Praktika:
     -   BC: Hybrid (D320)
     -   cagix: Zoom (Zugangsdaten siehe ILIAS)

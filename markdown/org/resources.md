@@ -1,6 +1,11 @@
 ---
+type: lecture-cg
 title: "Ressourcen"
+author: "Carsten Gips (FH Bielefeld)"
+weight: 4
 hidden: true
+nocite: |
+  @Nystrom2021,@Aho2008,@Mogensen2017,@Grune2012,@Torczon2012,@Parr2014
 ---
 
 
@@ -45,6 +50,3 @@ Unter @Alhour2018 findet sich eine kuratierte Liste mit interessanten Hinweisen,
 Thema Compilerbau. Lohnenswert!
 
 **Hinweis**: Am Ende einer Vorlesung wird noch einmal spezifisch zum Thema passende Literatur empfohlen.
-
-
-`{{< bib />}}`{=markdown}
