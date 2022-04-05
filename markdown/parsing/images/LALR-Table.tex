@@ -1,0 +1,29 @@
+\documentclass[border=0.2cm, convert={density=600}]{standalone}
+
+\usepackage[table]{xcolor}
+\definecolor{lightergray}{gray}{0.96}
+ 
+\begin{document}
+% LALR(1) Parser Table
+% Grammar:
+%	(0) S' → S
+%	(1) S → NN
+%	(2) N → 0N
+%	(3) N → 1
+
+\begin{tabular}{|r|ccc|cc|}
+	\hline\rowcolor{lightgray}
+	& \multicolumn{3}{c|}{Aktion} & \multicolumn{2}{c|}{Sprung}\\
+	\hline\rowcolor{lightgray}
+	Zustand & $0$ & $1$ & $\bot$ &  $S$  &  $N$ \\
+	\hline\rowcolor{lightergray}
+	$q_0$     & s(3/6) & s(4/7) &     & $q_1$ & $q_2$       \\ \rowcolor{lightgray}
+	$q_1$     &        &        & acc &       &             \\ \rowcolor{lightergray}
+	$q_2$     & s(3/6) & s(4/7) &     &       & $q_5$       \\ \rowcolor{lightgray}
+	$q_{3/6}$ & s(3/6) & s(4/7) &     &       & $q_{8/9}$   \\ \rowcolor{lightergray}
+	$q_{4/7}$ &   r3   &   r3   & r3  &       &             \\ \rowcolor{lightgray}
+	$q_5$     &        &        & r1  &       &             \\ \rowcolor{lightergray}
+	$q_{8/9}$ &   r2   &   r2   & r2  &       &             \\
+	\hline
+\end{tabular}
+\end{document}

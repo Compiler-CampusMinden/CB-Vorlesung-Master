@@ -1,0 +1,21 @@
+\documentclass[
+    border=0.2cm,
+    convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+\begin{lstlisting} [mathescape, backgroundcolor=\color{lightgray},
+	basicstyle=\scriptsize\ttfamily]
+	
+replace each production $X \rightarrow X \alpha \mid \beta$ by
+	$X \rightarrow \beta\  Y $
+	$Y \rightarrow \alpha\ Y \mid \epsilon$
+     	 	
+	
+\end{lstlisting}
+
+\end{document}

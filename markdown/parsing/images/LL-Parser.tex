@@ -1,0 +1,36 @@
+\documentclass[
+border=0.2cm,
+convert={density=600}
+]{standalone}
+
+\usepackage{listings}
+\usepackage{standalone}
+\usepackage{xcolor}
+
+\begin{document}
+	
+	
+	\begin{lstlisting}[mathescape,backgroundcolor=\color{lightgray},basicstyle=\scriptsize\ttfamily]
+
+a = next_token()
+X = top of stack  // entfernt X vom Stack
+	
+while X $ \neq \perp$
+
+   if X = a
+      a = next_token()  
+         
+   else if X $\in T$
+      error
+      
+   else if $P[X, a]$ leer
+      error
+      
+   else if $P[X, a] = X \rightarrow Y_1 Y_2 \ldots Y_k$
+      process_production($X \rightarrow Y_1 Y_2 \ldots Y_k$)      
+      push($Y_1 Y_2 \ldots Y_k$) //$Y_1$ = top of stack
+
+   X = top of stack
+\end{lstlisting}
+
+\end{document}
