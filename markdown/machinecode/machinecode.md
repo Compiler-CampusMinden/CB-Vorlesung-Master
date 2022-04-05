@@ -57,7 +57,9 @@ Hier der Vollständigkeit halber ein Ausblick ...
 ## Prozessorarchitektur
 
 <!-- TODO Image stopped working w/ Pandoc/Beamer (Slides) -->
+<!--
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Intel_i80286_arch.svg/1024px-Intel_i80286_arch.svg.png){width="80%"}
+-->
 
 [Quelle: ["Intel i80286 arch"](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg) by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)]{.origin}
 
