@@ -8,6 +8,11 @@ readings:
   - key: "Aho2008"
     comment: "Kapitel 2.3 und 5"
   - key: "Levine2009"
+outcomes:
+  - k2: "Konzept der attributierten Grammatiken: Anreicherung mit Attributen und semantischen Regeln"
+  - k2: "Unterschied zwischen geerbten und berechneten Attributen"
+  - k2: "Umsetzung von SDD mit Hilfe von SDT"
+  - k3: "Einfache semantische Analyse mit Hilfe von attributierten Grammatiken"
 ---
 
 # Motivation

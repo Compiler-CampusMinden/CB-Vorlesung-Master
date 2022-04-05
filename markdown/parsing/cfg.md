@@ -6,6 +6,18 @@ weight: 1
 readings:
   - key: "aho2013compilers"
   - key: "hopcroft2003"
+outcomes:
+  - k1: "PDAs"
+  - k1: "Deterministische PDAs"
+  - k1: "Kontextfreie Grammatiken"
+  - k1: "Deterministisch kontextfreie Grammatiken"
+  - k1: "Top-Down-Analyse"
+  - k1: "Recursive-Descent-Parser"
+  - k1: "First- und Follow-Mengen"
+  - k1: "LL-Parser"
+  - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
+  - k2: "Schreiben von LL-Parsern"
+  - k3: "Top-Down Analyse programmieren"
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"

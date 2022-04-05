@@ -13,6 +13,11 @@ readings:
     comment: "Kapitel 9"
   - key: "Mogensen2017"
     comment: "Kapitel 8, 10 und 11"
+outcomes:
+  - k1: "Algebraische Optimierungen"
+  - k1: "Maschinenunabhängige Optimierungen"
+  - k1: "Maschinenabhängige Optimierungen"
+  - k1: "Datenflussanalyse auf 3-Adress-Code"
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/optimization.ann.pdf"
     name: "Annotierte Folien: Optimierung und Datenflussanalyse"

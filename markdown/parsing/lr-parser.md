@@ -11,6 +11,17 @@ readings:
   - key: "hopcroft2003"
   - key: "Kunert2018"
   - key: "Wagenknecht2014"
+outcomes:
+  - k1: "Prinzipien der Bottom-Up-Analyse"
+  - k1: "Items"
+  - k1: "Closure"
+  - k1: "Parse Table"
+  - k2: "LR(0)-Parsing"
+  - k2: "SLR-Parsing"
+  - k2: "LR(1)-Parsing"
+  - k2: "LALR-Parsing"
+  - k3: "Konstruktion der Parse Tables"
+  - k3: "Durchführen des Parsens"
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_lr-part.ann.pdf"
     name: "Annotierte Folien: LR-Parser"

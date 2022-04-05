@@ -10,6 +10,15 @@ readings:
   - key: "Torczon2012"
     comment: "Kapitel 2"
   - key: "Parr2014"
+outcomes:
+  - k1: "DFAs"
+  - k1: "NFAs"
+  - k1: "Reguläre Ausdrücke"
+  - k1: "Reguläre Grammatiken"
+  - k2: "Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte"
+  - k3: "DFAs, NFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln"
+  - k3: "Herausfinden, ob eine Sprache regulär ist"
+  - k3: "Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert"
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/a5f6c9f70413034acabfc9e81c108fdec193f006/lexing_regular.ann.pdf"
     name: "Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke"
