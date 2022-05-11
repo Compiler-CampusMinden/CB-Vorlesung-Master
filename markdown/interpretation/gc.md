@@ -449,6 +449,52 @@ Das folgende Beispiel erläutert dieses Problem:
 :::
 
 
+## Benchmarking
+
+### Ziel
+
+*   Vergleich von verschiedenen GC-Algorithmen
+*   Wahl des optimalen Algorithmus für konkreten Anwendungsfall
+*   Overhead durch GC möglichst gering halten
+
+
+::: slides
+## Benchmarking: Setup
+:::
+
+### Setup
+
+*   "Warm up": einige Iterationen des Benchmarks ohne Messung vorlaufen lassen,
+    um bspw. Just-in-Time Kompilierung und Initialisierung aller Laufzeitkomponenten abzuschließen
+*   Anpassung der Heap-Größe an den Benchmark (falls Heap zu bestimmter Rate gefüllt werden soll)
+*   Überprüfung und Eliminierung von externen Faktoren, die das Ergebnis beeinflussen können
+    *   andere Prozesse
+    *   dynamische Frequenzskalierung der CPU
+    *   Vermeidung von Lese- und Schreibzugriffen, sofern diese nicht durch Test-Infrastruktur vorgegeben sind
+
+
+::: slides
+## Benchmarking: Metriken und Setup
+:::
+
+### Relevante Metriken für Tests
+
+*   Durchsatz (welchen Anteil hat GC an der Laufzeit?)
+*   Latenz (welche Verzögerung erzeugt GC?)
+
+### Szenarien
+
+(stark vom getesteten GC-Algorithmus abhängig)
+
+*   konstant gefüllter Heap/leerer Heap
+*   Erzeugen und Löschen von stark referenzierten Objekten/temporären Objekten
+*   Für Generational GC: Testen von Overhead von Schreib- und Lesebarrieren durch Objektreferenzierung
+
+::: notes
+[Beispiele für GC-Benchmarks der JVM](https://ionutbalosin.com/2019/12/jvm-garbage-collectors-benchmarks-report-19-12/)
+:::
+
+
 ## Wrap-Up
 
 *   Pflege verkette Liste aller Objekte in der VM
@@ -478,6 +524,8 @@ Das folgende Beispiel erläutert dieses Problem:
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
+
+\bigskip
 
 ### Exceptions
 *   Image [`reachable.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png)
