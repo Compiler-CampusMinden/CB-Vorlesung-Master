@@ -1,0 +1,12 @@
+digraph "CFG for 'f' function" {
+	label="CFG for 'f' function";
+
+	Node0x55c39ee69b80 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{bb:\l  %i = icmp sgt i64 %arg, %arg1\l  br i1 %i, label %bb2, label %bb4\l|{<s0>T|<s1>F}}"];
+	Node0x55c39ee69b80:s0 -> Node0x55c39ee69c30;
+	Node0x55c39ee69b80:s1 -> Node0x55c39ee69ca0;
+	Node0x55c39ee69c30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f59c7d70",label="{bb2:                                              \l  %i3 = add nsw i64 1, 20\l  br label %bb6\l}"];
+	Node0x55c39ee69c30 -> Node0x55c39ee6a4b0;
+	Node0x55c39ee69ca0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f59c7d70",label="{bb4:                                              \l  %i5 = add nsw i64 1, %arg1\l  br label %bb6\l}"];
+	Node0x55c39ee69ca0 -> Node0x55c39ee6a4b0;
+	Node0x55c39ee6a4b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{bb6:                                              \l  %.0 = phi i64 [ %i3, %bb2 ], [ %i5, %bb4 ]\l  ret i64 %.0\l}"];
+}
