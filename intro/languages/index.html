@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Bandbreite der Programmiersprachen   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/intro/languages.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/"><span itemprop="name">Überblick</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/" aria-disabled="true"><span itemprop="name">Bandbreite der Programmiersprachen</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#99-bottles-of-beer">99 Bottles of Beer</a></li>
+    <li><a href="#imperativ-hardwarenah-c">Imperativ, Hardwarenah: C</a></li>
+    <li><a href="#imperativ-objektorientiert-java">Imperativ, Objektorientiert: Java</a></li>
+    <li><a href="#logisch-prolog">Logisch: Prolog</a></li>
+    <li><a href="#funktional-haskell">Funktional: Haskell</a></li>
+    <li><a href="#brainfuck">Brainfuck</a></li>
+    <li><a href="#programmiersprache-lox">Programmiersprache Lox</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>Am Beispiel des Abzählreims &quot;99 Bottles of Beer&quot; werden (ganz kurz) verschiedene
+Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept
+(Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene Strategie
+zur Speicherverwaltung und Abarbeitung.</p>
+<p>Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich,
+dass Compiler teilweise sehr unterschiedliche Konzepte &quot;verstehen&quot; müssen.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/prsc8cf4cJ8" target="_blank" rel="nofollow noopener noreferrer">VL Programmiersprachen</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a" target="_blank" rel="nofollow noopener noreferrer">VL Programmiersprachen</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        <li>(K1) Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen</li>
+        
+        
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="99-bottles-of-beer">99 Bottles of Beer</h2>
+<blockquote>
+<p>99 bottles of beer on the wall, 99 bottles of beer.
+Take one down and pass it around, 98 bottles of beer on the wall.</p>
+<p>98 bottles of beer on the wall, 98 bottles of beer.
+Take one down and pass it around, 97 bottles of beer on the wall.</p>
+<p>[...]</p>
+<p>2 bottles of beer on the wall, 2 bottles of beer.
+Take one down and pass it around, 1 bottle of beer on the wall.</p>
+<p>1 bottle of beer on the wall, 1 bottle of beer.
+Take one down and pass it around, no more bottles of beer on the wall.</p>
+<p>No more bottles of beer on the wall, no more bottles of beer.
+Go to the store and buy some more, 99 bottles of beer on the wall.</p>
+</blockquote>
+<p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/lyrics.html">99-bottles-of-beer.net/lyrics.html</a></span></p>
+<h2 id="imperativ-hardwarenah-c">Imperativ, Hardwarenah: C</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-{.c" data-lang="{.c"><span style="display:flex;"><span> <span style="color:#75715e">#define MAXBEER (99)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chug</span>(<span style="color:#66d9ef">int</span> beers);
+</span></span><span style="display:flex;"><span> main() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">register</span> beers;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(beers <span style="color:#f92672">=</span> MAXBEER; beers; chug(beers<span style="color:#f92672">--</span>))  puts(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>    puts(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Time to buy more beer!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">void</span> chug(<span style="color:#66d9ef">register</span> beers) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> howmany[<span style="color:#ae81ff">8</span>], <span style="color:#f92672">*</span>s;
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> beers <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d bottle%s of beer on the wall,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, beers, s);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d bottle%s of beeeeer . . . ,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, beers, s);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Take one down, pass it around,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>beers) sprintf(howmany, <span style="color:#e6db74">&#34;%d&#34;</span>, beers); <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">strcpy</span>(howmany, <span style="color:#e6db74">&#34;No more&#34;</span>);
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> beers <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%s bottle%s of beer on the wall.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, howmany, s);
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-c-116.html">99-bottles-of-beer.net/language-c-116.html</a>, by Bill Wein</span></p>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Procedural</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Resourcenschonend, aber &quot;unsicher&quot;: Programmierer muss wissen, was er tut</p>
+</li>
+<li>
+<p>Relativ hardwarenah</p>
+</li>
+<li>
+<p>Einsatz: Betriebssysteme, Systemprogrammierung</p>
+</li>
+</ul>
+<h2 id="imperativ-objektorientiert-java">Imperativ, Objektorientiert: Java</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">bottles</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> beers<span style="color:#f92672">=</span>99<span style="color:#f92672">;</span> beers<span style="color:#f92672">&gt;-</span>1<span style="color:#f92672">;)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span>beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer on the wall, &#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer, &#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>beers<span style="color:#f92672">==</span>0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Go to the store, buy some more, &#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;99 bottles of beer on the wall.\n&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Take one down, pass it around, &#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            s <span style="color:#f92672">=</span> <span style="color:#f92672">(--</span>beers <span style="color:#f92672">==</span> 1<span style="color:#f92672">)?</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;s&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer on the wall.\n&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-java-4.html">99-bottles-of-beer.net/language-java-4.html</a>, by Sean Russell</span></p>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Objektorientiert</p>
+</li>
+<li>
+<p>Multi-Threading</p>
+</li>
+<li>
+<p>Basiert auf C/C++</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Automatische Garbage Collection</p>
+</li>
+<li>
+<p>&quot;Sichere&quot; Architektur: Laufzeitumgebung fängt viele Probleme ab</p>
+</li>
+<li>
+<p>Architekturneutral: Nutzt Bytecode und eine JVM</p>
+</li>
+<li>
+<p>Einsatz: High-Level All-Purpose Language</p>
+</li>
+</ul>
+<h2 id="logisch-prolog">Logisch: Prolog</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-prolog" data-lang="prolog"><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#f92672">:-</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bottles</span>(<span style="color:#ae81ff">99</span>).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span>(<span style="color:#ae81ff">1</span>) :-
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;1 bottle of beer on the wall, 1 bottle of beer,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Take one down, and pass it around,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Now they are all gone.&#39;</span>), <span style="color:#e6db74">nl</span>,!.
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span>(X) :-
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(X), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer on the wall,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(X), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Take one down and pass it around,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    NX <span style="color:#f92672">is</span> X <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(NX), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer on the wall.&#39;</span>), <span style="color:#e6db74">nl</span>, <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bottles</span>(NX).
+</span></span></code></pre></div><p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-prolog-965.html">99-bottles-of-beer.net/language-prolog-965.html</a>, by M@</span></p>
+<ul>
+<li>
+<p>Deklarativ</p>
+</li>
+<li>
+<p>Logisch: Definition von Fakten und Regeln; eingebautes Beweissystem</p>
+</li>
+<li>
+<p>Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme, ...</p>
+</li>
+</ul>
+<h2 id="funktional-haskell">Funktional: Haskell</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-haskell" data-lang="haskell"><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;no more bottles&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1 bottle&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> n <span style="color:#f92672">=</span> show n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; bottles&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">verse</span> <span style="color:#ae81ff">0</span>   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;No more bottles of beer on the wall, no more bottles of beer.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;Go to the store and buy some more, 99 bottles of beer on the wall.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">verse</span> n   <span style="color:#f92672">=</span> bottles n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer on the wall, &#34;</span> <span style="color:#f92672">++</span> bottles n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;Take one down and pass it around, &#34;</span> <span style="color:#f92672">++</span> bottles (n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                                                 <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer on the wall.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">main</span>      <span style="color:#f92672">=</span> mapM (putStrLn <span style="color:#f92672">.</span> verse) [<span style="color:#ae81ff">99</span>,<span style="color:#ae81ff">98</span><span style="color:#f92672">..</span><span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-haskell-1070.html">99-bottles-of-beer.net/language-haskell-1070.html</a>, by Iavor</span></p>
+<ul>
+<li>
+<p>Deklarativ</p>
+</li>
+<li>
+<p>Funktional</p>
+</li>
+<li>
+<p>Lazy, pure</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Typinferenz</p>
+</li>
+<li>
+<p>Algebraische Datentypen, Patternmatching</p>
+</li>
+<li>
+<p>Einsatz: Compiler, DSL, Forschung</p>
+</li>
+</ul>
+<h2 id="brainfuck">Brainfuck</h2>
+<div class='center'>
+<figure class="center" style="width:15%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/images/screenshot_brainfuck_99bottles.png" class="" />
+</figure>
+<p><span class='origin'>Quelle: <a href="https://99-bottles-of-beer.net/language-brainfuck-2542.html">99-bottles-of-beer.net/language-brainfuck-2542.html</a>, by Michal Wojciech Tarnowski</span></p>
+</div>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Feldbasiert (analog zum Band der Turingmaschine)</p>
+</li>
+<li>
+<p>8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe, Sprungbefehle</p>
+</li>
+</ul>
+<h2 id="programmiersprache-lox">Programmiersprache Lox</h2>
+<pre><code>fun fib(x) {
+    if (x == 0) {
+        return 0;
+    } else {
+        if (x == 1) {
+            return 1;
+        } else {
+            fib(x - 1) + fib(x - 2);
+        }
+    }
+}
+
+var wuppie = fib;
+wuppie(4);
+</code></pre>
+<ul>
+<li>
+<p>Die Sprache &quot;Lox&quot; finden Sie hier: <a href="https://www.craftinginterpreters.com/the-lox-language.html">craftinginterpreters.com/the-lox-language.html</a></p>
+</li>
+<li>
+<p>C-ähnliche Syntax</p>
+</li>
+<li>
+<p>Imperativ, objektorientiert, Funktionen als <em>First Class Citizens</em>, Closures</p>
+</li>
+<li>
+<p>Dynamisch typisiert</p>
+</li>
+<li>
+<p>Garbage Collector</p>
+</li>
+<li>
+<p>Statements und Expressions</p>
+</li>
+<li>
+<p>(Kleine) Standardbibliothek eingebaut</p>
+</li>
+</ul>
+<p>Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem
+Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren :)</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen formalen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Berücksichtigung von unterschiedlichen</p>
+<ul>
+<li>Sprachkonzepten (Programmierparadigmen)</li>
+<li>Typ-Systemen</li>
+<li>Speicherverwaltungsstrategien</li>
+<li>Abarbeitungsstrategien</li>
+</ul>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Aho2008">
+            
+                [Aho2008] <strong>Compiler: Prinzipien, techniken und werkzeuge</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6" target="_blank" rel="nofollow noopener noreferrer">978-3-8273-7097-6</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 1 Introduction</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Grune2012">
+            
+                [Grune2012] <strong>Modern compiler design</strong>
+            
+            
+                <br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-4614-4698-9" target="_blank" rel="nofollow noopener noreferrer">978-1-4614-4698-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 1 Introduction</em>
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item parent"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle" checked/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

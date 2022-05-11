@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>LL-Parser: Fortgeschrittene Techniken   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/parsing/ll-advanced.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/"><span itemprop="name">Parser</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/" aria-disabled="true"><span itemprop="name">LL-Parser: Fortgeschrittene Techniken</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ll-parser-mit-backtracking">LL-Parser mit Backtracking</a>
+      <ul>
+        <li><a href="#anmerkung">Anmerkung</a></li>
+      </ul>
+    </li>
+    <li><a href="#details-spekulatives-matchen">Details: Spekulatives Matchen</a></li>
+    <li><a href="#spekulatives-matchen-hilfsmethoden-iii">Spekulatives Matchen: Hilfsmethoden I/II</a></li>
+    <li><a href="#spekulatives-matchen-hilfsmethoden-iiii">Spekulatives Matchen: Hilfsmethoden II/II</a>
+      <ul>
+        <li><a href="#hinweis">Hinweis</a></li>
+        <li><a href="#backtracking-führt-zu-problemen">Backtracking führt zu Problemen</a></li>
+      </ul>
+    </li>
+    <li><a href="#verbesserung-backtracking-packrat-parser-memoizing">Verbesserung Backtracking: Packrat Parser (Memoizing)</a></li>
+    <li><a href="#skizze-idee-des-packrat-parsing">Skizze: Idee des Packrat-Parsing</a>
+      <ul>
+        <li><a href="#anmerkung-consume">Anmerkung <em>consume()</em></a></li>
+      </ul>
+    </li>
+    <li><a href="#semantische-prädikate">Semantische Prädikate</a></li>
+    <li><a href="#semantische-prädikate-in-antlr">Semantische Prädikate in ANTLR</a>
+      <ul>
+        <li><a href="#semantische-prädikate-in-parser-regeln">Semantische Prädikate in Parser-Regeln</a></li>
+        <li><a href="#semantische-prädikate-in-lexer-regeln">Semantische Prädikate in Lexer-Regeln</a></li>
+      </ul>
+    </li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>{{% img src=&ldquo;images/architektur_cb_parser.png&rdquo; title=&quot;&quot; width=&ldquo;auto&rdquo; %}}</p>
+<p>Man kann einen LL(k)-Parser bei Bedarf um ein &quot;spekulatives Matching&quot; ergänzen. Dies ist in Situationen
+relevant, wo man das <span>$k$</span> nicht vorhersehen kann, etwa bei der Unterscheidung einer Vorwärtsdeklaration
+und einer Funktionsdefinition in C. Hier kann man erst nach dem Parsen des Funktionsnamens entscheiden,
+welche Situation vorliegt; der Funktionsname kann dabei (nahezu) beliebig lang sein.</p>
+<p>Beim spekulativen Matching muss man sich merken, an welcher Position im Tokenstrom man die Spekulation
+gestartet hat, um im Fall des Nichterfolgs dorthin wieder zurückspringen zu können (&quot;Backtracking&quot;).</p>
+<p>Das Backtracking kann sehr langsam werden durch das Ausprobieren mehrerer Alternativen und das jeweils
+nötige Zurückrollen. Zudem kann es passieren, dass eine bestimmte Sequenz immer wieder erkannt werden
+muss. Hier hilft eine weitere Technik: <strong>Packrat Parsing</strong> <a href="#id_Packrat2006">[Packrat2006]</a> (nutzt
+<a href="https://en.wikipedia.org/wiki/Memoization">&quot;<em>memoisation</em>&quot;</a>). Hierbei führt man pro Regel eine Map mit,
+in der zu einer Position im Tokenstrom festgehalten wird, ob diese Regel an/ab dieser Position bereits
+erfolgreich oder nicht erfolgreich war. Dies kann man dann nutzen, um bei einem erneuten Parsen der
+selben Regel &quot;vorzuspulen&quot;.</p>
+<p>In ANTLR kann man <em>semantische Prädikate</em> benutzen, um Alternativen &quot;abzuschalten&quot;. Dies ist beispielsweise
+nützlich, wenn man nur eine Grammatik für unterschiedliche Versionen einer Sprache implementieren will.</p>
+<p>Eine gute Darstellung finden Sie in <a href="#id_Parr2010">[Parr2010]</a> (Kapitel 3) und in [Packrat2006].</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/12GT2WxZsxY" target="_blank" rel="nofollow noopener noreferrer">VL LL-Parser: Fortgeschrittene Techniken</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/c3dc479884ce6b50bbd0fe85a8dd49f7b250576ac73742b879c564d6cba4b83c79fa499f9164b947e81e597add85e6addfd91a41a4eb85438c51218846aac0cb" target="_blank" rel="nofollow noopener noreferrer">VL LL-Parser: Fortgeschrittene Techniken</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        
+        <li>(K3) Implementierung von LL(1)- und LL(k)-Parsern</li>
+        
+    
+        
+        
+        <li>(K3) Dynamischer Lookahead mittels Backtracking; Verbesserung der Laufzeiteigenschaften mit Packrat</li>
+        
+    
+        
+        
+        <li>(K3) Einsatz von semantischen Prädikaten zum (De-) Aktivieren von Regeln oder Token</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="ll-parser-mit-backtracking">LL-Parser mit Backtracking</h2>
+<p>Problem: Manchmal kennt man den nötigen Lookahead nicht vorher. Beispiel:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>wuppie();         <span style="color:#75715e">// Vorwärtsdeklaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>wuppie() { ...}   <span style="color:#75715e">// Definition
+</span></span></span></code></pre></div><p>Entsprechend sähe die Grammatik aus:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">func : fdef | fdecl ;
+fdef : head &#39;{&#39; body &#39;}&#39; ;
+fdecl: head &#39;;&#39; ;
+head : ... ;
+</code></pre><p>Hier müsste man erst den gesamten Funktionskopf parsen, bevor man entscheiden kann, ob es sich um
+eine Deklaration oder eine Definition handelt. Unglücklicherweise gibt es keine Längenbeschränkung
+bei den Funktionsnamen ...</p>
+<p>Mit Hilfe von Backtracking kann man zunächst spekulativ matchen und beim Auftreten eines Fehlers
+die Spekulation rückgängig machen:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> speculate(fdef): fdef()      <span style="color:#75715e"># Spekuliere auf &#34;fdef&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> speculate(fdecl): fdecl()  <span style="color:#75715e"># Spekuliere auf &#34;fdecl&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>()
+</span></span></code></pre></div><p>Die erste Alternative, die passt, gewinnt. Über die Reihenfolge der Spekulationen kann man
+entsprechend Vorrangregeln implementieren.</p>
+<h3 id="anmerkung">Anmerkung</h3>
+<p>Man könnte die obige Grammatik umformen ...</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">func : head (&#39;{&#39; body &#39;}&#39; | &#39;;&#39;) ;
+head : ... ;
+</code></pre><p>...und bräuchte dann kein spekulatives Parsen mit Backtracking.</p>
+<p>Da wir aber das Parsen mit Backtracking betrachten wollen, blenden wir diese Möglichkeit
+jetzt einfach aus ;)</p>
+<h2 id="details-spekulatives-matchen">Details: Spekulatives Matchen</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">speculate</span>(fn):
+</span></span><span style="display:flex;"><span>    success <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mark()                  <span style="color:#75715e"># markiere aktuelle Position</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:   fn()             <span style="color:#75715e"># probiere Regel fn()</span>
+</span></span><span style="display:flex;"><span>    catch: success <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    clear()                 <span style="color:#75715e"># Rollback</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> success
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Parr2010">[Parr2010, S. 60]</a></span></p>
+<p>Der Funktion <code>speculate</code> wird die zu testende Regel (Funktion) als Parameter übergeben, im obigen
+Beispiel wären dies <code>fdef</code> bzw. <code>fdecl</code>.</p>
+<p>Vor dem spekulativen Matchen muss die aktuelle Position im Tokenstrom markiert werden. Falls der
+Versuch, die Deklaration zu matchen nicht funktioniert, wird der Regel-Aufruf eine Exception werfen,
+entsprechend wird die Hilfsvariable gesetzt. Anschließend muss noch mit <code>clear()</code> das aktuelle
+Token wieder hergestellt werden (wir sind ja nur im Spekulationsmodus, d.h. selbst im Erfolgsfall
+wird ja die Regel noch &quot;richtig&quot; aufgerufen).</p>
+<h2 id="spekulatives-matchen-hilfsmethoden-iii">Spekulatives Matchen: Hilfsmethoden I/II</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Parser</span>:
+</span></span><span style="display:flex;"><span>    Lexer lexer
+</span></span><span style="display:flex;"><span>    markers <span style="color:#f92672">=</span> []    <span style="color:#75715e"># Integer-Stack: speichere Tokenpositionen</span>
+</span></span><span style="display:flex;"><span>    lookahead <span style="color:#f92672">=</span> []  <span style="color:#75715e"># Puffer (1 Token vorbefüllt via Konstruktor)</span>
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>       <span style="color:#75715e"># aktuelle Tokenposition im lookahead-Puffer</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mark</span>():
+</span></span><span style="display:flex;"><span>        markers<span style="color:#f92672">.</span>push(start)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clear</span>():
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> markers<span style="color:#f92672">.</span>pop()
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Parr2010">[Parr2010, S. 61/62]</a></span></p>
+<h2 id="spekulatives-matchen-hilfsmethoden-iiii">Spekulatives Matchen: Hilfsmethoden II/II</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consume</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>start
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> start <span style="color:#f92672">==</span> lookahead<span style="color:#f92672">.</span>count() <span style="color:#f92672">and</span> markers<span style="color:#f92672">.</span>isEmpty():
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; lookahead<span style="color:#f92672">.</span>clear()
+</span></span><span style="display:flex;"><span>    sync(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lookahead</span>(i):
+</span></span><span style="display:flex;"><span>    sync(i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> lookahead<span style="color:#f92672">.</span>get(start<span style="color:#f92672">+</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sync</span>(i):
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> start <span style="color:#f92672">+</span> i <span style="color:#f92672">-</span> lookahead<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        lookahead<span style="color:#f92672">.</span>add(lexer<span style="color:#f92672">.</span>nextToken()); <span style="color:#f92672">--</span>n
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Parr2010">[Parr2010, S. 61/62]</a></span></p>
+<p><code>consume</code> holt wie immer das nächste Token, hier indem der Index <code>start</code> weiter gesetzt
+wird und ein weiteres Token über <code>sync</code> in den Puffer geladen wird. Falls wir nicht am
+Spekulieren sind und das Ende des Puffers erreicht haben, nutzen wir die Gelegenheit und
+setzen den Puffer zurück. (Dies geht nicht, wenn wir spekulieren -- hier müssen wir ja
+ggf. ein Rollback vornehmen und benötigen also den aktuellen Puffer dann noch.)</p>
+<p>Die Funktion <code>sync</code> stellt sicher, dass ab der Position <code>start</code> noch <code>i</code> unverbrauchte
+Token im Puffer sind.</p>
+<h3 id="hinweis">Hinweis</h3>
+<p>Die Methode <code>count</code> liefert die Anzahl der aktuell gespeicherten Elemente in <code>lookahead</code>
+zurück (nicht die Gesamtzahl der Plätze in der Liste -- diese kann größer sein). Mit der
+Methode <code>add</code> wird ein Element hinten an die Liste angefügt, dabei wird das Token auf den
+nächsten Index-Platz (<code>count</code>) geschrieben und ggf. die Liste ggf. automatisch um weitere
+Speicherplätze ergänzt. Über <code>clear</code> werden die Elemente in der Liste gelöscht, aber der
+Speicherplatz erhalten (d.h. <code>count()</code> liefert den Wert 0, aber ein <code>add</code> müsste nicht erst
+die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das Token schreiben).</p>
+<div style="text-align: right;">
+<span class="btn btn-default btn-crossreference">
+Tafel: Beispiel mit dynamisch wachsendem Puffer
+</span>
+</div>
+<h3 id="backtracking-führt-zu-problemen">Backtracking führt zu Problemen</h3>
+<ol>
+<li>Backtracking kann <em>sehr</em> langsam sein (Ausprobieren vieler Alternativen)</li>
+<li>Der spekulative Match muss ggf. rückgängig gemacht werden</li>
+<li>Man muss bereits gematchte Strukturen erneut matchen (=&gt; Abhilfe: Packrat-Parsing)</li>
+</ol>
+<h2 id="verbesserung-backtracking-packrat-parser-memoizing">Verbesserung Backtracking: Packrat Parser (Memoizing)</h2>
+<div class='center'>
+<figure class="center" style="width:60%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/packrat.png" class="" />
+</figure>
+</div>
+<p>Bei der Eingabe <code>wuppie();</code> wird zunächst spekulativ die erste Alternative <code>fdef</code> untersucht
+und ein <code>head</code> gematcht. Da die Alternative nicht komplett passt (es kommt ein &quot;;&quot; statt
+einem &quot;{&quot;), muss die Spekulation rückgängig gemacht werden und die zweite Alternative
+<code>fdecl</code> untersucht werden. Dabei muss man den selben Input erneut auf <code>head</code> matchen!
+(Und wenn die Spekulation (irgendwann) erfolgreich war, muss noch einmal ein <code>head</code> gematcht
+werden ...)</p>
+<p>Idee: Wenn <code>head</code> sich merken würde, ob damit ein bestimmter Teil des Tokenstroms bereits
+behandelt wurde (erfolgreich oder nicht), könnte man das Spekulieren effizienter gestalten.
+Jede Regel muss also durch eine passende Regel mit Speicherung ergänzt werden.</p>
+<p>Dies wird auch als <a href="https://en.wikipedia.org/wiki/Memoization">&quot;Memoization&quot;</a> bezeichnet
+und ist eine zentrales Technik des Packrat Parsers (vgl. <a href="#id_Packrat2006">[Packrat2006]</a>).</p>
+<h2 id="skizze-idee-des-packrat-parsing">Skizze: Idee des Packrat-Parsing</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>head_memo <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">head</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> head_memo<span style="color:#f92672">.</span>get(start) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>()                         <span style="color:#75715e"># kein Match</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> head_memo<span style="color:#f92672">.</span>get(start) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> head_memo[start]; <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>     <span style="color:#75715e"># Vorspulen</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        failed <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>; start_ <span style="color:#f92672">=</span> start
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>: <span style="color:#f92672">...</span>     <span style="color:#75715e"># rufe die ursprüngliche head()-Regel auf</span>
+</span></span><span style="display:flex;"><span>        catch(e): failed <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>; <span style="color:#66d9ef">raise</span> e
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">finally</span>: head_memo[start_] <span style="color:#f92672">=</span> (failed <span style="color:#960050;background-color:#1e0010">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> : start)
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Parr2010">[Parr2010, S. 65/66]</a></span></p>
+<ul>
+<li>Wenn bereits untersucht (Eintrag vorhanden): Vorspulen bzw. Exception werfen</li>
+<li>Sonst (aktuelle Position noch nicht in der Tabelle =&gt; Regel noch nicht an
+dieser Position getestet):
+<ul>
+<li>Original-Regel ausführen</li>
+<li>Exception: Regel hatte keinen Erfolg =&gt; merken und Exception weiter reichen</li>
+</ul>
+</li>
+<li>Ergebnis für diese Startposition und diese Regel merken:
+<ul>
+<li>Falls Regel erfolgreich, dann Start-Position und die aktuelle Position
+(Stopp-Position) in der Tabelle für diese Regel notieren</li>
+<li>Falls Regel nicht erfolgreich, zur Start-Position eine ungültige Position setzen</li>
+</ul>
+</li>
+</ul>
+<h3 id="anmerkung-consume">Anmerkung <em>consume()</em></h3>
+<p>Die Funktion <code>consume()</code> muss passend ergänzt werden: Wann immer man den <code>lookahead</code>-Puffer
+zurücksetzt, werden alle <code>*_memo</code> ungültig und müssen ebenfalls zurückgesetzt werden!</p>
+<h2 id="semantische-prädikate">Semantische Prädikate</h2>
+<p>Problem in Java: <code>enum</code> ab Java5 Schlüsselwort (vorher als Identifier-Name verwendbar)</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">prog : (enumDecl | stat)+ ;
+stat : ... ;
+
+enumDecl : ENUM id &#39;{&#39; id (&#39;,&#39; id)* &#39;}&#39; ;
+</code></pre><p>Wie kann ich eine Grammatik bauen, die sowohl für Java5 und später als auch für die Vorgänger
+von Java5 funktioniert?</p>
+<p>Angenommen, man hätte eine Hilfsfunktion (&quot;Prädikat&quot;), mit denen man aus dem Kontext heraus
+die Unterscheidung treffen kann, dann würde die Umsetzung der Regel ungefähr so aussehen:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prog</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lookahead(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> ENUM <span style="color:#f92672">and</span> java5: enumDecl()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: stat()
+</span></span></code></pre></div><h2 id="semantische-prädikate-in-antlr">Semantische Prädikate in ANTLR</h2>
+<h3 id="semantische-prädikate-in-parser-regeln">Semantische Prädikate in Parser-Regeln</h3>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">@parser::members {public static boolean java5;}
+
+prog : ({java5}? enumDecl | stat)+ ;
+stat : ... ;
+
+enumDecl : ENUM id &#39;{&#39; id (&#39;,&#39; id)* &#39;}&#39; ;
+</code></pre><p>Prädikate in Parser-Regeln aktivieren bzw. deaktivieren alles, was nach der Abfrage
+des Prädikats gematcht werden könnte.</p>
+<h3 id="semantische-prädikate-in-lexer-regeln">Semantische Prädikate in Lexer-Regeln</h3>
+<p>Alternativ für Lexer-Regeln:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">ENUM : &#39;enum&#39; {java5}? ;
+ID   : [a-zA-Z]+ ;
+</code></pre><p>Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der Lexer keine
+Vorhersage macht, sondern nach dem längsten Match sucht und die Entscheidung erst trifft,
+wenn das ganze Token gesehen wurde. Bei Parser-Regeln steht das Prädikat links vor der
+entsprechenden Alternative, da der Parser mit Hilfe des Lookaheads Vorhersagen trifft, welche
+Regel/Alternative zutrifft.</p>
+<p><em>Anmerkung</em>: Hier wurden nur Variablen eingesetzt, es können aber auch Methoden/Funktionen
+genutzt werden. In Verbindung mit einer Symboltabelle (<a href="cb_symboltabellen1.html">&quot;Symboltabellen&quot;</a>)
+und/oder mit Attributen und Aktionen in der Grammatik (<a href="cb_attribute.html">&quot;Attribute&quot;</a> und
+<a href="cb_interpreter2.html">&quot;Interpreter: Attribute+Aktionen&quot;</a>) hat man hier ein mächtiges Hilfswerkzeug!</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>LL(1) und LL(k): Erweiterungen
+<ul>
+<li>Dynamischer Lookahead: BT-Parser mit Packrat-Ergänzung</li>
+<li>Semantische Prädikate zum Abschalten von Alternativen</li>
+</ul>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+            <li>
+                <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet01/"><strong>Blatt 01: Scanner und Parser</strong></a>
+                 (Abgabe: 15.11.21, BC)
+            </li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Aho2008">
+            
+                [Aho2008] <strong>Compiler: Prinzipien, techniken und werkzeuge</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6" target="_blank" rel="nofollow noopener noreferrer">978-3-8273-7097-6</a>.
+                
+                
+            
+            
+                <br><em>Abschnitte 2.4 und 4.4</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Grune2012">
+            
+                [Grune2012] <strong>Modern compiler design</strong>
+            
+            
+                <br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-4614-4698-9" target="_blank" rel="nofollow noopener noreferrer">978-1-4614-4698-9</a>.
+                
+                
+            
+            
+                <br><em>Abschnitte 3.1 bis (einschließlich) 3.4</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Mogensen2017">
+            
+                [Mogensen2017] <strong>Introduction to compiler design</strong>
+            
+            
+                <br>Mogensen, T., Springer, 2017.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">978-3-319-66966-3</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1007/978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">10.1007/978-3-319-66966-3</a>.
+                
+            
+            
+                <br><em>Kapitel 2 (insbesondere Abschnitte 2.3 bis (einschließlich) 2.19)</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Packrat2006">
+            
+                [Packrat2006] <a href="http://arxiv.org/abs/cs/0603077" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Packrat parsing: Simple, powerful, lazy, linear time</strong></a>
+            
+            
+                <br>Ford, B., 2006.
+                
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2010">
+            
+                [Parr2010] <strong>Language implementation patterns</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2010.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5645-6" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5645-6</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 3</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2014">
+            
+                [Parr2014] <strong>The definitive ANTLR 4 reference</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2014.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5699-9" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5699-9</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item parent"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle" checked/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

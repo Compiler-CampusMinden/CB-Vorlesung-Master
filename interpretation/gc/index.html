@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Garbage Collection   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/interpretation/gc.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/"><span itemprop="name">Interpreter</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/" aria-disabled="true"><span itemprop="name">Garbage Collection</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ist-das-code-oder-kann-das-weg">Ist das Code oder kann das weg?</a></li>
+    <li><a href="#erreichbarkeit">Erreichbarkeit</a></li>
+    <li><a href="#präzises-gc-mark-sweep-garbage-collection">&quot;Präzises GC&quot;: Mark-Sweep Garbage Collection</a>
+      <ul>
+        <li><a href="#phase-mark-wurzeln-markieren">Phase &quot;Mark&quot;: Wurzeln markieren</a></li>
+        <li><a href="#phase-mark-trace">Phase &quot;Mark&quot;: Trace</a></li>
+        <li><a href="#phase-sweep">Phase &quot;Sweep&quot;</a></li>
+        <li><a href="#hinweise">Hinweise</a></li>
+      </ul>
+    </li>
+    <li><a href="#metriken-latenz-und-durchsatz">Metriken: Latenz und Durchsatz</a></li>
+    <li><a href="#heuristik-self-adjusting-heap">Heuristik: Self-adjusting Heap</a></li>
+    <li><a href="#generational-gc">Generational GC</a></li>
+    <li><a href="#konservatives-gc-boehm-gc">&quot;Konservatives GC&quot;: Boehm GC</a>
+      <ul>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#exkurs-heap-verwaltung">Exkurs Heap-Verwaltung</a></li>
+        <li><a href="#vor--und-nachteile-des-konservativen-gc">Vor- und Nachteile des konservativen GC</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference-counting">Reference Counting</a>
+      <ul>
+        <li><a href="#algorithmus-skizze">Algorithmus (Skizze)</a></li>
+        <li><a href="#probleme">Probleme</a></li>
+      </ul>
+    </li>
+    <li><a href="#stop-and-copy-garbage-collection">Stop-and-Copy Garbage Collection</a>
+      <ul>
+        <li><a href="#vor--und-nachteile-von-stop-and-copy-gc">Vor- und Nachteile von Stop-and-Copy GC</a></li>
+      </ul>
+    </li>
+    <li><a href="#benchmarking">Benchmarking</a>
+      <ul>
+        <li><a href="#ziel">Ziel</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#relevante-metriken-für-tests">Relevante Metriken für Tests</a></li>
+        <li><a href="#szenarien">Szenarien</a></li>
+      </ul>
+    </li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>Bei der Abarbeitung des Bytecodes in der VM werden immer wieder Objekte auf dem Laufzeit-Heap angelegt.
+Nicht benötigte Objekte müssen von Zeit zu Zeit wieder frei gegeben werden.</p>
+<p>Für die <strong>Mark-Sweep-Garbage-Collection</strong> pflegt man in der VM eine verkettete Liste aller Objekte, die
+auf dem Heap angelegt werden. Bei der Durchführung eines Mark-Sweep-Laufs markiert man zunächst alle
+&quot;Wurzeln&quot;, d.h. die über den Stack der VM oder die Hashtabelle der VM mit den globalen Variablen und
+Funktionen oder die Konstanten-Arrays der VM direkt erreichbaren Objekte. Von hier aus traversiert man
+alle verwiesenen Objekte und markiert diese ebenfalls. Anschließend iteriert man über die verkettete
+Liste aller Objekte in der VM und entfernt alle Objekte, die im vorigen Schritt nicht markiert wurden.</p>
+<p>Wenn man GC zu selten durchführt, dauert ein GC-Lauf u.U. sehr lange (viele Objekte): hohe Latenz.
+Wenn man GC zu oft durchführt, dauert ein einzelner Lauf zwar nur recht kurz, aber das Verhältnis
+von Zeit im &quot;User-Modus&quot; vs. Zeit im &quot;GC-Modus&quot; wird ebenfalls schlecht: niedriger Durchsatz. Hier
+kann man mit der Heuristik des &quot;self-adjusting&quot; Heaps arbeiten: Wenn die Gesamtgröße der allozierten
+Objekte einen Schwellwert überschreitet, führt man GC durch und vergrößert den Schwellwert: Größe der
+verbleibenden Objekte multipliziert mit einem Faktor.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/Loo3Ver5pyc" target="_blank" rel="nofollow noopener noreferrer">VL Garbage Collection</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/6f634388ae21b10f85827208a3a00606fef9550c5ab1fb94fd750ff0f6ebf24f9e1873213cb14c93406b2512041a49bc3bede5a995750d82ce6299669476b4b3" target="_blank" rel="nofollow noopener noreferrer">VL Garbage Collection</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        
+        <li>(K3) Prinzipien der Garbage Collection</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="ist-das-code-oder-kann-das-weg">Ist das Code oder kann das weg?</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wuppie&#39;</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;fluppie&#39;</span>
+</span></span><span style="display:flex;"><span>print(y)
+</span></span></code></pre></div></div>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>():
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wuppie&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bar</span>():
+</span></span><span style="display:flex;"><span>        print(x)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fn <span style="color:#f92672">=</span> foo()
+</span></span><span style="display:flex;"><span>fn()
+</span></span></code></pre></div></div>
+</div>
+<p>Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem
+Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten.
+Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die
+Konstanten typischerweise am Ende des Text-Segments.</p>
+<p>Bei der Abarbeitung des Bytecodes durch die VM legt diese Objekte für globale und
+lokale Variablen, Strings sowie für Funktionen etc. an. Der Speicher dafür wird
+dynamisch auf dem Heap reserviert, und die Adressen beispielsweise im Stack (bei
+lokalen Variablen) oder in Hashtabellen (Funktionsnamen, globale Variablen) o.ä.
+gespeichert.</p>
+<p>Wenn Objekte nicht mehr benötigt werden, sollten sie entsprechend wieder freigegeben
+werden, da sonst der Heap der VM voll läuft. Im obigen Beispiel wird der Speicher
+für <code>wuppie</code> unerreichbar, sobald man die Zuweisung <code>y = 'fluppie'</code> ausführt.
+Andererseits darf man aber auch nicht zu großzügig Objekt aufräumen: Die lokale
+Variable <code>x</code> in <code>foo</code> wird in der beim Aufruf erzeugten Funktion <code>bar</code> benötigt
+(<em>Closure</em>) und muss deshalb von der Lebensdauer wie eine globale Variable behandelt
+werden.</p>
+<h2 id="erreichbarkeit">Erreichbarkeit</h2>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/reachable.png" class="" />
+</figure>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png"><code>reachable.png</code></a> by <a href="https://github.com/munificent">Bob Nystrom</a>, licensed under <a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a></span></p>
+<ol>
+<li>
+<p>Erreichbar sind zunächst alle &quot;Wurzeln&quot;, d.h. alle Objekte, die direkt über den
+Stack oder die Konstanten-Arrays oder die Hashtabelle mit den globalen Variablen
+(und Funktionen) erreichbar sind.</p>
+</li>
+<li>
+<p>Alle Objekte, die von erreichbaren Objekten aus erreichbar sind, sind ebenfalls
+erreichbar.</p>
+</li>
+</ol>
+<p>&quot;Objekt&quot; meint dabei im Zuge der Bytecode-Generierung oder während der Bearbeitung
+durch die VM erstellte Werte/Objekte, die auf dem Heap alloziert wurden und durch
+die VM aktiv freigegeben werden müssen.</p>
+<h2 id="präzises-gc-mark-sweep-garbage-collection">&quot;Präzises GC&quot;: Mark-Sweep Garbage Collection</h2>
+<p>Das führt zu einem zweistufigen Algorithmus:</p>
+<ol>
+<li><strong>Mark</strong>: Starte mit den Wurzeln und traversiere so lange durch die Objektreferenzen,
+bis alle erreichbaren Objekte besucht wurden.</li>
+<li><strong>Sweep</strong>: Lösche alle anderen Objekte.</li>
+</ol>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png" class="" />
+</figure>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png"><code>mark-sweep.png</code></a> by <a href="https://github.com/munificent">Bob Nystrom</a>, licensed under <a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a></span></p>
+<p>Die Strukturen für Objekte und die VM werden ergänzt: Objekte erhalten noch
+ein Flag für die Markierung.</p>
+<p>Zum Auffinden der erreichbaren Objekte wird mit einem Färbungsalgorithmus
+gearbeitet. Initial sind alle Objekte &quot;weiß&quot; (nicht markiert).</p>
+<h3 id="phase-mark-wurzeln-markieren">Phase &quot;Mark&quot;: Wurzeln markieren</h3>
+<p>Im ersten Schritt färbt man alle &quot;Wurzeln&quot; &quot;grau&quot; ein. Dabei werden alle
+Objektreferenzen im Stack der VM, in der Hashtabelle für globale Variablen
+der VM, in der Konstantentabelle des Bytecode-Chunks sowie in den Funktionspointern
+betrachtet: Über diese Datenstrukturen wird iteriert und alle auf dem Heap
+der Laufzeitumgebung allozierten Strukturen/Objekte werden markiert, indem
+ihr Flag gesetzt wird. Zusätzlich werden die Pointer auf diese Objekte in
+einen &quot;<code>grayStack</code>&quot; hinzugefügt. Damit sind alle Wurzeln &quot;grau&quot; markiert&quot;.</p>
+<h3 id="phase-mark-trace">Phase &quot;Mark&quot;: Trace</h3>
+<p>Nachdem alle Wurzeln &quot;grau&quot; markiert wurden und auf den <code>grayStack</code> der VM
+gelegt wurden, müssen nun mögliche Verweise in den Wurzeln verfolgt werden.
+Dazu entfernt man schrittweise die Objekte vom Stack und betrachtet sie damit
+als &quot;schwarz&quot;. (Das Markierungs-Flag bleibt gesetzt, &quot;schwarz&quot; sind die &quot;grau&quot;
+markierten Objekte, weil sie nicht mehr auf dem <code>grayStack</code> der VM liegen.)
+Sofern das aktuell betrachtete Objekt seinerseits wieder Referenzen hat
+(beispielsweise haben Funktionen wieder einen Bytecode-Chunk mit einem
+Konstanten-Array), werden diese Referenzen iteriert und alle dabei aufgefundenen
+Objekte auf den <code>grayStack</code> der VM gelegt und ihr Flag gesetzt.</p>
+<p>Dieser Prozess wird so lange durchgeführt, bis der <code>grayStack</code> leer ist. Dann
+sind alle erreichbaren Objekte markiert.</p>
+<h3 id="phase-sweep">Phase &quot;Sweep&quot;</h3>
+<p>Jetzt sind alle erreichbaren Objekte markiert. Objekte, deren Flag nicht gesetzt
+ist, sind nicht mehr erreichbar und können freigegeben werden.</p>
+<p>Wenn die Objekte nicht erreichbar sind, wie kommt man dann an diese heran?</p>
+<p>Die Strukturen für Objekte und die VM werden erneut ergänzt: Objekte erhalten noch
+einen <code>next</code>-Pointer, mit dem <em>alle</em> Objekte in einer verketteten Liste gehalten
+werden können.</p>
+<p>Wann immer für ein Objekt Speicher auf dem Laufzeit-Heap angefordert wird,
+wird dieses Objekt in eine verkettete Liste aller Objekte der VM eingehängt.
+Über diese Liste wird nun iteriert und dabei werden alle &quot;weißen&quot; (nicht markierten)
+Objekte ausgehängt und freigegeben.</p>
+<p>Zusätzlich müssen alle verbleibenden Objekte für den nächsten GC-Lauf wieder
+entfärbt werden, d.h. die Markierung muss wieder zurückgesetzt werden.</p>
+<h3 id="hinweise">Hinweise</h3>
+<p>Die Mark-and-Sweep-GC-Variante wird auch &quot;präzises Garbage Collection&quot; genannt,
+da dabei <em>alle</em> nicht mehr benötigten Objekte entfernt werden.</p>
+<p>Da während der Durchführung der GC die Abarbeitung des Programms pausiert wird,
+hat sich deshalb auch die Bezeichnung <em>stop-the-world GC</em> eingebürgert.</p>
+<h2 id="metriken-latenz-und-durchsatz">Metriken: Latenz und Durchsatz</h2>
+<ul>
+<li>
+<p><strong>Latenz</strong>: Längste Zeitdauer, während der das eigentliche Programm (des Users)
+pausiert, beispielsweise weil gerade eine Garbage Collection läuft</p>
+</li>
+<li>
+<p><strong>Durchsatz</strong>: Verhältnis aus Zeit für den User-Code zu Zeit für Garbage Collection</p>
+<p>Beispiel: Ein Durchsatz von 90% bedeutet, dass 90% der Rechenzeit für den User
+zur Verfügung steht und 10% für GC verwendet werden.</p>
+</li>
+</ul>
+<div class='center'>
+<figure class="center" style="width:80%">
+    <img alt="" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png" class="" />
+</figure>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png"><code>latency-throughput.png</code></a> by <a href="https://github.com/munificent">Bob Nystrom</a>, licensed under <a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a></span></p>
+</div>
+<h2 id="heuristik-self-adjusting-heap">Heuristik: Self-adjusting Heap</h2>
+<ul>
+<li>GC selten: Hohe Latenz (lange Pausen)</li>
+<li>GC oft: Geringer Durchsatz</li>
+</ul>
+<p><strong>Heuristik</strong></p>
+<ul>
+<li>Beobachte den allozierten Speicher der VM</li>
+<li>Wenn vorher festgelegte (willkürliche) Grenze überschritten: GC</li>
+<li>Größe des verbliebenen belegten Speichers mal Faktor neue Grenze</li>
+</ul>
+<p>Die Objekte bzw. der Speicherverbrauch, der nach einem GC-Lauf übrig bleibt, ist
+ein Indikator für den aktuell nötigen Speicher. Deshalb setzt man die neue Schwelle,
+ab der der nächste GC-Lauf gestartet wird, ungefähr auf diesen Speicherverbrauch mal
+einem gewissen Faktor (beispielsweise den Wert 2), um nicht sofort wieder einen
+GC starten zu müssen ...</p>
+<h2 id="generational-gc">Generational GC</h2>
+<ul>
+<li>Teile Heap in zwei Bereiche: &quot;<em>Kinderstube</em>&quot; und &quot;<em>Erwachsenenbereich</em>&quot;</li>
+<li>Neue Objekte werden in der Kinderstube angelegt</li>
+<li>Häufiges GC in Kinderstube</li>
+<li>Überlebende Objekte werden nach <span>$N$</span> Generation in den Erwachsenenbereich verschoben</li>
+<li>Deutlich selteneres GC im Erwachsenenbereich</li>
+</ul>
+<p>Die meisten Objekte haben oft eher eine kurze Lebensdauer. Wenn sie aber ein gewisses
+&quot;Alter&quot; erreicht haben, werden sie oft noch weiterhin benötigt.</p>
+<p>Man teilt den Heap in zwei unterschiedlich große Bereiche auf: Die &quot;Kinderstube&quot;
+(<em>Nursery</em>) und den größeren Heap-Bereich für die &quot;Erwachsenen&quot;. Neue Objekte kommen
+zunächst in die Kinderstube, und dort wird regelmäßig GC ausgeführt. Bei jedem GC-Lauf
+wird der Generationen-Zähler der &quot;überlebenden&quot; Objekte inkrementiert. Wenn die Objekte
+eine bestimmte Anzahl an Generationen überlebt haben, werden sie in den Erwachsenenbereich
+verschoben, wo deutlich seltener eine GC durchgeführt wird.</p>
+<h2 id="konservatives-gc-boehm-gc">&quot;Konservatives GC&quot;: Boehm GC</h2>
+<p>Man unterscheidet zusätzlich noch zwischen <em>konservativem</em> und <em>präzisem</em> GC:</p>
+<ul>
+<li><em>Konservatives GC</em> geht eher vorsichtig vor: Wenn ein Speicherbereich
+möglicherweise noch benötigt werden <em>könnte</em>, wird er nicht angefasst;
+alles, was auch nur so aussieht wie ein Pointer wird entsprechend behandelt.</li>
+<li><em>Präzises GC</em> &quot;weiss&quot; dagegen genau, welche Werte Pointer sind und welche
+nicht und handelt entsprechend.</li>
+</ul>
+<p>Boehm, Weiser und Demers: <a href="https://hboehm.info/gc/">&quot;<strong>Boehm GC</strong>&quot;</a>
+=&gt; Konservativer GC (Variante des Mark-and-Sweep-GC)</p>
+<div class='center'>
+<figure class="center" style="width:80%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/freispeicherverwaltung.png" class="" />
+</figure>
+</div>
+<ul>
+<li>Idee: Nutze die interne Verwaltung des Heaps zum Finden von Objekten</li>
+</ul>
+<h3 id="ablauf">Ablauf</h3>
+<ul>
+<li><strong>Mark</strong>:
+<ol>
+<li>Suche alle potentiell zu bereinigenden Objekte: Inspiziere Stack, statische
+Daten, Prozessor-Register, ...</li>
+<li>Behandle alle gefundenen Adressen zunächst als &quot;unsichere Pointer&quot;<br>
+Es ist noch nicht klar, ob das wirklich gültige Adressen in den Heap sind ...</li>
+<li>Prüfe alle unsicheren Pointer:
+<ul>
+<li>Liegt die Adresse tatsächlich <em>im</em> Heap?</li>
+<li>Zeigt der Pointer auf den Anfang eines Blockes?</li>
+<li>Ist der Block nicht in der Free-List enthalten?
+=&gt; Ergebnis: gültige Pointer (&quot;Root-Pointer&quot;): markiere diese Objekte als &quot;erreichbar&quot;</li>
+</ul>
+</li>
+<li>Wiederhole die Schritte (1) bis (3) durch die Untersuchung der gefundenen Objekte</li>
+</ol>
+</li>
+<li><strong>Sweep</strong>: Iteriere über den Heap (blockweise) und gebe alle belegten Blöcke frei, die
+nicht als &quot;erreichbar&quot; markiert wurden</li>
+</ul>
+<h3 id="exkurs-heap-verwaltung">Exkurs Heap-Verwaltung</h3>
+<p>Der Heap ist ein zusammenhängender Speicherbereich, der durch die Allokation und Freigabe
+von Blöcken in mehrere Blöcke segmentiert wird. Die freien Blöcke werden dabei in eine
+verkettete Liste &quot;Free-List&quot; (im Bild &quot;freemem&quot;) eingehängt. Diese verkettete Liste wird
+direkt im Heap abgebildet.</p>
+<p>Es wird dazu eine Verwaltungsstruktur definiert, die neben Informationen wie der Größe des
+freien Blocks einen Pointer auf den nächsten freien Block aufweist. Jeder Speicherblock im
+Heap beginnt stets mit dieser Struktur, so dass alle freien Blöcke in die Freispeicherliste
+eingehängt werden können:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> memblock {
+</span></span><span style="display:flex;"><span>    size_t size;
+</span></span><span style="display:flex;"><span>    uint marked;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> memblock <span style="color:#f92672">*</span>next;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>size</code> kann die Gesamtgröße des Blockes bedeuten oder aber nur die Größe der Nutzdaten,
+die sich hinter der Verwaltungsstruktur befinden
+=&gt; letztere Deutung wird in Linux verwendet</li>
+<li>In Linux hat man eine doppelt verkettete Liste (statt wie hier nur einfach verkettet)</li>
+</ul>
+<p>Bei <code>malloc</code> durchsucht man diese Liste im Heap, bis man einen passenden Block gefunden hat.
+Dann setzt man den <code>next</code>-Pointer des Vorgängerblocks auf den Wert des eigenen <code>next</code>-Pointers
+und hängt damit den gefundenen Block aus der Freispeicherliste aus. Der <code>next</code>-Pointer wird
+ungültig gemacht, indem man ihn auf einen vordefinierten (und nur zu diesem Zweck genutzten)
+Wert setzt (alternativ kann man dazu ein weiteres Flag in der Struktur spendieren). Dann
+bestimmt man per Pointerarithmetik die Adresse des ersten Bytes hinter der Verwaltungsstruktur
+und liefert diese Adresse als Ergebnis (Pointer auf den Nutzbereich des Blockes) an den Aufrufer
+zurück. Wenn der gefundene freie Block &quot;viel zu groß&quot; ist, kann man den Block auch splitten:
+Einen Teil gibt man als allozierten Block an den Aufrufer zurück, den anderen Teil (den Rest)
+hängt man als neuen Block in die Freispeicherliste ein.</p>
+<p>Bei einem <code>free</code> bekommt man den Pointer auf das erste Byte der Nutzdaten eines Speicherblockes
+und muss per Pointerarithmetik den Beginn der Verwaltungsstruktur des Blockes bestimmen. Dann
+setzt man den <code>next</code>-Pointer des Blockes auf den Wert des Freispeicherlisten-Pointers, und
+dieser wird auf die Startadresse der Verwaltungsstruktur des Blockes &quot;umgebogen&quot;. Damit hat man
+den Block vorn in die Freispeicherliste eingehängt.</p>
+<h3 id="vor--und-nachteile-des-konservativen-gc">Vor- und Nachteile des konservativen GC</h3>
+<ul>
+<li>(+) Keine explizite Kooperation mit der Speicherverwaltung nötig<br>
+Die Speicherverwaltung muss nur eine Bedingung erfüllen: Jedes benutzte Objekt hat einen
+Pointer auf den Anfang des Blockes</li>
+<li>(+) Explizite Deallocation (<code>free</code>) ist möglich</li>
+<li>(+) Kann jederzeit abgebrochen werden<br>
+Praktisch in Verbindung mit opportunistischer GC in interaktiven Applikationen</li>
+<li>(+) Keine separate Buchführung über alle in der VM erzeugten Objekte nötig</li>
+<li>(-) Mark-Phase dauert durch die zusätzlichen Tests länger</li>
+<li>(-) Die Möglichkeit einer Fragmentierung des Speichers ist hoch</li>
+<li>(-) Fehlinterpretationen können dafür sorgen, dass unsichere Pointer nicht freigegeben werden</li>
+<li>(-) Bei hoch optimierenden Compilern ist die GC nicht zuverlässig, da die Adressen u.U. nicht
+mehr auf die benutzen Objekte zeigen</li>
+</ul>
+<h2 id="reference-counting">Reference Counting</h2>
+<p>Beim Reference Counting erhält jedes Objekt einen Referenz-Zähler.</p>
+<p>Beim Erstellen weiterer Referenzen oder Pointer auf ein Objekt wird der Zähler entsprechend
+inkrementiert.</p>
+<p>Sobald ein Objekt seinen Gültigskeitsbereich (Scope) verlässt, wird versucht, das Objekt
+freizugeben. Dazu wird der interne Referenz-Zähler dekrementiert. Erst wenn der Zähler dabei
+den Wert 0 erreicht, bedeutet dies, dass es keine weitere Referenz oder Pointer auf dieses Objekt
+gibt und das Objekt wird vom Heap entfernt (freigegeben). Wenn der Zähler noch größer Null ist,
+wird das Objekt nicht weiter verändert.</p>
+<p>Dies ist eine einfach Form des GC, die ohne zyklische Sammelphasen auskommt. Allerdings hat
+diese Form ein Problem mit zyklischen Datenstrukturen.</p>
+<h3 id="algorithmus-skizze">Algorithmus (Skizze)</h3>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new</span>():
+</span></span><span style="display:flex;"><span>    obj <span style="color:#f92672">=</span> alloc_memory()
+</span></span><span style="display:flex;"><span>    obj<span style="color:#f92672">.</span>set_ref_counter(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> obj
+</span></span></code></pre></div><p><code>new()</code> wird beim Erstellen eines Objektes aufgerufen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete</span>(obj):
+</span></span><span style="display:flex;"><span>    obj<span style="color:#f92672">.</span>dec_ref_counter()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> obj<span style="color:#f92672">.</span>get_ref_counter() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> children(obj):
+</span></span><span style="display:flex;"><span>            delete(child)
+</span></span><span style="display:flex;"><span>        free_object(obj)
+</span></span></code></pre></div><p><code>delete()</code> wird aufgerufen, wenn das Objekt nicht weiter vom Programm verwendet wird, es
+beispielsweise seinen Scope verlässt. Hierbei wird geprüft, ob noch anderweitig auf dieses
+Objekt referenziert wird.</p>
+</div>
+<div class='column'>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/delete_example.png" class="" />
+</figure>
+<p>Im Beispiel wird <code>delete(A)</code> ausgeführt: Der Referenz-Zähler (<em>RC</em>) von A wird dekrementiert,
+und da er den Wert 0 erreicht, werden rekursiv die von A verwiesenen Kinder gelöscht. In B
+wird dabei ebenfalls der Wert 0 erreicht und <code>delete(D)</code> aufgerufen. Da dort der RC größer 0
+bleibt, wird dessen Kind E nicht weiter beachtet. Anschließend werden A und B aus dem Speicher
+freigegeben.</p>
+</div>
+</div>
+<h3 id="probleme">Probleme</h3>
+<p>Das größte Problem beim Referenz Counting ist der Umgang mit zyklischen Datenstrukturen, wie
+verkettete Listen oder einfache Graphen. Es dazu kommen, dass zyklische Datenstrukturen nicht
+gelöscht und freigegeben werden können und ein Speicherverlust entsteht.</p>
+<p>Das folgende Beispiel erläutert dieses Problem:</p>
+<figure class="center" style="width:80">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/delete_problem.png" class="" />
+</figure>
+<h2 id="stop-and-copy-garbage-collection">Stop-and-Copy Garbage Collection</h2>
+<ul>
+<li>Teile Heap in zwei Bereiche (A und B)</li>
+<li>Alloziere nur Speicher aus A (bis der Bereich voll ist)</li>
+<li>Stoppe Programmausführung und kopiere alle erreichbaren Objekte von A nach B</li>
+<li>Gebe gesamten Speicher in A frei</li>
+<li>Setze Programmausführung mit vertauschten Rollen von A und B fort</li>
+</ul>
+<h3 id="vor--und-nachteile-von-stop-and-copy-gc">Vor- und Nachteile von Stop-and-Copy GC</h3>
+<ul>
+<li>(+) Nur ein Lauf über Daten nötig</li>
+<li>(+) Automatische Speicherdefragmentierung</li>
+<li>(+) Aufwand proportional zur Menge der erreichbaren Objekte und nicht zur Größe des Speichers</li>
+<li>(+) Zyklische Referenzen sind kein Problem</li>
+<li>(-) Benötigt doppelten Speicherplatz für gegebene Heap-Größe</li>
+<li>(-) Objekte werden im Speicher bewegt (Update von Referenzen nötig)</li>
+<li>(-) Programm muss für GC angehalten werden</li>
+</ul>
+<h2 id="benchmarking">Benchmarking</h2>
+<h3 id="ziel">Ziel</h3>
+<ul>
+<li>Vergleich von verschiedenen GC-Algorithmen</li>
+<li>Wahl des optimalen Algorithmus für konkreten Anwendungsfall</li>
+<li>Overhead durch GC möglichst gering halten</li>
+</ul>
+<h3 id="setup">Setup</h3>
+<ul>
+<li>&quot;Warm up&quot;: einige Iterationen des Benchmarks ohne Messung vorlaufen lassen,
+um bspw. Just-in-Time Kompilierung und Initialisierung aller Laufzeitkomponenten abzuschließen</li>
+<li>Anpassung der Heap-Größe an den Benchmark (falls Heap zu bestimmter Rate gefüllt werden soll)</li>
+<li>Überprüfung und Eliminierung von externen Faktoren, die das Ergebnis beeinflussen können
+<ul>
+<li>andere Prozesse</li>
+<li>dynamische Frequenzskalierung der CPU</li>
+<li>Vermeidung von Lese- und Schreibzugriffen, sofern diese nicht durch Test-Infrastruktur vorgegeben sind</li>
+</ul>
+</li>
+</ul>
+<h3 id="relevante-metriken-für-tests">Relevante Metriken für Tests</h3>
+<ul>
+<li>Durchsatz (welchen Anteil hat GC an der Laufzeit?)</li>
+<li>Latenz (welche Verzögerung erzeugt GC?)</li>
+</ul>
+<h3 id="szenarien">Szenarien</h3>
+<p>(stark vom getesteten GC-Algorithmus abhängig)</p>
+<ul>
+<li>konstant gefüllter Heap/leerer Heap</li>
+<li>Erzeugen und Löschen von stark referenzierten Objekten/temporären Objekten</li>
+<li>Für Generational GC: Testen von Overhead von Schreib- und Lesebarrieren durch Objektreferenzierung</li>
+</ul>
+<p><a href="https://ionutbalosin.com/2019/12/jvm-garbage-collectors-benchmarks-report-19-12/">Beispiele für GC-Benchmarks der JVM</a></p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Pflege verkette Liste aller Objekte in der VM</p>
+</li>
+<li>
+<p>Mark-Sweep-GC:</p>
+<ol>
+<li>Markiere alle Wurzeln (&quot;grau&quot;, aus Stack und Hashtabelle)</li>
+<li>Traversiere ausgehend von den Wurzeln alle Objekte und markiere sie</li>
+<li>Gehe die verkettete Liste aller Objekte durch und entferne alle nicht markierten</li>
+</ol>
+</li>
+<li>
+<p>Problem: Latenz und Durchsatz =&gt; Idee des &quot;self-adjusting&quot; Heaps</p>
+</li>
+<li>
+<p>Varianten/Alternativen: Generational GC, Boehm-GC, Reference Counting, Stop-and-Copy GC, ...</p>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_GCHandbook2011">
+            
+                [GCHandbook2011] <strong>The garbage collection handbook: The art of automatic memory management</strong>
+            
+            
+                <br>Jones, R. und Hosking, A. und Moss, E., Routledge, 2011.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1420082791" target="_blank" rel="nofollow noopener noreferrer">978-1420082791</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Nystrom2021">
+            
+                [Nystrom2021] <a href="https://github.com/munificent/craftinginterpreters" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Crafting interpreters</strong></a>
+            
+            
+                <br>Nystrom, R., Genever Benning, 2021.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9" target="_blank" rel="nofollow noopener noreferrer">978-0-9905829-3-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 26: Garbage Collection</em>
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item parent"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle" checked/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

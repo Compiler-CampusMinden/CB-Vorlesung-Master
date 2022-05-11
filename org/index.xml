@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Organisatorisches on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/</link>
+    <description>Recent content in Organisatorisches on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fahrplan</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule/</guid>
+      <description>Woche Vorlesung Praktikum/Übung Verschiedenes      1 (KW40)     INTRO &amp;gt; Struktur eines Compilers (cagi)   INTRO &amp;gt; Programmiersprachen (cagi)   INTRO &amp;gt; Anwendungen (cagi)            2 (KW41)     LEXING &amp;gt; Reguläre Sprachen (BC)   LEXING &amp;gt; Tabellenbasierte Implementierung (cagi)   LEXING &amp;gt; Handcodierte Implementierung (cagi)      zweiter Teil der VL in Praktikumszeit</description>
+    </item>
+    <item>
+      <title>Note und Credits</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading/</guid>
+      <description>Prüfungsform: Parcours-Prüfung, 5 ECTS  Stationen 1-5: Erfolgreiche Bearbeitung der Aufgabenblätter Station 6+7: Mündliche Prüfung mit je 30 Minuten Dauer Station 8: Vortrag mit 45 Minuten Dauer  Gesamtnote: Mittelwert(mdl. Prüfung I, mdl. Prüfung II, Vortrag)
+Parcours-Prüfung: Was ist das? Sie legen die Prüfung in mehreren Stationen zurück und sammeln jeweils Teilnoten, die gemittelt in eine Gesamtnote für das Modul münden.
+Um eine Note und die Credit-Points zu erhalten, müssen Sie sich (wie bei allen anderen Prüfungen) für die Gesamtprüfung im LSF anmelden.</description>
+    </item>
+    <item>
+      <title>Syllabus</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus/</guid>
+      <description>Worum geht&#39;s hier?   Verständnis für die wichtigsten Konzepte im Compilerbau Kenntnis relevanter aktueller Tools/Frameworks Verständnis für wichtige Sprachparadigmen  =&amp;gt; Aufteilung: 40% Konzepte/Theorie, 60% Anwendung
+Überblick Modulinhalte   Lexikalische Analyse: Scanner/Lexer
+ Reguläre Ausdrücke Klassisches Vorgehen: RegExp nach NFA (Thompson&#39;s Construction), NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft&#39;s Algorithm) Manuelle Implementierung, Look-Ahead Generierung mit ANTLR und Flex Error Recovery    Syntaxanalyse: Parser</description>
+    </item>
+    <item>
+      <title>Ressourcen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources/</guid>
+      <description>Was brauche ich? Literatur ... Basics (&amp;quot;Must Have&amp;quot;!)  &amp;quot;Compiler: Prinzipien, Techniken und Werkzeuge&amp;quot;: [Aho2008] &amp;quot;Crafting Interpreters&amp;quot;: [Nystrom2021]  Weitere empfohlene Literatur Ergänzend zum [Aho2008] empfiehlt sich ein Blick in [Mogensen2017] und [Watson2017], wo ebenfalls beinahe alle Themen (auf etwas einfacherem Niveau) besprochen werden.
+Zur Vertiefung sei [Grune2012] als eine moderne Variante zum Drachenbuch empfohlen. Ebenfalls sehr interessant ist [Torczon2012], wobei hier der Fokus allerdings sehr stark auf dem Backend liegt.</description>
+    </item>
+  </channel>
+</rss>

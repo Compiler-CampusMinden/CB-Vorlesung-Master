@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>LLVM als IR   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/intermediate/llvm-ir.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/"><span itemprop="name">Zwischencode</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/" aria-disabled="true"><span itemprop="name">LLVM als IR</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#themen-für-heute-letzte-phase-in-compiler-pipeline">Themen für heute: Letzte Phase in Compiler-Pipeline</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#was-ist-das-ziel-von-llvm">Was ist das Ziel von LLVM?</a></li>
+    <li><a href="#der-werdegang-von-llvm">Der Werdegang von LLVM</a></li>
+    <li><a href="#was-ist-daraus-geworden">Was ist daraus geworden?</a></li>
+    <li><a href="#wer-setzt-es-ein">Wer setzt es ein?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#der-llvm-kern">Der LLVM-Kern</a></li>
+    <li><a href="#der-compiler-clang">Der Compiler Clang</a></li>
+    <li><a href="#clang-toolchain">Clang Toolchain</a></li>
+    <li><a href="#die-compiler-runtime-bibliothek">Die Compiler-Runtime-Bibliothek</a></li>
+    <li><a href="#die-sanitizer-in-compiler-rt">Die Sanitizer in compiler-rt</a></li>
+    <li><a href="#weitere-komponenten-von-llvm">Weitere Komponenten von LLVM</a></li>
+    <li><a href="#externe-llvm-projekte">Externe LLVM-Projekte</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#llvm-ir-2">LLVM IR</a></li>
+    <li><a href="#darstellungsformen-von-llvm-ir">Darstellungsformen von LLVM IR</a></li>
+    <li><a href="#typen-in-llvm-ir">Typen in LLVM IR</a></li>
+    <li><a href="#ssa-form-static-single-assignment">SSA-Form (Static single assignment)</a></li>
+    <li><a href="#hierarchie-der-llvm-ir">Hierarchie der LLVM IR</a></li>
+    <li><a href="#instruktionen">Instruktionen</a></li>
+    <li><a href="#basic-blocks">Basic Blocks</a></li>
+    <li><a href="#funktionen">Funktionen</a></li>
+    <li><a href="#funktionen-beispiel">Funktionen: Beispiel</a></li>
+    <li><a href="#funktionen-beispiel-in-ir">Funktionen: Beispiel in IR</a></li>
+    <li><a href="#kontrollflussgraph">Kontrollflussgraph</a></li>
+    <li><a href="#essentiell-die-phi-instruktion">Essentiell: die Phi-Instruktion</a></li>
+    <li><a href="#phi-instruktion-beispiel">Phi-Instruktion: Beispiel</a></li>
+    <li><a href="#module">Module</a></li>
+    <li><a href="#ein-weiteres-beispiel">Ein weiteres Beispiel</a></li>
+    <li><a href="#so-sieht-llvm-ir-dafür-aus">So sieht LLVM IR dafür aus</a></li>
+    <li><a href="#entsprechender-assembler-code">Entsprechender Assembler-Code</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#allgegenwärtig-in-llvm-der-optimierer">Allgegenwärtig in LLVM: Der Optimierer</a></li>
+    <li><a href="#arten-von-pässen">Arten von Pässen</a></li>
+    <li><a href="#einige-optimierungen-in-llvm">Einige Optimierungen in LLVM</a></li>
+    <li><a href="#ssa-und-optimierung">SSA und Optimierung</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#struktur-der-codegenerierung">Struktur der Codegenerierung</a></li>
+    <li><a href="#unterstützte-prozessorarchitekturen">Unterstützte Prozessorarchitekturen</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+        
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="attachments">
+    <h3>(Annotierte) Folien</h3>
+
+    <ul>
+    
+
+    
+        
+        
+        
+            <li><a href="https://www.fh-bielefeld.de" target="_blank" rel="nofollow noopener noreferrer">Extra Material, e.g. annotated slides</a></li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+</div>
+
+
+    <h1 id="motivation">Motivation</h1>
+<p>Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es
+sollen für zwei Programmiersprachen Compiler entwickelt werden, die diesen Befehlssatz
+als Ziel haben.
+Was tun?</p>
+<h2 id="themen-für-heute-letzte-phase-in-compiler-pipeline">Themen für heute: Letzte Phase in Compiler-Pipeline</h2>
+<figure class="center" style="width:auto">
+    <img alt="Compiler-Pipeline" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/images/architektur_cb.png" class="" />
+    <figcaption><h4>Compiler-Pipeline</h4></figcaption>
+</figure>
+<h1 id="llvm---ein-überblick">LLVM - Ein Überblick</h1>
+<h2 id="was-ist-das-ziel-von-llvm">Was ist das Ziel von LLVM?</h2>
+<p>LLVM ist ein Open-Source-Framework, welches die
+modulare Entwicklung von Compilern und ähnlichen sprachorientierten Programmen
+ermöglicht. Kernstücke sind LLVM IR (eine streng typisierte Zwischensprache), ein
+flexibel konfigurierbarer Optimierer, der zur Compilezeit, Linkzeit und Laufzeit eingesetzt werden kann
+und ein Codegenerator für zahlreiche Architekturen.</p>
+<p>Mit LLVM lassen sich sowohl AOT- als auch JIT-Compiler entwickeln. Die Idee ist,
+(mit Generatoren) ein Frontend zu entwickeln, das Programme über einen AST in
+LLVM IR übersetzt, und dann mit Hilfe der LLVM-Bibliotheken Maschinencode oder
+VM-Code zu generieren. Die Komponenten des Compilers sind entkoppelt und
+kommunizieren über APIs (Unabhängigkeit).</p>
+<p>Der Vorteil: Um <em>n</em> Sprachen für <em>m</em> Architekturen zu übersetzen, muss man
+bestenfalls <em>n</em> Frontends und <em>m</em> Codegeneratoren entwickeln,
+statt <em>n x m</em> Compiler zu schreiben.</p>
+<h2 id="der-werdegang-von-llvm">Der Werdegang von LLVM</h2>
+<ul>
+<li>ab 2000 Forschungsprojekt zur Untersuchung dynamischer Kompilierung und Optimierungen von Prof. Vikram Adve an der University of Illinois</li>
+<li>2002 Masterarbeit von Chris Lattner;
+&quot;LLVM: An Infrastructure for Multi-Stage Optimization&quot;
+<ul>
+<li>Siehe auch: <a href="http://llvm.org/pubs/2002-12-LattnerMSThesis.html">LattnerMSThesis</a></li>
+</ul>
+</li>
+<li>Kern des Projekts: LLVM IR und Infrastruktur</li>
+<li>ursprünglich <strong>L</strong>ow <strong>L</strong>evel <strong>V</strong>irtual <strong>M</strong>achine, wird aber nicht mehr als Akronym gesehen</li>
+<li>Chris Lattner ist weiterhin der führende Kopf des LLVM-Projekts</li>
+</ul>
+<h2 id="was-ist-daraus-geworden">Was ist daraus geworden?</h2>
+<p>Open Source - Framework (in C++ geschrieben) für die Entwicklung von</p>
+<ul>
+<li>Debuggern</li>
+<li>JIT-Systemen</li>
+<li>AOT-Compilern</li>
+<li>virtuellen Maschinen</li>
+<li>Optimierern</li>
+<li>Systemen zur statischen Analyse</li>
+<li>etc.</li>
+</ul>
+<p>Für das LLVM-Projekt haben 2012 Vikram Adve, Chris Lattner und Evan Chang den
+ACM Software System Award bekommen.</p>
+<h2 id="wer-setzt-es-ein">Wer setzt es ein?</h2>
+<p>Adobe      AMD      Apple      ARM      Google</p>
+<p>IBM        Intel        Mozilla      Nvidia      Qualcomm</p>
+<p>Samsung       ...</p>
+<h1 id="komponenten-projekte-von-llvm">Komponenten (Projekte) von LLVM</h1>
+<h2 id="der-llvm-kern">Der LLVM-Kern</h2>
+<p><strong>LLVM Core</strong>: Optimierer und Codegenerator für viele CPU- und auch GPU-Architekturen</p>
+<ul>
+<li>Optimierer arbeitet unabhängig von der Zielarchitektur (nur auf der LLVM IR)</li>
+<li>sehr gut dokumentiert</li>
+<li>verwendete Optimierungspässe fein konfigurierbar</li>
+<li>Optimierer auch einzeln als Tool <code>opt</code> aufrufbar</li>
+<li>wird für eigene Sprachen als Optimierer und Codegenerator eingesetzt</li>
+</ul>
+<h2 id="der-compiler-clang">Der Compiler Clang</h2>
+<p><strong>Clang</strong>: C/C++/Objective-C - Compiler auf Basis von LLVM mit aussagekräftigen
+Fehlermeldungen und Warnungen</p>
+<ul>
+<li>Plattform zur Entwicklung von Source Level Tools</li>
+<li><strong>Clang Static Analyzer</strong>: Teil von Clang, aber auch separat zu benutzen</li>
+<li><strong>Clang tidy</strong>: analysiert ebenfalls Code statisch, einzelne Checks konfigurierbar</li>
+</ul>
+<h2 id="clang-toolchain">Clang Toolchain</h2>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/images/opt_chain.png" class="" />
+</figure>
+<h2 id="die-compiler-runtime-bibliothek">Die Compiler-Runtime-Bibliothek</h2>
+<p><strong>compiler-rt</strong>: generiert Code, der zur Laufzeit benötigt wird:</p>
+<ul>
+<li><strong>built-ins</strong>: eine Bibliothek optimierter Implementierungen von Low-Level-Funktionen
+<ul>
+<li>z.B. die Konvertierung von double nach int 64 auf einer 32-Bit-Architektur</li>
+</ul>
+</li>
+<li><strong>profile</strong>: eine Bibliothek, die Informationen über Reichweiten (coverage information) erfasst</li>
+<li><strong>BlocksRuntime</strong>: implementiert maschinenunabhängig die Runtime-Schnittstellen von Apple &quot;Blocks&quot; (Objective-C)</li>
+<li><strong>Sanitizer Runtimes</strong>: Laufzeitbibliotheken, welche für die Einbettung und
+Verwendung von Sanitizern benötigt werden</li>
+</ul>
+<h2 id="die-sanitizer-in-compiler-rt">Die Sanitizer in compiler-rt</h2>
+<p>Sanitizer sind eine Methode zur Instrumentierung (Code der in das kompilierte Programm eingebettet wird),
+um die Lokalisierung und Analyse von verschiedensten Fehlerquellen zu erleichtern.</p>
+<p>Im Folgenden einige der verfügbaren Sanitizer:</p>
+<ul>
+<li><strong>AdressSanitizer</strong>: entdeckt Speicherfehler, z. B. use-after-free</li>
+<li><strong>ThreadSanitizer</strong>: entdeckt race conditions</li>
+<li><strong>UndefinedBehaviorSanitizer</strong>: fügt Code in das Programm ein, um zur Laufzeit
+undefiniertes Verhalten zu erkennen, z. B.
+<ul>
+<li>Benutzung von Null-Pointern</li>
+<li>Overflow von Signed-Integer-Variablen</li>
+<li>Float-Konvertierungen, die zu einem Overflow führen können</li>
+</ul>
+</li>
+<li><strong>MemorySanitizer</strong> entdeckt die Benutzung von nicht-initialisierten Variablen</li>
+<li><strong>LeakSanitizer</strong> entdeckt Speicherlöcher</li>
+<li><strong>DataFlowSanitizer</strong> liefert dem Compilerbauer Informationen über den
+Datenfluss in einem zu übersetzenden Programm</li>
+</ul>
+<p>Die Benutzung der Sanitizer kann die Laufzeit stark erhöhen und ist speicherintensiv.
+Die Sanitizer sind auch in Clang enthalten.
+Nicht alle Sanitizer sind für alle Betriebssysteme verfügbar.</p>
+<h2 id="weitere-komponenten-von-llvm">Weitere Komponenten von LLVM</h2>
+<p><strong>LLDB</strong>: Debugger innerhalb des LLVM-Systems</p>
+<p><strong>libc++ und libc++ABI</strong>: hochperformante Implementierungen der C++-Standardbibliothek,
+auch für C++11 und C++14</p>
+<p><strong>OpenMP</strong>: eine zu linkende OpenMP-Bibliothek für Shared-Memory-Programmierung (Multiprozessorcomputer)</p>
+<p><strong>polly</strong>: spezielle Schleifenoptimierungen auf Polyeder-Basis</p>
+<p><strong>libclc</strong>: eine Bibliothek für OpenCl, um nichtgrafische Anwendungen auf Grafikprozessoren zu nutzen</p>
+<p><strong>klee</strong>: zur automatischen Testgenerierung</p>
+<p><strong>LLD</strong>: ein Linker</p>
+<p>und viele weitere Tools, z. B. zum Testen von Compilern.</p>
+<h2 id="externe-llvm-projekte">Externe LLVM-Projekte</h2>
+<p>Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):</p>
+<p>Cuda      Go     Haskell      Java      Julia      Kotlin</p>
+<p>Lua      Numba      Python     Ruby      Rust      Swift      ...</p>
+<p>Für weiter Projekte siehe <a href="https://llvm.org/ProjectsWithLLVM/">Projects built with LLVM</a></p>
+<h1 id="llvm-ir">LLVM IR</h1>
+<h2 id="llvm-ir-2">LLVM IR</h2>
+<ul>
+<li>menschenlesbarer Zwischencode</li>
+<li>generische Maschinensprache</li>
+<li>Speicherung von Variablen stackbasiert oder in Registern</li>
+<li>Register können entweder nummeriert werden oder explizite Namen bekommen</li>
+<li>Register-Referenz: %1, Variablen-Referenz: @1</li>
+<li>Instruktionsumfang der IR an RISC-Befehlssatz angelehnt (<strong>R</strong>educed <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputer)</li>
+<li>IR ist immer in <strong>S</strong>ingle <strong>S</strong>tatic <strong>A</strong>ssignment-Form</li>
+<li>streng typisiert</li>
+<li>keine Vorgaben bzgl. grundlegender Sprachkonzepte, wie z.B. Speichermanagement, Error Handling</li>
+<li>Durchgängige Verwendung von Kontrollflussgraphen zur Unterstützung des Optimierers</li>
+</ul>
+<p>Vgl. auch: <a href="https://www.youtube.com/watch?v=J5xExRGaIIY&amp;t=215s">LLVM Dev Conference</a></p>
+<h2 id="darstellungsformen-von-llvm-ir">Darstellungsformen von LLVM IR</h2>
+<p>LLVM IR existiert in drei Formen, die äquivalent sind und ineinander überführt
+werden können:</p>
+<ul>
+<li>menschenlesbar als Text (<code>.ll</code>)</li>
+<li>Bitcode (<code>.bc</code>)</li>
+<li>In-Memory Representation zur Programmlaufzeit des Compilers</li>
+</ul>
+<p>(Die clang-Option -S gibt die menschenlesbaren LLVM IR aus.)</p>
+<h2 id="typen-in-llvm-ir">Typen in LLVM IR</h2>
+<p>LLVM IR-Typen sind plattformunabhängig und lassen sich direkt in optimalen Maschinencode übersetzen.</p>
+<pre><code>i1 1  ;                     boolean bit
+i32 299792458 ;             integer
+float 7.29735257e-3 ;       single precision
+double 6.62606957e-34 ;     double precision
+[10 x float] ;              Array of 10 floats
+[10 x [20 x i32]] ;         Array of 10 arrays of 20 integers
+&lt;8 x double&gt; ;              Vector of 8 double
+</code></pre>
+<h2 id="ssa-form-static-single-assignment">SSA-Form (Static single assignment)</h2>
+<ul>
+<li>bestimmte Form der Intermediate Representation</li>
+<li>jede Variable muss definiert sein, bevor sie verwendet wird</li>
+<li>jeder Variablen wird nur <strong>einmal</strong> ein Wert zugewiesen</li>
+<li>anschließend wird nur noch lesend auf die Variable zugegriffen</li>
+<li>erleichtert die Realisierung vieler Optimierungsverfahren</li>
+</ul>
+<p>Ein Beispiel:</p>
+<pre><code> // nicht SSA           // SSA
+ y := 1                 y1 := 1
+ y := 2         =&gt;      y2 := 2
+ x := y                 x1 := y2
+</code></pre>
+<h2 id="hierarchie-der-llvm-ir">Hierarchie der LLVM IR</h2>
+<p>Die LLVM IR ist hierarchisch aufgebaut:</p>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/images/hierarchy.png" class="" />
+</figure>
+<h2 id="instruktionen">Instruktionen</h2>
+<p>Operationen:</p>
+<ul>
+<li>arithmetische Operationen</li>
+<li>Vergleichsoperationen</li>
+<li>Kontrollflussoperationen</li>
+<li>Block-Terminatoren</li>
+</ul>
+<p>Instruktionen haben keinen oder einen Rückgabewert</p>
+<ul>
+<li>Das Ergebnis hat ein eindeutiges Label (SSA)</li>
+</ul>
+<p>Beispiel für eine <code>add</code>-Instruktion:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-llvm" data-lang="llvm"><span style="display:flex;"><span>%3 = <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">nsw</span> <span style="color:#66d9ef">i32</span> %3, <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><h2 id="basic-blocks">Basic Blocks</h2>
+<p>Aufbau von Basic Blocks:</p>
+<ul>
+<li>Label (erforderlich)</li>
+<li>Phi Instruktionen</li>
+<li>Instruktionen</li>
+<li>Terminator (erforderlich)
+<ul>
+<li>(bedingte) Sprunginstruktion</li>
+<li>Returninstruktion</li>
+</ul>
+</li>
+</ul>
+<p>Beispiel für einen Basic Block:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-llvm" data-lang="llvm"><span style="display:flex;"><span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">:</span>                              <span style="color:#75715e">; label
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %3 = <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">nsw</span> <span style="color:#66d9ef">i32</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">20</span>        <span style="color:#75715e">; instruktion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %4 = <span style="color:#66d9ef">icmp</span> <span style="color:#66d9ef">sgt</span> <span style="color:#66d9ef">i32</span> %3, <span style="color:#ae81ff">10</span>      <span style="color:#75715e">; instruktion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">br</span> <span style="color:#66d9ef">i1</span> %4, <span style="color:#66d9ef">label</span> %5, <span style="color:#66d9ef">label</span> %7    <span style="color:#75715e">; terminator
+</span></span></span></code></pre></div><h2 id="funktionen">Funktionen</h2>
+<p>Aufbau von Funktionen:</p>
+<ul>
+<li>Argumente</li>
+<li>Entry Block (erforderlich): erster Basic Block, der immer ausgeführt wird</li>
+<li>weitere Basic Blocks</li>
+</ul>
+<h2 id="funktionen-beispiel">Funktionen: Beispiel</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// func.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">long</span> a, <span style="color:#66d9ef">long</span> b){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">long</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">&gt;</span> b)
+</span></span><span style="display:flex;"><span>      x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>      x <span style="color:#f92672">+=</span> b;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Ausgabe von entsprechender LLVM IR:</p>
+<pre><code>clang -O3 -opt -Xclang -disable-llvm-passes
+    -S -emit-llvm func.c -o func.ll
+
+opt -S -mem2reg -instnamer func.ll -o func_mem2reg.ll
+</code></pre>
+<h2 id="funktionen-beispiel-in-ir">Funktionen: Beispiel in IR</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-llvm" data-lang="llvm"><span style="display:flex;"><span><span style="color:#75715e">; func_mem2reg.ll
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">define</span> <span style="color:#960050;background-color:#1e0010">dso_local</span> <span style="color:#66d9ef">i64</span> @f(<span style="color:#66d9ef">i64</span> %arg, <span style="color:#66d9ef">i64</span> %arg1) #0 {
+</span></span><span style="display:flex;"><span>bb:                                               <span style="color:#75715e">; entry-block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %i = <span style="color:#66d9ef">icmp</span> <span style="color:#66d9ef">sgt</span> <span style="color:#66d9ef">i64</span> %arg, %arg1
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">br</span> <span style="color:#66d9ef">i1</span> %i, <span style="color:#66d9ef">label</span> %bb2, <span style="color:#66d9ef">label</span> %bb4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bb2:                                              <span style="color:#75715e">; preds = %bb
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %i3 = <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">nsw</span> <span style="color:#66d9ef">i64</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">br</span> <span style="color:#66d9ef">label</span> %bb6
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bb4:                                              <span style="color:#75715e">; preds = %bb
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %i5 = <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">nsw</span> <span style="color:#66d9ef">i64</span> <span style="color:#ae81ff">1</span>, %arg1
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">br</span> <span style="color:#66d9ef">label</span> %bb6
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bb6:                                              <span style="color:#75715e">; preds = %bb4, %bb2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  %.0 = <span style="color:#66d9ef">phi</span> <span style="color:#66d9ef">i64</span> [ %i3, %bb2 ], [ %i5, %bb4 ]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">ret</span> <span style="color:#66d9ef">i64</span> %.0
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="kontrollflussgraph">Kontrollflussgraph</h2>
+<ul>
+<li>Die Basic Blocks einer Funktion sind durch Sprunginstruktionen verbunden</li>
+<li>Basic Blocks haben Vorgänger und Nachfolger</li>
+<li>Der so entstehende Kontrollfluss wird von LLVM ständig durch
+einen Kontrollflussgraphen modelliert</li>
+</ul>
+<p>Ausgabe des Kontrollflussgraphen im <code>.dot</code> Format:</p>
+<pre><code>opt -dot-cfg func_mem2reg.ll &gt; /dev/null
+</code></pre>
+<figure class="center" style="width:60%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/images/func_cfg.png" class="" />
+</figure>
+<h2 id="essentiell-die-phi-instruktion">Essentiell: die Phi-Instruktion</h2>
+<ul>
+<li>Basierend auf dem Programmfluss können einer Variablen unterschiedliche Werte zugewiesen werden (<code>x</code> im vorherigen Beispiel)</li>
+<li>SSA: jeder Variablen / jedem Register wird nur einmal ein Wert zugewiesen</li>
+<li>Daher: virtuelle Register entsprechen nicht 1:1 den Variablen des
+kompilierten Progamms</li>
+<li>Der Wert einer konditionell zugewiesenen Variablen kann daher in zwei unterschiedlichen
+virtuellen Registern stehen (je nach durchlaufenem Programmzweig)</li>
+<li>Problem: welches Register soll gelesen werden, um den Wert der Variablen weiter zu verwenden?</li>
+<li>Lösung: Phi-Instruktion speichert Werte in einem neuen Register abhängig vom
+Vorgängerblock</li>
+</ul>
+<h2 id="phi-instruktion-beispiel">Phi-Instruktion: Beispiel</h2>
+<pre><code>bb6:                                              ; preds = %bb4, %bb2
+  %.0 = phi i64 [ %i3, %bb2 ], [ %i5, %bb4 ]
+  ret i64 %.0
+</code></pre>
+<p>Effekt: Speichert den Wert aus Register <code>%i3</code> in Register <code>%.0</code>, falls wir aus
+Block <code>%bb2</code> kommen, sonst wird der Wert aus Register <code>%i5</code> gespeichert</p>
+<h2 id="module">Module</h2>
+<p>Bildet eine Übersetzungseinheit eines Programms ab</p>
+<p>Inhalt:</p>
+<ul>
+<li>Ziel Informationen (erforderlich)
+<ul>
+<li>Datenlayout (Endianess, native Integergrößen, etc.)</li>
+<li>Ziel-Triplet (Zielarchitektur, ABI, etc.)</li>
+</ul>
+</li>
+<li>Globale Variable</li>
+<li>Funktionsdeklarationen</li>
+<li>Funktionsdefinitionen</li>
+</ul>
+<p>Module werden vom Linker zum lauffähigen Programm zusammengefügt</p>
+<h2 id="ein-weiteres-beispiel">Ein weiteres Beispiel</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">35</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre><code>clang -emit-llvm -S hello.c
+</code></pre>
+<h2 id="so-sieht-llvm-ir-dafür-aus">So sieht LLVM IR dafür aus</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-llvm" data-lang="llvm"><span style="display:flex;"><span><span style="color:#75715e">; ModuleID = &#39;hello.c&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">source_filename</span> = <span style="color:#e6db74">&#34;hello.c&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">target</span> <span style="color:#66d9ef">datalayout</span> = <span style="color:#e6db74">&#34;e-m:e-i64:64-f80:128-n8:16:32:64-S128&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">target</span> <span style="color:#66d9ef">triple</span> = <span style="color:#e6db74">&#34;x86_64-pc-linux-gnu&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; Function Attrs: noinline nounwind optnone uwtable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">define</span> <span style="color:#66d9ef">i32</span> @main() #0 {
+</span></span><span style="display:flex;"><span>  %1 = <span style="color:#66d9ef">alloca</span> <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  %2 = <span style="color:#66d9ef">alloca</span> <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  %3 = <span style="color:#66d9ef">alloca</span> <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">store</span> <span style="color:#66d9ef">i32</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">i32</span>* %1, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">store</span> <span style="color:#66d9ef">i32</span> <span style="color:#ae81ff">7</span>, <span style="color:#66d9ef">i32</span>* %2, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  %4 = <span style="color:#66d9ef">load</span> <span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">i32</span>* %2, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  %5 = <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">nsw</span> <span style="color:#66d9ef">i32</span> %4, <span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">store</span> <span style="color:#66d9ef">i32</span> %5, <span style="color:#66d9ef">i32</span>* %3, <span style="color:#66d9ef">align</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">ret</span> <span style="color:#66d9ef">i32</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Es werden drei &ldquo;virtuelle Register&rdquo; %1, %2 und %3 definiert
+(32-bit Integer; align 4: alle Adressen sind Vielfache von 4).</p>
+<p>Mit store i32 0, ... wird in %1 der Wert 0 geschrieben (vergleichbar mit *p = 0).
+In %2 wird analog der Wert 7 geschrieben (x=7).</p>
+<p>Dann wird der Wert aus %2 in eine neues Register %4 geladen und das Ergebnis der
+Addition aus %4 und dem Wert 35 in ein weiteres neues Register %5 geschrieben.
+Der Wert dieser Variablen wird dann in dem Register %3 gespeichert (y = x+35).</p>
+<h2 id="entsprechender-assembler-code">Entsprechender Assembler-Code</h2>
+<p>(Ausgabe ohne <code>-emit-llvm -S</code> Optionen)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-as" data-lang="as"><span style="display:flex;"><span>    .<span style="color:#a6e22e">text</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">file</span>    <span style="color:#e6db74">&#34;hello.c&#34;</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">globl</span>    <span style="color:#a6e22e">main</span>                    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">--</span> <span style="color:#a6e22e">Begin</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">p2align</span>    <span style="color:#ae81ff">4</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0x90</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">type</span>    <span style="color:#a6e22e">main</span><span style="color:#f92672">,</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#66d9ef">function</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">main</span><span style="color:#f92672">:</span>                                   <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_startproc</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">bb</span>.<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pushq</span>    <span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_def_cfa_offset</span> <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_offset</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span><span style="color:#f92672">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">movq</span>    <span style="color:#f92672">%</span><span style="color:#a6e22e">rsp</span><span style="color:#f92672">,</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_def_cfa_register</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-as" data-lang="as"><span style="display:flex;"><span>    <span style="color:#a6e22e">xorl</span>    <span style="color:#f92672">%</span><span style="color:#a6e22e">eax</span><span style="color:#f92672">,</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">eax</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">movl</span>    <span style="color:#a6e22e">$0</span><span style="color:#f92672">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>(<span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">movl</span>    <span style="color:#a6e22e">$7</span><span style="color:#f92672">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>(<span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">movl</span>    <span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>(<span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>)<span style="color:#f92672">,</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">ecx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">addl</span>    <span style="color:#a6e22e">$35</span><span style="color:#f92672">,</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">ecx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">movl</span>    <span style="color:#f92672">%</span><span style="color:#a6e22e">ecx</span><span style="color:#f92672">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>(<span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">popq</span>    <span style="color:#f92672">%</span><span style="color:#a6e22e">rbp</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_def_cfa</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">rsp</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">retq</span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">Lfunc_end0</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">size</span>    <span style="color:#a6e22e">main</span><span style="color:#f92672">,</span> .<span style="color:#a6e22e">Lfunc_end0</span><span style="color:#f92672">-</span><span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">cfi_endproc</span>
+</span></span><span style="display:flex;"><span>                                        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">--</span> <span style="color:#a6e22e">End</span> <span style="color:#66d9ef">function</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">ident</span>    <span style="color:#e6db74">&#34;clang version 9.0.1 &#34;</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">section</span>    <span style="color:#e6db74">&#34;.note.GNU-stack&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">progbits</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">addrsig</span>
+</span></span></code></pre></div><h1 id="der-llvm-optimierer">Der LLVM-Optimierer</h1>
+<h2 id="allgegenwärtig-in-llvm-der-optimierer">Allgegenwärtig in LLVM: Der Optimierer</h2>
+<ul>
+<li>Teil von LLVM Core</li>
+<li>kann zur Laufzeit, Compilezeit und Linkzeit eingesetzt werden</li>
+<li>nutzt auch Leerlaufzeit des Prozessors</li>
+<li>läuft in einzelnen Pässen über den Code. Jeder Pass kann einzeln aufgerufen und konfiguriert werden.</li>
+<li>generiert in der Regel sehr schnellen Code</li>
+<li>arbeitet auf Basic Blocks und DAGs</li>
+</ul>
+<h2 id="arten-von-pässen">Arten von Pässen</h2>
+<p><strong>Analysis passes</strong> sammeln Informationen für andere Pässe, z. B. zum Debuggen oder Visualisieren</p>
+<p><strong>Transform passes</strong> verändern das Programm auf irgendeine Art und Weise</p>
+<p><strong>Utility passes</strong> sind Hilfspässe, z. B. die Umformung des IR in Bitcode</p>
+<p>Vgl. auch: <a href="http://releases.llvm.org/9.0.0/docs/Passes.html">LLVM&rsquo;s Analysis and Transform Passes</a></p>
+<h2 id="einige-optimierungen-in-llvm">Einige Optimierungen in LLVM</h2>
+<ul>
+<li>Dead Code Elimination</li>
+<li>Aggressive Dead Code Elimination</li>
+<li>Dead Argument Elimination</li>
+<li>Dead Type Elimination</li>
+<li>Dead Instruction Elimination</li>
+<li>Dead Store Elimination</li>
+<li>Dead Global Elimination</li>
+</ul>
+<p>Vgl. auch: <a href="http://releases.llvm.org/9.0.0/docs/Passes.html">LLVM&rsquo;s Analysis and Transform Passes</a></p>
+<h2 id="ssa-und-optimierung">SSA und Optimierung</h2>
+<p>Der Optimierer profitiert stark von SSA.
+Der Wert einer Variablen wird nicht überschrieben,
+sodass sie niemals in der <span>$kill$</span>-Menge der Datenflussanalyse vorkommt, wodurch
+die Datenflussanalyse in vielen Punkten erleichtert wird.</p>
+<p>Einige Beispiele für Optimierungen, die von SSA profitieren:</p>
+<ul>
+<li>Constant propagation
+<ul>
+<li>Nutzt Reaching Definition Analysis, welche durch die SSA-Form vereinfacht wird
+(keine konkurrierenden Zuweisungen)</li>
+</ul>
+</li>
+<li>Sparse conditional constant propagation
+<ul>
+<li>Propagiert Konstanten in Bedingungen von Programmabzweigungen</li>
+<li>Markiert Programmzweige basierend auf Konstanten als ausführbar oder nicht ausführbar</li>
+<li>Löscht die Argumente der Phi-Instruktion, welche mit nicht ausführbaren Zweigen zusammenhängen</li>
+<li>Auch diese Form der Constant Propagation profitiert von SSA</li>
+</ul>
+</li>
+<li>Global value numbering
+<ul>
+<li>Hilft bei der Identifikation von äquivalenten Berechnungen</li>
+<li>Nummerierung von Variablen und Werten, sodass gleichwertige Ausdrücke die gleiche Nummer erhalten</li>
+<li>Vereinfacht durch SSA-Form, da keine erneute Zuweisung einer Variablen möglich ist</li>
+</ul>
+</li>
+</ul>
+<h1 id="die-codegenerierung">Die Codegenerierung</h1>
+<h2 id="struktur-der-codegenerierung">Struktur der Codegenerierung</h2>
+<ul>
+<li>übersetzt LLVM IR in Maschinencode</li>
+<li>läuft in Pässen:
+<ul>
+<li>Built-In-Pässe, die defaultmäßig laufen</li>
+<li>Instruction Selection</li>
+<li>Register Allocation</li>
+<li>Scheduling</li>
+<li>Code Layout Optimization</li>
+<li>Assembly Emission</li>
+</ul>
+</li>
+</ul>
+<h2 id="unterstützte-prozessorarchitekturen">Unterstützte Prozessorarchitekturen</h2>
+<p>x86      AMD64      PowerPC      PowerPC 64Bit      Thumb</p>
+<p>SPARC      Alpha      CellSPU      PIC16      MIPS</p>
+<p>MSP430     System z      XMOS      Xcore      ...</p>
+<h1 id="wrap-up">Wrap-Up</h1>
+<ul>
+<li>LLVM ist eine (fast) komplette Infrastruktur zur Entwicklung Von Compilern
+und compilerähnlichen Programmen. Die wichtigsten Bestandteile sind der Zwischencode
+LLVM IR und der LLVM Optimierer.</li>
+</ul>
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_LLVM-doc">
+            
+                [LLVM-doc] <a href="https://releases.llvm.org/9.0.0/docs/index.html#" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>The LLVM compiler infrastructure - documentation</strong></a>
+            
+            
+                <br>LLVM-Project, 2022.
+                
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_LLVM-org">
+            
+                [LLVM-org] <a href="https://llvm.org/" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>The LLVM compiler infrastructure</strong></a>
+            
+            
+                <br>LLVM-Project, 2022.
+                
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        <li>(K1) Konzept von LLVM</li>
+        
+        
+        
+    
+        <li>(K1) Module von LLVM</li>
+        
+        
+        
+    
+        <li>(K1) SSA</li>
+        
+        
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item parent"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle" checked/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

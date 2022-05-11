@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>AST-basierte Interpreter: Funktionen und Klassen   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/interpretation/astdriven-part2.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/"><span itemprop="name">Interpreter</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/" aria-disabled="true"><span itemprop="name">AST-basierte Interpreter: Funktionen und Klassen</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#funktionen">Funktionen</a></li>
+    <li><a href="#ausführen-einer-funktionsdeklaration">Ausführen einer Funktionsdeklaration</a></li>
+    <li><a href="#ausführen-eines-funktionsaufrufs">Ausführen eines Funktionsaufrufs</a></li>
+    <li><a href="#funktionsaufruf-rückgabewerte">Funktionsaufruf: Rückgabewerte</a></li>
+    <li><a href="#native-funktionen">Native Funktionen</a></li>
+    <li><a href="#klassen-und-instanzen-i">Klassen und Instanzen I</a></li>
+    <li><a href="#klassen-und-instanzen-ii">Klassen und Instanzen II</a></li>
+    <li><a href="#zugriff-auf-methoden-und-attribute">Zugriff auf Methoden (und Attribute)</a></li>
+    <li><a href="#methoden-und-this-oder-self">Methoden und <em>this</em> oder <em>self</em></a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>Üblicherweise können Funktionen auf die Umgebung zurückgreifen, in der die Definition der
+Funktion erfolgt ist (<a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">&quot;<strong>Closure</strong>&quot;</a>).
+Deshalb wird beim Interpretieren einer Funktionsdefinition der jeweilige AST-Knoten (mit
+dem Block des Funktionskörpers) und die aktuelle Umgebung in einer Struktur zusammengefasst.
+Zusätzlich muss in der aktuellen Umgebung der Name der Funktion zusammen mit der eben erzeugten
+Struktur (&quot;Funktionsobjekt&quot;) als Wert definiert werden.</p>
+<p>Beim Funktionsaufruf löst man den Funktionsnamen in der aktuellen Umgebung auf und erhält
+das Funktionsobjekt mit dem AST der Funktion und der Closure. Die Funktionsparameter werden
+ebenfalls in der aktuellen Umgebung aufgelöst (Aufruf von <code>eval()</code> für die AST-Kindknoten
+des Funktionsaufrufs). Zur Interpretation der Funktion legt man sich eine neue Umgebung an,
+deren Eltern-Umgebung die Closure der Funktion ist, definiert die Funktionsparameter (Name
+und eben ermittelter Wert) in dieser neuen Umgebung und interpretiert dann den AST-Kindknoten
+des Funktionsblocks in dieser neuen Umgebung. Für den Rückgabewert muss man ein wenig tricksen:
+Ein Block hat normalerweise keinen Wert. Eine Möglichkeit wäre, bei der Interpretation eines
+<code>return</code>-Statements eine Exception mit dem Wert des Ausdruck hinter dem &quot;<code>return</code>&quot; zu werfen
+und im <code>eval()</code> des Funktionsblock zu fangen.</p>
+<p>Für Klassen kann man analog verfahren. Methoden sind zunächst einfach Funktionen, die in einem
+Klassenobjekt gesammelt werden. Das Erzeugen einer Instanz einer Klasse ist die Interpretation
+eines &quot;Aufrufs&quot; der Klasse (analog zum Aufruf einer Funktion): Dabei wird ein spezielles
+Instanzobjekt erzeugt, welches auf die Klasse verweist und welches die Werte der Attribute hält.
+Beim Aufruf von Methoden auf einem Instanzobjekt wird der Name der Funktion über das Klassenobjekt
+aufgelöst, eine neue Umgebung erzeugt mit der Closure der Funktion als Eltern-Umgebung und das
+Instanzobjekt wird in dieser Umgebung definiert als &quot;<code>this</code>&quot; oder &quot;<code>self</code>&quot;. Anschließend wird
+ein neues Funktionsobjekt mit der eben erzeugten Umgebung und dem Funktions-AST erzeugt und
+zurückgeliefert. Dieses neue Funktionsobjekt wird dann wie eine normale Funktion aufgerufen
+(interpretiert, s.o.). Der Zugriff in der Methode auf die Attribute der Klasse erfolgt dann
+über <code>this</code> bzw. <code>self</code>, welche in der Closure der Funktion nun definiert sind und auf das
+Instanzobjekt mit den Attributen verweisen.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/LTqk7ifB-V0" target="_blank" rel="nofollow noopener noreferrer">VL AST-basierte Interpreter (Funktionen, Klassen)</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/725097f1ce3ef3f10dd1d31674e1b18e89e8b58af259705080b78ccba9dd319d7be76884549c9c59e02fde9e1a2a91ae5aa3a6d44a8e200a2323e08e217faa14" target="_blank" rel="nofollow noopener noreferrer">VL AST-basierte Interpreter (Funktionen, Klassen)</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        
+        <li>(K3) Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns</li>
+        
+    
+        
+        
+        <li>(K3) Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog zu den Symboltabellen</li>
+        
+    
+        
+        
+        <li>(K3) Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung mit einem Visitor</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="funktionen">Funktionen</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    print a <span style="color:#f92672">+</span> b <span style="color:#f92672">+</span> c<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>foo<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 3<span style="color:#f92672">);</span>
+</span></span></code></pre></div></div>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">makeCounter</span>():
+</span></span><span style="display:flex;"><span>    var i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>():
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print i
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>counter <span style="color:#f92672">=</span> makeCounter()
+</span></span><span style="display:flex;"><span>counter()   <span style="color:#75715e"># &#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>counter()   <span style="color:#75715e"># &#34;2&#34;</span>
+</span></span></code></pre></div></div>
+</div>
+<p>Die Funktionsdeklaration muss im aktuellen Kontext abgelegt werden,
+dazu wird der AST-Teilbaum der Deklaration benötigt.</p>
+<p>Beim Aufruf muss man das Funktionssymbol im aktuellen Kontext
+suchen, die Argumente auswerten, einen neuen lokalen Kontext
+anlegen und darin die Parameter definieren (mit den eben ausgewerteten
+Werten) und anschließend den AST-Teilbaum des Funktionskörpers im
+Interpreter mit <code>eval()</code> auswerten ...</p>
+<h2 id="ausführen-einer-funktionsdeklaration">Ausführen einer Funktionsdeklaration</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">funcDecl : type ID &#39;(&#39; params? &#39;)&#39; block ;
+funcCall : ID &#39;(&#39; exprList? &#39;)&#39; ;
+</code></pre><div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funcDecl</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    fn <span style="color:#f92672">=</span> Fun(t, self<span style="color:#f92672">.</span>env)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>define(t<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText(), fn)
+</span></span></code></pre></div></div>
+<div class='column'>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/fun.png" class="" />
+</figure>
+</div>
+</div>
+<p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6">LoxFunction.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Man definiert im aktuellen Environment den Funktionsnamen und hält dazu
+den aktuellen Kontext (aktuelles Environment) sowie den AST-Knoten mit
+der eigentlichen Funktionsdefinition fest.</p>
+<p>Für <em>Closures</em> ist der aktuelle Kontext wichtig, sobald man die
+Funktion ausführen muss. In <a href="#id_Parr2010">[Parr2010, S.236]</a> wird beispielsweise
+einfach nur ein neuer Memory-Space (entspricht ungefähr hier einem
+neuen lokalen Environment) angelegt, in dem die im Funktionskörper
+definierten Symbole angelegt werden. Die Suche nach Symbolen erfolgt
+dort nur im Memory-Space (Environment) der Funktion bzw. im globalen
+Scope (Environment).</p>
+<h2 id="ausführen-eines-funktionsaufrufs">Ausführen eines Funktionsaufrufs</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">funcDecl : type ID &#39;(&#39; params? &#39;)&#39; block ;
+funcCall : ID &#39;(&#39; exprList? &#39;)&#39; ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funcCall</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    fn <span style="color:#f92672">=</span> (Fun)eval(t<span style="color:#f92672">.</span>ID())
+</span></span><span style="display:flex;"><span>    args <span style="color:#f92672">=</span> [eval(a)  <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> t<span style="color:#f92672">.</span>exprList()]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>env;  self<span style="color:#f92672">.</span>env <span style="color:#f92672">=</span> Environment(fn<span style="color:#f92672">.</span>closure)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(args<span style="color:#f92672">.</span>size()):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>define(fn<span style="color:#f92672">.</span>decl<span style="color:#f92672">.</span>params()[i]<span style="color:#f92672">.</span>getText(), args[i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    eval(fn<span style="color:#f92672">.</span>decl<span style="color:#f92672">.</span>block())
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>env <span style="color:#f92672">=</span> prev
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L57">LoxFunction.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Zunächst wird die <code>ID</code> im aktuellen Kontext ausgewertet. In der obigen Grammatik
+ist dies tatsächlich nur ein Funktionsname, aber man könnte über diesen Mechanismus
+auch Ausdrücke erlauben und damit Funktionspointer bzw. Funktionsreferenzen
+realisieren ... Im Ergebnis hat man das Funktionsobjekt mit dem zugehörigen AST-Knoten
+und dem Kontext zur Deklarationszeit.</p>
+<p>Die Argumente der Funktion werden nacheinander ebenfalls im aktuellen Kontext
+ausgewertet.</p>
+<p>Um den Funktionsblock auszuwerten, legt man einen neuen temporären Kontext über
+dem Closure-Kontext der Funktion an und definiert darin die Parameter der Funktion
+samt den aktuellen Werten. Dann lässt man den Interpreter über den Visitor-Dispatch
+den Funktionskörper evaluieren und schaltet wieder auf den Kontext vor der
+Funktionsauswertung zurück.</p>
+<h2 id="funktionsaufruf-rückgabewerte">Funktionsaufruf: Rückgabewerte</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funcCall</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    eval(fn<span style="color:#f92672">.</span>decl<span style="color:#f92672">.</span>block())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># (Wirkung)</span>
+</span></span></code></pre></div></div>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReturnEx</span>(RuntimeException):
+</span></span><span style="display:flex;"><span>    __init__(self, v): self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">return</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">raise</span> ReturnEx(eval(t<span style="color:#f92672">.</span>expr()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funcCall</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    erg <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>: eval(fn<span style="color:#f92672">.</span>decl<span style="color:#f92672">.</span>block())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> ReturnEx <span style="color:#66d9ef">as</span> r: erg <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>value
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> erg;
+</span></span></code></pre></div></div>
+</div>
+<p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Return.java#L4">Return.java</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L74">LoxFunction.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Rückgabewerte für den Funktionsaufruf werden innerhalb von <code>block</code> berechnet,
+wo eine Reihe von Anweisungen interpretiert werden, weshalb <code>block</code> ursprünglich
+keinen Rückgabewert hat. Im Prinzip könnte man <code>block</code> etwas zurück geben lassen,
+was durch die möglicherweise tiefe Rekursion relativ umständlich werden kann.</p>
+<p>An dieser Stelle kann man den Exceptions-Mechanismus <strong>missbrauchen</strong> und bei
+der Auswertung eines <code>return</code> mit dem Ergebniswert direkt zum Funktionsaufruf
+zurück springen. In Methoden, wo man einen neuen lokalen Kontext anlegt und
+die globale <code>env</code>-Variable temporär damit ersetzt, muss man dann ebenfalls
+mit <code>try/catch</code> arbeiten und im <code>finally</code>-Block die Umgebung zurücksetzen und
+die Exception erneut werfen.</p>
+<h2 id="native-funktionen">Native Funktionen</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Callable</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">call</span>(self, Interpreter i, List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> a): <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fun</span>(Callable): <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NativePrint</span>(Fun):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">call</span>(self, Interpreter i, List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> a):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> o <span style="color:#f92672">in</span> a: print a  <span style="color:#75715e"># nur zur Demo, hier sinnvoller Code :-)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Im Interpreter (Initialisierung):</span>
+</span></span><span style="display:flex;"><span>self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>define(<span style="color:#e6db74">&#34;print&#34;</span>, NativePrint())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funcCall</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    prev = self.env;  self.env = Environment(fn.closure)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    for i in range(args.size()): ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    eval(fn.decl.block()); self.env = prev</span>
+</span></span><span style="display:flex;"><span>    fn<span style="color:#f92672">.</span>call(self, args)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxCallable.java#L6">LoxCallable.java</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6">LoxFunction.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Normalerweise wird beim Interpretieren eines Funktionsaufrufs der
+Funktionskörper (repräsentiert durch den entsprechenden AST-Teilbaum)
+durch einen rekursiven Aufruf von <code>eval</code> ausgewertet.</p>
+<p>Für native Funktionen, die im Interpreter eingebettet sind, klappt
+das nicht mehr, da hier kein AST vorliegt.</p>
+<p>Man erstellt ein neues Interface <code>Callable</code> mit der Hauptmethode <code>call()</code>
+und leitet die frühere Klasse <code>Fun</code> davon ab: <code>class Fun(Callable)</code>.
+Die Methode <code>funcCall()</code> des Interpreters ruft nun statt der <code>eval()</code>-Methode
+die <code>call()</code>-Methode des Funktionsobjekts auf und übergibt den Interpreter
+(== Zustand) und die Argumente. Die <code>call()</code>-Methode der Klasse <code>Fun</code> muss
+nun ihrerseits im Normalfall den im Funktionsobjekt referenzierten AST-Teilbaum
+des Funktionskörpers mit dem Aufruf von <code>eval()</code> interpretieren ...</p>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/callFun.png" class="" />
+</figure>
+<p>Für die nativen Funktionen leitet man einfach eine (anonyme) Klasse
+ab und speichert sie unter dem gewünschten Namen im globalen Kontext
+des Interpreters. Die <code>call()</code>-Methode wird dann entsprechend der
+gewünschten Funktion implementiert, d.h. hier erfolgt kein weiteres
+Auswerten des AST.</p>
+<h2 id="klassen-und-instanzen-i">Klassen und Instanzen I</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">classDef : &#34;class&#34; ID &#34;{&#34; funcDecl* &#34;}&#34; ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">classDef</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    methods <span style="color:#f92672">=</span> HashMap<span style="color:#f92672">&lt;</span>String, Fun<span style="color:#f92672">&gt;</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> t<span style="color:#f92672">.</span>funcDecl():
+</span></span><span style="display:flex;"><span>        fn <span style="color:#f92672">=</span> Fun(m, self<span style="color:#f92672">.</span>env)
+</span></span><span style="display:flex;"><span>        methods[m<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()] <span style="color:#f92672">=</span> fn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    clazz <span style="color:#f92672">=</span> Clazz(methods)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>define(t<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText(), clazz)
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L115">Interpreter.java</a>, (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p><strong>Anmerkung</strong>: In dieser Darstellung wird der Einfachheit halber nur auf Methoden eingegangen.
+Für Attribute müssten ähnliche Konstrukte implementiert werden.</p>
+<h2 id="klassen-und-instanzen-ii">Klassen und Instanzen II</h2>
+<pre tabindex="0"><code class="language-{.python" data-lang="{.python">class Clazz(Callable):
+    __init__(self, Map&lt;String, Fun&gt; methods):
+        self.methods = methods
+
+    def call(self, Interpreter i, List&lt;Object&gt; a):
+        return Instance(self)
+
+    def findMethod(self, String name):
+        return self.methods[name]
+
+class Instance:
+    __init__(self, Clazz clazz):
+        self.clazz = clazz
+
+    def get(self, String name):
+        method = self.clazz.findMethod(name)
+        if method != None: return method.bind(self)
+        raise RuntimeError(name, &#34;undefined method&#34;)
+</code></pre><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxClass.java#L11">LoxClass.java</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxInstance.java#L7">LoxInstance.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Instanzen einer Klasse werden durch den funktionsartigen &quot;Aufruf&quot; der Klassen
+angelegt (parameterloser Konstruktor). Eine Instanz hält die Attribute (hier
+nicht gezeigt) und eine Referenz auf die Klasse, um später an die Methoden
+heranzukommen.</p>
+<h2 id="zugriff-auf-methoden-und-attribute">Zugriff auf Methoden (und Attribute)</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">getExpr : obj &#34;.&#34; ID ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getExpr</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    obj <span style="color:#f92672">=</span> eval(t<span style="color:#f92672">.</span>obj())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> isinstance(obj, Instance):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((Instance)obj)<span style="color:#f92672">.</span>get(t<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(t<span style="color:#f92672">.</span>obj()<span style="color:#f92672">.</span>getText(), <span style="color:#e6db74">&#34;no object&#34;</span>)
+</span></span></code></pre></div><p>Beim Zugriff auf Attribute muss das Objekt im aktuellen Kontext evaluiert
+werden. Falls es eine Instanz von <code>Instance</code> ist, wird auf das Feld per
+interner Hash-Map zugriffen; sonst Exception.</p>
+<h2 id="methoden-und-this-oder-self">Methoden und <em>this</em> oder <em>self</em></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fun</span>(Callable):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bind</span>(self, Instance i):
+</span></span><span style="display:flex;"><span>        e <span style="color:#f92672">=</span> Environment(self<span style="color:#f92672">.</span>closure)
+</span></span><span style="display:flex;"><span>        e<span style="color:#f92672">.</span>define(<span style="color:#e6db74">&#34;this&#34;</span>, i)
+</span></span><span style="display:flex;"><span>        e<span style="color:#f92672">.</span>define(<span style="color:#e6db74">&#34;self&#34;</span>, i)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Fun(self<span style="color:#f92672">.</span>decl, e)
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L31">LoxFunction.java</a>, (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Nach dem Interpretieren von Klassendefinitionen sind die Methoden in der Klasse
+selbst gespeichert, wobei der jeweilige <code>closure</code> auf den Klassenkontext zeigt.</p>
+<p>Beim Auflösen eines Methodenaufrufs wird die gefundene Methode an die
+Instanz gebunden, d.h. es wird eine neue Funktion angelegt, deren <code>closure</code>
+auf den Kontext der Instanz zeigt. Zusätzlich wird in diesem Kontext noch die
+Variable &quot;<code>this</code>&quot; definiert, damit man damit auf die Instanz zugreifen kann.</p>
+<p>In Python wird das in der Methodensignatur sichtbar: Der erste Parameter ist
+eine Referenz auf die Instanz, auf der diese Methode ausgeführt werden soll ...</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Interpreter simulieren die Programmausführung</p>
+<ul>
+<li>Namen und Symbole auflösen</li>
+<li>Speicherbereiche simulieren</li>
+<li>Code ausführen: Read-Eval-Loop</li>
+</ul>
+</li>
+<li>
+<p>Traversierung des AST: <code>eval(AST t)</code> als Visitor-Dispatcher</p>
+</li>
+<li>
+<p>Scopes mit <code>Environment</code> (analog zu Symboltabellen)</p>
+</li>
+<li>
+<p>Interpretation von Funktionen (Deklaration/Aufruf, native Funktionen)</p>
+</li>
+<li>
+<p>Interpretation von Klassen und Instanzen</p>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+            <li>
+                <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet05/"><strong>Blatt 05: Interpreter</strong></a>
+                 (Abgabe: 03.01.22, cagi)
+            </li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Grune2012">
+            
+                [Grune2012] <strong>Modern compiler design</strong>
+            
+            
+                <br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-4614-4698-9" target="_blank" rel="nofollow noopener noreferrer">978-1-4614-4698-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 6</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Mogensen2017">
+            
+                [Mogensen2017] <strong>Introduction to compiler design</strong>
+            
+            
+                <br>Mogensen, T., Springer, 2017.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">978-3-319-66966-3</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1007/978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">10.1007/978-3-319-66966-3</a>.
+                
+            
+            
+                <br><em>Kapitel 4</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Nystrom2021">
+            
+                [Nystrom2021] <a href="https://github.com/munificent/craftinginterpreters" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Crafting interpreters</strong></a>
+            
+            
+                <br>Nystrom, R., Genever Benning, 2021.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9" target="_blank" rel="nofollow noopener noreferrer">978-0-9905829-3-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel Kapitel: A Tree-Walk Interpreter, insb. 10. Functions u. 12. Classes</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2010">
+            
+                [Parr2010] <strong>Language implementation patterns</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2010.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5645-6" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5645-6</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item parent"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle" checked/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

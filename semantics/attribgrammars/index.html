@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Typen, Type Checking und Attributierte Grammatiken   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/semantics/attribgrammars.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/"><span itemprop="name">Semantische Analyse</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/" aria-disabled="true"><span itemprop="name">Typen, Type Checking und Attributierte Grammatiken</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ist-das-alles-erlaubt">Ist das alles erlaubt?</a></li>
+    <li><a href="#taschenrechner-parsen-von-ausdrücken-wie-354">Taschenrechner: Parsen von Ausdrücken wie <code>3*5+4</code></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#das-haben-wir-bis-jetzt-12">Das haben wir bis jetzt (1/2)</a></li>
+    <li><a href="#das-haben-wir-bis-jetzt-22">Das haben wir bis jetzt (2/2)</a></li>
+    <li><a href="#was-fehlt-jetzt-noch">Was fehlt jetzt noch?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#typisierung">Typisierung</a></li>
+    <li><a href="#ausdrücke">Ausdrücke</a></li>
+    <li><a href="#typinferenz">Typinferenz</a></li>
+    <li><a href="#statische-typprüfungen">Statische Typprüfungen</a></li>
+    <li><a href="#typkonvertierungen">Typkonvertierungen</a></li>
+    <li><a href="#nicht-grundsätzlich-statisch-mögliche-typprüfungen">Nicht grundsätzlich statisch mögliche Typprüfungen</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#was-man-damit-macht">Was man damit macht</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#berechnen-der-ausdrücke">Berechnen der Ausdrücke</a></li>
+    <li><a href="#attributierte-grammatiken-sdd">Attributierte Grammatiken (SDD)</a></li>
+    <li><a href="#definition-attributierte-grammatik">Definition: Attributierte Grammatik</a></li>
+    <li><a href="#abgeleitete-und-ererbte-attribute">Abgeleitete und ererbte Attribute</a></li>
+    <li><a href="#beispiel-attributgrammatiken">Beispiel: Attributgrammatiken</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#beispiel-s-attributgrammatik">Beispiel: S-Attributgrammatik</a></li>
+    <li><a href="#beispiel-annotierter-syntaxbaum-für-582">Beispiel: Annotierter Syntaxbaum für <code>5*8+2</code></a></li>
+    <li><a href="#erzeugung-des-ast-aus-dem-parse-tree-für-582">Erzeugung des AST aus dem Parse-Tree für <code>5*8+2</code></a></li>
+    <li><a href="#beispiel-l-attributgrammatik-berechnete-u-geerbte-attribute-ohne-links-rekursion">Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion</a></li>
+    <li><a href="#beispiel-typinferenz-für-379-oder-helloworld">Beispiel: Typinferenz für <code>3+7+9</code> oder <code>&quot;hello&quot;+&quot;world&quot;</code></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#erweiterung-attributierter-grammatiken">Erweiterung attributierter Grammatiken</a></li>
+    <li><a href="#s-attributierte-sdd-lr-grammatik-bottom-up-parsierbar">S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar</a></li>
+    <li><a href="#l-attributierte-sdd-ll-grammatik-top-down-parsierbar-12">L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (1/2)</a></li>
+    <li><a href="#l-attributierte-sdd-ll-grammatik-top-down-parsierbar-22">L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (2/2)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#berechnete-synthesized-attribute">Berechnete (<em>synthesized</em>) Attribute</a></li>
+    <li><a href="#geerbte-inherited-attribute-12">Geerbte (<em>inherited</em>) Attribute (1/2)</a></li>
+    <li><a href="#geerbte-inherited-attribute-22">Geerbte (<em>inherited</em>) Attribute (2/2)</a></li>
+    <li><a href="#probleme-mit-geerbten-attributen">Probleme mit geerbten Attributen</a></li>
+    <li><a href="#typen-für-geerbte-attribute">Typen für geerbte Attribute</a></li>
+    <li><a href="#bison-und-aktionen">Bison und Aktionen</a></li>
+    <li><a href="#beispiel">Beispiel:</a></li>
+    <li><a href="#bison-konflikte-durch-eingebettete-aktionen">Bison: Konflikte durch eingebettete Aktionen</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#wrap-up-1">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+
+    <h1 id="motivation">Motivation</h1>
+<h2 id="ist-das-alles-erlaubt">Ist das alles erlaubt?</h2>
+<p>Operation erlaubt?</p>
+<p>Zuweisung erlaubt?</p>
+<p>Welcher Ausdruck hat welchen Typ?</p>
+<p>(Welcher Code muss dafür erzeugt werden?)</p>
+<ul>
+<li>a = b</li>
+<li>a = f(b)</li>
+<li>a = b + c</li>
+<li>a = b + o.nummer</li>
+<li>if (f(a) == f(b))</li>
+</ul>
+<h2 id="taschenrechner-parsen-von-ausdrücken-wie-354">Taschenrechner: Parsen von Ausdrücken wie <code>3*5+4</code></h2>
+<pre><code>expr : expr '+' term
+     | term
+     ;
+term : term '*' DIGIT
+     | DIGIT
+     ;
+
+DIGIT : [0-9] ;
+</code></pre>
+<p>=&gt; Wie den Ausdruck <strong>ausrechnen</strong>?</p>
+<p><em>Anmerkung</em>: Heute geht es um die einfachste Form der semantischen Analyse: Anreichern einer Grammatik um
+Attribute und Aktionen, die während des Parsens oder bei der Traversierung des Parse-Trees ausgewertet
+werden.</p>
+<h1 id="semantische-analyse-die-symboltabellen-nutzen">Semantische Analyse: Die Symboltabellen nutzen</h1>
+<h2 id="das-haben-wir-bis-jetzt-12">Das haben wir bis jetzt (1/2)</h2>
+<p>Wir haben Einträge in den Symboltabellen angelegt und dafür gesorgt, dass wir in den richtigen Scopes Definitionen in der richtigen Reihenfolge suchen können.</p>
+<p>Zum Auflösen von Deklarationen und Zuordnen von Objekten zu Klassen ist mindestens ein zweiter Lauf über Syntaxbaum und/oder Symboltabellen.</p>
+<p>Der Parse Tree enthält bei allen Namen Verweise in die Symboltabellen.
+Die Symboltabelleneinträge für Variablen und Objekte enthalten jetzt die Typen der Variablen und Objekte, bzw. Verweise auf ihre Typen in den Symboltabellen.</p>
+<h2 id="das-haben-wir-bis-jetzt-22">Das haben wir bis jetzt (2/2)</h2>
+<p>Dabei konnten schon einige semantische Eigenschaften des zu übersetzenden Programms überprüft werden, falls erforderlich z. B.:</p>
+<ul>
+<li>Wurden alle Variablen / Objekte vor ihrer Verwendung definiert oder deklariert?</li>
+<li>Wurden keine Elemente mehrfach definiert?</li>
+<li>Wurden alle Funktionen / Methoden mit der richtigen Anzahl Parameter aufgerufen? (Nicht in allen Fällen schon prüfbar)</li>
+<li>Haben Arrayzugriffe auch keine zu hohe Dimension?</li>
+<li>Werden auch keine Namen benutzt, für die es keine Definition / Deklaration gibt?</li>
+</ul>
+<h2 id="was-fehlt-jetzt-noch">Was fehlt jetzt noch?</h2>
+<p>Es müssen kontextsensitive Analysen durchgeführt werden, allen voran Typanalysen. Damit der &quot;richtige&quot; (Zwischen-) Code entsprechend den beteiligten Datentypen erzeugt werden kann, muss mit Hilfe des Typsystems der Sprache (aus der Sprachdefinition) überprüft werden, ob alle Operationen nur mit den korrekten Datentypen benutzt werden. Dazu gehört auch, dass nicht nur Typen von z. B. Variablen, sondern von ganzen Ausdrücken betrachtet, bzw. bestimmt werden. Damit kann dann für die Codeerzeugung festgelegt werden, welcher Operator realisiert werden muss (Überladung).</p>
+<h1 id="analyse-von-datentypen">Analyse von Datentypen</h1>
+<h2 id="typisierung">Typisierung</h2>
+<ul>
+<li>stark oder statisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen finden in der semantischen Analyse statt (C, C++, Java)</li>
+<li>schwach oder dynamisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen finden zur Laufzeit statt (Python, Lisp, Perl)</li>
+<li>untypisierte Sprachen: keinerlei Typüberprüfungen (Maschinensprache)</li>
+</ul>
+<h2 id="ausdrücke">Ausdrücke</h2>
+<p>Jetzt muss für jeden Ausdruck im weitesten Sinne sein Typ bestimmt werden.</p>
+<p>Ausdrücke können hier sein:</p>
+<ul>
+<li>rechte Seiten von Zuweisungen</li>
+<li>linke Seiten von Zuweisungen</li>
+<li>Funktions- und Methodenaufrufe</li>
+<li>jeder einzelne aktuelle Parameter in Funktions- und Methodenaufrufen</li>
+<li>Bedingungen in Kontrollstrukturen</li>
+</ul>
+<h2 id="typinferenz">Typinferenz</h2>
+<p><strong>Def.:</strong> <em>Typinferenz</em> ist die Bestimmung des Datentyps jedes Bezeichners und jedes Ausdrucks im Code.</p>
+<p>Der Typ eines Ausdrucks wird mit Hilfe der Typen seiner Unterausdrücke bestimmt.</p>
+<p>Dabei kann man ein Kalkül mit sog. Inferenzregeln der Form</p>
+<div>$$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$</div>
+<p><em>(Wenn f den Typ <span>$s \rightarrow t$</span> hat und x den Typ s,
+dann hat der Ausdruck f(x) den Typ t.)</em></p>
+<p>benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Laufzeit.</p>
+<h2 id="statische-typprüfungen">Statische Typprüfungen</h2>
+<p><strong>Bsp.:</strong> Der + - Operator:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Typ 1. Operand</th>
+<th style="text-align:center">Typ 2. Operand</th>
+<th style="text-align:center">Ergebnistyp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center">string</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">string</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typkonvertierungen">Typkonvertierungen</h2>
+<ul>
+<li>
+<p>Der Compiler kann implizite Typkonvertierungen vornehmen, um einen Ausdruck zu verifizieren (siehe Sprachdefiniton).</p>
+</li>
+<li>
+<p>In der Regel sind dies Typerweiterungen, z.B. von <em>int</em> nach <em>float</em>.</p>
+</li>
+<li>
+<p>Manchmal muss zu zwei Typen der kleinste Typ gefunden werden, der beide vorhandenen Typen umschließt.</p>
+</li>
+<li>
+<p>Explizite Typkonvertierungen heißen auch <em>Type Casts</em>.</p>
+</li>
+</ul>
+<h2 id="nicht-grundsätzlich-statisch-mögliche-typprüfungen">Nicht grundsätzlich statisch mögliche Typprüfungen</h2>
+<p><strong>Bsp.:</strong> Der ^ - Operator <span>$(a^b)$</span>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Typ 1. Operand</th>
+<th style="text-align:center">Typ 2. Operand</th>
+<th style="text-align:center">Ergebnistyp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">int <span>$\geq$</span> 0</td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">int &lt; 0</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center"><span>$\ldots$</span></td>
+<td style="text-align:center"><span>$\ldots$</span></td>
+<td style="text-align:center"><span>$\ldots$</span></td>
+</tr>
+</tbody>
+</table>
+<h1 id="attributierte-grammatiken">Attributierte Grammatiken</h1>
+<h2 id="was-man-damit-macht">Was man damit macht</h2>
+<p>Die Syntaxanalyse kann keine kontextsensitiven Analysen durchführen.</p>
+<ul>
+<li>
+<p>Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von cs-Grammatiken ist <span>$PSPACE-complete$</span>.</p>
+</li>
+<li>
+<p>Der Parsergenerator <em>Bison</em> generiert LALR(1)-Parser, aber auch sog. <em>Generalized LR (GLR) Parser</em>, die bei nichtlösbaren Konflikten in der Grammatik (Reduce/Reduce oder Shift/Reduce) parallel den Input mit jede der Möglichkeiten weiterparsen.</p>
+</li>
+<li>
+<p>Ein weiterer Ansatz, kontextsensitive Abhängigkeiten zu berücksichtigen, ist der Einsatz von attributierten Grammatiken, nicht nur zur Typanalyse, sondern evtl. auch zur Codegenerierung.</p>
+</li>
+</ul>
+<h1 id="syntax-gesteuerte-übersetzung-attribute-und-aktionen">Syntax-gesteuerte Übersetzung: Attribute und Aktionen</h1>
+<h2 id="berechnen-der-ausdrücke">Berechnen der Ausdrücke</h2>
+<pre><code>expr : expr '+' term ;
+
+translate expr ;
+translate term ;
+handle + ;
+</code></pre>
+<h2 id="attributierte-grammatiken-sdd">Attributierte Grammatiken (SDD)</h2>
+<p>auch &quot;<em>syntax-directed definition</em>&quot;</p>
+<p>Anreichern einer CFG:</p>
+<ul>
+<li>Zuordnung einer Menge von Attributen zu den Symbolen (Terminal- und Nicht-Terminal-Symbole)</li>
+<li>Zuordnung einer Menge von <em>semantischen Regeln</em> (Evaluationsregeln) zu den Produktionen</li>
+</ul>
+<h2 id="definition-attributierte-grammatik">Definition: Attributierte Grammatik</h2>
+<p>Eine <em>attributierte Grammatik</em> <em>AG = (G,A,R)</em> besteht aus folgenden Komponenten:</p>
+<ul>
+<li>
+<p><em>G = (N, T, P, S)</em> ist eine cf-Grammatik</p>
+</li>
+<li>
+<p>A = <span>$\bigcup\limits_{X \in (T \cup N)} A(X)$</span> mit <span>$A(X) \cap A(Y) \neq \emptyset \Rightarrow X = Y$</span></p>
+</li>
+<li>
+<p>R = <span>$\bigcup\limits_{p \in P} R(p)$</span> mit <span>$R(p) = {X_i.a = f(\ldots) \vert p : X_0 \rightarrow X_1 \ldots X_n \in P, X_i.a \in A(X_i), 0 \leq i \leq n}$</span></p>
+</li>
+</ul>
+<h2 id="abgeleitete-und-ererbte-attribute">Abgeleitete und ererbte Attribute</h2>
+<p>Die in einer Produktion definierten Attribute sind</p>
+<p><em>AF(P)</em> = <span>${X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P, 0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)}$</span></p>
+<p>Wir betrachten Grammatiken mit zwei disjunkten Teilmengen, den abgeleiteten (synthesized) Attributen <em>AS(X)</em> und den ererbten (inherited) Attributen <em>AI(X)</em>:</p>
+<p><em>AS(X)</em> = <span>${X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)}$</span></p>
+<p><em>AI(X)</em> = <span>${X.a\ \vert \ \exists q : Y \rightarrow uXv \in P, X.a\in AF(q)}$</span></p>
+<p>Abgeleitete Attribute geben Informationen von unten nach oben weiter, geerbte von oben nach unten.</p>
+<p>Die Abhängigkeiten der Attribute lassen sich im sog. <em>Abhängigkeitsgraphen</em> darstellen.</p>
+<h2 id="beispiel-attributgrammatiken">Beispiel: Attributgrammatiken</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>e : e1 '+' t ;</code></td>
+<td style="text-align:left"><code>e.val = e1.val + t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>e : t ;</code></td>
+<td style="text-align:left"><code>e.val = t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : t1 '*' D ;</code></td>
+<td style="text-align:left"><code>t.val = t1.val * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : D ;</code></td>
+<td style="text-align:left"><code>t.val = D.lexval</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>t : D t' ;</code></td>
+<td style="text-align:left"><code>t'.inh = D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t.syn = t'.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' : '*' D t'1 ;</code></td>
+<td style="text-align:left"><code>t'1.inh = t'.inh * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t'.syn = t'1.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' :</code> <span>$\epsilon$</span> <code>;</code></td>
+<td style="text-align:left"><code>t'.syn = t'.inh</code></td>
+</tr>
+</tbody>
+</table>
+<p>Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die Vorkommen nummeriert. (t, t1; t', t'1)</p>
+<h1 id="s-attributgrammatiken-und-l-attributgrammatiken">S-Attributgrammatiken und L-Attributgrammatiken</h1>
+<p><em>S-Attributgrammatiken</em>: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern bei beim Reduzieren berechnen mittels Tiefensuche mit Postorder-Evaluation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visit</span>(N):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> each child C of N (<span style="color:#f92672">from</span> left to right):
+</span></span><span style="display:flex;"><span>        visit(C)
+</span></span><span style="display:flex;"><span>    eval(N)     <span style="color:#75715e"># evaluate attributes of N</span>
+</span></span></code></pre></div><p><em>L-Attributgrammatiken</em>: Grammatiken mit Attributen, die nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.</p>
+<p>Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.</p>
+<p>S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.</p>
+<h2 id="beispiel-s-attributgrammatik">Beispiel: S-Attributgrammatik</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>e : e1 '+' t ;</code></td>
+<td style="text-align:left"><code>e.val = e1.val + t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>e : t ;</code></td>
+<td style="text-align:left"><code>e.val = t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : t1 '*' D ;</code></td>
+<td style="text-align:left"><code>t.val = t1.val * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : D ;</code></td>
+<td style="text-align:left"><code>t.val = D.lexval</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="beispiel-annotierter-syntaxbaum-für-582">Beispiel: Annotierter Syntaxbaum für <code>5*8+2</code></h2>
+<div class='center'>
+<figure class="center" style="width:auto">
+    <img alt="Annotierter Parse-Tree" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/images/annotatedparsetree.png" class="" />
+    <figcaption><h4>Annotierter Parse-Tree</h4></figcaption>
+</figure>
+</div>
+<h2 id="erzeugung-des-ast-aus-dem-parse-tree-für-582">Erzeugung des AST aus dem Parse-Tree für <code>5*8+2</code></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>e : e1 '+' t ;</code></td>
+<td style="text-align:left"><code>e.node = new Node('+', e1.node, t.node)</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>e : t ;</code></td>
+<td style="text-align:left"><code>e.node = t.node</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : t1 '*' D ;</code></td>
+<td style="text-align:left"><code>t.node = new Node('*', t1.node, new Leaf(D, D.lexval));</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : D ;</code></td>
+<td style="text-align:left"><code>t.node = new Leaf(D, D.lexval);</code></td>
+</tr>
+</tbody>
+</table>
+<div class='center'>
+<figure class="center" style="width:40%">
+    <img alt="AST" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/images/ast.png" class="" />
+    <figcaption><h4>AST</h4></figcaption>
+</figure>
+</div>
+<h2 id="beispiel-l-attributgrammatik-berechnete-u-geerbte-attribute-ohne-links-rekursion">Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion</h2>
+<p>Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie <code>5*8+2</code>, hier umformuliert ohne Links-Rekursion
+und mit berechneten und geerbten Attributen:</p>
+<div class='center'>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>t : D t' ;</code></td>
+<td style="text-align:left"><code>t'.inh = D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t.syn = t'.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' : '*' D t'1 ;</code></td>
+<td style="text-align:left"><code>t'1.inh = t'.inh * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t'.syn = t'1.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' :</code> <span>$\epsilon$</span> <code>;</code></td>
+<td style="text-align:left"><code>t'.syn = t'.inh</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class='center'>
+<div class='columns'>
+<div class='column'>
+<p><strong><code>5*8</code></strong> =&gt;</p>
+</div>
+<div class='column'>
+<figure class="center" style="width:auto">
+    <img alt="Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/images/annotatedparsetree2.png" class="" />
+    <figcaption><h4>Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)</h4></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Vorgriff</em>: Dies ist ein Beispiel für eine &quot;L-attributierte SDD&quot;.</p>
+<h2 id="beispiel-typinferenz-für-379-oder-helloworld">Beispiel: Typinferenz für <code>3+7+9</code> oder <code>&quot;hello&quot;+&quot;world&quot;</code></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>e : e1 '+' t ;</code></td>
+<td style="text-align:left"><code>e.type = f(e1.type, t.type)</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>e : t ;</code></td>
+<td style="text-align:left"><code>e.type = t.type</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : NUM ;</code></td>
+<td style="text-align:left"><code>t.type = &quot;int&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : NAME ;</code></td>
+<td style="text-align:left"><code>t.type = &quot;string&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="syntax-gesteuerte-übersetzung-sdt">Syntax-gesteuerte Übersetzung (SDT)</h1>
+<h2 id="erweiterung-attributierter-grammatiken">Erweiterung attributierter Grammatiken</h2>
+<p><em>Syntax-directed translation scheme</em>:</p>
+<p>Zu den Attributen kommen <strong>Semantische Aktionen</strong>: Code-Fragmente als zusätzliche Knoten im Parse Tree an beliebigen Stellen in einer Produktion, die, wenn möglich, während des Parsens, ansonsten in weiteren Baumdurchläufen ausgeführt werden.</p>
+<pre><code>e : e1  {print e1.val;}
+    '+' {print &quot;+&quot;;}
+    t   {e.val = e1.val + t.val; print(e.val);}
+  ;
+</code></pre>
+<h2 id="s-attributierte-sdd-lr-grammatik-bottom-up-parsierbar">S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar</h2>
+<p>Die Aktionen werden am Ende jeder Produktion eingefügt (&quot;postfix SDT&quot;).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>e : e1 '+' t ;</code></td>
+<td style="text-align:left"><code>e.val = e1.val + t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>e : t ;</code></td>
+<td style="text-align:left"><code>e.val = t.val</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : t1 '*' D ;</code></td>
+<td style="text-align:left"><code>t.val = t1.val * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t : D ;</code></td>
+<td style="text-align:left"><code>t.val = D.lexval</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code>e : e1 '+' t  {e.val = e1.val + t.val; print(e.val);} ;
+e : t         {e.val = t.val;} ;
+t : t1 '*' D  {t.val = t1.val * D.lexval;} ;
+t : D         {t.val = D.lexval;} ;
+</code></pre>
+<h2 id="l-attributierte-sdd-ll-grammatik-top-down-parsierbar-12">L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (1/2)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Produktion</th>
+<th style="text-align:left">Semantische Regel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>t : D t' ;</code></td>
+<td style="text-align:left"><code>t'.inh = D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t.syn = t'.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' : '*' D t'1 ;</code></td>
+<td style="text-align:left"><code>t'1.inh = t'.inh * D.lexval</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>t'.syn = t'1.syn</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>t' :</code> <span>$\epsilon$</span> <code>;</code></td>
+<td style="text-align:left"><code>t'.syn = t'.inh</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code>t  : D {t'.inh = D.lexval;} t' {t.syn = t'.syn;} ;
+t' : '*' D {t'1.inh = t'.inh * D.lexval;} t'1 {t'.syn = t'1.syn;} ;
+t' : e {t'.syn = t'.inh;} ;
+</code></pre>
+<h2 id="l-attributierte-sdd-ll-grammatik-top-down-parsierbar-22">L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (2/2)</h2>
+<ul>
+<li>
+<p>LL-Grammatik: Jede L-attributierte SDD direkt während des Top-Down-Parsens implementierbar/berechenbar</p>
+</li>
+<li>
+<p>SDT dazu:</p>
+<ul>
+<li>Aktionen, die ein berechnetes Attribut des Kopfes einer Produktion berechnen, an das Ende der Produktion anfügen</li>
+<li>Aktionen, die geerbte Attribute für ein Nicht-Terminalsymbol <span>$A$</span> berechnen, direkt vor dem Auftreten von <span>$A$</span> im Körper der Produktion eingefügen</li>
+</ul>
+</li>
+<li>
+<p>Implementierung im rekursiven Abstieg:</p>
+<ul>
+<li>Geerbte Attribute sind Parameter für die Funktionen für die Nicht-Terminalsymbole</li>
+<li>berechnete Attribute sind Rückgabewerte dieser Funktionen.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>T t<span style="color:#960050;background-color:#1e0010">&#39;</span>(T inh) {
+</span></span><span style="display:flex;"><span>    match(<span style="color:#e6db74">&#39;*&#39;</span>);
+</span></span><span style="display:flex;"><span>    T t1inh <span style="color:#f92672">=</span> inh <span style="color:#f92672">*</span> match(D);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> t<span style="color:#960050;background-color:#1e0010">&#39;</span>(t1inh);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="bison-attribute-und-aktionen">Bison: Attribute und Aktionen</h1>
+<h2 id="berechnete-synthesized-attribute">Berechnete (<em>synthesized</em>) Attribute</h2>
+<pre><code>expr    : expr '+' term     { $$ = $1 + $3; }
+        | term
+        ;
+term    : term '*' DIGIT    { $$ = $1 * $3; }
+        | DIGIT
+        ;
+</code></pre>
+<p>Berechnete Attribute sind der Defaultfall in Bison.</p>
+<p>Erinnerung:
+Keine Typen deklariert:</p>
+<ul>
+<li>Bison verwendet per Default <code>int</code> für
+alle Symbole (Terminalsymbole (Token) und Regeln).</li>
+</ul>
+<p>Keine Aktionen an den Regeln angegeben:</p>
+<ul>
+<li>Bison nutzt die Default-Aktion <code>$$ = $1</code>. Diese
+Aktionen werden immer dann ausgeführt, wenn die rechte Seite der zugehörigen
+Regel/Alternative reduziert werden konnte.</li>
+</ul>
+<h2 id="geerbte-inherited-attribute-12">Geerbte (<em>inherited</em>) Attribute (1/2)</h2>
+<pre><code>functiondecl : returntype fname paramlist ;
+
+returntype  : REAL    { $$ = 1; }
+            | INT     { $$ = 2; }
+            ;
+
+fname : IDENTIFIER;
+
+paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
+          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
+          ;
+</code></pre>
+<h2 id="geerbte-inherited-attribute-22">Geerbte (<em>inherited</em>) Attribute (2/2)</h2>
+<p>Hier:</p>
+<ul>
+<li>
+<p><code>returntype</code> und <code>fname</code> haben normale berechnete Attribute</p>
+</li>
+<li>
+<p><code>paramlist</code>: Funktionsaufruf mit den erzeugten Werte für <code>returntype</code> und <code>fname</code> als Parameter <span>$\Rightarrow$</span> der Wert von <code>paramlist</code> ist ein &quot;geerbtes Attribut&quot;.</p>
+</li>
+</ul>
+<p>Zugriff auf die Werte der Symbole auf dem Stack links vom aktuellen
+Symbol: <code>$0</code> ist das erste
+Symbol links vom aktuellen (hier <code>type</code>), <code>$-1</code> das zweite (hier <code>class</code>)
+usw. ...</p>
+<h2 id="probleme-mit-geerbten-attributen">Probleme mit geerbten Attributen</h2>
+<pre><code>functiondecl : returntype fname paramlist ;
+functiondecl : STRING paramlist ;  /* Autsch! */
+
+...
+
+paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
+          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
+          ;
+</code></pre>
+<p>Wenn vor <code>paramlist</code> ein <code>STRING</code> steht, ist <code>$0</code> der Wert von <code>STRING</code>, nicht <code>fname</code>. Analog
+für <code>$-1</code>, <span>$\ldots$</span></p>
+<p>Dies ist eine Quelle für schwer zu findende Bugs!</p>
+<h2 id="typen-für-geerbte-attribute">Typen für geerbte Attribute</h2>
+<pre><code>functiondecl : returntype fname paramlist ;
+
+paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
+          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
+          ;
+</code></pre>
+<p><strong>Achtung</strong>: Für geerbte Attribute funktioniert die Deklaration von Typen
+mit <code>%type</code> nicht mehr!</p>
+<p>Das Symbol, auf das man sich mit <code>$0</code> bezieht, steht nicht in der Produktion,
+sondern im Stack. Bison kann zur Compilezeit nicht den
+Typ des referenzierten Symbols bestimmen. Falls
+oben die Typen von <code>returntype</code> und <code>fname</code> jeweils <code>rval</code> und <code>fval</code>
+wären, müsste man die Aktion manuell wie folgt anpassen:</p>
+<pre><code>paramlist : IDENTIFIER           { mksymbol($&lt;fval&gt;0, $&lt;rval&gt;-1, $1); }
+          | paramlist IDENTIFIER { mksymbol($&lt;fval&gt;0, $&lt;rval&gt;-1, $2); }
+          ;
+</code></pre>
+<h2 id="bison-und-aktionen">Bison und Aktionen</h2>
+<p>Regeln ohne Aktion ganz rechts: die Default-Aktion ist
+<code>$$ = $1;</code> (Vorsicht: Die Typen von <code>$$</code> und <code>$1</code> müssen passen!)</p>
+<p>Aktionen mitten in einer Regel:</p>
+<pre><code>xxx : A { dosomething(); } B ;
+</code></pre>
+<p>wird übersetzt in:</p>
+<pre><code>xxx : A dummy B ;
+dummy : /* empty */ { dosomething(); }
+</code></pre>
+<p>Da nach dem Shiften von <code>A</code> nicht klar ist,
+ob diese Regel matcht und <code>dosomething</code> ausgeführt
+werden soll, übersetzt Bison die Regel <code>xxx</code> in zwei Regeln, wobei <code>dosomething()</code> ganz rechts in der Dummy-Regel steht. <code>dummy</code> ist ein normales referenzierbares Symbol.</p>
+<h2 id="beispiel">Beispiel:</h2>
+<pre><code>xxx : A { $$ = 42; } B C { printf(&quot;%d&quot;, $2); } ;
+</code></pre>
+<p>=&gt; Hier wird &quot;42&quot; ausgegeben, da mit <code>$2</code> auf den Wert der
+eingebetteten Aktion zugegriffen wird.</p>
+<p><code>$3</code>: Der Wert von <code>B</code></p>
+<p><code>$4</code>: Der Wert von <code>C</code></p>
+<h2 id="bison-konflikte-durch-eingebettete-aktionen">Bison: Konflikte durch eingebettete Aktionen</h2>
+<pre><code>xxx : a | b ;
+
+a : 'a' 'b' 'a' 'a' ;
+b : 'a' 'b' 'a' 'b' ;
+</code></pre>
+<p>Diese Grammatik ist ohne Konflikte von Bison übersetzbar.</p>
+<pre><code>xxx : a | b ;
+
+a : 'a' 'b' { dosomething(); } 'a' 'a' ;
+b : 'a' 'b' 'a' 'b' ;
+</code></pre>
+<p>Nach dem Lesen von &quot;<code>ab</code>&quot; gibt es wegen des identischen Vorschauzeichens
+(<code>'a'</code>) einen Shift/Reduce-Konflikt.</p>
+<div style="text-align: right;">
+<span class="btn btn-default btn-crossreference">
+Konsole: bison -v vl09/embedded?.y
+</span>
+</div>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="wrap-up-1">Wrap-Up</h2>
+<ul>
+<li>
+<p>Die Typinferenz benötigt Informationen aus der Symboltabelle</p>
+</li>
+<li>
+<p>Einfache semantische Analyse: Attribute und semantische Regeln (SDD)</p>
+</li>
+<li>
+<p>Umsetzung mit SDT: Attribute und eingebettete Aktionen</p>
+</li>
+<li>
+<p>Reihenfolge der Auswertung u.U. schwierig</p>
+<p>Bestimmte SDT-Klassen können direkt beim Parsing abgearbeitet werden:</p>
+<ul>
+<li>S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar</li>
+<li>L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar</li>
+</ul>
+<p>Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree
+integriert und bei einer (späteren) Traversierung abgearbeitet.</p>
+</li>
+</ul>
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Aho2008">
+            
+                [Aho2008] <strong>Compiler: Prinzipien, techniken und werkzeuge</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6" target="_blank" rel="nofollow noopener noreferrer">978-3-8273-7097-6</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 2.3 und 5</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Levine2009">
+            
+                [Levine2009] <strong>Flex &amp; bison</strong>
+            
+            
+                <br>Levine, J., O'Reilly, 2009.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-5961-5597-1" target="_blank" rel="nofollow noopener noreferrer">978-0-5961-5597-1</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        <li>(K2) Konzept der attributierten Grammatiken: Anreicherung mit Attributen und semantischen Regeln</li>
+        
+        
+    
+        
+        <li>(K2) Unterschied zwischen geerbten und berechneten Attributen</li>
+        
+        
+    
+        
+        <li>(K2) Umsetzung von SDD mit Hilfe von SDT</li>
+        
+        
+    
+        
+        
+        <li>(K3) Einfache semantische Analyse mit Hilfe von attributierten Grammatiken</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item parent"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle" checked/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Lexer: Handcodierte Implementierung   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/lexing/recursive.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/"><span itemprop="name">Lexer</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/" aria-disabled="true"><span itemprop="name">Lexer: Handcodierte Implementierung</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#lexer-erzeugen-eines-token-stroms-aus-einem-zeichenstrom">Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom</a></li>
+    <li><a href="#manuelle-implementierung-rekursiver-abstieg">Manuelle Implementierung: Rekursiver Abstieg</a></li>
+    <li><a href="#read-ahead-unterscheiden-von--und-">Read-Ahead: Unterscheiden von &quot;<em>&lt;</em>&quot; und &quot;<em>&lt;=</em>&quot;</a></li>
+    <li><a href="#puffern-des-input-stroms-double-buffering">Puffern des Input-Stroms: Double Buffering</a></li>
+    <li><a href="#typische-muster-für-erstellung-von-token">Typische Muster für Erstellung von Token</a></li>
+    <li><a href="#fehler-bei-der-lexikalischen-analyse">Fehler bei der Lexikalischen Analyse</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>{{% img src=&ldquo;images/architektur_cb_lexer.png&rdquo; title=&quot;&quot; width=&ldquo;auto&rdquo; %}}</p>
+<p>Der Lexer (auch &quot;Scanner&quot;) soll den Zeichenstrom in eine Folge von Token zerlegen. Zur
+Spezifikation der Token werden reguläre Ausdrücke verwendet.</p>
+<p>Von Hand implementierte Lexer arbeiten üblicherweise rekursiv und verarbeiten immer
+das nächste Zeichen im Eingabestrom. Die Arbeitsweise erinnert an LL-Parser (vgl.
+[&ldquo;LL-Parser&rdquo;]({{&lt;ref &ldquo;/parsing/ll-parser&rdquo; &gt;}})).</p>
+<p>Lexer müssen sehr effizient sein, da sie noch direkt auf der niedrigsten Abstraktionsstufe
+arbeiten und u.U. oft durchlaufen werden. Deshalb setzt man hier gern spezielle Techniken
+wie Puffern von Zeichen über einen Doppel-Puffer ein.</p>
+<p>Die Palette an Fehlerbehandlungsstrategien im Lexer reichen von &quot;aufgeben&quot; über den &quot;Panic
+Mode&quot; (&quot;gobbeln&quot; von Zeichen, bis wieder eines passt) und Ein-Schritt-Transformationen bis
+hin zu speziellen Lexer-Regeln, die beispielsweise besonders häufige Typos abfangen.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/N0WJQ4UkXkM" target="_blank" rel="nofollow noopener noreferrer">VL Handcodierte Lexer</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/17a4958b1d4c0cf3488a7df02743806a33951d49f1cc22bccbdab7ad873738f0a24d0ad83f13c6d00ad48a669758659fde7a7e2ce19e793fe6f412e35ea0ee6d" target="_blank" rel="nofollow noopener noreferrer">VL Handcodierte Lexer</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        <li>(K1) Aufgaben eines Lexers</li>
+        
+        
+        
+    
+        
+        <li>(K2) Manuelle Implementierung: Rekursiver Abstieg</li>
+        
+        
+    
+        
+        <li>(K2) Umgang mit dem Doppel-Puffer</li>
+        
+        
+    
+        
+        <li>(K2) Varianten bei der Erkennung von Schlüsselwörtern</li>
+        
+        
+    
+        
+        <li>(K2) Fehler und Lösungsansätze in der lexikalischen Analyse</li>
+        
+        
+    
+        
+        
+        <li>(K3) Typische Einteilung von Token</li>
+        
+    
+        
+        
+        <li>(K3) Implementierung eines Top-Down-Lexers mit Read-Ahead und intelligenter Pufferung</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="lexer-erzeugen-eines-token-stroms-aus-einem-zeichenstrom">Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom</h2>
+<p>Aus dem Eingabe(-quell-)text</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* demo */</span>
+</span></span><span style="display:flex;"><span>a<span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>  , <span style="color:#ae81ff">6</span>]     ;
+</span></span></code></pre></div><p>erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:</p>
+<pre><code>&lt;ID, &quot;a&quot;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt;
+</code></pre>
+<h2 id="manuelle-implementierung-rekursiver-abstieg">Manuelle Implementierung: Rekursiver Abstieg</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextToken</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (peek <span style="color:#f92672">!=</span> EOF):  <span style="color:#75715e"># globale Variable, über consume()</span>
+</span></span><span style="display:flex;"><span>        switch (peek):
+</span></span><span style="display:flex;"><span>            case <span style="color:#e6db74">&#39; &#39;</span>: case <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>: case <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>: WS(); <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            case <span style="color:#e6db74">&#39;[&#39;</span>: consume(); <span style="color:#66d9ef">return</span> Token(LBRACK, <span style="color:#e6db74">&#39;[&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>            default:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> isLetter(peek): <span style="color:#66d9ef">return</span> NAME()
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">raise</span> Error(<span style="color:#e6db74">&#34;invalid character: &#34;</span><span style="color:#f92672">+</span>peek)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Token(EOF_Type, <span style="color:#e6db74">&#34;&lt;EOF&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">WS</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (peek <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">||</span> peek <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">...</span>): consume()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">NAME</span>():
+</span></span><span style="display:flex;"><span>    buf <span style="color:#f92672">=</span> StringBuilder()
+</span></span><span style="display:flex;"><span>    do { buf<span style="color:#f92672">.</span>append(peek); consume(); } <span style="color:#66d9ef">while</span> (isLetter(peek))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Token(NAME, buf<span style="color:#f92672">.</span>toString())
+</span></span></code></pre></div><p>Die manuelle Implementierung &quot;denkt&quot; nicht in den Zuständen des DFA, sondern
+orientiert sich immer am aktuellen Zeichen &quot;<code>peek</code>&quot;. Abhängig von dessen
+Ausprägung wird entweder direkt ein Token erzeugt und das Zeichen aus dem
+Eingabestrom entfernt sowie das nächste Zeichen eingelesen (mittels der
+Funktion <code>consume()</code>, nicht dargestellt im Beispiel), oder man ruft weitere
+Funktionen auf, die das Gewünschte erledigen, beispielsweise um White-Spaces
+zu entfernen oder um einen Namen einzulesen: Nach einem Buchstaben werden
+alle folgenden Buchstaben dem Namen (Bezeichner) hinzugefügt. Sobald ein
+anderes Zeichen im Eingabestrom erscheint, wird das Namen-Token erzeugt.</p>
+<p>Die Funktion <code>consume()</code> &quot;verbraucht&quot; das aktuelle Zeichen &quot;<code>peek</code>&quot; und holt
+das nächste Zeichen aus dem Eingabestrom.</p>
+<p><em>Anmerkung</em>: Häufig findet man im Lexer keinen &quot;schönen&quot; objektorientierten
+Ansatz. Dies ist i.d.R. Geschwindigkeitsgründen geschuldet ...</p>
+<h2 id="read-ahead-unterscheiden-von--und-">Read-Ahead: Unterscheiden von &quot;<em>&lt;</em>&quot; und &quot;<em>&lt;=</em>&quot;</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextToken</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (peek <span style="color:#f92672">!=</span> EOF):  <span style="color:#75715e"># globale Variable</span>
+</span></span><span style="display:flex;"><span>        switch (peek):
+</span></span><span style="display:flex;"><span>            case <span style="color:#e6db74">&#39;&lt;&#39;</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> match(<span style="color:#e6db74">&#39;=&#39;</span>): consume(); <span style="color:#66d9ef">return</span> Token(LE, <span style="color:#e6db74">&#34;&lt;=&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>: consume(); <span style="color:#66d9ef">return</span> Token(LESS, <span style="color:#e6db74">&#39;&lt;&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Token(EOF_Type, <span style="color:#e6db74">&#34;&lt;EOF&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">match</span>(c):   <span style="color:#75715e"># Lookahead: Ein Zeichen</span>
+</span></span><span style="display:flex;"><span>    consume()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (peek <span style="color:#f92672">==</span> c): <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: rollBack(); <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><p>Um die Token &quot;<code>&lt;</code>&quot; und &quot;<code>&lt;=</code>&quot; unterscheiden zu können, müssen wir ein Zeichen
+vorausschauen: Wenn nach dem &quot;<code>&lt;</code>&quot; noch ein &quot;<code>=</code>&quot; kommt, ist es &quot;<code>&lt;=</code>&quot;, sonst
+&quot;<code>&lt;</code>&quot;.</p>
+<p>Erinnerung: Die Funktion <code>consume()</code> liest das nächste Zeichen aus dem
+Eingabestrom und speichert den Wert in der globalen Variable <code>peek</code>.</p>
+<p>Für das Read-Ahead wird die Funktion <code>match()</code> definiert, die zunächst das
+bereits bekannte Zeichen, in diesem Fall das &quot;<code>&lt;</code>&quot; durch das nächste Zeichen
+im Eingabestrom ersetzt (Aufruf von <code>consume()</code>). Falls der Vergleich des
+Lookahead-Zeichens mit dem gesuchten Zeichen erfolgreich ist, liegt das
+&quot;größere&quot; Token vor, also &quot;<code>&lt;=</code>&quot;. Dann wird noch das &quot;<code>=</code>&quot; durch das nächste
+Zeichen ersetzt und das Token <code>LE</code> gebildet. Anderenfalls muss das zuviel
+gelesene Zeichen wieder in den Eingabestrom zurückgelegt werden (<code>rollBack()</code>).</p>
+<h2 id="puffern-des-input-stroms-double-buffering">Puffern des Input-Stroms: Double Buffering</h2>
+<p>Das Einlesen einzelner Zeichen führt zwar zu eleganten algorithmischen
+Lösungen, ist aber zur Laufzeit deutlich &quot;teurer&quot; als das Einlesen mit
+gepufferten I/O-Operationen, die eine ganze Folge von Zeichen einlesen
+(typischerweise einen ganzen Disk-Block, beispielsweise 4096 Zeichen).</p>
+<p>Dazu kann man einen Ringpuffer nutzen, den man mit Hilfe von zwei gleich
+großen <code>char</code>-Puffern mit jeweils der Länge <span>$N$</span> simulieren kann. (<span>$N$</span>
+sollte dann der Länge eines Disk-Blocks entsprechen.)</p>
+<p>Vergleiche auch <a href="https://en.wikipedia.org/wiki/Circular_buffer">Wikipedia: &quot;Circular Buffer&quot;</a>.</p>
+<div class='center'>
+<figure class="center" style="width:80%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/images/doublebuffer.png" class="" />
+</figure>
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; end <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; fill(buffer[<span style="color:#ae81ff">0</span>:n])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consume</span>():
+</span></span><span style="display:flex;"><span>    peek <span style="color:#f92672">=</span> buffer[start]
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> (start<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) mod <span style="color:#ae81ff">2</span>n
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (start mod n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        fill(buffer[start:start<span style="color:#f92672">+</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        end <span style="color:#f92672">=</span> (start<span style="color:#f92672">+</span>n) mod <span style="color:#ae81ff">2</span>n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rollBack</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (start <span style="color:#f92672">==</span> end): <span style="color:#66d9ef">raise</span> Error(<span style="color:#e6db74">&#34;roll back error&#34;</span>)
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> (start<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) mod <span style="color:#ae81ff">2</span>n
+</span></span></code></pre></div><p>Zunächst wird nur der vordere Pufferteil durch einen passenden Systemaufruf
+gefüllt.</p>
+<p>Beim Weiterschalten im simulierten DFA oder im manuell kodierten Lexer
+(Funktionsaufruf von <code>consume()</code>) wird das nächste Zeichen aus dem vorderen
+Pufferteil zurückgeliefert. Über die Modulo-Operation bleibt der Pointer
+<code>start</code> immer im Speicherbereich der beiden Puffer.</p>
+<p>Wenn man das Ende des vorderen Puffers erreicht, wird der hintere Puffer mit
+einem Systemaufruf gefüllt. Gleichzeitig wird ein Hilfspointer <code>end</code> auf
+den Anfang des vorderen Puffers gesetzt, um Fehler beim Roll-Back zu erkennen.</p>
+<p>Wenn man das Ende des hinteren Puffers erreicht, wird der vordere Puffer
+nachgeladen und der Hilfspointer auf den Anfang des hinteren Puffers gesetzt.</p>
+<p>Im Grunde ist also immer ein Puffer der &quot;Arbeitspuffer&quot; und der andere enthält
+die bereits gelesene (verarbeitete) Zeichenkette. Wenn beim Nachladen weniger
+als <span>$N$</span> Zeichen gelesen werden, liefert der Systemaufruf als letztes &quot;Zeichen&quot;
+ein <code>EOF</code>. Beim Verarbeiten wird <code>peek</code> entsprechend diesen Wert bekommen und
+der Lexer muss diesen Wert abfragen und berücksichtigen.</p>
+<p>Für das Roll-Back wird der <code>start</code>-Pointer einfach dekrementiert (und mit einer
+Modulo-Operation auf den Speicherbereich der beiden Puffer begrenzt). Falls
+dabei der <code>end</code>-Pointer &quot;eingeholt&quot; wird, ist der <code>start</code>-Pointer durch beide
+Puffer zurückgelaufen und es gibt keinen früheren Input mehr. In diesem Fall
+wird entsprechend ein Fehler gemeldet.</p>
+<p><em>Anmerkung</em>: In der Regel sind die Lexeme kurz und man muss man nur ein bis
+zwei Zeichen im Voraus lesen. Dann ist eine Puffergröße von 4096 Zeichen mehr
+als ausreichend groß und man sollte nicht in Probleme laufen. Wenn der nötige
+Look-Ahead aber beliebig groß werden kann, etwa bei Sprachen ohne reservierte
+Schlüsselwörtern oder bei Kontext-sensitiven Lexer-Grammatiken (denken Sie etwa
+an die Einrücktiefe bei Python), muss man andere Strategien verwenden. ANTLR
+beispielsweise vergrößert in diesem Fall den Puffer dynamisch, alternativ könnte
+man die Auflösung zwischen Schlüsselwörtern und Bezeichnern dem Parser überlassen.</p>
+<h2 id="typische-muster-für-erstellung-von-token">Typische Muster für Erstellung von Token</h2>
+<ol>
+<li>
+<p>Schlüsselwörter</p>
+<ul>
+<li>Ein eigenes Token (RE/DFA) für jedes Schlüsselwort, oder</li>
+<li>Erkennung als Name und Vergleich mit Wörterbuch
+und nachträgliche Korrektur des Tokentyps</li>
+</ul>
+<p>Wenn Schlüsselwörter über je ein eigenes Token abgebildet werden, benötigt
+man für jedes Schlüsselwort einen eigenen RE bzw. DFA. Die Erkennung als
+Bezeichner und das Nachschlagen in einem Wörterbuch (geeignete Hashtabelle)
+sowie die entsprechende nachträgliche Korrektur des Tokentyps kann die
+Anzahl der Zustände im Lexer signifikant reduzieren!</p>
+</li>
+<li>
+<p>Operatoren</p>
+<ul>
+<li>Ein eigenes Token für jeden Operator, oder</li>
+<li>Gemeinsames Token für jede Operatoren-Klasse</li>
+</ul>
+</li>
+<li>
+<p>Bezeichner: Ein gemeinsames Token für alle Namen</p>
+</li>
+<li>
+<p>Zahlen: Ein gemeinsames Token für alle numerischen Konstante
+(ggf. Integer und Float unterscheiden)</p>
+<p>Für Zahlen führt man oft ein Token &quot;<code>NUM</code>&quot; ein. Als Attribut speichert man
+das Lexem i.d.R. als String. Alternativ kann man (zusätzlich) das Lexem in
+eine Zahl konvertieren und als (zusätzliches) Attribut speichern. Dies kann
+in späteren Stufen viel Arbeit sparen.</p>
+</li>
+<li>
+<p>String-Literale: Ein gemeinsames Token</p>
+</li>
+<li>
+<p>Komma, Semikolon, Klammern, ...: Je ein eigenes Token</p>
+</li>
+<li>
+<p>Regeln für White-Space und Kommentare etc. ...</p>
+<p>Normalerweise benötigt man Kommentare und White-Spaces in den folgenden
+Stufen nicht und entfernt diese deshalb aus dem Eingabestrom. Dabei könnte
+man etwa White-Spaces in den Pattern der restlichen Token berücksichtigen,
+was die Pattern aber sehr komplex macht. Die Alternative sind zusätzliche
+Pattern, die auf die White-Space und anderen nicht benötigten Inhalt
+matchen und diesen &quot;geräuschlos&quot; entfernen. Mit diesen Pattern werden
+keine Token erzeugt, d.h. der Parser und die anderen Stufen bemerken nichts
+von diesem Inhalt.</p>
+<p>Gelegentlich benötigt man aber auch Informationen über White-Spaces,
+beispielsweise in Python. Dann müssen diese Token wie normale Token
+an den Parser weitergereicht werden.</p>
+</li>
+</ol>
+<p>Jedes Token hat i.d.R. ein Attribut, in dem das Lexem gespeichert wird. Bei
+eindeutigen Token (etwa bei eigenen Token je Schlüsselwort oder bei den
+Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem
+durch den Tokennamen eindeutig rekonstruierbar ist.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Token</th>
+<th style="text-align:left">Beschreibung</th>
+<th style="text-align:left">Beispiel-Lexeme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>if</code></td>
+<td style="text-align:left">Zeichen <code>i</code> und <code>f</code></td>
+<td style="text-align:left"><code>if</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>relop</code></td>
+<td style="text-align:left"><code>&lt;</code> oder <code>&gt;</code> oder <code>&lt;=</code> oder <code>&gt;=</code> oder <code>==</code> oder <code>!=</code></td>
+<td style="text-align:left"><code>&lt;</code>, <code>&lt;=</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>id</code></td>
+<td style="text-align:left">Buchstabe, gefolgt von Buchstaben oder Ziffern</td>
+<td style="text-align:left"><code>pi</code>, <code>count</code>, <code>x3</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>num</code></td>
+<td style="text-align:left">Numerische Konstante</td>
+<td style="text-align:left"><code>42</code>, <code>3.14159</code>, <code>0</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>literal</code></td>
+<td style="text-align:left">Alle Zeichen außer <code>&quot;</code>, in <code>&quot;</code> eingeschlossen</td>
+<td style="text-align:left"><code>&quot;core dumped&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>: Beispiele für Token</p>
+<p><em>Anmerkung</em>: Wenn es mehrere matchende REs gibt, wird in der Regel das längste
+Lexem bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit
+Vorrangregeln bzgl. der Token arbeiten.</p>
+<h2 id="fehler-bei-der-lexikalischen-analyse">Fehler bei der Lexikalischen Analyse</h2>
+<p>Problem: Eingabestrom sieht so aus: <code>fi (a==42) { ... }</code></p>
+<p>Der Lexer kann nicht erkennen, ob es sich bei <code>fi</code> um ein vertipptes
+Schlüsselwort handelt oder um einen Bezeichner: Es könnte sich um einen
+Funktionsaufruf der Funktion <code>fi()</code> handeln ...
+Dieses Problem kann erst in der nächsten Stufe sinnvoll erkannt und behoben
+werden.</p>
+<p>=&gt; Was tun, wenn keines der Pattern auf den Anfang des Eingabestroms passt?</p>
+<p>Optionen:</p>
+<ul>
+<li>
+<p>Aufgeben ...</p>
+<p>Eventuell vielleicht sogar die beste und einfachste Variante :-)</p>
+</li>
+<li>
+<p>&quot;Panic Mode&quot;: Entferne so lange Zeichen, bis ein Pattern passt.</p>
+<p>Das verwirrt u.U. den Parser, kann aber insbesondere in interaktiven
+Umgebungen hilfreich sein. Ggf. kann man dem Parser auch signalisieren,
+dass hier ein Problem vorlag.</p>
+</li>
+<li>
+<p>Ein-Schritt-Transformationen:</p>
+<ul>
+<li>Füge fehlendes Zeichen in Eingabestrom ein.</li>
+<li>Entferne ein Zeichen aus Eingabestrom.</li>
+<li>Vertausche ein Zeichen:
+<ul>
+<li>Ersetze ein Zeichen durch ein anderes.</li>
+<li>Vertausche zwei benachbarte Zeichen.</li>
+</ul>
+</li>
+</ul>
+<p>Diese Transformationen versuchen, den Input in einem Schritt zu reparieren.
+Das ist durchaus sinnvoll, da in der Praxis die meisten Fehler in dieser
+Stufe durch ein einzelnes Zeichen hervorgerufen werden: Es fehlt ein
+Zeichen oder es ist eines zuviel im Input. Es liegt ein falsches Zeichen
+vor (Tippfehler) oder zwei benachbarte Zeichen wurden verdreht ...</p>
+<p>Im Prinzip könnte man auch eine allgemeinere Strategie versuchen, indem man
+diejenige Transformation mit der <em>kleinsten Anzahl von Schritten</em> zur
+Fehlerbehebung bestimmt. Beispiele dafür finden sich im Bereich Natural
+Language Processing (<em>NLP</em>), etwa die Levenshtein-Distanz oder der
+SoundEx-Algorithmus oder sogar Hidden-Markov-Modelle. Allerdings muss
+man sich in Erinnerung rufen, dass gerade in dieser ersten Phase eines
+Compilers die Geschwindigkeit stark im Fokus steht und eine ausgefeilte
+Fehlerkorrekturstrategie die vielen kleinen Optimierungen schnell wieder
+zunichte machen kann.</p>
+</li>
+<li>
+<p>Fehler-Regeln: Matche typische Typos</p>
+<p>Gelegentlich findet man in den Grammatiken für den Lexer extra Regeln, die
+häufige bzw. typische Typos matchen und dann passend darauf reagieren.</p>
+</li>
+</ul>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Zusammenhang DFA, RE und Lexer</p>
+</li>
+<li>
+<p>Implementierungsansatz: Manuell codiert (rekursiver Abstieg)</p>
+</li>
+<li>
+<p>Read-Ahead</p>
+</li>
+<li>
+<p>Puffern mit Doppel-Puffer-Strategie</p>
+</li>
+<li>
+<p>Typische Fehler beim Scannen</p>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+            <li>
+                <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet01/"><strong>Blatt 01: Scanner und Parser</strong></a>
+                 (Abgabe: 15.11.21, BC)
+            </li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Aho2008">
+            
+                [Aho2008] <strong>Compiler: Prinzipien, techniken und werkzeuge</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6" target="_blank" rel="nofollow noopener noreferrer">978-3-8273-7097-6</a>.
+                
+                
+            
+            
+                <br><em>Abschnitt 2.6 und Kapitel 3</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Mogensen2017">
+            
+                [Mogensen2017] <strong>Introduction to compiler design</strong>
+            
+            
+                <br>Mogensen, T., Springer, 2017.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">978-3-319-66966-3</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1007/978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">10.1007/978-3-319-66966-3</a>.
+                
+            
+            
+                <br><em>Kapitel 1 (insbesondere Abschnitt 1.8)</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Torczon2012">
+            
+                [Torczon2012] <strong>Engineering a compiler</strong>
+            
+            
+                <br>Torczon, L. und Cooper, K., Elsevier MK, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-1208-8478-0" target="_blank" rel="nofollow noopener noreferrer">978-0-1208-8478-0</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 2</em>
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item parent"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle" checked/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parser on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/</link>
+    <description>Recent content in Parser on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CFG, LL-Parser</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/</guid>
+      <description>Wiederholung Endliche Automaten. reguläre Ausdrücke, reguläre Grammatiken, reguläre Sprachen  Wie sind DFAs und NFAs definiert? Was sind reguläre Ausdrücke? Was sind formale und reguläre Grammatiken? In welchem Zusammenhang stehen all diese Begriffe? Wie werden DFAs und reguläre Ausdrücke im Compilerbau eingesetzt?  Motivation Wofür reichen reguläre Sprachen nicht? Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus gezählt werden müssen. Diese Sprachen lassen sich oft mit Variablen im Exponenten beschreiben, die unendlich viele Werte annehmen können.</description>
+    </item>
+    <item>
+      <title>LL-Parser selbst implementiert</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/</guid>
+      <description>Erinnerung Lexer: Zeichenstrom $\to$ Tokenstrom def nextToken(): while (peek != EOF): # globale Variable, über consume() switch (peek): case &amp;#39; &amp;#39;: case &amp;#39;\t&amp;#39;: case &amp;#39;\n&amp;#39;: WS(); continue case &amp;#39;[&amp;#39;: consume(); return Token(LBRACK, &amp;#39;[&amp;#39;) ... default: raise Error(&amp;#34;invalid character: &amp;#34;+peek) return Token(EOF_Type, &amp;#34;&amp;lt;EOF&amp;gt;&amp;#34;) def match(c): # Lookahead: Ein Zeichen consume() if (peek == c): return True else: rollBack(); return False def consume(): peek = buffer[start] start = (start+1) mod 2n if (start mod n == 0): fill(buffer[start:start+n-1]) end = (start+n) mod 2n Erinnerung: Der Lexer arbeitet direkt auf dem Zeichenstrom und versucht über längste Matches daraus einen Tokenstrom zu erzeugen.</description>
+    </item>
+    <item>
+      <title>LL-Parser: Fortgeschrittene Techniken</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/</guid>
+      <description>LL-Parser mit Backtracking Problem: Manchmal kennt man den nötigen Lookahead nicht vorher. Beispiel:
+wuppie(); // Vorwärtsdeklaration wuppie() { ...} // Definition Entsprechend sähe die Grammatik aus:
+func : fdef | fdecl ; fdef : head &amp;#39;{&amp;#39; body &amp;#39;}&amp;#39; ; fdecl: head &amp;#39;;&amp;#39; ; head : ... ; Hier müsste man erst den gesamten Funktionskopf parsen, bevor man entscheiden kann, ob es sich um eine Deklaration oder eine Definition handelt. Unglücklicherweise gibt es keine Längenbeschränkung bei den Funktionsnamen .</description>
+    </item>
+    <item>
+      <title>ANTLR (Parsergenerator)</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/</guid>
+      <description>ANTLR (Parsergenerator) -- Vortragsthema --</description>
+    </item>
+    <item>
+      <title>Syntaxanalyse: LR-Parser</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/</guid>
+      <description>Wiederholung Ein PDA für L=\{ww^{R}\mid w\in \{a,b\}^{\ast}\}  Top-Down-Analyse  Baumaufbau von oben nach unten die Grammatik muss reduziert sein recursive-descent parser First- und Follow-Mengen bestimmen Wahl der Ableitungen tabellengesteuert nicht mehr rekursiv, sondern mit PDA  Motivation LL ist nicht alles Die Menge der LL-Sprachen ist eine echte Teilmenge der deterministisch kontextfreien Sprachen. Wir brauchen ein Verfahren, mit dem man alle deterministisch kontextfreien Sprachen parsen kann.
+Bottom-Up-Analyse Von unten nach oben Bei $LL$-Sprachen muss man nach den ersten $k$ Eingabezeichen entscheiden, welche Ableitung ganz oben im Baum als erste durchgeführt wird, also eine, die im Syntaxbaum ganz weit weg ist von den Terminalen, die die Entschiedung bestimmen.</description>
+    </item>
+    <item>
+      <title>Bison (Parsergenerator)</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/</guid>
+      <description>YACC und Bison (Parsergeneratoren) -- Vortragsthema -- (gehört zu &amp;ldquo;Flex: Lexer generieren)&amp;rdquo;)</description>
+    </item>
+    <item>
+      <title>PEG-Parser, Pratt-Parser und Parser Combinators</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/</guid>
+      <description>PEG Parser Generative Systeme vs. Recognition basierte Systeme  Generative Systeme:  formale Definition von Sprachen durch Regeln, die rekursiv angewendet Sätze/Strings der Sprache generieren Sprachen aus der Chomsky Hierarchie definiert durch kontextfreie Grammatiken (CFGs) und reguläre Ausdrücke (REs)   Recognition-basierte Systeme:  Sprachen definiert in Form von Regeln/Prädikaten, die entscheiden, ob ein gegebener String Teil der Sprache ist Parsing Expression Grammar (PEG)    Beispiel Sprache $L = \lbrace \varepsilon, \ \mathrm{aa}, \ \mathrm{aaaa}, \ \ldots \rbrace$:</description>
+    </item>
+    <item>
+      <title>Error-Recovery</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/</guid>
+      <description>Fehler beim Parsen  Quelle: BC George, Vorlesung &amp;quot;Einführung in die Programmierung mit Skriptsprachen&amp;quot;, CC BY-SA 4.0
+ Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern Wichtige Eigenschaften:  Reproduzierbare Ergebnisse Aussagekräftige Fehlermeldungen Nach Erkennen eines Fehlers: (vorläufige) Korrektur und Parsen des restlichen Codes =&amp;gt; weitere Fehler anzeigen. Problem: Bis wohin &amp;quot;gobbeln&amp;quot;, d.h. was als Synchronisationspunkt nehmen? Semikolon? Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!    Typische Fehler beim Parsing grammar VarDef; alt : stmt | stmt2 ; stmt : &amp;#39;int&amp;#39; ID &amp;#39;;&amp;#39; ; stmt2 : &amp;#39;int&amp;#39; ID &amp;#39;=&amp;#39; ID &amp;#39;;&amp;#39; ; ANTLR4: VarDef.</description>
+    </item>
+    <item>
+      <title>Grenze Lexer und Parser</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/</guid>
+      <description>Grenze Lexer und Parser (Faustregeln) Der Lexer verwendet einfache reguläre Ausdrücke, während der Parser mit Lookaheads unterschiedlicher Größe, Backtracking und umfangreicher Error-Recovery arbeitet. Entsprechend sollte man alle Arbeit, die man bereits im Lexer erledigen kann, auch dort erledigen. Oder andersherum: Man sollte dem Parser nicht unnötige Arbeit aufbürden.
+=&amp;gt; Erreiche in jeder Verarbeitungsstufe die maximal mögliche Abstraktionsstufe!
+  Matche und verwerfe im Lexer alles, was der Parser nicht braucht.</description>
+    </item>
+  </channel>
+</rss>

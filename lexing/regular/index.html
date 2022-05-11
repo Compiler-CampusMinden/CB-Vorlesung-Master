@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Reguläre Sprachen, Ausdrucksstärke   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/lexing/regular.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/"><span itemprop="name">Lexer</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/" aria-disabled="true"><span itemprop="name">Reguläre Sprachen, Ausdrucksstärke</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#was-muss-ein-compiler-wohl-als-erstes-tun">Was muss ein Compiler wohl als erstes tun?</a></li>
+    <li><a href="#themen-für-heute">Themen für heute</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#alphabete">Alphabete</a></li>
+    <li><a href="#sprachen-über-alphabete">Sprachen über Alphabete</a></li>
+    <li><a href="#deterministische-endliche-automaten">Deterministische endliche Automaten</a></li>
+    <li><a href="#die-übergangsfunktion">Die Übergangsfunktion</a></li>
+    <li><a href="#beispiel">Beispiel</a></li>
+    <li><a href="#nichtdeterministische-endliche-automaten">Nichtdeterministische endliche Automaten</a></li>
+    <li><a href="#die-übergangsfunktion-eines-nfas">Die Übergangsfunktion eines NFAs</a></li>
+    <li><a href="#wozu-nfas-im-compilerbau">Wozu NFAs im Compilerbau?</a></li>
+    <li><a href="#konvertierung-eines-nfas-in-einen-dfa">Konvertierung eines NFAs in einen DFA</a></li>
+    <li><a href="#beispiel-1">Beispiel</a></li>
+    <li><a href="#minimierung-eines-dfas">Minimierung eines DFAs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#operatoren-auf-sprachen">Operatoren auf Sprachen</a></li>
+    <li><a href="#reguläre-ausdrücke-1">Reguläre Ausdrücke</a></li>
+    <li><a href="#wichtige-identitäten">Wichtige Identitäten</a></li>
+    <li><a href="#beispiel-umwandlung-eines-regex-in-einen-nfa">Beispiel: Umwandlung eines regex in einen NFA</a></li>
+    <li><a href="#formale-grammatiken">Formale Grammatiken</a></li>
+    <li><a href="#ableitungen">Ableitungen</a></li>
+    <li><a href="#reguläre-grammatiken">Reguläre Grammatiken</a></li>
+    <li><a href="#reguläre-sprachen">Reguläre Sprachen</a></li>
+    <li><a href="#das-pumping-lemma-für-reguläre-sprachen">Das Pumping Lemma für reguläre Sprachen</a></li>
+    <li><a href="#abschlusseigenschaften-regulärer-sprachen">Abschlusseigenschaften regulärer Sprachen</a></li>
+    <li><a href="#entscheidbarkeit-für-reguläre-sprachen">Entscheidbarkeit für reguläre Sprachen</a></li>
+    <li><a href="#grenzen-der-regulären-sprachen">Grenzen der regulären Sprachen</a></li>
+    <li><a href="#wozu-das-ganze">Wozu das Ganze?</a></li>
+    <li><a href="#ein-lexer-ist-mehr-als-ein-dfa">Ein Lexer ist mehr als ein DFA</a></li>
+    <li><a href="#automatisch-oder-händisch">Automatisch oder händisch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#wrap-up-1">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+        
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="attachments">
+    <h3>(Annotierte) Folien</h3>
+
+    <ul>
+    
+
+    
+        
+        
+        
+            <li><a href="https://github.com/Compilerbau/AnnotatedSlides/blob/a5f6c9f70413034acabfc9e81c108fdec193f006/lexing_regular.ann.pdf" target="_blank" rel="nofollow noopener noreferrer">Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke</a></li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+</div>
+
+
+    <h1 id="motivation">Motivation</h1>
+<h2 id="was-muss-ein-compiler-wohl-als-erstes-tun">Was muss ein Compiler wohl als erstes tun?</h2>
+<h2 id="themen-für-heute">Themen für heute</h2>
+<ul>
+<li>Endliche Automaten</li>
+<li>Reguläre Ausdrücke</li>
+</ul>
+<h1 id="endliche-automaten">Endliche Automaten</h1>
+<h2 id="alphabete">Alphabete</h2>
+<p><strong>Def.:</strong> Ein <em>Alphabet</em> <span>$\Sigma$</span> ist eine endliche, nicht-leere Menge von Symbolen. Die Symbole eines Alphabets heißen <em>Buchstaben</em>.</p>
+<p><strong>Def.:</strong> Ein <em>Wort</em> <span>$w$</span> <em>über einem Alphabet</em> <span>$\Sigma$</span> ist eine endliche Folge von Symbolen aus <span>$\Sigma$</span>.
+<span>$\epsilon$</span> ist das leere Wort.
+Die <em>Länge</em> <span>$\vert w \vert$</span> eines Wortes <span>$w$</span> ist die Anzahl von Buchstaben, die es enthält (Kardinalität).</p>
+<p><strong>Def.:</strong>
+<span>$\Sigma^k = {w\ \text{über}\ \Sigma\ \vert\ \vert w \vert = k }$</span></p>
+<p><span>$\Sigma^{\ast} = \bigcup\limits_{i \in \mathbb{N}_0} \Sigma^i$</span> (die Kleene-Hülle von <span>$\Sigma$</span>)</p>
+<p><span>$\Sigma^+ = \bigcup\limits_{i \in \mathbb{N}} \Sigma^i$</span></p>
+<h2 id="sprachen-über-alphabete">Sprachen über Alphabete</h2>
+<p><strong>Def.:</strong> Seien <span>$x = a_1 a_2 \ \ldots \ a_n$</span> und <span>$y = b_1b_2 \  \ldots \  b_m$</span> Wörter. Wir nennen <span>$xy = x \circ y = a_1 \  \ldots \  a_nb_1 \ \ldots \ b_m$</span> die <em>Konkatenation</em> von <span>$x$</span> und <span>$y$</span>.</p>
+<p><strong>Def.:</strong> <em>Eine Sprache <span>$L$</span> über einem Alphabet <span>$\Sigma$</span></em> ist eine Teilmenge von <span>$\Sigma^{\ast} :\ L \subseteq\Sigma^{\ast}$</span></p>
+<h2 id="deterministische-endliche-automaten">Deterministische endliche Automaten</h2>
+<p><strong>Def.:</strong> Ein <em>deterministischer endlicher Automat</em> (DFA) ist ein 5-Tupel
+<span>$A = (Q, \Sigma, \delta, q_0, F)$</span> mit</p>
+<ul>
+<li><span>$Q$</span> : eine endliche Menge von Zuständen</li>
+<li><span>$\Sigma$</span> : ein Alphabet von Eingabesymbolen</li>
+<li><span>$\delta$</span> : die Übergangsfunktion <span>$(Q \times \Sigma) \rightarrow Q, \delta$</span> kann partiell sein</li>
+<li><span>$q_0 \in Q$</span> : der Startzustand</li>
+<li><span>$F \subseteq Q$</span> : die Menge der Endzustände</li>
+</ul>
+<h2 id="die-übergangsfunktion">Die Übergangsfunktion</h2>
+<p><strong>Def.:</strong> Wir definieren <span>$\delta^{\ast}: (Q \times \Sigma^{\ast}) \rightarrow Q$</span>: induktiv wie folgt:</p>
+<ul>
+<li>Basis: <span>$\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$</span></li>
+<li>Induktion: <span>$\delta^{\ast}(q, a_1, \ldots, a_n) = \delta(\delta^{\ast}(q, a_1, \ldots , a_{n-1}), a_n)$</span></li>
+</ul>
+<p><strong>Def.:</strong> Ein DFA akzeptiert ein Wort <span>$w \in \Sigma^{\ast}$</span> genau dann, wenn <span>$\delta^{\ast}(q_0, w) \in F.$</span></p>
+<p><strong>Def.:</strong> Die Sprache eines DFA <span>$A\ L(A)$</span> ist definiert durch:</p>
+<p><span>$L(A) ={w\ \vert \delta^{\ast}(q_0, w) \in F }$</span></p>
+<h2 id="beispiel">Beispiel</h2>
+<h2 id="nichtdeterministische-endliche-automaten">Nichtdeterministische endliche Automaten</h2>
+<p><strong>Def.:</strong> Ein <em>nichtdeterministischer endlicher Automat</em> (NFA) ist ein 5-Tupel
+<span>$A = (Q, \Sigma, \delta, q_0, F)$</span> mit</p>
+<ul>
+<li><span>$Q$</span>: eine endliche Menge von Zuständen</li>
+<li><span>$\Sigma$</span>: ein Alphabet von Eingabesymbolen</li>
+<li><span>$\delta$</span>: die Übergangsfunktion <span>$(Q \times \Sigma) \rightarrow \mathcal{P}(Q)$</span></li>
+<li><span>$q_0 \in Q$</span>: der Startzustand</li>
+<li><span>$F \subseteq Q$</span>: die Menge der Endzustände</li>
+</ul>
+<h2 id="die-übergangsfunktion-eines-nfas">Die Übergangsfunktion eines NFAs</h2>
+<p><strong>Def.:</strong> Wir definieren <span>$\delta^{\ast}: (Q \times \Sigma) \rightarrow \mathcal{P}(Q):$</span>
+induktiv wie folgt:</p>
+<ul>
+<li>
+<p>Basis: <span>$\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$</span></p>
+</li>
+<li>
+<p>Induktion: Sei <span>$w \in \Sigma^{\ast}, w = xa, x \in \Sigma^{\ast}, a \in \Sigma$</span> mit</p>
+<p><span>$\delta^{\ast}(q, x) = { p_1,\ \ldots,\  p_k }, p_i \in Q$</span>, sei</p>
+<p><span>$A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = {r_1, \ldots r_m }, r_j \in Q$</span>.</p>
+<p>Dann ist <span>$\delta^{\ast}(q, w) = {r_1,\  \ldots\ , r_m}$</span>.</p>
+</li>
+</ul>
+<h2 id="wozu-nfas-im-compilerbau">Wozu NFAs im Compilerbau?</h2>
+<p>Pattern Matching geht mit NFAs.</p>
+<p>NFAs sind so nicht zu programmieren, aber:</p>
+<p><strong>Satz:</strong> Eine Sprache <span>$L$</span> wird von einem NFA akzeptiert <span>$\Leftrightarrow L$</span> wird von einem DFA akzeptiert.</p>
+<h2 id="konvertierung-eines-nfas-in-einen-dfa">Konvertierung eines NFAs in einen DFA</h2>
+<p>Gegeben: Ein NFA <span>$A = (Q, \Sigma, \delta, q_0, F)$</span></p>
+<p>Wir konstruieren einen DFA <span>$A&rsquo; = (Q&rsquo;, \Sigma, \delta &lsquo;, q_0, F&rsquo;)$</span> wie folgt:</p>
+<figure class="center" style="width:45%">
+    <img alt="Konvertierung NFA in DFA" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/images/nfa2dfa.png" class="" />
+    <figcaption><h4>Konvertierung NFA in DFA</h4></figcaption>
+</figure>
+<h2 id="beispiel-1">Beispiel</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"><span>$\delta$</span></th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><span>$\rightarrow q_0$</span></td>
+<td style="text-align:center"><span>${q_0}$</span></td>
+<td style="text-align:center"><span>${q_1, q_2}$</span></td>
+</tr>
+<tr>
+<td style="text-align:right"><span>$q_1$</span></td>
+<td style="text-align:center"><span>${q_2}$</span></td>
+<td style="text-align:center"><span>${q_1}$</span></td>
+</tr>
+<tr>
+<td style="text-align:right">*<span>$q_2$</span></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><span>${q_0, q_2}$</span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><span>$\delta$</span>'</th>
+<th style="text-align:left">a</th>
+<th style="text-align:left">b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span>$\rightarrow$</span> <span>${q_0}$</span></td>
+<td style="text-align:left"><span>${q_0}$</span></td>
+<td style="text-align:left"><span>${q_1,q_2}$</span></td>
+</tr>
+<tr>
+<td style="text-align:left">*<span>${q_1 q_2}$</span></td>
+<td style="text-align:left"><span>${q_2}$</span></td>
+<td style="text-align:left"><span>${q_0, q_1, q_2}$</span></td>
+</tr>
+<tr>
+<td style="text-align:left">*<span>${q_2}$</span></td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><span>${q_0,q_2}$</span></td>
+</tr>
+<tr>
+<td style="text-align:left">*<span>${q_0, q_2}$</span></td>
+<td style="text-align:left"><span>${q_0}$</span></td>
+<td style="text-align:left"><span>${q_0, q_1, q_2}$</span></td>
+</tr>
+<tr>
+<td style="text-align:left">*<span>${q_0, q_1, q_2}$</span></td>
+<td style="text-align:left"><span>${q_0, q_2}$</span></td>
+<td style="text-align:left"><span>${q_0, q_1, q_2}$</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="minimierung-eines-dfas">Minimierung eines DFAs</h2>
+<p>Ist ist der DFA <span>$A$</span> nicht vollständig, wird ein Fehlerzustand <span>$q_e$</span>, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.</p>
+<p>Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.</p>
+<figure class="center" style="width:50%">
+    <img alt="DFA Minimierung" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/images/minimize_dfa.png" class="" />
+    <figcaption><h4>DFA Minimierung</h4></figcaption>
+</figure>
+<h1 id="reguläre-ausdrücke">Reguläre Ausdrücke</h1>
+<h2 id="operatoren-auf-sprachen">Operatoren auf Sprachen</h2>
+<p><strong>Def.:</strong> Seien <em>L</em> und <em>M</em> Sprachen.</p>
+<ul>
+<li><span>$L \cup M = {w \mid w \in L \vee w \in M }$</span></li>
+<li><span>$LM = L \cdot M = L \circ M = {vw \mid v \in L \land w \in M}$</span></li>
+<li>Die Kleene-Hülle einer Sprache:
+<ul>
+<li>Basis: <span>$L^0 = {\epsilon}$</span></li>
+<li>Induktion: <span>$L^i = {xw\mid x \in L^{i-1}, w \in L, i &gt; 0}$</span>, <span>$L^{\ast} = \bigcup\limits_{i \ge 0}L^i$</span>, <span>$L^+ = \bigcup\limits_{i &gt; 0}L^i$</span></li>
+</ul>
+</li>
+</ul>
+<h2 id="reguläre-ausdrücke-1">Reguläre Ausdrücke</h2>
+<p><strong>Def.:</strong> Induktive Definition von regulären Ausdrücken (<em>regex</em>) und der von ihnen repräsentierten Sprache:</p>
+<ul>
+<li>Basis:
+<ul>
+<li><span>$\epsilon$</span> und <span>$\emptyset$</span> sind reguläre Ausdrücke mit <span>$L(\epsilon) =  {\epsilon}$</span>, <span>$L(\emptyset)=\emptyset$</span></li>
+<li>Sei <span>$a$</span> ein Symbol <span>$\Rightarrow$</span> <span>$a$</span> ist ein regex mit <span>$L(a) = {a}$</span></li>
+</ul>
+</li>
+<li>Induktion: Seien <span>$E,\ F$</span> reguläre Ausdrücke. Dann gilt:
+<ul>
+<li><span>$E+F$</span> ist ein regex und bezeichnet die Vereinigung <span>$L(E + F) = L(E)\cup L(F)$</span></li>
+<li><span>$EF$</span> ist ein regex und bezeichnet die Konkatenation <span>$L(EF) = L(E)L(F)$</span></li>
+<li><span>$E^{\ast}$</span> ist ein regex und bezeichnet die Kleene-Hülle <span>$L(E^{\ast})=(L(E))^{\ast}$</span></li>
+<li><span>$(E)$</span> ist ein regex mit <span>$L((E)) = L(E)$</span></li>
+</ul>
+</li>
+</ul>
+<p>Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +</p>
+<h2 id="wichtige-identitäten">Wichtige Identitäten</h2>
+<p><strong>Satz:</strong> Sei <span>$A$</span> ein DFA <span>$\Rightarrow \exists$</span> regex <span>$R$</span> mit <span>$L(A) = L(R)$</span>.</p>
+<p><strong>Satz:</strong> Sei <span>$E$</span> ein regex <span>$\Rightarrow \exists$</span> DFA <span>$A$</span> mit <span>$L(E) = L(A)$</span>.</p>
+<h2 id="beispiel-umwandlung-eines-regex-in-einen-nfa">Beispiel: Umwandlung eines regex in einen NFA</h2>
+<h2 id="formale-grammatiken">Formale Grammatiken</h2>
+<p><strong>Def.:</strong> Eine <em>formale Grammatik</em> ist ein 4-Tupel <span>$G=(N,T,P,S)$</span> aus</p>
+<ul>
+<li><span>$N$</span>: einer endlichen Menge von <span>$Nichtterminalen$</span></li>
+<li><em>T</em>: einer endlichen Menge von <em>Terminalen</em>, <span>$N \cap T = \emptyset$</span></li>
+<li><span>$S \in N$</span>: dem <em>Startsymbol</em></li>
+<li><em>P</em>: einer endlichen Menge von <em>Produktionen</em> der Form: <span>$X \rightarrow Y$</span> mit <span>$X \in (N \cup T)^{\ast} N (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$</span></li>
+</ul>
+<h2 id="ableitungen">Ableitungen</h2>
+<p><strong>Def.:</strong> Sei <span>$G = (N, T, P, S)$</span> eine Grammatik, sei <span>$\alpha A \beta$</span> eine Zeichenkette über
+<span>$(N \cup T)^{\ast}$</span> und sei <span>$A$</span> <span>$\rightarrow \gamma$</span> eine Produktion von <span>$G$</span>.</p>
+<p>Wir sagen:
+<span>$\alpha A \beta \Rightarrow \alpha \gamma \beta$</span> (<span>$\alpha A \beta$</span> leitet <span>$\alpha \gamma \beta$</span> ab).</p>
+<p><strong>Def.:</strong> Wir definieren die Relation <span>$\overset{\ast}{\Rightarrow}$</span> induktiv wie folgt:</p>
+<ul>
+<li>Basis: <span>$\forall \alpha \in (N \cup T)^{\ast} \alpha \overset{\ast}{\Rightarrow} \alpha$</span> (Jede Zeichenkette leitet sich selbst ab.)</li>
+<li>Induktion: Wenn <span>$\alpha \overset{\ast}{\Rightarrow} \beta$</span> und
+<span>$\beta\Rightarrow \gamma$</span> dann <span>$\alpha \overset{\ast}{\Rightarrow} \gamma$</span></li>
+</ul>
+<p><strong>Def.:</strong> {Sei <span>$G = (N, T ,P, S)$</span> eine formale Grammatik.
+Dann ist <span>$L(G) = {w \in T^{\ast} \mid S \overset{\ast}{\Rightarrow} w}$</span> die von <span>$G$</span> erzeugte Sprache.</p>
+<h2 id="reguläre-grammatiken">Reguläre Grammatiken</h2>
+<p><strong>Def.:</strong> Eine <em>reguläre (oder type-3-) Grammatik</em> ist eine formale Grammatik mit den folgenden Einschränkungen:</p>
+<ul>
+<li>
+<p>Alle Produktionen sind entweder von der Form</p>
+<ul>
+<li><span>$X \to aY$</span> mit <span>$X \in N, a \in T, Y \in N$</span> (<em>rechtsreguläre</em> Grammatik) oder</li>
+<li><span>$X \to Ya$</span> mit <span>$X \in N, a \in T, Y \in N$</span> (<span>$linksreguläre$</span> Grammatik)</li>
+</ul>
+</li>
+<li>
+<p><span>$X\rightarrow\epsilon$</span> ist in beiden Fällen erlaubt.</p>
+</li>
+</ul>
+<h2 id="reguläre-sprachen">Reguläre Sprachen</h2>
+<p><strong>Satz:</strong> Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden <span>$reguläre$</span> Sprachen genannt.</p>
+<p><strong>Satz:</strong> Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.</p>
+<h2 id="das-pumping-lemma-für-reguläre-sprachen">Das Pumping Lemma für reguläre Sprachen</h2>
+<p><strong>Satz:</strong> Das :</p>
+<p>Sei <span>$L$</span> eine reguläre Sprache.</p>
+<p><span>$\Rightarrow \exists$</span> Konstante <span>$n \in \mathbb{N}$</span>:</p>
+<p><span>$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$</span> mit <span>$w = xyz, y \neq \epsilon, |xy| \leq n:$</span></p>
+<p><span>$\underset{k \geq 0} \forall xy^{k}z \in L$</span></p>
+<h2 id="abschlusseigenschaften-regulärer-sprachen">Abschlusseigenschaften regulärer Sprachen</h2>
+<p>Die Klasse der regulären Sprachen ist abgeschlossen unter</p>
+<ul>
+<li>Vereinigung</li>
+<li>Konkatenation</li>
+<li>Kleene-Stern</li>
+<li>Komplementbildung</li>
+<li>Durchschnitt</li>
+</ul>
+<h2 id="entscheidbarkeit-für-reguläre-sprachen">Entscheidbarkeit für reguläre Sprachen</h2>
+<p><strong>Satz:</strong> Es ist entscheidbar,</p>
+<ul>
+<li>ob eine gegebene reguläre Sprache leer ist</li>
+<li>ob <span>$w \in \Sigma^{\ast}$</span> in einer gegebenen regulären Sprache enthalten ist (Das &quot;Wort-Problem&quot;)</li>
+<li>ob zwei reguläre Sprachen äquivalent sind</li>
+</ul>
+<h2 id="grenzen-der-regulären-sprachen">Grenzen der regulären Sprachen</h2>
+<p>Reguläre Sprachen sind von ihrer Struktur her einfach. Schon Sprachen, in denen etwas &quot;gematcht&quot; werden muss, lassen sich nicht mehr regulär beschreiben, weil z. B. die fixe Anzahl von Zuständen eines DFAs die Erkennung solcher Sprachen verhindert.</p>
+<h2 id="wozu-das-ganze">Wozu das Ganze?</h2>
+<p>Im Compilerbau werden reguläre Ausdrücke benutzt, um die Schlüsselwörter und weitere Symbole der zu erkennenden Sprache anzugeben. Daraus wird mit Hilfe eines Generators, der aus den regulären Ausdrücken DFAs (oder einen großen DFA) macht, der sog. Scanner oder Lexer genannt, generiert. Seine Aufgabe ist es, die Folge von Zeichen in der Quelldatei in eine Folge von sog. Token umzuwandeln. Z. B. wird so aus den Zeichen des Schlüsselwortes <em>while</em> im Programmtext das Token für <em>while</em> gemacht, das in der Syntaxanalyse weiterverarbeitet wird. Die Tokenfolge eines Programms ist ein Wort einer Sprache, die der Parser erkennt. Jedes vom Lexer erkannte Token ist dort also ein terminales Symbol.</p>
+<h2 id="ein-lexer-ist-mehr-als-ein-dfa">Ein Lexer ist mehr als ein DFA</h2>
+<p>Was ist zu beachten:</p>
+<ul>
+<li>
+<p>Man braucht mindestens eine Liste von Paaren aus regulären Ausdrücken und Tokennamen.</p>
+</li>
+<li>
+<p>Neben den Schlüsselwörtern und Symbolen wie (,), *, <span>$\ldots$</span> müssen auch Namen für Variablen, Funktionen, Klassen, Methoden, <span>$\ldots$</span> (sog. Identifier) erkannt werden</p>
+</li>
+<li>
+<p>Namen haben meist eine gewisse Struktur, die sich mit regulären Ausdrücken beschreiben lassen.</p>
+</li>
+<li>
+<p>Erlaubte Token sind in der Grammatik des Parsers beschrieben, d. h. für literale Namen, Strings, Zahlen liefert der Scanner zwei Werte:</p>
+<ul>
+<li>z.  B. &lt;ID, &quot;radius&quot;&gt;, &lt;Integerzahl, 558&gt;</li>
+</ul>
+</li>
+<li>
+<p>Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)</p>
+</li>
+</ul>
+<p>Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für die regulären Ausdrücke implementieren.</p>
+<h2 id="automatisch-oder-händisch">Automatisch oder händisch</h2>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="wrap-up-1">Wrap-Up</h2>
+<ul>
+<li>Definition und Aufgaben von Lexern</li>
+<li>DFAs und NFAs</li>
+<li>Reguläre Ausdrücke</li>
+<li>Reguläre Grammatiken</li>
+<li>Zusammenhänge zwischen diesen Mechanismen und Lexern, bzw. Lexergeneratoren</li>
+</ul>
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_aho2013compilers">
+            
+                [aho2013compilers] <strong>Compilers: Pearson new international edition: Principles, techniques, and tools</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Education Limited, 2013.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=9781292037233" target="_blank" rel="nofollow noopener noreferrer">9781292037233</a>.
+                
+                
+            
+            
+                <br><em>Abschnitt 2.6 und Kapitel 3</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2014">
+            
+                [Parr2014] <strong>The definitive ANTLR 4 reference</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2014.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5699-9" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5699-9</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Torczon2012">
+            
+                [Torczon2012] <strong>Engineering a compiler</strong>
+            
+            
+                <br>Torczon, L. und Cooper, K., Elsevier MK, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-1208-8478-0" target="_blank" rel="nofollow noopener noreferrer">978-0-1208-8478-0</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 2</em>
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        <li>(K1) DFAs</li>
+        
+        
+        
+    
+        <li>(K1) NFAs</li>
+        
+        
+        
+    
+        <li>(K1) Reguläre Ausdrücke</li>
+        
+        
+        
+    
+        <li>(K1) Reguläre Grammatiken</li>
+        
+        
+        
+    
+        
+        <li>(K2) Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte</li>
+        
+        
+    
+        
+        
+        <li>(K3) DFAs, NFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln</li>
+        
+    
+        
+        
+        <li>(K3) Herausfinden, ob eine Sprache regulär ist</li>
+        
+    
+        
+        
+        <li>(K3) Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item parent"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle" checked/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Praktikum on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/</link>
+    <description>Recent content in Praktikum on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blatt 01: Scanner und Parser</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet01/</guid>
+      <description>A1.1: Grammatik Modifizieren Sie die Grammatik für Small C folgendermaßen:
+  Entfernen Sie folgende Elemente:
+ die for-Schleife das break-Statement die Zufallszahlengenerierung mit ?n die Zuweisungsoperatoren +=, -=, *= und /= die Modulo-Operation % den &amp;quot;Elvis&amp;quot;-Operator ?: (ternäre Abfrage) die Auto-Inkrement-/-Dekrement-Operatoren ++ und --    Bestimmen Sie die terminalen Symbole Ihrer Grammatik und deren Aufbau.
+  Erklären Sie, wo in der Grammatik das Konzept der Zuweisung auftaucht und welche Auswirkungen dies auf die erlaubten Programme hat.</description>
+    </item>
+    <item>
+      <title>Blatt 02: Semantische Analyse</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet02/</guid>
+      <description>A2.1: Erweiterung der Grammatik: Funktionen Erweitern Sie die Grammatik von Blatt 01 um die Möglichkeit, Funktionen definieren und aufrufen zu können. Funktionen sollen (wie in C) nicht innerhalb von Funktionen definiert werden können. Globale Variablen sollen ebenfalls zwischen den Funktionsdefinitionen/-aufrufen definiert werden können.
+Hinweis: Sogenannte Vorwärtsdeklarationen sind nicht nötig.
+A2.2: Grammatik und Scanner-/Parser-Generatoren Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für die folgenden Aufgaben nutzen.</description>
+    </item>
+    <item>
+      <title>Blatt 03: Optimierung</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet03/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet03/</guid>
+      <description>A3.1: Konstruktion Kontrollflussgraph Konstruieren Sie aus Ihrem AST einen Kontrollflussgraphen. Ergänzen Sie Ihre Ausgabefunktion, so dass auch der Kontrollflussgraph als DOT-Code formatiert ausgegeben wird.
+Hinweis: Geben Sie sowohl den ursprünglichen Kontrollflussgraphen als auch den Kontrollflussgraphen nach der Optimierung (siehe nächste Aufgabe) aus.
+A3.2: Optimierung Welche der in der Vorlesung besprochenen Optimierungen sind in der betrachteten Sprache sinnvoll? Begründen Sie Ihre Analyse und führen Sie diese Optimierungen auf dem Kontrollflussgraphen durch.</description>
+    </item>
+    <item>
+      <title>Blatt 04: LLVM-IR</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet04/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet04/</guid>
+      <description>A4.1: Sprachumfang im LLVM-IR Legen Sie fest, welche LLVM-IR-Befehle Sie für Ihr Projekt benötigen.
+ https://releases.llvm.org/1.6/docs/CommandGuide/html/llc.html https://releases.llvm.org/1.6/docs/CommandGuide/html/lli.html http://llvm.org/devmtg/2010-11/Naumann-Cling.pdf  A4.2: Erzeugung von LLVM-IR Vervollständigen Sie den Compiler mit LLVM-Werkzeugen: Ihr Compiler soll LLVM-IR ausgeben, der mit den LLVM-Werkzeugen in ein ausführbares Programm übersetzt werden kann.</description>
+    </item>
+    <item>
+      <title>Blatt 05: Interpreter</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet05/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet05/</guid>
+      <description>A5.1: Interpreter Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
+ Lesen Sie zunächst den zu interpretierenden Small-C-Code aus einer Datei ein. Realisieren Sie die Funktionen readint und writeint als native Funktionen im Interpreter.  A5.2: Interaktivität Erweitern Sie Ihren Interpreter um Interaktivität:
+ Der Interpreter soll einen Prompt in der Konsole anbieten Der Interpreter soll Code zeilenweise von der Standard-Eingabe lesen und verarbeiten Zur Eingabe mehrzeiliger Konstrukte sehen Sie entweder das Einlesen von Codeblöcken aus Dateien vor oder implementieren Sie entsprechend eine &amp;quot;logische Einrückung&amp;quot; für den Prompt als visuelles Feedback für den User  Sie können sich hier am Interpreter für Lox orientieren.</description>
+    </item>
+  </channel>
+</rss>

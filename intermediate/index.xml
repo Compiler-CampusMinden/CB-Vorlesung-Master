@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zwischencode on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/</link>
+    <description>Recent content in Zwischencode on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Überblick Zwischencode</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/</guid>
+      <description>Einordnung  Die Schritte in der letzten Phase der Compiler-Pipeline können sehr unterschiedlich ausfallen.
+Beispielsweise könnte direkt aus dem AST der Ziel-Machine-Code erzeugt werden. Auf der anderen Seite könnte aus dem AST ein Zwischenformat erzeugt werden, darauf Optimierungen vorgenommen werden, daraus ein weiteres Zwischenformat erzeugt werden, darauf weitere Optimierungen vorgenommen werden, ..., bis schließlich nach mehreren Zwischenstufen das Zielformat erzeugt wird.
+Nachfolgend betrachten wir verschiedene Beispiele, wie das Zwischenformat aussehen kann.</description>
+    </item>
+    <item>
+      <title>LLVM als IR</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/</guid>
+      <description>Motivation Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es sollen für zwei Programmiersprachen Compiler entwickelt werden, die diesen Befehlssatz als Ziel haben. Was tun?
+Themen für heute: Letzte Phase in Compiler-Pipeline Compiler-Pipeline  LLVM - Ein Überblick Was ist das Ziel von LLVM? LLVM ist ein Open-Source-Framework, welches die modulare Entwicklung von Compilern und ähnlichen sprachorientierten Programmen ermöglicht. Kernstücke sind LLVM IR (eine streng typisierte Zwischensprache), ein flexibel konfigurierbarer Optimierer, der zur Compilezeit, Linkzeit und Laufzeit eingesetzt werden kann und ein Codegenerator für zahlreiche Architekturen.</description>
+    </item>
+  </channel>
+</rss>

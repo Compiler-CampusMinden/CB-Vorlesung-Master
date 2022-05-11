@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimierung on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/</link>
+    <description>Recent content in Optimierung on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Optimierung und Datenflussanalyse</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/</guid>
+      <description>Motivation Was geschieht hier? 01 { 02 var a; 03 var b = 2; 04 b = a; 05 }  Zwischencode ist eine gute Idee Eine Sprache, viele Maschinen vs. viele Sprachen, eine Maschine ... und beides zusammen? Zwischencode (intermediate code); hier: Drei-Adress-Code  registerbasiert Formen: x = y op z, x = op z, x = y temporäre Variablen für Zwischenergebnisse bedingte und unbedingte Sprünge Pointerarithmetik für Indizierung  i = 0 while(f[i] &amp;gt; 100) i = i + 1;    i = 0 L1: t1 = i * 8 t2 = f + t1 if t2 &amp;lt;= 100 goto L2 t3 = i + 1 i = t3 goto L1 L2: .</description>
+    </item>
+  </channel>
+</rss>

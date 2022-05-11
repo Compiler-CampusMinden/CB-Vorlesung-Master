@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interpreter on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/</link>
+    <description>Recent content in Interpreter on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Syntaxgesteuerte Interpreter</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/</guid>
+      <description>Überblick Interpreter   Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
+Es gibt verschiedene Varianten, beispielsweise:
+  Syntaxgesteuerte Interpreter
+ Einfachste Variante, wird direkt im Parser mit abgearbeitet Keine Symboltabellen, d.h. auch keine Typprüfung oder Vorwärtsdeklarationen o.ä. (d.h. erlaubt nur vergleichsweise einfache Sprachen) Beispiel: siehe nächste Folie    AST-basierte Interpreter</description>
+    </item>
+    <item>
+      <title>AST-basierte Interpreter: Basics</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/</guid>
+      <description>Aufgaben im Interpreter Im Allgemeinen reichen einfache syntaxgesteuerte Interpreter nicht aus. Normalerweise simuliert ein Interpreter die Ausführung eines Programms durch den Computer. D.h. der Interpreter muss über die entsprechenden Eigenschaften verfügen: Prozessor, Code-Speicher, Datenspeicher, Stack ...
+int x = 42; int f(int x) {  int y = 9;  return y+x; }  x = f(x);    Aufbauen des AST ... =&amp;gt; Lexer+Parser
+  Auflösen von Symbolen/Namen .</description>
+    </item>
+    <item>
+      <title>AST-basierte Interpreter: Funktionen und Klassen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/</guid>
+      <description>Funktionen int foo(int a, int b, int c) {  print a + b + c; }  foo(1, 2, 3);  def makeCounter():  var i = 0  def count():  i = i + 1  print i  return count;  counter = makeCounter() counter() # &amp;#34;1&amp;#34; counter() # &amp;#34;2&amp;#34;   Die Funktionsdeklaration muss im aktuellen Kontext abgelegt werden, dazu wird der AST-Teilbaum der Deklaration benötigt.</description>
+    </item>
+    <item>
+      <title>Bytecode und Virtuelle Maschinen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/</guid>
+      <description>Bytecode und Virtuelle Maschinen -- Vortragsthema --</description>
+    </item>
+    <item>
+      <title>Garbage Collection</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/</guid>
+      <description>Ist das Code oder kann das weg? x = 42 y = &amp;#39;wuppie&amp;#39; y = &amp;#39;fluppie&amp;#39; print(y)  def foo():  x = &amp;#39;wuppie&amp;#39;  def bar():  print(x)  return f  fn = foo() fn()   Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten. Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die Konstanten typischerweise am Ende des Text-Segments.</description>
+    </item>
+  </channel>
+</rss>

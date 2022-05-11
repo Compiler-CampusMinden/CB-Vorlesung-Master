@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CB W21 on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/</link>
+    <description>Recent content in CB W21 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Überblick</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/</guid>
+      <description>Überblick Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben diese?
+Struktur eines Compilers Bandbreite der Programmiersprachen Anwendungen  </description>
+    </item>
+    <item>
+      <title>Lexer</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/</guid>
+      <description>Lexer Der Lexer (auch &amp;quot;Scanner&amp;quot;) soll den Zeichenstrom in eine Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke verwendet.
+Reguläre Sprachen, Ausdrucksstärke Lexer: Tabellenbasierte Implementierung Lexer: Handcodierte Implementierung Flex: Lexer generieren  </description>
+    </item>
+    <item>
+      <title>Parser</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/</guid>
+      <description>Parser Der Parser arbeitet mit dem Tokenstrom, der vom Lexer kommt. Mit Hilfe einer Grammatik wird geprüft, ob hier gültige Sätze im Sinne der Sprache/Grammatik gebildet wurden. Der Parser erzeugt dabei den Parse-Tree.
+CFG, LL-Parser LL-Parser selbst implementiert LL-Parser: Fortgeschrittene Techniken ANTLR (Parsergenerator) Syntaxanalyse: LR-Parser Bison (Parsergenerator) PEG-Parser, Pratt-Parser und Parser Combinators Error-Recovery Grenze Lexer und Parser  </description>
+    </item>
+    <item>
+      <title>Semantische Analyse</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/</guid>
+      <description>Semantische Analyse Auf die lexikalische Analyse und die Syntaxanalyse folgt die semantische Analyse. Nach dem Parsen steht fest, dass ein Programm syntaktisch korrekt ist. Nun muss geprüft werden, ob es auch semantisch korrekt ist.
+Symboltabellen Typen, Type Checking und Attributierte Grammatiken  </description>
+    </item>
+    <item>
+      <title>Zwischencode</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/</guid>
+      <description>Zwischencode Die Schnittstelle zwischen dem Frontend und dem Backend ist der Zwischencode (intermediate code (IC), auch intermediate representation (IR) genannt).
+Für den Zwischencode gibt es kein allgemein definiertes Format. In der Praxis trifft man auf eine große Bandbreite an verschiedenen Formaten.
+Überblick Zwischencode LLVM als IR   </description>
+    </item>
+    <item>
+      <title>Interpreter</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/</guid>
+      <description>Interpreter Ein Interpreter erzeugt keinen Code, sondern führt Source-Code (interaktiv) aus. Die einfachste Möglichkeit ist der Einsatz von attributierten Grammatiken, wo der Code bereits beim Parsen ausgeführt wird. Mehr Möglichkeiten hat man dagegen bei der Traversierung des AST, beispielsweise mit dem Visitor-Pattern. (Register- und Stack-basierte Interpreter betrachten wir im Rahmen der Veranstaltung aktuell nicht.)
+Syntaxgesteuerte Interpreter AST-basierte Interpreter: Basics AST-basierte Interpreter: Funktionen und Klassen Bytecode und Virtuelle Maschinen Garbage Collection  </description>
+    </item>
+    <item>
+      <title>Optimierung</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/</guid>
+      <description>Optimierung Dieses Kapitel betrachtet verschiedene Optimierungen auf dem Zwischencode sowie verschiedene Varianten der Datenflussanalyse.
+Optimierung und Datenflussanalyse  </description>
+    </item>
+    <item>
+      <title>Generierung von Maschinencode</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/</guid>
+      <description>Generierung von Maschinencode Dieses Kapitel betrachtet verschiedene Aspekte bei der Generierung von Maschinencode.
+Generierung von Maschinencode (Skizze)  </description>
+    </item>
+  </channel>
+</rss>

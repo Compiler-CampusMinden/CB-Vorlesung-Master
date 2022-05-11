@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Semantische Analyse on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/</link>
+    <description>Recent content in Semantische Analyse on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Symboltabellen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/</guid>
+      <description>Symboltabellen Zur semantischen Analyse gehört die Identifikation und Sammlung von Bezeichnern und die Zuordnung zur richtigen Ebene (Scopes). Das Werkzeug hierfür sind die Symboltabellen.
+ Semantische Analyse: Symboltabellen Nested Scopes Funktionen Strukturen und Klassen  </description>
+    </item>
+    <item>
+      <title>Typen, Type Checking und Attributierte Grammatiken</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/</guid>
+      <description>Motivation Ist das alles erlaubt? Operation erlaubt?
+Zuweisung erlaubt?
+Welcher Ausdruck hat welchen Typ?
+(Welcher Code muss dafür erzeugt werden?)
+ a = b a = f(b) a = b + c a = b + o.nummer if (f(a) == f(b))  Taschenrechner: Parsen von Ausdrücken wie 3*5+4 expr : expr &#39;+&#39; term | term ; term : term &#39;*&#39; DIGIT | DIGIT ; DIGIT : [0-9] ;  =&amp;gt; Wie den Ausdruck ausrechnen?</description>
+    </item>
+  </channel>
+</rss>

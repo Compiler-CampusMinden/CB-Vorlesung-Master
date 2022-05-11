@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>AST-basierte Interpreter: Basics   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/interpretation/astdriven-part1.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/"><span itemprop="name">Interpreter</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/" aria-disabled="true"><span itemprop="name">AST-basierte Interpreter: Basics</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#aufgaben-im-interpreter">Aufgaben im Interpreter</a></li>
+    <li><a href="#ast-basierte-interpreter-visitor-dispatcher">AST-basierte Interpreter: Visitor-Dispatcher</a></li>
+    <li><a href="#auswertung-von-literalen-und-ausdrücken">Auswertung von Literalen und Ausdrücken</a></li>
+    <li><a href="#kontrollstrukturen">Kontrollstrukturen</a></li>
+    <li><a href="#zustände-auswerten-von-anweisungen">Zustände: Auswerten von Anweisungen</a></li>
+    <li><a href="#detail-felder-im-interpreter">Detail: Felder im Interpreter</a></li>
+    <li><a href="#ausführen-einer-variablendeklaration">Ausführen einer Variablendeklaration</a></li>
+    <li><a href="#ausführen-einer-zuweisung">Ausführen einer Zuweisung</a></li>
+    <li><a href="#blöcke-umgang-mit-verschachtelten-environments">Blöcke: Umgang mit verschachtelten Environments</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>Ein AST-basierter Interpreter besteht oft aus einem &quot;Visitor-Dispatcher&quot;: Man traversiert
+mit einer <code>eval()</code>-Funktion den AST und ruft je nach Knotentyp die passende Funktion auf.
+Dabei werden bei Ausdrücken (<em>Expressions</em>) Werte berechnet und zurückgegeben, d.h. hier
+hat man einen Rückgabewert und ein entsprechendes <code>return</code> im <code>switch</code>/<code>case</code>, während man
+bei Anweisungen (<em>Statements</em>) keinen Rückgabewert hat.</p>
+<p>Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts in den
+passenden Typ der Implementierungssprache. Bei einfachen Ausdrücken kann man auf das in
+[&ldquo;Syntaxgesteuerte Interpreter&rdquo;]({{&lt;ref &ldquo;/interpretation/syntaxdriven&rdquo; &gt;}})
+demonstrierte Vorgehen zurückgreifen: Man interpretiert zunächst die Teilausdrücke durch den
+Aufruf von <code>eval()</code> für die jeweiligen AST-Kindknoten und berechnet daraus das gewünschte
+Ergebnis.</p>
+<p>Für Blöcke und Variablen muss man analog zum Aufbau von Symboltabellen wieder Scopes
+berücksichtigen, d.h. man benötigt Strukturen ähnlich zu den Symboltabellen (hier &quot;Umgebung&quot;
+(<em>Environment</em>) genannt). Es gibt eine globale Umgebung, und mit dem Betreten eines neuen
+Blocks wird eine neue Umgebung aufgemacht, deren Eltern-Umgebung die bisherige Umgebung ist.</p>
+<p>Zu jedem Namen kann man in einer Umgebung einen Wert definieren bzw. abrufen. Dabei muss man
+je nach Semantik der zu interpretierenden Sprache unterscheiden zwischen der &quot;Definition&quot; und
+der &quot;Zuweisung&quot; einer Variablen: Die Definition erfolgt i.d.R. in der aktuellen Umgebung, bei
+der Zuweisung sucht man ausgehend von der aktuellen Umgebung bis hoch zur globalen Umgebung
+nach dem ersten Vorkommen der Variablen und setzt den Wert in der gefundenen Umgebung. Bei
+Sprachen, die Variablen beim ersten Zugriff definieren, muss man dieses Verhalten entsprechend
+anpassen.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/lupQ0f3Tp7A" target="_blank" rel="nofollow noopener noreferrer">VL AST-basierte Interpreter (Basics)</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/18b6c77bbd5ecc90730df421e3ed175ae4670f56dd8b1a7bdd517066a2b1e7669e074c8f473e88f7f6073f2bd25092ceca16eee95953412a7f9fa5597a7acd9a" target="_blank" rel="nofollow noopener noreferrer">VL AST-basierte Interpreter (Basics)</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        
+        <li>(K3) Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns</li>
+        
+    
+        
+        
+        <li>(K3) Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog zu den Symboltabellen</li>
+        
+    
+        
+        
+        <li>(K3) Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung mit einem Visitor</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="aufgaben-im-interpreter">Aufgaben im Interpreter</h2>
+<p>Im Allgemeinen reichen einfache syntaxgesteuerte Interpreter nicht aus. Normalerweise simuliert
+ein Interpreter die Ausführung eines Programms durch den Computer. D.h. der Interpreter muss
+über die entsprechenden Eigenschaften verfügen: Prozessor, Code-Speicher, Datenspeicher, Stack ...</p>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> y<span style="color:#f92672">+</span>x;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> f(x);
+</span></span></code></pre></div></div>
+<div class='column'>
+<ul>
+<li>
+<p>Aufbauen des AST ... =&gt; Lexer+Parser</p>
+</li>
+<li>
+<p>Auflösen von Symbolen/Namen ... =&gt; Symboltabellen, Resolving</p>
+</li>
+<li>
+<p>Type-Checking und -Inference ... =&gt; Semantische Analyse (auf Symboltabellen)</p>
+</li>
+<li>
+<p>Speichern von Daten: Name+Wert vs. Adresse+Wert (Erinnerung: Data-Segment und Stack im virtuellen Speicher)</p>
+</li>
+<li>
+<p>Ausführen von Anweisungen Text-Segment im virtuellen Speicher; hier über den AST</p>
+</li>
+<li>
+<p>Aufruf von Funktionen und Methoden Kontextwechsel nötig: Was ist von wo aus sichtbar?</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="ast-basierte-interpreter-visitor-dispatcher">AST-basierte Interpreter: Visitor-Dispatcher</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eval</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>   t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>BLOCK  : block(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>ASSIGN : assign(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>RETURN : ret(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>IF     : ifstat(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>CALL   : <span style="color:#66d9ef">return</span> call(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>ADD    : <span style="color:#66d9ef">return</span> add(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>MUL    : <span style="color:#66d9ef">return</span> mul(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>INT    : <span style="color:#66d9ef">return</span> Integer<span style="color:#f92672">.</span>parseInt(t<span style="color:#f92672">.</span>getText())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>ID     : <span style="color:#66d9ef">return</span> load(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> : <span style="color:#f92672">...</span>  <span style="color:#75715e"># catch unhandled node types</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>;
+</span></span></code></pre></div><p>Nach dem Aufbau des AST durch Scanner und Parser und der semantischen Analyse
+anhand der Symboltabellen müssen die Ausdrücke (<em>expressions</em>) und Anweisungen
+(<em>statements</em>) durch den Interpreter ausgewertet werden. Eine Möglichkeit dazu
+ist das Traversieren des AST mit dem Visitor-Pattern. Basierend auf dem Typ
+des aktuell betrachteten AST-Knotens wird entschieden, wie damit umgegangen
+werden soll. Dies erinnert an den Aufbau der Symboltabellen ...</p>
+<p>Die <code>eval()</code>-Methode bildet das Kernstück des (AST-traversierenden) Interpreters.
+Hier wird passend zum aktuellen AST-Knoten die passende Methode des Interpreters
+aufgerufen.</p>
+<p><strong>Hinweis</strong>: Im obigen Beispiel wird nicht zwischen der Auswertung von
+Ausdrücken und Anweisungen unterschieden, es wird die selbe Methode <code>eval()</code>
+genutzt. Allerdings liefern Ausdrücke einen Wert zurück (erkennbar am <code>return</code>
+im jeweiligen <code>switch/case</code>-Zweig), während Anweisungen keinen Wert liefern.</p>
+<p>In den folgenden Beispielen wird davon ausgegangen, dass ein komplettes
+Programm eingelesen, geparst, vorverarbeitet und dann interpretiert wird.</p>
+<p>Für einen interaktiven Interpreter würde man in einer Schleife die Eingaben
+lesen, parsen und vorverarbeiten und dann interpretieren. Dabei würde jeweils
+der AST und die Symboltabelle <em>ergänzt</em>, damit die neuen Eingaben auf frühere
+verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
+&quot;Einlesen -- Verarbeiten -- Auswerten&quot; hat sich auch der Name &quot;<em>Read-Eval-Loop</em>&quot;
+bzw. &quot;<em>Read-Eval-Print-Loop</em>&quot; (<strong>REPL</strong>) eingebürgert.</p>
+<h2 id="auswertung-von-literalen-und-ausdrücken">Auswertung von Literalen und Ausdrücken</h2>
+<ul>
+<li>
+<p>Typen mappen: Zielsprache =&gt; Implementierungssprache</p>
+<p>Die in der Zielsprache verwendeten (primitiven) Typen müssen
+auf passende Typen der Sprache, in der der Interpreter selbst
+implementiert ist, abgebildet werden.</p>
+<p>Beispielsweise könnte man den Typ <code>nil</code> der Zielsprache auf den
+Typ <code>null</code> des in Java implementierten Interpreters abbilden, oder
+den Typ <code>number</code> der Zielsprache auf den Typ <code>Double</code> in Java
+mappen.</p>
+</li>
+<li>
+<p>Literale auswerten:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">INT: [0-9]+ ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> t<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Parser<span style="color:#f92672">.</span>INT : <span style="color:#66d9ef">return</span> Integer<span style="color:#f92672">.</span>parseInt(t<span style="color:#f92672">.</span>getText())
+</span></span></code></pre></div><p>Das ist der einfachste Teil ... Die primitiven Typen der
+Zielsprache, für die es meist ein eigenes Token gibt, müssen
+als Datentyp der Interpreter-Programmiersprache ausgewertet
+werden.</p>
+</li>
+<li>
+<p>Ausdrücke auswerten:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">add: e1=expr &#34;+&#34; e2=expr ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    lhs <span style="color:#f92672">=</span> eval(t<span style="color:#f92672">.</span>e1())
+</span></span><span style="display:flex;"><span>    rhs <span style="color:#f92672">=</span> eval(t<span style="color:#f92672">.</span>e2())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (double)lhs <span style="color:#f92672">+</span> (double)rhs  <span style="color:#75715e"># Semantik!</span>
+</span></span></code></pre></div><p>Die meisten möglichen Fehlerzustände sind bereits durch den Parser
+und bei der semantischen Analyse abgefangen worden. Falls zur Laufzeit
+die Auswertung der beiden Summanden keine Zahl ergibt, würde eine
+Java-Exception geworfen, die man an geeigneter Stelle fangen und
+behandeln muss. Der Interpreter soll sich ja nicht mit einem Stack-Trace
+verabschieden, sondern soll eine Fehlermeldung präsentieren und danach
+normal weiter machen ...</p>
+</li>
+</ul>
+<h2 id="kontrollstrukturen">Kontrollstrukturen</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">ifstat: &#39;if&#39; expr &#39;then&#39; s1=stat (&#39;else&#39; s2=stat)? ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ifstat</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> eval(t<span style="color:#f92672">.</span>expr()): eval(t<span style="color:#f92672">.</span>s1())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> t<span style="color:#f92672">.</span>s2(): eval(t<span style="color:#f92672">.</span>s2())
+</span></span></code></pre></div><p>Analog können die anderen bekannten Kontrollstrukturen umgesetzt werden,
+etwa <code>switch/case</code>, <code>while</code> oder <code>for</code>.</p>
+<p>Dabei können erste Optimierungen vorgenommen werden: Beispielsweise könnten
+<code>for</code>-Schleifen im Interpreter in <code>while</code>-Schleifen transformiert werden,
+wodurch im Interpreter nur ein Schleifenkonstrukt implementiert werden
+müsste.</p>
+<h2 id="zustände-auswerten-von-anweisungen">Zustände: Auswerten von Anweisungen</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> y;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    { <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+<div class='column'>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/images/nested_envs.png" class="" />
+</figure>
+</div>
+</div>
+<p>Das erinnert nicht nur zufällig an den Aufbau der Symboltabellen :-)</p>
+<p>Und so lange es nur um Variablen ginge, könnte man die Symboltabellen für das
+Speichern der Werte nutzen. Allerdings müssen wir noch Funktionen und Strukturen
+bzw. Klassen realisieren, und spätestens dann kann man die Symboltabelle nicht
+mehr zum Speichern von Werten einsetzen. Also lohnt es sich, direkt neue
+Strukturen für das Halten von Variablen und Werten aufzubauen.</p>
+<h2 id="detail-felder-im-interpreter">Detail: Felder im Interpreter</h2>
+<p>Eine mögliche Implementierung für einen Interpreter basierend auf einem
+ANTLR-Visitor ist nachfolgend gezeigt.</p>
+<p><strong>Hinweis</strong>: Bei der Ableitung des <code>BaseVisitor&lt;T&gt;</code> muss der Typ <code>T</code>
+festgelegt werden. Dieser fungiert als Rückgabetyp für die Visitor-Methoden.
+Entsprechend können alle Methoden nur einen gemeinsamen (Ober-) Typ zurückliefern,
+weshalb man sich an der Stelle oft mit <code>Object</code> behilft und dann manuell
+den konkreten Typ abfragen und korrekt casten muss.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Interpreter</span>(BaseVisitor<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span>):
+</span></span><span style="display:flex;"><span>    __init__(self, AST t):
+</span></span><span style="display:flex;"><span>        BaseVisitor<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;.</span>__init__(self)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>root <span style="color:#f92672">=</span> t
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>env <span style="color:#f92672">=</span> Environment()
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a> und angepasst auf ANTLR-Visitoren, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21">Interpreter.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<h2 id="ausführen-einer-variablendeklaration">Ausführen einer Variablendeklaration</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">varDecl: &#34;var&#34; ID (&#34;=&#34; expr)? &#34;;&#34; ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">varDecl</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># deklarierte Variable (String)</span>
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> t<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    value <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>;  <span style="color:#75715e"># TODO: Typ der Variablen beachten (Defaultwert)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> t<span style="color:#f92672">.</span>expr(): value <span style="color:#f92672">=</span> eval(t<span style="color:#f92672">.</span>expr())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>define(name, value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span></code></pre></div><p>Wenn wir bei der Traversierung des AST mit <code>eval()</code> bei einer Variablendeklaration
+vorbeikommen, also etwa <code>int x;</code> oder <code>int x = wuppie + fluppie;</code>, dann wird im
+<strong>aktuellen</strong> Environment der String &quot;x&quot; sowie der Wert (im zweiten Fall) eingetragen.</p>
+<h2 id="ausführen-einer-zuweisung">Ausführen einer Zuweisung</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">assign: ID &#34;=&#34; expr;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">assign</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    lhs <span style="color:#f92672">=</span> t<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()
+</span></span><span style="display:flex;"><span>    value <span style="color:#f92672">=</span> eval(t<span style="color:#f92672">.</span>expr())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>assign(lhs, value)  <span style="color:#75715e"># Semantik!</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">assign</span>(self, String n, Object v):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>values[n]: self<span style="color:#f92672">.</span>values[n] <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> self<span style="color:#f92672">.</span>enclosing: self<span style="color:#f92672">.</span>enclosing<span style="color:#f92672">.</span>assign(n, v)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(n, <span style="color:#e6db74">&#34;undefined variable&#34;</span>)
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Environment.java#L38">Environment.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Wenn wir bei der Traversierung des AST mit <code>eval()</code> bei einer Zuweisung
+vorbeikommen, also etwa <code>x = 7;</code> oder <code>x = wuppie + fluppie;</code>, dann wird
+zunächst im aktuellen Environment die rechte Seite der Zuweisung ausgewertet
+(Aufruf von <code>eval()</code>). Anschließend wird der Wert für die Variable im
+Environment eingetragen: Entweder sie wurde im aktuellen Environment früher
+bereits definiert, dann wird der neue Wert hier eingetragen. Ansonsten wird
+entlang der Verschachtelungshierarchie gesucht und entsprechend eingetragen.
+Falls die Variable nicht gefunden werden kann, wird eine Exception ausgelöst.</p>
+<p>An dieser Stelle kann man über die Methode <code>assign</code> in der Klasse <code>Environment</code>
+dafür sorgen, dass nur bereits deklarierte Variablen zugewiesen werden dürfen.
+Wenn man stattdessen wie etwa in Python das implizite Erzeugen neuer
+Variablen erlaubten möchte, würde man statt <code>Environment#assign</code> einfach
+<code>Environment#define</code> nutzen ...</p>
+<p><em>Anmerkung</em>: Der gezeigte Code funktioniert nur für normale Variablen, nicht
+für Zugriffe auf Attribute einer Struct oder Klasse!</p>
+<h2 id="blöcke-umgang-mit-verschachtelten-environments">Blöcke: Umgang mit verschachtelten Environments</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">block:  &#39;{&#39; stat* &#39;}&#39; ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">block</span>(self, AST t):
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>env
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>env <span style="color:#f92672">=</span> Environment(self<span style="color:#f92672">.</span>env)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> t<span style="color:#f92672">.</span>stat(): eval(s)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">finally</span>: self<span style="color:#f92672">.</span>env <span style="color:#f92672">=</span> prev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>;
+</span></span></code></pre></div><p><span class='origin'>Quelle: Eigener Code basierend auf einer Idee nach <a href="#id_Nystrom2021">[Nystrom2021]</a>, <a href="https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L92">Interpreter.java</a> (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a>)</span></p>
+<p>Beim Interpretieren von Blöcken muss man einfach nur eine weitere
+Verschachtelungsebene für die Environments anlegen und darin dann
+die Anweisungen eines Blockes auswerten ...</p>
+<p><strong>Wichtig</strong>: Egal, was beim Auswerten der Anweisungen in einem Block
+passiert: Es muss am Ende die ursprüngliche Umgebung wieder hergestellt
+werden (<code>finally</code>-Block).</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Interpreter simulieren die Programmausführung</p>
+<ul>
+<li>Namen und Symbole auflösen</li>
+<li>Speicherbereiche simulieren</li>
+<li>Code ausführen: Read-Eval-Loop</li>
+</ul>
+</li>
+<li>
+<p>Traversierung des AST: <code>eval(AST t)</code> als Visitor-Dispatcher</p>
+</li>
+<li>
+<p>Scopes mit <code>Environment</code> (analog zu Symboltabellen)</p>
+</li>
+<li>
+<p>Interpretation von Blöcken und Variablen (Deklaration, Zuweisung)</p>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+            <li>
+                <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet05/"><strong>Blatt 05: Interpreter</strong></a>
+                 (Abgabe: 03.01.22, cagi)
+            </li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Grune2012">
+            
+                [Grune2012] <strong>Modern compiler design</strong>
+            
+            
+                <br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-4614-4698-9" target="_blank" rel="nofollow noopener noreferrer">978-1-4614-4698-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 6</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Mogensen2017">
+            
+                [Mogensen2017] <strong>Introduction to compiler design</strong>
+            
+            
+                <br>Mogensen, T., Springer, 2017.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">978-3-319-66966-3</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1007/978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">10.1007/978-3-319-66966-3</a>.
+                
+            
+            
+                <br><em>Kapitel 4</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Nystrom2021">
+            
+                [Nystrom2021] <a href="https://github.com/munificent/craftinginterpreters" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Crafting interpreters</strong></a>
+            
+            
+                <br>Nystrom, R., Genever Benning, 2021.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9" target="_blank" rel="nofollow noopener noreferrer">978-0-9905829-3-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel Kapitel: A Tree-Walk Interpreter, insb. 8. Statements and State</em>
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle"/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item parent"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle" checked/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

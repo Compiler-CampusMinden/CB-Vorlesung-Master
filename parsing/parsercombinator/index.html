@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>PEG-Parser, Pratt-Parser und Parser Combinators   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/parsing/parsercombinator.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/"><span itemprop="name">Parser</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/" aria-disabled="true"><span itemprop="name">PEG-Parser, Pratt-Parser und Parser Combinators</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#generative-systeme-vs-recognition-basierte-systeme">Generative Systeme vs. Recognition basierte Systeme</a></li>
+    <li><a href="#beispiel">Beispiel</a></li>
+    <li><a href="#motivation-chomsky-cfgs--res">Motivation: Chomsky (CFGs + REs)</a></li>
+    <li><a href="#motivation-peg">Motivation: PEG</a></li>
+    <li><a href="#definition-peg">Definition PEG</a></li>
+    <li><a href="#definition-parsing-expression">Definition Parsing Expression</a></li>
+    <li><a href="#operatoren-für-parsing-expression">Operatoren für Parsing Expression</a></li>
+    <li><a href="#peg-eigenschaften">PEG Eigenschaften</a></li>
+    <li><a href="#beispiel-formeln">Beispiel: Formeln</a></li>
+    <li><a href="#beispiel-verschachtelte-kommentare">Beispiel: Verschachtelte Kommentare</a></li>
+    <li><a href="#beispiel-beliebige-escape-sequenzen">Beispiel: Beliebige Escape-Sequenzen</a></li>
+    <li><a href="#beispiel-verschachtelte-template-typen-in-c">Beispiel: Verschachtelte Template Typen in C++</a></li>
+    <li><a href="#beispiel-dangling-else">Beispiel: Dangling-Else</a></li>
+    <li><a href="#beispiel-nicht-cfg-sprachen">Beispiel: Nicht-CFG-Sprachen</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#eigenschaften">Eigenschaften</a></li>
+    <li><a href="#klassische-methode-rd">Klassische Methode (RD)</a></li>
+    <li><a href="#dijkstras-shunting-yard-algorithmus-sy">Dijkstras Shunting Yard Algorithmus (SY)</a></li>
+    <li><a href="#dijkstras-shunting-yard-algorithmus-beispiel">Dijkstras Shunting Yard Algorithmus-Beispiel</a></li>
+    <li><a href="#precedence-climbing-pc">Precedence Climbing (PC)</a></li>
+    <li><a href="#precedence-climbing-beispiel">Precedence Climbing-Beispiel</a></li>
+    <li><a href="#top-down-operator-precedence-tdop-pratt-parsing">Top Down Operator Precedence (TDOP) Pratt Parsing</a></li>
+    <li><a href="#tokenhandler">Tokenhandler</a></li>
+    <li><a href="#top-down-operator-precedence-beispiel">Top Down Operator Precedence-Beispiel</a></li>
+    <li><a href="#right-associative-tdop">Right Associative TDOP</a></li>
+    <li><a href="#vergleich">Vergleich</a></li>
+    <li><a href="#vergleich-tdop-vs-precedence-climbing">Vergleich TDOP vs. Precedence Climbing</a></li>
+    <li><a href="#anwendung">Anwendung</a></li>
+    <li><a href="#weitere-links">Weitere Links</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#prinzip">Prinzip</a></li>
+    <li><a href="#simple-parser">Simple Parser</a></li>
+    <li><a href="#kombinierter-parser">Kombinierter Parser</a></li>
+    <li><a href="#kombinierte-parser-definieren">Kombinierte Parser definieren</a></li>
+    <li><a href="#verwendung-des-parsers">Verwendung des Parsers</a></li>
+    <li><a href="#ausführung-des-kombinierten-parsers">Ausführung des Kombinierten Parsers</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+
+    <h1 id="peg-parser">PEG Parser</h1>
+<h2 id="generative-systeme-vs-recognition-basierte-systeme">Generative Systeme vs. Recognition basierte Systeme</h2>
+<ul>
+<li>Generative Systeme:
+<ul>
+<li>formale Definition von Sprachen durch Regeln, die rekursiv
+angewendet Sätze/Strings der Sprache generieren</li>
+<li>Sprachen aus der Chomsky Hierarchie definiert durch
+kontextfreie Grammatiken (CFGs) und reguläre Ausdrücke (REs)</li>
+</ul>
+</li>
+<li>Recognition-basierte Systeme:
+<ul>
+<li>Sprachen definiert in Form von Regeln/Prädikaten, die
+entscheiden, ob ein gegebener String Teil der Sprache ist</li>
+<li>Parsing Expression Grammar (PEG)</li>
+</ul>
+</li>
+</ul>
+<h2 id="beispiel">Beispiel</h2>
+<p>Sprache <span>$L = \lbrace \varepsilon, \ \mathrm{aa}, \ \mathrm{aaaa}, \ \ldots \rbrace$</span>:</p>
+<ul>
+<li>generativ: <span>$L =\lbrace s \in \mathrm{a}^{\ast} \mid s = (\mathrm{aa})^{n},, n \geq 0\rbrace$</span></li>
+<li>recognition: <span>$L = \lbrace s \in \mathrm{a}^{\ast} \mid \left| s \right| \mod 2 = 0 \rbrace$</span></li>
+</ul>
+<h2 id="motivation-chomsky-cfgs--res">Motivation: Chomsky (CFGs + REs)</h2>
+<ul>
+<li>ursprünglich für natürliche Sprachen</li>
+<li>adaptiert für maschinenorientierte Sprachen (Eleganz, Ausdrucksstärke)</li>
+<li>Nachteile:
+<ul>
+<li>maschinenorientierte Sprachen sollten präzise und eindeutig sein</li>
+<li>CFGs erlauben mehrdeutige Syntax (gut für natürliche Sprachen)</li>
+<li>Mehrdeutigkeiten schwer oder gar nicht zu verhindern
+<ul>
+<li>C++ Syntax</li>
+<li>Lambda abstractions, <code>let</code> expressions und conditionals in Haskell</li>
+</ul>
+</li>
+<li>generelles Parsen nur in super-linearer Zeit</li>
+</ul>
+</li>
+</ul>
+<h2 id="motivation-peg">Motivation: PEG</h2>
+<ul>
+<li>
+<p>stilistisch ähnlich zu CFGs mit REs (EBNF)</p>
+</li>
+<li>
+<p><strong>Kernunterschied</strong>: priorisierender Auswahloperator (<code>/</code> statt <code>|</code>)</p>
+<ul>
+<li>alternative Muster werden der Reihe nach getestet</li>
+<li>erste passende Alternative wird verwendet</li>
+<li>Mehrdeutigkeiten werden dadurch unmöglich</li>
+<li>nahe an der Funktionsweise von Parsern (Erkennen von Eingaben)
+<ul>
+<li>PEGs können als formale Beschreibung eines Top-Down-Parsers betrachtet werden</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Beispiel:</p>
+<ul>
+<li>EBNF: <span>$A \rightarrow a \ b \ | \ a$</span> und <span>$A \rightarrow a \ | \  a \ b$</span> sind äquivalent</li>
+<li>PEG: <span>$A \leftarrow a \ b \  / \ a$</span> und <span>$A \leftarrow a \ / \ a \ b$</span> sind verschieden</li>
+</ul>
+</li>
+</ul>
+<h2 id="definition-peg">Definition PEG</h2>
+<p>Eine Parsing Expression Grammar (PEG) ist ein 4-Tuple <span>$G = (V_N, V_T, R, e_S)$</span> mit</p>
+<ul>
+<li><span>$V_N$</span> eine endliche Menge von Nicht-Terminalen</li>
+<li><span>$V_T$</span> eine endliche Menge von Terminalen</li>
+<li><span>$R$</span> eine endliche Menge von Regeln</li>
+<li><span>$e_S$</span> eine <em>Parsing Expression</em>, die als <em>Start Expression</em>
+bezeichnet wird.</li>
+</ul>
+<p>Weiterhin gilt:</p>
+<ul>
+<li><span>$V_N \cap V_T = \emptyset$</span>.</li>
+<li>jede Regel <span>$e \in R$</span> ist ein Paar <span>$(A,e)$</span>, geschrieben als <span>$A \leftarrow e$</span> mit <span>$A \in V_N$</span>, und <span>$e$</span> eine <strong>Parsing Expression</strong></li>
+<li>für jedes Nicht-Terminal <span>$A$</span> existierte genau ein <span>$e$</span> mit <span>$A \leftarrow e \in R$</span>.</li>
+</ul>
+<h2 id="definition-parsing-expression">Definition Parsing Expression</h2>
+<p><strong>Parsing Expressions</strong> werden rekursiv definiert: Seien <span>$e$</span>, <span>$e_1$</span> und <span>$e_2$</span> Parsing Expressions, dann gilt dies auch für</p>
+<ul>
+<li>den leeren String <span>$\varepsilon$</span></li>
+<li>jedes Terminal <span>$a \in V_T$</span></li>
+<li>jedes Nicht-Terminal <span>$A \in V_N$</span></li>
+<li>die Sequenz <span>$e_1 e_2$</span></li>
+<li>die priorisierende Option <span>$e_1 / e_2$</span></li>
+<li>beliebige Wiederholungen <span>$e^{\ast}$</span></li>
+<li>Nicht-Prädikate <span>$!e$</span></li>
+</ul>
+<h2 id="operatoren-für-parsing-expression">Operatoren für Parsing Expression</h2>
+<p>Folgende Operatoren sind für die Konstruktion von <strong>Parsing Expressions</strong> erlaubt:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operator</th>
+<th style="text-align:center">Priorität</th>
+<th style="text-align:left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">' '</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">String-Literal</td>
+</tr>
+<tr>
+<td style="text-align:center">&quot; &quot;</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">String-Literal</td>
+</tr>
+<tr>
+<td style="text-align:center">[ ]</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">Zeichenklasse</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">beliebiges Zeichen</td>
+</tr>
+<tr>
+<td style="text-align:center">(e)</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">Gruppierung</td>
+</tr>
+<tr>
+<td style="text-align:center">e?</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">Optional</td>
+</tr>
+<tr>
+<td style="text-align:center">e*</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">Kein-oder-mehr</td>
+</tr>
+<tr>
+<td style="text-align:center">e+</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">Ein-oder-mehr</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;e</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">Und-Prädikat</td>
+</tr>
+<tr>
+<td style="text-align:center">!e</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">Nicht-Prädikat</td>
+</tr>
+<tr>
+<td style="text-align:center">e1 e2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">Sequenz</td>
+</tr>
+<tr>
+<td style="text-align:center">e1 / e2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">priorisierende Auswahl</td>
+</tr>
+</tbody>
+</table>
+<p>Die Operatoren <code>.</code>, <code>+</code>, <code>?</code> und <code>&amp;</code> sind syntaktischer Zucker und lassen sich auf ander Operatoren zurückführen.</p>
+<p>Die Operatoren <code>!</code> und <code>&amp;</code> sind zentral für die Ausdrucksstärke von PEGs.</p>
+<p>Beispiel: <code>&amp;e</code> versucht das Muster <code>e</code> zu erkennen und kehrt dann an den Anfangspunkt zurück ohne Zeichen aus dem Eingabestrom zu verbrauchen.
+Nur das Wissen über Erfolg oder Misserfolg wird gespeichert (siehe Beispiel zu Nicht-CFG-Sprachen).</p>
+<h2 id="peg-eigenschaften">PEG Eigenschaften</h2>
+<ul>
+<li>
+<p>andere Sprachklasse als CFGs</p>
+<ul>
+<li>PEGs können alle deterministischen LR(k)-Sprachen darstellen</li>
+<li>PEGs können manche nicht-CFG Sprachen darstellen (z.B. <span>$a^n b^n c^n$</span>)</li>
+<li>ungelöste Frage: Sind alle CFGs durch PEGs darstellbar?</li>
+</ul>
+</li>
+<li>
+<p>parsierbar in linearer Zeit mit unbegrenztem Lookahead (Packrat
+Parsing)</p>
+<ul>
+<li>
+<p>Nachteil: gesamter zu parsender Text muss im Speicher gehalten werden</p>
+</li>
+<li>
+<p>Speicherplatz ist heute aber keine große Einschränkung mehr</p>
+</li>
+<li>
+<p>Quellcode-Dateien sind meist nur im KB-Bereich</p>
+</li>
+</ul>
+</li>
+<li>
+<p>neue Möglichkeiten für das Syntax-Design von Sprachen</p>
+<ul>
+<li>aber auch neue Möglichkeiten für Fehler durch Unachtsamkeit</li>
+</ul>
+</li>
+<li>
+<p>Syntaxbeschreibung: keine Unterscheidung zwischen Hierarchie und
+lexikalischen Elementen nötig</p>
+<ul>
+<li>für gewöhnlich Hierarchie durch CFG und lex. Elem. durch RE beschrieben
+<ul>
+<li>CFGs ungeeignet für lex. Elemente (keine Greedy-Matching, keine 'negative' Syntax)</li>
+<li>REs: keine rekursive Syntax</li>
+</ul>
+</li>
+<li>Tokens können hierarchische Eigenschaften haben (verschachtelte Kommentare)</li>
+<li>beliebige Escape-Sequenzen möglich</li>
+</ul>
+</li>
+<li>
+<p>Herausforderung bei PEGs:</p>
+<ul>
+<li>sind Alternativen vertauschbar, ohne die Sprache zu ändern?</li>
+<li>Analog zur Frage der Mehrdeutigkeit bei CFGs</li>
+</ul>
+</li>
+</ul>
+<h2 id="beispiel-formeln">Beispiel: Formeln</h2>
+<pre><code>Expr   &lt;- Term ([-+] Term)*
+Term   &lt;- Factor ([*/] Factor)*
+Factor &lt;- '(' Expr ')' / [0-9]+
+</code></pre>
+<p>Achtung: Grammatik ist rechtsassoziativ</p>
+<h2 id="beispiel-verschachtelte-kommentare">Beispiel: Verschachtelte Kommentare</h2>
+<p>Verschachtelte Kommentare sind möglich, da die lexikalische Syntax von PEGs nicht auf REs beschränkt ist:</p>
+<pre><code>Comment       &lt;- CommentStart CommentBody* CommentEnd
+CommentStart  &lt;- '/*'
+CommentEnd    &lt;- '*/'
+CommentBody   &lt;- Comment / (!CommentEnd AnySingleChar)
+AnySingleChar &lt;- .
+</code></pre>
+<p>oder in Kurzform</p>
+<pre><code>Comment &lt;- '/*' (Comment / !'*/' .)* '*/'
+</code></pre>
+<h2 id="beispiel-beliebige-escape-sequenzen">Beispiel: Beliebige Escape-Sequenzen</h2>
+<p>Escape-Sequenzen haben meist nur eine stark eingeschränkte Syntax. Eine PEG kann beliebige Ausdrücke in eine Escape-Sequenz erlauben:</p>
+<pre><code>Expression  &lt;- ...
+Literal     &lt;- [&quot;] (![&quot;] [Character EscSequence])* [&quot;]
+Character   &lt;- !'\\' .
+EscSequence &lt;- '\\(' Expression ')'
+</code></pre>
+<p>Zum Beispiel könnte man dadurch in einer Escape-Sequenz auf Variablen zugreifen (<code>\(var)</code>) oder arithmetische Ausdrücke verarbeiten (<code>\(1+2)</code>).</p>
+<h2 id="beispiel-verschachtelte-template-typen-in-c">Beispiel: Verschachtelte Template Typen in C++</h2>
+<p>Bekanntes Problem mit Template-Definitionen in C++: Leerzeichen zwischen Winkelklammern nötig um Interpretation als Pipe-Operator (<code>&gt;&gt;</code>) zu verhindern:</p>
+<pre><code>TypeA&lt;TypeB&lt;TypeC&gt; &gt; MyVar;
+</code></pre>
+<p>PEG erlaubt kontextsensitive Interpretation:</p>
+<pre><code>Expression      &lt;- ...
+TemplateType    &lt;- PrimaryType (LEFTANGLE TemplateType RIGHTANGLE)?
+ShiftExpression &lt;- Expression (ShiftOperator Expression)*
+ShiftOperator   &lt;- LEFTSHIFT / RIGHTSHIFT
+Spacing         &lt;- any number of spaces, tabs, newlines or comments
+
+LEFTANGLE       &lt;- '&lt;' Spacing
+RIGHTANGLE      &lt;- '&gt;' Spacing
+LEFTSHIFT       &lt;- '&lt;&lt;' Spacing
+RIGHTSHIFT      &lt;- '&gt;&gt;' Spacing
+</code></pre>
+<h2 id="beispiel-dangling-else">Beispiel: Dangling-Else</h2>
+<p>In CFGs sind verschachtelte if-then(-else) Ausdrücke mehrdeutig
+(Shift-Reduce-Konflikt). Dies wird häufig durch informelle Meta-Regeln
+oder Erweiterung der Syntax aufgelöst. In PEGs sorgt der prioriserende
+Auswahloperator für das korrekte Verhalten.</p>
+<pre><code>Statement &lt;- IF Cond Statement ELSE Statement
+           / IF Cond Statement
+           / ...
+</code></pre>
+<h2 id="beispiel-nicht-cfg-sprachen">Beispiel: Nicht-CFG-Sprachen</h2>
+<p>Ein klassisches Beispiel einer nicht-CFG Sprache ist <span>$a^n b^n c^n$</span>. Diese Sprache lässt sich mit der folgenden PEG darstellen:</p>
+<p><span>$G = (\lbrace A,B,S \rbrace, \lbrace a,b,c \rbrace, R, S)$</span></p>
+<p><span>$A \leftarrow a \ A \ b \ /\ \varepsilon$</span></p>
+<p><span>$B \leftarrow b \ B \ c \ /\ \varepsilon$</span></p>
+<p><span>$S \leftarrow (A \ !b) \ a^{\ast} \ B \ !.$</span></p>
+<p>Regel S lässt sich dabei wie folgt lesen: Erkenne und Verbrauche eine beliebig lange Sequenz von a's (<span>$a^{\ast}$</span>) gefolgt von einer Sequenz, die von Regel B erkannt wird und danach keine weiteren Zeichen hat (<span>$!.$</span>) aber nur dann wenn die Sequenz auch von <span>$A \ !b$</span> erkannt wird. Der erste Teil trifft zu wenn in der Sequenz auf <span>$n$</span> b's gleich viele c's folgen während der zweite Teil zutrifft wenn <span>$n$</span> b's auf <span>$n$</span> a's folgen.</p>
+<h1 id="operator-precedence-parsing">Operator Precedence Parsing</h1>
+<h2 id="motivation">Motivation</h2>
+<ul>
+<li>Probleme mit <a href="https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html">CFG und BNF</a></li>
+<li><a href="https://eli.thegreenplace.net/2008/09/26/recursive-descent-ll-and-predictive-parsers/">Recursive Decent Parser</a> (RD)
+<ul>
+<li>Modelliere Grammatik(-regeln) durch rekursive Funktionen</li>
+<li>Top-Down-Ansatz</li>
+<li>i.d.R. LL(1) Parser (handgeschrieben)</li>
+<li>Generatoren: <a href="http://www.antlr.org/">ANTLR</a>, <a href="http://spirit.sourceforge.net/">Boost.Spirit</a></li>
+</ul>
+</li>
+<li><a href="https://eli.thegreenplace.net/2009/03/14/some-problems-of-recursive-descent-parsers/">Probleme</a> mit RD
+<ul>
+<li>Linksrekursion (für handgeschriebene Parser von gringer
+Bedeutung; ersetzbar durch Schleife, EBNF)</li>
+<li>Vorrangregeln (Precedence/Binding Power) und Assoziativität
+von Operatoren</li>
+<li>Effizienz (Backtracking)</li>
+</ul>
+</li>
+</ul>
+<h2 id="eigenschaften">Eigenschaften</h2>
+<ul>
+<li>Recognition-basiert (insofern als der Parser nicht aus einer
+Grammatik generiert, sondern von Hand geschrieben wird)</li>
+<li>verwendet Vorschautoken</li>
+<li>benutzt sowohl Rekursion als auch Schleifen</li>
+<li>interpretiert <a href="https://en.wikipedia.org/wiki/Operator-precedence_grammar">Operator-Precedence Grammatik</a>
+<ul>
+<li>Untermenge der deterministischen kontextfreien Grammatiken</li>
+</ul>
+</li>
+<li>simpel zu programmieren und kann die Operator-Tabelle während der Programmlaufzeit konsultieren</li>
+<li>verwendet eine Reihenfolge (precedence) für die Operatoren</li>
+</ul>
+<h2 id="klassische-methode-rd">Klassische Methode (RD)</h2>
+<ul>
+<li>siehe <a href="https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm">Parsing Expressions by Recursive Descent</a></li>
+<li>neues Nicht-Terminal für jeden Precedence-Level</li>
+<li>Nachteile:
+<ul>
+<li>Anzahl der Precedence Level bestimmt Größe und Geschwindigkeit des Parsers</li>
+<li>Operatoren und Precedence Levels fest in Grammatik eingebaut</li>
+</ul>
+</li>
+</ul>
+<h2 id="dijkstras-shunting-yard-algorithmus-sy">Dijkstras Shunting Yard Algorithmus (SY)</h2>
+<ul>
+<li>Verwendet Stacks für Operatoren und Argumente anstatt Rekursion</li>
+</ul>
+<figure class="center" style="width:90%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/shuntingyardStack.png" class="" />
+</figure>
+<h2 id="dijkstras-shunting-yard-algorithmus-beispiel">Dijkstras Shunting Yard Algorithmus-Beispiel</h2>
+<pre><code>while there are tokens to be read:
+        read a token
+        if the token is a number:
+        output.add(token)
+        if the token is an operator:
+        if operator is a bracket:
+            if left bracket:
+                stack.put(token)
+            else:
+                check if left bracket is in stack
+                while stack.top != left bracket:
+                    output.add(stack.pop())
+                output.add(stack.pop())     // pop left bracket
+        else:
+            while token.precedence &lt; stack.top.precedence:
+                output.add(stack.pop())
+            stack.put(token)
+</code></pre>
+<h2 id="precedence-climbing-pc">Precedence Climbing (PC)</h2>
+<ul>
+<li>Climb <strong>down</strong> the precedence levels (Norvell)</li>
+<li>Behandelt eine Expression wie verschachtelte Unterausdrücke
+<ul>
+<li>
+<p>Jeder Unterausdruck enthält das gemeinsame precedence level</p>
+<pre><code>2 + 3 * 4 * 5 - 6
+
+|---------------|   : prec 1
+    |-------|       : prec 2
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Die Operatoren stehen mit Gewicht und Association (left, right) in einer Tabelle</li>
+</ul>
+<h2 id="precedence-climbing-beispiel">Precedence Climbing-Beispiel</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">expr</span>(prec_bound) {
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> atom() <span style="color:#75715e">// number or an expression in braces
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">loop</span> {
+</span></span><span style="display:flex;"><span>      operator <span style="color:#f92672">=</span> nextToken()
+</span></span><span style="display:flex;"><span>      (prec, assoc) <span style="color:#f92672">=</span> lookup(operator)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (prec <span style="color:#f92672">&lt;=</span> prec_bound) { <span style="color:#66d9ef">break</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      next_bound <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> (assoc.left<span style="color:#f92672">?</span>()) { prec <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> } <span style="color:#66d9ef">else</span> { prec }
+</span></span><span style="display:flex;"><span>      rhs <span style="color:#f92672">=</span> expr(next_bound)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      result <span style="color:#f92672">=</span> compute(operator, result, rhs)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Eingabe: 6 + 3 * 4</p>
+<p>Berechnung/Ausgabe:</p>
+<pre><code>* expr(1)
+    * atom() --&gt; 6
+    * expr(2)                           # Loop with '+' left assoc
+        * atom() --&gt; 3
+        * expr(3)                       # Loop with '*' left assoc
+            * atom() --&gt; 4
+            * result --&gt; 4              # Loop not enterd '+ &lt; *'
+        * result = 3 * 4 --&gt; 12
+    * result = 6 + 12 --&gt; 18
+</code></pre>
+<p>Beispiel: <a href="https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing">Parsing expressions by precedence climbing</a> (Python)</p>
+<h2 id="top-down-operator-precedence-tdop-pratt-parsing">Top Down Operator Precedence (TDOP) Pratt Parsing</h2>
+<ul>
+<li>Generalisierung von Precedence Climbing</li>
+<li>Verwendet eine Gewichtung (binding Power) statt einer Reihenfolge (precedence)
+<ul>
+<li>lbp = left Binding Power</li>
+<li>rbp = right Binding Power</li>
+</ul>
+</li>
+</ul>
+<h2 id="tokenhandler">Tokenhandler</h2>
+<ul>
+<li>Die Tokenhandler behandeln Notationen unterschiedlich
+<ul>
+<li>infix notation: a = b - c
+<ul>
+<li>led (left denotation)</li>
+</ul>
+</li>
+<li>prefix from: a = -b
+<ul>
+<li>nud (Null denotation)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  op_token_sub <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    lbp: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// &#39;-&#39; has two roles
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    prefix: () <span style="color:#f92672">=&gt;</span> { <span style="color:#f92672">-</span>expression(<span style="color:#ae81ff">100</span>) }, <span style="color:#75715e">// negation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    infix: (left) <span style="color:#f92672">=&gt;</span> { left <span style="color:#f92672">-</span> expression(<span style="color:#ae81ff">10</span>) }, <span style="color:#75715e">// subtraction
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>  op_token_mul <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    lbp: <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    prefix: <span style="color:#a6e22e">none</span>, <span style="color:#75715e">// &#39;*&#39; has only one role
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    infix: (left) <span style="color:#f92672">=&gt;</span> { left <span style="color:#f92672">*</span> expression(<span style="color:#ae81ff">20</span>) }, <span style="color:#75715e">// multiplication
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span></code></pre></div><ul>
+<li>hat eine Tokenhandler für jede Operation
+<ul>
+<li>op_token_add, op_token_mul, op_token_sub, op_token_pow</li>
+</ul>
+</li>
+<li>op_token_lparen, op_token_rparen</li>
+</ul>
+<h2 id="top-down-operator-precedence-beispiel">Top Down Operator Precedence-Beispiel</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">expression</span>(rbp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    token <span style="color:#f92672">=</span> tokens.next()
+</span></span><span style="display:flex;"><span>    left <span style="color:#f92672">=</span> token.prefix()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> rbp <span style="color:#f92672">&lt;</span> tokens.current().lbp {
+</span></span><span style="display:flex;"><span>      token <span style="color:#f92672">=</span> tokens.next()
+</span></span><span style="display:flex;"><span>      left <span style="color:#f92672">=</span> token.infix(left)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> left
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Eingabe: 6 - 3 * 4</p>
+<pre><code>* expression()
+  * token = op_token_val(6)
+  * left = 6
+  * token = op_token_sub # Loop entered (0 &lt; 10)
+  * left = token.infix(6)
+    * expression(10)
+      * token = op_token_val(3)
+      * left = 3
+      * token = op_token_mul # Loop entered (10 &lt; 20)
+      * left = token.infix(3)
+        * expression(20)
+          * token = op_token_val(4)
+          * left = 4
+        --&gt; 4 # Loop not entered (20 &lt; 0)
+      --&gt; 4 * 3
+    --&gt; 6 - 12
+   --&gt; 6 # Loop not entered (0 &lt; 0)
+</code></pre>
+<p>Beispiel: <a href="https://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing/">Top-Down operator precedence parsing</a> (Python)</p>
+<h2 id="right-associative-tdop">Right Associative TDOP</h2>
+<ul>
+<li>Der Parser behandelt die folgende Potenzierungsoperatoren als Unterausdrücke des ersten Unterausdrucks</li>
+<li>Dies wird erreicht, indem wir den Ausdruck im Handler der Potenzierung mit einem rbp aufrufen, der niedriger ist als der lbp der Potenzierung</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  op_token_pow <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    lbp: <span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    infix: <span style="color:#a6e22e">left</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>      left <span style="color:#f92672">**</span> expression(<span style="color:#ae81ff">30</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#75715e">// RECURSIVE CALL
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    },
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><ul>
+<li>Wenn expression zum nächsten ^ in seiner Schleife gelangt, stellt er fest, dass noch <code>rbp &lt; tokens.current().lbp</code> ist und gibt das Ergebnis nicht sofort zurück, sondern sammelt zunächst den Wert des Unterausdrucks.</li>
+</ul>
+<h2 id="vergleich">Vergleich</h2>
+<ul>
+<li>Shunting Yard, TDOP und Precedence Climbing sind im
+wesentlichen der gleiche Algorithmus:</li>
+<li>Im Gegensatz zum klassichen RD ist das Hinzufügen/Ändern von
+Operatoren einfach
+<ul>
+<li>RD: Hinzufügen/Ändern von Funktionen im Parser</li>
+<li>SY/TDOP/PC: Daten liegen in Tabellenform vor</li>
+</ul>
+</li>
+<li>Mischformen möglich (siehe Shunting Yard in <a href="https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm">Parsing Expressions by Recursive Descent</a>)</li>
+<li>Shunting Yard verwendet einen Stack anstatt Rekursion</li>
+<li>Precedence Climbing wird am häufigsten eingesetzt</li>
+</ul>
+<h2 id="vergleich-tdop-vs-precedence-climbing">Vergleich TDOP vs. Precedence Climbing</h2>
+<ul>
+<li>TDOP(Pratt Parsing) vs. Precedence Climbing
+<ul>
+<li><a href="https://www.oilshell.org/blog/2016/11/01.html">Pratt Parsing and Precedence Climbing Are the Same Algorithm</a></li>
+<li><a href="https://www.engr.mun.ca/~theo/Misc/pratt_parsing.htm">From Precedence Climbing to Pratt Parsing</a> (Norvell)</li>
+<li>Eine While Schleife mit rekursiven Aufruf mit Abbruchbedingung (binding Power/precedence)</li>
+<li>Rechts Assoziativität
+<ul>
+<li>In precedence climbing: next_min_prec = prec + 1 für left Assoziativität</li>
+<li>In Pratt Parsing: rechte binding power rbp auf lbp-1 gesetzt und der rekursive Aufruf mit ihr durchgeführt</li>
+</ul>
+</li>
+<li>Klammern
+<ul>
+<li>In precedence climbing in der rekursiven Parsing Funktion behandelt</li>
+<li>In Pratt Parsing können sie als nud-Funktion für das Token ( behandelt werden</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="anwendung">Anwendung</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>
+<ul>
+<li>benutzerdefinierte Infix-Operatoren mit individueller
+Assoziativität und Vorrang-Regeln</li>
+<li>Ein Beispiel für das Konultieren der Operator während der Laufzeit</li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Raku_(programming_language)">Raku</a>
+<ul>
+<li>im Verbund mit zwei weiteren Parsern (Speed-up beim Parsen von
+arithmetischen Ausdrücken)</li>
+</ul>
+</li>
+<li>Taschenrechner
+<ul>
+<li>Umwandlung Infix-Notation (menschenlesbar) in umgekehrte
+polnische Notation (optimiert für Auswertung)</li>
+</ul>
+</li>
+</ul>
+<h2 id="weitere-links">Weitere Links</h2>
+<ul>
+<li><a href="https://abarker.github.io/typped/pratt_parsing_intro.html">Introduction to Pratt parsing and its terminology</a> (Python <a href="https://github.com/abarker/typped">typped</a>
+Dokumentation)</li>
+<li><a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">Pratt Parsers: Expression Parsing Made Easy</a> (Java)</li>
+<li><a href="http://crockford.com/rust/tdop/tdop.html">Top Down Operator Precedence</a> (JavaScript)</li>
+<li><a href="https://en.wikipedia.org/wiki/Operator-precedence_parser">Operator-precedence parser</a> (Wikipedia)</li>
+<li><a href="https://www.oilshell.org/blog/2017/03/31.html">Pratt Parsing Index and Updates</a> (Sammlung von Artikeln/Posts)</li>
+<li><a href="https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html">Simple but Powerful Pratt Parsing</a> (Rust)</li>
+<li><a href="http://www.oilshell.org/blog/2017/03/30.html">Precedence Climbing is Widely Used</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Shunting_yard_algorithm">Shunting-yard algorithm</a> (Wikipedia)</li>
+<li><a href="https://www.oilshell.org/blog/2016/11/01.html">Pratt Parsing and Precedence Climbing Are the Same Algorithm</a></li>
+<li>Beispiel: <a href="https://eli.thegreenplace.net/2009/03/20/a-recursive-descent-parser-with-an-infix-expression-evaluator">A recursive descent parser with an infix expression evaluator</a> (Python)</li>
+</ul>
+<h1 id="parser-kombinatoren">Parser Kombinatoren</h1>
+<h2 id="prinzip">Prinzip</h2>
+<ul>
+<li>High-order Funktion
+<ul>
+<li>Funktionen als Parameter</li>
+<li>Funktion als Rückgabewert</li>
+</ul>
+</li>
+<li>Verwendet mehrere Parser als Input und gibt den Output des kombinierten Parser zurück:
+<ul>
+<li>Parse Tree</li>
+<li>Index der Stelle im String die zum Stoppen des Parsers geführt hat</li>
+</ul>
+</li>
+<li>Die Output der verwendeten Parser:
+<ul>
+<li>Success: {result, restString}</li>
+<li>Failure: Error Message und Position</li>
+</ul>
+</li>
+</ul>
+<h2 id="simple-parser">Simple Parser</h2>
+<p>Simple Parser, die nachher als Inputparameter für einen Kombinierten Parser verwendet werden:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">integer</span>(input) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">match</span> <span style="color:#f92672">=</span> <span style="color:#f92672">/^</span><span style="color:#960050;background-color:#1e0010">\</span>d<span style="color:#f92672">+/</span>.applyTo(input)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">match</span>) {
+</span></span><span style="display:flex;"><span>    matchedText <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span>.first
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Ok({data: <span style="color:#a6e22e">matchedText</span>, rest: <span style="color:#a6e22e">input</span>.skip(len(matchedText))})
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> Err({dataDesc: <span style="color:#e6db74">&#34;an integer&#34;</span>, input: <span style="color:#a6e22e">input</span>})
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">plus</span>(input) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (input.first <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Ok({data: <span style="color:#e6db74">&#34;+&#34;</span>, rest: <span style="color:#a6e22e">input</span>.skip(<span style="color:#ae81ff">1</span>)})
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> Err({dataDesc: <span style="color:#e6db74">&#34;&#39;+&#39;&#34;</span>, input: <span style="color:#a6e22e">input</span>})
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">eof</span>(input) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (len(input) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Ok({data: <span style="color:#a6e22e">none</span>, rest: <span style="color:#a6e22e">input</span>})
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> Err({dataDesc: <span style="color:#e6db74">&#34;end of input&#34;</span>, input: <span style="color:#a6e22e">input</span>});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="kombinierter-parser">Kombinierter Parser</h2>
+<p>Der kombinierte Parser sieht wie folgt aus:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">apply</span>(func, parsers) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (input) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    accData <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    currentInput <span style="color:#f92672">=</span> input
+</span></span><span style="display:flex;"><span>    parsers.each((parser) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>      result <span style="color:#f92672">=</span> parser(currentInput)
+</span></span><span style="display:flex;"><span>      case result {
+</span></span><span style="display:flex;"><span>        Err: <span style="color:#a6e22e">return</span> result
+</span></span><span style="display:flex;"><span>        Ok(data, rest):
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">accData</span>.append(data)
+</span></span><span style="display:flex;"><span>          currentInput <span style="color:#f92672">=</span> rest
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Ok({data: <span style="color:#a6e22e">func</span>(accData), rest: <span style="color:#a6e22e">currentInput</span>})
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Nun kann über den Parameter <code>func</code> eine Funktionalität angegeben werden, und über den Parameter <code>parsers</code> kann ein Array an Simplen Parsern übergeben werden. Die Parser müssen dabei in der richtigen Reihenfolge aufgerufen werden. In der Variable accData werden alle Parser-Ergebnisse gespeichert, um sie nachher in der der <code>func</code> zu verwenden. Der <code>currentInput</code> enthält im ersten Durchlauf den gesamten Input. Jeder Parser schreibt dann den Rest (den nicht parsbaren Teil) in <code>currentInput</code> für den nächsten Parser.</p>
+<h2 id="kombinierte-parser-definieren">Kombinierte Parser definieren</h2>
+<p>Der kombinierte Parser kann nun so definiert werden:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">plusExpr</span>(input) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// `_` because data of plus/eof is not needed for calculation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> apply((num1, _, num2, _) <span style="color:#f92672">=&gt;</span> { num1 <span style="color:#f92672">+</span> num2 }, [
+</span></span><span style="display:flex;"><span>      integer,
+</span></span><span style="display:flex;"><span>      plus,
+</span></span><span style="display:flex;"><span>      integer,
+</span></span><span style="display:flex;"><span>      eof
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Diese Zusammensetzung der Parser überprüft eine Plus-Expression mit Integern. Wichtig hierbei ist die richtige Reihenfolge der Parser.</p>
+<h2 id="verwendung-des-parsers">Verwendung des Parsers</h2>
+<p>Nun muss noch eine Parse-Funktion geschrieben werden, um die kombinierten Parser auszuführen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">parse</span>(parser, input) {
+</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> parser(input)
+</span></span><span style="display:flex;"><span>  case result {
+</span></span><span style="display:flex;"><span>    Err(dataDesc, input):
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">raise</span> <span style="color:#e6db74">&#34;Parse error!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          expected: &#39;${dataDesc}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          got: &#39;${input}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;</span>
+</span></span><span style="display:flex;"><span>    Ok:
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">return</span> result
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="ausführung-des-kombinierten-parsers">Ausführung des Kombinierten Parsers</h2>
+<p>Führt man nun den Parser aus, kann es wie folgt aussehen:</p>
+<pre><code># parse(plusExpr, &quot;12+34&quot;)
+-&gt; {data: 46, rest: &quot;&quot;}
+
+# parse(plusExpr, &quot;12+34rest&quot;)
+-&gt; Uncaught: Parse error!
+        expected: 'end of input'
+        got: 'rest'
+</code></pre>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Parser_combinator">Wiki</a></li>
+<li><a href="https://hasura.io/blog/parser-combinators-walkthrough/">Parser Combinators: a Walkthrough</a></li>
+<li><a href="https://gist.github.com/yelouafi/556e5159e869952335e01f6b473c4ec1">Introduction to parser combinators</a></li>
+</ul>
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_aho2013compilers">
+            
+                [aho2013compilers] <strong>Compilers: Pearson new international edition: Principles, techniques, and tools</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Education Limited, 2013.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=9781292037233" target="_blank" rel="nofollow noopener noreferrer">9781292037233</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 2 und 3</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Ford2004Peg">
+            
+                [Ford2004Peg] <a href="https://doi.org/10.1145/982962.964011" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Parsing Expression Grammars: A Recognition-Based Syntactic Foundation</strong></a>
+            
+            
+                <br>Ford, B., Association for Computing Machinery, 2004-01.
+                
+                
+                    DOI <a href="https://doi.org/10.1145/982962.964011" target="_blank" rel="nofollow noopener noreferrer">10.1145/982962.964011</a>.
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Ford2004Proceedings">
+            
+                [Ford2004Proceedings] <a href="https://doi.org/10.1145/964001.964011" class="icon reading" target="_blank" rel="nofollow noopener noreferrer"><strong>Parsing Expression Grammars: A Recognition-Based Syntactic Foundation</strong></a>
+            
+            
+                <br>Ford, B., Association for Computing Machinery, 2004.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=158113729X" target="_blank" rel="nofollow noopener noreferrer">158113729X</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1145/964001.964011" target="_blank" rel="nofollow noopener noreferrer">10.1145/964001.964011</a>.
+                
+            
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Mogensen2017">
+            
+                [Mogensen2017] <strong>Introduction to compiler design</strong>
+            
+            
+                <br>Mogensen, T., Springer, 2017.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">978-3-319-66966-3</a>.
+                
+                
+                    DOI <a href="https://doi.org/10.1007/978-3-319-66966-3" target="_blank" rel="nofollow noopener noreferrer">10.1007/978-3-319-66966-3</a>.
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item parent"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle" checked/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

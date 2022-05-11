@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.96.0" />
+    <meta name="generator" content="Relearn 3.4.1&#43;tip">
+    <meta name="description" content="">
+    <meta name="author" content="cagix">
+    <title>Error-Recovery   </title>
+    <link rel="icon" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png?1652289546" type="image/png">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-relearn-light.css?1652289546" rel="stylesheet" id="variant-style">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/variant.css?1652289546" rel="stylesheet">
+    <link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/print.css?1652289546" rel="stylesheet" media="print">
+    <style>
+      :not(pre) > code.copy-to-clipboard-code + span.copy-to-clipboard-button {
+        display: none;
+      }
+      :not(pre) > code.copy-to-clipboard-code {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    </style>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/variant.js?1652289546"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      var index_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/index.json";
+      var root_url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.fh-bielefeld.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1165993/';
+      variants.init( [ 'relearn-light', 'relearn-dark', 'green' ] );
+    </script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.min.js?1652289546"></script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support" data-url="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="top-github-link">
+            <a class="github-link" title='Edit' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/parsing/recovery.md" target="blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <meta itemprop="itemListOrder" content="Descending" />
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="3" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/"><span itemprop="name">CB W21</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="2" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/"><span itemprop="name">Parser</span></a> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><meta itemprop="position" content="1" /><a itemprop="item" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/" aria-disabled="true"><span itemprop="name">Error-Recovery</span></a></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#fehler-beim-parsen">Fehler beim Parsen</a></li>
+    <li><a href="#typische-fehler-beim-parsing">Typische Fehler beim Parsing</a>
+      <ul>
+        <li><a href="#lexikalische-fehler">Lexikalische Fehler</a></li>
+        <li><a href="#ein-extra-token">Ein extra Token</a></li>
+        <li><a href="#mehrere-extra-token">Mehrere extra Token</a></li>
+        <li><a href="#fehlendes-token">Fehlendes Token</a></li>
+        <li><a href="#fehlendes-token-am-entscheidungspunkt">Fehlendes Token am Entscheidungspunkt</a></li>
+      </ul>
+    </li>
+    <li><a href="#überblick-recovery-bei-parser-fehlern">Überblick Recovery bei Parser-Fehlern</a></li>
+    <li><a href="#skizze-generierte-parser-regeln-antlr">Skizze: Generierte Parser-Regeln (ANTLR)</a></li>
+    <li><a href="#inline-recovery-bei-token-mismatch-skizze">Inline-Recovery bei Token-Mismatch (Skizze)</a></li>
+    <li><a href="#panic-mode-sync-and-return-skizze">Panic Mode: Sync-and-Return (Skizze)</a></li>
+    <li><a href="#antlr-einsatz-des-resynchronization-set">ANTLR: Einsatz des &quot;<em>Resynchronization Set</em>&quot;</a>
+      <ul>
+        <li><a href="#hinweis-follow-spannespan-following">Hinweis: <em>FOLLOW</em> <span>$\ne$</span> <em>Following</em></a></li>
+        <li><a href="#beispiele-resynchronisation-im-panic-mode-antlr">Beispiele Resynchronisation im Panic Mode (ANTLR)</a></li>
+      </ul>
+    </li>
+    <li><a href="#antlr4-anmerkungen-fehlerbehandlung-in-sub-regeln">ANTLR4: Anmerkungen Fehlerbehandlung in Sub-Regeln</a></li>
+    <li><a href="#antlr4-ändern-der-fehlerbehandlungs-strategie">ANTLR4: Ändern der Fehlerbehandlungs-Strategie</a>
+      <ul>
+        <li><a href="#ändern-der-fehlerbehandlungs-strategie-global">Ändern der Fehlerbehandlungs-Strategie (global)</a></li>
+        <li><a href="#ändern-der-fehlerbehandlungs-strategie-lokal">Ändern der Fehlerbehandlungs-Strategie (lokal)</a></li>
+        <li><a href="#ändern-der-fehler-meldungen">Ändern der Fehler-Meldungen</a></li>
+      </ul>
+    </li>
+    <li><a href="#panic-mode-in-bison-error-recovery">Panic Mode in Bison (Error Recovery)</a>
+      <ul>
+        <li><a href="#parsen-mit-error-token">Parsen mit <em>error</em>-Token</a></li>
+        <li><a href="#anwendung-im-obigen-beispiel">Anwendung im obigen Beispiel</a></li>
+        <li><a href="#wo-kommen-die-error-token-am-besten-hin">Wo kommen die <em>error</em>-Token am besten hin?</a></li>
+        <li><a href="#bison-und-c-und-speichermanagement-im-fehlerfall">Bison und C und Speichermanagement im Fehlerfall</a></li>
+      </ul>
+    </li>
+    <li><a href="#fehlerproduktionen">Fehlerproduktionen</a>
+      <ul>
+        <li><a href="#antlr4">ANTLR4</a></li>
+        <li><a href="#flex-und-bison">Flex und Bison</a></li>
+      </ul>
+    </li>
+    <li><a href="#anmerkung-nicht-eindeutige-grammatiken">Anmerkung: Nicht eindeutige Grammatiken</a>
+      <ul>
+        <li><a href="#antlr4-1">ANTLR4</a></li>
+        <li><a href="#bison">Bison</a></li>
+      </ul>
+    </li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+          </div>
+
+
+
+    
+
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+
+    
+        <p>Umgang mit Fehlern ist im Compiler sehr wichtig: Falscher Code darf nicht in ein ausführbares Programm
+umgewandelt werden oder ausgeführt werden, gleichzeitig erwarten Nutzer zielführende Fehlermeldungen
+und auch das Erkennen von möglichst mehreren Fehlern in einem Lauf.</p>
+<p>Auf der Ebene des Parsers kann man Fehler in Bezug auf die Grammatik erkennen. Typische Strategien sind
+das Entfernen von Token aus dem Eingabestrom, bis wieder ein Token erscheint, welches die weitere Abarbeitung
+der aktuellen Regel erlaubt (&quot;Synchronisierung&quot;). Dies sind oft Zeilenenden, ein Semikolon oder eine schließende
+geschweifte Klammer. Dieses recht einfache, aber grobe Vorgehen kann verfeinert werden, indem man versucht,
+überschüssige Token zu entfernen oder fehlender Token zu ersetzen. In ANTLR wird beispielsweise maximal ein
+fehlendes Token virtuell &quot;ersetzt&quot; bzw. max. ein überschüssiges Token entfernt, damit man den restlichen Code
+weiter parsen kann. Wenn mehr als ein Token fehlt oder zuviel ist, geht ANTLR in einen &quot;Panic Mode&quot; und
+entfernt so lange Token aus dem Eingabestrom, bis das aktuelle Token in einem <em>Resynchronization Set</em> enthalten
+ist. Die Bildung dieser Menge erinnert an die Regeln zum Bilden der <em>FOLLOW</em>-Mengen, ist aber an den Kontext
+der &quot;aufgerufenen&quot; Parser-Regeln gebunden. Zusätzlich gibt es weitere Strategien zum Behandeln von Fehlern in
+Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen (&quot;Fail-Save&quot;). In Bison wird dagegen mit
+einem speziellen <em>error</em>-Token gearbeitet und man fügt an &quot;strategischen&quot; Stellen Regeln der Form Regel <span>$A \to \operatorname{error} \alpha$</span> hinzu. Dabei ist <span>$\alpha$</span> ein Token, welches zur Synchronisierung genutzt werden
+soll. Im Fehlerfall werden so lange Token vom Stack entfernt, bis man eine Regel <span>$A \to \operatorname{error} \alpha$</span> anwenden kann und das <em>error</em>-Token shiften kann. Danach werden ggf. so lange Token aus dem Eingabestrom
+entfernt, bis das Token <span>$\alpha$</span> auftaucht und man die Regel mit einem <em>reduce</em> abschließen kann. Diese Form
+der Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.</p>
+<p>Zusätzlich kann man in der Grammatik bereits typische Fehler (vergessene Klammern oder Typos wie Dreher bei
+Schlüsselwörtern) schon über &quot;Fehlerproduktionen&quot; vorwegnehmen. Das bedeutet, dass man eine Regel formuliert,
+die diesen typischen Tippfehler akzeptiert (und korrigiert), aber zusätzlich eine Warnung generiert. Es muss
+dann aber jeweils entschieden werden, ob der entsprechende Quellcode in ein ausführbares Programm übersetzt
+werden darf.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+
+    
+    
+        <li><a href="https://youtu.be/9sFdI7pYMQs" target="_blank" rel="nofollow noopener noreferrer">Link YouTube</a></li>
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+    
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade" target="_blank" rel="nofollow noopener noreferrer">VL Error-Recovery</a></li>
+    
+
+</ul>
+
+    
+
+    
+
+</div>
+
+
+    
+
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+
+    
+
+    
+    
+    <ul>
+    
+        
+        <li>(K2) Varianten der Fehler bei Parsern</li>
+        
+        
+    
+        
+        <li>(K2) Fehlerbehandlung bei LL-Parsern: <em>single token deletion</em>, <em>single token insertion</em>, <em>sync-and-return</em></li>
+        
+        
+    
+        
+        <li>(K2) Berechnung und Anwendung des <em>Resynchronization Sets</em></li>
+        
+        
+    
+        
+        
+        <li>(K3) Ändern der Fehlermeldungen bei ANTLR</li>
+        
+    
+        
+        
+        <li>(K3) Eigene Errorhandler in ANTLR-Parser bauen und einbinden</li>
+        
+    
+        
+        
+        <li>(K3) Nutzen von speziellen Fehler-Alternativen in Grammatiken</li>
+        
+    
+    </ul>
+    
+
+</div>
+
+
+    <h2 id="fehler-beim-parsen">Fehler beim Parsen</h2>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/bc_xml-parsing-error.png" class="" />
+</figure>
+<p><span class='origin'>Quelle: BC George, Vorlesung &quot;Einführung in die Programmierung mit Skriptsprachen&quot;, <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span></p>
+<ul>
+<li>Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern</li>
+<li>Wichtige Eigenschaften:
+<ul>
+<li>Reproduzierbare Ergebnisse</li>
+<li>Aussagekräftige Fehlermeldungen</li>
+<li>Nach Erkennen eines Fehlers: (vorläufige) Korrektur und Parsen des restlichen Codes
+=&gt; weitere Fehler anzeigen.
+Problem: Bis wohin &quot;gobbeln&quot;, d.h. was als Synchronisationspunkt nehmen? Semikolon?</li>
+<li>Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!</li>
+</ul>
+</li>
+</ul>
+<h2 id="typische-fehler-beim-parsing">Typische Fehler beim Parsing</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">grammar VarDef;
+
+alt   : stmt | stmt2 ;
+stmt  : &#39;int&#39; ID &#39;;&#39; ;
+stmt2 : &#39;int&#39; ID &#39;=&#39; ID &#39;;&#39;  ;
+</code></pre><div style="text-align: right;">
+<span class="btn btn-default btn-crossreference">
+ANTLR4: <a href="https://github.com/Compilerbau/Lecture/blob/master/markdown/parsing/src/VarDef.g4">VarDef.g4</a>, Beispiele: <a href="https://github.com/Compilerbau/Lecture/blob/master/markdown/parsing/src/VarDef.txt">VarDef.txt</a>
+</span>
+</div>
+<p><em>Anmerkung</em>: Die nachfolgenden Fehler werden am Beispiel der Grammatik
+<a href="src/VarDef.g4">VarDef.g4</a> und ANTLR4 demonstriert.</p>
+<h3 id="lexikalische-fehler">Lexikalische Fehler</h3>
+<p>Eingabe: <code>int x1;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>token recognition error at: '1'</code></p>
+<p>Die ist ein Fehler aus dem Lexer, wenn beim Erkennen eines Tokens ein komplett
+unbekanntes Zeichen auftritt.</p>
+<h3 id="ein-extra-token">Ein extra Token</h3>
+<p>Eingabe: <code>int x y;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>extraneous input 'y' expecting ';'</code></p>
+<p>Wenn nur ein Token zu viel ist, dann kann der von ANTLR generierte Parser eine
+passende Fehlermeldung ausgeben.</p>
+<h3 id="mehrere-extra-token">Mehrere extra Token</h3>
+<p>Eingabe: <code>int x y z;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>mismatched input 'y' expecting ';'</code></p>
+<p>Wenn dagegen mehr als ein Token zu viel ist, dann gibt der von ANTLR generierte
+Parser eine generische Fehlermeldung aus.</p>
+<h3 id="fehlendes-token">Fehlendes Token</h3>
+<p>Eingabe: <code>int ;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>missing ID at ';'</code></p>
+<p>Ein anderer typischer Fehler sind fehlende Token, die kann der Parser analog zu
+überzähligen Token erkennen und ausgeben.</p>
+<h3 id="fehlendes-token-am-entscheidungspunkt">Fehlendes Token am Entscheidungspunkt</h3>
+<p>Eingabe: <code>int ;</code> (Startregel <code>alt</code>)</p>
+<p>Fehlermeldung: <code>no viable alternative at input 'int;'</code></p>
+<p>Hier fehlt ein Token, aber an einer Stelle, wo sich der Parser zwischen zwei
+Alternativen (Sub-Regeln) entscheiden muss.</p>
+<h2 id="überblick-recovery-bei-parser-fehlern">Überblick Recovery bei Parser-Fehlern</h2>
+<div class='center'>
+<figure class="center" style="width:80%">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/recovery.png" class="" />
+</figure>
+</div>
+<ul>
+<li>Fehler im Lexer (hier nicht weiter betrachtet):
+<ul>
+<li>Aktuelles Zeichen passt zu keinem Token: Entfernen oder Hinzufügen
+von Zeichen (plus Rückmeldung an den Parser)</li>
+<li>Spezielle Token, die typische fehlerhafte Zeichenketten als Token
+erkennen (mit Weiterverarbeitung im Parser)</li>
+</ul>
+</li>
+<li>Fehler im Parser:
+<ul>
+<li>Token passt nicht: Token entfernen oder ein Dummy-Token erzeugen</li>
+<li>Panic-Mode: Entferne Token bis zu einem Synchronisationspunkt.
+Problem: Dabei nicht zu weit zu springen!</li>
+<li>Spezielle Fehlerproduktionen: Spezielle Regeln in der Grammatik,
+die typische Fehler matchen.</li>
+</ul>
+</li>
+</ul>
+<p>Anmerkung LR-Parser: Ein Syntaxfehler wird entdeckt, wenn die Action-Tabelle
+für Top-of-Stack und akt. Token leer ist =&gt; Stack und/oder Token modifizieren,
+aber deutlich schwieriger als bei LL ...</p>
+<h2 id="skizze-generierte-parser-regeln-antlr">Skizze: Generierte Parser-Regeln (ANTLR)</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt  : &#39;int&#39; ID &#39;;&#39; ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stmt</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>: match(<span style="color:#e6db74">&#34;int&#34;</span>); match(ID); match(<span style="color:#e6db74">&#34;;&#34;</span>)
+</span></span><span style="display:flex;"><span>    catch (RecognitionException re):
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>reportError(self)               <span style="color:#75715e"># let&#39;s report it</span>
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>recover(self)                   <span style="color:#75715e"># Panic-Mode</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">match</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lookahead <span style="color:#f92672">==</span> x: consume()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: _errHandler<span style="color:#f92672">.</span>recoverInline(self)           <span style="color:#75715e"># Inline-Mode</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Der im Parser registrierte ErrorHandler erzeugt in der Methode
+<code>reportError()</code> eine geeignete Meldung und gibt sie an den Parser
+über dessen Methode <code>notifyErrorListeners()</code> weiter.</p>
+<p>Die eigentliche Fehlerbehandlung findet in der Methode <code>recover()</code>
+bzw. <code>recoverInline()</code> des ErrorHandlers statt.</p>
+<h2 id="inline-recovery-bei-token-mismatch-skizze">Inline-Recovery bei Token-Mismatch (Skizze)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recoverInline</span>(parser):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SINGLE TOKEN DELETION</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> singleTokenDeletion(parser):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getMatchedSymbol(parser)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SINGLE TOKEN INSERTION</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> singleTokenInsertion(parser):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getMissingSymbol(parser)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># that didn&#39;t work, throw a new exception</span>
+</span></span><span style="display:flex;"><span>    throw new InputMismatchException(parser)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Die Klasse <code>InputMismatchException</code> drückt aus, dass das aktuelle Token nicht
+zur Erwartung des Parsers passt. Deshalb wird diese Exception am Ende von
+<code>recoverInline()</code> geworfen. Die Klasse <code>RecognitionException</code>, die in den
+Parserregeln wie <code>stmt</code> gefangen wird, ist die gemeinsame Oberklasse aller
+Parser-Exceptions.</p>
+<p>Liste der wichtigsten Exceptions (nach
+<a href="https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md">github.com/antlr/antlr4/blob/master/doc/parser-rules.md</a>):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Exception</th>
+<th style="text-align:left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RecognitionException</code></td>
+<td style="text-align:left">Basisklasse für alle Parser-Exceptions</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>NoViableAltException</code></td>
+<td style="text-align:left">Parser konnte sich nicht für (mind.) einen Pfad entscheiden angesichts des Tokenstroms</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>LexerNoViableAltException</code></td>
+<td style="text-align:left">Lexer-Pendant zu <code>NoViableAltException</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>InputMismatchException</code></td>
+<td style="text-align:left">Das aktuelle Token ist nicht das, was der Parser erwartet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="panic-mode-sync-and-return-skizze">Panic Mode: Sync-and-Return (Skizze)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rule</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>: <span style="color:#f92672">...</span> rule<span style="color:#f92672">-</span>body <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    catch (RecognitionException re):
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>reportError(self)       <span style="color:#75715e"># let&#39;s report it</span>
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>recover(self)           <span style="color:#75715e"># Panic-Mode</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>=&gt; Entferne solange Token, bis aktuelles Token im &quot;<em>Resynchronization Set</em>&quot;</p>
+<h2 id="antlr-einsatz-des-resynchronization-set">ANTLR: Einsatz des &quot;<em>Resynchronization Set</em>&quot;</h2>
+<ul>
+<li><strong>Following Set</strong>: Menge der Token, die direkt auf eine Regel-Referenz folgen,
+ohne dass die aktuelle Regel/Alternative verlassen wird</li>
+<li><strong>Resynchronization Set</strong>: Vereinigung der <em>Following Sets</em> für alle Regeln im
+aktuellen Aufruf-Stack</li>
+</ul>
+<p><span class='origin'>Quelle: nach <a href="#id_Parr2014">[Parr2014, S. 161 ff.]</a></span></p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt : &#39;if&#39; expr &#39;:&#39; stmt           // Following Set für &#34;expr&#34;: {&#39;:&#39;}
+     | &#39;while&#39; &#39;(&#39; expr &#39;)&#39; stmt ;  // Following Set für &#34;expr&#34;: {&#39;)&#39;}
+expr : term &#39;+&#39; INT ;               // Following Set für &#34;term&#34;: {&#39;+&#39;}
+</code></pre><ul>
+<li>Eingabe: <code>if :</code></li>
+<li>Aufruf-Stack nach Bearbeitung von <code>if</code>: <code>[stmt, expr, term]</code></li>
+<li><strong>Resynchronization Set</strong>: <code>{'+', ':'}</code></li>
+</ul>
+<h3 id="hinweis-follow-spannespan-following">Hinweis: <em>FOLLOW</em> <span>$\ne$</span> <em>Following</em></h3>
+<p><strong>FOLLOW</strong> ist die Menge aller Token, die auf eine Regel folgen können</p>
+<ul>
+<li><code>FOLLOW(term) = {'+'}</code></li>
+<li><code>FOLLOW(expr) = {':', ')'}</code></li>
+</ul>
+<p><strong>Following</strong> ist dagegen <strong>abhängig vom aktuellen Kontext</strong>!</p>
+<ul>
+<li>Stack: <code>[stmt, expr, term]</code> =&gt; <em>Resynchronization Set</em>: <code>{'+', ':'}</code></li>
+</ul>
+<h3 id="beispiele-resynchronisation-im-panic-mode-antlr">Beispiele Resynchronisation im Panic Mode (ANTLR)</h3>
+<p><strong>Hinweis</strong>: Die Regel <code>term</code> ist in obigem Beispiel nicht weiter detailliert. Hier wird
+angenommen, dass das aktuelle Token <code>':'</code> nicht passt.</p>
+<ul>
+<li>Eingabe: <code>if :</code>
+<ul>
+<li>In Regel <code>term</code>: Token <code>':'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{'+', ':'}</code>
+(d.h. hier bleibt <code>':'</code> das aktuelle Token)</li>
+<li>Rückkehr zu Regel <code>expr</code></li>
+</ul>
+</li>
+<li>In Regel <code>expr</code>: Token <code>':'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{':'}</code>
+(d.h. hier bleibt <code>':'</code> das aktuelle Token)</li>
+<li>Rückkehr zu Regel <code>stmt</code></li>
+</ul>
+</li>
+<li>In Regel <code>stmt</code>: Token <code>':'</code> passt jetzt
+<ul>
+<li>Abschluss des Parsing (mit Fehlermeldung)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Eingabe: <code>if x + 42 ))):</code>
+<ul>
+<li>In Regel <code>stmt</code>: Token <code>')'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{':'}</code> (d.h.
+hier werden alle <code>')'</code> entfernt)</li>
+</ul>
+</li>
+<li>In Regel <code>stmt</code>: Token <code>':'</code> passt jetzt
+<ul>
+<li>Abschluss des Parsing (mit Fehlermeldung)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="antlr4-anmerkungen-fehlerbehandlung-in-sub-regeln">ANTLR4: Anmerkungen Fehlerbehandlung in Sub-Regeln</h2>
+<p>Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
+(d.h. eine Regel enthält <code>(...)*</code> oder <code>(...)+</code>) geht ANTLR4 etwas anders vor.</p>
+<ol>
+<li>
+<p>Start einer Sub-Regel/Alternative: Versuch einer <em>single token deletion</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># am Anfang einer Alternative oder Schleife</span>
+</span></span><span style="display:flex;"><span>_errHandler<span style="color:#f92672">.</span>sync(self)
+</span></span></code></pre></div></li>
+<li>
+<p>Schleifenkonstrukte: <code>(...)*</code> oder <code>(...)+</code></p>
+<p>Versuche, in der Schleife zu bleiben! Im Fehlerfall <code>consume()</code> bis</p>
+<ul>
+<li>Weitere Iteration der Schleife erkannt</li>
+<li>Token, welches der Schleife folgt, erkannt</li>
+<li>Token im <em>Resynchronization Set</em> des aktuellen Aufruf-Stacks</li>
+</ul>
+<p>Anmerkung: Im Prinzip entspricht dies dem <em>Panic Mode</em>, der Unterschied liegt
+darin, bis wohin der Parser nach der Recovery in einer Funktion/Methode (Regel)
+zurückspringt. D.h. wenn es verschiedene Möglichkeiten gibt, haben diese die
+obige Priorisierung.</p>
+</li>
+<li>
+<p>Fail-Save</p>
+<p>Um Endlos-Schleifen durch die Schritte (1) bzw. (2) zu vermeiden, löst der Parser
+beim zweiten Versuch, die selbe Parser-Stelle und Input-Position zu bearbeiten
+(also bei bereits aktivem Fehler), einen &quot;<em>Fail-Safe</em>&quot; aus. Der Parser konsumiert
+dann ein Token und fährt dann mit der Recovery fort.</p>
+</li>
+</ol>
+<p>Zu Details zur Fehlerbehandlung durch ANTLR vergleiche <a href="#id_Parr2014">[Parr2014, S. 170 ff.]</a>.</p>
+<h2 id="antlr4-ändern-der-fehlerbehandlungs-strategie">ANTLR4: Ändern der Fehlerbehandlungs-Strategie</h2>
+<h3 id="ändern-der-fehlerbehandlungs-strategie-global">Ändern der Fehlerbehandlungs-Strategie (global)</h3>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/handler.png" class="" />
+</figure>
+<p>Sie überschreiben die Klasse <code>DefaultErrorStrategy</code> und müssen die oben gezeigten Methoden
+<code>recover()</code> und <code>recoverInline()</code>aufrufen. Die eigene Fehlerbehandlung setzen Sie über die
+Methode <code>setErrorHandler</code> des Parsers.</p>
+<h3 id="ändern-der-fehlerbehandlungs-strategie-lokal">Ändern der Fehlerbehandlungs-Strategie (lokal)</h3>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">r : ...
+  ;
+  catch[RecognitionException e] { throw e; }
+</code></pre><p>Es lassen sich auch andere bzw. mehrere Exceptions fangen. Der <code>catch</code>-Block ersetzt den
+Default-<code>catch</code>-Block der generierten Methode. Das bedeutet, dass sich der geänderte Modus
+nur für die eine Regel auswirkt.</p>
+<h3 id="ändern-der-fehler-meldungen">Ändern der Fehler-Meldungen</h3>
+<div class='center'>
+<figure class="center" style="width:auto">
+    <img alt="" src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/images/listener.png" class="" />
+</figure>
+</div>
+<p>Für einen eigenen Listener leitet man sinnvollerweise von <code>BaseErrorListener</code> ab und
+überschreibt die leere Implementierung von <code>syntaxError()</code>.</p>
+<p>Damit die Fehlermeldungen nicht mehrfach ausgegeben werden, entfernt man zunächst alle
+Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.</p>
+<h2 id="panic-mode-in-bison-error-recovery">Panic Mode in Bison (Error Recovery)</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt : &#39;int&#39; ID &#39;;&#39;     { printf(&#34;%s\n&#34;, $2); }
+     | error &#39;\n&#39;       { yyerror(); yyerrok; }
+     ;
+</code></pre><p>Bison kennt ein spezielles Fehler-Token <code>error</code>. Dieses Token wird genutzt, um
+einen Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
+<em>höchstwahrscheinlich</em> weiter parsen kann.</p>
+<h3 id="parsen-mit-error-token">Parsen mit <em>error</em>-Token</h3>
+<p>Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch.
+Im Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der
+Form <span>$A \to \operatorname{error} \alpha$</span> anwendbar ist. Dann wird das Token
+<code>error</code> auf den Stack geschoben und so lange Eingabe-Token gelesen und verworfen,
+bis eines gefunden wird, welches auf das <code>error</code>-Token folgen kann. Dies nennt
+Bison &quot;Resynchronisation&quot;. Anschließend wird im Recovery-Modus normal fortgefahren,
+bis drei weitere Token auf den Stack geschoben wurden und damit der Recovery-Modus
+verlassen wird. Falls bereits vorher weitere Fehler auftreten, werden diese nicht
+separat gemeldet.</p>
+<h3 id="anwendung-im-obigen-beispiel">Anwendung im obigen Beispiel</h3>
+<p>Im obigen Beispiel ist die Regel <code>stmt : error '\n'</code> enthalten. Im Fehlerfall
+werden die Symbole vom Stack entfernt, bis ein Zustand erreicht ist, der eine
+Shift-Aktion auf das Token <code>error</code> hat. Das Error-Token wird auf den Stack
+geschoben und alle Eingabetoken bis zum nächsten <code>'\n'</code> gelesen und direkt
+entfernt. Mit dem Erreichen des Zeilenumbruchs wird die zugeordnete Aktion
+ausgeführt. Diese gibt den Fehler auf der Konsole aus und führt mit dem Makro
+<code>yyerrok</code> einen Reset des Parsers aus (d.h. er verlässt den Recovery-Modus
+<strong>vor</strong> dem Shiften der per Default drei gültigen Token). Anschließend ist der
+Bison-Parser wieder im normalen Modus. Die fehlerhaften Symbole/Token wurden
+aus dem Eingabestrom entfernt.</p>
+<h3 id="wo-kommen-die-error-token-am-besten-hin">Wo kommen die <em>error</em>-Token am besten hin?</h3>
+<p>Die &quot;schwarze Kunst&quot; ist, die Error-Token an geeigneten Stellen unterzubringen,
+d.h. vorherzusehen, wo der Parser am sinnvollsten wieder aufsetzen kann. Häufig
+sind dies beispielsweise das ein Statement beendende Semikolon oder die einen
+Block beendende schließende geschweifte Klammer. Beispielsweise könnte man für
+die Sprache C bei der Definition von Statements mehrere Synchronisationspunkte
+einbauen:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt : ...
+     | error &#39;;&#39;    /* Synchronisation für &#39;return&#39; */
+     | error &#39;}&#39;    /* Synchronisation nach Block */
+     | error &#39;\n&#39;   /* Synchronisation nach Zeilenumbruch */
+     ;
+</code></pre><h3 id="bison-und-c-und-speichermanagement-im-fehlerfall">Bison und C und Speichermanagement im Fehlerfall</h3>
+<p>Wenn Bison im Recovery-Modus ist, werden Symbole und ihre Werte vom Stack entfernt.
+Falls diese Werte (vgl. <code>%union</code>) Pointer mit dynamisch alloziertem Speicher sind,
+muss Bison diesen Speicher freigeben.</p>
+<p>Dazu kann man sich über die Direktive <code>%destructor { code } symbols</code> oder
+<code>%destructor { code } &lt;types&gt;</code> Code definieren, der dann für die jeweiligen Symbole
+oder Typen ausgeführt wird.</p>
+<p>Die Typangabe <code>&lt;*&gt;</code> dient dabei als Catch-All für Symbole, für die ein Typ definiert
+wurde, aber kein Destruktor.</p>
+<p>Beispiel:</p>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">%union {
+    char* str;
+}
+%token &lt;str&gt; ID
+
+%destructor { free($$); } &lt;str&gt;
+</code></pre><p>Für weitere Details vergleiche <a href="#id_Levine2009">[Levine2009, Kap. 8]</a>.</p>
+<h2 id="fehlerproduktionen">Fehlerproduktionen</h2>
+<p>Häufig vorkommende Fehler kann man bereits in der Grammatik berücksichtigen.
+Dadurch kommt es nicht zu einem Parser-Error mit Recovery-Mechanismus, sondern
+der Fehler wird über eine entsprechende Alternative in der Grammatik korrigiert.</p>
+<p>Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
+wird in der folgenden Grammatik über eingebettete Aktionen erledigt.</p>
+<h3 id="antlr4">ANTLR4</h3>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt : &#39;int&#39; ID &#39;;&#39;
+     : &#39;int&#39; ID             {notifyErrorListeners(&#34;Missing &#39;;&#39;&#34;);}
+     : &#39;int&#39; ID &#39;;&#39; &#39;;&#39;     {notifyErrorListeners(&#34;Too many &#39;;&#39;&#34;);}
+     ;
+</code></pre><p>Der aus der Grammatik generierte Parser leitet von der Basisklasse <code>Parser</code>
+ab. Dort wird eine Methode <code>notifyErrorListeners()</code> implementiert, die man
+mit Hilfe von in die Grammatik eingebetteten Aktionen aufrufen kann (Vorgriff
+auf <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">&ldquo;Syntaxgesteuerte Interpreter&rdquo;</a>).
+Letztlich steht im generierten Parser in der generierten Methode <code>stmt()</code> an
+der passenden Stelle ein Aufruf <code>notifyErrorListeners(Too many ';'&quot;);</code> ...</p>
+<h3 id="flex-und-bison">Flex und Bison</h3>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stmt : &#39;int&#39; ID &#39;;&#39;     { $$ = $2; }
+     : &#39;int&#39; ID         { yyerror(&#34;unterminated id&#34;);
+                          $$ = $2; }
+     ;
+%%
+void yyerror(char *s, ...) {
+    va_list ap; va_start(ap, s);
+    fprintf(stderr, &#34;%d: error: &#34;, yylineno);
+    vfprintf(stderr, s, ap); fprintf(stderr, &#34;\n&#34;);
+}
+</code></pre><p>Analog zu ANTLR4 ist es auch in Flex/Bison üblich, für typische Szenarien
+&quot;nicht ganz korrekte&quot; Eingaben zu akzeptieren. Dazu definiert man zusätzliche
+Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
+und eine zusätzliche Warnung ausgeben.</p>
+<p>Dabei definiert man sich typischerweise die Funktion <code>yyerror()</code>. Über
+<code>yytext</code> hat man Zugriff auf den Eingabetext des aktuellen Tokens, und
+mit <code>yylineno</code> hat man Zugriff auf die aktuelle Eingabezeile (<code>yylineno</code>
+wird automatisch bei jedem <code>\n</code> inkrementiert). Wenn man weitere Informationen
+benötigt, muss man mit dem Bison-Feature &quot;Locations&quot; arbeiten. Dies ist ein
+spezieller Datentyp <code>YYLTYPE</code>.</p>
+<p>Für weitere Details vergleiche <a href="#id_Levine2009">[Levine2009, Kap. 8]</a>.</p>
+<h2 id="anmerkung-nicht-eindeutige-grammatiken">Anmerkung: Nicht eindeutige Grammatiken</h2>
+<pre tabindex="0"><code class="language-yacc" data-lang="yacc">stat: expr &#39;;&#39; | ID &#39;+&#39; ID &#39;;&#39; ;
+expr: ID &#39;+&#39; ID | INT ;
+</code></pre><p>=&gt; Was passiert bei der Eingabe: <code>a+b</code> ??! Welche Regel/Alternative soll
+jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!</p>
+<h3 id="antlr4-1">ANTLR4</h3>
+<p>Nicht eindeutige Grammatiken führen <strong>nicht</strong> zu einer Fehlermeldung,
+da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
+in der Grammatik selbst steckt.</p>
+<p>Während des Debuggings von Grammatiken lohnt es sich aber, diese
+Warnungen zu aktivieren. Dies kann entweder mit der Option &quot;<code>-diagnostics</code>&quot;
+beim Aufruf des <code>grun</code>-Tools geschehen oder über das Setzen des
+<code>DiagnosticErrorListener</code> aus der ANTLR4-Runtime als ErrorListener.</p>
+<h3 id="bison">Bison</h3>
+<p>Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
+(vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
+jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
+man im über die Option <code>-v</code> erzeugten <code>&lt;name&gt;.output</code>-File überprüfen.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Fehler bei <code>match()</code>: <em>single token deletion</em> oder <em>single token insertion</em></p>
+</li>
+<li>
+<p>Panic Mode: <em>sync-and-return</em> bis Token in <em>Resynchronization Set</em> (ANTLR4)
+oder <code>error</code>-Token shiftbar (Bison)</p>
+<ul>
+<li>ANTLR4: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen</li>
+<li>ANTLR4: Fail-Save zur Vermeidung von Endlosschleifen</li>
+</ul>
+</li>
+<li>
+<p>Fehler-Alternativen in Grammatik einbauen</p>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+<div class="assignments">
+    <h2>Übungsblätter/Aufgaben</h2>
+
+    <ul>
+    
+        
+        
+        
+            <li>
+                <a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments/sheet01/"><strong>Blatt 01: Scanner und Parser</strong></a>
+                 (Abgabe: 15.11.21, BC)
+            </li>
+        
+    
+    </ul>
+
+</div>
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Quellen</h2>
+
+    <ul>
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Levine2009">
+            
+                [Levine2009] <strong>Flex &amp; bison</strong>
+            
+            
+                <br>Levine, J., O'Reilly, 2009.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-0-5961-5597-1" target="_blank" rel="nofollow noopener noreferrer">978-0-5961-5597-1</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 7 und 8</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2010">
+            
+                [Parr2010] <strong>Language implementation patterns</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2010.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5645-6" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5645-6</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 2 und 3</em>
+            
+            </li>
+        
+
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Parr2014">
+            
+                [Parr2014] <strong>The definitive ANTLR 4 reference</strong>
+            
+            
+                <br>Parr, T., Pragmatic Bookshelf, 2014.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-9343-5699-9" target="_blank" rel="nofollow noopener noreferrer">978-1-9343-5699-9</a>.
+                
+                
+            
+            
+            </li>
+        
+
+    
+    </ul>
+
+</div>
+
+
+
+
+
+
+        </div>
+      </main><p><div style="color: darkgray; font-size: smaller;">
+<p style="margin-left: 1rem;">
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github. com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/McShelby/hugo-theme-relearn">Hugo Relearn Theme</a>.
+</p>
+</div>
+<div style="color: darkgray; font-size: smaller;">
+</p>
+
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+        </div>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics">
+          <li data-nav-id="/intro/" title="Überblick" class="dd-item"><input type="checkbox" id="section-925e5bfbd01266c727d74ae1db5ab0c6" class="toggle"/><label for="section-925e5bfbd01266c727d74ae1db5ab0c6" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">Überblick<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intro/overview/" title="Struktur eines Compilers" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications/" title="Anwendungen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/lexing/" title="Lexer" class="dd-item"><input type="checkbox" id="section-bb8b5f2d5bce97089d93a2c0be9cb831" class="toggle"/><label for="section-bb8b5f2d5bce97089d93a2c0be9cb831" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">Lexer<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/table/" title="Lexer: Tabellenbasierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/recursive/" title="Lexer: Handcodierte Implementierung" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/lexing/flex/" title="Flex: Lexer generieren" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">Flex: Lexer generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/parsing/" title="Parser" class="dd-item parent"><input type="checkbox" id="section-c2bacbc729658cf1c1ef6e9bd97af028" class="toggle" checked/><label for="section-c2bacbc729658cf1c1ef6e9bd97af028" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">Parser<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/parsing/cfg/" title="CFG, LL-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">CFG, LL-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">ANTLR (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/lr-parser/" title="Syntaxanalyse: LR-Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-parser/">LR-Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">Bison (Parsergenerator)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">PEG-Parser, Pratt-Parser und Parser Combinators<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/recovery/" title="Error-Recovery" class="dd-item active"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">Error-Recovery<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/" title="Semantische Analyse" class="dd-item"><input type="checkbox" id="section-20322bfde8ed397e91399ac844c7c357" class="toggle"/><label for="section-20322bfde8ed397e91399ac844c7c357" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/" title="Symboltabellen" class="dd-item alwaysopen"><input type="checkbox" id="section-286e2767870b411c2fe8e6d693814baa" class="toggle" checked/><label for="section-286e2767870b411c2fe8e6d693814baa" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/functions/" title="Funktionen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/semantics/attribgrammars/" title="Typen, Type Checking und Attributierte Grammatiken" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/intermediate/" title="Zwischencode" class="dd-item"><input type="checkbox" id="section-21ef2c4786eb146dfbdfafeb68d4e757" class="toggle"/><label for="section-21ef2c4786eb146dfbdfafeb68d4e757" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">Zwischencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/intermediate/intro/" title="Überblick Zwischencode" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">Überblick Zwischencode<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">LLVM als IR<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/interpretation/" title="Interpreter" class="dd-item"><input type="checkbox" id="section-2e6cf2a74afa6001d60b6c0af360c3cc" class="toggle"/><label for="section-2e6cf2a74afa6001d60b6c0af360c3cc" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">Interpreter<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">Bytecode/VM<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/interpretation/gc/" title="Garbage Collection" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/optimization/" title="Optimierung" class="dd-item"><input type="checkbox" id="section-85c2c0a1bea0e81783489d8c12ac12f2" class="toggle"/><label for="section-85c2c0a1bea0e81783489d8c12ac12f2" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/">Optimierung<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/optimization/optimization/" title="Optimierung und Datenflussanalyse" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/optimization/optimization/">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/machinecode/" title="Generierung von Maschinencode" class="dd-item"><input type="checkbox" id="section-fdd868e37791c7381ffd0004fa749159" class="toggle"/><label for="section-fdd868e37791c7381ffd0004fa749159" ></label><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a><ul>
+          <li data-nav-id="/machinecode/machinecode/" title="Generierung von Maschinencode (Skizze)" class="dd-item"><a href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/grading"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a></li>
+            <li><a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/org/resources"><i class='fas fa-bookmark'></i> Ressourcen</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"/>
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+              <a class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <select id="select-variant" onchange="variants.changeVariant( this.value );">
+                    <option id="relearn-light" value="relearn-light" selected>Relearn Light</option>
+                    <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="green" value="green">Green</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </a>
+              <script>variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter"><p style="margin-left: 1rem;">
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/imprint'>Impressum</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/privacy'>Datenschutz</a>,
+    <a href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/credits'>Credits</a>
+</p>
+
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1652289546"></script>
+    <script src="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/theme.js?1652289546"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

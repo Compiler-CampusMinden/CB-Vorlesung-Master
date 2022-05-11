@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Symboltabellen on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/</link>
+    <description>Recent content in Symboltabellen on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Semantische Analyse: Symboltabellen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/</guid>
+      <description>Was passiert nach der Syntaxanalyse? int x = 42; int f(int x) {  int y = 9;  return y+x; }  x = f(x);     Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen semantische Analyse, Optimierung und Codegenerierung Informationen über Bezeichner, z.B.
+ Welcher Bezeichner ist gemeint? Welchen Typ hat ein Bezeichner?  Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet werden.</description>
+    </item>
+    <item>
+      <title>Nested Scopes</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/</guid>
+      <description>Scopes und Name Spaces Def.: Unter dem Gültigkeitsbereich (Sichtbarkeitsbereich, Scope) eines Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes, die ein eigenes Element dieses Namens benutzen.
+Scopes sind fast immer hierarchisch angeordnet.
+Def.: Unter einem Namensraum (name space) versteht man die Menge der zu einem Zeitpunkt sichtbaren Bezeichner.
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.</description>
+    </item>
+    <item>
+      <title>Funktionen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/</guid>
+      <description>Funktionen und Scopes int x = 42; int y; void f() {  int x;  x = 1;  y = 2;  { int y = x; } } void g(int z){}     Behandlung von Funktionsdefinitionen  Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ... Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird.</description>
+    </item>
+    <item>
+      <title>Strukturen und Klassen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/</guid>
+      <description>Strukturen struct A {  int x;  struct B {int x;};  B b;  struct C {int z;}; }; A a; void f() {  A a;  a.b.x = 42; }     Strukturen: Erweiterung der Symbole und Scopes  Quelle: Eigene Modellierung nach einer Idee in [Parr2010, S. 162]
+Strukturen stellen wie Funktionen sowohl einen Scope als auch ein Symbol dar.
+Zusätzlich stellt eine Struktur (-definition) aber auch einen neuen Typ dar, weshalb Struct auch noch das Interface Type &amp;quot;implementiert&amp;quot;.</description>
+    </item>
+  </channel>
+</rss>

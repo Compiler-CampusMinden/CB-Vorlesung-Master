@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Generierung von Maschinencode on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/</link>
+    <description>Recent content in Generierung von Maschinencode on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generierung von Maschinencode (Skizze)</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/machinecode/machinecode/</guid>
+      <description>Einordnung  Quelle: &amp;quot;A Map of the Territory (mountain.png)&amp;quot; by Bob Nystrom, licensed under MIT
+Die Erzeugung von Maschinencode ist in gewisser Weise ein &amp;quot;Parallelweg&amp;quot; zum Erzeugen von Bytecode. Die Schwierigkeit liegt darin, die technischen Besonderheiten der Zielplattform (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.
+Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lexer on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/</link>
+    <description>Recent content in Lexer on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reguläre Sprachen, Ausdrucksstärke</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/</guid>
+      <description>Motivation Was muss ein Compiler wohl als erstes tun? Themen für heute  Endliche Automaten Reguläre Ausdrücke  Endliche Automaten Alphabete Def.: Ein Alphabet $\Sigma$ ist eine endliche, nicht-leere Menge von Symbolen. Die Symbole eines Alphabets heißen Buchstaben.
+Def.: Ein Wort $w$ über einem Alphabet $\Sigma$ ist eine endliche Folge von Symbolen aus $\Sigma$. $\epsilon$ ist das leere Wort. Die Länge $\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält (Kardinalität).</description>
+    </item>
+    <item>
+      <title>Lexer: Tabellenbasierte Implementierung</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/table/</guid>
+      <description>Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ; erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&amp;lt;ID, &amp;quot;a&amp;quot;&amp;gt; &amp;lt;ASSIGN&amp;gt; &amp;lt;LBRACK&amp;gt; &amp;lt;NUM, 5&amp;gt; &amp;lt;COMMA&amp;gt; &amp;lt;NUM, 6&amp;gt; &amp;lt;RBRACK&amp;gt; &amp;lt;SEMICOL&amp;gt;   Input: Zeichenstrom (Eingabedatei o.ä.) Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&amp;quot;Lexeme&amp;quot;), Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert) Ausgabe: Tokenstrom  Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder Kommentare entfernt.</description>
+    </item>
+    <item>
+      <title>Lexer: Handcodierte Implementierung</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/recursive/</guid>
+      <description>Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ; erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&amp;lt;ID, &amp;quot;a&amp;quot;&amp;gt; &amp;lt;ASSIGN&amp;gt; &amp;lt;LBRACK&amp;gt; &amp;lt;NUM, 5&amp;gt; &amp;lt;COMMA&amp;gt; &amp;lt;NUM, 6&amp;gt; &amp;lt;RBRACK&amp;gt; &amp;lt;SEMICOL&amp;gt;  Manuelle Implementierung: Rekursiver Abstieg def nextToken():  while (peek != EOF): # globale Variable, über consume()  switch (peek):  case &amp;#39; &amp;#39;: case &amp;#39;\t&amp;#39;: case &amp;#39;\n&amp;#39;: WS(); continue  case &amp;#39;[&amp;#39;: consume(); return Token(LBRACK, &amp;#39;[&amp;#39;)  .</description>
+    </item>
+    <item>
+      <title>Flex: Lexer generieren</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/</guid>
+      <description>Flex: Lexer generieren -- Vortragsthema -- (gehört zu &amp;ldquo;Bison (Parsergenerator)&amp;rdquo;)</description>
+    </item>
+  </channel>
+</rss>
