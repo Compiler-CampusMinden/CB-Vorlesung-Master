@@ -11,13 +11,17 @@ outcomes:
   - k1: "Deterministische PDAs"
   - k1: "Kontextfreie Grammatiken"
   - k1: "Deterministisch kontextfreie Grammatiken"
+<!-- REM remove outcomes specific to LL-Parsers
   - k1: "Top-Down-Analyse"
   - k1: "Recursive-Descent-Parser"
   - k1: "First- und Follow-Mengen"
   - k1: "LL-Parser"
+REM -->
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
+<!-- REM remove outcomes specific to LL-Parsers
   - k2: "Schreiben von LL-Parsern"
   - k3: "Top-Down Analyse programmieren"
+REM -->
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
@@ -275,7 +279,7 @@ Sie sind nicht abgeschlossen unter
 *   Konkatenation
 
 
-
+<!-- REM remove syntaxanalyse (split up in two sessions)
 # Syntaxanalyse
 
 ## Syntax
@@ -531,7 +535,12 @@ Der Eingabestring sei $w\perp$, der initiale Kellerinhalt sei $\perp$.
 *   Der Parser liefert in der Regel einen abstrakten Syntaxbaum.
 
 
+REM -->
 
+<!-- ADD
+- mehr Inhalte für CFGs (vertiefendere Erklärungen)
+- spezifisches Wrap-up für CFGs
+ADD -->
 
 
 
