@@ -36,15 +36,17 @@ DOCKER_USER       = -u "$(shell id -u):$(shell id -g)"
 DOCKER_VOLUME     = -v "$(shell pwd):/data" -w "/data"
 DOCKER_TEX_VOLUME = -v "$(dir $(realpath $<)):/data" -w "/data"
 
-PANDOC = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc" $(DOCKER_IMAGE)
-HUGO   = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"   $(DOCKER_IMAGE)
-DOT    = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"    $(DOCKER_IMAGE)
-LATEX  = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"  $(DOCKER_IMAGE)
+PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                $(DOCKER_IMAGE)
+HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                  $(DOCKER_IMAGE)
+DOT           = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"                   $(DOCKER_IMAGE)
+LATEX         = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"                 $(DOCKER_IMAGE)
+DELETE_SCRIPT = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="/opt/delete-script.rb" $(DOCKER_IMAGE)
 else
-PANDOC = pandoc
-HUGO   = hugo
-DOT    = dot
-LATEX  = cd $(dir $(realpath $<)) && latex
+PANDOC        = pandoc
+HUGO          = hugo
+DOT           = dot
+LATEX         = cd $(dir $(realpath $<)) && latex
+DELETE_SCRIPT = ./.github/actions/alpine-pandoc-hugo/delete-script.rb
 endif
 
 ## Data-Dir: Path to the Git submodule of Pandoc-Lecture
@@ -331,3 +333,10 @@ $(SLIDES_SINGLE_PDF_TARGETS): $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_IN
 	$(create-folder)
 	$(PANDOC) $(PANDOC_DIRS) -d slides $< -o $@
 $(SLIDES_SINGLE_PDF_TARGETS): $$(filter $$(dir $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_INTERMEDIATE_DIR)/%, $$(subst _,/,$$@)))%, $(SLIDES_IMAGE_TARGETS))
+
+##@ Structure
+
+.PHONY: delete-rem-tags
+delete-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
+	$(DELETE_SCRIPT) $(SRC_DIR)
+
