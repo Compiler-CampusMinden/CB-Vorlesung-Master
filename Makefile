@@ -97,6 +97,21 @@ WEB_OUTPUT_DIR = docs
 ## Output directory for generated slides
 SLIDES_OUTPUT_DIR = pdf
 
+## Temporary directory for extracing lecture structure
+STRUCTURE_TEMP_DIR = $(TEMP_DIR)/structure
+
+## Output .md file for structure
+STRUCTURE_SUMMARY = $(STRUCTURE_TEMP_DIR)/structure.md
+
+## Output directory for lecture structure
+STRUCTURE_OUTPUT_DIR = structure
+
+## Temporary pdf output file for structure
+STRUCTURE_SUMMARY_TEMP_PDF = $(STRUCTURE_SUMMARY:%.md=%.pdf)
+
+## Final pdf output containing the structure of this lecture series
+STRUCTURE_SUMMARY_PDF = $(patsubst $(STRUCTURE_TEMP_DIR)/%.pdf,$(STRUCTURE_OUTPUT_DIR)/%.pdf, $(STRUCTURE_SUMMARY_TEMP_PDF))
+
 #-------------------------------------------------------------------------
 # Helper lists
 #-------------------------------------------------------------------------
@@ -148,6 +163,7 @@ SLIDES_SINGLE_PDF_TARGETS      = $(addprefix $(SLIDES_OUTPUT_DIR)/,$(subst /,_, 
 ## Convenience targets
 SLIDES_MARKDOWN_TARGETS        = $(SLIDES_BUNDLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%) $(SLIDES_SINGLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%)
 SLIDES_SHORT_TARGETS           = $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_BUNDLE_PDF_TARGETS)) $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_SINGLE_PDF_TARGETS))
+STRUCTURE_TARGETS              = $(WEB_MARKDOWN_SOURCES:$(SRC_DIR)%=$(STRUCTURE_TEMP_DIR)%)
 
 ## Readings data template
 READINGS = data/readings.yaml
@@ -216,7 +232,7 @@ docker: ## Build Docker image "alpine-pandoc-hugo"
 
 .PHONY: clean-all
 clean-all: clean-temp ## Clean up all generated files and directories
-	rm -rf $(SLIDES_OUTPUT_DIR) $(WEB_OUTPUT_DIR) $(READINGS)
+	rm -rf $(SLIDES_OUTPUT_DIR) $(WEB_OUTPUT_DIR) $(READINGS) $(STRUCTURE_OUTPUT_DIR)
 
 .PHONY: clean-temp
 clean-temp: ## Clean up all intermediate files and directories
@@ -340,3 +356,22 @@ $(SLIDES_SINGLE_PDF_TARGETS): $$(filter $$(dir $$(patsubst $(SLIDES_OUTPUT_DIR)/
 delete-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
 	$(DELETE_SCRIPT) $(SRC_DIR)
 
+.PHONY: structure
+structure: $(STRUCTURE_SUMMARY_PDF) ## Extract structure of the whole lecture series to a pdf
+
+## Extract the structure (title and headings) from each session
+$(STRUCTURE_TARGETS): $(STRUCTURE_TEMP_DIR)/%: $(SRC_DIR)/%
+	$(create-folder)
+	$(PANDOC) $(PANDOC_DIRS) $< --lua-filter=extract_filewise.lua -o $@
+
+## Summarize the structure of the whole lecture series in one markdown file
+$(STRUCTURE_SUMMARY): $(STRUCTURE_TARGETS)
+	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_TARGETS) --lua-filter=extract_summary.lua -o $@
+
+## Convert summery of whole lecture to pdf
+$(STRUCTURE_SUMMARY_TEMP_PDF): $(STRUCTURE_SUMMARY)
+	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_SUMMARY) -o $(STRUCTURE_SUMMARY_TEMP_PDF) --number-sections
+
+## Copy structure from temp directory to 'structure' directory
+$(STRUCTURE_SUMMARY_PDF): $(STRUCTURE_SUMMARY_TEMP_PDF) ## extract structure of all lectures to a pdf
+	$(create-dir-and-copy)
