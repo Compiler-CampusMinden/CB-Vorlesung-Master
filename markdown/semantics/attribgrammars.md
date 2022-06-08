@@ -109,6 +109,7 @@ Ausdrücke können hier sein:
 *   Bedingungen in Kontrollstrukturen
 
 
+<!-- REM Typinferenz
 ## Typinferenz
 
 **Def.:** *Typinferenz* ist die Bestimmung des Datentyps jedes Bezeichners und jedes Ausdrucks im Code.
@@ -123,7 +124,7 @@ $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 dann hat der Ausdruck f(x) den Typ t.)*
 
 benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Laufzeit.
-
+-->
 
 ## Statische Typprüfungen
 
@@ -255,7 +256,7 @@ Die Abhängigkeiten der Attribute lassen sich im sog. *Abhängigkeitsgraphen* da
 Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die Vorkommen nummeriert. (t, t1; t', t'1)
 
 
-
+<!-- REM S-Attributgrammatiken und L-Attributgrammatiken
 # S-Attributgrammatiken und L-Attributgrammatiken
 
 *S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern bei beim Reduzieren berechnen mittels Tiefensuche mit Postorder-Evaluation:
@@ -273,8 +274,9 @@ def visit(N):
 Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
 
 S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
+-->
 
-
+<!-- REM S-Attributgrammatik
 ## Beispiel: S-Attributgrammatik
 
 | Produktion       | Semantische Regel           |
@@ -283,15 +285,16 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 | `e : t ;`        | `e.val = t.val`             |
 | `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
 | `t : D ;`        | `t.val = D.lexval`          |
-
-
+-->
+<!-- REM Beispiel: Annotierter Syntaxbaum
 ## Beispiel: Annotierter Syntaxbaum für `5*8+2`
 
 ::: center
 ![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
 :::
+-->
 
-
+<!-- REM Erzeugung AST aus Parsetree
 ## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
 
 \small
@@ -308,8 +311,9 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 ::: center
 ![AST](images/ast.png){width="40%"}
 :::
+-->
 
-
+<!-- REM Beispiel: L-Attributgrammatik
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
 
 ::: notes
@@ -350,8 +354,9 @@ und mit berechneten und geerbten Attributen:
 *Vorgriff*: Dies ist ein Beispiel für eine "L-attributierte SDD".
 
 :::
+-->
 
-
+<!-- REM Beispiel: Typinferenz
 ## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
 
 | Produktion       | Semantische Regel             |
@@ -360,7 +365,7 @@ und mit berechneten und geerbten Attributen:
 | `e : t ;`        | `e.type = t.type`             |
 | `t : NUM ;`      | `t.type = "int"`              |
 | `t : NAME ;`     | `t.type = "string"`           |
-
+-->
 
 
 # Syntax-gesteuerte Übersetzung (SDT)
@@ -378,7 +383,7 @@ e : e1  {print e1.val;}
   ;
 ```
 
-
+<!-- REM S-attributierte SDD
 ## S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar
 
 
@@ -399,7 +404,7 @@ e : t         {e.val = t.val;} ;
 t : t1 '*' D  {t.val = t1.val * D.lexval;} ;
 t : D         {t.val = D.lexval;} ;
 ```
-
+-->
 
 ## L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (1/2)
 
@@ -442,10 +447,10 @@ T t'(T inh) {
 ```
 
 
-
+<!-- REM Bison related slides
 # Bison: Attribute und Aktionen
 
-<!-- 20 Minuten: 6 Folien (3.0 Min/Folie; inkl. Diskussion) -->
+<!- 20 Minuten: 6 Folien (3.0 Min/Folie; inkl. Diskussion) ->
 
 ## Berechnete (*synthesized*) Attribute
 
@@ -608,7 +613,7 @@ Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
 ::: notes
 [Konsole: bison -v vl09/embedded?.y]{.bsp}
 :::
-
+-->
 
 # Wrap-Up
 
