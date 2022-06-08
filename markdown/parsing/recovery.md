@@ -54,6 +54,11 @@ fhmedia:
     name: "VL Error-Recovery"
 ---
 
+<!-- ADD
+Das tldr hier drüber enhält hier noch einige Verweise auf Bison, die vmtl auch noch rausgefummelt werden müssen.
+
+Das selbe gilt für die Beispiele. Wenn ich das richtig sehe, sind auch die teilweise für Bison/Flex und teilweise für ANTLR.
+ADD -->
 
 ## Fehler beim Parsen
 
