@@ -284,6 +284,9 @@ Die Klasse der regulären Sprachen ist abgeschlossen unter
 *   Komplementbildung
 *   Durchschnitt
 
+<!-- ADD
+Beispiel
+-->
 
 ## Entscheidbarkeit für reguläre Sprachen
 
@@ -293,6 +296,9 @@ Die Klasse der regulären Sprachen ist abgeschlossen unter
 *    ob $w \in \Sigma^{\ast}$ in einer gegebenen regulären Sprache enthalten ist (Das "Wort-Problem")
 *    ob zwei reguläre Sprachen äquivalent sind
 
+<!-- ADD
+Beispiel
+-->
 
 ## Grenzen der regulären Sprachen
 
