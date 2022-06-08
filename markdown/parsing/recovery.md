@@ -392,6 +392,7 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 :::::::::
 
 
+<!-- REM
 ## Panic Mode in Bison (Error Recovery)
 
 ```yacc
@@ -474,7 +475,7 @@ Beispiel:
 
 Für weitere Details vergleiche [@Levine2009, Kap. 8].
 :::
-
+REM -->
 
 ## Fehlerproduktionen
 
@@ -486,6 +487,11 @@ der Fehler wird über eine entsprechende Alternative in der Grammatik korrigiert
 Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
 wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 :::
+
+<!-- ADD
+die Überschriften im folgenden Teil dienen zur Unterscheidung Bison/Flex bzw Antrl.
+Da Bison/Flex rausfliegt, sind die verbleibenden ANTRL Überschriften nicht mehr sonderlich sinnvoll.
+-->
 
 ::: notes
 ### ANTLR4
@@ -509,6 +515,7 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 
 \bigskip
 
+<!-- REM
 :::notes
 ### Flex und Bison
 
@@ -554,6 +561,7 @@ expr: ID '+' ID | INT ;
 
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
+REM -->
 
 ### ANTLR4
 
@@ -566,6 +574,7 @@ Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
 
+<!-- REM
 ### Bison
 
 Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
@@ -573,6 +582,7 @@ Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
 jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
 man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
 :::
+REM -->
 
 
 ## Wrap-Up
