@@ -294,6 +294,9 @@ Sie sind nicht abgeschlossen unter
 
 REM -->
 
+<!-- ADD
+- Allgemein: Beispiele an mehreren Stellen
+-->
 
 # Syntaxanalyse
 
@@ -344,6 +347,9 @@ Hier ist ein einfacher Algorithmus, der (indeterministisch) einen Ableitungsbaum
 
 ![Recursive Descent-Algorithmus](images/recursive_descent.png){width="55%"}
 
+<!-- ADD
+- Definition / Gegenüberstellung AST & Parsetree
+-->
 
 ## Grenzen des Algorithmus
 
