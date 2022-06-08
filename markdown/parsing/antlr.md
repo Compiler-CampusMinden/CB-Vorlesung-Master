@@ -7,7 +7,9 @@ weight: 4
 
 ## ANTLR (Parsergenerator)
 
+<!-- REM Vortragsthema string
 -- Vortragsthema --
+-->
 <!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
 
 ## Semantische Prädikate
