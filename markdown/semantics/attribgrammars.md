@@ -1,6 +1,6 @@
 ---
 type: lecture-bc
-title: "Typen, Type Checking und Attributierte Grammatiken"
+title: "Typen und Attributierte Grammatiken"
 menuTitle: "Attributierte Grammatiken"
 author: "BC George (FH Bielefeld)"
 weight: 2
