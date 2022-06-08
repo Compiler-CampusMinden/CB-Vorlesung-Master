@@ -88,6 +88,7 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 ## Beispiel
 
+<!-- REM Nichtdeterministische endliche Automaten
 
 ## Nichtdeterministische endliche Automaten
 
@@ -100,7 +101,9 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 * $q_0 \in Q$: der Startzustand
 * $F \subseteq Q$: die Menge der Endzustände
 
+-->
 
+<!-- REM Übergangsfunktion NFA
 ## Die Übergangsfunktion eines NFAs
 
  **Def.:** Wir definieren  $\delta^{\ast}: (Q \times \Sigma) \rightarrow \mathcal{P}(Q):$
@@ -114,8 +117,9 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
      $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \{r_1, \ldots r_m \}, r_j \in Q$.
 
      Dann ist $\delta^{\ast}(q, w) = \{r_1,\  \ldots\ , r_m\}$.
+-->
 
-
+<!-- REM Wozu NFAs?
 ## Wozu NFAs im Compilerbau?
 
 Pattern Matching geht mit NFAs.
@@ -123,8 +127,9 @@ Pattern Matching geht mit NFAs.
 NFAs sind so nicht zu programmieren, aber:
 
  **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
+-->
 
-
+<!-- REM Konvertierung NFS in DFA
 ## Konvertierung eines NFAs in einen DFA
 
 Gegeben: Ein NFA $A = (Q, \Sigma, \delta, q_0, F)$
@@ -134,10 +139,11 @@ Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
 \bigskip
 
 ![Konvertierung NFA in DFA](images/nfa2dfa.png){width="45%"}
+-->
 
 
-
-## Beispiel
+<!-- REM Beispiel
+## Beispiel NFA zu DFA
 
 $\delta$          |     a     |        b
 -----------------:|:---------:|:--------------:
@@ -154,8 +160,9 @@ $\rightarrow$ $\{q_0\}$ | $\{q_0\}$      | $\{q_1,q_2\}$
 *$\{q_2\}$              | -              | $\{q_0,q_2\}$
 *$\{q_0, q_2\}$         | $\{q_0\}$      | $\{q_0, q_1, q_2\}$
 *$\{q_0, q_1, q_2\}$    | $\{q_0, q_2\}$ | $\{q_0, q_1, q_2\}$
+-->
 
-
+<!-- REM Minimierung DFA
 ## Minimierung eines DFAs
 
 Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.
@@ -163,6 +170,7 @@ Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein E
 Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
 
 ![DFA Minimierung](images/minimize_dfa.png){width="50%"}
+-->
 
 # Reguläre Ausdrücke
 
@@ -201,7 +209,9 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 **Satz:** Sei $E$ ein regex $\Rightarrow \exists$ DFA $A$ mit $L(E) = L(A)$.
 
+<!-- REM Beispiel: Umwandlung regex in NFA
 ## Beispiel: Umwandlung eines regex in einen NFA
+-->
 
 
 
@@ -251,7 +261,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 
 **Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
 
-
+<!-- REM Pumping Lemma reguläre Sprachen
 ## Das Pumping Lemma für reguläre Sprachen
 
 **Satz:** Das \textit{Pumping Lemma für reguläre Sprachen}:
@@ -263,6 +273,7 @@ $\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
 $\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
 
 $\underset{k \geq 0} \forall xy^{k}z \in L$
+-->
 
 
 ## Abschlusseigenschaften regulärer Sprachen
