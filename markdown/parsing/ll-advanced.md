@@ -1,3 +1,4 @@
+<!-- REM
 ---
 type: lecture-cg
 title: "LL-Parser: Fortgeschrittene Techniken"
@@ -273,7 +274,11 @@ zurücksetzt, werden alle `*_memo` ungültig und müssen ebenfalls zurückgesetz
 :::
 
 [[Anmerkung Anpassung `consume()`]{.bsp}]{.slides}
+REM -->
 
+<!-- ADD
+Der restliche Inhalt soll Teil von Vorlesung 8 (ehem. 4.2) "Attributierte Grammatiken werden"
+ADD -->
 
 ## Semantische Prädikate
 

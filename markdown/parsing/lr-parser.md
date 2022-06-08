@@ -1,3 +1,4 @@
+<!-- REM
 ---
 type: lecture-bc
 title: "Syntaxanalyse: LR-Parser"
@@ -29,7 +30,7 @@ attachments:
 
 
 # Wiederholung
-<!-- 10 Minuten: 1 Folie -->
+<!- 10 Minuten: 1 Folie ->
 
 ![Ein PDA für $L=\{ww^{R}\mid w\in \{a,b\}^{\ast}\}$](images/pda.png){width="60%"}
 
@@ -45,7 +46,7 @@ attachments:
 
 
 # Motivation
-<!-- 5 Minuten -->
+<!- 5 Minuten ->
 
 ## *LL* ist nicht alles
 
@@ -53,8 +54,8 @@ Die Menge der *LL*-Sprachen ist eine echte Teilmenge der deterministisch kontext
 
 
 # Bottom-Up-Analyse
-<!-- 70 Minuten: 57 Folien (inkl. Diskussion) -->
-<!-- XXX GTB, Kap. 1 und 2 -->
+<!- 70 Minuten: 57 Folien (inkl. Diskussion) ->
+<!- XXX GTB, Kap. 1 und 2 ->
 
 ## Von unten nach oben
 
@@ -448,10 +449,11 @@ Folgendes kann trotzdem helfen:
 
 
 
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
+<!- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). ->
 ::: slides
 ## LICENSE
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 :::
+REM -->
