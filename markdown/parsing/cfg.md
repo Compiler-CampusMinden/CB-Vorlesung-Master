@@ -93,6 +93,7 @@ Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe g
 ![Ein PDA für $L=\{ww^{R}\mid w\in \{a,b\}^{\ast}\}$](images/pda2.png){width="45%"}
 
 
+<!-- REM Konfiguration PDAs
 ## Konfigurationen von PDAs
 
 **Def.:** Eine Konfiguration (ID) eines PDAs 3-Tupel $(q, w, \gamma)$
@@ -103,10 +104,14 @@ mit
 * $\gamma$ ist der Kellerinhalt $\gamma\in \Gamma^{\ast}$
 
 eines PDAs zu einem gegebenen Zeitpunkt.
-
+-->
 
 ## Die Übergangsrelation eines PDAs
 
+<!-- ADD
+Hier wird die PDA-Konfiguration referenziert, die Folie dafür sollte aber raus, das ist
+potentiell ein Problem.
+-->
 **Def.:** Die Relation $\vdash$ definiert Übergänge von einer Konfiguration zu einer anderen:
 
 Sei $(p, \alpha) \in \delta(q, a, X)$, dann gilt $\forall w\ \epsilon \ \Sigma^{\ast}$ und
@@ -122,6 +127,7 @@ induktiv wie folgt:
 *   Basis: $I\overset{\ast}{\vdash} I$ für eine ID $I$.
 *   Induktion: $I\overset{\ast}{\vdash}J$, wenn $\exists$ ID $K$ mit $I\vdash K$ und $K \overset{\ast}{\vdash}J$.
 
+<!-- REM Eigenschaften Konfigurationsübergänge
 ## Eigenschaften der Konfigurationsübergänge
 
 **Satz:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$ ein PDA und $(q, x,\alpha)\overset{\ast}{\vdash}
@@ -133,7 +139,7 @@ $(q, xw, \alpha \gamma) \overset{\ast}{\vdash}(p, yw, \beta\gamma)$
 (p,y w, \beta)$.
 
 Dann gilt: $(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$
-
+-->
 
 ## Akzeptierte Sprachen
 
@@ -145,7 +151,7 @@ für einen Zustand $q \in F, \alpha \in \Gamma^{\ast}$.
 definieren wir die über den *leeren Keller* akzeptierte Sprache
 $N(P) = \{(w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\}$.
 
-
+<!-- REM Akzeptanzäquivalenzen
 ## Akzeptanzäquivalenzen
 
 **Satz:** Wenn $L = N(P_N)$ für einen PDA $P_N$, dann gibt es einen PDA $P_L$ mit
@@ -156,7 +162,7 @@ $\epsilon$-Transitionen mit $L(P) = N(P) = L(Q) = N(Q)$.
 
 Die Transitionsfunktion $\delta$ ist dann von der Form
 $\delta: Q \times \Sigma \times \Gamma \to2^{Q \times \Gamma^{\ast}}$.
-
+-->
 
 ## Deterministische PDAs
 
@@ -220,6 +226,7 @@ Sprachklasse.
 Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
 
 
+<!-- REM Pumping Lemma kontextfreie Sprachen
 ## Das Pumping Lemma für kontextfreie Sprachen
 
 Wenn wir beweisen müssen, dass eine Sprache nicht cf ist, hilft das Pumping Lemma für cf-Sprachen:
@@ -234,8 +241,9 @@ $\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
 *   $\mid vwx\mid \leq p$
 *   $vx \neq \epsilon$
 *   $\forall i \geq 0 : uv^i wx^i y \in L$
+-->
 
-
+<!-- REM Abschlusseigenschaften kontextfreie Sprachen
 ## Abschlusseigenschaften von kontextfreien Sprachen
 
 **Satz:** Die kontextfreien Sprachen sind abgeschlossen unter:
@@ -245,6 +253,7 @@ $\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
 *   Kleene-Hüllen $L^{\ast}$ und $L^+$
 
 **Satz:** Wenn *L* kontextfrei ist, dann ist $L^R$ kontextfrei.
+-->
 
 
 ## Entscheidbarkeit von kontextfreien Grammatiken und Sprachen
