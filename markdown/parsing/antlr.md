@@ -10,6 +10,12 @@ weight: 4
 <!-- REM Vortragsthema string
 -- Vortragsthema --
 -->
+
+<!-- ADD
+- "altes Material" wieder einbauen
+- soll mal eine 20 min Einheit werden
+-->
+
 <!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
 
 ## Semantische Prädikate
