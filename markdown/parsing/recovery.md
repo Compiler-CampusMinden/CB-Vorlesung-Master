@@ -397,7 +397,7 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 :::::::::
 
 
-<!-- REM
+<!-- REM Panic Mode in Bison (Error Recovery)
 ## Panic Mode in Bison (Error Recovery)
 
 ```yacc
@@ -520,7 +520,7 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 
 \bigskip
 
-<!-- REM
+<!-- REM Flex und Bison (Fehlerproduktionen)
 :::notes
 ### Flex und Bison
 
@@ -554,7 +554,7 @@ spezieller Datentyp `YYLTYPE`.
 
 Für weitere Details vergleiche [@Levine2009, Kap. 8].
 :::
-
+REM -->
 
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
@@ -566,7 +566,6 @@ expr: ID '+' ID | INT ;
 
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
-REM -->
 
 ### ANTLR4
 
@@ -579,7 +578,7 @@ Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
 
-<!-- REM
+<!-- REM Bison (nicht eindeutige Grammatiken)
 ### Bison
 
 Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
