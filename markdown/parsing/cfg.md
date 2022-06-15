@@ -94,7 +94,7 @@ mit
 * $\gamma$ ist der Kellerinhalt $\gamma\in \Gamma^{\ast}$
 
 eines PDAs zu einem gegebenen Zeitpunkt.
--->
+REM -->
 
 ## Die Übergangsrelation eines PDAs
 
@@ -129,7 +129,7 @@ $(q, xw, \alpha \gamma) \overset{\ast}{\vdash}(p, yw, \beta\gamma)$
 (p,y w, \beta)$.
 
 Dann gilt: $(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$
--->
+REM -->
 
 ## Akzeptierte Sprachen
 
@@ -152,7 +152,7 @@ $\epsilon$-Transitionen mit $L(P) = N(P) = L(Q) = N(Q)$.
 
 Die Transitionsfunktion $\delta$ ist dann von der Form
 $\delta: Q \times \Sigma \times \Gamma \to2^{Q \times \Gamma^{\ast}}$.
--->
+REM -->
 
 ## Deterministische PDAs
 
@@ -231,7 +231,7 @@ $\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
 *   $\mid vwx\mid \leq p$
 *   $vx \neq \epsilon$
 *   $\forall i \geq 0 : uv^i wx^i y \in L$
--->
+REM -->
 
 <!-- REM Abschlusseigenschaften kontextfreie Sprachen
 ## Abschlusseigenschaften von kontextfreien Sprachen
@@ -243,7 +243,7 @@ $\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
 *   Kleene-Hüllen $L^{\ast}$ und $L^+$
 
 **Satz:** Wenn *L* kontextfrei ist, dann ist $L^R$ kontextfrei.
--->
+REM -->
 
 
 ## Entscheidbarkeit von kontextfreien Grammatiken und Sprachen
