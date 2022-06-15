@@ -99,7 +99,7 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 * $q_0 \in Q$: der Startzustand
 * $F \subseteq Q$: die Menge der Endzustände
 
--->
+REM -->
 
 <!-- REM Übergangsfunktion NFA
 ## Die Übergangsfunktion eines NFAs
@@ -115,7 +115,7 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
      $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \{r_1, \ldots r_m \}, r_j \in Q$.
 
      Dann ist $\delta^{\ast}(q, w) = \{r_1,\  \ldots\ , r_m\}$.
--->
+REM -->
 
 <!-- REM Wozu NFAs?
 ## Wozu NFAs im Compilerbau?
@@ -125,7 +125,7 @@ Pattern Matching geht mit NFAs.
 NFAs sind so nicht zu programmieren, aber:
 
  **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
--->
+REM -->
 
 <!-- REM Konvertierung NFS in DFA
 ## Konvertierung eines NFAs in einen DFA
@@ -137,7 +137,7 @@ Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
 \bigskip
 
 ![Konvertierung NFA in DFA](images/nfa2dfa.png){width="45%"}
--->
+REM -->
 
 
 <!-- REM Beispiel
@@ -158,7 +158,7 @@ $\rightarrow$ $\{q_0\}$ | $\{q_0\}$      | $\{q_1,q_2\}$
 *$\{q_2\}$              | -              | $\{q_0,q_2\}$
 *$\{q_0, q_2\}$         | $\{q_0\}$      | $\{q_0, q_1, q_2\}$
 *$\{q_0, q_1, q_2\}$    | $\{q_0, q_2\}$ | $\{q_0, q_1, q_2\}$
--->
+REM -->
 
 <!-- REM Minimierung DFA
 ## Minimierung eines DFAs
@@ -168,7 +168,7 @@ Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein E
 Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
 
 ![DFA Minimierung](images/minimize_dfa.png){width="50%"}
--->
+REM -->
 
 # Reguläre Ausdrücke
 
@@ -209,7 +209,7 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 <!-- REM Beispiel: Umwandlung regex in NFA
 ## Beispiel: Umwandlung eines regex in einen NFA
--->
+REM -->
 
 
 
@@ -271,7 +271,7 @@ $\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
 $\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
 
 $\underset{k \geq 0} \forall xy^{k}z \in L$
--->
+REM -->
 
 
 ## Abschlusseigenschaften regulärer Sprachen
