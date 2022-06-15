@@ -9,7 +9,7 @@ weight: 4
 
 <!-- REM Vortragsthema string
 -- Vortragsthema --
--->
+REM -->
 
 <!-- ADD
 - "altes Material" wieder einbauen
