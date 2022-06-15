@@ -124,7 +124,7 @@ $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 dann hat der Ausdruck f(x) den Typ t.)*
 
 benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Laufzeit.
--->
+REM -->
 
 ## Statische Typprüfungen
 
@@ -274,7 +274,7 @@ def visit(N):
 Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
 
 S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
--->
+REM -->
 
 <!-- REM S-Attributgrammatik
 ## Beispiel: S-Attributgrammatik
@@ -285,14 +285,14 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 | `e : t ;`        | `e.val = t.val`             |
 | `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
 | `t : D ;`        | `t.val = D.lexval`          |
--->
+REM -->
 <!-- REM Beispiel: Annotierter Syntaxbaum
 ## Beispiel: Annotierter Syntaxbaum für `5*8+2`
 
 ::: center
 ![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
 :::
--->
+REM -->
 
 <!-- REM Erzeugung AST aus Parsetree
 ## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
@@ -311,7 +311,7 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 ::: center
 ![AST](images/ast.png){width="40%"}
 :::
--->
+REM -->
 
 <!-- REM Beispiel: L-Attributgrammatik
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
@@ -354,7 +354,7 @@ und mit berechneten und geerbten Attributen:
 *Vorgriff*: Dies ist ein Beispiel für eine "L-attributierte SDD".
 
 :::
--->
+REM -->
 
 <!-- REM Beispiel: Typinferenz
 ## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
@@ -365,7 +365,7 @@ und mit berechneten und geerbten Attributen:
 | `e : t ;`        | `e.type = t.type`             |
 | `t : NUM ;`      | `t.type = "int"`              |
 | `t : NAME ;`     | `t.type = "string"`           |
--->
+REM -->
 
 
 # Syntax-gesteuerte Übersetzung (SDT)
@@ -404,7 +404,7 @@ e : t         {e.val = t.val;} ;
 t : t1 '*' D  {t.val = t1.val * D.lexval;} ;
 t : D         {t.val = D.lexval;} ;
 ```
--->
+REM -->
 
 ## L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (1/2)
 
@@ -613,7 +613,7 @@ Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
 ::: notes
 [Konsole: bison -v vl09/embedded?.y]{.bsp}
 :::
--->
+REM -->
 
 <!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
 
