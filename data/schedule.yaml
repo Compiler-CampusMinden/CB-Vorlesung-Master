@@ -140,6 +140,7 @@
       leader: "cagi"
     - topic: "/machinecode/machinecode"
       leader: "cagi"
+    - topic: "/org/exam"
 
 - week: "KW03"
   misc_lecture:
