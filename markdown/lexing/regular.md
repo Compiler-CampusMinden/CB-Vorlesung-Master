@@ -87,21 +87,6 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 ## Beispiel
 
 
-<!-- REM Übergangsfunktion NFA
-## Die Übergangsfunktion eines NFAs
-
- **Def.:** Wir definieren  $\delta^{\ast}: (Q \times \Sigma) \rightarrow \mathcal{P}(Q):$
-    induktiv wie folgt:
-
-* Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
-* Induktion: Sei $w \in \Sigma^{\ast}, w = xa, x \in \Sigma^{\ast}, a \in \Sigma$ mit
-
-     $\delta^{\ast}(q, x) =  \{ p_1,\ \ldots,\  p_k \}, p_i \in Q$, sei
-
-     $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \{r_1, \ldots r_m \}, r_j \in Q$.
-
-     Dann ist $\delta^{\ast}(q, w) = \{r_1,\  \ldots\ , r_m\}$.
-REM -->
 
 <!-- REM Wozu NFAs?
 ## Wozu NFAs im Compilerbau?
