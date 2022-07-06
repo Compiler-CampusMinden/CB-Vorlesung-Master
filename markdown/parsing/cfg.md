@@ -180,17 +180,6 @@ Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
 
 
 
-<!-- REM Abschlusseigenschaften kontextfreie Sprachen
-## Abschlusseigenschaften von kontextfreien Sprachen
-
-**Satz:** Die kontextfreien Sprachen sind abgeschlossen unter:
-
-*   Vereinigung
-*   Konkatenation
-*   Kleene-Hüllen $L^{\ast}$ und $L^+$
-
-**Satz:** Wenn *L* kontextfrei ist, dann ist $L^R$ kontextfrei.
-REM -->
 
 
 ## Entscheidbarkeit von kontextfreien Grammatiken und Sprachen
