@@ -436,41 +436,6 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 
 \bigskip
 
-<!-- REM Flex und Bison (Fehlerproduktionen)
-:::notes
-### Flex und Bison
-
-:::
-
-```yacc
-stmt : 'int' ID ';'     { $$ = $2; }
-     : 'int' ID         { yyerror("unterminated id");
-                          $$ = $2; }
-     ;
-%%
-void yyerror(char *s, ...) {
-    va_list ap; va_start(ap, s);
-    fprintf(stderr, "%d: error: ", yylineno);
-    vfprintf(stderr, s, ap); fprintf(stderr, "\n");
-}
-```
-
-::: notes
-Analog zu ANTLR4 ist es auch in Flex/Bison üblich, für typische Szenarien
-"nicht ganz korrekte" Eingaben zu akzeptieren. Dazu definiert man zusätzliche
-Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
-und eine zusätzliche Warnung ausgeben.
-
-Dabei definiert man sich typischerweise die Funktion `yyerror()`. Über
-`yytext` hat man Zugriff auf den Eingabetext des aktuellen Tokens, und
-mit `yylineno` hat man Zugriff auf die aktuelle Eingabezeile (`yylineno`
-wird automatisch bei jedem `\n` inkrementiert). Wenn man weitere Informationen
-benötigt, muss man mit dem Bison-Feature "Locations" arbeiten. Dies ist ein
-spezieller Datentyp `YYLTYPE`.
-
-Für weitere Details vergleiche [@Levine2009, Kap. 8].
-:::
-REM -->
 
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
