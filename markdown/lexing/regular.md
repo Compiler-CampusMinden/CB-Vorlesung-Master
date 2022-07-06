@@ -88,15 +88,6 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 
 
-<!-- REM Wozu NFAs?
-## Wozu NFAs im Compilerbau?
-
-Pattern Matching geht mit NFAs.
-
-NFAs sind so nicht zu programmieren, aber:
-
- **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
-REM -->
 
 <!-- REM Konvertierung NFS in DFA
 ## Konvertierung eines NFAs in einen DFA
