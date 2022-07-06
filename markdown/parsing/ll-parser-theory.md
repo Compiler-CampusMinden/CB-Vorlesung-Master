@@ -35,11 +35,6 @@ ADD -->
 
 ## Themen für heute
 
-<!-- REM specific topics for CFGs
-*   PDAs: mächtiger als DFAs, NFAs
-*   kontextfreie Grammatiken und Sprachen: mächtiger als reguläre Grammatiken und Sprachen
-*   DPDAs und deterministisch kontextfreie Grammatiken: die Grundlage der Syntaxanalyse im Compilerbau
-REM -->
 *   Der Einsatz kontextfreier Grammatik zur Syntaxanalyse mittels Top-Down-Techniken
 
 <!-- REM remove CFG specific slides
