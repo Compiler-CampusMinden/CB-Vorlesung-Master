@@ -86,20 +86,6 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 ## Beispiel
 
-<!-- REM Nichtdeterministische endliche Automaten
-
-## Nichtdeterministische endliche Automaten
-
- **Def.:** Ein *nichtdeterministischer endlicher Automat* (NFA) ist ein 5-Tupel
-    $A = (Q, \Sigma, \delta, q_0, F)$ mit
-
-* $Q$: eine endliche Menge von Zuständen
-* $\Sigma$: ein Alphabet von Eingabesymbolen
-* $\delta$: die Übergangsfunktion  $(Q \times \Sigma) \rightarrow \mathcal{P}(Q)$
-* $q_0 \in Q$: der Startzustand
-* $F \subseteq Q$: die Menge der Endzustände
-
-REM -->
 
 <!-- REM Übergangsfunktion NFA
 ## Die Übergangsfunktion eines NFAs
