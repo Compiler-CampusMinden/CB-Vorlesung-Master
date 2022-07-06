@@ -92,15 +92,6 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 
 
-<!-- REM Minimierung DFA
-## Minimierung eines DFAs
-
-Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.
-
-Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
-
-![DFA Minimierung](images/minimize_dfa.png){width="50%"}
-REM -->
 
 # Reguläre Ausdrücke
 
