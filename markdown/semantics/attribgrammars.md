@@ -241,13 +241,6 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-<!-- REM Beispiel: Annotierter Syntaxbaum
-## Beispiel: Annotierter Syntaxbaum für `5*8+2`
-
-::: center
-![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
-:::
-REM -->
 
 <!-- REM Erzeugung AST aus Parsetree
 ## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
