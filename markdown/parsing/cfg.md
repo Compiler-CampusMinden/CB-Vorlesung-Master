@@ -116,18 +116,6 @@ für einen Zustand $q \in F, \alpha \in \Gamma^{\ast}$.
 definieren wir die über den *leeren Keller* akzeptierte Sprache
 $N(P) = \{(w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\}$.
 
-<!-- REM Akzeptanzäquivalenzen
-## Akzeptanzäquivalenzen
-
-**Satz:** Wenn $L = N(P_N)$ für einen PDA $P_N$, dann gibt es einen PDA $P_L$ mit
-$L = L(P_L)$.
-
-**Satz:** Für einen PDA $P$ mit $\epsilon$-Transitionen existiert ein PDA $Q$ ohne
-$\epsilon$-Transitionen mit $L(P) = N(P) = L(Q) = N(Q)$.
-
-Die Transitionsfunktion $\delta$ ist dann von der Form
-$\delta: Q \times \Sigma \times \Gamma \to2^{Q \times \Gamma^{\ast}}$.
-REM -->
 
 ## Deterministische PDAs
 
