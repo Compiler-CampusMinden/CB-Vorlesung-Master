@@ -11,9 +11,6 @@ outcomes:
   - k1: "Recursive-Descent-Parser"
   - k1: "First- und Follow-Mengen"
   - k1: "LL-Parser"
-<!-- REM remove cfg specific outcomes
-  - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
-REM -->
   - k2: "Schreiben von LL-Parsern"
   - k3: "Top-Down Analyse programmieren"
 attachments:
