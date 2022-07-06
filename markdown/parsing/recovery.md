@@ -459,15 +459,6 @@ Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
 
-<!-- REM Bison (nicht eindeutige Grammatiken)
-### Bison
-
-Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
-(vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
-jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
-man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
-:::
-REM -->
 
 
 ## Wrap-Up
