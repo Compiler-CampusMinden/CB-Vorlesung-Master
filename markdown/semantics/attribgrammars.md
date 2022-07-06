@@ -261,28 +261,6 @@ e : e1  {print e1.val;}
   ;
 ```
 
-<!-- REM S-attributierte SDD
-## S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar
-
-
-Die Aktionen werden am Ende jeder Produktion eingefügt ("postfix SDT").
-
-| Produktion       | Semantische Regel           |
-| :--------------- | :-------------------------- |
-| `e : e1 '+' t ;` | `e.val = e1.val + t.val`    |
-| `e : t ;`        | `e.val = t.val`             |
-| `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
-| `t : D ;`        | `t.val = D.lexval`          |
-
-\bigskip
-
-```
-e : e1 '+' t  {e.val = e1.val + t.val; print(e.val);} ;
-e : t         {e.val = t.val;} ;
-t : t1 '*' D  {t.val = t1.val * D.lexval;} ;
-t : D         {t.val = D.lexval;} ;
-```
-REM -->
 
 ## L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (1/2)
 
