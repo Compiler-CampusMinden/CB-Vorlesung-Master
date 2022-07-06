@@ -109,22 +109,6 @@ Ausdrücke können hier sein:
 *   Bedingungen in Kontrollstrukturen
 
 
-<!-- REM Typinferenz
-## Typinferenz
-
-**Def.:** *Typinferenz* ist die Bestimmung des Datentyps jedes Bezeichners und jedes Ausdrucks im Code.
-
-Der Typ eines Ausdrucks wird mit Hilfe der Typen seiner Unterausdrücke bestimmt.
-
-Dabei kann man ein Kalkül mit sog. Inferenzregeln der Form
-
-$$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
-
-*(Wenn f den Typ $s \rightarrow t$ hat und x den Typ s,
-dann hat der Ausdruck f(x) den Typ t.)*
-
-benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Laufzeit.
-REM -->
 
 ## Statische Typprüfungen
 
