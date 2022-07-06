@@ -7,12 +7,6 @@ readings:
   - key: "aho2013compilers"
   - key: "hopcroft2003"
 outcomes:
-<!-- REM remove cfg specific outcomes
-  - k1: "PDAs"
-  - k1: "Deterministische PDAs"
-  - k1: "Kontextfreie Grammatiken"
-  - k1: "Deterministisch kontextfreie Grammatiken"
-REM -->
   - k1: "Top-Down-Analyse"
   - k1: "Recursive-Descent-Parser"
   - k1: "First- und Follow-Mengen"
