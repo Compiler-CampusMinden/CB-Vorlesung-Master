@@ -105,19 +105,6 @@ induktiv wie folgt:
 *   Basis: $I\overset{\ast}{\vdash} I$ für eine ID $I$.
 *   Induktion: $I\overset{\ast}{\vdash}J$, wenn $\exists$ ID $K$ mit $I\vdash K$ und $K \overset{\ast}{\vdash}J$.
 
-<!-- REM Eigenschaften Konfigurationsübergänge
-## Eigenschaften der Konfigurationsübergänge
-
-**Satz:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$ ein PDA und $(q, x,\alpha)\overset{\ast}{\vdash}
-(p, y, \beta)$. Dann gilt für beliebige Strings $w\in\Sigma^{\ast}$, $\gamma$ in $\Gamma^{\ast}$:
-
-$(q, xw, \alpha \gamma) \overset{\ast}{\vdash}(p, yw, \beta\gamma)$
-
-**Satz:** Sei $P = (Q, \Sigma, \Gamma, \gamma, q_0, \perp, F)$ ein PDA und $(q,xw,\alpha) \overset{\ast}{\vdash}
-(p,y w, \beta)$.
-
-Dann gilt: $(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$
-REM -->
 
 ## Akzeptierte Sprachen
 
