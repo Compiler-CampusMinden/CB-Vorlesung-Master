@@ -240,25 +240,6 @@ Die Abhängigkeiten der Attribute lassen sich im sog. *Abhängigkeitsgraphen* da
 Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die Vorkommen nummeriert. (t, t1; t', t'1)
 
 
-<!-- REM S-Attributgrammatiken und L-Attributgrammatiken
-# S-Attributgrammatiken und L-Attributgrammatiken
-
-*S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern bei beim Reduzieren berechnen mittels Tiefensuche mit Postorder-Evaluation:
-
-
-```python
-def visit(N):
-    for each child C of N (from left to right):
-        visit(C)
-    eval(N)     # evaluate attributes of N
-```
-
-*L-Attributgrammatiken*: Grammatiken mit Attributen, die nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.
-
-Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
-
-S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
-REM -->
 
 <!-- REM S-Attributgrammatik
 ## Beispiel: S-Attributgrammatik
