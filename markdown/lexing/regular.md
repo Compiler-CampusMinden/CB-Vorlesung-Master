@@ -89,17 +89,6 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 
 
-<!-- REM Konvertierung NFS in DFA
-## Konvertierung eines NFAs in einen DFA
-
-Gegeben: Ein NFA $A = (Q, \Sigma, \delta, q_0, F)$
-
-Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
-
-\bigskip
-
-![Konvertierung NFA in DFA](images/nfa2dfa.png){width="45%"}
-REM -->
 
 
 <!-- REM Beispiel
