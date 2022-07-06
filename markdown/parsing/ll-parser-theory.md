@@ -21,16 +21,6 @@ attachments:
 
 # Wiederholung
 
-<!-- REM remove Wiederholung for CFG
-## Endliche Automaten. reguläre Ausdrücke, reguläre Grammatiken, reguläre Sprachen
-
-*   Wie sind DFAs und NFAs definiert?
-*   Was sind reguläre Ausdrücke?
-*   Was sind formale und reguläre Grammatiken?
-*   In welchem Zusammenhang stehen all diese Begriffe?
-*   Wie werden DFAs und reguläre Ausdrücke im Compilerbau eingesetzt?
-
-REM -->
 
 <!-- ADD
 - Wiederholung für LL-Parser
