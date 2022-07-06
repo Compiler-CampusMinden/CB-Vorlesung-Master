@@ -179,19 +179,6 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 
 **Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
 
-<!-- REM Pumping Lemma reguläre Sprachen
-## Das Pumping Lemma für reguläre Sprachen
-
-**Satz:** Das \textit{Pumping Lemma für reguläre Sprachen}:
-
-Sei $L$ eine reguläre Sprache.
-
-$\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
-
-$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
-
-$\underset{k \geq 0} \forall xy^{k}z \in L$
-REM -->
 
 
 ## Abschlusseigenschaften regulärer Sprachen
