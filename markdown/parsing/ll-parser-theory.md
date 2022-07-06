@@ -28,18 +28,6 @@ ADD -->
 
 # Motivation
 
-<!-- REM specific motivation for CFGs
-## Wofür reichen reguläre Sprachen nicht?
-
-Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus gezählt werden müssen. Diese Sprachen lassen sich oft mit Variablen im Exponenten beschreiben, die unendlich viele Werte annehmen können.
-
-*    $a^ib^{2*i}$ ist nicht regulär
-*    $a^ib^{2*i}$ für $0 \leq i \leq 3$ ist regulär
-
-*    Wo finden sich die oben genannten Konstanten bei einem DFA wieder?
-*    Warum ist die erste Sprache oben nicht regulär, die zweite aber?
-
-REM -->
 
 <!-- ADD
 - spezifische Motivation für LL-Parser
