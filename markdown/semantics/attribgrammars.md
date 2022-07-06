@@ -241,16 +241,6 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-<!-- REM S-Attributgrammatik
-## Beispiel: S-Attributgrammatik
-
-| Produktion       | Semantische Regel           |
-| :--------------- | :-------------------------- |
-| `e : e1 '+' t ;` | `e.val = e1.val + t.val`    |
-| `e : t ;`        | `e.val = t.val`             |
-| `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
-| `t : D ;`        | `t.val = D.lexval`          |
-REM -->
 <!-- REM Beispiel: Annotierter Syntaxbaum
 ## Beispiel: Annotierter Syntaxbaum für `5*8+2`
 
