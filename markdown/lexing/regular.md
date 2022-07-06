@@ -130,9 +130,6 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 **Satz:** Sei $E$ ein regex $\Rightarrow \exists$ DFA $A$ mit $L(E) = L(A)$.
 
-<!-- REM Beispiel: Umwandlung regex in NFA
-## Beispiel: Umwandlung eines regex in einen NFA
-REM -->
 
 
 
