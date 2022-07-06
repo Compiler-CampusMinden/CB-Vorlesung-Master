@@ -244,16 +244,6 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-<!-- REM Beispiel: Typinferenz
-## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
-
-| Produktion       | Semantische Regel             |
-| :--------------- | :---------------------------- |
-| `e : e1 '+' t ;` | `e.type = f(e1.type, t.type)` |
-| `e : t ;`        | `e.type = t.type`             |
-| `t : NUM ;`      | `t.type = "int"`              |
-| `t : NAME ;`     | `t.type = "string"`           |
-REM -->
 
 
 # Syntax-gesteuerte Übersetzung (SDT)
