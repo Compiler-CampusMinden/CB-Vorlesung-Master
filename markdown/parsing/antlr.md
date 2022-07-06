@@ -7,9 +7,6 @@ weight: 4
 
 ## ANTLR (Parsergenerator)
 
-<!-- REM Vortragsthema string
--- Vortragsthema --
-REM -->
 
 <!-- ADD
 - "altes Material" wieder einbauen
