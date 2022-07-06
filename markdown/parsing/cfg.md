@@ -179,22 +179,6 @@ Sprachklasse.
 Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
 
 
-<!-- REM Pumping Lemma kontextfreie Sprachen
-## Das Pumping Lemma für kontextfreie Sprachen
-
-Wenn wir beweisen müssen, dass eine Sprache nicht cf ist, hilft das Pumping Lemma für cf-Sprachen:
-
-**Satz:** Sei *L* eine kontextfreie Sprache
-
-$\Rightarrow \exists$ eine Konstante $p \in \mathbb{N}$:
-
-$\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
-\Sigma ^{\ast}$ mit $z = uvwxy$ und
-
-*   $\mid vwx\mid \leq p$
-*   $vx \neq \epsilon$
-*   $\forall i \geq 0 : uv^i wx^i y \in L$
-REM -->
 
 <!-- REM Abschlusseigenschaften kontextfreie Sprachen
 ## Abschlusseigenschaften von kontextfreien Sprachen
