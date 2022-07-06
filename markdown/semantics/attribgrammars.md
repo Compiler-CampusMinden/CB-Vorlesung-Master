@@ -243,48 +243,6 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-<!-- REM Beispiel: L-Attributgrammatik
-## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
-
-::: notes
-
-Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie `5*8+2`, hier umformuliert ohne Links-Rekursion
-und mit berechneten und geerbten Attributen:
-
-:::
-
-::: center
-
-| Produktion              | Semantische Regel             |
-| :---------------------- | :---------------------------- |
-| `t : D t' ;`            | `t'.inh = D.lexval`           |
-|                         | `t.syn = t'.syn`              |
-| `t' : '*' D t'1 ;`      | `t'1.inh = t'.inh * D.lexval` |
-|                         | `t'.syn = t'1.syn`            |
-| `t' :` $\epsilon$ `;`   | `t'.syn = t'.inh`             |
-
-:::
-
-\vspace{-10mm}
-
-::::::::: center
-:::::: columns
-::: {.column width="10%"}
-\vspace{20mm}
-**`5*8`** =>
-:::
-::: {.column width="45%"}
-![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)](images/annotatedparsetree2.png)
-:::
-::::::
-:::::::::
-
-::: notes
-
-*Vorgriff*: Dies ist ein Beispiel für eine "L-attributierte SDD".
-
-:::
-REM -->
 
 <!-- REM Beispiel: Typinferenz
 ## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
