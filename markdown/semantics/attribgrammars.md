@@ -242,24 +242,6 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-<!-- REM Erzeugung AST aus Parsetree
-## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
-
-\small
-
-| Produktion       | Semantische Regel                                         |
-| :--------------- | :-------------------------------------------------------- |
-| `e : e1 '+' t ;` | `e.node = new Node('+', e1.node, t.node)`                 |
-| `e : t ;`        | `e.node = t.node`                                         |
-| `t : t1 '*' D ;` | `t.node = new Node('*', t1.node, new Leaf(D, D.lexval));` |
-| `t : D ;`        | `t.node = new Leaf(D, D.lexval);`                         |
-
-\normalsize
-
-::: center
-![AST](images/ast.png){width="40%"}
-:::
-REM -->
 
 <!-- REM Beispiel: L-Attributgrammatik
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
