@@ -83,7 +83,6 @@ Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe g
 ![Ein PDA für $L=\{ww^{R}\mid w\in \{a,b\}^{\ast}\}$](images/pda2.png){width="45%"}
 
 
-<!-- REM Konfiguration PDAs
 ## Konfigurationen von PDAs
 
 **Def.:** Eine Konfiguration (ID) eines PDAs 3-Tupel $(q, w, \gamma)$
@@ -94,14 +93,10 @@ mit
 * $\gamma$ ist der Kellerinhalt $\gamma\in \Gamma^{\ast}$
 
 eines PDAs zu einem gegebenen Zeitpunkt.
-REM -->
+
 
 ## Die Übergangsrelation eines PDAs
 
-<!-- ADD
-Hier wird die PDA-Konfiguration referenziert, die Folie dafür sollte aber raus, das ist
-potentiell ein Problem.
--->
 **Def.:** Die Relation $\vdash$ definiert Übergänge von einer Konfiguration zu einer anderen:
 
 Sei $(p, \alpha) \in \delta(q, a, X)$, dann gilt $\forall w\ \epsilon \ \Sigma^{\ast}$ und
