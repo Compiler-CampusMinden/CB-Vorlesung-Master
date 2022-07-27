@@ -54,6 +54,11 @@ fhmedia:
     name: "VL Error-Recovery"
 ---
 
+<!-- ADD
+Das tldr hier drüber enhält hier noch einige Verweise auf Bison, die vmtl auch noch rausgefummelt werden müssen.
+
+Das selbe gilt für die Beispiele. Wenn ich das richtig sehe, sind auch die teilweise für Bison/Flex und teilweise für ANTLR.
+ADD -->
 
 ## Fehler beim Parsen
 
@@ -392,89 +397,6 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 :::::::::
 
 
-## Panic Mode in Bison (Error Recovery)
-
-```yacc
-stmt : 'int' ID ';'     { printf("%s\n", $2); }
-     | error '\n'       { yyerror(); yyerrok; }
-     ;
-```
-
-::: notes
-Bison kennt ein spezielles Fehler-Token `error`. Dieses Token wird genutzt, um
-einen Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
-*höchstwahrscheinlich* weiter parsen kann.
-
-### Parsen mit *error*-Token
-
-Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch.
-Im Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der
-Form $A \to \operatorname{error} \alpha$ anwendbar ist. Dann wird das Token
-`error` auf den Stack geschoben und so lange Eingabe-Token gelesen und verworfen,
-bis eines gefunden wird, welches auf das `error`-Token folgen kann. Dies nennt
-Bison "Resynchronisation". Anschließend wird im Recovery-Modus normal fortgefahren,
-bis drei weitere Token auf den Stack geschoben wurden und damit der Recovery-Modus
-verlassen wird. Falls bereits vorher weitere Fehler auftreten, werden diese nicht
-separat gemeldet.
-
-### Anwendung im obigen Beispiel
-
-Im obigen Beispiel ist die Regel `stmt : error '\n'` enthalten. Im Fehlerfall
-werden die Symbole vom Stack entfernt, bis ein Zustand erreicht ist, der eine
-Shift-Aktion auf das Token `error` hat. Das Error-Token wird auf den Stack
-geschoben und alle Eingabetoken bis zum nächsten `'\n'` gelesen und direkt
-entfernt. Mit dem Erreichen des Zeilenumbruchs wird die zugeordnete Aktion
-ausgeführt. Diese gibt den Fehler auf der Konsole aus und führt mit dem Makro
-`yyerrok` einen Reset des Parsers aus (d.h. er verlässt den Recovery-Modus
-**vor** dem Shiften der per Default drei gültigen Token). Anschließend ist der
-Bison-Parser wieder im normalen Modus. Die fehlerhaften Symbole/Token wurden
-aus dem Eingabestrom entfernt.
-
-### Wo kommen die *error*-Token am besten hin?
-
-Die "schwarze Kunst" ist, die Error-Token an geeigneten Stellen unterzubringen,
-d.h. vorherzusehen, wo der Parser am sinnvollsten wieder aufsetzen kann. Häufig
-sind dies beispielsweise das ein Statement beendende Semikolon oder die einen
-Block beendende schließende geschweifte Klammer. Beispielsweise könnte man für
-die Sprache C bei der Definition von Statements mehrere Synchronisationspunkte
-einbauen:
-
-```yacc
-stmt : ...
-     | error ';'    /* Synchronisation für 'return' */
-     | error '}'    /* Synchronisation nach Block */
-     | error '\n'   /* Synchronisation nach Zeilenumbruch */
-     ;
-```
-
-### Bison und C und Speichermanagement im Fehlerfall
-
-Wenn Bison im Recovery-Modus ist, werden Symbole und ihre Werte vom Stack entfernt.
-Falls diese Werte (vgl. `%union`) Pointer mit dynamisch alloziertem Speicher sind,
-muss Bison diesen Speicher freigeben.
-
-Dazu kann man sich über die Direktive `%destructor { code } symbols` oder
-`%destructor { code } <types>` Code definieren, der dann für die jeweiligen Symbole
-oder Typen ausgeführt wird.
-
-Die Typangabe `<*>` dient dabei als Catch-All für Symbole, für die ein Typ definiert
-wurde, aber kein Destruktor.
-
-
-Beispiel:
-
-```yacc
-%union {
-    char* str;
-}
-%token <str> ID
-
-%destructor { free($$); } <str>
-```
-
-Für weitere Details vergleiche [@Levine2009, Kap. 8].
-:::
-
 
 ## Fehlerproduktionen
 
@@ -486,6 +408,11 @@ der Fehler wird über eine entsprechende Alternative in der Grammatik korrigiert
 Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
 wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 :::
+
+<!-- ADD
+die Überschriften im folgenden Teil dienen zur Unterscheidung Bison/Flex bzw Antrl.
+Da Bison/Flex rausfliegt, sind die verbleibenden ANTRL Überschriften nicht mehr sonderlich sinnvoll.
+-->
 
 ::: notes
 ### ANTLR4
@@ -508,40 +435,6 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 :::
 
 \bigskip
-
-:::notes
-### Flex und Bison
-
-:::
-
-```yacc
-stmt : 'int' ID ';'     { $$ = $2; }
-     : 'int' ID         { yyerror("unterminated id");
-                          $$ = $2; }
-     ;
-%%
-void yyerror(char *s, ...) {
-    va_list ap; va_start(ap, s);
-    fprintf(stderr, "%d: error: ", yylineno);
-    vfprintf(stderr, s, ap); fprintf(stderr, "\n");
-}
-```
-
-::: notes
-Analog zu ANTLR4 ist es auch in Flex/Bison üblich, für typische Szenarien
-"nicht ganz korrekte" Eingaben zu akzeptieren. Dazu definiert man zusätzliche
-Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
-und eine zusätzliche Warnung ausgeben.
-
-Dabei definiert man sich typischerweise die Funktion `yyerror()`. Über
-`yytext` hat man Zugriff auf den Eingabetext des aktuellen Tokens, und
-mit `yylineno` hat man Zugriff auf die aktuelle Eingabezeile (`yylineno`
-wird automatisch bei jedem `\n` inkrementiert). Wenn man weitere Informationen
-benötigt, muss man mit dem Bison-Feature "Locations" arbeiten. Dies ist ein
-spezieller Datentyp `YYLTYPE`.
-
-Für weitere Details vergleiche [@Levine2009, Kap. 8].
-:::
 
 
 ::: notes
@@ -566,13 +459,6 @@ Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
 
-### Bison
-
-Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
-(vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
-jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
-man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
-:::
 
 
 ## Wrap-Up
