@@ -1,6 +1,6 @@
 ---
 type: lecture-bc
-title: "Typen, Type Checking und Attributierte Grammatiken"
+title: "Typen und Attributierte Grammatiken"
 menuTitle: "Attributierte Grammatiken"
 author: "BC George (FH Bielefeld)"
 weight: 2
@@ -108,21 +108,6 @@ Ausdrücke können hier sein:
 *   jeder einzelne aktuelle Parameter in Funktions- und Methodenaufrufen
 *   Bedingungen in Kontrollstrukturen
 
-
-## Typinferenz
-
-**Def.:** *Typinferenz* ist die Bestimmung des Datentyps jedes Bezeichners und jedes Ausdrucks im Code.
-
-Der Typ eines Ausdrucks wird mit Hilfe der Typen seiner Unterausdrücke bestimmt.
-
-Dabei kann man ein Kalkül mit sog. Inferenzregeln der Form
-
-$$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
-
-*(Wenn f den Typ $s \rightarrow t$ hat und x den Typ s,
-dann hat der Ausdruck f(x) den Typ t.)*
-
-benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Laufzeit.
 
 
 ## Statische Typprüfungen
@@ -256,110 +241,8 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
-# S-Attributgrammatiken und L-Attributgrammatiken
-
-*S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern bei beim Reduzieren berechnen mittels Tiefensuche mit Postorder-Evaluation:
 
 
-```python
-def visit(N):
-    for each child C of N (from left to right):
-        visit(C)
-    eval(N)     # evaluate attributes of N
-```
-
-*L-Attributgrammatiken*: Grammatiken mit Attributen, die nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.
-
-Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
-
-S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
-
-
-## Beispiel: S-Attributgrammatik
-
-| Produktion       | Semantische Regel           |
-| :--------------- | :-------------------------- |
-| `e : e1 '+' t ;` | `e.val = e1.val + t.val`    |
-| `e : t ;`        | `e.val = t.val`             |
-| `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
-| `t : D ;`        | `t.val = D.lexval`          |
-
-
-## Beispiel: Annotierter Syntaxbaum für `5*8+2`
-
-::: center
-![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
-:::
-
-
-## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
-
-\small
-
-| Produktion       | Semantische Regel                                         |
-| :--------------- | :-------------------------------------------------------- |
-| `e : e1 '+' t ;` | `e.node = new Node('+', e1.node, t.node)`                 |
-| `e : t ;`        | `e.node = t.node`                                         |
-| `t : t1 '*' D ;` | `t.node = new Node('*', t1.node, new Leaf(D, D.lexval));` |
-| `t : D ;`        | `t.node = new Leaf(D, D.lexval);`                         |
-
-\normalsize
-
-::: center
-![AST](images/ast.png){width="40%"}
-:::
-
-
-## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
-
-::: notes
-
-Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie `5*8+2`, hier umformuliert ohne Links-Rekursion
-und mit berechneten und geerbten Attributen:
-
-:::
-
-::: center
-
-| Produktion              | Semantische Regel             |
-| :---------------------- | :---------------------------- |
-| `t : D t' ;`            | `t'.inh = D.lexval`           |
-|                         | `t.syn = t'.syn`              |
-| `t' : '*' D t'1 ;`      | `t'1.inh = t'.inh * D.lexval` |
-|                         | `t'.syn = t'1.syn`            |
-| `t' :` $\epsilon$ `;`   | `t'.syn = t'.inh`             |
-
-:::
-
-\vspace{-10mm}
-
-::::::::: center
-:::::: columns
-::: {.column width="10%"}
-\vspace{20mm}
-**`5*8`** =>
-:::
-::: {.column width="45%"}
-![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)](images/annotatedparsetree2.png)
-:::
-::::::
-:::::::::
-
-::: notes
-
-*Vorgriff*: Dies ist ein Beispiel für eine "L-attributierte SDD".
-
-:::
-
-
-## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
-
-| Produktion       | Semantische Regel             |
-| :--------------- | :---------------------------- |
-| `e : e1 '+' t ;` | `e.type = f(e1.type, t.type)` |
-| `e : t ;`        | `e.type = t.type`             |
-| `t : NUM ;`      | `t.type = "int"`              |
-| `t : NAME ;`     | `t.type = "string"`           |
 
 
 
@@ -376,28 +259,6 @@ e : e1  {print e1.val;}
     '+' {print "+";}
     t   {e.val = e1.val + t.val; print(e.val);}
   ;
-```
-
-
-## S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar
-
-
-Die Aktionen werden am Ende jeder Produktion eingefügt ("postfix SDT").
-
-| Produktion       | Semantische Regel           |
-| :--------------- | :-------------------------- |
-| `e : e1 '+' t ;` | `e.val = e1.val + t.val`    |
-| `e : t ;`        | `e.val = t.val`             |
-| `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
-| `t : D ;`        | `t.val = D.lexval`          |
-
-\bigskip
-
-```
-e : e1 '+' t  {e.val = e1.val + t.val; print(e.val);} ;
-e : t         {e.val = t.val;} ;
-t : t1 '*' D  {t.val = t1.val * D.lexval;} ;
-t : D         {t.val = D.lexval;} ;
 ```
 
 
@@ -443,171 +304,79 @@ T t'(T inh) {
 
 
 
-# Bison: Attribute und Aktionen
+<!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
 
-<!-- 20 Minuten: 6 Folien (3.0 Min/Folie; inkl. Diskussion) -->
+## Semantische Prädikate
 
-## Berechnete (*synthesized*) Attribute
+Problem in Java: `enum` ab Java5 Schlüsselwort [(vorher als Identifier-Name verwendbar)]{.notes}
 
+```yacc
+prog : (enumDecl | stat)+ ;
+stat : ... ;
+
+enumDecl : ENUM id '{' id (',' id)* '}' ;
 ```
-expr    : expr '+' term     { $$ = $1 + $3; }
-        | term
-        ;
-term    : term '*' DIGIT    { $$ = $1 * $3; }
-        | DIGIT
-        ;
-```
-
-Berechnete Attribute sind der Defaultfall in Bison.
-
-Erinnerung:
-Keine Typen deklariert:
-*   Bison verwendet per Default `int` für
-alle Symbole (Terminalsymbole (Token) und Regeln).
-
-Keine Aktionen an den Regeln angegeben:
-*   Bison nutzt die Default-Aktion `$$ = $1`. Diese
-Aktionen werden immer dann ausgeführt, wenn die rechte Seite der zugehörigen
-Regel/Alternative reduziert werden konnte.
-
-
-## Geerbte (*inherited*) Attribute (1/2)
-
-```
-functiondecl : returntype fname paramlist ;
-
-returntype  : REAL    { $$ = 1; }
-            | INT     { $$ = 2; }
-            ;
-
-fname : IDENTIFIER;
-
-paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
-          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
-          ;
-```
-
-
-## Geerbte (*inherited*) Attribute (2/2)
-
-Hier:
-*   `returntype` und `fname` haben normale berechnete Attribute
-
-*   `paramlist`: Funktionsaufruf mit den erzeugten Werte für `returntype` und `fname` als Parameter $\Rightarrow$ der Wert von `paramlist` ist ein "geerbtes Attribut".
-
-Zugriff auf die Werte der Symbole auf dem Stack links vom aktuellen
-Symbol: `$0` ist das erste
-Symbol links vom aktuellen (hier `type`), `$-1` das zweite (hier `class`)
-usw. ...
-
-
-## Probleme mit geerbten Attributen
-
-```
-functiondecl : returntype fname paramlist ;
-functiondecl : STRING paramlist ;  /* Autsch! */
-
-...
-
-paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
-          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
-          ;
-```
-
-Wenn vor `paramlist` ein `STRING` steht, ist `$0` der Wert von `STRING`, nicht `fname`. Analog
-für `$-1`, $\ldots$
-
-Dies ist eine Quelle für schwer zu findende Bugs!
-
-
-## Typen für geerbte Attribute
-
-```
-functiondecl : returntype fname paramlist ;
-
-paramlist : IDENTIFIER           { mksymbol($0, $-1, $1); }
-          | paramlist IDENTIFIER { mksymbol($0, $-1, $2); }
-          ;
-```
-
-**Achtung**: Für geerbte Attribute funktioniert die Deklaration von Typen
-mit `%type` nicht mehr!
-
-Das Symbol, auf das man sich mit `$0` bezieht, steht nicht in der Produktion,
-sondern im Stack. Bison kann zur Compilezeit nicht den
-Typ des referenzierten Symbols bestimmen. Falls
-oben die Typen von `returntype` und `fname` jeweils `rval` und `fval`
-wären, müsste man die Aktion manuell wie folgt anpassen:
-
-```
-paramlist : IDENTIFIER           { mksymbol($<fval>0, $<rval>-1, $1); }
-          | paramlist IDENTIFIER { mksymbol($<fval>0, $<rval>-1, $2); }
-          ;
-```
-
-
-## Bison und Aktionen
-
-Regeln ohne Aktion ganz rechts: die Default-Aktion ist
-`$$ = $1;` (Vorsicht: Die Typen von `$$` und `$1` müssen passen!)
-
-Aktionen mitten in einer Regel:
-
-```
-xxx : A { dosomething(); } B ;
-```
-
-wird übersetzt in:
-
-```
-xxx : A dummy B ;
-dummy : /* empty */ { dosomething(); }
-```
-
-Da nach dem Shiften von `A` nicht klar ist,
-ob diese Regel matcht und `dosomething` ausgeführt
-werden soll, übersetzt Bison die Regel `xxx` in zwei Regeln, wobei `dosomething()` ganz rechts in der Dummy-Regel steht. `dummy` ist ein normales referenzierbares Symbol.
-
-## Beispiel:
-
-```
-xxx : A { $$ = 42; } B C { printf("%d", $2); } ;
-```
-
-=> Hier wird "42" ausgegeben, da mit `$2` auf den Wert der
-eingebetteten Aktion zugegriffen wird.
-
-`$3`: Der Wert von `B`
-
-`$4`: Der Wert von `C`
-
-
-## Bison: Konflikte durch eingebettete Aktionen
-
-```
-xxx : a | b ;
-
-a : 'a' 'b' 'a' 'a' ;
-b : 'a' 'b' 'a' 'b' ;
-```
-
-Diese Grammatik ist ohne Konflikte von Bison übersetzbar.
-
-\bigskip
-
-```
-xxx : a | b ;
-
-a : 'a' 'b' { dosomething(); } 'a' 'a' ;
-b : 'a' 'b' 'a' 'b' ;
-```
-
-Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
-(`'a'`) einen Shift/Reduce-Konflikt.
 
 ::: notes
-[Konsole: bison -v vl09/embedded?.y]{.bsp}
+Wie kann ich eine Grammatik bauen, die sowohl für Java5 und später als auch für die Vorgänger
+von Java5 funktioniert?
+
+Angenommen, man hätte eine Hilfsfunktion ("Prädikat"), mit denen man aus dem Kontext heraus
+die Unterscheidung treffen kann, dann würde die Umsetzung der Regel ungefähr so aussehen:
 :::
+
+\bigskip
+\pause
+
+```python
+def prog():
+    if lookahead(1) == ENUM and java5: enumDecl()
+    else: stat()
+```
+
+
+## Semantische Prädikate in ANTLR
+
+::: notes
+### Semantische Prädikate in Parser-Regeln
+:::
+
+```yacc
+@parser::members {public static boolean java5;}
+
+prog : ({java5}? enumDecl | stat)+ ;
+stat : ... ;
+
+enumDecl : ENUM id '{' id (',' id)* '}' ;
+```
+
+::: notes
+Prädikate in Parser-Regeln aktivieren bzw. deaktivieren alles, was nach der Abfrage
+des Prädikats gematcht werden könnte.
+
+### Semantische Prädikate in Lexer-Regeln
+
+Alternativ für Lexer-Regeln:
+:::
+
+```yacc
+ENUM : 'enum' {java5}? ;
+ID   : [a-zA-Z]+ ;
+```
+
+::: notes
+Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der Lexer keine
+Vorhersage macht, sondern nach dem längsten Match sucht und die Entscheidung erst trifft,
+wenn das ganze Token gesehen wurde. Bei Parser-Regeln steht das Prädikat links vor der
+entsprechenden Alternative, da der Parser mit Hilfe des Lookaheads Vorhersagen trifft, welche
+Regel/Alternative zutrifft.
+
+*Anmerkung*: Hier wurden nur Variablen eingesetzt, es können aber auch Methoden/Funktionen
+genutzt werden. In Verbindung mit einer Symboltabelle (["Symboltabellen"](cb_symboltabellen1.html))
+und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribute.html) und
+["Interpreter: Attribute+Aktionen"](cb_interpreter2.html)) hat man hier ein mächtiges Hilfswerkzeug!
+:::
+-->
 
 
 # Wrap-Up
