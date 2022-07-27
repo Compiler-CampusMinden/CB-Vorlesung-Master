@@ -1,6 +1,6 @@
 ---
 type: lecture-bc
-title: "CFG, LL-Parser"
+title: "CFG"
 author: "BC George (FH Bielefeld)"
 weight: 1
 readings:

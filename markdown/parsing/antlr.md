@@ -1,8 +1,26 @@
 ---
 type: lecture-cg
 title: "ANTLR (Parsergenerator)"
+author: "Carsten Gips (FH Bielefeld)"
 weight: 4
+readings:
+  - key: "Aho2008"
+    comment: " Abschnitt 2.6 und Kapitel 3"
+tldr: |
+  TODO
+outcomes:
+  - k2: "TODO"
+  - k3: "TODO"
+assignments:
+  - topic: sheet01
+youtube:
+  - link: ""
+    name: "VL Lexer mit ANTLR"
+fhmedia:
+  - link: ""
+    name: "VL Lexer mit ANTLR"
 ---
+
 
 <!-- ADD
 20' Sitzung als Teil von Vorlesung 6 unter Verwendung vom existierenden Material
@@ -90,16 +108,21 @@ und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribut
 :::
 -->
 
-<!-- ADD
+
 ## Wrap-Up
 
 TODO
 
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). ->
+
+
+
+
+
+
+<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
 ::: slides
 ## LICENSE
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 :::
--->

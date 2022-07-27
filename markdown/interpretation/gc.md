@@ -3,7 +3,7 @@ type: lecture-cg
 title: "Garbage Collection"
 menuTitle: "Garbage Collection"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 5
+weight: 4
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel 26: Garbage Collection"

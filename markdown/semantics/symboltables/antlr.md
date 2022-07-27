@@ -6,7 +6,6 @@ weight: 5
 readings:
   - key: "Russell2020"
     comment: "Kapitel 2 und 3"
-  - key: "Ertel2017"
 tldr: |
   hier kommt eine tolle inline-zusammenfassung!
   Formatierung _könnte_ auch **gehen**?
@@ -14,18 +13,14 @@ outcomes:
   - k1: "XXX"
   - k2: "XXX"
   - k1: "XXX"
-quizzes:
-  - link: "TODO"
-    name: "Testquizz"
 assignments:
   - topic: sheet02
 youtube:
-  - link: "https://youtu.be/XYZ"
-    name: "Use This As Link Text"
+  - link: "TODO"
+    name: "VL Symboltabellen mit ANTLR"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/XYZ"
-    name: "Use This As Link Text (Direkt-Link)"
-sketch: true
+  - link: "TODO"
+    name: "VL Symboltabellen mit ANTLR"
 ---
 
 
