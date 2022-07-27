@@ -12,12 +12,10 @@ readings:
   - key: "Parr2014"
 outcomes:
   - k1: "DFAs"
-  - k1: "NFAs"
   - k1: "Reguläre Ausdrücke"
   - k1: "Reguläre Grammatiken"
   - k2: "Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte"
-  - k3: "DFAs, NFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln"
-  - k3: "Herausfinden, ob eine Sprache regulär ist"
+  - k3: "DFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln"
   - k3: "Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert"
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/a5f6c9f70413034acabfc9e81c108fdec193f006/lexing_regular.ann.pdf"
@@ -89,80 +87,11 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 ## Beispiel
 
 
-## Nichtdeterministische endliche Automaten
-
- **Def.:** Ein *nichtdeterministischer endlicher Automat* (NFA) ist ein 5-Tupel
-    $A = (Q, \Sigma, \delta, q_0, F)$ mit
-
-* $Q$: eine endliche Menge von Zuständen
-* $\Sigma$: ein Alphabet von Eingabesymbolen
-* $\delta$: die Übergangsfunktion  $(Q \times \Sigma) \rightarrow \mathcal{P}(Q)$
-* $q_0 \in Q$: der Startzustand
-* $F \subseteq Q$: die Menge der Endzustände
-
-
-## Die Übergangsfunktion eines NFAs
-
- **Def.:** Wir definieren  $\delta^{\ast}: (Q \times \Sigma) \rightarrow \mathcal{P}(Q):$
-    induktiv wie folgt:
-
-* Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
-* Induktion: Sei $w \in \Sigma^{\ast}, w = xa, x \in \Sigma^{\ast}, a \in \Sigma$ mit
-
-     $\delta^{\ast}(q, x) =  \{ p_1,\ \ldots,\  p_k \}, p_i \in Q$, sei
-
-     $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \{r_1, \ldots r_m \}, r_j \in Q$.
-
-     Dann ist $\delta^{\ast}(q, w) = \{r_1,\  \ldots\ , r_m\}$.
-
-
-## Wozu NFAs im Compilerbau?
-
-Pattern Matching geht mit NFAs.
-
-NFAs sind so nicht zu programmieren, aber:
-
- **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
-
-
-## Konvertierung eines NFAs in einen DFA
-
-Gegeben: Ein NFA $A = (Q, \Sigma, \delta, q_0, F)$
-
-Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
-
-\bigskip
-
-![Konvertierung NFA in DFA](images/nfa2dfa.png){width="45%"}
 
 
 
-## Beispiel
-
-$\delta$          |     a     |        b
------------------:|:---------:|:--------------:
-$\rightarrow q_0$ | $\{q_0\}$ | $\{q_1, q_2\}$
-            $q_1$ | $\{q_2\}$ | $\{q_1\}$
-           *$q_2$ |     -     | $\{q_0, q_2\}$
 
 
-
-$\delta$'               | a              | b
-:-----------------------|:---------------|:-------------------
-$\rightarrow$ $\{q_0\}$ | $\{q_0\}$      | $\{q_1,q_2\}$
-*$\{q_1 q_2\}$          | $\{q_2\}$      | $\{q_0, q_1, q_2\}$
-*$\{q_2\}$              | -              | $\{q_0,q_2\}$
-*$\{q_0, q_2\}$         | $\{q_0\}$      | $\{q_0, q_1, q_2\}$
-*$\{q_0, q_1, q_2\}$    | $\{q_0, q_2\}$ | $\{q_0, q_1, q_2\}$
-
-
-## Minimierung eines DFAs
-
-Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.
-
-Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
-
-![DFA Minimierung](images/minimize_dfa.png){width="50%"}
 
 # Reguläre Ausdrücke
 
@@ -201,7 +130,6 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 **Satz:** Sei $E$ ein regex $\Rightarrow \exists$ DFA $A$ mit $L(E) = L(A)$.
 
-## Beispiel: Umwandlung eines regex in einen NFA
 
 
 
@@ -252,18 +180,6 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 **Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
 
 
-## Das Pumping Lemma für reguläre Sprachen
-
-**Satz:** Das \textit{Pumping Lemma für reguläre Sprachen}:
-
-Sei $L$ eine reguläre Sprache.
-
-$\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
-
-$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
-
-$\underset{k \geq 0} \forall xy^{k}z \in L$
-
 
 ## Abschlusseigenschaften regulärer Sprachen
 
@@ -275,6 +191,9 @@ Die Klasse der regulären Sprachen ist abgeschlossen unter
 *   Komplementbildung
 *   Durchschnitt
 
+<!-- ADD
+Beispiel
+-->
 
 ## Entscheidbarkeit für reguläre Sprachen
 
@@ -284,6 +203,9 @@ Die Klasse der regulären Sprachen ist abgeschlossen unter
 *    ob $w \in \Sigma^{\ast}$ in einer gegebenen regulären Sprache enthalten ist (Das "Wort-Problem")
 *    ob zwei reguläre Sprachen äquivalent sind
 
+<!-- ADD
+Beispiel
+-->
 
 ## Grenzen der regulären Sprachen
 
