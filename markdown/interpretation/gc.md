@@ -87,7 +87,7 @@ werden.
 
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/reachable.png)
 
-[Quelle: [`reachable.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
+[Quelle: [reachable.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 1. Erreichbar sind zunächst alle "Wurzeln", d.h. alle Objekte, die direkt über den
@@ -115,7 +115,7 @@ Das führt zu einem zweistufigen Algorithmus:
 
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png)
 
-[Quelle: [`mark-sweep.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
+[Quelle: [mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Die Strukturen für Objekte und die VM werden ergänzt: Objekte erhalten noch
@@ -193,7 +193,7 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
 ::: center
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png){width="80%"}
 
-[Quelle: [`latency-throughput.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
+[Quelle: [latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 :::
 
 
@@ -528,13 +528,7 @@ Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 \bigskip
 
 ### Exceptions
-*   Image [`reachable.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png)
-    (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png),
-    by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
-*   Image [`mark-sweep.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png)
-    (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png),
-    by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
-*   Image [`latency-throughput.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png)
-    (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png),
-    by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
+*   Image [reachable.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
+*   Image [mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
+*   Image [latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
 :::

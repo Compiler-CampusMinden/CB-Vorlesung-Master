@@ -167,7 +167,7 @@ können.
 
 ![](images/nestedscopesuml.png){width="80%"}
 
-[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, S. 142]]{.origin}
+[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, p. 142]]{.origin}
 
 ::: notes
 ### Alternative Implementierung über einen Stack
@@ -202,7 +202,7 @@ class Scope:
         symbol.scope = self     # track the scope in each symbol
 ```
 
-[Quelle: Eigene Implementierung nach einer Idee in [@Parr2010, S. 169]]{.origin}
+[Quelle: Eigene Implementierung nach einer Idee in [@Parr2010, p. 169]]{.origin}
 
 ::: notes
 **Anmerkung**: In der Klasse `Symbol` kann man ein Feld `scope` vom Typ `Scope`

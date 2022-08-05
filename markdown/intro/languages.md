@@ -47,7 +47,7 @@ fhmedia:
 > No more bottles of beer on the wall, no more bottles of beer.
 > Go to the store and buy some more, 99 bottles of beer on the wall.
 
-[Quelle: [99-bottles-of-beer.net/lyrics.html](https://www.99-bottles-of-beer.net/lyrics.html)]{.origin}
+[Quelle: nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net]{.origin}
 
 
 ## Imperativ, Hardwarenah: C
@@ -72,7 +72,7 @@ fhmedia:
  }
 ```
 
-[Quelle: [99-bottles-of-beer.net/language-c-116.html](https://www.99-bottles-of-beer.net/language-c-116.html), by Bill Wein]{.origin}
+[Quelle: ["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Imperativ
@@ -108,7 +108,7 @@ class bottles {
 }
 ```
 
-[Quelle: [99-bottles-of-beer.net/language-java-4.html](https://www.99-bottles-of-beer.net/language-java-4.html), by Sean Russell]{.origin}
+[Quelle: ["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Imperativ
@@ -145,7 +145,7 @@ bottles(X) :-
     bottles(NX).
 ```
 
-[Quelle: [99-bottles-of-beer.net/language-prolog-965.html](https://www.99-bottles-of-beer.net/language-prolog-965.html), by M\@]{.origin}
+[Quelle: ["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Deklarativ
@@ -172,7 +172,7 @@ verse n   = bottles n ++ " of beer on the wall, " ++ bottles n ++ " of beer.\n"
 main      = mapM (putStrLn . verse) [99,98..0]
 ```
 
-[Quelle: [99-bottles-of-beer.net/language-haskell-1070.html](https://www.99-bottles-of-beer.net/language-haskell-1070.html), by Iavor]{.origin}
+[Quelle: ["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Deklarativ
@@ -193,7 +193,7 @@ main      = mapM (putStrLn . verse) [99,98..0]
 ::: center
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
-[Quelle: [99-bottles-of-beer.net/language-brainfuck-2542.html](https://99-bottles-of-beer.net/language-brainfuck-2542.html), by Michal Wojciech Tarnowski]{.origin}
+[Quelle: Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
 :::
 
 ::: notes
@@ -266,15 +266,15 @@ Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studi
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 
+\bigskip
+
 ### Exceptions
 
 Citations of "99 Bottles of Beer" lyrics and programming language examples (license(s) unknown):
-*   [99-bottles-of-beer.net/lyrics.html](https://www.99-bottles-of-beer.net/lyrics.html) (Author unknown, Website hosted by Oliver Schade, Gregor Scheithauer, and Stefan Scheler)
-*   [99-bottles-of-beer.net/language-c-116.html](https://www.99-bottles-of-beer.net/language-c-116.html), by Bill Wein
-*   [99-bottles-of-beer.net/language-java-4.html](https://www.99-bottles-of-beer.net/language-java-4.html), by Sean Russell
-*   [99-bottles-of-beer.net/language-prolog-965.html](https://www.99-bottles-of-beer.net/language-prolog-965.html), by M\@
-*   [99-bottles-of-beer.net/language-haskell-1070.html](https://www.99-bottles-of-beer.net/language-haskell-1070.html), by Iavor
-*   [99-bottles-of-beer.net/language-brainfuck-2542.html](https://99-bottles-of-beer.net/language-brainfuck-2542.html), by Michal Wojciech Tarnowski
-    and screenshot of this website (file [`screenshot_brainfuck_99bottles.png`](https://github.com/Compilerbau/Lecture/blob/master/markdown/intro/languages/images/screenshot_brainfuck_99bottles.png)
-    in folder [`markdown/intro/languages/images/`](https://github.com/Compilerbau/Lecture/blob/master/markdown/intro/languages/images/))
+*   ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net (Author unknown, Website hosted by Oliver Schade, Gregor Scheithauer, and Stefan Scheler)
+*   ["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net
+*   ["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net
+*   ["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net
+*   ["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net
+*   Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net (file [`screenshot_brainfuck_99bottles.png`](https://github.com/Compilerbau/CB-Lecture-Bachelor/blob/master/markdown/intro/images/screenshot_brainfuck_99bottles.png))
 :::

@@ -64,7 +64,7 @@ ADD -->
 
 ![](images/bc_xml-parsing-error.png)
 
-[Quelle: BC George, Vorlesung "Einführung in die Programmierung mit Skriptsprachen", [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)]{.origin}
+[Quelle: Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC George](mailto:bc.george@fh-bielefeld.de) ([CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin}
 
 ::: notes
 *   Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern
@@ -261,7 +261,7 @@ def rule():
 *   **Resynchronization Set**: Vereinigung der *Following Sets* für alle Regeln im
     aktuellen Aufruf-Stack
 
-[Quelle: nach [@Parr2014, S. 161 ff.]]{.origin}
+[Quelle: nach [@Parr2014, pp. 161-163]]{.origin}
 :::
 
 \bigskip

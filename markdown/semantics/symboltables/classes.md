@@ -66,7 +66,7 @@ void f() {
 
 ![](images/structscopesuml.png){width="80%"}
 
-[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, S. 162]]{.origin}
+[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
 
 
 ::: notes
@@ -123,7 +123,7 @@ void f() {
 :::
 ::: {.column width="54%"}
 ![](images/structscopesuml.png){width="90%"}
-[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, S. 162]]{.origin}
+[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
 :::
 ::::::
 :::::::::
@@ -164,7 +164,7 @@ public
 
 ![](images/classscopesuml.png){width="80%"}
 
-[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, S. 167]]{.origin}
+[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin}
 
 ::: notes
 Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die
@@ -193,7 +193,7 @@ class Clazz(Struct):
         except: return None
 ```
 
-[Quelle: Eigene Implementierung nach einer Idee in [@Parr2010, S. 172]]{.origin}
+[Quelle: Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
 
 ::: notes
 Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst gesucht werden,
