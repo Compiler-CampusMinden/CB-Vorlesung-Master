@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "AST-basierte Interpreter: Funktionen und Klassen"
 menuTitle: "AST-basierte Interpreter 2"
 author: "Carsten Gips (FH Bielefeld)"

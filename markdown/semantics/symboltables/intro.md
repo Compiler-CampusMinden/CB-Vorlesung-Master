@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Semantische Analyse: Symboltabellen"
 menuTitle: "Überblick Symboltabellen"
 author: "Carsten Gips (FH Bielefeld)"

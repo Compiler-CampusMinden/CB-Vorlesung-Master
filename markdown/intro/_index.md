@@ -1,5 +1,5 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Überblick"
 weight: 1
 ---

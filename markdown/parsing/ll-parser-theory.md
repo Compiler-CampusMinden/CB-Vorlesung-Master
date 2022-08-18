@@ -1,5 +1,5 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "LL-Parser"
 author: "BC George (FH Bielefeld)"
 weight: 2

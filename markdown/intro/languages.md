@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Bandbreite der Programmiersprachen"
 menuTitle: "Programmiersprachen"
 author: "Carsten Gips (FH Bielefeld)"

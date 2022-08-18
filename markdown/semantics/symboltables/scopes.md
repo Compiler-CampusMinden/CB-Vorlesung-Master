@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Nested Scopes"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 2

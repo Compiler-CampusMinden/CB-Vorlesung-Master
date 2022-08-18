@@ -1,5 +1,5 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "Typen und Attributierte Grammatiken"
 menuTitle: "Attributierte Grammatiken"
 author: "BC George (FH Bielefeld)"

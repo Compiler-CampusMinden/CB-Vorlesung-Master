@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Strukturen und Klassen"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 4

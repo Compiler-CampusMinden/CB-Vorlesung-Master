@@ -1,7 +1,6 @@
 ---
-chapter: true
+archetype: "home"
 title: "CB W21"
-hidden: true
 ---
 
 

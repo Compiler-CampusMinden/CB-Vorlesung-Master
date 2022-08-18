@@ -13,7 +13,7 @@ contentDir: "temp/content"
 publishDir: "docs"
 
 params:
-  editURL: "https://github.com/Compilerbau/Lecture/edit/master/markdown/"
+  editURL: "https://github.com/Compilerbau/CB-Lecture-Bachelor/edit/master/markdown/"
   author: "cagix"
   themeVariant: "green"
   titleSeparator: " "
@@ -23,11 +23,23 @@ params:
   disableNextPrev: true
   disableSearch: true
   disableLandingPageButton: true
+  disableMathJax: false
   disableMermaid: true
   themeVariant:
   - "relearn-light"
   - "relearn-dark"
   - "green"
+
+outputs:
+  home:
+    - "HTML"
+    - "PRINT"
+  section:
+    - "HTML"
+    - "PRINT"
+  page:
+    - "HTML"
+    - "PRINT"
 
 menu:
   shortcuts:

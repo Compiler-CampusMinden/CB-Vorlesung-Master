@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Anwendungen"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 3

@@ -1,5 +1,5 @@
 ---
-type: assignment
+archetype: assignment
 title: "Blatt 04: LLVM-IR"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 hidden: true

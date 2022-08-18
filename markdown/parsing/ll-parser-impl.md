@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "LL-Parser selbst implementiert"
 menuTitle: "LL-Parser implementieren"
 author: "Carsten Gips (FH Bielefeld)"

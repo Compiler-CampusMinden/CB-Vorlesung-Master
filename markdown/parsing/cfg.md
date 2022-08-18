@@ -1,5 +1,5 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "CFG"
 author: "BC George (FH Bielefeld)"
 weight: 1

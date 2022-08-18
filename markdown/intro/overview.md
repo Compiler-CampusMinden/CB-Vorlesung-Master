@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Struktur eines Compilers"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 1

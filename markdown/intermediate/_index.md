@@ -1,5 +1,5 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Zwischencode"
 weight: 5
 ---

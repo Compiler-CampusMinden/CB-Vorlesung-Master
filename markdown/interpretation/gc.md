@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Garbage Collection"
 menuTitle: "Garbage Collection"
 author: "Carsten Gips (FH Bielefeld)"

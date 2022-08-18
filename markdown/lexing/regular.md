@@ -1,5 +1,5 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "Reguläre Sprachen, Ausdrucksstärke"
 menuTitle: "Reguläre Sprachen"
 author: "BC George (FH Bielefeld)"

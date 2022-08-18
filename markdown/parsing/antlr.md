@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "ANTLR (Parsergenerator)"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 4

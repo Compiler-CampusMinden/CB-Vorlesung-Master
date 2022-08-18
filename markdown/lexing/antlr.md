@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Lexer mit ANTLR generieren"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 4
