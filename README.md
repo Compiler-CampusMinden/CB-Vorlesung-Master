@@ -21,7 +21,6 @@ We CAN VirtuOWL.
 See the [credits](CREDITS.md) for a detailed list of contributing projects.
 
 
-
 ## License
 
 <!-- https://creativecommons.org/choose/ -->
