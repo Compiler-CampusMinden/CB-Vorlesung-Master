@@ -2,8 +2,9 @@
 archetype: assignment
 title: "Blatt 03: Optimierung"
 author: "BC George, Carsten Gips (FH Bielefeld)"
-hidden: true
 weight: 3
+
+hidden: true
 ---
 
 

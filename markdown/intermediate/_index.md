@@ -5,8 +5,6 @@ weight: 5
 ---
 
 
-# Zwischencode
-
 Die Schnittstelle zwischen dem Frontend und dem Backend ist der Zwischencode
 (*intermediate code* (*IC*), auch *intermediate representation* (*IR*) genannt).
 

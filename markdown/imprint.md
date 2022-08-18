@@ -1,6 +1,7 @@
 ---
 title: "Impressum"
 disableToc: true
+
 hidden: true
 _build:
   render: always
