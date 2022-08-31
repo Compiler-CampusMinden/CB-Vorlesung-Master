@@ -12,6 +12,9 @@ tlmgr install standalone filemod currfile mathtools gincltex svn-prov adjustbox 
 ## Install make and graphviz (dot)
 apk --no-cache add make bash zip graphviz ghostscript font-noto || exit 1
 
+## Install ruby and git (delete-script.rb)
+apk --no-cache add ruby git
+
 ## Install current Hugo (linux/64bit/tgz)
 ## https://github.com/gohugoio/hugo/releases/latest/
-wget https://github.com/gohugoio/hugo/releases/download/v0.101.0/hugo_0.101.0_Linux-64bit.tar.gz && tar -zxf hugo_*.tar.gz -C /usr/bin/ && rm hugo_*.tar.gz  || exit 1
+wget https://github.com/gohugoio/hugo/releases/download/v0.102.1/hugo_0.102.1_Linux-64bit.tar.gz && tar -zxf hugo_*.tar.gz -C /usr/bin/ && rm hugo_*.tar.gz  || exit 1
