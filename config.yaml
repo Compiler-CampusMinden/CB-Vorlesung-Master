@@ -1,4 +1,3 @@
-baseURL: "https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/"
 canonifyURLs: true   # prepend all relative URLs w/ baseURL
 relativeURLs: false  # do NOT rewrite relative URLs to be relative to current content
 uglyurls: true       # use foo.de/bar.html instead of foo.de/bar/ (our new ILIAS 7.x HTML-Lernmodul won't find landing pages else)
@@ -13,8 +12,22 @@ themesDir: ".hugo"
 contentDir: "temp/content"
 publishDir: "docs"
 
+defaultContentLanguage: "ba"
+defaultContentLanguageInSubdir: true
+languages:
+  ba:
+    baseURL: "https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/ba/"
+    languageName: "Bachelor"
+    title: "Bachelor"
+    weight: 1
+  ma:
+    baseURL: "https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1371719/ma/"
+    languageName: "Master"
+    title: "Master"
+    weight: 2
+
 params:
-  editURL: "https://github.com/Compilerbau/CB-Lecture-Bachelor/edit/master/markdown/"
+  editURL: "https://github.com/Compiler-CampusMinden/CB-Vorlesung/edit/master/markdown/"
   author: "cagix"
   themeVariant: "green"
   titleSeparator: " "
@@ -24,6 +37,7 @@ params:
   disableNextPrev: true
   disableSearch: true
   disableLandingPageButton: true
+  disableLanguageSwitchingButton: true
   disableMathJax: false
   disableMermaid: true
   themeVariant:
@@ -33,23 +47,20 @@ params:
 
 menu:
   shortcuts:
+  - name: "<i class='fas fa-bookmark'></i> Zeiten"
+    url: "/index.html#kursformat"
+    weight: 10
   - name: "<i class='fas fa-bookmark'></i> Fahrplan"
-    url: "/org/schedule.html"
-    weight: 10
-  - name: "<i class='fas fa-bookmark'></i> Praktikum"
-    url: "/assignments.html"
-    weight: 10
-  - name: "<i class='fas fa-bookmark'></i> Note/Credits"
-    url: "/org/grading.html"
+    url: "/index.html#fahrplan"
     weight: 20
-  - name: "<i class='fas fa-bookmark'></i> Syllabus"
-    url: "/org/syllabus.html"
+  - name: "<i class='fas fa-bookmark'></i> Praktikum/Übung"
+    url: "/assignments.html"
     weight: 30
-  - name: "<i class='fas fa-bookmark'></i> Ressourcen"
-    url: "/org/resources.html"
+  - name: "<i class='fas fa-bookmark'></i> Note/Credits"
+    url: "/index.html#prüfungsform-note-und-credits"
     weight: 40
-  - name: "<i class='fas fa-bookmark'></i> Prüfungsvorbereitung"
-    url: "/org/exam.html"
+  - name: "<i class='fas fa-bookmark'></i> FAQ"
+    url: "/org/faq.html"
     weight: 50
 
 markup:

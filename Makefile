@@ -38,7 +38,7 @@ DOCKER_VOLUME        = -v "$(shell pwd):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_RE
 DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
 # GIT_DIR ensures that git works with the repository
 # no matter the owning user of the directory.
-# see https://github.com/Compilerbau/CB-Lecture-Bachelor/pull/16 for the discussion
+# see https://github.com/Compiler-CampusMinden/CB-Vorlesung/pull/16 for the discussion
 # around this specific workaround and
 # https://github.blog/2022-04-12-git-security-vulnerability-announced/ &
 # https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else

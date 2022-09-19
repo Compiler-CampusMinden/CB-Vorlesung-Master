@@ -1,0 +1,19 @@
+\documentclass[border=0.2cm, convert={density=600}]{standalone}
+
+\usepackage[table]{xcolor}
+\definecolor{lightergray}{gray}{0.96}
+ 
+\begin{document}
+\renewcommand\arraystretch{1.3}
+\begin{tabular}{|l|l|}
+	\hline\rowcolor{lightgray}
+	(Pseudo-)Maschinencode & Kommentar\\
+	\hline
+	$SP = SP + framesize(f)$ & Speicher für lokale Variablen freigeben\\
+	\hline
+	$\textrm{Stack}[SP + 4] = \textit{Ergebnis}$ & Ergebnis auf Stack ablegen\\
+	\hline
+	$\mathrm{GOTO}\; \textrm{Stack}[SP]$ & Rücksprung zum Aufrufer\\
+	\hline
+\end{tabular}
+\end{document}

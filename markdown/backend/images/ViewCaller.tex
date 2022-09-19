@@ -1,0 +1,37 @@
+\documentclass[border=0.2cm, convert={density=600}]{standalone}
+
+\usepackage[table]{xcolor}
+\definecolor{lightergray}{gray}{0.96}
+ 
+\begin{document}
+\renewcommand\arraystretch{1.3}
+\begin{tabular}{|l|l|l|}
+	\hline\rowcolor{lightgray}
+	Code & (Pseudo-)Maschinencode & Kommentar\\
+	\hline
+	                         & $\textrm{Stack}[SP] = R_0$ & \\
+	                         & $\ldots$                   & Speichern der lokalen Variablen des Aufrufers auf dem Stack\\
+	                         & $\textrm{Stack}[SP + 4\ast k] = R_k$ & \\
+	\cline{2-3}
+	                         & $ SP = SP-4 \ast (n+1)$ & Platz machen für Parameter und Rücksprungadresse\\
+	\cline{2-3}
+	                         & $ \textrm{Stack}[SP + 4] = p_1$ & \\
+	                         & $\ldots$ & Parameter auf Stack ablegen\\
+	                         & $\textrm{Stack}[SP + 4\ast n] = p_n$ & \\
+	\cline{2-3}
+	$x = f(p_1,\ldots, p_n)$ & $\textrm{Stack}[SP] = \textit{Rücksprungadresse}$ & Rücksprungadresse auf Stack ablegen\\
+	\cline{2-3}
+	                         & $\mathrm{GOTO}\; f$ & Sprung zur Funktion $f$\\
+	\cline{2-3}
+	                         & $\mathrm{LABEL}\; \textit{Rücksprungadresse}$ & Rücksprungadresse\\
+	\cline{2-3}
+	                         & $x = \textrm{Stack}[SP + 4]$ & Ergebnis vom Stack holen\\
+	\cline{2-3}
+	                         & $SP = SP + 4\ast (n+1)$ & Parameter und Rücksprungadresse abräumen\\
+	\cline{2-3}
+	                         & $R_0 = \textrm{Stack}[SP + 4]$ & \\
+	                         & $\ldots$ & Lokale Variablen wiederherstellen \\
+	                         & $R_k = \textrm{Stack}[SP + 4\ast k]$& \\
+	\hline
+\end{tabular}
+\end{document}

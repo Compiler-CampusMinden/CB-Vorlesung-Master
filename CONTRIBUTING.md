@@ -103,7 +103,7 @@ template).
 1.  Build the slides before class as described above.
 2.  During class, annotate the PDF slides.
 3.  After class push the resulting PDF to
-    [Compilerbau/AnnotatedSlides](https://github.com/Compilerbau/AnnotatedSlides).
+    [Compiler-CampusMinden/AnnotatedSlides](https://github.com/Compiler-CampusMinden/AnnotatedSlides).
     Open the annotated slides in your browser, copy the URL and paste it to
     the YAML header in the lecture Markdown file:
     ```yaml

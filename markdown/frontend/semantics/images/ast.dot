@@ -1,0 +1,19 @@
+// dot -Tpdf ast.dot -o ast.pdf  &&   dot -Tpng ast.dot -o ast.png
+
+digraph ast {
+    node [shape=plaintext];
+    edge [arrowhead="none"];
+
+    e1 -> e2 
+    e1 -> t1
+    e2 -> t2
+    e2 -> t3
+    
+    e1 [label="+"];
+    e2 [label="*"];
+    
+    t1 [label="DIGIT, 2"];
+    t2 [label="DIGIT, 5"];
+    t3 [label="DIGIT, 8"];
+}
+

@@ -1,0 +1,152 @@
+-   week: "KW40"  # Feiertag: Montag, 03.10.
+    lecture:
+        -   topic: "/org/syllabus"
+            leader: "BC, Carsten"
+            notes: "Kick-Off (Zoom)"
+
+-   week: "KW41"
+    lecture:
+        # Teil 1
+        -   topic: "/intro/overview"
+            leader: "Carsten"
+        -   topic: "/intro/languages"
+            leader: "Carsten"
+        -   topic: "/intro/applications"
+            leader: "Carsten"
+        # Teil 2
+        -   topic: "/frontend/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+
+-   week: "KW42"
+    lecture:
+        # Teil 1
+        -   topic: "/frontend/lexing/recursive"
+            leader: "Carsten"
+        -   topic: "/frontend/lexing/antlr"  # neu
+            leader: "Carsten"
+        # Teil 2
+        -   topic: "/frontend/parsing/cfg"
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+
+-   week: "KW43"
+    lecture:
+        # Teil 1
+        -   topic: "/frontend/parsing/ll-parser-theory"
+            leader: "BC"
+        # Teil 2
+        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+
+-   week: "KW44"  # Feiertag: Dienstag, 01.11.
+    lecture:
+        -   topic: "/frontend/parsing/ll-parser-impl"
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/antlr"  # neu
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/finalwords"
+            leader: "Carsten"
+    misc_lecture:
+        -   notes: ">> Material bitte bis MONTAG durcharbeiten!"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
+    misc_column:
+        -   notes: "Edmonton: ANTLR + Live-Coding (CA): Mo, 31.10.2022, 17:00-18:30 Uhr"
+
+-   week: "KW45"
+    lecture:
+        -   topic: "/frontend/semantics/symboltables/intro"
+            leader: "Carsten"
+        -   topic: "/frontend/semantics/symboltables/scopes"
+            leader: "Carsten"
+        -   topic: "/frontend/semantics/symboltables/functions"
+            leader: "Carsten"
+        -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
+            leader: "Carsten"
+    assignment:
+        -   topic: "sheet01"  # Grammatik+ANTLR+AST
+            due: "xx.xx.22, tbd"
+
+-   week: "KW46"
+    lecture:
+        -   topic: "/backend/interpretation/syntaxdriven"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part1"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part2"
+            leader: "Carsten"
+    assignment:
+        -   topic: "sheet02"  # Symboltabellen
+            due: "xx.xx.22, tbd"
+
+-   week: "KW47"
+    misc_lecture:
+        -   notes: ">> Freies Arbeiten (Vorbereitung auf Edmonton-Sitzung), Sprechstunde"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten (Vorbereitung auf Edmonton-Sitzung)"
+
+-   week: "KW48"
+    lecture:
+        -   topic: "/intermediate/intro"
+            leader: "Carsten"
+        -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
+            leader: "BC"
+    assignment:
+        -   topic: "sheet03"  # Interpreter
+            due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
+    misc_column:
+        -   notes: "Edmonton: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
+
+-   week: "KW49"
+    lecture:
+        -   topic: "backend/interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+            leader: "Carsten"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
+    misc_column:
+        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
+
+-   week: "KW50"
+    misc_lecture:
+        -   notes: ">> Besprechung Projektideen (per Team)"
+    assignment:
+        -   topic: "sheet04"  # Builder
+            due: "xx.xx.22, tbd"
+
+-   week: "KW51"  # Weihnachten
+    misc_lecture:
+        -   notes: ">> Frohe Weihnachten!"
+
+-   week: "KW52"  # Weihnachten
+    misc_lecture:
+        -   notes: ">> Weihnachtsferien!"
+
+-   week: "KW01"  # Freies Arbeiten, Sprechstunde
+    misc_lecture:
+        -   notes: ">> Alles Gute im neuen Jahr!"
+        -   notes: ">> Freies Arbeiten, Sprechstunde"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
+
+-   week: "KW02"   # Freies Arbeiten, Sprechstunde
+    misc_lecture:
+        -   notes: ">> Freies Arbeiten, Sprechstunde"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
+
+-   week: "KW03"
+    # letzte Vorlesungswoche: Präsentation der Projekte
+    # Prüfungswochen: KW04, KW05
+    misc_lecture:
+        -   notes: ">> Präsentation der Projekte"
+    misc_assignment:
+        -   notes: ">> Präsentation der Projekte"
