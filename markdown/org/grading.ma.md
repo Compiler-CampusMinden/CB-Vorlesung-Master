@@ -17,8 +17,8 @@ hidden: true
     Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
     ein Testat bescheinigt wird.
 
-    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie durch alle
-    vier Übungsblätter fristgerecht bearbeitet haben.
+    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie alle vier
+    Übungsblätter fristgerecht bearbeitet haben.
 
 -   **Gesamtnote**:
     Mündliche Prüfung am Ende des Semesters, angeboten in beiden

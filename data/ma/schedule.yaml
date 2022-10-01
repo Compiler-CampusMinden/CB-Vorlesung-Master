@@ -65,8 +65,6 @@
         # Teil 2
         -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 1 (Intro)
             leader: "BC"
-    misc_lecture:
-        -   notes: ">> Material bitte bis MONTAG durcharbeiten!"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
@@ -82,7 +80,7 @@
             leader: "Carsten"
     assignment:
         -   topic: "sheet01"  # Scanner, Parser
-            due: "xx.xx.22, tbd"
+            due: "15.11.22"
 
 -   week: "KW47"
     lecture:
@@ -109,7 +107,7 @@
             leader: "BC"
     assignment:
         -   topic: "sheet02"  # Semantische Analyse
-            due: "xx.xx.22, tbd"
+            due: "29.11.22"
     misc_column:
         -   notes: "Edmonton: Vortrag: Flex und Bison + Live-Coding (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
 
@@ -119,7 +117,7 @@
             leader: "BC"
     assignment:
         -   topic: "sheet03"  # Optimierung
-            due: "xx.xx.22, tbd"
+            due: "06.12.22"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
 
@@ -161,7 +159,7 @@
         -   notes: ">> Vorträge"
     assignment:
         -   topic: "sheet04"  # Freie Aufgabe
-            due: "xx.xx.23, tbd"
+            due: "10.01.23"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte
