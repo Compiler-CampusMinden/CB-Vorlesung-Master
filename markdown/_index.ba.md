@@ -32,7 +32,7 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 | Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
 |:----------------------|:----------------------|
 | Mi, 08:00 - 09:30 Uhr | Mi, 15:45 - 17:15 Uhr |
-| online/D328           | online/D328           |
+| online/C1             | online/C1             |
 
 Durchführung als **Flipped Classroom** (Carsten) bzw. **Online-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
@@ -78,4 +78,4 @@ Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})
 
 `{{< schedule >}}`{=markdown}
 
-**Hinweis**: Abgabe der Hausaufgaben bis jeweils XX.XX Uhr im ILIAS.
+**Hinweis**: Abgabe der Hausaufgaben bis jeweils 08.00 Uhr im ILIAS.

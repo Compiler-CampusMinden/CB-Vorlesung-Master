@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Meilenstein 04: Builder (Mini-Python)"
+title: "Meilenstein 04: Builder und freie Aufgabe (Mini-Python)"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 4
 

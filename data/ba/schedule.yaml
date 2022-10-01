@@ -72,7 +72,7 @@
             leader: "Carsten"
     assignment:
         -   topic: "sheet01"  # Grammatik+ANTLR+AST
-            due: "xx.xx.22, tbd"
+            due: "09.11.22"
 
 -   week: "KW46"
     lecture:
@@ -84,7 +84,7 @@
             leader: "Carsten"
     assignment:
         -   topic: "sheet02"  # Symboltabellen
-            due: "xx.xx.22, tbd"
+            due: "16.11.22"
 
 -   week: "KW47"
     misc_lecture:
@@ -100,7 +100,7 @@
             leader: "BC"
     assignment:
         -   topic: "sheet03"  # Interpreter
-            due: "xx.xx.22, tbd"
+            due: "29.11.22"
     misc_assignment:
         -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
@@ -120,7 +120,7 @@
         -   notes: ">> Besprechung Projektideen (per Team)"
     assignment:
         -   topic: "sheet04"  # Builder
-            due: "xx.xx.22, tbd"
+            due: "14.12.22"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:

@@ -56,7 +56,7 @@ einem voraufgezeichneten Video durchführen. Die anschließende Diskussion wird 
 Ihnen live durchgeführt.
 
 Sie geben **vor** dem Vortrag Ihre Unterlagen (Folien oder voraufgezeichnetes
-Video) über die Aufgabe im ILIAS ab. Beachten Sie dabei die Grenze von 512MB pro
+Video) über die Aufgabe im ILIAS ab. Beachten Sie dabei die Grenze von 512 MB pro
 Datei. Wenn den Vortrag direkt mit der IDE machen, erstellen Sie ein PDF-Dokument
 mit 5..6 Seiten, in welchem die Inhalte Ihres Vortrags dargestellt sind und laden
 dieses in die ILIAS-Aufgabe hoch.
@@ -72,4 +72,4 @@ Diskussion werden live gestaltet. An diesen Sitzungen nehmen alle Teilnehmenden
 des Moduls teil.
 
 Sie geben **vor** dem Vortrag Ihre Unterlagen (Folien oder 5..6 Seiten Bericht)
-über die Aufgabe im ILIAS ab. Beachten Sie dabei die Grenze von 512MB pro Datei.
+über die Aufgabe im ILIAS ab. Beachten Sie dabei die Grenze von 512 MB pro Datei.
