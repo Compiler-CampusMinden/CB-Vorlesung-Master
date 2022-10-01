@@ -37,7 +37,7 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 Durchführung als **Flipped Classroom** (Carsten) bzw. **Online-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
-[ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
+[ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld
 
 ### Prüfungsform, Note und Credits
 

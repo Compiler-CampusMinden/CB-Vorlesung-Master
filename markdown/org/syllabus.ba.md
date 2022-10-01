@@ -56,7 +56,7 @@ hidden: true
 
 ## Erwartungen an Sie
 
-![](images/modulbeschreibung.png){width="80%"}
+![](images/modulbeschreibung_ba.png){width="80%"}
 
 *   90h Selbststudium => ca. 6h Arbeitszeit pro Woche!
 
