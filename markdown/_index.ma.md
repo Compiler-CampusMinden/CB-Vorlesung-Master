@@ -34,7 +34,7 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 | Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
 | online/C1             | online/C1             |
 
-Durchführung als **Flipped Classroom** (Carsten) bzw. **Online-Vorlesung** (BC):
+Durchführung als **Flipped Classroom/online** (Carsten) bzw. **Hybrid-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld

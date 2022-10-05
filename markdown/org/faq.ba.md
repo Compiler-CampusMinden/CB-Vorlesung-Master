@@ -13,6 +13,10 @@ hidden: true
 Wir führen die Veranstaltung gemeinsam durch und wechseln uns regelmäßig ab. BC macht
 dabei normale Vorlesungen, Carsten setzt auf das Konzept "Flipped Classroom".
 
+Dabei sind die Vorlesungen von BC "hybrid", d.h. sie finden vor Ort in Minden statt und
+man kann sich bei Bedarf auch über Zoom dazuschalten. Die Sprechstunden zum Flipped
+Classroom bei Carsten sind dagegen immer online.
+
 Bitte im Fahrplan aufpassen, wer was macht und dann entsprechend vorbereitet sein.
 
 Gerade am Anfang nutzen wir die Praktikumszeit für eine extra Vorlesungseinheit, dafür
