@@ -18,7 +18,7 @@ outcomes:
   - k3: "DFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln"
   - k3: "Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular.ann.ba.pdf"
     name: "Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke"
 ---
 
