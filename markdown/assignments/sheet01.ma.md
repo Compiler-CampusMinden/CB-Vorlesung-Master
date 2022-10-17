@@ -5,22 +5,77 @@ author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 1
 
 hidden: true
-
-sketch: true
 ---
 
 
 ## A1.1: Grammatik
 
-Erstellen Sie eine Grammatik für **Mini-Python**. An folgenden Code-Beispielen können
-Sie den minimalen Funktionsumfang ablesen.
+Erstellen Sie eine Grammatik für **Mini-Python**.
 
-```python
-TODO: Code-Beispiele: Wie funktioniert die Sprache?!
-Alternativ Link auf Wiki (Repo-Split, nur Builder!)
-```
+Der auf der Wiki-Seite [Sprachumfang] definierte Umfang soll mit Ihrer
+Grammatik mindestens unterstützt werden. Dabei ist die Funktionalität
+wie in Python mit folgenden Ausnahmen:
 
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+*   Einrückung ist für die Funktionalität irrelevant
+*   Schleifen, Funktionen und Klassen werden mit `#end` beendet
+
+Nachfolgend einige Beispiele in Ergänzung zur Wiki-Seite [Sprachumfang]:
+
+1.  Beispiele für IF-Statements:
+
+    ```python
+    a= 2
+    if a == 2:
+        print("a is ", a)
+    #end
+    ```
+
+    ```python
+    if a == 2:
+    print("a is ", a)
+    elif a == 3:
+    print("a is ", a)
+    else:
+    print("a is neither 2 and 3")
+    #end
+    ```
+
+2.  Beispiel für Schleifen:
+
+    ```python
+    while(x>y):
+        print(x ,"is bigger than ",y)
+        x=x-1
+    #end
+    ```
+
+3.  Beispiel für Funktionen:
+
+    ```python
+    def foo():
+    print("ich bin eine Funktion")
+    #end
+    ```
+
+4.  Beispiele für Klassen:
+
+    ```python
+    class A:
+    def foo():
+        print("Ich bin eine Methode von A")
+    #end
+    #end
+    ```
+
+    ```python
+    class B(A): #Vererbung B erbt von A
+    def foo():
+        print("Ich bin eine Methode von B")
+    #end
+    #end
+    ```
+
+[Sprachumfang]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/wiki/Definition-der-syntaktischen-Sprachelemente
 
 
 ## A1.2: ANTLR
