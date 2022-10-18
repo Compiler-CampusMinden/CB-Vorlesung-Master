@@ -292,8 +292,6 @@ durch den Tokennamen eindeutig rekonstruierbar ist.
 | `num`     | Numerische Konstante                                 | `42`, `3.14159`, `0` |
 | `literal` | Alle Zeichen außer `"`, in `"` eingeschlossen        | `"core dumped"`      |
 
-: Beispiele für Token
-
 
 *Anmerkung*: Wenn es mehrere matchende REs gibt, wird in der Regel das längste
 Lexem bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit
