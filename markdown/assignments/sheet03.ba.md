@@ -5,8 +5,6 @@ author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 3
 
 hidden: true
-
-sketch: true
 ---
 
 
@@ -15,10 +13,8 @@ sketch: true
 Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 
 *   Lesen Sie den zu interpretierenden Mini-Python-Code aus einer Datei ein.
-*   Realisieren Sie die Funktionen `READ()` und `WRITE()` als _native_ Funktionen
+*   Realisieren Sie die Funktionen `input()` und `print()` als _native_ Funktionen
     in Ihrem Interpreter.
-
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
 
 
 ## A3.2: Vortrag I
