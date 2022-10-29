@@ -1,0 +1,35 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>460</x><y>240</y><w>320</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+calcVisitor&lt;T&gt;
+--
+--
+visitS(calcParser.SContext ctx): T
+visitADD(calcParser.ADDContext ctx): T
+visitZAHL(calcParser.ZAHLContext ctx): T
+visitMULT(calcParser.MULTContext ctx): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>120</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ParseTreeVisitor&lt;T&gt;
+--
+--
+visit(ParseTree parseTree): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>180</y><w>140</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>390</y><w>320</w><h>110</h></coordinates><panel_attributes>calcBaseVisitor&lt;T&gt;
+--
+--
+visitS(calcParser.SContext ctx): T
+visitADD(calcParser.ADDContext ctx): T
+visitZAHL(calcParser.ZAHLContext ctx): T
+visitMULT(calcParser.MULTContext ctx): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>350</y><w>200</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>180;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>630</y><w>320</w><h>90</h></coordinates><panel_attributes>MyVisitor
+--
+--
+visitMULT(calcParser.MULTContext ctx): Integer
+visitADD(calcParser.ADDContext ctx): Integer
+visitZAHL(calcParser.ZAHLContext ctx): Integer</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>490</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>240</y><w>220</w><h>70</h></coordinates><panel_attributes>/AbstractParseTreeVisitor&lt;T&gt;/
+--
+--
+visit(ParseTree parseTree): T</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>300</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLNote</id><coordinates><x>630</x><y>460</y><w>240</w><h>140</h></coordinates><panel_attributes>Note..
+bg=light_gray
+
+@Override 
+public T visitS(calcParser.SContext ctx) { 
+    return visitChildren(ctx); 
+}
+
+...
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>450</y><w>110</w><h>70</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;90;50</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>180</y><w>150</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;60</additional_attributes></element></diagram>

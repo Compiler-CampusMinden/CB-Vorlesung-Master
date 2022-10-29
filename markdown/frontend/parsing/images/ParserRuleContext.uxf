@@ -1,0 +1,13 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>70</x><y>240</y><w>210</w><h>70</h></coordinates><panel_attributes>SContext
+--
+expr: ExprContext 
+--
+expr(): ExprContext</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>220</x><y>120</y><w>210</w><h>30</h></coordinates><panel_attributes>ParserRuleContext</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>240</y><w>210</w><h>70</h></coordinates><panel_attributes>ExprContext
+--
+--
+e(int i): EContext
+e(): List&lt;EContext&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>140</y><w>160</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>140</y><w>140</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;100</additional_attributes></element><element><id>UMLNote</id><coordinates><x>630</x><y>170</y><w>250</w><h>80</h></coordinates><panel_attributes>Note..
+bg=light_gray
+
+e(int i): EContext     // get ith e content
+e(): List&lt;EContext&gt; // return ALL e contexts</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>210</y><w>80</w><h>100</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;80;60;10</additional_attributes></element></diagram>
