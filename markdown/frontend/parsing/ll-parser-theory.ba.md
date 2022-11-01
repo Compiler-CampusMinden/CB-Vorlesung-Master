@@ -22,25 +22,28 @@ attachments:
 # Wiederholung
 
 
-<!-- ADD
-- Wiederholung für LL-Parser
-ADD -->
+## PDAs und kontextfreie Grammatiken
+
+*   Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen?
+*   Wie könnnen wir sie minimal erweitern?
+*   Sind PDAs deterministisch?
+*   Wie sind kontextfreie Grammatiken definiert?
+*   Sind kontextfreie Grammatiken eindeutig?
 
 # Motivation
 
 
-<!-- ADD
-- spezifische Motivation für LL-Parser
-ADD -->
+## Was brauchen wir für die Syntaxanalyse von Programmen?
+
+*   einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt
+*   einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik
+
 
 ## Themen für heute
 
 *   Der Einsatz kontextfreier Grammatik zur Syntaxanalyse mittels Top-Down-Techniken
 
 
-<!-- ADD
-- Allgemein: Beispiele an mehreren Stellen
--->
 
 # Syntaxanalyse
 
@@ -50,6 +53,17 @@ Wir verstehen unter Syntax eine Menge von Regeln, die die Struktur von Daten (z.
 
 Syntaxanalyse ist die Bestimmung, ob Eingabedaten einer vorgegebenen Syntax entsprechen.
 
+Diese vorgegebene Syntax wird im Compilerbau mit einer Grammatik beschrieben.
+
+
+## Ziele der Syntaxanalyse
+
+*   aussagekräftige Fehlermeldungen, wenn ein Eingabeprogramm syntaktisch nicht korrekt ist
+*   evtl. Fehlerkorrektur
+*   Bestimmung der syntaktischen Struktur eines Programms
+*   Erstellung des AST (abstrakter Syntaxbaum): Der Parse Tree ohne Symbole, die nach der Syntaxanalyse inhaltlich irrelevant sind (z. B. Semikolons, manche Schlüsselwörter)
+*   die Symboltablelle(n) mit Informationen bzgl. Bezeichner (Variable, Funktionen und Methoden, Klassen, benutzerdefinierte Typen, Parameter, ...), aber auch die Gültigkeitsbereiche.
+
 
 ## Arten der Syntaxanalyse
 
@@ -58,7 +72,7 @@ Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. ei
 *   Top-Down-Analyse: Aufbau des Parse trees von oben
     *   Parsen durch rekursiven Abstieg
     *   LL-Parsing
-*   Bottom-Up-Analyse: LR-Parsing
+*   (Bottom-Up-Analyse: LR-Parsing)
 
 
 ## Mehrdeutigkeiten
@@ -83,6 +97,8 @@ Bevor mit einer Grammatik weitergearbeitet wird, müssen erst alle nutzlosen und
 
 # Top-Down-Analyse
 
+## Wie würden Sie manuell parsen?
+
 ##  Algorithmus: Rekursiver Abstieg
 
 Hier ist ein einfacher Algorithmus, der (indeterministisch) einen Ableitungsbaum vom Nonterminal *X* von oben nach unten aufbaut:
@@ -91,9 +107,6 @@ Hier ist ein einfacher Algorithmus, der (indeterministisch) einen Ableitungsbaum
 
 ![Recursive Descent-Algorithmus](images/recursive_descent.png){width="55%"}
 
-<!-- ADD
-- Definition / Gegenüberstellung AST & Parsetree
--->
 
 ## Grenzen des Algorithmus
 
@@ -171,7 +184,7 @@ Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um
 
 *   $a \in T^\ast, |a| \leq k: {First}_k (a) = \{a\}$
 *   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$
-*   $A \in (N \cup T)^\ast \backslash T^\ast: {First}_k (A) = \lbrace v \in T^\ast \mid  A \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast*, First_k(w) = \lbrace v \rbrace \rbrace$
+*   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
 
 
 ## Linksableitungen
@@ -209,32 +222,6 @@ mit $(w, x, y \in T^\ast, \alpha, \beta, \gamma \in (N \cup T)^\ast, A \in N)$ u
 gilt:
 
 $\alpha = \beta$
-
-
-
-## LL(k)-Grammatiken
-
-Das hilft manchmal:
-
-Für $k = 1$:
-G ist $LL(1): \forall A \rightarrow \alpha, A \rightarrow \beta \in P, \alpha \neq \beta$ gilt:
-
-1.  $\lnot \exists a \in T: \alpha  \overset{\ast}{\Rightarrow}_l  a\alpha_1$ und $\beta \overset{\ast}{\Rightarrow}_l a\beta_1$
-2.  $((\alpha \overset{\ast}{\Rightarrow}_l \epsilon) \Rightarrow (\lnot (\beta \overset{\ast}{\Rightarrow}_l \epsilon)))$ und $((\beta \overset{\ast}{\Rightarrow}_l \epsilon) \Rightarrow (\lnot (\alpha\overset{\ast}{\Rightarrow}_l \epsilon)))$
-3.  $((\beta \overset{\ast}{\Rightarrow}_l \epsilon)$ und $(\alpha \overset{\ast}{\Rightarrow}_l a\alpha_1)) \Rightarrow a \notin Follow(A)$
-4.  $((\alpha \overset{\ast}{\Rightarrow}_l \epsilon)$ und $(\beta \overset{\ast}{\Rightarrow}_l a\beta_1)) \Rightarrow a \notin Follow(A)$
-
-\bigskip
-
-Die ersten beiden  Zeilen bedeuten:
-
-$\alpha$ und $\beta$ können nicht beide $\epsilon$ ableiten,  $First_1(\alpha) \cap First_1(\beta) = \emptyset$
-
-Die dritte und vierte Zeile bedeuten:
-
-$(\epsilon \in First_1(\beta)) \Rightarrow (First_1(\alpha) \cap Follow_1(A) = \emptyset)$
-
-$(\epsilon \in First_1(\alpha)) \Rightarrow (First_1(\beta) \cap Follow_1(A) = \emptyset)$
 
 
 ## LL(1)-Grammatiken

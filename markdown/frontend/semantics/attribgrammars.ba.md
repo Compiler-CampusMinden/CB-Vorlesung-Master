@@ -61,21 +61,15 @@ werden.
 :::
 
 
-# Semantische Analyse: Die Symboltabellen nutzen
+# Semantische Analyse
 
-## Das haben wir bis jetzt (1/2)
+## Das haben wir bis jetzt
 
-Wir haben Einträge in den Symboltabellen angelegt und dafür gesorgt, dass wir in den richtigen Scopes Definitionen in der richtigen Reihenfolge suchen können.
+Wir haben den AST vorliegen.
 
-Zum Auflösen von Deklarationen und Zuordnen von Objekten zu Klassen ist mindestens ein zweiter Lauf über Syntaxbaum und/oder Symboltabellen.
+Idealerweise enthält er bei jedem Bezeichner einen Verweis in sogenannte Symboltabellen (siehe spätere Veranstaltung).
 
-Der Parse Tree enthält bei allen Namen Verweise in die Symboltabellen.
-Die Symboltabelleneinträge für Variablen und Objekte enthalten jetzt die Typen der Variablen und Objekte, bzw. Verweise auf ihre Typen in den Symboltabellen.
-
-
-## Das haben wir bis jetzt (2/2)
-
-Dabei konnten schon einige semantische Eigenschaften des zu übersetzenden Programms überprüft werden, falls erforderlich z. B.:
+Beim Parsen können schon einige semantische Eigenschaften des zu übersetzenden Programms überprüft werden, falls erforderlich z. B.:
 
 *   Wurden alle Variablen / Objekte vor ihrer Verwendung definiert oder deklariert?
 *   Wurden keine Elemente mehrfach definiert?
@@ -244,7 +238,110 @@ Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die 
 
 
 
+# S-Attributgrammatiken und L-Attributgrammatiken
 
+*S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern bei beim Reduzieren berechnen mittels Tiefensuche mit Postorder-Evaluation:
+
+
+```python
+def visit(N):
+    for each child C of N (from left to right):
+        visit(C)
+    eval(N)     # evaluate attributes of N
+```
+
+*L-Attributgrammatiken*: Grammatiken, deren gerbte Atribute nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.
+
+Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
+
+S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
+
+
+## Beispiel: S-Attributgrammatik
+
+| Produktion       | Semantische Regel           |
+| :--------------- | :-------------------------- |
+| `e : e1 '+' t ;` | `e.val = e1.val + t.val`    |
+| `e : t ;`        | `e.val = t.val`             |
+| `t : t1 '*' D ;` | `t.val = t1.val * D.lexval` |
+| `t : D ;`        | `t.val = D.lexval`          |
+
+
+## Beispiel: Annotierter Syntaxbaum für `5*8+2`
+
+::: center
+![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
+:::
+
+
+## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
+
+\small
+
+| Produktion       | Semantische Regel                                         |
+| :--------------- | :-------------------------------------------------------- |
+| `e : e1 '+' t ;` | `e.node = new Node('+', e1.node, t.node)`                 |
+| `e : t ;`        | `e.node = t.node`                                         |
+| `t : t1 '*' D ;` | `t.node = new Node('*', t1.node, new Leaf(D, D.lexval));` |
+| `t : D ;`        | `t.node = new Leaf(D, D.lexval);`                         |
+
+\normalsize
+
+::: center
+![AST](images/ast.png){width="40%"}
+:::
+
+
+## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
+
+::: notes
+
+Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie `5*8+2`, hier umformuliert ohne Links-Rekursion
+und mit berechneten und geerbten Attributen:
+
+:::
+
+::: center
+
+| Produktion              | Semantische Regel             |
+| :---------------------- | :---------------------------- |
+| `t : D t' ;`            | `t'.inh = D.lexval`           |
+|                         | `t.syn = t'.syn`              |
+| `t' : '*' D t'1 ;`      | `t'1.inh = t'.inh * D.lexval` |
+|                         | `t'.syn = t'1.syn`            |
+| `t' :` $\epsilon$ `;`   | `t'.syn = t'.inh`             |
+
+:::
+
+\vspace{-10mm}
+
+::::::::: center
+:::::: columns
+::: {.column width="10%"}
+\vspace{20mm}
+**`5*8`** =>
+:::
+::: {.column width="45%"}
+![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)](images/annotatedparsetree2.png)
+:::
+::::::
+:::::::::
+
+::: notes
+
+*Vorgriff*: Dies ist ein Beispiel für eine "L-attributierte SDD".
+
+:::
+
+
+## Beispiel: Typinferenz für `3+7+9` oder `"hello"+"world"`
+
+| Produktion       | Semantische Regel             |
+| :--------------- | :---------------------------- |
+| `e : e1 '+' t ;` | `e.type = f(e1.type, t.type)` |
+| `e : t ;`        | `e.type = t.type`             |
+| `t : NUM ;`      | `t.type = "int"`              |
+| `t : NAME ;`     | `t.type = "string"`           |
 
 
 
@@ -307,81 +404,6 @@ T t'(T inh) {
 
 
 
-<!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
-
-## Semantische Prädikate
-
-Problem in Java: `enum` ab Java5 Schlüsselwort [(vorher als Identifier-Name verwendbar)]{.notes}
-
-```yacc
-prog : (enumDecl | stat)+ ;
-stat : ... ;
-
-enumDecl : ENUM id '{' id (',' id)* '}' ;
-```
-
-::: notes
-Wie kann ich eine Grammatik bauen, die sowohl für Java5 und später als auch für die Vorgänger
-von Java5 funktioniert?
-
-Angenommen, man hätte eine Hilfsfunktion ("Prädikat"), mit denen man aus dem Kontext heraus
-die Unterscheidung treffen kann, dann würde die Umsetzung der Regel ungefähr so aussehen:
-:::
-
-\bigskip
-\pause
-
-```python
-def prog():
-    if lookahead(1) == ENUM and java5: enumDecl()
-    else: stat()
-```
-
-
-## Semantische Prädikate in ANTLR
-
-::: notes
-### Semantische Prädikate in Parser-Regeln
-:::
-
-```yacc
-@parser::members {public static boolean java5;}
-
-prog : ({java5}? enumDecl | stat)+ ;
-stat : ... ;
-
-enumDecl : ENUM id '{' id (',' id)* '}' ;
-```
-
-::: notes
-Prädikate in Parser-Regeln aktivieren bzw. deaktivieren alles, was nach der Abfrage
-des Prädikats gematcht werden könnte.
-
-### Semantische Prädikate in Lexer-Regeln
-
-Alternativ für Lexer-Regeln:
-:::
-
-```yacc
-ENUM : 'enum' {java5}? ;
-ID   : [a-zA-Z]+ ;
-```
-
-::: notes
-Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der Lexer keine
-Vorhersage macht, sondern nach dem längsten Match sucht und die Entscheidung erst trifft,
-wenn das ganze Token gesehen wurde. Bei Parser-Regeln steht das Prädikat links vor der
-entsprechenden Alternative, da der Parser mit Hilfe des Lookaheads Vorhersagen trifft, welche
-Regel/Alternative zutrifft.
-
-*Anmerkung*: Hier wurden nur Variablen eingesetzt, es können aber auch Methoden/Funktionen
-genutzt werden. In Verbindung mit einer Symboltabelle (["Symboltabellen"](cb_symboltabellen1.html))
-und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribute.html) und
-["Interpreter: Attribute+Aktionen"](cb_interpreter2.html)) hat man hier ein mächtiges Hilfswerkzeug!
-:::
--->
-
-
 # Wrap-Up
 
 ## Wrap-Up
@@ -399,7 +421,7 @@ und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribut
     *   S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar
     *   L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar
 
-    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree
+    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw. AST,
     integriert und bei einer (späteren) Traversierung abgearbeitet.
 
 

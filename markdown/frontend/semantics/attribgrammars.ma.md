@@ -61,21 +61,15 @@ werden.
 :::
 
 
-# Semantische Analyse: Die Symboltabellen nutzen
+# Semantische Analyse
 
-## Das haben wir bis jetzt (1/2)
+## Das haben wir bis jetzt
 
-Wir haben Einträge in den Symboltabellen angelegt und dafür gesorgt, dass wir in den richtigen Scopes Definitionen in der richtigen Reihenfolge suchen können.
+Wir haben den AST vorliegen.
 
-Zum Auflösen von Deklarationen und Zuordnen von Objekten zu Klassen ist mindestens ein zweiter Lauf über Syntaxbaum und/oder Symboltabellen.
+Idealerweise enthält er bei jedem Bezeichner einen Verweis in sogenannte Symboltabellen (siehe spätere Veranstaltung).
 
-Der Parse Tree enthält bei allen Namen Verweise in die Symboltabellen.
-Die Symboltabelleneinträge für Variablen und Objekte enthalten jetzt die Typen der Variablen und Objekte, bzw. Verweise auf ihre Typen in den Symboltabellen.
-
-
-## Das haben wir bis jetzt (2/2)
-
-Dabei konnten schon einige semantische Eigenschaften des zu übersetzenden Programms überprüft werden, falls erforderlich z. B.:
+Beim Parsen können schon einige semantische Eigenschaften des zu übersetzenden Programms überprüft werden, falls erforderlich z. B.:
 
 *   Wurden alle Variablen / Objekte vor ihrer Verwendung definiert oder deklariert?
 *   Wurden keine Elemente mehrfach definiert?
@@ -177,6 +171,8 @@ Die Syntaxanalyse kann keine kontextsensitiven Analysen durchführen.
 
 *   Ein weiterer Ansatz, kontextsensitive Abhängigkeiten zu berücksichtigen, ist der Einsatz von attributierten Grammatiken, nicht nur zur Typanalyse, sondern evtl. auch zur Codegenerierung.
 
+*   Informationen weden im Baum weitergegeben.
+
 
 
 # Syntax-gesteuerte Übersetzung: Attribute und Aktionen
@@ -212,6 +208,8 @@ Anreichern einer CFG:
 
 Eine *attributierte Grammatik* *AG = (G,A,R)* besteht aus folgenden Komponenten:
 
+*   Mengen A(X) der Attribute eines Nonterminals X
+
 *   *G = (N, T, P, S)* ist eine cf-Grammatik
 
 *   A = $\bigcup\limits_{X \in (T \cup N)} A(X)$ mit $A(X) \cap A(Y) \neq \emptyset \Rightarrow X = Y$
@@ -221,9 +219,9 @@ Eine *attributierte Grammatik* *AG = (G,A,R)* besteht aus folgenden Komponenten:
 
 ## Abgeleitete und ererbte Attribute
 
-Die in einer Produktion definierten Attribute sind
+Die in einer Produktion p definierten Attribute sind
 
-*AF(P)* = $\{X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\}$
+*AF(p)* = $\{X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\}$
 
 Wir betrachten Grammatiken mit zwei disjunkten Teilmengen, den abgeleiteten (synthesized) Attributen *AS(X)* und den ererbten (inherited) Attributen *AI(X)*:
 
@@ -271,7 +269,7 @@ def visit(N):
     eval(N)     # evaluate attributes of N
 ```
 
-*L-Attributgrammatiken*: Grammatiken mit Attributen, die nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.
+*L-Attributgrammatiken*: Grammatiken, deren gerbte Atribute nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind. Sie können während des Parsens mit LL-Parsern berechnet werden. Ein links-nach-rechts-Durchlauf ist ausreichend.
 
 Alle Kanten im Abhängigkeitsgraphen gehen nur von links nach rechts.
 
@@ -444,8 +442,6 @@ T t'(T inh) {
 }
 ```
 
-
-
 # Bison: Attribute und Aktionen
 
 <!-- 20 Minuten: 6 Folien (3.0 Min/Folie; inkl. Diskussion) -->
@@ -613,6 +609,8 @@ Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
 :::
 
 
+
+
 # Wrap-Up
 
 ## Wrap-Up
@@ -630,7 +628,7 @@ Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
     *   S-attributierte SDD, LR-Grammatik: Bottom-Up-Parsierbar
     *   L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar
 
-    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree
+    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw. AST,
     integriert und bei einer (späteren) Traversierung abgearbeitet.
 
 
