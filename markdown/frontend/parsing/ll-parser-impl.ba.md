@@ -38,7 +38,7 @@ outcomes:
   - k2: "Prinzipieller Aufbau von LL-Parsern"
   - k3: "Implementierung von LL(1)- und LL(k)-Parsern"
   - k3: "Implementierung von Vorrang und Assoziativität"
-  - k3: "Umgang mit Linksrekursion, insbesondere bei ANTLR4"
+  - k3: "Umgang mit Linksrekursion, insbesondere bei ANTLR"
 assignments:
   - topic: sheet01
 youtube:
@@ -50,7 +50,7 @@ fhmedia:
 ---
 
 
-## Erinnerung Lexer: Zeichenstrom $\to$ Tokenstrom
+## Erinnerung Lexer: Zeichenstrom => Tokenstrom
 
 ``` {.python size="footnotesize"}
 def nextToken():
@@ -88,7 +88,7 @@ in den Puffer einlesen.
 
 [Grammatik:]{.notes}
 
-```yacc
+```antlr
 r : X s ;
 ```
 
@@ -187,7 +187,7 @@ while True:
 
 [Beispiel: Parsen von Listen, also Sequenzen wie `[1,2,3,4]`:]{.notes}
 
-```yacc
+```antlr
 list     : '[' elements ']' ;
 elements : INT (',' INT)* ;
 
@@ -262,7 +262,7 @@ durchgereicht) über den Aufruf der Start-Regel, also beispielsweise `parser.lis
 
 [Dies formuliert man üblicherweise in der Grammatik:]{.notes}
 
-```yacc
+```antlr
 expr : expr '+' term
      | term
      ;
@@ -280,7 +280,7 @@ unter Beibehaltung der Vorrangregeln so in ANTLR (v4) formulieren:
 \pause
 \bigskip
 
-```yacc
+```antlr
 expr : expr '*' expr
      | expr '+' expr
      | INT
@@ -297,7 +297,7 @@ manuell auflösen und die Grammatik umschreiben.
 **Beispiel**:
 :::
 
-```yacc
+```antlr
 expr : expr '*' expr | expr '+' expr | INT ;
 ```
 
@@ -305,14 +305,14 @@ expr : expr '*' expr | expr '+' expr | INT ;
 
 [Diese linksrekursive Grammatik könnte man (unter Beachtung der Vorrangregeln) etwa so umformulieren:]{.notes}
 
-```yacc
+```antlr
 expr     : addExpr ;
 addExpr  : multExpr ('+' multExpr)* ;
 multExpr : INT ('*' INT)* ;
 ```
 
 ::: notes
-ANTLR4 kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere Versionen von ANTLR muss man die
+ANTLR (v4) kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere Versionen von ANTLR muss man die
 Rekursion manuell beseitigen.
 
 Vergleiche ["ALL(\*)" bzw. "Adaptive LL(\*)"](https://www.antlr.org/papers/allstar-techreport.pdf).
@@ -323,9 +323,9 @@ Vergleiche ["ALL(\*)" bzw. "Adaptive LL(\*)"](https://www.antlr.org/papers/allst
 \bigskip
 \pause
 
-**Achtung**: Mit *indirekter* Linksrekursion kann ANTLR4 *nicht* umgehen:
+**Achtung**: Mit *indirekter* Linksrekursion kann ANTLR (v4) *nicht* umgehen:
 
-```yacc
+```antlr
 expr : expM | ... ;
 expM : expr '*' expr ;
 ```
@@ -343,7 +343,7 @@ Die Eingabe `2^3^4` sollte als `2^(3^4)` geparst werden.  [Analog sollte `a=b=c`
 Per Default werden Operatoren wie `+` in ANTLR *links-assoziativ* behandelt, d.h. die Eingabe `1+2+3` wird
 als `(1+2)+3` gelesen. Für *rechts-assoziative* Operatoren muss man ANTLR dies in der Grammatik mitteilen:
 
-```yacc
+```antlr
 expr : expr '^'<assoc=right> expr
      | INT
      ;
@@ -358,7 +358,7 @@ ignoriert?!
 
 ## LL(k)-Parser
 
-```yacc
+```antlr
 expr : ID '++'    // x++
      | ID '--'    // x--
      ;
@@ -375,7 +375,7 @@ umschreiben:
 \bigskip
 \pause
 
-```yacc
+```antlr
 expr : ID ('++' | '--') ;    // x++ oder x--
 ```
 

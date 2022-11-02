@@ -64,7 +64,7 @@ wuppie() { ...}   // Definition
 
 [Entsprechend sähe die Grammatik aus:]{.notes}
 
-```yacc
+```antlr
 func : fdef | fdecl ;
 fdef : head '{' body '}' ;
 fdecl: head ';' ;
@@ -99,7 +99,7 @@ entsprechend Vorrangregeln implementieren.
 
 Man könnte die obige Grammatik umformen ...
 
-```yacc
+```antlr
 func : head ('{' body '}' | ';') ;
 head : ... ;
 ```
@@ -279,7 +279,7 @@ zurücksetzt, werden alle `*_memo` ungültig und müssen ebenfalls zurückgesetz
 
 Problem in Java: `enum` ab Java5 Schlüsselwort [(vorher als Identifier-Name verwendbar)]{.notes}
 
-```yacc
+```antlr
 prog : (enumDecl | stat)+ ;
 stat : ... ;
 
@@ -310,7 +310,7 @@ def prog():
 ### Semantische Prädikate in Parser-Regeln
 :::
 
-```yacc
+```antlr
 @parser::members {public static boolean java5;}
 
 prog : ({java5}? enumDecl | stat)+ ;
@@ -328,7 +328,7 @@ des Prädikats gematcht werden könnte.
 Alternativ für Lexer-Regeln:
 :::
 
-```yacc
+```antlr
 ENUM : 'enum' {java5}? ;
 ID   : [a-zA-Z]+ ;
 ```

@@ -20,17 +20,12 @@ tldr: |
   geschweifte Klammer. Dieses recht einfache, aber grobe Vorgehen kann verfeinert werden, indem man versucht,
   überschüssige Token zu entfernen oder fehlender Token zu ersetzen. In ANTLR wird beispielsweise maximal ein
   fehlendes Token virtuell "ersetzt" bzw. max. ein überschüssiges Token entfernt, damit man den restlichen Code
-  weiter parsen kann. Wenn mehr als ein Token fehlt oder zuviel ist, geht ANTLR in einen "Panic Mode" und
+  weiter parsen kann. Wenn mehr als ein Token fehlt oder zu viel ist, geht ANTLR in einen "Panic Mode" und
   entfernt so lange Token aus dem Eingabestrom, bis das aktuelle Token in einem *Resynchronization Set* enthalten
   ist. Die Bildung dieser Menge erinnert an die Regeln zum Bilden der *FOLLOW*-Mengen, ist aber an den Kontext
-  der "aufgerufenen" Parser-Regeln gebunden. Zusätzlich gibt es weitere Strategien zum Behandeln von Fehlern in
-  Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen ("Fail-Save"). In Bison wird dagegen mit
-  einem speziellen *error*-Token gearbeitet und man fügt an "strategischen" Stellen Regeln der Form Regel $A \to
-  \operatorname{error} \alpha$ hinzu. Dabei ist $\alpha$ ein Token, welches zur Synchronisierung genutzt werden
-  soll. Im Fehlerfall werden so lange Token vom Stack entfernt, bis man eine Regel $A \to \operatorname{error}
-  \alpha$ anwenden kann und das *error*-Token shiften kann. Danach werden ggf. so lange Token aus dem Eingabestrom
-  entfernt, bis das Token $\alpha$ auftaucht und man die Regel mit einem *reduce* abschließen kann. Diese Form
-  der Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.
+  der "aufgerufenen" Parser-Regeln gebunden. Zusätzlich gibt es weitere komplexere Strategien zum Behandeln von
+  Fehlern in Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen ("Fail-Save"). Diese Form der
+  Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.
 
   Zusätzlich kann man in der Grammatik bereits typische Fehler (vergessene Klammern oder Typos wie Dreher bei
   Schlüsselwörtern) schon über "Fehlerproduktionen" vorwegnehmen. Das bedeutet, dass man eine Regel formuliert,
@@ -54,11 +49,6 @@ fhmedia:
     name: "VL Error-Recovery"
 ---
 
-<!-- ADD
-Das tldr hier drüber enhält hier noch einige Verweise auf Bison, die vmtl auch noch rausgefummelt werden müssen.
-
-Das selbe gilt für die Beispiele. Wenn ich das richtig sehe, sind auch die teilweise für Bison/Flex und teilweise für ANTLR.
-ADD -->
 
 ## Fehler beim Parsen
 
@@ -75,12 +65,14 @@ ADD -->
         => weitere Fehler anzeigen.
         Problem: Bis wohin "gobbeln", d.h. was als Synchronisationspunkt nehmen? Semikolon?
     *   Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!
+
+_Anmerkung_: Die folgenden Inhalte beziehen sich auf die Fehlerbehandlung in ANTLR (v4).
 :::
 
 
 ## Typische Fehler beim Parsing
 
-```yacc
+```antlr
 grammar VarDef;
 
 alt   : stmt | stmt2 ;
@@ -88,12 +80,14 @@ stmt  : 'int' ID ';' ;
 stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
-[ANTLR4: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+::: slides
+[Grammatik: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Input-Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+:::
 
 
 ::::::::: notes
 *Anmerkung*: Die nachfolgenden Fehler werden am Beispiel der Grammatik
-`[VarDef.g4](src/VarDef.g4)`{=markdown} und ANTLR4 demonstriert.
+`[VarDef.g4](src/VarDef.g4)`{=markdown} und ANTLR demonstriert.
 
 ### Lexikalische Fehler
 
@@ -144,9 +138,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 
 ## Überblick Recovery bei Parser-Fehlern
 
-::: center
 ![](images/recovery.png){width="80%"}
-:::
 
 ::: notes
 *   Fehler im Lexer (hier nicht weiter betrachtet):
@@ -161,16 +153,12 @@ Alternativen (Sub-Regeln) entscheiden muss.
         Problem: Dabei nicht zu weit zu springen!
     *   Spezielle Fehlerproduktionen: Spezielle Regeln in der Grammatik,
         die typische Fehler matchen.
-
-Anmerkung LR-Parser: Ein Syntaxfehler wird entdeckt, wenn die Action-Tabelle
-für Top-of-Stack und akt. Token leer ist => Stack und/oder Token modifizieren,
-aber deutlich schwieriger als bei LL ...
 :::
 
 
 ## Skizze: Generierte Parser-Regeln (ANTLR)
 
-```yacc
+```antlr
 stmt  : 'int' ID ';' ;
 ```
 
@@ -253,7 +241,7 @@ def rule():
 => Entferne solange Token, bis aktuelles Token im "*Resynchronization Set*"
 
 
-## ANTLR: Einsatz des "*Resynchronization Set*"
+## Einsatz des "*Resynchronization Set*"
 
 ::: notes
 *   **Following Set**: Menge der Token, die direkt auf eine Regel-Referenz folgen,
@@ -266,7 +254,7 @@ def rule():
 
 \bigskip
 
-```yacc
+```antlr
 stmt : 'if' expr ':' stmt           // Following Set für "expr": {':'}
      | 'while' '(' expr ')' stmt ;  // Following Set für "expr": {')'}
 expr : term '+' INT ;               // Following Set für "term": {'+'}
@@ -282,7 +270,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 
 
 ::: notes
-### Hinweis: *FOLLOW* $\ne$ *Following*
+### Hinweis: *FOLLOW* != *Following*
 
 **FOLLOW** ist die Menge aller Token, die auf eine Regel folgen können
 
@@ -324,10 +312,10 @@ angenommen, dass das aktuelle Token `':'` nicht passt.
 
 
 ::: notes
-## ANTLR4: Anmerkungen Fehlerbehandlung in Sub-Regeln
+## Anmerkungen Fehlerbehandlung in Sub-Regeln
 
 Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
-(d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR4 etwas anders vor.
+(d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR etwas anders vor.
 
 1.  Start einer Sub-Regel/Alternative: Versuch einer *single token deletion*
 
@@ -361,7 +349,7 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 
 ::::::::: notes
-## ANTLR4: Ändern der Fehlerbehandlungs-Strategie
+## Ändern der Fehlerbehandlungs-Strategie in ANTLR
 
 ### Ändern der Fehlerbehandlungs-Strategie (global)
 
@@ -373,7 +361,7 @@ Methode `setErrorHandler` des Parsers.
 
 ### Ändern der Fehlerbehandlungs-Strategie (lokal)
 
-```yacc
+```antlr
 r : ...
   ;
   catch[RecognitionException e] { throw e; }
@@ -409,16 +397,7 @@ Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
 wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 :::
 
-<!-- ADD
-die Überschriften im folgenden Teil dienen zur Unterscheidung Bison/Flex bzw Antrl.
-Da Bison/Flex rausfliegt, sind die verbleibenden ANTRL Überschriften nicht mehr sonderlich sinnvoll.
--->
-
-::: notes
-### ANTLR4
-:::
-
-```yacc
+```antlr
 stmt : 'int' ID ';'
      : 'int' ID             {notifyErrorListeners("Missing ';'");}
      : 'int' ID ';' ';'     {notifyErrorListeners("Too many ';'");}
@@ -434,13 +413,11 @@ Letztlich steht im generierten Parser in der generierten Methode `stmt()` an
 der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 :::
 
-\bigskip
-
 
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
 
-```yacc
+```antlr
 stat: expr ';' | ID '+' ID ';' ;
 expr: ID '+' ID | INT ;
 ```
@@ -448,27 +425,24 @@ expr: ID '+' ID | INT ;
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
 
-### ANTLR4
-
-Nicht eindeutige Grammatiken führen **nicht** zu einer Fehlermeldung,
+Nicht eindeutige Grammatiken führen in ANTLR **nicht** zu einer Fehlermeldung,
 da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
 in der Grammatik selbst steckt.
 
 Während des Debuggings von Grammatiken lohnt es sich aber, diese
 Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
-`DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
-
+`DiagnosticErrorListener` aus der ANTLR-Runtime als ErrorListener.
+:::
 
 
 ## Wrap-Up
 
 *   Fehler bei `match()`: *single token deletion* oder *single token insertion*
 
-*   Panic Mode: *sync-and-return* bis Token in *Resynchronization Set* (ANTLR4)
-    oder `error`-Token shiftbar (Bison)
-    *   ANTLR4: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
-    *   ANTLR4: Fail-Save zur Vermeidung von Endlosschleifen
+*   ANTLR: Panic Mode: *sync-and-return* bis Token in *Resynchronization Set*
+    *   Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
+    *   Fail-Save zur Vermeidung von Endlosschleifen
 
 *   Fehler-Alternativen in Grammatik einbauen
 

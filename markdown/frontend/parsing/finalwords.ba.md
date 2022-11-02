@@ -119,7 +119,7 @@ Vorname Name: +49.571.8385-268
     einfach entfernt ...
     :::
 
-    ``` {.yacc size="scriptsize"}
+    ``` {.antlr size="scriptsize"}
     addrbk : ROW+;
     ROW    : '\n';
     OTHER  : ~'\n' -> skip ;
@@ -135,7 +135,7 @@ Vorname Name: +49.571.8385-268
     (und -Fragmenten) zu erkennen.
     :::
 
-    ``` {.yacc size="scriptsize"}
+    ``` {.antlr size="scriptsize"}
     addrbk  : row+;
     row     : SURNAME NAME ':' TELNR;
     ```
@@ -150,7 +150,7 @@ Vorname Name: +49.571.8385-268
     Adressen entsprechend eine Parser-Regel sein:
     :::
 
-    ``` {.yacc size="scriptsize"}
+    ``` {.antlr size="scriptsize"}
     addrbk  : row+;
     row     : SURNAME NAME ':' telnr;
    ```
