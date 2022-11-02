@@ -373,9 +373,7 @@ nur für die eine Regel auswirkt.
 
 ### Ändern der Fehler-Meldungen
 
-::: center
 ![](images/listener.png)
-:::
 
 Für einen eigenen Listener leitet man sinnvollerweise von `BaseErrorListener` ab und
 überschreibt die leere Implementierung von `syntaxError()`.

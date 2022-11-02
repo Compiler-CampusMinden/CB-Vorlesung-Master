@@ -83,7 +83,9 @@ stmt  : 'int' ID ';' ;
 stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
-[ANTLR: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+::: slides
+[Grammatik: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Input-Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+:::
 
 
 ::::::::: notes
@@ -139,9 +141,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 
 ## Überblick Recovery bei Parser-Fehlern
 
-::: center
 ![](images/recovery.png){width="80%"}
-:::
 
 ::: notes
 *   Fehler im Lexer (hier nicht weiter betrachtet):
@@ -380,9 +380,7 @@ nur für die eine Regel auswirkt.
 
 ### Ändern der Fehler-Meldungen
 
-::: center
 ![](images/listener.png)
-:::
 
 Für einen eigenen Listener leitet man sinnvollerweise von `BaseErrorListener` ab und
 überschreibt die leere Implementierung von `syntaxError()`.
@@ -511,7 +509,6 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 
 :::notes
 ### Flex und Bison
-
 :::
 
 ```antlr
