@@ -48,12 +48,15 @@ Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
 
 ### Kooperation mit University of Alberta, Edmonton (Kanada)
 
-Über das Projekt "We CAN virtuOWL" der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
-Kooperation mit der University of Alberta (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
+Über das Projekt ["We CAN virtuOWL"] der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
+Kooperation mit der [University of Alberta] (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
 gestartet.
 
 Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
 Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)
+
+["We CAN virtuOWL"]: https://www.uni-bielefeld.de/uni/profil/international/netzwerke/alberta-owl/we-can-virtuowl/
+[University of Alberta]: https://www.fh-bielefeld.de/en/international-office/alberta-owl-cooperation
 
 
 ## Materialien

@@ -17,7 +17,7 @@ opening a new issue.
 
 This course was funded by the German Academic Exchange Service (DAAD) and the
 German Federal Ministry of Education and Research (BMBF) as part of the project
-We CAN VirtuOWL.
+[We CAN VirtuOWL](https://www.uni-bielefeld.de/uni/profil/international/netzwerke/alberta-owl/we-can-virtuowl/).
 
 See the [credits](CREDITS.md) for a detailed list of contributing projects.
 
