@@ -109,7 +109,7 @@ Interpreter mit `eval()` auswerten ...
 
 ## Ausführen einer Funktionsdeklaration
 
-```yacc
+```antlr
 funcDecl : type ID '(' params? ')' block ;
 funcCall : ID '(' exprList? ')' ;
 ```
@@ -154,7 +154,7 @@ Scope (Environment).
 
 ## Ausführen eines Funktionsaufrufs
 
-```yacc
+```antlr
 funcDecl : type ID '(' params? ')' block ;
 funcCall : ID '(' exprList? ')' ;
 ```
@@ -305,7 +305,7 @@ Auswerten des AST.
 
 ## Klassen und Instanzen I
 
-```yacc
+```antlr
 classDef : "class" ID "{" funcDecl* "}" ;
 ```
 
@@ -365,7 +365,7 @@ heranzukommen.
 
 ## Zugriff auf Methoden (und Attribute)
 
-```yacc
+```antlr
 getExpr : obj "." ID ;
 ```
 

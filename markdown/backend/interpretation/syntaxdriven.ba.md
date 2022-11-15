@@ -6,8 +6,6 @@ weight: 1
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel: A Tree-Walk Interpreter"
-  - key: "Levine2009: Bison"
-    comment: "Kapitel 6"
   - key: "Parr2014"
     comment: "Kapitel 6.4 und 8.4"
   - key: "Parr2010"
@@ -47,7 +45,7 @@ tldr: |
   `["AST-basierte Interpreter: Funktionen und Klassen"]({{<ref "/backend/interpretation/astdriven-part2" >}})`{=markdown}
   betrachten.
 outcomes:
-  - k3: "Attribute und eingebettete Aktionen in Bison und ANTLR"
+  - k3: "Attribute und eingebettete Aktionen in ANTLR"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns"
 assignments:
@@ -63,9 +61,7 @@ fhmedia:
 
 ## Überblick Interpreter
 
-::: center
 ![](images/interpreter.png){width="60%"}
-:::
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.
@@ -121,7 +117,7 @@ abarbeiten. Letztlich kommen dabei aber die oben dargestellten Varianten zum Ein
 
 ## Syntaxgesteuerte Interpreter: Attributierte Grammatiken
 
-```yacc
+```antlr
 s     : expr                    {System.err.println($expr.v);} ;
 
 expr returns [int v]
@@ -177,14 +173,14 @@ Beispiel:
 \bigskip
 \bigskip
 
-```yacc
+```antlr
 add[int x] returns [int r] : '+=' INT {$r = $x + $INT.int;} ;
 ```
 
 
 ## Eingebettete Aktionen in ANTLR II
 
-```yacc
+```antlr
 @members {
     int count = 0;
 }
@@ -230,7 +226,7 @@ Die Techniken sollen im Folgenden kurz vorgestellt werden.
 ## ANTLR: Kontext-Objekte für Parser-Regeln
 :::
 
-```yacc
+```antlr
 s    : expr         {List<EContext> x = $expr.ctx.e();} ;
 expr : e '*' e ;
 ```
@@ -262,7 +258,7 @@ Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 ::: notes
 ### ANTLR: Benannte Regel-Elemente oder Alternativen
 
-```yacc
+```antlr
 stat  : 'return' value=e ';'    # Return
       | 'break' ';'             # Break
       ;
@@ -309,7 +305,7 @@ konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
 ausführen.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
@@ -394,7 +390,7 @@ Freiheiten im Vergleich zum Listener-Pattern, insbesondere im Hinblick auf
 Rückgabewerte.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL

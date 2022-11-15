@@ -160,7 +160,7 @@ verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
 
 *   Literale auswerten:
 
-    ```yacc
+    ```antlr
     INT: [0-9]+ ;
     ```
 
@@ -179,7 +179,7 @@ verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
 
 *   Ausdrücke auswerten:
 
-    ```yacc
+    ```antlr
     add: e1=expr "+" e2=expr ;
     ```
 
@@ -203,7 +203,7 @@ verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
 
 ## Kontrollstrukturen
 
-```yacc
+```antlr
 ifstat: 'if' expr 'then' s1=stat ('else' s2=stat)? ;
 ```
 
@@ -292,7 +292,7 @@ class Interpreter(BaseVisitor<Object>):
 
 ## Ausführen einer Variablendeklaration
 
-```yacc
+```antlr
 varDecl: "var" ID ("=" expr)? ";" ;
 ```
 
@@ -320,7 +320,7 @@ vorbeikommen, also etwa `int x;` oder `int x = wuppie + fluppie;`, dann wird im
 
 ## Ausführen einer Zuweisung
 
-```yacc
+```antlr
 assign: ID "=" expr;
 ```
 
@@ -366,7 +366,7 @@ für Zugriffe auf Attribute einer Struct oder Klasse!
 
 ## Blöcke: Umgang mit verschachtelten Environments
 
-```yacc
+```antlr
 block:  '{' stat* '}' ;
 ```
 
