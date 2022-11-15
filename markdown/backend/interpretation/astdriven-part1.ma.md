@@ -41,8 +41,6 @@ outcomes:
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns"
   - k3: "Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog zu den Symboltabellen"
   - k3: "Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung mit einem Visitor"
-assignments:
-  - topic: sheet05
 youtube:
   - link: "https://youtu.be/lupQ0f3Tp7A"
     name: "VL AST-basierte Interpreter (Basics)"

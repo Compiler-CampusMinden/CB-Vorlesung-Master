@@ -49,7 +49,7 @@ outcomes:
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns"
 assignments:
-  - topic: sheet05
+  - topic: sheet03
 youtube:
   - link: "https://youtu.be/s5wvvoYsxe4"
     name: "VL Syntaxgesteuerte Interpreter"

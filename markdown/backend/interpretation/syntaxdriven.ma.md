@@ -50,8 +50,6 @@ outcomes:
   - k3: "Attribute und eingebettete Aktionen in Bison und ANTLR"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns"
-assignments:
-  - topic: sheet05
 youtube:
   - link: "https://youtu.be/s5wvvoYsxe4"
     name: "VL Syntaxgesteuerte Interpreter"
