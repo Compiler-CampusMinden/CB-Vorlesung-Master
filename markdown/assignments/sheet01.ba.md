@@ -61,7 +61,7 @@ Nachfolgend einige Beispiele in Ergänzung zur Wiki-Seite [Sprachumfang]:
 
     ```python
     class A:
-    def foo():
+    def foo(self):
         print("Ich bin eine Methode von A")
     #end
     #end
@@ -69,7 +69,7 @@ Nachfolgend einige Beispiele in Ergänzung zur Wiki-Seite [Sprachumfang]:
 
     ```python
     class B(A): #Vererbung B erbt von A
-    def foo():
+    def foo(self):
         print("Ich bin eine Methode von B")
     #end
     #end
