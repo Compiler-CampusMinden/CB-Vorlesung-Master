@@ -64,7 +64,7 @@
         -   topic: "/frontend/parsing/antlr"  # neu
             leader: "Carsten"
         # Teil 2
-        -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 1 (Intro)
+        -   topic: "/frontend/parsing/lr-parser1"  # Splitten: Teil 1 (Intro)
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
@@ -73,7 +73,7 @@
     lecture:
         # -   topic: "/frontend/parsing/bison"
         #     leader: "Carsten"
-        -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 2
+        -   topic: "/frontend/parsing/lr-parser2"  # Splitten: Teil 2
             leader: "BC"
         -   topic: "/frontend/parsing/recovery"
             leader: "Carsten"

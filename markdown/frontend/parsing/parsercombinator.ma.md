@@ -3,7 +3,7 @@ archetype: lecture-bc
 title: "PEG-Parser, Pratt-Parser und Parser Combinators"
 menuTitle: "PEG-Parser, Pratt-Parser und Parser Combinators"
 author: "BC George (FH Bielefeld)"
-weight: 7
+weight: 9
 readings:
   - key: "aho2013compilers"
     comment: "Kapitel 2 und 3"

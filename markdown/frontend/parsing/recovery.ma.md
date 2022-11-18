@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Error-Recovery"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 8
+weight: 10
 readings:
   - key: "Parr2010"
     comment: "Kapitel 2 und 3"

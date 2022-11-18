@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Grenze Lexer und Parser"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 9
+weight: 11
 readings:
   - key: "Nystrom2021"
   - key: "Parr2014"
