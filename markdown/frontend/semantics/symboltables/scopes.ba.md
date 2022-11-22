@@ -26,7 +26,7 @@ outcomes:
 assignments:
   - topic: sheet02
 youtube:
-  - link: "https://youtu.be/ CdM1gvsi6P0"
+  - link: "https://youtu.be/CdM1gvsi6P0"
     name: "VL Nested Scopes"
 fhmedia:
   - link: "https://www.fh-bielefeld.de/medienportal/m/1ce547df40e91e7a07497e6a070076157868b7d4b1fa18c2f1e17ee5c348e9063582da157de251ae1eb5daff45cfa97efdff7367b4bdd4634da0c00498c876ab"
