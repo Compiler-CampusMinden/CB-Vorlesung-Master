@@ -19,7 +19,7 @@ outcomes:
   - k1: "Maschinenabhängige Optimierungen"
   - k1: "Datenflussanalyse auf 3-Adress-Code"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/optimization.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/optimization.ann.ma.pdf"
     name: "Annotierte Folien: Optimierung und Datenflussanalyse"
 ---
 
@@ -382,7 +382,7 @@ In beiden Fällen gibt es zwei Varianten:
 
 Diese Analyse wird zur Propagation von Konstanten und Variablen benutzt und bildet sukzessive Mengen von Zeilen mit Variablendefinitionen.
 
-$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i)$$
+$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$
 
 $out(B_i)$: alle Zeilennummern von Variablendefinitionen, die am Ende von $B_i$ gültig sind
 
@@ -399,7 +399,7 @@ Zunächst ist $in(B_1) = \emptyset$, danach ist $in(B_i) = \bigcup  out(B_j)$ mi
 
 Diese Analyse wird zur Berechnung verfügbarer Ausdrücke der Form $x = y\ op\ z$ für die Eliminierung redundanter Berechnungen benutzt und bildet sukzessive Mengen von Ausdrücken.
 
-$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i)$$
+$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$(
 
 $out(B_i)$: alle am Ende von $B_i$ verfügbaren Ausdrücke
 
@@ -416,7 +416,7 @@ Zunächst ist $gen(B_1) = \emptyset$, danach ist $in(B_i) = \bigcap  out(B_j)$ m
 
 Diese Analyse dient der Ermittlung von lebenden und toten Variablen (für die Registerzuweisung) und bildet sukzessive Mengen von Variablen.
 
-$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i)$$
+$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$
 
 $out(B_i)$: alle Variablen, die am Ende von $B_i$ lebendig sind
 
@@ -433,7 +433,7 @@ Zunächst ist $out(B_n) = \emptyset$, danach ist $out(B_i) = \bigcup in(B_j)$ mi
 
 Diese Analyse wird zur Berechnung von "very busy" Ausdrücken der Form $x = y\ op\ z$, die auf allen möglichen Wegen im Flussgraphen vom aktuellen Basisblock aus mindestens einmal benutzt werden. Ausdrücke sollten dort berechnet werden, wo sie very busy sind, um den Code kürzer zu machen.
 
-$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i)$$
+$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$
 
 $out(B_i)$: alle Ausdrücke $x\ op\ y$, die am Ende von $B_i$ very busy sind
 
@@ -493,7 +493,7 @@ r1 = r1 - 1
 \bigskip
 \bigskip
 
-\blueArrow `a` und `e` sind nach Gebrauch "*tot*"
+\blueArrow `a` und `d` sind nach Gebrauch "*tot*"
 
 ## Berechnung der minimal benötigten Anzahl von Registern
 
