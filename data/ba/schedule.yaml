@@ -93,11 +93,8 @@
         -   notes: ">> Freies Arbeiten (Vorbereitung auf Edmonton-Sitzung)"
 
 -   week: "KW48"
-    lecture:
-        -   topic: "/intermediate/intro"
-            leader: "Carsten"
-        -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
-            leader: "BC"
+    misc_lecture:
+        -   notes: ">> VL wg. Erkrankung auf nächste Woche verschoben"
     assignment:
         -   topic: "sheet03"  # Interpreter
             due: "29.11.22"
@@ -108,19 +105,26 @@
 
 -   week: "KW49"
     lecture:
-        -   topic: "backend/interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+        -   topic: "/intermediate/intro"
             leader: "Carsten"
+        -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
+            leader: "BC"
+    misc_lecture:
+        -   notes: ">> VL-Sitzung in Praktikumszeit"
     misc_assignment:
         -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
 
 -   week: "KW50"
-    misc_lecture:
-        -   notes: ">> Besprechung Projektideen (per Team)"
+    lecture:
+        -   topic: "backend/interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+            leader: "Carsten"
     assignment:
         -   topic: "sheet04"  # Builder
             due: "14.12.22"
+    misc_assignment:
+        -   notes: ">> Besprechung Projektideen (per Team)"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:
