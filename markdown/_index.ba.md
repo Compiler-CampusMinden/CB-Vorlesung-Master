@@ -16,9 +16,11 @@ Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
 In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
-setzen diese bei der Erstellung eines kleinen Compiler-Frontends für _Mini-Python_ ein.
+setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
 
 Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
+
+[_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
 
 
 ## Team

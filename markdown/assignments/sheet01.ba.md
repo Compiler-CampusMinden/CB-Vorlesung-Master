@@ -10,16 +10,16 @@ hidden: true
 
 ## A1.1: Grammatik
 
-Erstellen Sie eine Grammatik für **Mini-Python**.
+Erstellen Sie eine Grammatik für [**Mini-Python**].
 
-Der auf der Wiki-Seite [Sprachumfang] definierte Umfang soll mit Ihrer
-Grammatik mindestens unterstützt werden. Dabei ist die Funktionalität
-wie in Python mit folgenden Ausnahmen:
+Der in der [Dokumentation] definierte [syntaktische] und [semantische]
+Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden.
+Dabei ist die Funktionalität wie in Python mit folgenden Ausnahmen:
 
 *   Einrückung ist für die Funktionalität irrelevant
 *   Schleifen, Funktionen und Klassen werden mit `#end` beendet
 
-Nachfolgend einige Beispiele in Ergänzung zur Wiki-Seite [Sprachumfang]:
+Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
 
 1.  Beispiele für IF-Statements:
 
@@ -75,7 +75,10 @@ Nachfolgend einige Beispiele in Ergänzung zur Wiki-Seite [Sprachumfang]:
     #end
     ```
 
-[Sprachumfang]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/wiki/Definition-der-syntaktischen-Sprachelemente
+[**Mini-Python**]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+[Dokumentation]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs
+[syntaktische]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/syntax_definition.md
+[semantische]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/semantic_definition.md
 
 
 ## A1.2: ANTLR

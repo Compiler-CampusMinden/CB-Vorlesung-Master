@@ -13,10 +13,12 @@ hidden: true
 Erweitern Sie Ihr Projekt zu einem Compiler, indem Sie unseren [CBuilder]
 einbinden. Erzeugen Sie damit aus dem geparsten Mini-Python-Code passenden
 C-Code, den Sie mit der im [CBuilder] mitgelieferten [C-Runtime] in ein
-lauffähiges Programm übersetzen und ausführen können.
+lauffähiges Programm übersetzen und ausführen können. Beachten Sie dazu
+auch die [Dokumentation].
 
 [CBuilder]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
 [C-Runtime]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/c-runtime
+[Dokumentation]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs
 
 
 ## A4.2: Konzepte und Features
