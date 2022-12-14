@@ -149,15 +149,14 @@
 
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
     misc_lecture:
-        -   notes: ">> Freies Arbeiten"
-        -   notes: ">> ggf. Vorträge"
+        -   notes: ">> Alles Gute im neuen Jahr!"
+        -   notes: ">> Sprechstunde (in VL-Zeit)"
     misc_assignment:
         -   notes: ">> Freies Arbeiten"
-        -   notes: ">> ggf. Vorträge"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     misc_lecture:
-        -   notes: ">> Vorträge"
+        -   notes: ">> Vorträge: Termine siehe Etherpad"
     assignment:
         -   topic: "sheet04"  # Freie Aufgabe
             due: "10.01.23"
@@ -166,6 +165,6 @@
     # letzte Vorlesungswoche: Präsentation der Projekte
     # Prüfungswochen: KW04, KW05
     misc_lecture:
-        -   notes: ">> Vorträge"
+        -   notes: ">> Vorträge: Termine siehe Etherpad"
     misc_assignment:
-        -   notes: ">> Vorträge"
+        -   notes: ">> Rückblick, Prüfungsvorbereitung (Prüfungstermine siehe Etherpad)"

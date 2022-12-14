@@ -137,20 +137,20 @@
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
     misc_lecture:
         -   notes: ">> Alles Gute im neuen Jahr!"
-        -   notes: ">> Freies Arbeiten, Sprechstunde"
-    misc_assignment:
         -   notes: ">> Freies Arbeiten"
+    misc_assignment:
+        -   notes: ">> Sprechstunde (in Praktikumszeit)"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     misc_lecture:
-        -   notes: ">> Freies Arbeiten, Sprechstunde"
-    misc_assignment:
         -   notes: ">> Freies Arbeiten"
+    misc_assignment:
+        -   notes: ">> Sprechstunde (in Praktikumszeit)"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte
     # Prüfungswochen: KW04, KW05
     misc_lecture:
-        -   notes: ">> Präsentation der Projekte"
+        -   notes: ">> Präsentation der Projekte: Termine siehe Etherpad"
     misc_assignment:
-        -   notes: ">> Präsentation der Projekte"
+        -   notes: ">> Präsentation der Projekte: Termine siehe Etherpad"
