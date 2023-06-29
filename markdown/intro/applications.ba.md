@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Anwendungen"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 3
 readings:
   - key: "Aho2008"
@@ -24,7 +24,7 @@ youtube:
   - link: "https://youtu.be/gt9ROh-qRIU"
     name: "VL Anwendungen"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/7fb03ad60cf2c17a163bd4a1dceae2a0afb3c70203d632062843c2518e9d2bf833a118630d0eb153cb6a451a27b396caa9b8eb5f3b46925169f43b8a9aaaf35e"
+  - link: "https://www.hsbi.de/medienportal/m/7fb03ad60cf2c17a163bd4a1dceae2a0afb3c70203d632062843c2518e9d2bf833a118630d0eb153cb6a451a27b396caa9b8eb5f3b46925169f43b8a9aaaf35e"
     name: "VL Anwendungen"
 ---
 

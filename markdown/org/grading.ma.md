@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Note und Credits"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 4
 
 hidden: true

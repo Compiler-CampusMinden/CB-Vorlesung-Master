@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "FAQ"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 6
 
 hidden: true

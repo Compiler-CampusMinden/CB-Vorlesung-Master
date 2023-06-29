@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "CFG"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 1
 readings:
   - key: "aho2013compilers"

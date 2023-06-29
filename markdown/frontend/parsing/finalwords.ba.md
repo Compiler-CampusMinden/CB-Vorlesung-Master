@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Grenze Lexer und Parser"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 6
 readings:
   - key: "Nystrom2021"
@@ -30,7 +30,7 @@ youtube:
   - link: "https://youtu.be/`u9fE_I764rg`{=markdown}"
     name: "VL Grenze Lexer und Parser"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/cb1486383c3bc9cf2e1c88b2dd94dea71954ceb2f6ea23dea512f10b3d86c34363b8d9c0ab41ef56fc07d9e3b22726752a92ff426592f129c6d6e674795f91cb"
+  - link: "https://www.hsbi.de/medienportal/m/cb1486383c3bc9cf2e1c88b2dd94dea71954ceb2f6ea23dea512f10b3d86c34363b8d9c0ab41ef56fc07d9e3b22726752a92ff426592f129c6d6e674795f91cb"
     name: "VL Grenze Lexer und Parser"
 ---
 

@@ -1,13 +1,13 @@
 ---
 archetype: lecture-cg
 title: "Modulvorstellung Compilerbau (Wahlfach Liste 1)"
-author: "BC George & Carsten Gips (FH Bielefeld)"
+author: "BC George & Carsten Gips (HSBI)"
 weight: 1
 youtube:
   - link: "https://youtu.be/2SsTAg4qFU8"
     name: "Modulvorstellung CB (Wahlfach Liste 1)"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/05ce8fc0b604c723475126e10c7cafd200c6742b7e044778fff30f8d8e25e5cd14d5e2eceb8af205ef0d929f5e7a56451dbfd6ac247da5fc36dc2b8042ea7b70"
+  - link: "https://www.hsbi.de/medienportal/m/05ce8fc0b604c723475126e10c7cafd200c6742b7e044778fff30f8d8e25e5cd14d5e2eceb8af205ef0d929f5e7a56451dbfd6ac247da5fc36dc2b8042ea7b70"
     name: "Modulvorstellung CB (Wahlfach Liste 1)"
 
 hidden: true

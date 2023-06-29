@@ -1,7 +1,7 @@
 ---
 archetype: assignment
 title: "Blatt 02: AST und Semantische Analyse"
-author: "BC George, Carsten Gips (FH Bielefeld)"
+author: "BC George, Carsten Gips (HSBI)"
 weight: 2
 
 hidden: true

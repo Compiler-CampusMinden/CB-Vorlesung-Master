@@ -25,8 +25,8 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 
 ## Team
 
--   [BC George](https://www.fh-bielefeld.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
--   [Carsten Gips](https://www.fh-bielefeld.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+-   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
+-   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
 
 
 ## Kursformat
@@ -39,7 +39,7 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 Durchführung als **Flipped Classroom/online** (Carsten) bzw. **Hybrid-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
-[ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld
+[ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld
 
 ### Prüfungsform, Note und Credits
 
@@ -58,7 +58,7 @@ Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für be
 Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)
 
 ["We CAN virtuOWL"]: https://www.uni-bielefeld.de/uni/profil/international/netzwerke/alberta-owl/we-can-virtuowl/
-[University of Alberta]: https://www.fh-bielefeld.de/en/international-office/alberta-owl-cooperation
+[University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
 
 
 ## Materialien

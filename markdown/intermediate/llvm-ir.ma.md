@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "LLVM als IR"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 2
 readings:
   - key: "LLVM-org"

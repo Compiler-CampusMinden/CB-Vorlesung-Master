@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Funktionen"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 3
 readings:
   - key: "Mogensen2017"
@@ -27,7 +27,7 @@ youtube:
   - link: "https://youtu.be/yk2x6WGhgVg"
     name: "VL Funktionen"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/eddc0526dca0dd506e7f1a4ea426319fca05126ebacadb328ab8ccf68f2d0b038bc58b98ab51fdf3774db1b3a4ffe5b3d2279c7db4a37fe277ed2f3b27b9e495"
+  - link: "https://www.hsbi.de/medienportal/m/eddc0526dca0dd506e7f1a4ea426319fca05126ebacadb328ab8ccf68f2d0b038bc58b98ab51fdf3774db1b3a4ffe5b3d2279c7db4a37fe277ed2f3b27b9e495"
     name: "VL Funktionen"
 ---
 

@@ -2,7 +2,7 @@
 archetype: lecture-bc
 title: "Typen und Attributierte Grammatiken"
 menuTitle: "Attributierte Grammatiken"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 2
 readings:
   - key: "Aho2008"

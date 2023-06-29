@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Parser mit ANTLR generieren"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 5
 readings:
   - key: "@Parr2014"
@@ -60,7 +60,7 @@ youtube:
   - link: "https://youtu.be/FJOEPY-TMmw"
     name: "Demo ANTLR Parser"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/19925b756d6fc934bfe0b5107eb5fa58373a53af49c690ebce86e15f2b212c89c80ea7665e42c78abdc8dfe0718ea46f6a9817eeba4ad1293bdb4c84f7c8f084"
+  - link: "https://www.hsbi.de/medienportal/m/19925b756d6fc934bfe0b5107eb5fa58373a53af49c690ebce86e15f2b212c89c80ea7665e42c78abdc8dfe0718ea46f6a9817eeba4ad1293bdb4c84f7c8f084"
     name: "VL Parser mit ANTLR"
 ---
 

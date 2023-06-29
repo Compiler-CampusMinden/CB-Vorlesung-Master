@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Struktur eines Compilers"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 1
 readings:
   - key: "Aho2008"
@@ -27,7 +27,7 @@ youtube:
   - link: "https://youtu.be/zpELDC_3G7Q"
     name: "VL Überblick"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/ec65309e6ba36d1d63e1aa8523f1f06b96af927d88c547083f1960ebf716e9d121701813bc1972dcf83779a007a62f839bf97f19bff3abc22c60dae523be7c0e"
+  - link: "https://www.hsbi.de/medienportal/m/ec65309e6ba36d1d63e1aa8523f1f06b96af927d88c547083f1960ebf716e9d121701813bc1972dcf83779a007a62f839bf97f19bff3abc22c60dae523be7c0e"
     name: "VL Überblick"
 ---
 

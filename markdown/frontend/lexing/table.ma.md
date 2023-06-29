@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 menuTitle: "Tabellenbasierte Implementierung"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 2
 readings:
   - key: "Aho2008"
@@ -36,7 +36,7 @@ youtube:
   - link: "https://youtu.be/2GeEaU3qB6c"
     name: "VL Tabellenbasierte Scanner"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/36f62768351b19aa6453c819afa64cf2cc9ac698d3cf29137f3c7a5aeb5229de7c1102b8cf87981c27cbc1b250f03f1572e690dc96fb69e89a982f8200d54eb2"
+  - link: "https://www.hsbi.de/medienportal/m/36f62768351b19aa6453c819afa64cf2cc9ac698d3cf29137f3c7a5aeb5229de7c1102b8cf87981c27cbc1b250f03f1572e690dc96fb69e89a982f8200d54eb2"
     name: "VL Tabellenbasierte Scanner"
 ---
 

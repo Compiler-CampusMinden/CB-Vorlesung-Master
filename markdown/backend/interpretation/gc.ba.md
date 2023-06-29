@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Garbage Collection"
 menuTitle: "Garbage Collection"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 4
 readings:
   - key: "Nystrom2021"
@@ -31,7 +31,7 @@ youtube:
   - link: "https://youtu.be/Loo3Ver5pyc"
     name: "VL Garbage Collection"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/6f634388ae21b10f85827208a3a00606fef9550c5ab1fb94fd750ff0f6ebf24f9e1873213cb14c93406b2512041a49bc3bede5a995750d82ce6299669476b4b3"
+  - link: "https://www.hsbi.de/medienportal/m/6f634388ae21b10f85827208a3a00606fef9550c5ab1fb94fd750ff0f6ebf24f9e1873213cb14c93406b2512041a49bc3bede5a995750d82ce6299669476b4b3"
     name: "VL Garbage Collection"
 ---
 

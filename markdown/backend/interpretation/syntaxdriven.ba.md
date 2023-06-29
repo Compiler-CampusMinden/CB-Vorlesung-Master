@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Syntaxgesteuerte Interpreter"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 1
 readings:
   - key: "Nystrom2021"
@@ -54,7 +54,7 @@ youtube:
   - link: "https://youtu.be/s5wvvoYsxe4"
     name: "VL Syntaxgesteuerte Interpreter"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/0e4ffb9743823767da26cf83c54fa2c87293bb9974ccb5b62e9111cccf01954b96fd29a449fc96097f0b8c549d93c720aed4c3fe079795dbe6246081b7c20a8f"
+  - link: "https://www.hsbi.de/medienportal/m/0e4ffb9743823767da26cf83c54fa2c87293bb9974ccb5b62e9111cccf01954b96fd29a449fc96097f0b8c549d93c720aed4c3fe079795dbe6246081b7c20a8f"
     name: "VL Syntaxgesteuerte Interpreter"
 ---
 

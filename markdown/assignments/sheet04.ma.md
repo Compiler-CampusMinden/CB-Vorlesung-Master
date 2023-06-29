@@ -1,7 +1,7 @@
 ---
 archetype: assignment
 title: "Blatt 04: Freie Aufgabe"
-author: "BC George, Carsten Gips (FH Bielefeld)"
+author: "BC George, Carsten Gips (HSBI)"
 weight: 4
 
 hidden: true

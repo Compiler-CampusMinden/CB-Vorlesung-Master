@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "LL-Parser (Theorie)"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 2
 readings:
   - key: "aho2013compilers"

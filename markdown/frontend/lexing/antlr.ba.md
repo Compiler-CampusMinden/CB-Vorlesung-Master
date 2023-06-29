@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Lexer mit ANTLR generieren"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 3
 readings:
   - key: "@Parr2014"
@@ -33,7 +33,7 @@ youtube:
   - link: "https://youtu.be/bNpgqctiQM8"
     name: "Demo Lexer-Regeln mit Aktionen"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/5a434cef0848efaa850e8153cba24dbe79d02f1e3423d9eb363a998024b01ed397e3fe425584fb6bb57828efbbe0e5a2b04f01e30e8fd972fc4ddc78b2b8c6f8"
+  - link: "https://www.hsbi.de/medienportal/m/5a434cef0848efaa850e8153cba24dbe79d02f1e3423d9eb363a998024b01ed397e3fe425584fb6bb57828efbbe0e5a2b04f01e30e8fd972fc4ddc78b2b8c6f8"
     name: "VL Lexer mit ANTLR"
 ---
 

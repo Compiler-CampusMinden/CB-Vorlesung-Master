@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Strukturen und Klassen"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 4
 readings:
   - key: "Mogensen2017"
@@ -26,7 +26,7 @@ youtube:
   - link: "https://youtu.be/-w9ljeFGq3k"
     name: "VL Strukturen und Klassen"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/61bbea5570ec17a741c3899f0822085deee317d4f5f34268eb6bcc1cc4ce6b443eb2ac397791e1fbeb5ba7a9d6c46cf08307bf3be2ccde9b7d2fc0a6ee9cfcc9"
+  - link: "https://www.hsbi.de/medienportal/m/61bbea5570ec17a741c3899f0822085deee317d4f5f34268eb6bcc1cc4ce6b443eb2ac397791e1fbeb5ba7a9d6c46cf08307bf3be2ccde9b7d2fc0a6ee9cfcc9"
     name: "VL Strukturen und Klassen"
 ---
 

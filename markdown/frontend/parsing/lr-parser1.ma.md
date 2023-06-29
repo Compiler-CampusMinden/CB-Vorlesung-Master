@@ -2,7 +2,7 @@
 archetype: lecture-bc
 title: "Syntaxanalyse: LR-Parser (Teil 1)"
 menuTitle: "LR-Parser 1"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 6
 readings:
   - key: "Aho2008"

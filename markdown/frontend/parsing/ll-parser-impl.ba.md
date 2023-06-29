@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "LL-Parser selbst implementiert"
 menuTitle: "LL-Parser implementieren"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 3
 readings:
   - key: "Parr2010"
@@ -45,7 +45,7 @@ youtube:
   - link: "https://youtu.be/3djLtMtW82k"
     name: "VL LL-Parser selbst implementiert"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/fc75fe2bfb0c45447689e386f3e0c227bb30a0d081374134c60e20392a1f8c54536a749aefec5c5825c4d8c9e9aa77c30b37acb56e9b3c314da17691d9c5eee8"
+  - link: "https://www.hsbi.de/medienportal/m/fc75fe2bfb0c45447689e386f3e0c227bb30a0d081374134c60e20392a1f8c54536a749aefec5c5825c4d8c9e9aa77c30b37acb56e9b3c314da17691d9c5eee8"
     name: "VL LL-Parser selbst implementiert"
 ---
 

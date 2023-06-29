@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Error-Recovery"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 5
 readings:
   - key: "Parr2010"
@@ -45,7 +45,7 @@ assignments:
 youtube:
   - link: "https://youtu.be/9sFdI7pYMQs"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade"
+  - link: "https://www.hsbi.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade"
     name: "VL Error-Recovery"
 ---
 
@@ -54,7 +54,7 @@ fhmedia:
 
 ![](images/bc_xml-parsing-error.png)
 
-[Quelle: Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC George](mailto:bc.george@fh-bielefeld.de) ([CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin}
+[Quelle: Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC George](mailto:bc.george@hsbi.de) ([CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin}
 
 ::: notes
 *   Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern

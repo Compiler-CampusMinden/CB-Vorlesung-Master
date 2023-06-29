@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Bandbreite der Programmiersprachen"
 menuTitle: "Programmiersprachen"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 2
 readings:
   - key: "Aho2008"
@@ -23,7 +23,7 @@ youtube:
   - link: "https://youtu.be/prsc8cf4cJ8"
     name: "VL Programmiersprachen"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a"
+  - link: "https://www.hsbi.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a"
     name: "VL Programmiersprachen"
 ---
 

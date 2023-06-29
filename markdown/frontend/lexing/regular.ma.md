@@ -2,7 +2,7 @@
 archetype: lecture-bc
 title: "Reguläre Sprachen, Ausdrucksstärke"
 menuTitle: "Reguläre Sprachen"
-author: "BC George (FH Bielefeld)"
+author: "BC George (HSBI)"
 weight: 1
 readings:
   - key: "aho2013compilers"

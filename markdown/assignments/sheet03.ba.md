@@ -1,7 +1,7 @@
 ---
 archetype: assignment
 title: "Meilenstein 03: Interpreter (Mini-Python)"
-author: "BC George, Carsten Gips (FH Bielefeld)"
+author: "BC George, Carsten Gips (HSBI)"
 weight: 3
 
 hidden: true

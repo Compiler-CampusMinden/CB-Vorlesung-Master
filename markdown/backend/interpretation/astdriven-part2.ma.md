@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "AST-basierte Interpreter: Funktionen und Klassen"
 menuTitle: "AST-basierte Interpreter 2"
-author: "Carsten Gips (FH Bielefeld)"
+author: "Carsten Gips (HSBI)"
 weight: 3
 readings:
   - key: "Nystrom2021"
@@ -50,7 +50,7 @@ youtube:
   - link: "https://youtu.be/LTqk7ifB-V0"
     name: "VL AST-basierte Interpreter (Funktionen, Klassen)"
 fhmedia:
-  - link: "https://www.fh-bielefeld.de/medienportal/m/725097f1ce3ef3f10dd1d31674e1b18e89e8b58af259705080b78ccba9dd319d7be76884549c9c59e02fde9e1a2a91ae5aa3a6d44a8e200a2323e08e217faa14"
+  - link: "https://www.hsbi.de/medienportal/m/725097f1ce3ef3f10dd1d31674e1b18e89e8b58af259705080b78ccba9dd319d7be76884549c9c59e02fde9e1a2a91ae5aa3a6d44a8e200a2323e08e217faa14"
     name: "VL AST-basierte Interpreter (Funktionen, Klassen)"
 ---
 
