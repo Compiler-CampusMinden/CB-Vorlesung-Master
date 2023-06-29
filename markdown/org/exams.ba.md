@@ -11,10 +11,11 @@ tldr: |
 
   Sofern die Situation dies zulässt, wird die Klausur in den Räumen der HSBI am Campus Minden unter
   Aufsicht durchgeführt. Hier werden Ihnen Rechner für den Zugang zum Prüfungs-ILIAS zur Verfügung
-  gestellt, Sie benötigen nur Ihre HSBI-Zugangsdaten.
+  gestellt, Sie benötigen nur Ihre HSBI-Zugangsdaten (User, Passwort), einen Studierendenausweis und
+  Personalausweis sowie Ihren DIN-A4-Spickzettel.
 
   Wenn die Corona-Lage eine Durchführung in Präsenz nicht erlaubt, wird die Klausur stattdessen als
-  *Open-Book-Ausarbeitung* aus dem Home-Office durchgeführt. Sie benötigen dazu einen normalen Rechner
+  _Open-Book-Ausarbeitung_ aus dem Home-Office durchgeführt. Sie benötigen dazu einen normalen Rechner
   oder Laptop mit einem Standardbrowser. Tablets und Handys können wg. der Mobil-Version der Browser
   problematisch sein. Sie müssen JavaScript aktivieren und Cookies zulassen, der Privacy-Modus ist
   bitte ebenfalls zu deaktivieren. Sie erreichen den Prüfungs-ILIAS
@@ -31,9 +32,9 @@ tldr: |
 
   ### Ablauf der Klausur
 
-  Die Prüfung (das ILIAS-Objekt) selbst schalte ich dann zum Start der Prüfung online. Parallel zur
-  Prüfung wird bei der Durchführung als Open-Book-Ausarbeitung eine Zoom-Sitzung laufen, in der Sie
-  Fragen stellen können.
+  Die Prüfung (das ILIAS-Objekt) selbst schalte ich erst zum Start der Prüfung online. Bei der Durchführung
+  als Open-Book-Ausarbeitung wird parallel zur Prüfung eine Zoom-Sitzung laufen, in der Sie Fragen stellen
+  können.
 
   Nach der Prüfung müssen Sie eine Erklärung abgeben, dass Sie die Prüfung selbstständig und ohne Hilfe
   Dritter angefertigt haben. Dazu ist im Prüfungsraum parallel zur eigentlichen Prüfung ein weiter Test
@@ -69,7 +70,6 @@ hidden: true
 
 ## Elektronische Klausur: Termin, Materialien
 
-::: notes
 ### Termin
 
 Die Prüfung des theoretischen Teils der Performanzprüfung erfolgt durch eine Klausur, die
@@ -78,24 +78,11 @@ als digitale Prüfung auf einem Prüfungs-ILIAS durchgeführt wird.
 Es wird angestrebt, die Klausur in Präsenz in den Rechnerpools am Campus Minden durchzuführen.
 Falls dies wegen der Corona-Situation oder anderer Umstände nicht möglich sein sollte, wird
 die Klausur als "Open-Book-Ausarbeitung" im Home-Office durchgeführt.
-:::
 
-::: cbox
-[Prüfungszeitraum 1:]{.notes} **E2: Mo, 11.07.2022, 09:00 -- 09:45 Uhr**
-:::
+Es wird in beiden Prüfungszeiträumen ein Termin angeboten. Die Termine werden vom Prüfungsamt
+bekannt gegeben.
 
-:::::: notes
-Dauer 45 Minuten (Zeitraum 1, E2) bzw. 90 Minuten (Zeitraum 2).
-
-Im ersten Prüfungszeitraum zählen die Termine E1 und E2 zusammen als **eine** Prüfung (vergleiche
-`["Note und Credits > Theoretische Teilleistung"]({{< ref "/org/grading" >}})`{=markdown}.)
-
-Im zweiten Prüfungszeitraum wird **eine** Prüfung mit 90 Minuten Dauer angeboten. Der konkrete
-Termin im zweiten Prüfungszeitraum wird noch vom Prüfungsamt bekannt gegeben.
-::::::
-
-\bigskip
-\bigskip
+Dauer jeweils 90 Minuten.
 
 *   Die konkrete Durchführungsform [(in Präsenz am Campus Minden oder im Home-Office)]{.notes}
     wird Ihnen [spätestens]{.notes} zwei Wochen vor der Prüfung über das LSF bekanntgegeben
@@ -104,115 +91,96 @@ Termin im zweiten Prüfungszeitraum wird noch vom Prüfungsamt bekannt gegeben.
 *   Melden Sie sich im ILIAS-Prüfungsraum vor dem Prüfungstag per "Beitritt mit Bestätigung" an
     [(wie zu einem normalen Kurs)]{.notes}
 
-\bigskip
-
-::: notes
 ### Zugelassene Hilfsmittel
-:::
 
-*   **Zugelassene Materialien**: [**DIN-A4-Spickzettel (beidseitig)**]{.alert}
+#### Präsenz
 
-    ::: notes
-    Sie dürfen **einen** Spickzettel im **DIN-A4**-Format benutzen, der beidseitig beschrieben
-    sein kann.
+**Zugelassene Materialien**: [**DIN-A4-Spickzettel (beidseitig)**]{.alert}
 
-    Ich möchte Sie hier noch einmal ermuntern, diesen Zettel tatsächlich manuell zu erstellen
-    (also ganz traditionell zu **schreiben**), da bereits der Schreibvorgang einen gewissen
-    Lerneffekt bewirkt!
+Sie dürfen **einen** Spickzettel im **DIN-A4**-Format benutzen, der beidseitig beschrieben
+sein kann.
 
-    Falls die Prüfung als Open-Book-Ausarbeitung im Home-Office durchgeführt werden sollte, dürfen
-    Sie zusätzlich auch alle anderen Unterlagen benutzen.
-    :::
+Ich möchte Sie hier noch einmal ermuntern, diesen Zettel tatsächlich manuell zu erstellen
+(also ganz traditionell zu **schreiben**), da bereits der Schreibvorgang einen gewissen
+Lerneffekt bewirkt!
 
-    *   Ausnahme: **Keine Hilfe durch Dritte!** (insb. keine Zusammenarbeit, keine Kommunikation)
+#### Open-Book-Ausarbeitung
 
-        ::: notes
-        Sie sollen die Prüfung eigenständig bearbeiten. Hilfe von Dritten sowie jegliche Kommunikation
-        mit Dritten ist in keinem Fall zugelassen und wird als Täuschungsversuch gewertet.
-        :::
+Falls die Prüfung als Open-Book-Ausarbeitung im Home-Office durchgeführt werden sollte, dürfen
+Sie alle Unterlagen benutzen.
 
-\bigskip
+*   Ausnahme: **Keine Hilfe durch Dritte!** (insbesondere keine Zusammenarbeit, keine Kommunikation)
 
-::: notes
+    Sie sollen die Prüfung eigenständig bearbeiten. Hilfe von Dritten sowie jegliche Kommunikation
+    mit Dritten ist in keinem Fall zugelassen und wird als Täuschungsversuch gewertet.
+
 ### Einsicht
-:::
 
 *   Prüfungseinsicht: Zeitnah; Bekanntgabe per Mail
 
 
-## Technische Vorbereitungen: Präsenzprüfung am Campus Minden
+## Technische Vorbereitungen
 
-::: notes
+### Präsenzprüfung am Campus Minden
+
 Diese Bemerkungen betreffen die Durchführung als Präsenzprüfung in den Räumen am Campus Minden.
-:::
 
 *   **HSBI-Zugangsdaten**: Username, Passwort
 
-    ::: notes
     Bei der Durchführung der Prüfung am Campus Minden wird Ihnen ein Rechner zur Verfügung
     gestellt. Dort läuft voraussichtlich ein Browser im Kiosk-Mode, wo Sie sich am Prüfungs-ILIAS
     anmelden. Dazu benötigen Sie ihre HSBI-Zugangsdaten, mit denen Sie sich auch im "normalen"
     ILIAS anmelden.
-    :::
 
+*   **Studierendenausweis** und Personalausweis
 
-## Technische Vorbereitungen: Home-Office
+    An der Prüfung dürfen nur Personen teilnehmen, die dafür im LSF angemeldet sind. Es findet
+    eine entsprechende Kontrolle statt. Halten Sie Ihren Studierendenausweis und Personalausweis
+    bereit.
 
-::: notes
+### Home-Office
+
 Diese Bemerkungen betreffen die Durchführung aus dem Home-Office mit Ihrer Hardware. Bei der
 Durchführung in Präsenz in den Räumen am Campus Minden werden die technischen Details von uns
 für Sie vorbereitet sein.
-:::
 
 *   **Rechner**: Nutzen Sie für die Prüfung einen stationären Rechner oder ein Notebook.
 
-    ::: notes
     Vermeiden Sie die Verwendung von Tablets und Smartphones! Bei der Verwendung von Tablets
     kann es unter Umständen zu Darstellungsproblemen kommen. Smartphones sind aufgrund des kleinen
     Bildschirms für die Prüfungsdurchführung schlicht ungeeignet.
 
     Bei fehlendem Zugang zu einem entsprechenden Endgerät kontaktieren Sie bitte frühzeitig die
     Prüfungsverantwortlichen.
-    :::
 
 *   **Netz**: Stabil genug? Belastbar genug?
 
-    ::: notes
     Wenn Sie keinen Zugang zu einer ausreichend stabilen Internetverbindung haben, setzen Sie sich
     frühzeitig mit Ihren Prüfungsverantwortlichen in Verbindung.
-    :::
 
 *   **VPN**: Der Prüfungs-ILIAS ist nur im HSBI-VPN erreichbar.
 
-    ::: notes
     Installieren Sie den VPN-Client (Anleitung: [hsbi.de/dvz/faq/cat/7](https://www.hsbi.de/dvz/faq/cat/7))
     und testen Sie im Vorfeld der Prüfung bei aktivierter VPN-Verbindung den Zugang zur Prüfungsplattform
     [eassessment.hsbi.de](https://eassessment.hsbi.de). Zugangsdaten wie im normalen
     ILIAS.
 
-    Achtung: Auch wenn Sie sich in den Räumen der HSBI befinden, müssen Sie die VPN-Verbindung aktivieren,
+    Achtung: Auch wenn Sie sich in den Räumen der HSBI befinden, müssen Sie oft die VPN-Verbindung aktivieren,
     um Zugang zur Prüfungsplattform zu erhalten.
-    :::
 
 *   **Browser**: [Nutzen Sie einen der]{.notes} Standardbrowser (Edge, Firefox, Safari, Chrome/Chromium)
     in der Standardeinstellung: insbesondere JavaScript und Cookies müssen aktiviert/erlaubt sein.
 
-    ::: notes
     Deaktivieren Sie sämtliche Browser-Erweiterungen wie z.B. Ad-Blocker (AdBlockPlus, uBlock, ...) oder
     JavaScript-Blocker (No-Script, Ghostery, ...) für den Prüfungszeitraum.
 
     **Nutzen Sie Ihren Browser nicht im Privacy-Modus!**
-    :::
-
-\bigskip
 
 *   **HSBI-Zugangsdaten**: Username, Passwort
 
-    ::: notes
     Bei der Durchführung der Prüfung als Open-Book-Ausarbeitung führen Sie die Prüfung auf Ihrer
     eigenen Hardware im Home-Office durch. Auch hier müssen Sie sich am Prüfungs-ILIAS anmelden.
     Dazu benötigen Sie ihre HSBI-Zugangsdaten, mit denen Sie sich auch im "normalen" ILIAS anmelden.
-    :::
 
 
 ## Bearbeitung des E-Assessment
@@ -221,18 +189,15 @@ für Sie vorbereitet sein.
 
 2.  Bearbeiten Sie die Aufgaben in **einem einzigen** Browser-Tab
 
-    ::: notes
     [**Öffnen Sie die Aufgaben _NICHT_ in parallelen Tabs!**]{.alert}
     Es kann sonst zu Fehlfunktionen von ILIAS kommen.
 
     Bewegen Sie sich nicht per Browser-Navigation ("vor", "zurück" im Browser)
     durch die Aufgaben, sondern nutzen Sie dafür die Buttons "nächste Frage",
     "Weiter" oder "Zurück" vom ILIAS!
-    :::
 
 3.  Hinweis zu Anzeige der restlichen Bearbeitungsdauer
 
-    ::: notes
     Wenn Sie den Browser bzw. das Tab mit der Prüfung im Laufe der Prüfung verlassen,
     wird Ihnen bei der Rückkehr unter Umständen eine falsche restliche Bearbeitungsdauer
     angezeigt. Sie können die Anzeige korrigieren/aktualisieren, indem Sie einfach zu einer
@@ -240,54 +205,44 @@ für Sie vorbereitet sein.
 
     Hinweis: Die restliche Bearbeitungsdauer wird im Test nur dann angezeigt, wenn diese
     Funktion von den Prüfenden aktiviert wurde.
-    :::
 
 4.  Parallel zum E-Assessment läuft eine Zoom-Session, dort können Sie Fragen stellen
 
-    ::: notes
-    Bei Durchführung aus dem Home-Office; Daten siehe Mail über das LSF ca. eine Woche vor der Prüfung
-    :::
+    Nur bei Durchführung aus dem Home-Office; Daten siehe Mail über das LSF ca. eine Woche vor der Prüfung
 
 5.  Verbindungsprobleme (Home-Office):
     -   Bei kurzzeitigen Verbindungsabbrüchen loggen Sie sich einfach wieder ein
     -   Wenn die Probleme länger dauern, gilt der Versuch als nicht unternommen
-        [(außer Sie haben die Probleme aktiv herbeigeführt, dann zählt das als
-        Täuschungsversuch, vgl. RPO §22a (5))]{.notes}
+        [(außer Sie haben die Probleme aktiv herbeigeführt, dann kann das als
+        Täuschungsversuch gewertet werden, vgl. RPO §22a (4))]{.notes}
 
 6.  Erklärung "Eigenständige Bearbeitung" (max. 24h nach Prüfungsende)
 
-    ::: notes
     Sie müssen eine Erklärung der eigenständigen Bearbeitung in der vorbereiteten Aufgabe im separaten
     "Test" im Prüfungsraum abgeben. Ohne diese Erklärung wird Ihre Prüfung nicht bearbeitet/gewertet!
 
     Dazu haben Sie maximal 24 Stunden nach Beendigung der Prüfung Zeit.
-    :::
 
 
-::: notes
 ## Fragetypen-Demo
 
 In Ihrem ILIAS-Kurs finden Sie eine Fragetypen-Demo mit den wichtigsten Fragetypen. Machen
 Sie sich mit der Mechanik der Fragetypen vertraut und schauen Sie sich die Kommentare bei
 den einzelnen Aufgaben an. Sie können die Demo bei Bedarf beliebig oft wiederholen.
-:::
 
 
 ## Hinweise zu den Inhalten
 
 *   Klausurrelevant: Vorlesung und Praktikum
-    [(vergleiche `["Note und Credits > Hinweise zum ersten Prüfungszeitraum"]({{< ref "/org/grading" >}})`{=markdown})]{.notes}
 *   Für Verständnis u.U. hilfreich: Studium der vertiefenden Literaturangaben
 
 \smallskip
 
 *   **Fragen**:
-    *   Schauen Sie sich die Quizzes (Kahoot, ILIAS) an ...
+    *   Schauen Sie sich die Quizzes an ...
     *   Schauen Sie sich die Praktikumsaufgaben an ...
     *   Überlegen Sie sich, was zu einem Themengebiet im Rahmen einer Prüfung
         möglich ist und (wie) gefragt werden könnte :)
-
-\bigskip
 
 ::: cbox
 Können vor Kennen :-)
@@ -295,6 +250,8 @@ Können vor Kennen :-)
 
 
 ## Beispiele für mögliche Fragen
+
+
 
 ::: notes
 Betrachten Sie den folgenden Java-Code:
@@ -324,7 +281,34 @@ Was geschieht, bzw. wieso kommt es zu der jeweiligen Ausgabe?
 
 ## Beispiele für mögliche Fragen (cnt.)
 
-``` {.java size="tiny"}
+### Vererbung und Polymorphie
+
+Betrachten Sie den folgenden Java-Code:
+
+```java
+public class Person {
+    public String getInfo(Person p) { return "Person"; }
+}
+
+public class Studi extends Person {
+    public String getInfo(Studi s) { return "Studi"; }
+
+    public static void main(String[] args) {
+        Studi s = new Studi(); Person p = s;
+        System.out.println(s.getInfo(p));
+        System.out.println(s.getInfo(s));
+    }
+}
+```
+
+Geben Sie alle Ausgaben, die das obige Programm produziert, an.
+
+Begründen Sie Ihre Antwort kurz und stichhaltig (für *jede* Ausgabe!).
+Was geschieht, bzw. wieso kommt es zu der jeweiligen Ausgabe?
+
+### Multithreading und Synchronisierung
+
+```java
 public class StaffelKaputt extends Thread {
     private Object stab;
     StaffelKaputt(Object stab) { this.stab = stab; }
@@ -350,14 +334,12 @@ Welche Ausgabe erwarten Sie (angenommen, das Programm wäre fehlerfrei; eine
 mögliche Variante reicht)? Welche Ausgabe erhalten Sie stattdessen? Korrigieren
 Sie den Fehler.
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Reguläre Ausdrücke
 
 Auf welche Strings passt (im Sinne von "match") der folgende reguläre
 Ausdruck: `\s*([a-zA-Z0-9_.\-]+)\s*=\s*(-?\d+\.?\d*)\s;?\s*`
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Versionieren mit Git
 
 *   Erklären Sie, wie man mit Git die Unterschiede zwischen zwei
     bestimmten Versionsständen einer Datei herausfindet.
@@ -379,8 +361,7 @@ Ausdruck: `\s*([a-zA-Z0-9_.\-]+)\s*=\s*(-?\d+\.?\d*)\s;?\s*`
 
 *   Was würde `git diff` jeweils nach Schritt 2 anzeigen?
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Kommandozeilenparameter
 
 Schreiben Sie ein Programm, welches auf zwei Kommandozeilenparameter reagieren
 kann. Die erkannten Parameter sollen auf der Konsole ausgegeben werden. Nutzen
@@ -394,8 +375,7 @@ Sie Apache Commons CLI (API siehe Anhang).
 *   Die Parameter können in unterschiedlicher Reihenfolge auftreten.
 *   Es kann auch nur ein Parameter angegeben werden.
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Build mit Ant
 
 *   Was ist der Unterschied zwischen Ant-Targets und Ant-Tasks?
 *   Wie kann man Ant-Properties von außen (beim Aufruf) setzen?
@@ -407,8 +387,7 @@ Sie Apache Commons CLI (API siehe Anhang).
 *   Schreiben Sie Ant-Targets, mit denen Sie JUnit-Testfälle ausführen und
     auswerten können.
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Generics
 
 Was kommt hier raus? Und warum?
 
@@ -429,12 +408,11 @@ public class X {
 }
 ```
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Logging
 
 Erklären Sie den Code. Was passiert?
 
-``` {.java size="footnotesize"}
+```java
 class MyFormatter extends SimpleFormatter {
     public String format(LogRecord record) {
         return super.format(record) + "---- FAKE ----\n";
@@ -458,8 +436,7 @@ public class MoreLogging {
 }
 ```
 
-
-## Beispiele für mögliche Fragen (cnt.)
+### Methodenreferenzen
 
 *   Was bedeutet der folgende Code?
 

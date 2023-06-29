@@ -1,76 +1,71 @@
-##########################################################################
-# Makefile for the 'Compilerbau' lecture
-##########################################################################
+#################################################################################
+# Makefile for building the lecture material (website and slides)
+#################################################################################
 
-## Run 'make' or 'make help' to display commonly used targets. Targets for
-## individual files also exist but should only be used if you know what
-## you are doing.
+## Run 'make' or 'make help' to display commonly used targets. "make slides" and
+## "make web" should be the most useful targets (also, targets for individual
+## files also exist but should only be used if you know what you are doing).
+##
+## (a) You can use the toolchain installed in the Docker image "pandoc-lecture",
+##     which comes ready to use (no other dependencies).
+## (b) Alternatively, you need to
+##         (1) install all tools (Pandoc, Hugo, TexLive) manually to your
+##             operating system, and
+##         (2) clone the pandoc-lecture repo plus relearn theme locally to a
+##             specific location (${HOME}/.local/share/pandoc/):
+##             "git clone --depth 1 https://github.com/cagix/pandoc-lecture.git ${HOME}/.local/share/pandoc/"
+##             "wget https://github.com/McShelby/hugo-theme-relearn/archive/refs/tags/${RELEARN}.tar.gz"
+##             "tar -zxf ${RELEARN}.tar.gz --strip-components 1 -C ${HOME}/.local/share/pandoc/hugo/hugo-theme-relearn/"
+##             (Alternatively, just use "make install_scripts_locally" using https://github.com/cagix/pandoc-lecture/)
+##
+## To build the mentioned Docker image or for the required packages for a native
+## installation, see https://github.com/cagix/pandoc-lecture/docker.
+##
+## If you want to use the Docker image to build the lecture material, start the
+## container interactively using "make runlocal" and run the desired Make targets
+## in the interactive container shell.
 
 ## NOTE:
-## The pdf slides that can be generated for certain chapters are named by
-## taking the relative path of the respective source file and replacing
-## any '/' with an '_' (e.g. A/B/C -> A_B_C). This must be reversable in
-## order to find the prerequisites for each output file. Therefore, any
-## subdirectory of the $(SRC_DIR) directory must NOT contain an '_'.
+## The pdf slides that can be generated for certain chapters are named by taking
+## the relative path of the respective source file and replacing any '/' with an
+## '_' (e.g. A/B/C -> A_B_C).
+## This must be reversable in order to find the prerequisites for each output
+## file. Therefore, any subdirectory of the $(SRC_DIR) directory must NOT contain
+## any '_'.
 
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
+# Literature and other sources: Please adjust to your course!
+#--------------------------------------------------------------------------------
+
+## Readings data template
+READINGS = data/readings.yaml
+BIBTEX   = cb.bib
+
+#--------------------------------------------------------------------------------
 # Tools
-#-------------------------------------------------------------------------
-## Define tools to process various types of source files. By default, a
-## custom Docker image will be used. To create this image, run:
-## make create-docker-image
+#--------------------------------------------------------------------------------
+## Define tools to process various types of source files.
 ##
-## Launching tools via a Docker container: make TARGET
-## Launch the tools directly:              export DOCKER=false; make TARGET
-##
-## Note: LaTeX needs to be called in the folder of the .tex file to
-## be processed. In the rule that generates images from tex files, the
-## variable "$<" is set to the current .tex file (incl. path in the working
-## directory). Therefore, the working directory for the Docker container is
-## set to the folder of the current .tex file. When called directly, we
-## need to first change-dir to this folder.
-ifneq ($(DOCKER), false)
-DOCKER_REPO_MNTPOINT = /data
-DOCKER_IMAGE         = alpine-pandoc-hugo
-DOCKER_COMMAND       = docker run --rm -i
-DOCKER_USER          = -u "$(shell id -u):$(shell id -g)"
-DOCKER_VOLUME        = -v "$(shell pwd):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
-DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
-# GIT_DIR ensures that git works with the repository
-# no matter the owning user of the directory.
-# see https://github.com/Compiler-CampusMinden/CB-Vorlesung/pull/16 for the discussion
-# around this specific workaround and
-# https://github.blog/2022-04-12-git-security-vulnerability-announced/ &
-# https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else
-# for a general overview of the issue.
-DOCKER_GIT_ENV = --env GIT_DIR="$(DOCKER_REPO_MNTPOINT)/.git"               \
-                 --env GIT_AUTHOR_NAME="$(shell git config user.name)"      \
-                 --env GIT_AUTHOR_EMAIL="$(shell git config user.email)"    \
-                 --env GIT_COMMITTER_NAME="$(shell git config user.name)"   \
-                 --env GIT_COMMITTER_EMAIL="$(shell git config user.email)"
+## Note: LaTeX needs to be called in the folder of the .tex file to be processed.
+## In the rule that generates images from tex files, the variable "$<" is set to
+## the current .tex file (incl. path in the working directory). Therefore, the
+## working directory for the Docker container is set to the folder of the current
+## .tex file. When called directly, we need to first change-dir to this folder.
+PANDOC = pandoc
+HUGO   = hugo
+DOT    = dot
+LATEX  = cd $(dir $(realpath $<)) && latex
 
-PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                                  $(DOCKER_IMAGE)
-HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                                    $(DOCKER_IMAGE)
-DOT           = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"                                     $(DOCKER_IMAGE)
-LATEX         = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"                                   $(DOCKER_IMAGE)
-DELETE_SCRIPT = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="/opt/delete-script.rb" $(DOCKER_GIT_ENV) $(DOCKER_IMAGE)
-else
-PANDOC        = pandoc
-HUGO          = hugo
-DOT           = dot
-LATEX         = cd $(dir $(realpath $<)) && latex
-DELETE_SCRIPT = ./.github/actions/alpine-pandoc-hugo/delete-script.rb
-endif
-
-## Data-Dir: Path to the Git submodule of Pandoc-Lecture
-## Resource-Path: Where to search for bib files and other resources?
-##
-## Note: If Pandoc is used via a Docker container, DATADIR must be the
-## working directory or a subdirectory, as the working directory will
-## be mounted into the Docker container! References to a parent directory
-## of the working directory therefore will not work when using a Docker
-## container!
-PANDOC_DIRS = --data-dir=.pandoc --resource-path=".:.pandoc"
+## Where do we find the content from https://github.com/cagix/pandoc-lecture,
+## i.e. the resources for Pandoc and the themes for Hugo?
+##     (a) If we run inside the Docker container or inside the GitHub action,
+##         we find the files in ${XDG_DATA_HOME}/pandoc/.
+##     (b) If we are running locally (native installation), we look for the
+##         files at ${HOME}/.local/share/pandoc/.
+## XDG_DATA_HOME can be set externally
+XDG_DATA_HOME ?= $(HOME)/.local/share
+PANDOC_DIRS = --resource-path=".:$(XDG_DATA_HOME)/pandoc/:$(XDG_DATA_HOME)/pandoc/resources/"
+HUGO_DIRS   = --themesDir "$(XDG_DATA_HOME)/pandoc/hugo"
 
 ## Define options for generating images from ".tex" files
 LATEX_ARGS = -shell-escape
@@ -81,11 +76,11 @@ DOT_ARGS = -Tpng
 ## Define options to be used by Hugo
 ## local.yaml allows to override settings in config.yaml
 HUGO_LOCAL = $(wildcard local.yaml)
-HUGO_ARGS  = --config config.yaml,$(HUGO_LOCAL)
+HUGO_ARGS  = --config config.yaml,$(HUGO_LOCAL)  $(HUGO_DIRS)
 
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 # I/O Directories
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 ## Top level directory for source files
 SRC_DIR = markdown
@@ -110,24 +105,9 @@ WEB_OUTPUT_DIR = docs
 ## Output directory for generated slides
 SLIDES_OUTPUT_DIR = pdf
 
-## Temporary directory for extracing lecture structure
-STRUCTURE_TEMP_DIR = $(TEMP_DIR)/structure
-
-## Output .md file for structure
-STRUCTURE_SUMMARY = $(STRUCTURE_TEMP_DIR)/structure.md
-
-## Output directory for lecture structure
-STRUCTURE_OUTPUT_DIR = structure
-
-## Temporary pdf output file for structure
-STRUCTURE_SUMMARY_TEMP_PDF = $(STRUCTURE_SUMMARY:%.md=%.pdf)
-
-## Final pdf output containing the structure of this lecture series
-STRUCTURE_SUMMARY_PDF = $(patsubst $(STRUCTURE_TEMP_DIR)/%.pdf,$(STRUCTURE_OUTPUT_DIR)/%.pdf, $(STRUCTURE_SUMMARY_TEMP_PDF))
-
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 # Helper lists
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 ## TeX source and target files
 TEX_SOURCES        = $(shell find $(SRC_DIR) -type f -iname '*.tex')
@@ -176,15 +156,10 @@ SLIDES_SINGLE_PDF_TARGETS      = $(addprefix $(SLIDES_OUTPUT_DIR)/,$(subst /,_, 
 ## Convenience targets
 SLIDES_MARKDOWN_TARGETS        = $(SLIDES_BUNDLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%) $(SLIDES_SINGLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%)
 SLIDES_SHORT_TARGETS           = $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_BUNDLE_PDF_TARGETS)) $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_SINGLE_PDF_TARGETS))
-STRUCTURE_TARGETS              = $(WEB_MARKDOWN_SOURCES:$(SRC_DIR)%=$(STRUCTURE_TEMP_DIR)%)
 
-## Readings data template
-READINGS = data/readings.yaml
-BIBTEX   = cb.bib
-
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 # Secondary Expansion
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 ## Enable secondary expansion for subsequent targets. This allows the use
 ## of automatic variables like '@' in the prerequisite definitions by
@@ -194,9 +169,9 @@ BIBTEX   = cb.bib
 
 .SECONDEXPANSION:
 
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 # Phony Targets
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 .DEFAULT_GOAL:=help
 
@@ -213,6 +188,11 @@ list-slides: ## List available targets for individual slides
 	@: ## Suppress 'Nothing to be done for ...' message
 
 ##@ Building
+
+## Start Docker container "pandoc-lecture" into interactive shell
+.PHONY: runlocal
+runlocal: ## Start Docker container "pandoc-lecture" into interactive shell
+	docker run  --rm -it  -v "$(shell pwd):/pandoc" -w "/pandoc"  -u "$(shell id -u):$(shell id -g)"  --entrypoint "bash"  pandoc-lecture
 
 ## Make everything
 .PHONY: all
@@ -243,53 +223,17 @@ docker: ## Build Docker image "alpine-pandoc-hugo"
 
 ##@ Cleanup
 
-.PHONY: clean-all
-clean-all: clean-temp ## Clean up all generated files and directories
-	rm -rf $(SLIDES_OUTPUT_DIR) $(WEB_OUTPUT_DIR) $(READINGS) $(STRUCTURE_OUTPUT_DIR)
-
-.PHONY: clean-temp
-clean-temp: ## Clean up all intermediate files and directories
-	rm -rf $(TEMP_DIR) $(HUGO_TEMP_DIR) $(HUGO_LOCK)
-
 .PHONY: distclean
-distclean: clean-all ## Same as clean-all
+distclean: clean ## Clean up all generated files and directories
+	rm -rf $(SLIDES_OUTPUT_DIR) $(WEB_OUTPUT_DIR) $(READINGS)
 
 .PHONY: clean
-clean: clean-temp ## Same as clean-temp
+clean: ## Clean up intermediate files and directories
+	rm -rf $(TEMP_DIR) $(HUGO_TEMP_DIR) $(HUGO_LOCK)
 
-##@ New Elements
-
-## Create new lecture stub based on archetype
-## Use all sections and the page name, but leave out "content/" and "index.md".
-## Example: "markdown/topic/subtopic/lecture/index.md" becomes "topic/subtopic/lecture"
-## 1. "make new_chapter TOPIC=topic"
-## 2. "make new_chapter TOPIC=topic/subtopic"
-## 3. "make new_lecture-bc TOPIC=topic/subtopic/lecture"
-TOPIC ?=
-
-PHONY: new_chapter
-new_chapter: ## Create new chapter
-	$(HUGO) new -c "$(ORIG_CONTENT)/" -k chapter $(TOPIC)
-
-PHONY: new_lecture-bc
-new_lecture-bc: ## Create new lecture for BC
-	$(HUGO) new -c "$(ORIG_CONTENT)/" -k lecture-bc $(TOPIC)
-
-PHONY: new_lecture-cg
-new_lecture-cg: ## Create new lecture for Carsten
-	$(HUGO) new -c "$(ORIG_CONTENT)/" -k lecture-cg $(TOPIC)
-
-PHONY: new_lecture-cy
-new_lecture-cy: ## Create new lecture for Canan
-	$(HUGO) new -c "$(ORIG_CONTENT)/" -k lecture-cy $(TOPIC)
-
-PHONY: new_assignment
-new_assignment: ## Create new assignment
-	$(HUGO) new -c "$(ORIG_CONTENT)/" -k assignment $(TOPIC)
-
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 # File Targets
-#-------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 ## Canned recipe for creating output folder
 define create-folder
@@ -362,29 +306,3 @@ $(SLIDES_SINGLE_PDF_TARGETS): $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_IN
 	$(create-folder)
 	$(PANDOC) $(PANDOC_DIRS) -d slides $< -o $@
 $(SLIDES_SINGLE_PDF_TARGETS): $$(filter $$(dir $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_INTERMEDIATE_DIR)/%, $$(subst _,/,$$@)))%, $(SLIDES_IMAGE_TARGETS))
-
-##@ Structure
-
-.PHONY: delete-rem-tags
-delete-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
-	$(DELETE_SCRIPT) $(SRC_DIR)
-
-.PHONY: structure
-structure: $(STRUCTURE_SUMMARY_PDF) ## Extract structure of the whole lecture series to a pdf
-
-## Extract the structure (title and headings) from each session
-$(STRUCTURE_TARGETS): $(STRUCTURE_TEMP_DIR)/%: $(SRC_DIR)/%
-	$(create-folder)
-	$(PANDOC) $(PANDOC_DIRS) $< --lua-filter=extract_filewise.lua -o $@
-
-## Summarize the structure of the whole lecture series in one markdown file
-$(STRUCTURE_SUMMARY): $(STRUCTURE_TARGETS)
-	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_TARGETS) --lua-filter=extract_summary.lua -o $@
-
-## Convert summery of whole lecture to pdf
-$(STRUCTURE_SUMMARY_TEMP_PDF): $(STRUCTURE_SUMMARY)
-	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_SUMMARY) -o $(STRUCTURE_SUMMARY_TEMP_PDF) --number-sections
-
-## Copy structure from temp directory to 'structure' directory
-$(STRUCTURE_SUMMARY_PDF): $(STRUCTURE_SUMMARY_TEMP_PDF) ## extract structure of all lectures to a pdf
-	$(create-dir-and-copy)

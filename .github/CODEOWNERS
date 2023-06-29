@@ -1,0 +1,16 @@
+* @cagix
+/markdown/assignments/ @bcg7 @cagix
+/markdown/frontend/lexing/regular.ba.md @bcg7 @cagix
+/markdown/frontend/lexing/regular.ma.md @bcg7 @cagix
+/markdown/frontend/parsing/cfg.ba.md @bcg7 @cagix
+/markdown/frontend/parsing/cfg.ma.md @bcg7 @cagix
+/markdown/frontend/parsing/ll-parser-theory.ba.md @bcg7 @cagix
+/markdown/frontend/parsing/ll-parser-theory.ma.md @bcg7 @cagix
+/markdown/frontend/parsing/lr-parser1.ma.md @bcg7 @cagix
+/markdown/frontend/parsing/lr-parser2.ma.md @bcg7 @cagix
+/markdown/frontend/parsing/parsercombinator.ma.md @bcg7 @cagix
+/markdown/frontend/semantics/attribgrammars.ba.md @bcg7 @cagix
+/markdown/frontend/semantics/attribgrammars.ma.md @bcg7 @cagix
+/markdown/intermediate/llvm-ir.ma.md @bcg7 @cagix
+/markdown/backend/minipython-builder.ba.md @bcg7 @cagix
+/markdown/backend/optimization.ma.md @bcg7 @cagix

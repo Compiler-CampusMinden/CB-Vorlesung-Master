@@ -48,28 +48,16 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
 `["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
 
-### Kooperation mit University of Alberta, Edmonton (Kanada)
-
-Über das Projekt ["We CAN virtuOWL"] der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
-Kooperation mit der [University of Alberta] (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
-gestartet.
-
-Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
-Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)
-
-["We CAN virtuOWL"]: https://www.uni-bielefeld.de/uni/profil/international/netzwerke/alberta-owl/we-can-virtuowl/
-[University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
-
 
 ## Materialien
 
 1.  "**Compiler: Prinzipien, Techniken und Werkzeuge**".
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
-    ISBN [978-3-8273-7097-6](https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6).
+    ISBN [978-3-8273-7097-6](https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7097-6).
 
 2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
     Nystrom, R., Genever Benning, 2021.
-    ISBN [978-0-9905829-3-9](https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9).
+    ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
 
 Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})`{=markdown}.
 
@@ -79,3 +67,18 @@ Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})
 `{{< schedule >}}`{=markdown}
 
 **Hinweis**: Abgabe der Hausaufgaben bis jeweils 14.00 Uhr im ILIAS.
+
+
+## Förderungen und Kooperationen
+
+### Kooperation mit University of Alberta, Edmonton (Kanada)
+
+Über das Projekt ["We CAN virtuOWL"] der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
+Kooperation mit der [University of Alberta] (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
+gestartet.
+
+Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
+Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)
+
+["We CAN virtuOWL"]: https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/
+[University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
