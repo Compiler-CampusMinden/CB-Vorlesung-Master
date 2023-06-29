@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Error-Recovery"
 author: "Carsten Gips (HSBI)"
-weight: 5
+weight: 10
 readings:
   - key: "Parr2010"
     comment: "Kapitel 2 und 3"
@@ -23,9 +23,14 @@ tldr: |
   weiter parsen kann. Wenn mehr als ein Token fehlt oder zu viel ist, geht ANTLR in einen "Panic Mode" und
   entfernt so lange Token aus dem Eingabestrom, bis das aktuelle Token in einem *Resynchronization Set* enthalten
   ist. Die Bildung dieser Menge erinnert an die Regeln zum Bilden der *FOLLOW*-Mengen, ist aber an den Kontext
-  der "aufgerufenen" Parser-Regeln gebunden. Zusätzlich gibt es weitere komplexere Strategien zum Behandeln von
-  Fehlern in Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen ("Fail-Save"). Diese Form der
-  Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.
+  der "aufgerufenen" Parser-Regeln gebunden. Zusätzlich gibt es weitere Strategien zum Behandeln von Fehlern in
+  Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen ("Fail-Save"). In Bison wird dagegen mit
+  einem speziellen *error*-Token gearbeitet und man fügt an "strategischen" Stellen Regeln der Form Regel $A \to
+  \operatorname{error} \alpha$ hinzu. Dabei ist $\alpha$ ein Token, welches zur Synchronisierung genutzt werden
+  soll. Im Fehlerfall werden so lange Token vom Stack entfernt, bis man eine Regel $A \to \operatorname{error}
+  \alpha$ anwenden kann und das *error*-Token shiften kann. Danach werden ggf. so lange Token aus dem Eingabestrom
+  entfernt, bis das Token $\alpha$ auftaucht und man die Regel mit einem *reduce* abschließen kann. Diese Form
+  der Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.
 
   Zusätzlich kann man in der Grammatik bereits typische Fehler (vergessene Klammern oder Typos wie Dreher bei
   Schlüsselwörtern) schon über "Fehlerproduktionen" vorwegnehmen. Das bedeutet, dass man eine Regel formuliert,
@@ -65,8 +70,6 @@ fhmedia:
         => weitere Fehler anzeigen.
         Problem: Bis wohin "gobbeln", d.h. was als Synchronisationspunkt nehmen? Semikolon?
     *   Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!
-
-_Anmerkung_: Die folgenden Inhalte beziehen sich auf die Fehlerbehandlung in ANTLR (v4).
 :::
 
 
@@ -81,7 +84,7 @@ stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
 ::: slides
-[Grammatik: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Input-Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+[Grammatik: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/parsing/src/VarDef.g4), Input-Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
 :::
 
 
@@ -153,6 +156,10 @@ Alternativen (Sub-Regeln) entscheiden muss.
         Problem: Dabei nicht zu weit zu springen!
     *   Spezielle Fehlerproduktionen: Spezielle Regeln in der Grammatik,
         die typische Fehler matchen.
+
+Anmerkung LR-Parser: Ein Syntaxfehler wird entdeckt, wenn die Action-Tabelle
+für Top-of-Stack und akt. Token leer ist => Stack und/oder Token modifizieren,
+aber deutlich schwieriger als bei LL ...
 :::
 
 
@@ -241,7 +248,7 @@ def rule():
 => Entferne solange Token, bis aktuelles Token im "*Resynchronization Set*"
 
 
-## Einsatz des "*Resynchronization Set*"
+## ANTLR: Einsatz des "*Resynchronization Set*"
 
 ::: notes
 *   **Following Set**: Menge der Token, die direkt auf eine Regel-Referenz folgen,
@@ -270,7 +277,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 
 
 ::: notes
-### Hinweis: *FOLLOW* != *Following*
+### Hinweis: *FOLLOW* $\ne$ *Following*
 
 **FOLLOW** ist die Menge aller Token, die auf eine Regel folgen können
 
@@ -312,7 +319,7 @@ angenommen, dass das aktuelle Token `':'` nicht passt.
 
 
 ::: notes
-## Anmerkungen Fehlerbehandlung in Sub-Regeln
+## ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln
 
 Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
 (d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR etwas anders vor.
@@ -349,7 +356,7 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 
 ::::::::: notes
-## Ändern der Fehlerbehandlungs-Strategie in ANTLR
+## ANTLR: Ändern der Fehlerbehandlungs-Strategie
 
 ### Ändern der Fehlerbehandlungs-Strategie (global)
 
@@ -383,6 +390,89 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 :::::::::
 
 
+## Panic Mode in Bison (Error Recovery)
+
+```antlr
+stmt : 'int' ID ';'     { printf("%s\n", $2); }
+     | error '\n'       { yyerror(); yyerrok; }
+     ;
+```
+
+::: notes
+Bison kennt ein spezielles Fehler-Token `error`. Dieses Token wird genutzt, um
+einen Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
+*höchstwahrscheinlich* weiter parsen kann.
+
+### Parsen mit *error*-Token
+
+Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch.
+Im Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der
+Form $A \to \operatorname{error} \alpha$ anwendbar ist. Dann wird das Token
+`error` auf den Stack geschoben und so lange Eingabe-Token gelesen und verworfen,
+bis eines gefunden wird, welches auf das `error`-Token folgen kann. Dies nennt
+Bison "Resynchronisation". Anschließend wird im Recovery-Modus normal fortgefahren,
+bis drei weitere Token auf den Stack geschoben wurden und damit der Recovery-Modus
+verlassen wird. Falls bereits vorher weitere Fehler auftreten, werden diese nicht
+separat gemeldet.
+
+### Anwendung im obigen Beispiel
+
+Im obigen Beispiel ist die Regel `stmt : error '\n'` enthalten. Im Fehlerfall
+werden die Symbole vom Stack entfernt, bis ein Zustand erreicht ist, der eine
+Shift-Aktion auf das Token `error` hat. Das Error-Token wird auf den Stack
+geschoben und alle Eingabetoken bis zum nächsten `'\n'` gelesen und direkt
+entfernt. Mit dem Erreichen des Zeilenumbruchs wird die zugeordnete Aktion
+ausgeführt. Diese gibt den Fehler auf der Konsole aus und führt mit dem Makro
+`yyerrok` einen Reset des Parsers aus (d.h. er verlässt den Recovery-Modus
+**vor** dem Shiften der per Default drei gültigen Token). Anschließend ist der
+Bison-Parser wieder im normalen Modus. Die fehlerhaften Symbole/Token wurden
+aus dem Eingabestrom entfernt.
+
+### Wo kommen die *error*-Token am besten hin?
+
+Die "schwarze Kunst" ist, die Error-Token an geeigneten Stellen unterzubringen,
+d.h. vorherzusehen, wo der Parser am sinnvollsten wieder aufsetzen kann. Häufig
+sind dies beispielsweise das ein Statement beendende Semikolon oder die einen
+Block beendende schließende geschweifte Klammer. Beispielsweise könnte man für
+die Sprache C bei der Definition von Statements mehrere Synchronisationspunkte
+einbauen:
+
+```antlr
+stmt : ...
+     | error ';'    /* Synchronisation für 'return' */
+     | error '}'    /* Synchronisation nach Block */
+     | error '\n'   /* Synchronisation nach Zeilenumbruch */
+     ;
+```
+
+### Bison und C und Speichermanagement im Fehlerfall
+
+Wenn Bison im Recovery-Modus ist, werden Symbole und ihre Werte vom Stack entfernt.
+Falls diese Werte (vgl. `%union`) Pointer mit dynamisch alloziertem Speicher sind,
+muss Bison diesen Speicher freigeben.
+
+Dazu kann man sich über die Direktive `%destructor { code } symbols` oder
+`%destructor { code } <types>` Code definieren, der dann für die jeweiligen Symbole
+oder Typen ausgeführt wird.
+
+Die Typangabe `<*>` dient dabei als Catch-All für Symbole, für die ein Typ definiert
+wurde, aber kein Destruktor.
+
+
+Beispiel:
+
+```antlr
+%union {
+    char* str;
+}
+%token <str> ID
+
+%destructor { free($$); } <str>
+```
+
+Für weitere Details vergleiche [@Levine2009, Kap. 8].
+:::
+
 
 ## Fehlerproduktionen
 
@@ -393,6 +483,10 @@ der Fehler wird über eine entsprechende Alternative in der Grammatik korrigiert
 
 Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
 wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
+:::
+
+::: notes
+### ANTLR
 :::
 
 ```antlr
@@ -411,6 +505,41 @@ Letztlich steht im generierten Parser in der generierten Methode `stmt()` an
 der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 :::
 
+\bigskip
+
+:::notes
+### Flex und Bison
+:::
+
+```antlr
+stmt : 'int' ID ';'     { $$ = $2; }
+     : 'int' ID         { yyerror("unterminated id");
+                          $$ = $2; }
+     ;
+%%
+void yyerror(char *s, ...) {
+    va_list ap; va_start(ap, s);
+    fprintf(stderr, "%d: error: ", yylineno);
+    vfprintf(stderr, s, ap); fprintf(stderr, "\n");
+}
+```
+
+::: notes
+Analog zu ANTLR ist es auch in Flex/Bison üblich, für typische Szenarien
+"nicht ganz korrekte" Eingaben zu akzeptieren. Dazu definiert man zusätzliche
+Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
+und eine zusätzliche Warnung ausgeben.
+
+Dabei definiert man sich typischerweise die Funktion `yyerror()`. Über
+`yytext` hat man Zugriff auf den Eingabetext des aktuellen Tokens, und
+mit `yylineno` hat man Zugriff auf die aktuelle Eingabezeile (`yylineno`
+wird automatisch bei jedem `\n` inkrementiert). Wenn man weitere Informationen
+benötigt, muss man mit dem Bison-Feature "Locations" arbeiten. Dies ist ein
+spezieller Datentyp `YYLTYPE`.
+
+Für weitere Details vergleiche [@Levine2009, Kap. 8].
+:::
+
 
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
@@ -423,7 +552,9 @@ expr: ID '+' ID | INT ;
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
 
-Nicht eindeutige Grammatiken führen in ANTLR **nicht** zu einer Fehlermeldung,
+### ANTLR
+
+Nicht eindeutige Grammatiken führen **nicht** zu einer Fehlermeldung,
 da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
 in der Grammatik selbst steckt.
 
@@ -431,6 +562,13 @@ Während des Debuggings von Grammatiken lohnt es sich aber, diese
 Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR-Runtime als ErrorListener.
+
+### Bison
+
+Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
+(vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
+jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
+man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
 :::
 
 
@@ -438,9 +576,10 @@ beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 
 *   Fehler bei `match()`: *single token deletion* oder *single token insertion*
 
-*   ANTLR: Panic Mode: *sync-and-return* bis Token in *Resynchronization Set*
-    *   Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
-    *   Fail-Save zur Vermeidung von Endlosschleifen
+*   Panic Mode: *sync-and-return* bis Token in *Resynchronization Set* (ANTLR)
+    oder `error`-Token shiftbar (Bison)
+    *   ANTLR: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
+    *   ANTLR: Fail-Save zur Vermeidung von Endlosschleifen
 
 *   Fehler-Alternativen in Grammatik einbauen
 
