@@ -30,7 +30,7 @@ languages:
     weight: 2
 
 params:
-  editURL: "https://github.com/Compiler-CampusMinden/CB-Vorlesung/edit/master/markdown/"
+  editURL: "https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/edit/master/markdown/"
   author: "cagix"
   titleSeparator: " "
   alwaysopen: false

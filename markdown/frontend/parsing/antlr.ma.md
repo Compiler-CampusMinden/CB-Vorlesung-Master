@@ -500,7 +500,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
@@ -577,7 +577,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.

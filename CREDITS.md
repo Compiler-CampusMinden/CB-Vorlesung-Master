@@ -38,8 +38,8 @@ not part of the CC BY-SA 4.0 licence of this project.
 
 ## Contributors
 
-[This project](https://github.com/Compiler-CampusMinden/CB-Vorlesung)
+[This project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master)
 has been created and is being maintained by the authors
 [BC George](https://github.com/bcg7), and
 [Carsten Gips](https://github.com/cagix), and various
-[contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung/graphs/contributors).
+[contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors).

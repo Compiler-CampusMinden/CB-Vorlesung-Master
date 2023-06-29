@@ -107,7 +107,7 @@ vornehmen.
 Anschließend können diverse *Writer* den AST in das gewünschte Zielformat überführen.
 :::
 
-[Konsole: pandoc [hello.md](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/intermediate/src/hello.md) -s -t native]{.bsp}
+[Konsole: pandoc [hello.md](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intermediate/src/hello.md) -s -t native]{.bsp}
 
 
 ## Zwischenformat: Drei-Adressen-Code
@@ -204,7 +204,7 @@ define i32 @main() #0 {
 :::
 ::::::
 
-[Beispiel: clang -emit-llvm -S -o - [hello.c](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/intermediate/src/hello.c)]{.bsp}
+[Beispiel: clang -emit-llvm -S -o - [hello.c](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intermediate/src/hello.c)]{.bsp}
 
 ::: notes
 Der obige Output ist auf die *relevanten Zeilen gekürzt*; der gesamte Output im LLVM-Format
@@ -277,7 +277,7 @@ y = x + 35
 :::
 ::::::
 
-[Beispiel: python -m dis [hello.py](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/intermediate/src/hello.py)]{.bsp}
+[Beispiel: python -m dis [hello.py](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intermediate/src/hello.py)]{.bsp}
 
 ::: notes
 Python pflegt 3 Listen: `co_names` für die Namen plus `co_values` für die dazugehörigen Werte sowie
@@ -340,7 +340,7 @@ public class Hello {
 :::
 ::::::
 
-[Beispiel: javac [Hello.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/intermediate/src/Hello.java) && javap -c  Hello.class]{.bsp}
+[Beispiel: javac [Hello.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intermediate/src/Hello.java) && javap -c  Hello.class]{.bsp}
 
 ::: notes
 Für jeden Methodenaufruf wird ein entsprechender Frame auf den Stack gepusht.
@@ -412,7 +412,7 @@ main:
 :::
 ::::::
 
-[Beispiel: gcc -S -o - [hello.c](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/intermediate/src/hello.c)]{.bsp}
+[Beispiel: gcc -S -o - [hello.c](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intermediate/src/hello.c)]{.bsp}
 
 ::: notes
 Die Ausgabe unterscheidet sich je nach Architektur, auf dem der C-Code
