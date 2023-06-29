@@ -1,4 +1,4 @@
-#baseURL: "https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/"
+baseURL: "https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1371719/"
 canonifyURLs: true   # prepend all relative URLs w/ baseURL
 relativeURLs: false  # do NOT rewrite relative URLs to be relative to current content
 uglyurls: true       # use foo.de/bar.html instead of foo.de/bar/ (our new ILIAS 7.x HTML-Lernmodul won't find landing pages else)
@@ -14,20 +14,6 @@ theme:
 
 contentDir: "temp/content"
 publishDir: "docs"
-
-defaultContentLanguage: "ba"
-defaultContentLanguageInSubdir: true
-languages:
-  ba:
-    baseURL: "https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/ba/"
-    languageName: "Bachelor"
-    title: "Bachelor"
-    weight: 1
-  ma:
-    baseURL: "https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1371719/ma/"
-    languageName: "Master"
-    title: "Master"
-    weight: 2
 
 params:
   editURL: "https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/edit/master/markdown/"
