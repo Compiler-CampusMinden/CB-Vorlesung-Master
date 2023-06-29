@@ -17,8 +17,6 @@ jobs:
       - uses: cagix/pandoc-lecture@master
         with:
           hugo: 'true'
-          texlive: 'true'
-          graphviz: 'true'
       - run: make web_zip
 
       - uses: peaceiris/actions-gh-pages@v3
