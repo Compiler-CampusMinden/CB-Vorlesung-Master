@@ -84,7 +84,7 @@ NUM   : [0-9]+ ;
 WS    : [ \t\n]+ -> skip ;
 ```
 
-[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/markdown/frontend/parsing/src/Hello.g4"}
+[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/Hello.g4"}
 
 ::::::::: notes
 ### Starten des Parsers
