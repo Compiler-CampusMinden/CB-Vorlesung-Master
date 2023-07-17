@@ -604,9 +604,6 @@ b : 'a' 'b' 'a' 'b' ;
 Nach dem Lesen von "`ab`" gibt es wegen des identischen Vorschauzeichens
 (`'a'`) einen Shift/Reduce-Konflikt.
 
-::: notes
-[Konsole: bison -v vl09/embedded?.y]{.bsp}
-:::
 
 
 

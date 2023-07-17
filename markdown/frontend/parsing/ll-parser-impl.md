@@ -256,7 +256,7 @@ durchgereicht) über den Aufruf der Start-Regel, also beispielsweise `parser.lis
 
 [Die Eingabe `1+2*3` muss als `1+(2*3)` interpretiert werden, da `*` Vorrang vor `+` hat.]{.notes}
 
-[Tafel: Unterschiede im AST]{.bsp}
+[[Tafel: Unterschiede im AST]{.bsp}]{.slides}
 
 \pause
 
@@ -413,7 +413,7 @@ def lookahead(i):
 
 [Quelle: Eigener Code basierend auf einer Idee nach [@Parr2010, p. 47]]{.origin}
 
-[Tafel: Beispiel mit Ringpuffer: k=3 und "[1,2,3,4,5]"]{.bsp}
+[[Tafel: Beispiel mit Ringpuffer: k=3 und "[1,2,3,4,5]"]{.bsp}]{.slides}
 
 
 ## Wrap-Up
