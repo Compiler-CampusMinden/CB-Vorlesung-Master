@@ -202,7 +202,7 @@ Speicherplatz erhalten (d.h. `count()` liefert den Wert 0, aber ein `add` müsst
 die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das Token schreiben).
 :::
 
-[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.bsp}
+[[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.bsp}]{.slides}
 
 ::: notes
 ### Backtracking führt zu Problemen
