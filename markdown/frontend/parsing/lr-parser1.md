@@ -20,7 +20,7 @@ outcomes:
   - k3: "Konstruktion der Parse Tables"
   - k3: "Durchführen des Parsens"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lr-parser1.ann.ma.pdf"
+  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/lr-parser1.ann.ma.pdf"
     name: "Annotierte Folien: LR-Parser1"
 ---
 
