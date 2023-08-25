@@ -99,14 +99,14 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [Reguläre Sprachen](lecture/frontend/lexing/regular.md)
 [](lecture/frontend/lexing/table.md)
 [Handcodierter Lexer](lecture/frontend/lexing/recursive.md)
-[Lexer mit ANTLR](lecture/frontend/lexing/antlr.md)
+[Lexer mit ANTLR](lecture/frontend/lexing/antlr-lexing.md)
 [Lexer mit Flex](lecture/frontend/lexing/flex.md)
 
 [CFG](lecture/frontend/parsing/cfg.md)
 [LL-Parser (Theorie)](lecture/frontend/parsing/ll-parser-theory.md)
 [LL-Parser (Praxis)](lecture/frontend/parsing/ll-parser-impl.md)
 [](lecture/frontend/parsing/ll-advanced.md)
-[Parser mit ANTLR](lecture/frontend/parsing/antlr.md)
+[Parser mit ANTLR](lecture/frontend/parsing/antlr-parsing.md)
 [Parser mit Bison](lecture/frontend/parsing/bison.md)
 [](lecture/frontend/parsing/lr-parser1.md)
 [](lecture/frontend/parsing/lr-parser2.md)
@@ -116,12 +116,12 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 [Attributierte Grammatiken](lecture/frontend/semantics/attribgrammars.md)
 
-[Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro.md)
+[Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro-symbtab.md)
 [Symboltabellen: Scopes](lecture/frontend/semantics/symboltables/scopes.md)
 [Symboltabellen: Funktionen](lecture/frontend/semantics/symboltables/functions.md)
 [Symboltabellen: Klassen](lecture/frontend/semantics/symboltables/classes.md)
 
-[Überblick Zwischencode](lecture/intermediate/intro.md)
+[Überblick Zwischencode](lecture/intermediate/intro-ir.md)
 [](lecture/intermediate/llvm-ir.md)
 
 <!-- [Mini-Python (Builder)](lecture/backend/minipython-builder.md) -->
