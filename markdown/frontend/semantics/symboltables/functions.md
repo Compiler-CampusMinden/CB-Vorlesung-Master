@@ -29,6 +29,17 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/eddc0526dca0dd506e7f1a4ea426319fca05126ebacadb328ab8ccf68f2d0b038bc58b98ab51fdf3774db1b3a4ffe5b3d2279c7db4a37fe277ed2f3b27b9e495"
     name: "VL Funktionen"
+challenges: |
+    Diskutieren Sie folgende Fragen:
+
+    *   Warum werden überhaupt Symboltabellen eingesetzt?
+    *   Warum muss man zwischen Deklaration und Definition unterscheiden?
+    *   Erklären Sie die Verbindung einer Symboltabelle zu den einzelnen Phasen einer Compiler-Pipeline.
+    *   Wo liegen die Grenzen der semantischen Analyse?
+    *   Warum kann man im Allgemeinen nicht die Symboltabellen nutzen, um die Werte von Symbolen mit zu speichern?
+    *   Wieso sind Funktionen Scope und Symbol gleichzeitig?
+    *   Skizzieren Sie für eine Funktionsdeklaration mit Parametern die resultierende Symboltabelle.
+    *   Erklären Sie, wie man beim Funktionsaufruf vorgehen würde. Werden dabei Einträge in der Symboltabelle erzeugt?
 ---
 
 

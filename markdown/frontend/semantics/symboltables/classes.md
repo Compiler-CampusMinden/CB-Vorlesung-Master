@@ -28,6 +28,43 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/61bbea5570ec17a741c3899f0822085deee317d4f5f34268eb6bcc1cc4ce6b443eb2ac397791e1fbeb5ba7a9d6c46cf08307bf3be2ccde9b7d2fc0a6ee9cfcc9"
     name: "VL Strukturen und Klassen"
+challenges: |
+    **Symboltabellen praktisch**
+
+    Betrachten Sie folgenden Java-Code:
+
+    1. Umkreisen Sie alle Symbole.
+    2. Zeichen Sie Pfeile von Symbol-Referenzen zur jeweiligen Definition (falls vorhanden).
+    3. Identifizieren Sie alle benannten Scopes.
+    4. Identifizieren Sie alle anonymen Scopes.
+    5. Geben Sie die resultierende Symboltabelle an (Strukturen wie in VL besprochen).
+
+    ```java
+    package a.b;
+
+    import u.Y;
+
+    class X extends Y {
+        int f(int x) {
+            int x,y;
+            { int x; x - y + 1; }
+            x = y + 1;
+        }
+    }
+
+    class Z {
+        class W extends X {
+            int x;
+            void foo() { f(34); }
+        }
+        int x,z;
+        int f(int x) {
+            int y;
+            y = x;
+            z = x;
+        }
+    }
+    ```
 ---
 
 

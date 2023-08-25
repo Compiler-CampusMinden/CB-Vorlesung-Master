@@ -47,6 +47,12 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/fc75fe2bfb0c45447689e386f3e0c227bb30a0d081374134c60e20392a1f8c54536a749aefec5c5825c4d8c9e9aa77c30b37acb56e9b3c314da17691d9c5eee8"
     name: "VL LL-Parser selbst implementiert"
+challenges: |
+    *   Wie kann man aus einer LL(1)-Grammatik einen LL(1)-Parser mit rekursivem Abstieg implementieren? Wie "übersetzt" man dabei Token und Regeln?
+    *   Wie geht man mit Alternativen um? Wie mit optionalen Subregeln?
+    *   Warum ist Linksrekursion i.A. bei LL-Parsern nicht erlaubt? Wie kann man Linksrekursion beseitigen?
+    *   Wie kann man Vorrangregeln implementieren?
+    *   Wann braucht man mehr als ein Token Lookahead? Geben Sie ein Beispiel an.
 ---
 
 
