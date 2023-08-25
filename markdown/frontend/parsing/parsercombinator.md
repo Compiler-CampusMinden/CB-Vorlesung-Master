@@ -14,7 +14,7 @@ outcomes:
   - k1: "Top Down Operator Precedence (Pratt) Parser"
   - k1: "Parser-Kombinatoren"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/parsercombinator.ann.ma.pdf"
+  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/parsercombinator.ann.ma.pdf"
     name: "Annotierte Folien: PEG-Parser, Pratt-Parser und Parser Combinators"
 ---
 

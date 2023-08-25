@@ -14,7 +14,7 @@ outcomes:
   - k2: "Umsetzung von SDD mit Hilfe von SDT"
   - k3: "Einfache semantische Analyse mit Hilfe von attributierten Grammatiken"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/semantics_attribgrammars.ann.ma.pdf"
+  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/semantics_attribgrammars.ann.ma.pdf"
     name: "Annotierte Folien: Typen, Type Checking und attributierte Grammatiken"
 ---
 
