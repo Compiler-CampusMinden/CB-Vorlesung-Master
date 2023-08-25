@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 menuTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (HSBI)"
-weight: 2
 readings:
   - key: "Aho2008"
     comment: " Abschnitt 2.6 und Kapitel 3"

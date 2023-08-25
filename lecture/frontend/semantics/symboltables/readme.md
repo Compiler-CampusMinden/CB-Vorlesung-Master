@@ -1,7 +1,6 @@
 ---
 archetype: "chapter"
 title: "Symboltabellen"
-weight: 1
 ---
 
 

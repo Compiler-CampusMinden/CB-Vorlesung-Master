@@ -1,7 +1,6 @@
 ---
 archetype: "chapter"
 title: "Semantische Analyse"
-weight: 3
 ---
 
 

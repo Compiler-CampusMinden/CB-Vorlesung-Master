@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "AST-basierte Interpreter: Funktionen und Klassen"
 menuTitle: "AST-basierte Interpreter 2"
 author: "Carsten Gips (HSBI)"
-weight: 3
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel Kapitel: A Tree-Walk Interpreter, insb. 10. Functions u. 12. Classes"

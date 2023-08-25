@@ -1,7 +1,6 @@
 ---
 archetype: lecture-cg
 title: "Flex: Lexer generieren"
-weight: 4
 ---
 
 

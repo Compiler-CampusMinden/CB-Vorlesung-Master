@@ -1,7 +1,6 @@
 ---
 archetype: "chapter"
 title: "Zwischencode"
-weight: 3
 ---
 
 

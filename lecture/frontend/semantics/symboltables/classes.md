@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Strukturen und Klassen"
 author: "Carsten Gips (HSBI)"
-weight: 4
 readings:
   - key: "Mogensen2017"
     comment: "Kapitel 3"

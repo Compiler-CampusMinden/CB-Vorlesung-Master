@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Ressourcen"
 author: "Carsten Gips (HSBI)"
-weight: 3
 nocite: |
   @Nystrom2021,@Aho2008,@Mogensen2017,@Grune2012,@Torczon2012,@Parr2014
 

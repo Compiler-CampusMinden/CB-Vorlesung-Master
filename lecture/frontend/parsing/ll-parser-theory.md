@@ -2,7 +2,6 @@
 archetype: lecture-bc
 title: "LL-Parser (Theorie)"
 author: "BC George (HSBI)"
-weight: 2
 readings:
   - key: "aho2013compilers"
   - key: "hopcroft2003"

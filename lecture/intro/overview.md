@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Struktur eines Compilers"
 author: "Carsten Gips (HSBI)"
-weight: 1
 readings:
   - key: "Aho2008"
     comment: "Kapitel 1 Introduction"

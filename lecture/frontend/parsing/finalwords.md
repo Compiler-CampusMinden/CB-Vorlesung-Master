@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Grenze Lexer und Parser"
 author: "Carsten Gips (HSBI)"
-weight: 11
 readings:
   - key: "Nystrom2021"
   - key: "Parr2014"

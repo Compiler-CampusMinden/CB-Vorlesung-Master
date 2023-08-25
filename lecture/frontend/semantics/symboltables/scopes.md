@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Nested Scopes"
 author: "Carsten Gips (HSBI)"
-weight: 2
 readings:
   - key: "Mogensen2017"
     comment: "Kapitel 3"

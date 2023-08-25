@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "Lexer: Handcodierte Implementierung"
 menuTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (HSBI)"
-weight: 3
 readings:
   - key: "Aho2008"
     comment: " Abschnitt 2.6 und Kapitel 3"

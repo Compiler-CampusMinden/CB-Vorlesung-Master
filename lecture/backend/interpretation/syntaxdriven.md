@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Syntaxgesteuerte Interpreter"
 author: "Carsten Gips (HSBI)"
-weight: 1
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel: A Tree-Walk Interpreter"

@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "AST-basierte Interpreter: Basics"
 menuTitle: "AST-basierte Interpreter 1"
 author: "Carsten Gips (HSBI)"
-weight: 2
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel Kapitel: A Tree-Walk Interpreter, insb. 8. Statements and State"

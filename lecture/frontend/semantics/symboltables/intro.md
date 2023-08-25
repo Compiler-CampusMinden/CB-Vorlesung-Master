@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "Semantische Analyse: Symboltabellen"
 menuTitle: "Überblick Symboltabellen"
 author: "Carsten Gips (HSBI)"
-weight: 1
 readings:
   - key: "Mogensen2017"
     comment: "Kapitel 3"

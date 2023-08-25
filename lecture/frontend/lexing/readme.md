@@ -1,7 +1,6 @@
 ---
 archetype: "chapter"
 title: "Lexer"
-weight: 1
 ---
 
 

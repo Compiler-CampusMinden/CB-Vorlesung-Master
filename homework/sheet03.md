@@ -2,7 +2,6 @@
 archetype: assignment
 title: "Blatt 03: Optimierung und Datenflussanalyse"
 author: "BC George, Carsten Gips (HSBI)"
-weight: 3
 
 hidden: true
 ---

@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "LL-Parser: Fortgeschrittene Techniken"
 menuTitle: "LL: Fortgeschrittene Techniken"
 author: "Carsten Gips (HSBI)"
-weight: 4
 readings:
   - key: "Parr2010"
     comment: "Kapitel 3"

@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Error-Recovery"
 author: "Carsten Gips (HSBI)"
-weight: 10
 readings:
   - key: "Parr2010"
     comment: "Kapitel 2 und 3"

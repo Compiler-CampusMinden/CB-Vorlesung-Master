@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Modulvorstellung Compilerbau (Wahlfach Liste 1)"
 author: "BC George & Carsten Gips (HSBI)"
-weight: 1
 youtube:
   - link: "https://youtu.be/2SsTAg4qFU8"
     name: "Modulvorstellung CB (Wahlfach Liste 1)"

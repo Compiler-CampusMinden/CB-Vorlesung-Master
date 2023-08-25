@@ -3,7 +3,6 @@ archetype: lecture-bc
 title: "Reguläre Sprachen, Ausdrucksstärke"
 menuTitle: "Reguläre Sprachen"
 author: "BC George (HSBI)"
-weight: 1
 readings:
   - key: "aho2013compilers"
     comment: "Abschnitt 2.6 und Kapitel 3"

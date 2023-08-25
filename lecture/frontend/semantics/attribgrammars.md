@@ -3,7 +3,6 @@ archetype: lecture-bc
 title: "Typen, Type Checking und Attributierte Grammatiken"
 menuTitle: "Attributierte Grammatiken"
 author: "BC George (HSBI)"
-weight: 2
 readings:
   - key: "Aho2008"
     comment: "Kapitel 2.3 und 5"

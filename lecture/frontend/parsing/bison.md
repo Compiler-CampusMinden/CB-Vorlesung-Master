@@ -1,7 +1,6 @@
 ---
 archetype: lecture-cg
 title: "Bison (Parsergenerator)"
-weight: 8
 ---
 
 

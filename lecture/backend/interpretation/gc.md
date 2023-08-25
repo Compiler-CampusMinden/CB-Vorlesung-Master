@@ -3,7 +3,6 @@ archetype: lecture-cg
 title: "Garbage Collection"
 menuTitle: "Garbage Collection"
 author: "Carsten Gips (HSBI)"
-weight: 5
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel 26: Garbage Collection"

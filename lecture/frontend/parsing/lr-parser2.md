@@ -3,7 +3,6 @@ archetype: lecture-bc
 title: "Syntaxanalyse: LR-Parser (Teil 2)"
 menuTitle: "LR-Parser 2"
 author: "BC George (HSBI)"
-weight: 7
 readings:
   - key: "Aho2008"
     comment: "Kapitel 4.5 bis 4.8"

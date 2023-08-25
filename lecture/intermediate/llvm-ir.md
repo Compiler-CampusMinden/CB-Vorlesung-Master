@@ -2,7 +2,6 @@
 archetype: lecture-bc
 title: "LLVM als IR"
 author: "BC George (HSBI)"
-weight: 2
 readings:
   - key: "LLVM-org"
   - key: "LLVM-doc"

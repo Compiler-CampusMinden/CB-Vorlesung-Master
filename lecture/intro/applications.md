@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Anwendungen"
 author: "Carsten Gips (HSBI)"
-weight: 3
 readings:
   - key: "Aho2008"
     comment: "Kapitel 1 Introduction"

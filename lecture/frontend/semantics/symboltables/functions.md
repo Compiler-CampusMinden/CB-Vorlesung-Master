@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Funktionen"
 author: "Carsten Gips (HSBI)"
-weight: 3
 readings:
   - key: "Mogensen2017"
     comment: "Kapitel 3"

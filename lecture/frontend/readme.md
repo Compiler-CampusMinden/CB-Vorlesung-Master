@@ -1,7 +1,6 @@
 ---
 archetype: "chapter"
 title: "Frontend"
-weight: 2
 ---
 
 

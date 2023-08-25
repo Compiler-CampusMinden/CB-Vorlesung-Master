@@ -2,7 +2,6 @@
 archetype: lecture-bc
 title: "CFG"
 author: "BC George (HSBI)"
-weight: 1
 readings:
   - key: "aho2013compilers"
   - key: "hopcroft2003"
