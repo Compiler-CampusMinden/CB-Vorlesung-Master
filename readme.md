@@ -92,48 +92,55 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [Prüfungsvorbereitung](admin/exams.md)
 [FAQ](admin/faq.md)
 
+[Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
 [Überblick](lecture/intro/overview.md)
 [Sprachen](lecture/intro/languages.md)
 [Anwendungen](lecture/intro/applications.md)
 
+[Frontend](lecture/frontend/readme.md)                                  <!-- because of sub-sub-dirs -->
+[Lexer](lecture/frontend/lexing/readme.md)                              <!-- because of sub-sub-dirs -->
 [Reguläre Sprachen](lecture/frontend/lexing/regular.md)
-[](lecture/frontend/lexing/table.md)
+[Tabellenbasierte Lexer](lecture/frontend/lexing/table.md)
 [Handcodierter Lexer](lecture/frontend/lexing/recursive.md)
 [Lexer mit ANTLR](lecture/frontend/lexing/antlr-lexing.md)
 [Lexer mit Flex](lecture/frontend/lexing/flex.md)
 
+[Parser](lecture/frontend/parsing/readme.md)                            <!-- because of sub-sub-dirs -->
 [CFG](lecture/frontend/parsing/cfg.md)
 [LL-Parser (Theorie)](lecture/frontend/parsing/ll-parser-theory.md)
 [LL-Parser (Praxis)](lecture/frontend/parsing/ll-parser-impl.md)
-[](lecture/frontend/parsing/ll-advanced.md)
+[LL: Fortgeschrittene Techniken](lecture/frontend/parsing/ll-advanced.md)
 [Parser mit ANTLR](lecture/frontend/parsing/antlr-parsing.md)
 [Parser mit Bison](lecture/frontend/parsing/bison.md)
-[](lecture/frontend/parsing/lr-parser1.md)
-[](lecture/frontend/parsing/lr-parser2.md)
-[](lecture/frontend/parsing/parsercombinator.md)
+[LR-Parser (Teil 1)](lecture/frontend/parsing/lr-parser1.md)
+[LR-Parser (Teil 2)](lecture/frontend/parsing/lr-parser2.md)
+[PEG-Parser, Pratt-Parser](lecture/frontend/parsing/parsercombinator.md)
 [Error Revocery](lecture/frontend/parsing/recovery.md)
 [Grenze Lexer und Parser](lecture/frontend/parsing/finalwords.md)
 
+[Typen](lecture/frontend/semantics/readme.md)                           <!-- because of sub-sub-dirs -->
 [Attributierte Grammatiken](lecture/frontend/semantics/attribgrammars.md)
 
+[Symboltabellen](lecture/frontend/semantics/symboltables/readme.md)     <!-- because of sub-sub-dirs -->
 [Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro-symbtab.md)
 [Symboltabellen: Scopes](lecture/frontend/semantics/symboltables/scopes.md)
 [Symboltabellen: Funktionen](lecture/frontend/semantics/symboltables/functions.md)
 [Symboltabellen: Klassen](lecture/frontend/semantics/symboltables/classes.md)
 
+[IR](lecture/intermediate/readme.md)                                    <!-- because of sub-sub-dirs -->
 [Überblick Zwischencode](lecture/intermediate/intro-ir.md)
-[](lecture/intermediate/llvm-ir.md)
+[LLVM als IR](lecture/intermediate/llvm-ir.md)
 
-<!-- [Mini-Python (Builder)](lecture/backend/minipython-builder.md) -->
-
+[Backend](lecture/backend/readme.md)                                    <!-- because of sub-sub-dirs -->
+[Interpreter](lecture/backend/interpretation/readme.md)                 <!-- because of sub-sub-dirs -->
 [Syntaxgesteuerte Interpreter](lecture/backend/interpretation/syntaxdriven.md)
 [AST-basierte Interpreter 1](lecture/backend/interpretation/astdriven-part1.md)
 [AST-basierte Interpreter 2](lecture/backend/interpretation/astdriven-part2.md)
 [Garbage Collection](lecture/backend/interpretation/gc.md)
 [Bytecode und VM](lecture/backend/interpretation/vm.md)
 
-[](lecture/backend/optimization.md)
-[](lecture/backend/machinecode.md)
+[Optimierung und Datenflussanalyse](lecture/backend/optimization.md)
+[Maschinencode](lecture/backend/machinecode.md)
 
 [B01](homework/sheet01.md)
 [B02](homework/sheet02.md)

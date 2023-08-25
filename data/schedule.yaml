@@ -23,7 +23,7 @@
       leader: "Carsten"
     - topic: /frontend/lexing/recursive
       leader: "Carsten"
-    - topic: /frontend/lexing/antlr
+    - topic: /frontend/lexing/antlr-lexing
       leader: "Carsten"
     - topic: /frontend/parsing/cfg
       leader: "BC"
@@ -52,7 +52,7 @@
       leader: "Carsten"
     - topic: /frontend/parsing/ll-advanced
       leader: "Carsten"
-    - topic: /frontend/parsing/antlr
+    - topic: /frontend/parsing/antlr-parsing
       leader: "Carsten"
     - topic: /frontend/parsing/lr-parser1
       leader: "BC"
@@ -73,7 +73,7 @@
 
 - week: "KW47"
   lecture:
-    - topic: /frontend/semantics/symboltables/intro
+    - topic: /frontend/semantics/symboltables/intro-symbtab
       leader: "Carsten"
     - topic: /frontend/semantics/symboltables/scopes
       leader: "Carsten"
@@ -88,7 +88,7 @@
 
 - week: "KW48"
   lecture:
-    - topic: /intermediate/intro
+    - topic: /intermediate/intro-ir
       leader: "Carsten"
     - topic: /intermediate/llvm-ir
       leader: "BC"
