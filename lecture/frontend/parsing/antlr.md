@@ -108,7 +108,7 @@ NUM   : [0-9]+ ;
 WS    : [ \t\n]+ -> skip ;
 ```
 
-[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/Hello.g4"}
+[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/Hello.g4"}
 
 ::::::::: notes
 ### Starten des Parsers
@@ -524,7 +524,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/TestMyListener.java"}
+[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyListener.java"}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
@@ -601,7 +601,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java"}
+[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyVisitor.java"}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.

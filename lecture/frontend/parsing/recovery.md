@@ -88,7 +88,7 @@ stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
 ::: slides
-[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/parsing/src/VarDef.g4"}
+[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/parsing/src/VarDef.g4"}
 :::
 
 

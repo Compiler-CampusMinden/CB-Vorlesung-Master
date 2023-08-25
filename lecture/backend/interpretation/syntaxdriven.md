@@ -370,7 +370,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/interpretation/src/TestMyListener.java"}
+[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/interpretation/src/TestMyListener.java"}
 :::
 
 
@@ -448,7 +448,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/interpretation/src/TestMyVisitor.java"}
+[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/interpretation/src/TestMyVisitor.java"}
 :::
 
 

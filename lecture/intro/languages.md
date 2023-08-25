@@ -276,5 +276,5 @@ Citations of "99 Bottles of Beer" lyrics and programming language examples (lice
 *   ["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net
 *   ["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net
 *   ["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net
-*   Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net (file [`screenshot_brainfuck_99bottles.png`](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/markdown/intro/images/screenshot_brainfuck_99bottles.png))
+*   Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net (file [`screenshot_brainfuck_99bottles.png`](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intro/images/screenshot_brainfuck_99bottles.png))
 :::

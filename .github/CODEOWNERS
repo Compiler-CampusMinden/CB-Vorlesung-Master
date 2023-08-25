@@ -1,11 +1,11 @@
 * @cagix
 /homework/ @bcg7 @cagix
-/markdown/frontend/lexing/regular.md @bcg7 @cagix
-/markdown/frontend/parsing/cfg.md @bcg7 @cagix
-/markdown/frontend/parsing/ll-parser-theory.md @bcg7 @cagix
-/markdown/frontend/parsing/lr-parser1.md @bcg7 @cagix
-/markdown/frontend/parsing/lr-parser2.md @bcg7 @cagix
-/markdown/frontend/parsing/parsercombinator.md @bcg7 @cagix
-/markdown/frontend/semantics/attribgrammars.md @bcg7 @cagix
-/markdown/intermediate/llvm-ir.md @bcg7 @cagix
-/markdown/backend/optimization.md @bcg7 @cagix
+/lecture/frontend/lexing/regular.md @bcg7 @cagix
+/lecture/frontend/parsing/cfg.md @bcg7 @cagix
+/lecture/frontend/parsing/ll-parser-theory.md @bcg7 @cagix
+/lecture/frontend/parsing/lr-parser1.md @bcg7 @cagix
+/lecture/frontend/parsing/lr-parser2.md @bcg7 @cagix
+/lecture/frontend/parsing/parsercombinator.md @bcg7 @cagix
+/lecture/frontend/semantics/attribgrammars.md @bcg7 @cagix
+/lecture/intermediate/llvm-ir.md @bcg7 @cagix
+/lecture/backend/optimization.md @bcg7 @cagix
