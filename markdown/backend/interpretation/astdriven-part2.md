@@ -52,6 +52,29 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/725097f1ce3ef3f10dd1d31674e1b18e89e8b58af259705080b78ccba9dd319d7be76884549c9c59e02fde9e1a2a91ae5aa3a6d44a8e200a2323e08e217faa14"
     name: "VL AST-basierte Interpreter (Funktionen, Klassen)"
+challenges: |
+    -  Wie interpretiert man Code?
+    -  Warum kann man die Werte nicht einfach in Symboltabellen ablegen?
+    -  Wie geht man mit Funktionen um? Warum? Kann man diese mehrfach aufrufen?
+    -  Wieso erzeugt man eine neue Environment mit der Closure in der Funktion?
+    -  Wie gehen native Funktionen?
+
+
+    Betrachten Sie folgenden Code-Ausschnitt:
+
+    ```c
+    int x = 42;
+    int f(int x) {
+        int y = 9;
+        return y+x;
+    }
+
+    x = f(x);
+    ```
+
+    1. Geben Sie den AST an.
+    2. Stellen Sie die Strukturen der Symboltabelle dar.
+    3. Stellen Sie die Strukturen im Interpreter dar.
 ---
 
 

@@ -62,6 +62,30 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/19925b756d6fc934bfe0b5107eb5fa58373a53af49c690ebce86e15f2b212c89c80ea7665e42c78abdc8dfe0718ea46f6a9817eeba4ad1293bdb4c84f7c8f084"
     name: "VL Parser mit ANTLR"
+challenges: |
+    **Lexer und Parser mit ANTLR: Programmiersprache Lox**
+
+    Betrachten Sie folgenden Code-Schnipsel in der Sprache ["Lox"](https://www.craftinginterpreters.com/the-lox-language.html):
+
+    ```
+    fun fib(x) {
+        if (x == 0) {
+            return 0;
+        } else {
+            if (x == 1) {
+                return 1;
+            } else {
+                fib(x - 1) + fib(x - 2);
+            }
+        }
+    }
+
+    var wuppie = fib(4);
+    ```
+
+    Erstellen Sie für diese fiktive Sprache einen Lexer+Parser mit ANTLR.
+
+    (Die genauere Sprachdefinition finden Sie bei Bedarf unter [craftinginterpreters.com/the-lox-language.html](https://www.craftinginterpreters.com/the-lox-language.html).)
 ---
 
 

@@ -48,6 +48,71 @@ youtube:
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/10e0ed907bb767e8304c0cf197293588f9497a217e0dee792c458887ec73299a415da96fd2ea12e0f054ba478772239ec2581db5cedadb3aba14203c590493d1"
     name: "VL Lexer mit ANTLR"
+challenges: |
+    **Token und Lexer-Regeln mit ANTLR**
+
+    Formulieren Sie für ANTLR Lexer-Regeln, mit denen folgende Token erkannt werden:
+
+    *   White-Space: Leerzeichen, Tabs, Zeilenumbrüche
+    *   Vergleichsoperatoren: `<`, `>`, `<=`, `>=`, `==`, `<>`
+    *   If: `if`
+    *   Then: `then`
+    *   Else: `else`
+    *   Namen: Ein Buchstabe, gefolgt von beliebig vielen weiteren Buchstaben und/oder Ziffern
+    *   Numerische Konstanten: Mindestens eine Ziffer, gefolgt von maximal einem Paar bestehend aus einem Punkt und mindestens einer Ziffer, gefolgt von maximal einem Paar bestehend aus dem Buchstaben "E" gefolgt von einem "+" oder "-" und mindestens einer Ziffer.
+
+    Formulieren Sie Hilfskonstrukte zur Verwendung in mehreren Lexer-Regeln als ANTLR-Fragmente.
+
+    White-Spaces sollen entfernt werden und nicht als Token weitergereicht werden.
+
+
+    **Real-World-Lexer mit ANTLR: Programmiersprache Lox**
+
+    Betrachten Sie folgenden Code-Schnipsel in der Sprache ["Lox"](https://www.craftinginterpreters.com/the-lox-language.html):
+
+    ```
+    fun fib(x) {
+        if (x == 0) {
+            return 0;
+        } else {
+            if (x == 1) {
+                return 1;
+            } else {
+                fib(x - 1) + fib(x - 2);
+            }
+        }
+    }
+
+    var wuppie = fib(4);
+    ```
+
+    Erstellen Sie für diese fiktive Sprache einen Lexer mit ANTLR. Die genauere Sprachdefinition finden Sie unter [craftinginterpreters.com/the-lox-language.html](https://www.craftinginterpreters.com/the-lox-language.html).
+
+
+    **Pig-Latin mit ANTLR-Lexer**
+
+    Schreiben Sie eine Lexer-Grammatik mit eingebetteten Aktionen für ANTLR sowie ein passendes Programm zur Einbindung des generierten Lexers, welches einen Text nach [Pig Latin](https://de.wikipedia.org/wiki/Pig_Latin) übersetzt:
+
+    *   Ist der erste Buchstabe eines Wortes ein Konsonant, schiebe ihn ans Ende des Wortes und füge "ay" an.
+    *   Ist der erste Buchstabe eines Wortes ein Vokal, hänge an das Wort ein "ay" an.
+
+
+    **Lexing mit ANTLR**
+
+    In einem Telefonbuch sind zeilenweise Namen und Telefonnummern gespeichert.
+
+    Definieren Sie eine Lexer-Grammatik für ANTLR, mit der Sie die Zeilen einlesen können. Können Sie dabei verschiedene Formate der Telefonnummern berücksichtigen?
+
+    ```
+    Heinz 030 5346 983
+    Kalle +49 30 1234 567
+    Lina +49.571.8385-255
+    Rosi (0571) 8385-268
+    ```
+
+    Können Sie die Grammatik so anpassen, dass Sie nur möglichst wenige verschiedene Token an den Parser weitergeben?
+
+    Ergänzen Sie Ihre Grammatik um Lexer-Aktionen, so dass Sie die Zeilen, die Zeichen (in den Namen) und die Ziffern (in den Telefonnummern) zählen können.
 ---
 
 
