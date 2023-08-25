@@ -84,6 +84,50 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
 
 
+<!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
+::: slides
+[Syllabus](admin/syllabus.md)
+[Resources](admin/resources.md)
+[Grading](admin/grading.md)
+[Prüfungsvorbereitung](admin/exams.md)
+[FAQ](admin/faq.md)
+
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+[]()
+
+[B01](homework/sheet01.md)
+[B02](homework/sheet02.md)
+[B03](homework/sheet03.md)
+[B04](homework/sheet04.md)
+:::
+
+
 
 
 
