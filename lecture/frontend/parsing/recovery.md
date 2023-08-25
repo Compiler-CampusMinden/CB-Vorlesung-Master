@@ -503,7 +503,7 @@ stmt : 'int' ID ';'
 Der aus der Grammatik generierte Parser leitet von der Basisklasse `Parser`
 ab. Dort wird eine Methode `notifyErrorListeners()` implementiert, die man
 mit Hilfe von in die Grammatik eingebetteten Aktionen aufrufen kann (Vorgriff
-auf `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}).
+auf [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)).
 Letztlich steht im generierten Parser in der generierten Methode `stmt()` an
 der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 :::

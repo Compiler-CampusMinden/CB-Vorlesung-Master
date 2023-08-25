@@ -4,6 +4,6 @@ title: "Bison (Parsergenerator)"
 ---
 
 
--- Vortragsthema -- (gehört zu `["Flex: Lexer generieren)"]({{<ref "/frontend/lexing/flex" >}})`{=markdown})
+-- Vortragsthema -- (gehört zu [Flex: Lexer generieren](../lexing/flex.md))
 
 <!-- Material in alter Veranstaltung vorhanden -->

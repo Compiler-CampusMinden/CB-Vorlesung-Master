@@ -41,9 +41,9 @@ tldr: |
   syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung mit
   dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber
   zusätzlich noch Speicherstrukturen, die wir in
-  `["AST-basierte Interpreter: Basics"]({{<ref "/backend/interpretation/astdriven-part1" >}})`{=markdown}
+  [AST-basierte Interpreter: Basics](astdriven-part1.md)
   und
-  `["AST-basierte Interpreter: Funktionen und Klassen"]({{<ref "/backend/interpretation/astdriven-part2" >}})`{=markdown}
+  [AST-basierte Interpreter: Funktionen und Klassen](astdriven-part2.md)
   betrachten.
 outcomes:
   - k3: "Attribute und eingebettete Aktionen in Bison und ANTLR"

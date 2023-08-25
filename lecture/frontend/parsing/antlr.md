@@ -525,7 +525,7 @@ public class TestMyListener {
 
 [Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyListener.java"}
 
-In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+In [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -602,7 +602,7 @@ public class TestMyVisitor {
 
 [Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyVisitor.java"}
 
-In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+In [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -628,9 +628,9 @@ hinzu, welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert
 als Rückgabewert der generierten Methode). Auf diesen Wert kann in den
 Aktionen mit `$v` zugegriffen werden.
 
-In `["Attributierte Grammatiken"]({{<ref "/frontend/semantics/attribgrammars" >}})`{=markdown}
+In [Attributierte Grammatiken](../semantics/attribgrammars.md)
 werfen wir einen genaueren Blick auf die attributierten Grammatiken. In
-`["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+[Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
 werden wir eingebettete Aktionen und Attribute nutzen, um einen einfachen
 syntaxgesteuerten Interpreter aufzubauen.
 
@@ -647,12 +647,12 @@ sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
 auf [github.com/antlr/antlr4](https://github.com/antlr/antlr4).
 
 Mit Hilfe von semantischen Prädikaten (vgl.
-`["LL-Parser: Fortgeschrittene Techniken"]({{<ref "/frontend/parsing/ll-advanced" >}})`{=markdown})
+[LL-Parser: Fortgeschrittene Techniken](ll-advanced.md))
 können Parser-Regeln aktiviert oder abgeschaltet werden, je nachdem, was vorher
 gesehen wurde.
 
 Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
-`["Error-Recovery"]({{<ref "/frontend/parsing/recovery" >}})`{=markdown}.
+[Error-Recovery](recovery.md).
 :::
 
 

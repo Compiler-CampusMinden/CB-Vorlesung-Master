@@ -218,7 +218,7 @@ zurückgeben lassen. (Diese Methode wird letztlich vom Parser benutzt.)
 
 Die restlichen Dateien werden für den Parser und verschiedene Arten der
 Traversierung des AST generiert (vgl.
-`["AST-basierte Interpreter"]({{<ref "/backend/interpretation/astdriven-part1" >}})`{=markdown}).
+[AST-basierte Interpreter](../../backend/interpretation/astdriven-part1.md)).
 
 ### Bedeutung der Ausgabe
 
@@ -285,7 +285,7 @@ hello
     Rekursive Lexer-Regeln sind erlaubt. **Achtung**: Es dürfen keine
     _links-rekursiven_ Regeln genutzt werden, etwa wie `ID : ID '*' ID ;` ...
     (Eine genauere Definition und die Transformation in nicht-linksrekursive
-    Regeln siehe `["LL-Parser"]({{<ref "/frontend/parsing/ll-parser-theory" >}})`{=markdown}).
+    Regeln siehe [LL-Parser](../parsing/ll-parser-theory.md)).
 
 *   Alle Literale werden in _einfache_ Anführungszeichen eingeschlossen
     (es erfolgt keine Unterscheidung zwischen einzelnen Zeichen und Strings
