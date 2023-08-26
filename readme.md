@@ -86,6 +86,7 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 <!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
 ::: slides
+<details>
 [Syllabus](admin/syllabus.md)
 [Resources](admin/resources.md)
 [Grading](admin/grading.md)
@@ -146,6 +147,7 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [B02](homework/sheet02.md)
 [B03](homework/sheet03.md)
 [B04](homework/sheet04.md)
+</details>
 :::
 
 
