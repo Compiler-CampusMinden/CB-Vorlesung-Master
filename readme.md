@@ -18,9 +18,57 @@ In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten K
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
 setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
 
-Siehe [Syllabus](admin/syllabus.md) zu Details.
-
 [_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+
+
+## Überblick Modulinhalte
+
+1.  Lexikalische Analyse: Scanner/Lexer
+    *   Reguläre Ausdrücke
+    *   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction),
+        NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
+    *   Manuelle Implementierung, Generierung mit ANTLR und Flex
+    *   Error Recovery
+
+2.  Syntaxanalyse: Parser
+    *   Kontextfreie Grammatiken (CFG), Chomsky
+    *   LL-Parser (Top-Down-Parser)
+        *   FIRST, FOLLOW
+        *   Tabellenbasierte Verfahren
+        *   Rekursiver Abstieg
+        *   LL(1), LL(k), LL(*)
+        *   Umgang mit linksrekursiven Grammatiken
+        *   Umgang mit Vorrang-Regeln und Assoziativität
+        *   Backtracking, Memoizing, Predicated Parsers; ANTLR4: ALL(*)
+    *   LR-Parser (Bottom-Up-Parser)
+        *   Shift-Reduce
+        *   LR(0), SLR(1), LR(1), LALR(1)
+    *   Generierung mit ANTLR und Bison
+    *   Error Recovery
+    *   Grenze Lexer und Parser (aus praktischen Gesichtspunkten)
+
+3.  Symboltabellen
+    *   Berücksichtigung unterschiedlicher Sprachparadigmen
+    *   Typen, Klassen, Polymorphie
+    *   Namen und Scopes
+
+4.  Semantische Analyse und Optimierungen
+    *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
+    *   Typen, Typ-Inferenz, Type Checking
+    *   Datenfluss-Analyse
+    *   Optimierungen: Peephole u.a.
+
+5.  Zwischencode: Intermediate Representation (IR), LLVM
+
+6.  Interpreter
+    *   AST-Traversierung
+    *   Read-Eval-Schleife
+    *   Resolver: Beschleunigung bei der Interpretation
+
+7.  Compiler
+    *   Speicherlayout
+    *   Erzeugen von Byte-Code
+    *   Ausführen in einer Virtuellen Maschine
 
 
 ## Team
