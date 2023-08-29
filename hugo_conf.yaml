@@ -46,7 +46,7 @@ menu:
       url: "/index.html#fahrplan"
       weight: 20
     - name: "<i class='fas fa-bookmark'></i> Praktikum"
-      url: "/homework.html"
+      url: "/index.html#praktikum"
       weight: 30
     - name: "<i class='fas fa-bookmark'></i> Note/Credits"
       url: "/index.html#prüfungsform-note-und-credits"

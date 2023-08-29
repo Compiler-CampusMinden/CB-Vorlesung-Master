@@ -204,7 +204,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [Optimierung und Datenflussanalyse]: lecture/backend/optimization.md
 [Maschinencode]: lecture/backend/machinecode.md
 
-### Praktikum/Übung
+### Praktikum
 
 | Woche | Blatt                                    | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum |
 |:-----:|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
