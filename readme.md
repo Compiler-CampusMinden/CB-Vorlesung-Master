@@ -93,8 +93,17 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Mündliche Prüfung plus Testat**, 5 ECTS
 
-Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
-[Note und Credits](admin/grading.md).
+-   **Testat**:
+    Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
+    Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
+    ein Testat bescheinigt wird.
+
+    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie alle vier
+    Übungsblätter fristgerecht bearbeitet haben.
+
+-   **Gesamtnote**:
+    Mündliche Prüfung am Ende des Semesters, angeboten in beiden
+    Prüfungszeiträumen.
 
 
 ## Materialien

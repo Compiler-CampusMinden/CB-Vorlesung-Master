@@ -39,7 +39,7 @@ Das setzt voraus, dass Sie vorbereitet in die Stunde kommen und sich aktiv einbr
 
 ## Bearbeitung der Übungsaufgaben
 
-Die Übungsaufgaben sollen in 2er-Teams oder einzeln bearbeitet und gelöst werden.
+Die Bearbeitung der Aufgaben erfolgt in 2er-Teams oder individuell.
 
 
 ## Abgabe der Lösungen
@@ -54,12 +54,17 @@ Einmal pro Team reicht - bitte im ILIAS das Team-Mitglied mit auswählen.
 
 Im Praktikum stellen Sie sich gegenseitig Ihre Lösungen vor und diskutieren darüber.
 
+Die Vorstellung Ihrer Lösung im Praktikum kann mit einem Medium Ihrer Wahl
+stattfinden. Sie können zum Beispiel Ihren Bildschirm teilen und Ihre Lösung
+erklären. Sie brauchen nicht extra eine Präsentation anfertigen!
+
 
 ## Punkte und Bestehen
 
-Um das Blatt zu bestehen, muss die Lösung fristgerecht ins ILIAS hochgeladen
-worden sein und Sie müssen Ihre Lösung im Praktikum den anderen vorgestellt
-haben (oder zumindest die Bereitschaft dazu gezeigt haben).
+Sie haben ein Übungsblatt bestanden, wenn Sie Ihre Lösung fristgerecht
+im ILIAS hochgeladen haben und im Praktikum vorgestellt und diskutiert
+haben und Ihre Bearbeitung der Aufgabe eine ernsthafte Beschäftigung
+erkennen lässt.
 
 Es muss nicht immer alles 100% korrekt gelöst sein, aber es muss eine intensive
 Beschäftigung mit der Aufgabe erkennbar sein.
@@ -97,6 +102,71 @@ Team eintragen kann.
 
 Wenn die Themen nicht ausreichen, finden wir gern noch mehr und/oder andere Themen.
 Lediglich Thema 1 ist "gesetzt" und wird auf alle Fälle vergeben.
+
+
+## Auswahl Vortragsthemen
+
+Die Vorträge sollen 30 Minuten (1 Person) bzw. 60 Minuten (2 Personen)
+dauern. Planen Sie eine Diskussion von ca. 10 Minuten am Ende ein.
+
+-   Vortrag 1:
+    Flex und Bison + Live-Coding,
+    Di, 29.11.2022, 18:00-19:30 Uhr (im gemeinsamen Meeting mit Edmonton),
+    Sprache: Englisch,
+    2 Personen
+
+-   Vortrag 2:
+    LLVM (Beispiel, in die Tiefe),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 oder 2 Personen
+
+-   Vortrag 3:
+    Parser-Kombinatoren,
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 4:
+    VM und Bytecode,
+    KW02/KW03,
+    Sprache: Deutsch,
+    2 Personen
+
+-   Vortrag 5:
+    Just-in-Time Compilation (Python, Javascript),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 6:
+    Garbage Collection
+    ([Unified Theory of Garbage Collection](https://www.cs.cornell.edu/courses/cs6120/2020fa/blog/unified-theory-gc/),
+    [Fast Conservative Garbage Collection](https://www.cs.cornell.edu/courses/cs6120/2020fa/blog/modern-gc/)):
+    Java vs. CPython,
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 7:
+    [Tree-Sitter](http://tree-sitter.github.io/tree-sitter/) (LR-Parser-Generator),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 8:
+    LSP: [Language Server Protocol](https://microsoft.github.io/language-server-protocol/),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 9:
+    LL(\*) und Adaptive LL(\*) in ANTLR v4,
+    (T. Parr: "_LL(\*): The Foundation of the ANTLR Parser Generator_" und "_Adaptive LL(\*) Parsing: The Power of Dynamic Analysis_"
+    und [_LL(\*) grammar analysis_](https://theantlrguy.atlassian.net/wiki/spaces/~admin/pages/524294/LL+grammar+analysis))
+    KW02/KW03,
+    Sprache: Deutsch,
+    2 Personen
 
 
 ## Einordnung Lernziele
