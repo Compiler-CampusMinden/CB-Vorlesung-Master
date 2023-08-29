@@ -89,7 +89,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld
 
-### Prüfungsform, Note und Credits
+## Prüfungsform, Note und Credits
 
 **Mündliche Prüfung plus Testat**, 5 ECTS
 
@@ -136,9 +136,87 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ## Fahrplan
 
-`{{< schedule >}}`{=markdown}
+### Vorlesung
 
-**Hinweis**: Abgabe der Hausaufgaben bis jeweils 14.00 Uhr im ILIAS.
+| Woche | Datum                             | Themen                                                                                                                                    | Lead        | Bemerkung                        |
+|:-----:|:----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:---------------------------------|
+|  41   | XX, XX.XX.23                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | Carsten, BC |                                  |
+|  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                                       | BC          |                                  |
+|  42   | XX, XX.XX.23 (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                  |
+|  43   | XX, XX.XX.23                      | [CFG]                                                                                                                                     | BC          |                                  |
+|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          | Finale Verteilung Vortragsthemen |
+|  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                  |
+|  44   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR]                                                            | Carsten     |                                  |
+|  44   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                                        |             |                                  |
+|  45   | XX, XX.XX.23                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                  |
+|  45   | XX, XX.XX.23 (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                  |
+|  46   | XX, XX.XX.23                      | [Error Revocery] \| [Grenze Lexer und Parser]                                                                                             | Carsten     | [B01]                            |
+|  47   | XX, XX.XX.23                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                  |
+|  47   | XX, XX.XX.23 (**Praktikum**)      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          |                                  |
+|  48   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [LLVM als IR]                                                                                                 | BC, Carsten | [B02]                            |
+|  48   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vortrag: Flex und Bison + Live-Coding (DE)                                                                                      |             |                                  |
+|  49   | XX, XX.XX.23                      | [PEG-Parser, Pratt-Parser]                                                                                                                | BC          | [B03]                            |
+|  49   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA)                                                                                 |             |                                  |
+|  50   | XX, XX.XX.23                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     |                                  |
+|  51   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                                           | Carsten     |                                  |
+|  02   | XX, XX.XX.24                      | Freies Arbeiten                                                                                                                           | Carsten     |                                  |
+|  03   | XX, XX.XX.24                      | Vorträge: Termine siehe Etherpad                                                                                                          | Carsten, BC | [B04]                            |
+|  04   | XX, XX.XX.24                      | Vorträge: Termine siehe Etherpad                                                                                                          | Carsten, BC |                                  |
+
+[Überblick]: lecture/intro/overview.md
+[Sprachen]: lecture/intro/languages.md
+[Anwendungen]: lecture/intro/applications.md
+
+[Reguläre Sprachen]: lecture/frontend/lexing/regular.md
+[Tabellenbasierte Lexer]: lecture/frontend/lexing/table.md
+[Handcodierter Lexer]: lecture/frontend/lexing/recursive.md
+[Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
+<!-- [Lexer mit Flex]: lecture/frontend/lexing/flex.md -->
+
+[CFG]: lecture/frontend/parsing/cfg.md
+[LL-Parser (Theorie)]: lecture/frontend/parsing/ll-parser-theory.md
+[LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md
+[LL: Fortgeschrittene Techniken]: lecture/frontend/parsing/ll-advanced.md
+[Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
+<!-- [Parser mit Bison]: lecture/frontend/parsing/bison.md -->
+[LR-Parser (Teil 1)]: lecture/frontend/parsing/lr-parser1.md
+[LR-Parser (Teil 2)]: lecture/frontend/parsing/lr-parser2.md
+[PEG-Parser, Pratt-Parser]: lecture/frontend/parsing/parsercombinator.md
+[Error Revocery]: lecture/frontend/parsing/recovery.md
+[Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md
+
+[Attributierte Grammatiken]: lecture/frontend/semantics/attribgrammars.md
+
+[Überblick Symboltabellen]: lecture/frontend/semantics/symboltables/intro-symbtab.md
+[Symboltabellen: Scopes]: lecture/frontend/semantics/symboltables/scopes.md
+[Symboltabellen: Funktionen]: lecture/frontend/semantics/symboltables/functions.md
+[Symboltabellen: Klassen]: lecture/frontend/semantics/symboltables/classes.md
+
+[Überblick Zwischencode]: lecture/intermediate/intro-ir.md
+[LLVM als IR]: lecture/intermediate/llvm-ir.md
+
+[Syntaxgesteuerte Interpreter]: lecture/backend/interpretation/syntaxdriven.md
+[AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
+[AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
+[Garbage Collection]: lecture/backend/interpretation/gc.md
+<!-- [Bytecode und VM]: lecture/backend/interpretation/vm.md -->
+
+[Optimierung und Datenflussanalyse]: lecture/backend/optimization.md
+[Maschinencode]: lecture/backend/machinecode.md
+
+### Praktikum/Übung
+
+| Woche | Blatt                                    | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum |
+|:-----:|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
+|  46   | [B01]: Grammatik, Parser und AST         | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
+|  48   | [B02]: AST und Semantische Analyse       | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
+|  49   | [B03]: Optimierung und Datenflussanalyse | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
+|  03   | [B04]: Freie Aufgabe                     | XX, XX.XX.2024, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2024        |
+
+[B01]: homework/sheet01.md
+[B02]: homework/sheet02.md
+[B03]: homework/sheet03.md
+[B04]: homework/sheet04.md
 
 
 ## Förderungen und Kooperationen
@@ -154,67 +232,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 ["We CAN virtuOWL"]: https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/
 [University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
-
-
-<!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
-::: slides
-<details>
-[Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
-[Überblick](lecture/intro/overview.md)
-[Sprachen](lecture/intro/languages.md)
-[Anwendungen](lecture/intro/applications.md)
-
-[Frontend](lecture/frontend/readme.md)                                  <!-- because of sub-sub-dirs -->
-[Lexer](lecture/frontend/lexing/readme.md)                              <!-- because of sub-sub-dirs -->
-[Reguläre Sprachen](lecture/frontend/lexing/regular.md)
-[Tabellenbasierte Lexer](lecture/frontend/lexing/table.md)
-[Handcodierter Lexer](lecture/frontend/lexing/recursive.md)
-[Lexer mit ANTLR](lecture/frontend/lexing/antlr-lexing.md)
-[Lexer mit Flex](lecture/frontend/lexing/flex.md)
-
-[Parser](lecture/frontend/parsing/readme.md)                            <!-- because of sub-sub-dirs -->
-[CFG](lecture/frontend/parsing/cfg.md)
-[LL-Parser (Theorie)](lecture/frontend/parsing/ll-parser-theory.md)
-[LL-Parser (Praxis)](lecture/frontend/parsing/ll-parser-impl.md)
-[LL: Fortgeschrittene Techniken](lecture/frontend/parsing/ll-advanced.md)
-[Parser mit ANTLR](lecture/frontend/parsing/antlr-parsing.md)
-[Parser mit Bison](lecture/frontend/parsing/bison.md)
-[LR-Parser (Teil 1)](lecture/frontend/parsing/lr-parser1.md)
-[LR-Parser (Teil 2)](lecture/frontend/parsing/lr-parser2.md)
-[PEG-Parser, Pratt-Parser](lecture/frontend/parsing/parsercombinator.md)
-[Error Revocery](lecture/frontend/parsing/recovery.md)
-[Grenze Lexer und Parser](lecture/frontend/parsing/finalwords.md)
-
-[Typen](lecture/frontend/semantics/readme.md)                           <!-- because of sub-sub-dirs -->
-[Attributierte Grammatiken](lecture/frontend/semantics/attribgrammars.md)
-
-[Symboltabellen](lecture/frontend/semantics/symboltables/readme.md)     <!-- because of sub-sub-dirs -->
-[Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro-symbtab.md)
-[Symboltabellen: Scopes](lecture/frontend/semantics/symboltables/scopes.md)
-[Symboltabellen: Funktionen](lecture/frontend/semantics/symboltables/functions.md)
-[Symboltabellen: Klassen](lecture/frontend/semantics/symboltables/classes.md)
-
-[IR](lecture/intermediate/readme.md)                                    <!-- because of sub-sub-dirs -->
-[Überblick Zwischencode](lecture/intermediate/intro-ir.md)
-[LLVM als IR](lecture/intermediate/llvm-ir.md)
-
-[Backend](lecture/backend/readme.md)                                    <!-- because of sub-sub-dirs -->
-[Interpreter](lecture/backend/interpretation/readme.md)                 <!-- because of sub-sub-dirs -->
-[Syntaxgesteuerte Interpreter](lecture/backend/interpretation/syntaxdriven.md)
-[AST-basierte Interpreter 1](lecture/backend/interpretation/astdriven-part1.md)
-[AST-basierte Interpreter 2](lecture/backend/interpretation/astdriven-part2.md)
-[Garbage Collection](lecture/backend/interpretation/gc.md)
-[Bytecode und VM](lecture/backend/interpretation/vm.md)
-
-[Optimierung und Datenflussanalyse](lecture/backend/optimization.md)
-[Maschinencode](lecture/backend/machinecode.md)
-
-[B01](homework/sheet01.md)
-[B02](homework/sheet02.md)
-[B03](homework/sheet03.md)
-[B04](homework/sheet04.md)
-</details>
-:::
 
 
 
