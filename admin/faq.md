@@ -97,3 +97,38 @@ Team eintragen kann.
 
 Wenn die Themen nicht ausreichen, finden wir gern noch mehr und/oder andere Themen.
 Lediglich Thema 1 ist "gesetzt" und wird auf alle Fälle vergeben.
+
+
+## Einordnung Lernziele
+
+Die Lernziele der einzelnen Einheiten werden in einer Einstufung nach
+
+> *Anderson, Krathwohl (eds)*: "A Taxonomy for Learning, Teaching, and Assessing: A Revision of
+> Bloom's Taxonomy of Educational Objectives", Allyn & Bacon, 2001
+
+angegeben.
+
+Kennen (K1)
+:   Abruf von Informationen (Begriffe, Fakten, Prinzipien)
+:   (erkennen, nennen, bezeichnen, wiedergeben, kennen)
+
+Verstehen (K2)
+:   Begründen und Erläutern von Aussagen zum Thema
+:   (beschreiben, zusammenfassen, vergleichen, klassifizieren, begründen, erklären)
+
+Anwenden (K3)
+:   Übertragung von erworbenem Wissen auf neue Situationen oder Anwendung zur Problemlösung
+:   (ausführen, anwenden, beurteilen, entwerfen, nutzen)
+
+
+## Erwarteter Arbeitsaufwand
+
+*   **90h Selbststudium => ca. 6h Arbeitszeit pro Woche**
+
+Zeiten sind Richtwerte! - Manche brauchen länger, manche sind schneller ...
+
+Die Praktikumsaufgaben sollen Ihnen helfen, sich mit den Inhalten der Vorlesung auseinander zu setzen. Die Abgabeform und die Bedingungen an das Testat sind bewusst so gewählt, damit Sie im Praktikum untereinander in eine Diskussion eintreten (können). Nutzen Sie diese Chance und verhalten Sie sich aktiv - so macht das Praktikum Spaß und bringt allen mehr.
+
+Studieren Sie! Studieren bedeutet, sich **selbstständig** mit einem Thema auseinander zu setzen, zu vertiefen, zu üben, Zusammenhänge herzustellen. Die Lehrveranstaltung unterstützt Sie dabei, indem die wichtigsten Themen ausgesucht, in eine zeitliche Reihenfolge gebracht und didaktisch aufbereitet werden, so dass Sie sich die Inhalte leichter erschließen können. Es gibt aber viele weitere Themen und Dinge, die nicht besprochen werden können (schon aus rein zeitlichen Gründen), die aber (für Sie und/oder das Themengebiet) interessant sein können!
+
+Prüfungsrelevant sind selbstverständlich nur die besprochenen Inhalte. Der Fokus liegt aber auf dem "Können", also dem **Beherrschen** der jeweiligen Themen.
