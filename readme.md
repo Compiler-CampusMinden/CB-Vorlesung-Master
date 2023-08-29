@@ -1,6 +1,6 @@
 ---
 archetype: "home"
-title: "CB W22 M.Sc."
+title: "CB W23 M.Sc."
 ---
 
 
