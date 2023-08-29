@@ -93,7 +93,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Mündliche Prüfung plus Testat**, 5 ECTS
 
--   **Testat**:
+-   **Testat**: Vergabe der Credit-Points
     Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
     Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
     ein Testat bescheinigt wird.
@@ -159,12 +159,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 <!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
 ::: slides
 <details>
-[Syllabus](admin/syllabus.md)
-[Resources](admin/resources.md)
-[Grading](admin/grading.md)
-[Prüfungsvorbereitung](admin/exams.md)
-[FAQ](admin/faq.md)
-
 [Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
 [Überblick](lecture/intro/overview.md)
 [Sprachen](lecture/intro/languages.md)
