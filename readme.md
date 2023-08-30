@@ -4,7 +4,7 @@ title: "CB W23 M.Sc."
 ---
 
 
-# MIF 1.10: Compilerbau / MIF 1.5 Concepts of Programming Lanuages (Winter 2022/23)
+# MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Lanuages (Winter 2022/23)
 
 ## Kursbeschreibung
 
