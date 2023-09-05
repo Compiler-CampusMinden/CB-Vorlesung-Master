@@ -166,9 +166,7 @@ und damit den Kreis schließen :-)
 
 ## Erkennen von Zeichenketten für Strickmuster: "10LRL"
 
-::: center
 ![](images/dfa.png){width="45%"}
-:::
 
 ::: notes
 DFA zur Erkennung von Strickanweisungen: Das erste Zeichen muss ein
@@ -187,9 +185,7 @@ als "`*`" zusammengefasst.
 \bigskip
 \pause
 
-::: center
 ![](images/delta.png){width="40%"}
-:::
 
 ::: notes
 Für jeden Zustand wird in der Tabelle vermerkt, in welchen Folgezustand beim

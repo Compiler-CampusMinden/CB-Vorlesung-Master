@@ -189,11 +189,9 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
     zur Verfügung steht und 10% für GC verwendet werden.
 :::
 
-::: center
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png){width="80%"}
 
 [Quelle: [latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
-:::
 
 
 ## Heuristik: Self-adjusting Heap
@@ -256,9 +254,7 @@ Boehm, Weiser und Demers: ["**Boehm GC**"](https://hboehm.info/gc/)
 => Konservativer GC (Variante des Mark-and-Sweep-GC)
 :::
 
-::: center
 ![](images/freispeicherverwaltung.png){width="80%"}
-:::
 
 \bigskip
 
