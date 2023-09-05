@@ -30,7 +30,7 @@ fhmedia:
 
 ## Anwendung: Compiler
 
-![](images/compiler.png){width="60%"}
+![](images/compiler.png)
 
 ::: notes
 Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers,
@@ -45,7 +45,7 @@ Beispiele: gcc, clang, ...
 ## Anwendung: Interpreter
 
 
-![](images/interpreter.png){width="60%"}
+![](images/interpreter.png)
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.

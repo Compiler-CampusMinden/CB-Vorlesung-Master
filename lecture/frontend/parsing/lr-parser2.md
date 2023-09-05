@@ -87,11 +87,11 @@ Regel bei allen Terminals ein, die in der FOLLOW-Menge des Nonterminals auf der 
 
 ## Die SLR-Parsertabelle der Grammatik G1
 
-![SLR(1)-Parsertabelle](images/SLR_1-Table.png){width="80%"}
+![SLR(1)-Parsertabelle](images/SLR_1-Table.png){width="60%"}
 
 ## Zum Vergleich: Die LR(0)-Tabelle von G1 (letzte Vorlesung)
 
-![LR(0)-Parsertabelle](images/LR_0-Table.png){width="80%"}
+![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%"}
 
 
 # Kanonische LR(1)-Syntaxanalyse
@@ -155,7 +155,7 @@ Terminals eingetragen, die in der LOOKAHEAD-Menge der entsprechenden Regel entha
 
 ## Die LR(1)-Parsertabelle der Grammatik G2
 
-![LR(1)-Parsertabelle](images/LR_1-Table.png){width="55%"}
+![LR(1)-Parsertabelle](images/LR_1-Table.png){width="45%"}
 
 
 
@@ -176,7 +176,7 @@ Parsergeneratoren generieren oft direkt aus einem LR(0)- einen LALR(1)-Zustands-
 
 ## Die LALR-Parsertabelle der Grammatik G2
 
-![LALR(1)-Parsertabelle](images/LALR-Table.png){width="80%"}
+![LALR(1)-Parsertabelle](images/LALR-Table.png){width="60%"}
 
 
 

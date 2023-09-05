@@ -144,7 +144,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 
 ## Überblick Recovery bei Parser-Fehlern
 
-![](images/recovery.png){width="80%"}
+![](images/recovery.png)
 
 ::: notes
 *   Fehler im Lexer (hier nicht weiter betrachtet):

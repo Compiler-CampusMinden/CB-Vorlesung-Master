@@ -185,7 +185,7 @@ als "`*`" zusammengefasst.
 \bigskip
 \pause
 
-![](images/delta.png){width="40%"}
+![](images/delta.png)
 
 ::: notes
 Für jeden Zustand wird in der Tabelle vermerkt, in welchen Folgezustand beim
