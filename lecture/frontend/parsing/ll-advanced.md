@@ -214,9 +214,7 @@ die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das
 
 ## Verbesserung Backtracking: Packrat Parser (Memoizing)
 
-::: center
 ![](images/packrat.png){width="60%"}
-:::
 
 ::: notes
 Bei der Eingabe `wuppie();` wird zunächst spekulativ die erste Alternative `fdef` untersucht

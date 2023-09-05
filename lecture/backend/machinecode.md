@@ -86,9 +86,7 @@ gebracht.
 
 ## Virtueller Speicher
 
-:::::: center
 ![](images/virtueller-speicher.png){width="40%"}
-::::::
 
 
 ::::::::: notes

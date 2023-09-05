@@ -197,7 +197,7 @@ Betrachten wir erneut die obige Grammatik.
 
 Die Eingabe von "`a = 42;`" führt zu folgendem Parse-Tree:
 
-![](images/hello_ex1.png){width="60%"}
+![](images/hello_ex1.png)
 
 Diese Eingabe führt zur Erkennung der Token `[ID, WS, =, WS, NUM, ;]`, wobei die
 `WS`-Token verworfen werden und der Parser den Tokenstream `[ID, =, NUM, ;]`
@@ -229,7 +229,7 @@ den Baum zu einem _Abstract Syntax Tree_ (AST). Im Beispiel könnte man den Zwei
 Betrachten wir nun die Eingabe `foo = 2+3*4; bar = 3*4+2;`. Diese führt zu
 folgendem Parse-Tree:
 
-![](images/hello_ex2.png){width="60%"}
+![](images/hello_ex2.png)
 
 Wie man sehen kann, sind in der Grammatik die üblichen Vorrangregeln für die
 Operationen `+` und `*` berücksichtigt - die Multiplikation wird in beiden

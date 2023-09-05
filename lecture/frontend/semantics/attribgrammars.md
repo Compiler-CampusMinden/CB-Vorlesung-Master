@@ -287,9 +287,7 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 
 ## Beispiel: Annotierter Syntaxbaum für `5*8+2`
 
-::: center
-![Annotierter Parse-Tree](images/annotatedparsetree.png){height="90%"}
-:::
+![Annotierter Parse-Tree](images/annotatedparsetree.png)
 
 
 ## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
@@ -305,9 +303,7 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 
 \normalsize
 
-::: center
-![AST](images/ast.png){width="40%"}
-:::
+![AST](images/ast.png){width="30%"}
 
 
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion

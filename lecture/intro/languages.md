@@ -189,11 +189,9 @@ main      = mapM (putStrLn . verse) [99,98..0]
 
 ## Brainfuck
 
-::: center
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
 [Quelle: Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
-:::
 
 ::: notes
 *   Imperativ

@@ -30,9 +30,7 @@ fhmedia:
 
 ## Anwendung: Compiler
 
-::: center
-![](images/compiler.png){width="60%"}
-:::
+![](images/compiler.png)
 
 ::: notes
 Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers,
@@ -47,9 +45,7 @@ Beispiele: gcc, clang, ...
 ## Anwendung: Interpreter
 
 
-::: center
-![](images/interpreter.png){width="60%"}
-:::
+![](images/interpreter.png)
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.
@@ -77,9 +73,7 @@ Beispiel: Java mit seiner JVM
 
 ## Anwendung: C-Toolchain
 
-::: center
 ![](images/c-toolchain.png){width="80%"}
-:::
 
 ::: notes
 Erinnern Sie sich an die LV "Systemprogrammierung" im dritten Semester :-)
@@ -96,9 +90,7 @@ Beispiele: gcc, clang, ...
 
 ## Anwendung: C++-Compiler
 
-::: center
 ![](images/cpp-toolchain.png){width="80%"}
-:::
 
 ::: notes
 C++ hat meist keinen eigenen (vollständigen) Compiler :-)
@@ -115,9 +107,7 @@ Beispiel: g++
 
 ## Anwendung: Bugfinder
 
-::: center
 ![](images/findbugs.png){width="80%"}
-:::
 
 ::: notes
 Tools wie FindBugs analysieren den (Java-) Quellcode und suchen nach bekannten

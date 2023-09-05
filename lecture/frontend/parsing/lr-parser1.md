@@ -273,7 +273,7 @@ Hier entsteht ein Tafelbild.
 
 ## Die LR(0)-Parsertabelle zu G1
 
-![LR(0)-Parsertabelle](images/LR_0-Table.png){width="80%"}
+![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%"}
 
 
 
