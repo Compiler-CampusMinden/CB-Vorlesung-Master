@@ -79,10 +79,10 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 ## Kursformat
 
-| Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
-|:----------------------|:----------------------|
-| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
-| online/C1             | online/C1             |
+| Vorlesung (2 SWS)     | Praktikum (2 SWS / 3 SWS) |
+|:----------------------|:--------------------------|
+| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr     |
+| online/C1             | online/C1                 |
 
 Durchführung als **Flipped Classroom/online** (Carsten) bzw. **Hybrid-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
@@ -91,7 +91,10 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ## Prüfungsform, Note und Credits
 
-**Mündliche Prüfung plus Testat**, 5 ECTS
+:::::: {.tabs groupid="pruefungsordnung"}
+::: {.tab title="Compilerbau"}
+
+**Parcoursprüfung**, 5 ECTS
 
 -   **Testat**: Vergabe der Credit-Points
     Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
@@ -104,6 +107,26 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 -   **Gesamtnote**:
     Mündliche Prüfung am Ende des Semesters, angeboten in beiden
     Prüfungszeiträumen.
+
+:::
+::: {.tab title="Concepts of Programming Lanuages"}
+
+**Parcoursprüfung**, 10 ECTS
+
+-   **Testat**: Vergabe der Credit-Points
+    Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
+    Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
+    ein Testat bescheinigt wird.
+
+    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie alle vier
+    Übungsblätter fristgerecht bearbeitet haben.
+
+-   **Gesamtnote**:
+    Mündliche Prüfung am Ende des Semesters, angeboten in beiden
+    Prüfungszeiträumen.
+
+:::
+::::::
 
 
 ## Materialien
