@@ -79,10 +79,24 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 ## Kursformat
 
-| Vorlesung (2 SWS)     | Praktikum (2 SWS / 3 SWS) |
-|:----------------------|:--------------------------|
-| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr     |
-| online/C1             | online/C1                 |
+:::::: {.tabs groupid="pruefungsordnung"}
+::: {.tab title="Compilerbau"}
+
+| Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
+|:----------------------|:----------------------|
+| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
+| online/C1             | online/C1             |
+
+:::
+::: {.tab title="Concepts of Programming Lanuages"}
+
+| Vorlesung (2 SWS)     | Praktikum (3 SWS)     |
+|:----------------------|:----------------------|
+| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
+| online/C1             | online/C1             |
+
+:::
+::::::
 
 Durchführung als **Flipped Classroom/online** (Carsten) bzw. **Hybrid-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
