@@ -1,10 +1,8 @@
 ---
 archetype: "home"
-title: "MIF 1.10: CB / MIF 1.5: CPL (W23)"
+title: "MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Lanuages (Winter 2023/24)"
 ---
 
-
-# MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Lanuages (Winter 2023/24)
 
 ## Kursbeschreibung
 
