@@ -1,12 +1,13 @@
 ---
 archetype: "home"
-title: "MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Lanuages (Winter 2023/24)"
+title: "MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Languages (Winter 2023/24)"
 ---
 
 
-## Kursbeschreibung
-
 ![](admin/images/architektur_cb.png){width="80%"}
+
+
+## Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
@@ -82,22 +83,22 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 | Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
 |:----------------------|:----------------------|
-| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
+| Di, 13:30 - 15:00 Uhr | Di, 15:15 - 16:45 Uhr |
 | online/C1             | online/C1             |
 
 :::
-::: {.tab title="Concepts of Programming Lanuages"}
+::: {.tab title="Concepts of Programming Languages"}
 
 | Vorlesung (2 SWS)     | Praktikum (3 SWS)     |
 |:----------------------|:----------------------|
-| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
+| Di, 13:30 - 15:00 Uhr | Di, 15:15 - 17:30 Uhr |
 | online/C1             | online/C1             |
 
 :::
 ::::::
 
-Durchführung als **Flipped Classroom/online** (Carsten) bzw. **Hybrid-Vorlesung** (BC):
-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
+Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC):
+alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1117243&client_id=FH-Bielefeld
 
@@ -121,7 +122,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
     Prüfungszeiträumen.
 
 :::
-::: {.tab title="Concepts of Programming Lanuages"}
+::: {.tab title="Concepts of Programming Languages"}
 
 **Parcoursprüfung**, 10 ECTS
 
