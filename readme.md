@@ -200,7 +200,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  04   | XX, XX.XX.24                      | Vorträge: Termine siehe Etherpad                                                                                                          | Carsten, BC |                                  |
 
 [Überblick]: lecture/intro/overview.md
-[Sprachen]: lecture/intro/.md
+[Sprachen]: lecture/intro/languages.md
 [Anwendungen]: lecture/intro/applications.md
 
 [Reguläre Sprachen]: lecture/frontend/lexing/regular.md
