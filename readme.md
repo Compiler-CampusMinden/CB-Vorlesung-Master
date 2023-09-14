@@ -173,30 +173,29 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Vorlesung
 
-| Woche | Datum                             | Themen                                                                                                                                    | Lead        | Bemerkung                        |
-|:-----:|:----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:---------------------------------|
-|  41   | XX, XX.XX.23                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | Carsten, BC |                                  |
-|  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                                       | BC          |                                  |
-|  42   | XX, XX.XX.23 (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                  |
-|  43   | XX, XX.XX.23                      | [CFG]                                                                                                                                     | BC          |                                  |
-|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          | Finale Verteilung Vortragsthemen |
-|  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                  |
-|  44   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR]                                                            | Carsten     |                                  |
-|  44   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                                        |             |                                  |
-|  45   | XX, XX.XX.23                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                  |
-|  45   | XX, XX.XX.23 (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                  |
-|  46   | XX, XX.XX.23                      | [PEG-Parser, Pratt-Parser]                                                                                                                | BC          | [B01]                            |
-|  47   | XX, XX.XX.23                      | [Error Revocery] \| [Grenze Lexer und Parser]                                                                                             | Carsten     |                                  |
-|  47   | XX, XX.XX.23 (**Praktikum**)      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                  |
-|  48   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [LLVM als IR]                                                                                                 | BC, Carsten |                                  |
-|  48   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vortrag: Flex und Bison + Live-Coding (DE)                                                                                      |             |                                  |
-|  49   | XX, XX.XX.23                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          | [B02]                            |
-|  49   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA)                                                                                 |             |                                  |
-|  50   | XX, XX.XX.23                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     | [B03]                            |
-|  51   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                                           | Carsten     |                                  |
-|  02   | XX, XX.XX.24                      | Freies Arbeiten                                                                                                                           | Carsten     |                                  |
-|  03   | XX, XX.XX.24                      | Vorträge: Termine siehe Etherpad                                                                                                          | Carsten, BC | [B04]                            |
-|  04   | XX, XX.XX.24                      | Vorträge: Termine siehe Etherpad                                                                                                          | Carsten, BC |                                  |
+| Woche | Datum                           | Themen                                                                                                                                    | Lead        | Bemerkung                                     |
+|:-----:|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
+|  41   | Di, 10.10.                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | Carsten, BC |                                               |
+|  42   | Di, 17.10.                      | [Reguläre Sprachen]                                                                                                                       | BC          |                                               |
+|  42   | Di, 17.10. (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                               |
+|  43   | Di, 24.10.                      | [CFG]                                                                                                                                     | BC          |                                               |
+|  43   | Di, 24.10. (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          | Finale Verteilung Vortragsthemen              |
+|  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR]                                                            | Carsten     |                                               |
+|  44   | Di, 31.10. (**Praktikum**)      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                               |
+|  45   | Di, 07.11.                      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                               |
+|  45   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: ANTLR + Live-Coding (CA)                                                                                                    |             |                                               |
+|  46   | Di, 14.11.                      | [PEG-Parser, Pratt-Parser]                                                                                                                | BC          | [B01]                                         |
+|  47   | Di, 21.11.                      | [Error Revocery] \| [Grenze Lexer und Parser]                                                                                             | Carsten     |                                               |
+|  47   | Di, 21.11. (**Praktikum**)      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                               |
+|  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                               |
+|  48   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: Mini-Panel "Compilers Today" (CA/DE)                                                                                        |             |                                               |
+|  49   | Di, 05.12.                      | [Überblick Zwischencode] \| [LLVM als IR]                                                                                                 | BC, Carsten |                                               |
+|  49   | **XX, XX.12., 17:00-18:30 Uhr** | **Edmonton**: Vortrag I (Blatt 02) (DE)                                                                                                   |             | [B02] (Kein Praktikum - Termin mit Edmonton!) |
+|  50   | Di, 12.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          | [B03]                                         |
+|  51   | Di, 19.12.                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     | [B04]                                         |
+|  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                                           | Carsten     |                                               |
+|  03   | Di, 16.01.                      | Vortrag II/III: Termine siehe Etherpad                                                                                                    | Carsten, BC |                                               |
+|  04   | Di, 23.01.                      | Vortrag II/III: Termine siehe Etherpad                                                                                                    | Carsten, BC |                                               |
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -241,12 +240,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Blatt                                    | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum |
-|:-----:|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
-|  46   | [B01]: Grammatik, Parser und AST         | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
-|  49   | [B02]: AST und Semantische Analyse       | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
-|  50   | [B03]: Optimierung und Datenflussanalyse | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023        |
-|  03   | [B04]: Freie Aufgabe                     | XX, XX.XX.2024, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2024        |
+| Woche | Blatt      | Abgabe ILIAS                        | Vorstellung Praktikum |
+|:-----:|:-----------|:------------------------------------|:----------------------|
+|  46   | [B01]: XXX | Di, 14.11., 13:00 Uhr ([Link](XXX)) | Di, 14.11.            |
+|  49   | [B02]: XXX | XX, XX.12., XX:XX Uhr ([Link](XXX)) | XX, XX.XX.            |
+|  50   | [B03]: XXX | Di, 12.12., 13:00 Uhr ([Link](XXX)) | Di, 12.12.            |
+|  51   | [B04]: XXX | Di, 19.12., 13:00 Uhr ([Link](XXX)) | Di, 19.12.            |
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
