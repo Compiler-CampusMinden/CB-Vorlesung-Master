@@ -72,8 +72,8 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 ## Team
 
--   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
--   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+*   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
+*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
 
 
 ## Kursformat
@@ -107,36 +107,35 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 :::::: {.tabs groupid="pruefungsordnung"}
 ::: {.tab title="Compilerbau"}
 
-**Parcoursprüfung**, 5 ECTS
+**Mündliche Prüfung plus Testat**, 5 ECTS (PO18)
 
--   **Testat**: Vergabe der Credit-Points
+*   **Testat**: Vergabe der Credit-Points
     Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
     Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
     ein Testat bescheinigt wird.
 
-    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie alle vier
-    Übungsblätter fristgerecht bearbeitet haben.
+    Kriterien:
+    *   Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
+    *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, 30 Minuten Dauer
+    *   Vortrag II: Vorstellung der Projektergebnisse, 30 Minuten Dauer
 
--   **Gesamtnote**:
-    Mündliche Prüfung am Ende des Semesters, angeboten in beiden
-    Prüfungszeiträumen.
+*   **Gesamtnote**:
+    Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen.
 
 :::
 ::: {.tab title="Concepts of Programming Languages"}
 
-**Parcoursprüfung**, 10 ECTS
+**Parcoursprüfung**, 10 ECTS (PO23)
 
--   **Testat**: Vergabe der Credit-Points
-    Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
-    Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
-    ein Testat bescheinigt wird.
+*   **unbenotet**: Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
+*   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt,
+    30 Minuten Dauer
+*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+*   **benotet (30%)**: Vortrag III: Vortrag zu Paper-Analyse oder zu Implementierung zusätzlicher
+    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 45 Minuten Dauer
+*   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
 
-    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie alle vier
-    Übungsblätter fristgerecht bearbeitet haben.
-
--   **Gesamtnote**:
-    Mündliche Prüfung am Ende des Semesters, angeboten in beiden
-    Prüfungszeiträumen.
+**Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
 
 :::
 ::::::
