@@ -108,7 +108,7 @@ $L(A) =\lbrace w\ \vert \delta^{\ast}(q_0, w) \in F \rbrace$
 * Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
 * Induktion: Sei $w \in \Sigma^{\ast}, w = xa, x \in \Sigma^{\ast}, a \in \Sigma$ mit
 
-     $\delta^{\ast}(q, x) =  \lbrace  p_1,\ \ldots,\  p_k \rbrace, p_i \in Q$, sei
+     $\delta^{\ast}(q, x) =  \lbrace p_1,\ \ldots,\  p_k \rbrace, p_i \in Q$, sei
 
      $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \lbrace r_1, \ldots r_m \rbrace, r_j \in Q$.
 
