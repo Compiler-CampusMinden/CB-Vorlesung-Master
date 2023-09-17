@@ -167,7 +167,7 @@ und
 
 ##  Algorithmus: Entfernung von indirekter Linksrekursion {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)  mit $N= \{X_1, X_2, \ldots X_n\}$ ohne $\epsilon$-Regeln oder Zyklen der Form $X_1 \rightarrow X_2, X_2 \rightarrow X_3, \ldots X_{m-1} \rightarrow X_m, X_m \rightarrow X_1$
+**Eingabe:** Eine  Grammatik G = (N, T, P, S)  mit $N= \lbrace X_1, X_2, \ldots X_n\rbrace$ ohne $\epsilon$-Regeln oder Zyklen der Form $X_1 \rightarrow X_2, X_2 \rightarrow X_3, \ldots X_{m-1} \rightarrow X_m, X_m \rightarrow X_1$
 
 **Ausgabe:** Eine äquivalente Grammatik $G'$ ohne Linksrekursion
 
@@ -187,7 +187,7 @@ Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um
 
 **Def.:** Wir definieren $First$ - Mengen einer Grammatik wie folgt:
 
-*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \{a\}$
+*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a\rbrace$
 *   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$
 *   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
 

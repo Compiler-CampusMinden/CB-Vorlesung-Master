@@ -80,7 +80,7 @@ Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben, muss es w
 ## Beispiel
 
 
-![Ein PDA für $L=\{ww^{R}\mid w\in \{a,b\}^{\ast}\}$](images/pda2.png){width="45%"}
+![Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$](images/pda2.png){width="45%"}
 
 
 ## Konfigurationen von PDAs
@@ -128,12 +128,12 @@ Dann gilt: $(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$
 ## Akzeptierte Sprachen
 
 **Def.:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$ ein PDA. Dann ist die *über einen Endzustand*
-akzeptierte Sprache $L(P) = \{w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \alpha)\}$
+akzeptierte Sprache $L(P) = \lbrace w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \alpha)\rbrace$
 für einen Zustand $q \in F, \alpha \in \Gamma^{\ast}$.
 
 **Def.:** Für einen PDA $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$
 definieren wir die über den *leeren Keller* akzeptierte Sprache
-$N(P) = \{(w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\}$.
+$N(P) = \lbrace (w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\rbrace$.
 
 
 ## Akzeptanzäquivalenzen
