@@ -302,8 +302,7 @@ Was ist zu beachten:
 *   Neben den Schlüsselwörtern und Symbolen wie (,), *, $\ldots$ müssen auch Namen für Variablen, Funktionen, Klassen, Methoden, $\ldots$ (sog. Identifier) erkannt werden
 *   Namen haben meist eine gewisse Struktur, die sich mit regulären Ausdrücken beschreiben lassen.
 *   Erlaubte Token sind in der Grammatik des Parsers beschrieben, d. h. für literale Namen, Strings, Zahlen liefert der Scanner  zwei Werte:
-
-	*  z. B. <ID, "radius">, <Integerzahl, 558>
+	*  z. B. `<ID, "radius">`, `<Integerzahl, 558>`
 *   Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
 
 Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für die regulären Ausdrücke implementieren.
