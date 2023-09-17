@@ -180,17 +180,17 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  42   | Di, 17.10. (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                               |
 |  43   | Di, 24.10.                      | [CFG]                                                                                                                                     | BC          |                                               |
 |  43   | Di, 24.10. (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          | Finale Verteilung Vortragsthemen              |
+|  44   | **Mo, 30.10., 17:00-18:30 Uhr** | **Edmonton**: ANTLR + Live-Coding (CA)                                                                                                    |             |                                               |
 |  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR]                                                            | Carsten     |                                               |
-|  44   | Di, 31.10. (**Praktikum**)      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                               |
-|  45   | Di, 07.11.                      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                               |
-|  45   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: ANTLR + Live-Coding (CA)                                                                                                    |             |                                               |
+|  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                               |
+|  45   | Fr, 10.11. (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                               |
 |  46   | Di, 14.11.                      | [PEG-Parser, Pratt-Parser]                                                                                                                | BC          | [B01]                                         |
 |  47   | Di, 21.11.                      | [Error Revocery] \| [Grenze Lexer und Parser]                                                                                             | Carsten     |                                               |
 |  47   | Di, 21.11. (**Praktikum**)      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                               |
 |  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                               |
-|  48   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: Mini-Panel "Compilers Today" (CA/DE)                                                                                        |             |                                               |
+|  48   | **Di, 28.11., 17:00-18:30 Uhr** | **Edmonton**: Mini-Panel "Compilers Today" (CA/DE)                                                                                        |             |                                               |
 |  49   | Di, 05.12.                      | [Überblick Zwischencode] \| [LLVM als IR]                                                                                                 | BC, Carsten |                                               |
-|  49   | **XX, XX.12., 17:00-18:30 Uhr** | **Edmonton**: Vortrag I (Blatt 02) (DE)                                                                                                   |             | [B02] (Kein Praktikum - Termin mit Edmonton!) |
+|  49   | **Mi, 06.12., 17:00-18:30 Uhr** | **Edmonton**: Vortrag I (Blatt 02) (DE)                                                                                                   |             | [B02] (Kein Praktikum - Termin mit Edmonton!) |
 |  50   | Di, 12.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          | [B03]                                         |
 |  51   | Di, 19.12.                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     | [B04]                                         |
 |  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                                           | Carsten     |                                               |
@@ -240,12 +240,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Blatt      | Abgabe ILIAS                        | Vorstellung Praktikum |
-|:-----:|:-----------|:------------------------------------|:----------------------|
-|  46   | [B01]: XXX | Di, 14.11., 13:00 Uhr ([Link](XXX)) | Di, 14.11.            |
-|  49   | [B02]: XXX | XX, XX.12., XX:XX Uhr ([Link](XXX)) | XX, XX.XX.            |
-|  50   | [B03]: XXX | Di, 12.12., 13:00 Uhr ([Link](XXX)) | Di, 12.12.            |
-|  51   | [B04]: XXX | Di, 19.12., 13:00 Uhr ([Link](XXX)) | Di, 19.12.            |
+| Woche | Blatt      | Abgabe ILIAS                        | Vorstellung Praktikum                      |
+|:-----:|:-----------|:------------------------------------|:-------------------------------------------|
+|  46   | [B01]: XXX | Di, 14.11., 13:00 Uhr ([Link](XXX)) | Di, 14.11.                                 |
+|  49   | [B02]: XXX | Mi, 06.12., 12:00 Uhr ([Link](XXX)) | **Mi, 06.12., 17:00-18:30 Uhr (Edmonton)** |
+|  50   | [B03]: XXX | Di, 12.12., 13:00 Uhr ([Link](XXX)) | Di, 12.12.                                 |
+|  51   | [B04]: XXX | Di, 19.12., 13:00 Uhr ([Link](XXX)) | Di, 19.12.                                 |
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
