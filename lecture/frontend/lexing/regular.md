@@ -138,21 +138,21 @@ Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
 
 ## Beispiel
 
-$\delta$          |     a     |        b
------------------:|:---------:|:--------------:
-$\rightarrow q_0$ | $\lbrace q_0\rbrace$ | $\lbrace q_1, q_2\rbrace$
-            $q_1$ | $\lbrace q_2\rbrace$ | $\lbrace q_1\rbrace$
-           *$q_2$ |     -     | $\lbrace q_0, q_2\rbrace$
+|          $\delta$ |          a           |             b             |
+|------------------:|:--------------------:|:-------------------------:|
+| $\rightarrow q_0$ | $\lbrace q_0\rbrace$ | $\lbrace q_1, q_2\rbrace$ |
+|             $q_1$ | $\lbrace q_2\rbrace$ |   $\lbrace q_1\rbrace$    |
+|            *$q_2$ |          -           | $\lbrace q_0, q_2\rbrace$ |
 
 
 
-$\delta$'               | a              | b
-:-----------------------|:---------------|:-------------------
-$\rightarrow$ $\lbrace q_0\rbrace$ | $\lbrace q_0\rbrace$      | $\lbrace q_1,q_2\rbrace$
-*$\lbrace q_1 q_2\rbrace$          | $\lbrace q_2\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$
-*$\lbrace q_2\rbrace$              | -              | $\lbrace q_0,q_2\rbrace$
-*$\lbrace q_0, q_2\rbrace$         | $\lbrace q_0\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$
-*$\lbrace q_0, q_1, q_2\rbrace$    | $\lbrace q_0, q_2\rbrace$ | $\lbrace q_0, q_1, q_2\rbrace$
+| $\delta$'                          | a                         | b                              |
+|:-----------------------------------|:--------------------------|:-------------------------------|
+| $\rightarrow$ $\lbrace q_0\rbrace$ | $\lbrace q_0\rbrace$      | $\lbrace q_1,q_2\rbrace$       |
+| *$\lbrace q_1 q_2\rbrace$          | $\lbrace q_2\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$ |
+| *$\lbrace q_2\rbrace$              | -                         | $\lbrace q_0,q_2\rbrace$       |
+| *$\lbrace q_0, q_2\rbrace$         | $\lbrace q_0\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$ |
+| *$\lbrace q_0, q_1, q_2\rbrace$    | $\lbrace q_0, q_2\rbrace$ | $\lbrace q_0, q_1, q_2\rbrace$ |
 
 
 ## Minimierung eines DFAs
