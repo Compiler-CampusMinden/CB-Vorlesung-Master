@@ -164,7 +164,7 @@ benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Lau
 
 Die Syntaxanalyse kann keine kontextsensitiven Analysen durchführen.
 
-*   Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von cs-Grammatiken ist $PSPACE-complete$.
+*   Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von cs-Grammatiken ist *PSPACE-complete*.
 
 *   Der Parsergenerator *Bison* generiert LALR(1)-Parser, aber auch sog. *Generalized LR (GLR) Parser*, die bei nichtlösbaren Konflikten in der Grammatik (Reduce/Reduce oder Shift/Reduce) parallel den Input mit jede der Möglichkeiten   weiterparsen.
 
