@@ -282,6 +282,9 @@ Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und 
 
 ## LL-Parsertabellen
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 ## LL-Parsertabellen
 
