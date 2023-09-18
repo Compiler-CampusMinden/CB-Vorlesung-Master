@@ -194,7 +194,7 @@ Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um
 
 ## Linksableitungen
 
-**Def.:** Bei einer kontextfreien Grammatik $G$ ist die $Linksableitung$ von $\alpha \in (N \cup T)^{\ast}$ die Ableitung, die man erhält, wenn in jedem Schritt das am weitesten links stehende Nichtterminal in $\alpha$ abgeleitet wird.
+**Def.:** Bei einer kontextfreien Grammatik $G$ ist die *Linksableitung* von $\alpha \in (N \cup T)^{\ast}$ die Ableitung, die man erhält, wenn in jedem Schritt das am weitesten links stehende Nichtterminal in $\alpha$ abgeleitet wird.
 
 Man schreibt $\alpha \overset{\ast}{\Rightarrow}_l \beta.$
 
