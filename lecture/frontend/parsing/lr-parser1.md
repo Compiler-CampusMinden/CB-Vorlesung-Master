@@ -27,7 +27,11 @@ attachments:
 # Wiederholung
 <!-- 10 Minuten: 1 Folie -->
 
-<!--![Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$](images/pda.png){width="60%"} -->
+<!--
+Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
+
+![](images/pda.png){width="60%"}
+-->
 
 ## Top-Down-Analyse
 
