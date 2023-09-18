@@ -228,7 +228,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 *    Induktion: Wenn $\alpha \overset{\ast}{\Rightarrow} \beta$ und
         $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
-**Def.:** {Sei $G = (N, T ,P, S)$ eine formale Grammatik.
+**Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik.
     Dann ist $L(G) = \lbrace w \in T^{\ast} \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
 
 
