@@ -29,6 +29,11 @@ attachments:
 
 ## Was muss ein Compiler wohl als erstes tun?
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 ## Themen für heute
 - Endliche Automaten
 - Reguläre Ausdrücke
@@ -86,6 +91,10 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 $L(A) =\lbrace w\ \vert \delta^{\ast}(q_0, w) \in F \rbrace$
 
 ## Beispiel
+
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 ## Nichtdeterministische endliche Automaten
@@ -202,6 +211,9 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 ## Beispiel: Umwandlung eines regex in einen NFA
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 ## Formale Grammatiken
@@ -310,6 +322,9 @@ Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für d
 
 ## Automatisch oder händisch
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 # Wrap-Up
