@@ -102,6 +102,11 @@ Bevor mit einer Grammatik weitergearbeitet wird, müssen erst alle nutzlosen und
 
 ## Wie würden Sie manuell parsen?
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 
 
 ##  Algorithmus: Rekursiver Abstieg
