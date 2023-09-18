@@ -42,8 +42,18 @@ attachments:
 
 ## Eine Sprache, viele Maschinen vs. viele Sprachen, eine Maschine
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 
 ## ... und beides zusammen?
+
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
 
 
 ## Zwischencode (intermediate code); hier: Drei-Adress-Code
