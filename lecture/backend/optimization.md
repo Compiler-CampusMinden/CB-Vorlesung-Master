@@ -398,7 +398,7 @@ Zunächst ist $in(B_1) = \emptyset$, danach ist $in(B_i) = \bigcup  out(B_j)$ mi
 
 Diese Analyse wird zur Berechnung verfügbarer Ausdrücke der Form $x = y\ op\ z$ für die Eliminierung redundanter Berechnungen benutzt und bildet sukzessive Mengen von Ausdrücken.
 
-$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$(
+$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$
 
 $out(B_i)$: alle am Ende von $B_i$ verfügbaren Ausdrücke
 
