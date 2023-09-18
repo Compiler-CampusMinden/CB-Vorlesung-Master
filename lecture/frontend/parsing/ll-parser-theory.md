@@ -134,6 +134,11 @@ $X \rightarrow BC\  \vert \  BD$
 \vfill
 \vfill
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 ##  Algorithmus: Linksfaktorisierung
 
 **Eingabe:** Eine  Grammatik G = (N, T, P, S)
