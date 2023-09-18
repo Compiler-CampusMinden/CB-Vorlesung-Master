@@ -266,6 +266,11 @@ $(\epsilon \in First_1(\alpha)) \Rightarrow (First_1(\beta) \cap Follow_1(A) = \
 
 ## LL(1)-Grammatiken
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 
 ## LL(k)-Sprachen
 
