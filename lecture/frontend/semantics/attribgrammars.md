@@ -147,7 +147,7 @@ benutzen. So wird dann z. B. auch Überladung aufgelöst und Polymorphie zur Lau
 
 ## Nicht grundsätzlich statisch mögliche Typprüfungen
 
-**Bsp.:** Der \^\ - Operator $(a^b)$:
+**Bsp.:** Der ^ - Operator $(a^b)$:
 
 | Typ 1. Operand | Typ 2. Operand | Ergebnistyp |
 |:--------------:|:--------------:|:-----------:|
