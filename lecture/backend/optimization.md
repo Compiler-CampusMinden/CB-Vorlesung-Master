@@ -157,9 +157,9 @@ Ein Sprungbefehl kann nur der letzte Befehl eines Basisblocks sein.
 \bigskip
 **Def.:** Ein *(Kontroll)Flussgraph* $G = (V, E)$ ist ein Graph mit
 
-$V = \lbrace B_i \ \vert \ B_i \textnormal{ ist ein Basisblock des zu compilierenden Programms} \rbrace$,
+$V = \lbrace B_i \ \vert \ B_i \text{ ist ein Basisblock des zu compilierenden Programms} \rbrace$,
 
-$E = \lbrace (B_i, B_j)\ \vert \textnormal{ es gibt einen Programmlauf, in dem } B_j \textnormal{ direkt hinter } B_i \textnormal{ ausgeführt wird} \rbrace$
+$E = \lbrace (B_i, B_j)\ \vert \text{ es gibt einen Programmlauf, in dem } B_j \text{ direkt hinter } B_i \text{ ausgeführt wird} \rbrace$
 
 
 ## Häufig benutzte Strategie: Peephole-Optimierung
