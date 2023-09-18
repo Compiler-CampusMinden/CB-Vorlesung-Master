@@ -239,14 +239,14 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 *    Alle Produktionen sind entweder von der Form
 
      *    $X \to aY$  mit $X \in N, a \in T, Y \in N$ (*rechtsreguläre* Grammatik) oder
-     *    $X \to Ya$  mit $X \in N, a \in T, Y \in N$ ($linksreguläre$ Grammatik)
+     *    $X \to Ya$  mit $X \in N, a \in T, Y \in N$ (*linksreguläre* Grammatik)
 
 *    $X\rightarrow\epsilon$ ist in beiden Fällen erlaubt.
 
 
 ## Reguläre Sprachen
 
-**Satz:** Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden $reguläre$ Sprachen genannt.
+**Satz:** Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden *reguläre* Sprachen genannt.
 
 **Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
 
