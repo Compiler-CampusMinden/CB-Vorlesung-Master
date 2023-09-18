@@ -265,7 +265,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 
 ## Das Pumping Lemma für reguläre Sprachen
 
-**Satz:** Das \textit{Pumping Lemma für reguläre Sprachen}:
+**Satz:** Das *Pumping Lemma für reguläre Sprachen*:
 
 Sei $L$ eine reguläre Sprache.
 
