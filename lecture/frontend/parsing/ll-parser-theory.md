@@ -208,8 +208,7 @@ Manchmal müssen wir wissen, welche terminalen Zeichen hinter einem Nichttermina
 
 $\forall \beta \in (N \cup T)^*:$
 
-$Follow_k(\beta) = \lbrace w \in T^\ast \mid \exists \alpha, \gamma \in  (N \cup T)^\ast\ \text{mit}\
-S \overset{\ast}{\Rightarrow}_l \alpha \beta \gamma\ \text{und}\ w \in First_k(\gamma) \rbrace$
+$$Follow_k(\beta) = \lbrace w \in T^\ast \mid \exists \alpha, \gamma \in  (N \cup T)^\ast\ \text{ mit }\ S \overset{\ast}{\Rightarrow}_l \alpha \beta \gamma\ \text{ und }\ w \in First_k(\gamma) \rbrace$$
 
 
 ## LL(k)-Grammatiken
