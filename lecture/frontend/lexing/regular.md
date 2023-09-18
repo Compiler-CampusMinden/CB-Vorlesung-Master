@@ -56,7 +56,7 @@ $\Sigma^+ = \bigcup\limits_{i \in \mathbb{N}} \Sigma^i$
 
 **Def.:** Seien $x = a_1 a_2 \ \ldots  \ a_n$ und $y = b_1b_2 \  \ldots  \  b_m$ Wörter. Wir nennen $xy = x \circ y = a_1 \  \ldots \  a_nb_1 \ \ldots \ b_m$ die *Konkatenation* von $x$ und $y$.
 
-**Def.:** *Eine Sprache $L$ über einem Alphabet $\Sigma$* ist eine Teilmenge von $\Sigma^{\ast} :\ L \subseteq\Sigma^{\ast}$
+**Def.:** *Eine Sprache* $L$ *über einem Alphabet* $\Sigma$ ist eine Teilmenge von $\Sigma^{\ast} :\ L \subseteq\Sigma^{\ast}$
 
 
 ## Deterministische endliche Automaten
