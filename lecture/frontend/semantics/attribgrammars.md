@@ -213,20 +213,20 @@ Eine *attributierte Grammatik* *AG = (G,A,R)* besteht aus folgenden Komponenten:
 
 *   A = $\bigcup\limits_{X \in (T \cup N)} A(X)$ mit $A(X) \cap A(Y) \neq \emptyset \Rightarrow X = Y$
 
-*   R = $\bigcup\limits_{p \in P} R(p)$ mit $R(p) = \{X_i.a = f(\ldots) \vert p : X_0 \rightarrow X_1 \ldots X_n \in P, X_i.a \in A(X_i), 0 \leq i \leq n\}$
+*   R = $\bigcup\limits_{p \in P} R(p)$ mit $R(p) = \lbrace X_i.a = f(\ldots) \vert p : X_0 \rightarrow X_1 \ldots X_n \in P, X_i.a \in A(X_i), 0 \leq i \leq n\rbrace$
 
 
 ## Abgeleitete und ererbte Attribute
 
 Die in einer Produktion p definierten Attribute sind
 
-*AF(p)* = $\{X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\}$
+*AF(p)* = $\lbrace X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\rbrace$
 
 Wir betrachten Grammatiken mit zwei disjunkten Teilmengen, den abgeleiteten (synthesized) Attributen *AS(X)* und den ererbten (inherited) Attributen *AI(X)*:
 
-*AS(X)* = $\{X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)\}$
+*AS(X)* = $\lbrace X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)\rbrace$
 
-*AI(X)* = $\{X.a\ \vert \ \exists q : Y \rightarrow uXv \in P, X.a\in AF(q)\}$
+*AI(X)* = $\lbrace X.a\ \vert \ \exists q : Y \rightarrow uXv \in P, X.a\in AF(q)\rbrace$
 
 
 Abgeleitete Attribute geben Informationen von unten nach oben weiter, geerbte von oben nach unten.
