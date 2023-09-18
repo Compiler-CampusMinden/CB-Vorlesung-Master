@@ -107,7 +107,7 @@ Jetzt werden nicht Follow-Mengen von Nichtterminalen, sondern LOOKAHEAD-Mengen v
 
 ## Die LR(1)-Items
 
-Zu jedem LR(0)-Item (hier auch $Kern$ genannt) wird eine $LOOKAHEAD$ - Menge $L$ hinzugefügt, die angibt, welche Terminals dem Symbol auf der linken Seite folgen können.
+Zu jedem LR(0)-Item (hier auch *Kern* genannt) wird eine *LOOKAHEAD* - Menge $L$ hinzugefügt, die angibt, welche Terminals dem Symbol auf der linken Seite folgen können.
 
 z. B. $[S' \rightarrow \cdot S, \lbrace \bot \rbrace ]$
 
