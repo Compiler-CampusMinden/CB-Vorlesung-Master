@@ -168,7 +168,7 @@ Ein Fenster mit wenigen Zeilen Inhalt gleitet über den Quellcode, Zwischencode 
 
 Peephole-Optimierung ist zunächst ein lokales Verfahren, kann aber auch auf den gesamten Kontrollflussgraphen erweitert werden.
 
-\blueArrow
+=>
 Anwendung von Graphalgorithmen!
 
 
@@ -492,11 +492,11 @@ r1 = r1 - 1
 \bigskip
 \bigskip
 
-\blueArrow `a` und `d` sind nach Gebrauch "*tot*"
+=> `a` und `d` sind nach Gebrauch "*tot*"
 
 ## Berechnung der minimal benötigten Anzahl von Registern
 
-\blueArrow Liveness-Graph, Färbungsproblem für Graphen!
+=> Liveness-Graph, Färbungsproblem für Graphen!
 
 Es wird ein Graph $G = (V, E)$ erzeugt mit
 
@@ -505,7 +505,7 @@ $E = \lbrace (v_1, v_2)\ \vert \ v_1  \text{ und } v_2 \text{ sind zur selben Ze
 
 Heuristisch wird jetzt die minimale Anzahl von Farben für Knoten bestimmt, bei der benachbarte Knoten nicht dieselbe Farbe bekommen.
 
-\blueArrow Das Ergebnis ist die Zahl der benötigten Register.
+=> Das Ergebnis ist die Zahl der benötigten Register.
 
 
 ## Und wenn man nicht so viele Register zur Verfügung hat?
@@ -548,7 +548,7 @@ Folgendes kann man ausnutzen:
 
 Die Verringerung der Spannung um 20% führt zu einer um  20% geringeren Prozessorgeschwindigkeit, d. h. das Programm braucht 25% mehr Zeit, verbraucht aber 36% $(1-(1-0,2)^2)$ weniger Energie.
 
-\blueArrow Wenn das Programm durch Optimierung um 25% schneller wird und die Prozessorspannung um 20% verringert wird, verändert sich die Laufzeit des Programms nicht, man spart aber 36% Energie.
+=> Wenn das Programm durch Optimierung um 25% schneller wird und die Prozessorspannung um 20% verringert wird, verändert sich die Laufzeit des Programms nicht, man spart aber 36% Energie.
 
 
 

@@ -206,7 +206,7 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
 
 *   Beobachte den allozierten Speicher der VM
 *   Wenn [vorher festgelegte (willkürliche)]{.notes} Grenze überschritten: GC
-*   Größe des verbliebenen [belegten]{.notes} Speichers mal Faktor \blueArrow neue Grenze
+*   Größe des verbliebenen [belegten]{.notes} Speichers mal Faktor => neue Grenze
 
 ::: notes
 Die Objekte bzw. der Speicherverbrauch, der nach einem GC-Lauf übrig bleibt, ist
