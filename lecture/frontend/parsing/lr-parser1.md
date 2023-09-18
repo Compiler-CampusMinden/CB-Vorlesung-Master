@@ -193,7 +193,7 @@ Je nach Anwendungsfall müssen beim Reduzieren von Handles weitere Aktionen ausg
 
 Bsp: Steht bei der Beispielgrammatik von Folie 8 oben auf dem Stack ein $T$ mit dem nächsten  Eingabezeichen $\ast$, darf $T$ nicht zu $E$ reduziert werden.
 
-Lösung: Der Parser merkt sich, wo er steht in noch nicht komplett reduzierten Regeln. Dazu benutzt er sogenannte $Items$ oder $LR(0)-Items$, auch $dotted\ Items$ oder $(kanonische)\ LR(0)-Elemente$.
+Lösung: Der Parser merkt sich, wo er steht in noch nicht komplett reduzierten Regeln. Dazu benutzt er sogenannte *Items* oder *LR(0)-Items*, auch *dotted Items* oder *(kanonische) LR(0)-Elemente* genannt.
 
 
 ## Items
