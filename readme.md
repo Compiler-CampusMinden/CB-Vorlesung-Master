@@ -27,7 +27,6 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
     *   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction),
         NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
     *   Manuelle Implementierung, Generierung mit ANTLR und Flex
-    *   Error Recovery
 
 2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG), Chomsky
@@ -43,8 +42,6 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
         *   Shift-Reduce
         *   LR(0), SLR(1), LR(1), LALR(1)
     *   Generierung mit ANTLR und Bison
-    *   Error Recovery
-    *   Grenze Lexer und Parser (aus praktischen Gesichtspunkten)
 
 3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
@@ -64,7 +61,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
     *   Read-Eval-Schleife
     *   Resolver: Beschleunigung bei der Interpretation
 
-7.  Compiler
+7.  Code-Generierung, Byte-Code
     *   Speicherlayout
     *   Erzeugen von Byte-Code
     *   Ausführen in einer Virtuellen Maschine
