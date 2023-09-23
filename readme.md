@@ -113,8 +113,9 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
     Kriterien:
     *   Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
-    *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, 30 Minuten Dauer
-    *   Vortrag II: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+    *   Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
+    *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
+    *   Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
 
 *   **Gesamtnote**:
     Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen.
@@ -125,11 +126,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 **Parcoursprüfung**, 10 ECTS (PO23)
 
 *   **unbenotet**: Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
+*   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
 *   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt,
-    30 Minuten Dauer
-*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+    ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
+*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
 *   **benotet (30%)**: Vortrag III: Vortrag zu Paper-Analyse oder zu Implementierung zusätzlicher
-    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 45 Minuten Dauer
+    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer
 *   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
 
 **Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
