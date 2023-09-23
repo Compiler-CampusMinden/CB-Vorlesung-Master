@@ -23,7 +23,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 ## Überblick Modulinhalte
 
 1.  Lexikalische Analyse: Scanner/Lexer
-    *   Reguläre Ausdrücke
+    *   Reguläre Sprachen
     *   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction),
         NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
     *   Manuelle Implementierung, Generierung mit ANTLR und Flex
