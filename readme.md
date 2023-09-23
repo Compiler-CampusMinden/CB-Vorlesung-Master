@@ -172,28 +172,28 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Vorlesung
 
-| Woche | Datum                           | Themen                                                                                                                                    | Lead        | Bemerkung                                     |
-|:-----:|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
-|  41   | Di, 10.10.                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | Carsten, BC |                                               |
-|  42   | Di, 17.10.                      | [Reguläre Sprachen]                                                                                                                       | BC          |                                               |
-|  42   | Di, 17.10. (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                               |
-|  43   | Di, 24.10.                      | [CFG]                                                                                                                                     | BC          |                                               |
-|  43   | Di, 24.10. (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          | Finale Verteilung Vortragsthemen              |
-|  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                                                  |             |                                               |
-|  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR] \| [Grenze Lexer und Parser]                               | Carsten     |                                               |
-|  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                               |
-|  45   | Di, 07.11. (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                               |
-|  46   | Di, 14.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     | [B01]                                         |
-|  47   | Di, 21.11.                      | Freies Arbeiten (DLK23)                                                                                                                   | Carsten     |                                               |
-|  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                               |
-|  48   | **Di, 28.11., 18:00-19:00 Uhr** | **Edmonton II**: Vortrag Mindener Projekte (DE) (**Vortrag I**)                                                                           |             |                                               |
-|  49   | Di, 05.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          |                                               |
-|  49   | **Mi, 06.12., 18:00-19:00 Uhr** | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                                        |             | [B02] (Kein Praktikum - Termin mit Edmonton!) |
-|  50   | Di, 12.12.                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     | [B03]                                         |
-|  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                                           | Carsten     | [B04]                                         |
-|  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                                           | Carsten     |                                               |
-|  03   | Di, 16.01.                      | Vortrag II: Termine siehe Etherpad                                                                                                        | Carsten, BC | Vortrag II: Termine siehe Etherpad            |
-|  04   | Di, 23.01.                      | Vortrag III: Termine siehe Etherpad                                                                                                       | Carsten, BC | Vortrag III: Termine siehe Etherpad           |
+| Woche | Datum                           | Themen                                                                                                                                    | Lead        | Bemerkung                                             |
+|:-----:|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:------------------------------------------------------|
+|  41   | Di, 10.10.                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | BC, Carsten |                                                       |
+|  42   | Di, 17.10.                      | [Reguläre Sprachen]                                                                                                                       | BC          |                                                       |
+|  42   | Di, 17.10. (**Praktikum**)      | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                                       |
+|  43   | Di, 24.10.                      | [CFG]                                                                                                                                     | BC          |                                                       |
+|  43   | Di, 24.10. (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          |                                                       |
+|  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                                                  |             |                                                       |
+|  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR] \| [Grenze Lexer und Parser]                               | Carsten     |                                                       |
+|  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                                       |
+|  45   | Di, 07.11. (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                                       |
+|  46   | Di, 14.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     | Meilenstein 1                                         |
+|  47   | Di, 21.11.                      | Freies Arbeiten (DLK23)                                                                                                                   | Carsten     |                                                       |
+|  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                                       |
+|  48   | **Di, 28.11., 18:00-19:00 Uhr** | **Edmonton II**: Vortrag Mindener Projekte (DE) (**Vortrag I**)                                                                           |             | Meilenstein 2 (Kein Praktikum - Termin mit Edmonton!) |
+|  49   | Di, 05.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          |                                                       |
+|  49   | **Mi, 06.12., 18:00-19:00 Uhr** | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                                        |             |                                                       |
+|  50   | Di, 12.12.                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     |                                                       |
+|  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                                           | Carsten     | Meilenstein 3                                         |
+|  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                                           | Carsten     |                                                       |
+|  03   | Di, 16.01.                      | Vortrag II: Termine siehe Etherpad                                                                                                        | BC, Carsten | Vortrag II: Termine siehe Etherpad                    |
+|  04   | Di, 23.01.                      | Vortrag III: Termine siehe Etherpad                                                                                                       | BC, Carsten | Vortrag III: Termine siehe Etherpad                   |
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -238,17 +238,16 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Blatt      | Abgabe ILIAS                        | Vorstellung Praktikum                      |
-|:-----:|:-----------|:------------------------------------|:-------------------------------------------|
-|  46   | [B01]: XXX | Di, 14.11., 13:00 Uhr ([Link](XXX)) | Di, 14.11.                                 |
-|  49   | [B02]: XXX | Mi, 06.12., 12:00 Uhr ([Link](XXX)) | **Mi, 06.12., 17:00-18:30 Uhr (Edmonton)** |
-|  50   | [B03]: XXX | Di, 12.12., 13:00 Uhr ([Link](XXX)) | Di, 12.12.                                 |
-|  51   | [B04]: XXX | Di, 19.12., 13:00 Uhr ([Link](XXX)) | Di, 19.12.                                 |
+| Woche | Rücksprache   | Vorstellung Praktikum                      | Inhalt                                           |
+|:-----:|:--------------|:-------------------------------------------|:-------------------------------------------------|
+|  46   | Meilenstein 1 | Di, 14.11.                                 | Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung |
+|  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton)** | Projektstatus                                    |
+|  51   | Meilenstein 3 | Di, 19.12.                                 | Projektstatus                                    |
 
-[B01]: homework/sheet01.md
-[B02]: homework/sheet02.md
-[B03]: homework/sheet03.md
-[B04]: homework/sheet04.md
+<!-- [B01]: homework/sheet01.md -->
+<!-- [B02]: homework/sheet02.md -->
+<!-- [B03]: homework/sheet03.md -->
+<!-- [B04]: homework/sheet04.md -->
 
 
 ## Förderungen und Kooperationen
