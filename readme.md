@@ -32,11 +32,9 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
     *   Kontextfreie Grammatiken (CFG), Chomsky
     *   LL-Parser (Top-Down-Parser)
         *   FIRST, FOLLOW
-        *   Tabellenbasierte Verfahren
-        *   Rekursiver Abstieg
+        *   Tabellenbasierte Verfahren, rekursiver Abstieg
         *   LL(1), LL(k), LL(*)
-        *   Umgang mit linksrekursiven Grammatiken
-        *   Umgang mit Vorrang-Regeln und Assoziativität
+        *   Umgang mit Vorrang-Regeln, Assoziativität und linksrekursiven Grammatiken
         *   Backtracking, Memoizing, Predicated Parsers; ANTLR4: ALL(*)
     *   LR-Parser (Bottom-Up-Parser)
         *   Shift-Reduce
@@ -45,8 +43,8 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
-    *   Typen, Klassen, Polymorphie
     *   Namen und Scopes
+    *   Typen, Klassen, Polymorphie
 
 4.  Semantische Analyse und Optimierungen
     *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
@@ -59,7 +57,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 6.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
-    *   Resolver: Beschleunigung bei der Interpretation
+    *   Resolver: Beschleunigung der Interpretation
 
 7.  Code-Generierung, Byte-Code
     *   Speicherlayout
