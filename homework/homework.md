@@ -44,7 +44,7 @@ Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie
 Es gibt drei vordefinierte Meilensteine:
 
 1.  Meilenstein 1: Vorstellung der Recherche-Ergebnisse und Konzepte zum Thema Java Bytecode sowie zur Arbeitsaufteilung und -planung (im Praktikum)
-2.  Meilenstein 2: Vorstellung der Arbeit im Rahmen des Edmonton-Meetings ("Edmonton II")
+2.  Meilenstein 2: Vorstellung der Arbeit im Rahmen des Edmonton-Meetings ("Vortrag I", "Edmonton II")
 3.  Meilenstein 3: Vorstellung des Projektstatus (in Vorlesung und/oder Praktikum)
 
 Im Rahmen des Vortrags II sollen dann die Projektergebnisse gemeinsam vorgestellt werden.
