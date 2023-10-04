@@ -37,3 +37,17 @@ Strukturell werden Sie vermutlich ein Frontend mit Lexer und Parser benötigen. 
 Organisieren Sie selbstständig in Ihrer Semestergruppe die Arbeitsaufteilung und -planung. Da der Java Bytecode eine zentrale Rolle spielt, sollten Sie sich dies gemeinsam in einem ersten Schritt anschauen.
 
 Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie sich aktiv Feedback.
+
+
+## Meilensteine
+
+Es gibt drei vordefinierte Meilensteine:
+
+1.  Meilenstein 1: Vorstellung der Recherche-Ergebnisse und Konzepte zum Thema Java Bytecode sowie zur Arbeitsaufteilung und -planung (im Praktikum)
+2.  Meilenstein 2: Vorstellung der Arbeit im Rahmen des Edmonton-Meetings ("Edmonton II")
+3.  Meilenstein 3: Vorstellung des Projektstatus (in Vorlesung und/oder Praktikum)
+
+Im Rahmen des Vortrags II sollen dann die Projektergebnisse gemeinsam vorgestellt werden.
+
+**Hinweis zu Meilenstein 2**:
+Stellen Sie gemeinsam als Gruppe das Projekt den Studierenden der University of Alberta vor. Was ist die Aufgabe, welche Konzepte und Strukturen haben Sie erarbeitet, wie sehen erste Arbeitsergebnisse aus? Jede(r) sollte ca. 10 Minuten vortragen. Dieser Vortrag findet in englischer Sprache statt und ist Teil der Prüfungsleistung.
