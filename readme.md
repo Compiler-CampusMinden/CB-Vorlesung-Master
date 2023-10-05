@@ -129,7 +129,8 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
     ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
 *   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
 *   **benotet (30%)**: Vortrag III: Vortrag zu Paper-Analyse oder zu Implementierung zusätzlicher
-    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer
+    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer; Zusammenfassung als
+    Blog-Eintrag
 *   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
 
 **Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
