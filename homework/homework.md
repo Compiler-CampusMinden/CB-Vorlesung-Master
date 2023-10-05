@@ -38,6 +38,8 @@ Organisieren Sie selbstständig in Ihrer Semestergruppe die Arbeitsaufteilung un
 
 Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie sich aktiv Feedback.
 
+**Hinweis**: Wir werden in der Vorlesung nicht alle benötigten Techniken besprechen können (und auch möglicherweise nicht rechtzeitig). Es besteht die Erwartung, dass Sie sich selbstständig und rechtzeitig mit den jeweiligen Themen auseinander setzen.
+
 
 ## Meilensteine
 
