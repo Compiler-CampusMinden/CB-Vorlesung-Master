@@ -32,9 +32,9 @@ Da dies eine Implementierung für Lernzwecke ist, müssen Sie folgende Java-Konz
 -   I/O (Umgang mit Dateien und Ordnern)
 -   Laden von Klassen aus einem `.jar`
 
-Strukturell werden Sie vermutlich ein Frontend mit Lexer und Parser benötigen. Hier empfehlen wir Ihnen die Umsetzung mit ANTLR. Sie werden ebenfalls Symboltabellen für die semantische Analyse benötigen und für verschiedene Optimierungen. Ihr Compiler `cmjavac` soll dann Java Bytecode als "Zwischencode" ausgeben (`.class`-Dateien). Ihre Virtual Machine `cmjava` liest die `.class`-Dateien wieder ein und verarbeitet diese. Arbeiten Sie mit einer Stack-basierten VM und implementieren Sie diese in einer Sprache, die keine Garbage Collection eingebaut hat.
+Strukturell werden Sie vermutlich ein Frontend mit Lexer und Parser benötigen. Hier empfehlen wir Ihnen die Umsetzung mit ANTLR. Sie werden ebenfalls Symboltabellen für die semantische Analyse benötigen und für verschiedene Optimierungen. Ihr Compiler `cmjavac` soll Java Bytecode als "Zwischencode" ausgeben (`.class`-Dateien). Ihre Virtual Machine `cmjava` liest die `.class`-Dateien wieder ein und verarbeitet diese. Arbeiten Sie mit einer Stack-basierten VM und implementieren Sie diese in einer Sprache, die keine Garbage Collection eingebaut hat.
 
-Organisieren Sie selbstständig in Ihrer Semestergruppe die Arbeitsaufteilung und -planung. Da der Java Bytecode eine zentrale Rolle spielt, sollten Sie sich dies gemeinsam in einem ersten Schritt anschauen.
+Organisieren Sie selbstständig in Ihrer Semestergruppe die Arbeitsaufteilung und -planung. Da der Java Bytecode eine zentrale Rolle spielt, sollten Sie sich dieses Thema gemeinsam in einem ersten Schritt anschauen.
 
 Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie sich aktiv Feedback.
 
@@ -44,10 +44,10 @@ Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie
 Es gibt drei vordefinierte Meilensteine:
 
 1.  **Meilenstein 1**: Vorstellung der Recherche-Ergebnisse und Konzepte zum Thema Java Bytecode sowie zur Arbeitsaufteilung und -planung (im Praktikum)
-2.  **Meilenstein 2**: Vorstellung der Arbeit im Rahmen des Edmonton-Meetings ("**Vortrag I**", "**Edmonton II**")
+2.  **Meilenstein 2**: Vorstellung der Arbeit im Rahmen des Edmonton-Meetings (Prüfungsleistung "**Vortrag I**", Termin "**Edmonton II**")
 3.  **Meilenstein 3**: Vorstellung des Projektstatus (in Vorlesung und/oder Praktikum)
 
 Im Rahmen des **Vortrags II** sollen am Ende des Semesters die Projektergebnisse gemeinsam vorgestellt werden.
 
 **Hinweis zu Meilenstein 2**:
-Stellen Sie gemeinsam als Gruppe das Projekt den Studierenden der University of Alberta vor. Was ist die Aufgabe, welche Konzepte und Strukturen haben Sie erarbeitet, wie sehen erste Arbeitsergebnisse aus? Jede(r) sollte ca. 10 Minuten vortragen. Dieser Vortrag findet in englischer Sprache statt und ist Teil der Prüfungsleistung.
+Stellen Sie gemeinsam als Gruppe das Projekt den Studierenden der University of Alberta vor: Was ist die Aufgabe, welche Konzepte und Strukturen haben Sie erarbeitet, wie sehen erste Arbeitsergebnisse aus? Jede(r) sollte ca. 10 Minuten vortragen. Dieser Vortrag findet in englischer Sprache statt und ist Teil der Prüfungsleistung.
