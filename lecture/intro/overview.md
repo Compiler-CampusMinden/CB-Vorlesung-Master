@@ -436,6 +436,16 @@ expr : ID '(' ')'
 ```
 
 
+::: notes
+## Unbedingt lesenswert
+
+Sie sollten diese beiden Paper unbedingt als Einstieg in das Modul lesen:
+
+1.  [Programming Language Semantics](https://www.cs.nott.ac.uk/~pszgmh/123.pdf)
+2.  [An Incremental Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf)
+:::
+
+
 ## Wrap-Up
 
 *   Compiler übersetzen Text in ein anderes Format
