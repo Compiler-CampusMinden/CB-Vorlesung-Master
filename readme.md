@@ -249,8 +249,8 @@ Sie bearbeiten im Praktikum eine gemeinsame [Aufgabe] in der Semestergruppe.
 <!-- [B02]: homework/sheet02.md -->
 <!-- [B03]: homework/sheet03.md -->
 <!-- [B04]: homework/sheet04.md -->
-[Praktikum]: homework/homework.md
-[Aufgabe]: homework/homework.md
+[Praktikum]: homework/project.md
+[Aufgabe]: homework/project.md
 [Vortrag III]: homework/talk.md
 
 
