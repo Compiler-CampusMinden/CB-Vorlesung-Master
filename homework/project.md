@@ -7,7 +7,7 @@ hidden: true
 ---
 
 
-## Aufgabe: Java-Compiler und -VM
+## Aufgabe
 
 Konzipieren und implementieren Sie im Laufe des Semesters gemeinsam in der gesamten Gruppe einen Compiler `cmjavac` sowie eine Virtual Machine `cmjava` für die Programmiersprache Java.
 
