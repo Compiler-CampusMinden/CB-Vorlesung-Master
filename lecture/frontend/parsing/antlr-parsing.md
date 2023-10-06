@@ -51,8 +51,6 @@ outcomes:
   - k2: "Aufbau des Parse-Tree"
   - k3: "Umgang mit Kontext-Objekten"
   - k3: "Traversierung des Parse-Tree mit den generierten Listenern oder Visitors"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/YuUHBvPUS4k"
     name: "VL Parser mit ANTLR"

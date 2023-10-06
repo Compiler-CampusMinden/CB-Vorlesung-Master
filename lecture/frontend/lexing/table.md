@@ -29,8 +29,6 @@ outcomes:
   - k1: "Aufgaben eines Lexers"
   - k2: "Erkennen von Lexemen mit RE und DFA"
   - k2: "DFA-nahe Implementierung: Tabellenbasiert und direkt codiert"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/2GeEaU3qB6c"
     name: "VL Tabellenbasierte Scanner"

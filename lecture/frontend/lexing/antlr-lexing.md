@@ -33,8 +33,6 @@ outcomes:
   - k3: "Zustandsbehaftete Lexer (Modes)"
   - k3: "Nutzung von Channels"
   - k2: "Importieren von Grammatiken"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/I119N04WIYA"
     name: "VL Lexer mit ANTLR"

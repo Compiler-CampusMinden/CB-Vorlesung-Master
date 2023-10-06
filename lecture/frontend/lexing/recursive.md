@@ -35,8 +35,6 @@ outcomes:
   - k2: "Fehler und Lösungsansätze in der lexikalischen Analyse"
   - k3: "Typische Einteilung von Token"
   - k3: "Implementierung eines Top-Down-Lexers mit Read-Ahead und intelligenter Pufferung"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/N0WJQ4UkXkM"
     name: "VL Handcodierte Lexer"

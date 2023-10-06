@@ -22,8 +22,6 @@ outcomes:
   - k3: "Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener"
   - k3: "Auflösen von Symbolen über die Scopes"
   - k3: "Einfache statische Prüfungen anhand der Symboltabellen"
-assignments:
-  - topic: sheet02
 youtube:
   - link: "https://youtu.be/CdM1gvsi6P0"
     name: "VL Nested Scopes"
