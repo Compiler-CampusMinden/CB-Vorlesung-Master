@@ -110,7 +110,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
     ein Testat bescheinigt wird.
 
     Kriterien:
-    *   Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
+    *   Aktive Mitarbeit im [Praktikum] und an den Meilensteinen
     *   Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
     *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
     *   Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
@@ -123,13 +123,14 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Parcoursprüfung**, 10 ECTS (PO23)
 
-*   **unbenotet**: Aktive Mitarbeit im Praktikum und den in der Gruppe definierten Meilensteinen
+*   **unbenotet**: Aktive Mitarbeit im [Praktikum] und an den Meilensteinen
 *   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
 *   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt,
     ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
 *   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
-*   **benotet (30%)**: Vortrag III: Vortrag zu Paper-Analyse oder zu Implementierung zusätzlicher
-    Baustein (extra-Leistung neue PO) plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer
+*   **benotet (30%)**: [Vortrag III]: Vortrag zu Paper-Analyse (extra-Leistung neue PO)
+    plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer; Zusammenfassung als
+    Blog-Eintrag
 *   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
 
 **Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
@@ -191,7 +192,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                                           | Carsten     | Meilenstein 3                                         |
 |  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                                           | Carsten     |                                                       |
 |  03   | Di, 16.01.                      | Vortrag II: Termine siehe Etherpad                                                                                                        | BC, Carsten | Vortrag II: Termine siehe Etherpad                    |
-|  04   | Di, 23.01.                      | Vortrag III: Termine siehe Etherpad                                                                                                       | BC, Carsten | Vortrag III: Termine siehe Etherpad                   |
+|  04   | Di, 23.01.                      | [Vortrag III]: Termine siehe Etherpad                                                                                                     | BC, Carsten | [Vortrag III]: Termine siehe Etherpad                 |
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -236,16 +237,21 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Rücksprache   | Vorstellung Praktikum                      | Inhalt                                           |
-|:-----:|:--------------|:-------------------------------------------|:-------------------------------------------------|
-|  46   | Meilenstein 1 | Di, 14.11.                                 | Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung |
-|  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton)** | Projektstatus                                    |
-|  51   | Meilenstein 3 | Di, 19.12.                                 | Projektstatus                                    |
+Sie bearbeiten im Praktikum eine gemeinsame [Aufgabe] in der Semestergruppe.
+
+| Woche | Rücksprache   | Vorstellung Praktikum                         | Inhalt                                                                          |
+|:-----:|:--------------|:----------------------------------------------|:--------------------------------------------------------------------------------|
+|  46   | Meilenstein 1 | Di, 14.11.                                    | Konzepte Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung, Exposé [Vortrag III] |
+|  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton II)** | Projektstatus (**Vortrag I**)                                                   |
+|  51   | Meilenstein 3 | Di, 19.12.                                    | Projektstatus                                                                   |
 
 <!-- [B01]: homework/sheet01.md -->
 <!-- [B02]: homework/sheet02.md -->
 <!-- [B03]: homework/sheet03.md -->
 <!-- [B04]: homework/sheet04.md -->
+[Praktikum]: homework/homework.md
+[Aufgabe]: homework/homework.md
+[Vortrag III]: homework/talk.md
 
 
 ## Förderungen und Kooperationen
