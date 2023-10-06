@@ -20,8 +20,6 @@ tldr: |
   und Assemblercode.
 outcomes:
   - k1: "Varianten von Zwischencode, Vor- und Nachteile"
-assignments:
-  - topic: sheet04
 youtube:
   - link: "https://youtu.be/EVTtPkOwhJ8"
     name: "VL Überblick Zwischencode"

@@ -23,8 +23,6 @@ tldr: |
           Zeichenstrom eine Integerzahl kommt)
 outcomes:
   - k2: "Grenze zwischen Lexer und Parser: Was mache ich auf welcher Stufe?"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/`u9fE_I764rg`{=markdown}"
     name: "VL Grenze Lexer und Parser"

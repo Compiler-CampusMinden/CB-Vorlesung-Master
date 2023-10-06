@@ -19,8 +19,6 @@ tldr: |
 outcomes:
   - k3: "Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener"
   - k3: "Attribute von Klassen und Strukturen auflösen"
-assignments:
-  - topic: sheet02
 youtube:
   - link: "https://youtu.be/-w9ljeFGq3k"
     name: "VL Strukturen und Klassen"

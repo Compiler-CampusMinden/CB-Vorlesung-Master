@@ -43,11 +43,9 @@ outcomes:
   - k3: "Ändern der Fehlermeldungen bei ANTLR"
   - k3: "Eigene Errorhandler in ANTLR-Parser bauen und einbinden"
   - k3: "Nutzen von speziellen Fehler-Alternativen in Grammatiken"
-assignments:
-  - topic: sheet01
-    name: "VL Error-Recovery"
 youtube:
   - link: "https://youtu.be/9sFdI7pYMQs"
+    name: "VL Error-Recovery"
 fhmedia:
   - link: "https://www.hsbi.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade"
     name: "VL Error-Recovery"

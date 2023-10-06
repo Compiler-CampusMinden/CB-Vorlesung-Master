@@ -25,8 +25,6 @@ tldr: |
 outcomes:
   - k2: "Aufgaben der semantischen Analyse"
   - k2: "Bedeutung von Symboltabellen: Aufgaben, Verbindung zu Compiler-Phasen"
-assignments:
-  - topic: sheet02
 youtube:
   - link: "https://youtu.be/5637iNH0wWk"
     name: "VL Symboltabellen (Intro)"

@@ -41,8 +41,6 @@ outcomes:
   - k3: "Implementierung von LL(1)- und LL(k)-Parsern"
   - k3: "Dynamischer Lookahead mittels Backtracking; Verbesserung der Laufzeiteigenschaften mit Packrat"
   - k3: "Einsatz von semantischen Prädikaten zum (De-) Aktivieren von Regeln oder Token"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/12GT2WxZsxY"
     name: "VL LL-Parser: Fortgeschrittene Techniken"

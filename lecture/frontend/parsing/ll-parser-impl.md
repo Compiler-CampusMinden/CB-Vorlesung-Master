@@ -38,8 +38,6 @@ outcomes:
   - k3: "Implementierung von LL(1)- und LL(k)-Parsern"
   - k3: "Implementierung von Vorrang und Assoziativität"
   - k3: "Umgang mit Linksrekursion, insbesondere bei ANTLR"
-assignments:
-  - topic: sheet01
 youtube:
   - link: "https://youtu.be/3djLtMtW82k"
     name: "VL LL-Parser selbst implementiert"
