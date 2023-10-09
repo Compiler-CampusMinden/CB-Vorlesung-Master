@@ -180,10 +180,9 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  43   | Di, 24.10. (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                                                     | BC          |                                                       |
 |  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                                                  |             |                                                       |
 |  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR] \| [Grenze Lexer und Parser]                               | Carsten     |                                                       |
-|  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          |                                                       |
-|  45   | Di, 07.11. (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                                       |
-|  46   | Di, 14.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     | Meilenstein 1                                         |
-|  47   | Di, 21.11.                      | Freies Arbeiten (DLK23)                                                                                                                   | Carsten     |                                                       |
+|  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          | Meilenstein 1                                         |
+|  46   | Di, 14.11.                      | [LR-Parser (Teil 2)]                                                                                                                      | BC          | Exposé [Vortrag III]                                  |
+|  47   | Di, 21.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                                       |
 |  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                                       |
 |  48   | **Di, 28.11., 18:00-19:00 Uhr** | **Edmonton II**: Vortrag Mindener Projekte (DE) (**Vortrag I**)                                                                           |             | Meilenstein 2 (Kein Praktikum - Termin mit Edmonton!) |
 |  49   | Di, 05.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          |                                                       |
@@ -239,11 +238,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 Sie bearbeiten im Praktikum eine gemeinsame [Aufgabe] in der Semestergruppe.
 
-| Woche | Rücksprache   | Vorstellung Praktikum                         | Inhalt                                                                          |
-|:-----:|:--------------|:----------------------------------------------|:--------------------------------------------------------------------------------|
-|  46   | Meilenstein 1 | Di, 14.11.                                    | Konzepte Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung, Exposé [Vortrag III] |
-|  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton II)** | Projektstatus (**Vortrag I**)                                                   |
-|  51   | Meilenstein 3 | Di, 19.12.                                    | Projektstatus                                                                   |
+| Woche | Rücksprache   | Vorstellung Praktikum                         | Inhalt                                                    |
+|:-----:|:--------------|:----------------------------------------------|:----------------------------------------------------------|
+|  45   | Meilenstein 1 | Di, 07.11.                                    | Konzepte Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung |
+|  46   | Exposé        | Di, 14.11.                                    | Diskussion Exposé [Vortrag III]                           |
+|  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton II)** | Projektstatus (**Vortrag I**)                             |
+|  51   | Meilenstein 3 | Di, 19.12.                                    | Projektstatus                                             |
 
 <!-- [B01]: homework/sheet01.md -->
 <!-- [B02]: homework/sheet02.md -->
