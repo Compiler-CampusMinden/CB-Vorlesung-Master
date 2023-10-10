@@ -167,6 +167,8 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ## Fahrplan
 
+Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com/calendar/ical/02297ee2a58f34113eeb16e51ad329dc2ca11d2649b8f196b2478fa75fd4893a%40group.calendar.google.com/public/basic.ics) mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
+
 ### Vorlesung
 
 | Woche | Datum                           | Themen                                                                                                                                    | Lead        | Bemerkung                                             |
