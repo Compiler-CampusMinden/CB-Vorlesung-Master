@@ -13,11 +13,9 @@ Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdiszip
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
 Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
-In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
-im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
-setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
-
-[_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+In diesem Modul geht es um ein fortgeschritteneres Verständnis für interessante Konzepte
+im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen
+diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Java ein.
 
 
 ## Überblick Modulinhalte
