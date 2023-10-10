@@ -13,7 +13,7 @@ Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdiszip
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
 Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
-In diesem Modul geht es um ein fortgeschritteneres Verständnis für interessante Konzepte
+In diesem Modul geht es um ein fortgeschrittenes Verständnis für interessante Konzepte
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen
 diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Java ein.
 
