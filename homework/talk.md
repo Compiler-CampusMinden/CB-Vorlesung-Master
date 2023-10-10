@@ -7,7 +7,7 @@ hidden: true
 ---
 
 
-Der Vortrag III ist Teil der Prüfungsleistung für Studierende, die nach der neuen Prüfungsordnung (PO23) am Modul "Concepts of Programming Languages" teilnehmen. Die Vorträge sollen 30 Minuten dauern und werden in der letzten Vorlesungswoche stattfinden. Planen Sie eine Diskussion von ca. 10 Minuten ein. Zusätzlich ist eine kurze Zusammenfassung des Vortrags als Blog im Discussions-Thread des jeweiligen Exposés zu erstellen.
+Der Vortrag III ist Teil der Prüfungsleistung für Studierende, die nach der neuen Prüfungsordnung (PO23) am Modul "Concepts of Programming Languages" teilnehmen. Die Vorträge sollen 20 Minuten dauern und werden in der letzten Vorlesungswoche stattfinden. Planen Sie eine Diskussion von zusätzlich ca. 10 Minuten ein. Zusätzlich ist eine kurze Zusammenfassung des Vortrags als Blog im Discussions-Thread des jeweiligen Exposés zu erstellen.
 
 Wir bieten Ihnen hier verschiedene Themen zur Auswahl an, Sie können aber auch gern eigene Vorschläge erarbeiten. Erstellen Sie in beiden Fällen ein kurzes Exposé (Thema, Kernthesen, Paper) als neuen Beitrag in den [GitHub-Discussions](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions/new?category=vortrag-iii) und stimmen Sie dieses bis zum Meilenstein I mit Ihren Dozent:innen ab. Ein Thema (bezogen auf die genutzten Paper/Quellen) kann nur einmal vergeben werden - hier gilt das _first-come-first-serve_-Prinzip in den Discussions.
 

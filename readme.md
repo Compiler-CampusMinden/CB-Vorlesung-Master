@@ -110,8 +110,8 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
     Kriterien:
     *   Aktive Mitarbeit im [Praktikum] und an den Meilensteinen
     *   Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
-    *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
-    *   Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
+    *   Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 5 Minuten pro Person (60 bis 90 Minuten gesamt)
+    *   Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (2x 90 Minuten gesamt)
 
 *   **Gesamtnote**:
     Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen.
@@ -123,12 +123,10 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 *   **unbenotet**: Aktive Mitarbeit im [Praktikum] und an den Meilensteinen
 *   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
-*   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt,
-    ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
-*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (60 bis 90 Minuten gesamt)
+*   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 5 Minuten pro Person (60 bis 90 Minuten gesamt)
+*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 10 Minuten pro Person (2x 90 Minuten gesamt)
 *   **benotet (30%)**: [Vortrag III]: Vortrag zu Paper-Analyse (extra-Leistung neue PO)
-    plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer; Zusammenfassung als
-    Blog-Eintrag
+    plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer (Vortrag+Diskussion); Zusammenfassung als Blog-Eintrag
 *   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
 
 **Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
