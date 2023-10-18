@@ -163,6 +163,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 ### Tools
 
 *   [github.com/antlr](https://github.com/antlr/antlr4)
+*   [Compiler Explorer](https://godbolt.org/)
 
 
 ## Fahrplan
