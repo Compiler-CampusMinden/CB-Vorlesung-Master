@@ -11,14 +11,14 @@ readings:
   - key: "Mogensen2017"
     comment: "Kapitel 1 (insbesondere Abschnitt 1.8)"
 tldr: |
-  ![](images/architektur_cb_lexer.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/lexing/images/architektur_cb_lexer.png)
 
   Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token zerlegen. Zur
   Spezifikation der Token werden reguläre Ausdrücke verwendet.
 
   Von Hand implementierte Lexer arbeiten üblicherweise rekursiv und verarbeiten immer
   das nächste Zeichen im Eingabestrom. Die Arbeitsweise erinnert an LL-Parser (vgl.
-  [LL-Parser](../parsing/ll-parser-impl.md)).
+  [LL-Parser](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/ll-parser-impl.md)).
 
   Lexer müssen sehr effizient sein, da sie noch direkt auf der niedrigsten Abstraktionsstufe
   arbeiten und u.U. oft durchlaufen werden. Deshalb setzt man hier gern spezielle Techniken
