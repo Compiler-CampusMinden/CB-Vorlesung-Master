@@ -14,7 +14,7 @@ readings:
   - key: "Grune2012"
     comment: "Abschnitte 3.1 bis (einschließlich) 3.4"
 tldr: |
-  ![](images/architektur_cb_parser.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/parsing/images/architektur_cb_parser.png)
 
   LL-Parser können über einen "rekursiven Abstieg" direkt aus einer Grammatik implementiert werden:
   -   Zu jeder Produktionsregel erstellt man eine gleichnamige Funktion.

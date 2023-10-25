@@ -11,20 +11,20 @@ readings:
   - key: "Mogensen2017"
     comment: "Kapitel 1 (insbesondere Abschnitt 1.8)"
 tldr: |
-  ![](images/architektur_cb_lexer.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/lexing/images/architektur_cb_lexer.png)
 
   Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token
   zerlegen. Zur Spezifikation der Token werden reguläre Ausdrücke verwendet.
   Diese können über verschiedene Schritte in einen zugehörigen DFA transformiert
   werden, der wiederum über Tabellen dargestellt werden kann (vgl. auch
-  [Reguläre Sprachen, Ausdrucksstärke](regular.md)).
+  [Reguläre Sprachen, Ausdrucksstärke](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/regular.md)).
 
   Mit Hilfe der (üblicherweise von Scanner-Generatoren generierten) Tabellen kann
   ein Lexer implementiert werden ("tabellenbasierte Implementierung"). Zur Steigerung
   der Effizienz kann die Tabelle in den Code integriert werden (etwa mit Sprungbefehlen,
   "direkt codierte Implementierung"). Diese Lexer sind nur schwer nachvollziehbar und
-  werden üblicherweise generiert (vgl. [Flex](flex.md)
-  und [ANTLR](antlr.md)).
+  werden üblicherweise generiert (vgl. [Flex](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/flex.md)
+  und [ANTLR](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/antlr-lexing.md)).
 outcomes:
   - k1: "Aufgaben eines Lexers"
   - k2: "Erkennen von Lexemen mit RE und DFA"
