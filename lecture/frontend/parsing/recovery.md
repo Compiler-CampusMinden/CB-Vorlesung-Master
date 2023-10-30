@@ -85,13 +85,14 @@ stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
 ::: slides
-[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/parsing/src/VarDef.g4"}
+[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/VarDef.g4"}
 :::
 
 
 ::::::::: notes
 *Anmerkung*: Die nachfolgenden Fehler werden am Beispiel der Grammatik
-`[VarDef.g4](src/VarDef.g4)`{=markdown} und ANTLR demonstriert.
+[VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/VarDef.g4)
+und ANTLR demonstriert.
 
 ### Lexikalische Fehler
 
