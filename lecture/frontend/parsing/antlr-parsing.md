@@ -81,6 +81,7 @@ challenges: |
     ```
 
     Erstellen Sie für diese fiktive Sprache einen Lexer+Parser mit ANTLR.
+    Implementieren Sie mit Hilfe der Listener oder Visitoren einen einfachen Pretty-Printer.
 
     (Die genauere Sprachdefinition finden Sie bei Bedarf unter [craftinginterpreters.com/the-lox-language.html](https://www.craftinginterpreters.com/the-lox-language.html).)
 ---
