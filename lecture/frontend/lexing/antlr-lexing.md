@@ -110,6 +110,18 @@ challenges: |
     Können Sie die Grammatik so anpassen, dass Sie nur möglichst wenige verschiedene Token an den Parser weitergeben?
 
     Ergänzen Sie Ihre Grammatik um Lexer-Aktionen, so dass Sie die Zeilen, die Zeichen (in den Namen) und die Ziffern (in den Telefonnummern) zählen können.
+
+
+    **Lexing mit ANTLR**
+
+    IBAN für Deutschland bestehen aus dem Kürzel "DE" sowie einer zweistelligen Checksumme, gefolgt von 2x 4 Ziffern für die
+    Bank (ehemalige Bankleitzahl) sowie 2x 4 Ziffern für die ehemalige Kontonummer sowie zwei weiteren Ziffern. Typisch sind
+    zwei Formate:
+
+    -   Menschenlesbares Format:  `DEcc bbbb bbbb kkkk kkkk xx`
+    -   Maschinenlesbares Format: `DEccbbbbbbbbkkkkkkkkxx`
+
+    Definieren Sie eine Lexer-Grammatik für ANTLR, mit der Sie die verschiedenen IBAN-Formate für Deutschland einlesen können.
 ---
 
 
