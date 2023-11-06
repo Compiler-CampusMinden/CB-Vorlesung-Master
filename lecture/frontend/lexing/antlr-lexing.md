@@ -118,8 +118,8 @@ challenges: |
     Bank (ehemalige Bankleitzahl) sowie 2x 4 Ziffern für die ehemalige Kontonummer sowie zwei weiteren Ziffern. Typisch sind
     zwei Formate:
 
-    -   Menschenlesbares Format: `DEkk bbbb bbbb cccc cccc xx`
-    -   Maschinenlesbares Format: `DE12345678901234567842`
+    -   Menschenlesbares Format:  `DEcc bbbb bbbb kkkk kkkk xx`
+    -   Maschinenlesbares Format: `DEccbbbbbbbbkkkkkkkkxx`
 
     Definieren Sie eine Lexer-Grammatik für ANTLR, mit der Sie die verschiedenen IBAN-Formate für Deutschland einlesen können.
 ---

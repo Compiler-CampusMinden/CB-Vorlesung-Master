@@ -1,8 +1,8 @@
 grammar Iban;
 
 /*
-    DEkk bbbb bbbb cccc cccc xx
-    DEkkbbbbbbbbccccccccxx
+    DEcc bbbb bbbb kkkk kkkk xx
+    DEccbbbbbbbbkkkkkkkkxx
 
     DE12 3456 7890 1234 5678 42
     DE12345678901234567842
