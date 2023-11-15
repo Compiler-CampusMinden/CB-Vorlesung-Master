@@ -182,11 +182,12 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 |  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                                                  |             | online bzw. H10                                       |
 |  44   | Di, 31.10.                      | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR] \| [Grenze Lexer und Parser]                               | Carsten     |                                                       |
 |  45   | Di, 07.11.                      | [LR-Parser (Teil 1)]                                                                                                                      | BC          | Meilenstein 1                                         |
-|  46   | Di, 14.11.                      | [LR-Parser (Teil 2)]                                                                                                                      | BC          | Exposé [Vortrag III]                                  |
+|  46   | ~~Di, 14.11.~~                  | ~~[LR-Parser (Teil 2)]~~                                                                                                                  | BC          | ~~Exposé [Vortrag III]~~                              |
 |  47   | Di, 21.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                                       |
+|  47   | Di, 21.11. (**Praktikum**)      | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                                       |
 |  48   | Di, 28.11.                      | [Attributierte Grammatiken]                                                                                                               | BC          |                                                       |
 |  48   | **Di, 28.11., 18:00-19:00 Uhr** | **Edmonton II**: Vortrag Mindener Projekte (DE) (**Vortrag I**)                                                                           |             | Meilenstein 2 (Kein Praktikum - Termin mit Edmonton!) |
-|  49   | Di, 05.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          |                                                       |
+|  49   | Di, 05.12.                      | [Optimierung und Datenflussanalyse]                                                                                                       | BC          | Exposé [Vortrag III]                                  |
 |  49   | **Mi, 06.12., 18:00-19:00 Uhr** | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                                        |             |                                                       |
 |  50   | Di, 12.12.                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     |                                                       |
 |  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                                           | Carsten     | Meilenstein 3                                         |
@@ -242,8 +243,9 @@ Sie bearbeiten im Praktikum eine gemeinsame [Aufgabe] in der Semestergruppe.
 | Woche | Rücksprache   | Vorstellung Praktikum                         | Inhalt                                                    |
 |:-----:|:--------------|:----------------------------------------------|:----------------------------------------------------------|
 |  45   | Meilenstein 1 | Di, 07.11.                                    | Konzepte Java-Bytecode, Arbeitsaufteilung, Arbeitsplanung |
-|  46   | Exposé        | Di, 14.11.                                    | Diskussion Exposé [Vortrag III]                           |
+|  46   | ~~Exposé~~    | ~~Di, 14.11.~~                                | Diskussion Exposé [Vortrag III]                           |
 |  48   | Meilenstein 2 | **Di, 28.11., 18:00-19:00 Uhr (Edmonton II)** | Projektstatus (**Vortrag I**)                             |
+|  49   | Exposé        | Di, 05.12.                                    | Diskussion Exposé [Vortrag III]                           |
 |  51   | Meilenstein 3 | Di, 19.12.                                    | Projektstatus                                             |
 
 <!-- [B01]: homework/sheet01.md -->
