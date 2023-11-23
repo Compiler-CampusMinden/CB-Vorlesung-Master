@@ -215,21 +215,26 @@ class Clazz(Struct):
         # do we know "name" here?
         if symbols[name]: return symbols[name]
         # NEW: if not here, check any parent class ...
-        if parentClazz != None: return parentClazz.resolve(name)
-        # ... or enclosing scope if base class
-        try: return enclosingScope.resolve(name)
-        except: return None     # not found
+        if parentClazz and parentClazz.resolve(name): return parentClazz.resolve(name)
+        else:
+            # ... or enclosing scope if base class
+            if enclosingScope: return enclosingScope.resolve(name)
+            else: return None     # not found
 
     def resolveMember(name):
         if symbols[name]: return symbols[name]
         # NEW: check parent class
-        try: return parentClazz.resolveMember(name)
-        except: return None
+        if parentClazz: return parentClazz.resolveMember(name)
+        else: return None
 ```
 
 [Quelle: Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
 
 ::: notes
+**Hinweis**: Die obige Implementierungsskizze soll vor allem das Prinzip demonstrieren - sie ist aus
+Gründen der Lesbarkeit nicht besonders effizient: beispielsweise wird `parentClazz.resolve(name)`
+mehrfach evaluiert ...
+
 Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst gesucht werden,
 anschließend in der Elternklasse.
 

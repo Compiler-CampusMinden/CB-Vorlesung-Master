@@ -191,8 +191,8 @@ class Scope:
         # do we know "name" here?
         if symbols[name]: return symbols[name]
         # if not here, check any enclosing scope
-        try: return enclosingScope.resolve(name)
-        except: return None     # not found
+        if enclosingScope: return enclosingScope.resolve(name)
+        else: return None     # not found
 
     def bind(symbol):
         symbols[symbol.name] = symbol
