@@ -192,7 +192,9 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 |   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                                           | Carsten     |                                                       |
 |   03   | Di, 16.01. (**13:30-16:45 Uhr**)     | Vortrag II                                                                                                                                | BC, Carsten |                                                       |
 |   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                                                 | BC          |                                                       |
-|   04   | Di, 23.01.                           | [Vortrag III]: Termine siehe Etherpad                                                                                                     | BC, Carsten | [Vortrag III]: Termine siehe Etherpad                 |
+|   04   | Di, 23.01.  (**13:30-16:45 Uhr**)    | [Vortrag III]: [Termine siehe Etherpad]                                                                                                   | BC, Carsten |                                                       |
+
+[Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331974&client_id=FH-Bielefeld
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
