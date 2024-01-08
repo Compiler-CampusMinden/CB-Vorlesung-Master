@@ -193,8 +193,12 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 |   03   | Di, 16.01. (**13:30-16:45 Uhr**)     | Vortrag II                                                                                                                                | BC, Carsten |                                                       |
 |   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                                                 | BC          |                                                       |
 |   04   | Di, 23.01.  (**13:30-16:45 Uhr**)    | [Vortrag III]: [Termine siehe Etherpad]                                                                                                   | BC, Carsten |                                                       |
+|  _06_  | _Mi, 07.02._                         | Mündliche Prüfung CB (PO18): [Termine siehe Buchungsliste CB]                                                                             | Carsten, BC |                                                       |
+|  _06_  | _Fr, 09.02._                         | Mündliche Prüfung CPL (PO23): [Termine siehe Buchungsliste CPL]                                                                           | Carsten, BC |                                                       |
 
 [Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331974&client_id=FH-Bielefeld
+[Termine siehe Buchungsliste CB]: https://www.hsbi.de/elearning/goto.php?target=book_1334199&client_id=FH-Bielefeld
+[Termine siehe Buchungsliste CPL]: https://www.hsbi.de/elearning/goto.php?target=book_1334202&client_id=FH-Bielefeld
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
