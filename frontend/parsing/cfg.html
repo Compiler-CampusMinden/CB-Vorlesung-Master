@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="generator" content="Relearn 5.23.2">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CFG">
+    <meta name="twitter:description" content="">
+    <meta property="og:title" content="CFG">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">
+    <title>CFG</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg/index.print.html" rel="alternate" type="text/html" title="CFG">
+
+    
+    
+
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1704710916" rel="icon" type="image/png">
+
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1704710916" rel="stylesheet" id="R-variant-style">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1704710916" rel="stylesheet" media="print">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/ie.css?1704710916" rel="stylesheet">
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/url.js?1704710916"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1704710916"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      var root_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_Reset_view = 'Reset view';
+      window.T_View_reset = 'View reset!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207/';
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+              <button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)">
+                <i class="fa-fw fas fa-bars"></i>
+              </button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+              <button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)">
+                <i class="fa-fw fas fa-list-alt"></i>
+              </button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#endliche-automaten-reguläre-ausdrücke-reguläre-grammatiken-reguläre-sprachen">Endliche Automaten, reguläre Ausdrücke, reguläre Grammatiken, reguläre Sprachen</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#wofür-reichen-reguläre-sprachen-nicht">Wofür reichen reguläre Sprachen nicht?</a></li>
+    <li><a href="#themen-für-heute">Themen für heute</a></li>
+    <li><a href="#einordnung-erweiterung-der-automatenklasse-dfa-um-komplexere-sprachen-als-die-regulären-akzeptieren-zu-können">Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können</a></li>
+    <li><a href="#kellerautomaten-push-down-automata-pdas">Kellerautomaten (Push-Down-Automata, PDAs)</a></li>
+    <li><a href="#was-kann-man-damit-akzeptieren">Was kann man damit akzeptieren?</a></li>
+    <li><a href="#beispiel">Beispiel</a></li>
+    <li><a href="#konfigurationen-von-pdas">Konfigurationen von PDAs</a></li>
+    <li><a href="#die-übergangsrelation-eines-pdas">Die Übergangsrelation eines PDAs</a></li>
+    <li><a href="#eigenschaften-der-konfigurationsübergänge">Eigenschaften der Konfigurationsübergänge</a></li>
+    <li><a href="#akzeptierte-sprachen">Akzeptierte Sprachen</a></li>
+    <li><a href="#akzeptanzäquivalenzen">Akzeptanzäquivalenzen</a></li>
+    <li><a href="#deterministische-pdas">Deterministische PDAs</a></li>
+    <li><a href="#der-kleine-unterschied">Der kleine Unterschied</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#kontextfreie-grammatiken">Kontextfreie Grammatiken</a></li>
+    <li><a href="#beispiel-1">Beispiel</a></li>
+    <li><a href="#mehrdeutige-grammatiken">Mehrdeutige Grammatiken</a></li>
+    <li><a href="#kontextfreie-grammatiken-und-pdas">Kontextfreie Grammatiken und PDAs</a></li>
+    <li><a href="#das-pumping-lemma-für-kontextfreie-sprachen">Das Pumping Lemma für kontextfreie Sprachen</a></li>
+    <li><a href="#abschlusseigenschaften-von-kontextfreien-sprachen">Abschlusseigenschaften von kontextfreien Sprachen</a></li>
+    <li><a href="#entscheidbarkeit-von-kontextfreien-grammatiken-und-sprachen">Entscheidbarkeit von kontextfreien Grammatiken und Sprachen</a></li>
+    <li><a href="#abschlusseigenschaften-deterministisch-kontextfreier-sprachen">Abschlusseigenschaften deterministisch kontextfreier Sprachen</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#das-sollen-sie-mitnehmen">Das sollen Sie mitnehmen</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            CFG
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show">
+              <a class="topbar-control" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)">
+                <i class="fa-fw fas fa-print"></i>
+              </a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+              <button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More">
+                <i class="fa-fw fas fa-ellipsis-v"></i>
+              </button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>CFG</h1>
+
+
+
+    
+    
+
+
+
+
+    
+    
+        
+        
+            
+            
+                
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="far fa-file-powerpoint"></i> Annotierte Folien</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/frontend_parsing_cfg.ann.ma.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Annotierte Folien: CFG, LL-Parser</a></li></ul></div>
+</div>
+
+
+
+
+    <h1 id="wiederholung">Wiederholung</h1>
+<h2 id="endliche-automaten-reguläre-ausdrücke-reguläre-grammatiken-reguläre-sprachen">Endliche Automaten, reguläre Ausdrücke, reguläre Grammatiken, reguläre Sprachen</h2>
+<ul>
+<li>Wie sind DFAs und NFAs definiert?</li>
+<li>Was sind reguläre Ausdrücke?</li>
+<li>Was sind formale und reguläre Grammatiken?</li>
+<li>In welchem Zusammenhang stehen all diese Begriffe?</li>
+<li>Wie werden DFAs und reguläre Ausdrücke im Compilerbau eingesetzt?</li>
+</ul>
+<h1 id="motivation">Motivation</h1>
+<h2 id="wofür-reichen-reguläre-sprachen-nicht">Wofür reichen reguläre Sprachen nicht?</h2>
+<p>Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus gezählt werden müssen. Diese Sprachen lassen sich oft mit Variablen im Exponenten beschreiben, die unendlich viele Werte annehmen können.</p>
+<ul>
+<li>
+<p>
+<span class="math align-center">$a^ib^{2*i}$</span> ist nicht regulär</p>
+</li>
+<li>
+<p>
+<span class="math align-center">$a^ib^{2*i}$</span> für 
+<span class="math align-center">$0 \leq i \leq 3$</span> ist regulär</p>
+</li>
+<li>
+<p>Wo finden sich die oben genannten VAriablen bei einem DFA wieder?</p>
+</li>
+<li>
+<p>Warum ist die erste Sprache oben nicht regulär, die zweite aber?</p>
+</li>
+</ul>
+<h2 id="themen-für-heute">Themen für heute</h2>
+<ul>
+<li>PDAs: mächtiger als DFAs, NFAs</li>
+<li>kontextfreie Grammatiken und Sprachen: mächtiger als reguläre Grammatiken und Sprachen</li>
+<li>DPDAs und deterministisch kontextfreie Grammatiken: die Grundlage der Syntaxanalyse im Compilerbau</li>
+</ul>
+<h2 id="einordnung-erweiterung-der-automatenklasse-dfa-um-komplexere-sprachen-als-die-regulären-akzeptieren-zu-können">Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können</h2>
+<p>Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speicher, um zählen und matchen zu können. Wir suchen dabei konzeptionell die &quot;kleinstmögliche&quot; Erweiterung, die die akzeptierte Sprachklasse gegenüber DFAs vergrößert.</p>
+<ul>
+<li>Der konzeptionell einfachste Speicher ist ein Stack. Wir haben keinen wahlfreien Zugriff auf die gespeicherten Werte.</li>
+<li>Es soll eine deterministische und eine indeterministische Variante der neuen Automatenklasse geben.</li>
+<li>In diesem Zusammenhang wird der Stack auch Keller genannt.</li>
+</ul>
+<h2 id="kellerautomaten-push-down-automata-pdas">Kellerautomaten (Push-Down-Automata, PDAs)</h2>
+<p><strong>Def.:</strong> Ein Kellerautomat (PDA) 
+<span class="math align-center">$P = (Q,\ \Sigma,\ \Gamma,\  \delta,\ q_0,\ \perp,\ F)$</span>
+ist ein Septupel mit:</p>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg/Def_PDA.png" alt="Definition eines PDAs" width="60%" height="auto">
+    <figcaption><p>Definition eines PDAs</p></figcaption>
+</figure>
+<p>Ein PDA ist per Definition nichtdeterministisch und kann spontane Zustandsübergänge durchführen.</p>
+<h2 id="was-kann-man-damit-akzeptieren">Was kann man damit akzeptieren?</h2>
+<p>Strukturen mit paarweise zu matchenden Symbolen.</p>
+<p>Bei jedem Zustandsübergang wird ein Zeichen (oder 
+<span class="math align-center">$\epsilon$</span>) aus der Eingabe gelesen, ein Symbol von Keller genommen. Diese und das Eingabezeichen bestimmen den Folgezustand und eine Zeichenfolge, die auf den Stack gepackt wird. Dabei wird ein Symbol, das später mit einem Eingabesymbol zu matchen ist, auf den Stack gepackt.</p>
+<p>Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben, muss es wieder gepusht werden.</p>
+<h2 id="beispiel">Beispiel</h2>
+<p>Ein PDA für 
+<span class="math align-center">$L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$</span>:</p>
+<p><a href="#R-image-0d69ae7d8ae33154e167d4c0f1b0e3b9" class="lightbox-link"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg/pda2.png?width=45%25&amp;height=auto" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: 45%;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0d69ae7d8ae33154e167d4c0f1b0e3b9"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg/pda2.png?width=45%25&amp;height=auto" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<h2 id="konfigurationen-von-pdas">Konfigurationen von PDAs</h2>
+<p><strong>Def.:</strong> Eine Konfiguration (ID) eines PDAs 3-Tupel 
+<span class="math align-center">$(q, w, \gamma)$</span>
+mit</p>
+<ul>
+<li>
+<span class="math align-center">$q$</span> ist ein Zustand</li>
+<li>
+<span class="math align-center">$w$</span> ist der verbleibende Input, 
+<span class="math align-center">$w\in\Sigma^{\ast}$</span></li>
+<li>
+<span class="math align-center">$\gamma$</span> ist der Kellerinhalt 
+<span class="math align-center">$\gamma\in \Gamma^{\ast}$</span></li>
+</ul>
+<p>eines PDAs zu einem gegebenen Zeitpunkt.</p>
+<h2 id="die-übergangsrelation-eines-pdas">Die Übergangsrelation eines PDAs</h2>
+<p><strong>Def.:</strong> Die Relation 
+<span class="math align-center">$\vdash$</span> definiert Übergänge von einer Konfiguration zu einer anderen:</p>
+<p>Sei 
+<span class="math align-center">$(p, \alpha) \in \delta(q, a, X)$</span>, dann gilt 
+<span class="math align-center">$\forall w\ \epsilon \ \Sigma^{\ast}$</span> und
+
+<span class="math align-center">$\beta \in \Gamma^{\ast}$</span>:</p>
+<p>
+<span class="math align-center">$(q, aw, X\beta)\vdash(p, w, \alpha\beta)$</span>.</p>
+<p><strong>Def.:</strong> Wir definieren mit 
+<span class="math align-center">$\overset{\ast}{\vdash}$</span> 0 oder endlich viele Schritte des PDAs
+induktiv wie folgt:</p>
+<ul>
+<li>Basis: 
+<span class="math align-center">$I\overset{\ast}{\vdash} I$</span> für eine ID 
+<span class="math align-center">$I$</span>.</li>
+<li>Induktion: 
+<span class="math align-center">$I\overset{\ast}{\vdash}J$</span>, wenn 
+<span class="math align-center">$\exists$</span> ID 
+<span class="math align-center">$K$</span> mit 
+<span class="math align-center">$I\vdash K$</span> und 
+<span class="math align-center">$K \overset{\ast}{\vdash}J$</span>.</li>
+</ul>
+<h2 id="eigenschaften-der-konfigurationsübergänge">Eigenschaften der Konfigurationsübergänge</h2>
+<p><strong>Satz:</strong> Sei 
+<span class="math align-center">$P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$</span> ein PDA und 
+<span class="math align-center">$(q, x,\alpha)\overset{\ast}{\vdash}
+(p, y, \beta)$</span>. Dann gilt für beliebige Strings 
+<span class="math align-center">$w\in\Sigma^{\ast}$</span>, 
+<span class="math align-center">$\gamma$</span> in 
+<span class="math align-center">$\Gamma^{\ast}$</span>:</p>
+
+<span class="math align-center">$(q, xw, \alpha \gamma) \overset{\ast}{\vdash}(p, yw, \beta\gamma)$</span>
+<p><strong>Satz:</strong> Sei 
+<span class="math align-center">$P = (Q, \Sigma, \Gamma, \gamma, q_0, \perp, F)$</span> ein PDA und 
+<span class="math align-center">$(q,xw,\alpha) \overset{\ast}{\vdash}
+(p,y w, \beta)$</span>.</p>
+<p>Dann gilt: 
+<span class="math align-center">$(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$</span></p>
+<h2 id="akzeptierte-sprachen">Akzeptierte Sprachen</h2>
+<p><strong>Def.:</strong> Sei 
+<span class="math align-center">$P=(Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$</span> ein PDA. Dann ist die <em>über einen Endzustand</em>
+akzeptierte Sprache 
+<span class="math align-center">$L(P) = \lbrace w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \alpha)\rbrace$</span>
+für einen Zustand 
+<span class="math align-center">$q \in F, \alpha \in \Gamma^{\ast}$</span>.</p>
+<p><strong>Def.:</strong> Für einen PDA 
+<span class="math align-center">$P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$</span>
+definieren wir die über den <em>leeren Keller</em> akzeptierte Sprache
+
+<span class="math align-center">$N(P) = \lbrace (w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\rbrace$</span>.</p>
+<h2 id="akzeptanzäquivalenzen">Akzeptanzäquivalenzen</h2>
+<p><strong>Satz:</strong> Wenn 
+<span class="math align-center">$L = N(P_N)$</span> für einen PDA 
+<span class="math align-center">$P_N$</span>, dann gibt es einen PDA 
+<span class="math align-center">$P_L$</span> mit
+
+<span class="math align-center">$L = L(P_L)$</span>.</p>
+<p><strong>Satz:</strong> Für einen PDA 
+<span class="math align-center">$P$</span> mit 
+<span class="math align-center">$\epsilon$</span>-Transitionen existiert ein PDA 
+<span class="math align-center">$Q$</span> ohne
+
+<span class="math align-center">$\epsilon$</span>-Transitionen mit 
+<span class="math align-center">$L(P) = N(P) = L(Q) = N(Q)$</span>.</p>
+<p>Die Transitionsfunktion 
+<span class="math align-center">$\delta$</span> ist dann von der Form
+
+<span class="math align-center">$\delta: Q \times \Sigma \times \Gamma \to2^{Q \times \Gamma^{\ast}}$</span>.</p>
+<h2 id="deterministische-pdas">Deterministische PDAs</h2>
+<p><strong>Def.</strong> Ein PDA 
+<span class="math align-center">$P = (Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$</span> ist <em>deterministisch</em>
+
+<span class="math align-center">$: \Leftrightarrow$</span></p>
+<ul>
+<li>
+<span class="math align-center">$\delta(q, a, X)$</span> hat höchstens ein Element für jedes 
+<span class="math align-center">$q \in Q, a \in\Sigma$</span> oder 
+<span class="math align-center">$(a = \epsilon$</span> und 
+<span class="math align-center">$X \in \Gamma)$</span>.</li>
+<li>Wenn 
+<span class="math align-center">$\delta (q, a, x)$</span> nicht leer ist für ein 
+<span class="math align-center">$a \in \Sigma$</span>, dann muss 
+<span class="math align-center">$\delta (q, \epsilon, x)$</span> leer sein.</li>
+</ul>
+<p>Deterministische PDAs werden auch <em>DPDAs</em> genannt.</p>
+<h2 id="der-kleine-unterschied">Der kleine Unterschied</h2>
+<p><strong>Satz:</strong> Die von DPDAs akzeptierten Sprachen sind eine echte Teilmenge der von
+PDAs akzeptierten Sprachen.</p>
+<p>Die Sprachen, die von <em>regex</em> beschrieben werden, sind eine echte Teilmenge der von
+DPDAs akzeptierten Sprachen.</p>
+<h1 id="kontextfreie-grammatiken-und-sprachen">Kontextfreie Grammatiken und Sprachen</h1>
+<h2 id="kontextfreie-grammatiken">Kontextfreie Grammatiken</h2>
+<p><strong>Def.</strong> Eine <em>kontextfreie (cf-)</em> Grammatik ist ein 4-Tupel 
+<span class="math align-center">$G = (N, T, P, S)$</span> mit <em>N, T, S</em> wie in
+(formalen) Grammatiken und <em>P</em> ist eine endliche Menge von Produktionen der Form:</p>
+<p>
+<span class="math align-center">$X \rightarrow Y$</span> mit 
+<span class="math align-center">$X \in N, Y \in {(N \cup T)}^{\ast}$</span>.</p>
+<p>
+<span class="math align-center">$\Rightarrow, \overset{\ast}{\Rightarrow}$</span> sind definiert wie bei regulären Sprachen. Bei cf-Grammatiken nennt man die Ableitungsbäume oft <em>Parse trees</em>.</p>
+<h2 id="beispiel-1">Beispiel</h2>
+
+<span class="math align-center">$S \rightarrow a \mid S\ +\  S\ |\  S \ast S$</span>
+<p>Ableitungsbäume für 
+<span class="math align-center">$a + a \ast a$</span>:</p>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="mehrdeutige-grammatiken">Mehrdeutige Grammatiken</h2>
+<p><strong>Def.:</strong> Gibt es in einer von einer kontextfreien Grammatik erzeugten Sprache ein
+Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
+<em>mehrdeutig</em>. Anderenfalls heißt sie <em>eindeutig</em>.</p>
+<p><strong>Satz:</strong> Es gibt kontextfreie Sprachen, für die keine eindeutige Grammatik existiert.</p>
+<h2 id="kontextfreie-grammatiken-und-pdas">Kontextfreie Grammatiken und PDAs</h2>
+<p><strong>Satz:</strong> Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe
+Sprachklasse.</p>
+<p><strong>Satz:</strong> Sei 
+<span class="math align-center">$L = N(P)$</span> für einen DPDA <em>P</em>, dann hat <em>L</em> eine eindeutige Grammatik.</p>
+<p><strong>Def.:</strong> Die Klasse der Sprachen, die von einem DPDA akzeptiert werden, heißt
+Klasse der <em>deterministisch kontextfreien (oder LR(k)-) Sprachen</em>.</p>
+<h2 id="das-pumping-lemma-für-kontextfreie-sprachen">Das Pumping Lemma für kontextfreie Sprachen</h2>
+<p>Wenn wir beweisen müssen, dass eine Sprache nicht cf ist, hilft das Pumping Lemma für cf-Sprachen:</p>
+<p><strong>Satz:</strong> Sei <em>L</em> eine kontextfreie Sprache</p>
+<p>
+<span class="math align-center">$\Rightarrow \exists$</span> eine Konstante 
+<span class="math align-center">$p \in \mathbb{N}$</span>:</p>
+<p>
+<span class="math align-center">$\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$</span> 
+<span class="math align-center">$u, v, w, x, y \in
+\Sigma ^{\ast}$</span> mit 
+<span class="math align-center">$z = uvwxy$</span> und</p>
+<ul>
+<li>
+<span class="math align-center">$\mid vwx\mid \leq p$</span></li>
+<li>
+<span class="math align-center">$vx \neq \epsilon$</span></li>
+<li>
+<span class="math align-center">$\forall i \geq 0 : uv^i wx^i y \in L$</span></li>
+</ul>
+<h2 id="abschlusseigenschaften-von-kontextfreien-sprachen">Abschlusseigenschaften von kontextfreien Sprachen</h2>
+<p><strong>Satz:</strong> Die kontextfreien Sprachen sind abgeschlossen unter:</p>
+<ul>
+<li>Vereinigung</li>
+<li>Konkatenation</li>
+<li>Kleene-Hüllen 
+<span class="math align-center">$L^{\ast}$</span> und 
+<span class="math align-center">$L^+$</span></li>
+</ul>
+<p><strong>Satz:</strong> Wenn <em>L</em> kontextfrei ist, dann ist 
+<span class="math align-center">$L^R$</span> kontextfrei.</p>
+<h2 id="entscheidbarkeit-von-kontextfreien-grammatiken-und-sprachen">Entscheidbarkeit von kontextfreien Grammatiken und Sprachen</h2>
+<p><strong>Satz:</strong> Es ist entscheidbar für eine kontextfreie Grammatik <em>G</em>,</p>
+<ul>
+<li>ob 
+<span class="math align-center">$L(G) = \emptyset$</span></li>
+<li>welche Symbole nach 
+<span class="math align-center">$\epsilon$</span> abgeleitet werden können</li>
+<li>welche Symbole erreichbar sind</li>
+<li>ob 
+<span class="math align-center">$w  \in L(G)$</span> für ein gegebenes 
+<span class="math align-center">$w \in {\Sigma}^{\ast}$</span></li>
+</ul>
+<p><strong>Satz:</strong> Es ist nicht entscheidbar,</p>
+<ul>
+<li>ob eine gegebene kontextfreie Grammatik eindeutig ist</li>
+<li>ob der Durchschnitt zweier kontextfreier Sprachen leer ist</li>
+<li>ob zwei kontextfreie Sprachen identisch sind</li>
+<li>ob eine gegebene kontextfreie Sprache gleich 
+<span class="math align-center">$\Sigma^{\ast}$</span> ist</li>
+</ul>
+<h2 id="abschlusseigenschaften-deterministisch-kontextfreier-sprachen">Abschlusseigenschaften deterministisch kontextfreier Sprachen</h2>
+<p><strong>Satz:</strong> Deterministisch kontextfreie Sprachen sind abgeschlossen unter</p>
+<ul>
+<li>Durchschnitt mit regulären Sprachen</li>
+<li>Komplement</li>
+</ul>
+<p>Sie sind nicht abgeschlossen unter</p>
+<ul>
+<li>Umkehrung</li>
+<li>Vereinigung</li>
+<li>Konkatenation</li>
+</ul>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="das-sollen-sie-mitnehmen">Das sollen Sie mitnehmen</h2>
+<ul>
+<li>Die Struktur von gängigen Programmiersprachen lässt sich nicht mit regulären Ausdrücken beschreiben und damit nicht mit DFAs akzeptieren.</li>
+<li>Das Automatenmodell der DFAs wird um einen endlosen Stack erweitert, das ergibt PDAs.</li>
+<li>Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.</li>
+<li>Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.</li>
+<li>Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.</li>
+</ul>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_aho2013compilers'>[aho2013compilers] <strong>Compilers: Pearson New International Edition: Principles, Techniques, and Tools</strong><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Education Limited, 2013. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-2920-3723-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-2920-3723-3</a>.</li> <li id='id_hopcroft2003'>[hopcroft2003] <strong>Einführung in die Automatentheorie, formale Sprachen und Komplexitätstheorie</strong><br>Hopcroft, J. E. und Motwani, R. und Ullman, J. D., Pearson Education Deutschland GmbH, 2003. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7020-4' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-8273-7020-4</a>.</li></ul></div>
+</div>
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K1) PDAs</li> <li>(K1) Deterministische PDAs</li> <li>(K1) Kontextfreie Grammatiken</li> <li>(K1) Deterministisch kontextfreie Grammatiken</li> <li>(K2) Zusammenhang zwischen PDAs und kontextfreien Grammatiken</li></ul></div>
+</div>
+
+
+
+    
+
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+        <form action="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get"><div class="searchbox default-animation">
+          <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div></form>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.en.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1704710917" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/intro.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html">Überblick<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-925e5bfbd01266c727d74ae1db5ab0c6" class="morespace collapsible-menu">
+          <li data-nav-id="/intro/overview.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend.html" class="parent "><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html">Frontend<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-1f846e8dcef1e4719580d68fa558c953" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/lexing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html">Lexer<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-cdb85067b64f23a8375ce1382008d411" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/lexing/regular.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/table.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/recursive.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/antlr-lexing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">Lexer mit ANTLR generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/parsing.html" class="parent "><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html">Parser<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-3d952dd8be57a29c3491d54b27381fe9" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/parsing/cfg.html" class="active"><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">CFG<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-parser-theory.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html">LL-Parser (Theorie)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-parser-impl.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-advanced.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/antlr-parsing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">Parser mit ANTLR generieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/finalwords.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/lr-parser1.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">LR-Parser 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/lr-parser2.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html">LR-Parser 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/recovery.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">Error-Recovery<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/semantics.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-59ae8b9e1a0121460e9e72eed15dfcf4" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/semantics/symboltables.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-b170d4e1d268d0405c96200a11a57acb" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/semantics/symboltables/intro-symbtab.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/scopes.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/functions.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/classes.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/semantics/attribgrammars.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/backend.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html">Backend<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-5d85b052b2506f4b0363622e3c0670d3" class="morespace collapsible-menu">
+          <li data-nav-id="/backend/optimization.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html">Interpreter<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-5c8b601f75fa660b497d1e71ee84e9f4" class="morespace collapsible-menu">
+          <li data-nav-id="/backend/interpretation/syntaxdriven.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/astdriven-part1.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/astdriven-part2.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/gc.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/backend/machinecode.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#praktikum"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions"><i class='fas fa-external-link-alt'></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-auto" value="auto" selected>Auto</option>
+                      <option id="R-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1704710917" defer></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1704710917" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1704710917"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1704710917" defer></script>
+  </body>
+</html>

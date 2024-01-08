@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="generator" content="Relearn 5.23.2">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Syntaxanalyse: LR-Parser (Teil 1)">
+    <meta name="twitter:description" content="">
+    <meta property="og:title" content="Syntaxanalyse: LR-Parser (Teil 1)">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">
+    <title>Syntaxanalyse: LR-Parser (Teil 1)</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/index.print.html" rel="alternate" type="text/html" title="Syntaxanalyse: LR-Parser (Teil 1)">
+
+    
+    
+
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1704710916" rel="icon" type="image/png">
+
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710916" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710916" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1704710916" rel="stylesheet" id="R-variant-style">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1704710916" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1704710916" rel="stylesheet" media="print">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/ie.css?1704710916" rel="stylesheet">
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/url.js?1704710916"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1704710916"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      var root_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_Reset_view = 'Reset view';
+      window.T_View_reset = 'View reset!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207/';
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+              <button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)">
+                <i class="fa-fw fas fa-bars"></i>
+              </button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+              <button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)">
+                <i class="fa-fw fas fa-list-alt"></i>
+              </button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#top-down-analyse">Top-Down-Analyse</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#ll-ist-nicht-alles"><em>LL</em> ist nicht alles</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#von-unten-nach-oben">Von unten nach oben</a></li>
+    <li><a href="#baumaufbau-von-unten">Baumaufbau von unten</a></li>
+    <li><a href="#kann-ein-stack-helfen">Kann ein Stack helfen?</a></li>
+    <li><a href="#probleme-damit">Probleme damit?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mehrdeutigkeiten--konflikte-beim-parsen">Mehrdeutigkeiten = Konflikte beim Parsen</a></li>
+    <li><a href="#mögliche-konflikte">Mögliche Konflikte</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#da-wollen-wir-hin">Da wollen wir hin</a></li>
+    <li><a href="#so-geht-es">So geht es</a></li>
+    <li><a href="#beispiel">Beispiel</a></li>
+    <li><a href="#definitionen">Definitionen</a></li>
+    <li><a href="#lr-parsing-1">LR-Parsing</a></li>
+    <li><a href="#steuerung-des-parsens-mittels-der-parse-table">Steuerung des Parsens mittels der Parse Table</a></li>
+    <li><a href="#arbeitsweise">Arbeitsweise</a></li>
+    <li><a href="#mögliche-actions-ohne-berücksichtigung-von-vorschautoken">Mögliche &quot;Actions&quot; ohne Berücksichtigung von Vorschautoken</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#lr-parsing-ohne-vorschautoken">LR-Parsing ohne Vorschautoken</a></li>
+    <li><a href="#items">Items</a></li>
+    <li><a href="#was-bedeuten-die-items">Was bedeuten die Items?</a></li>
+    <li><a href="#berechnung-der-closure_0-von-einer-menge-i-von-items">Berechnung der <em>Closure_0</em> von einer Menge <em>I</em> von Items</a></li>
+    <li><a href="#berechnung-der-goto_0-sprungmarken">Berechnung der <em>GOTO_0</em>-Sprungmarken</a></li>
+    <li><a href="#konstruktion-des-hahahugoshortcode23s44hbhb---automaten">Konstruktion des HAHAHUGOSHORTCODE23s44HBHB - Automaten</a></li>
+    <li><a href="#konstruktion-der-parse-table">Konstruktion der Parse Table</a></li>
+    <li><a href="#und-wenn-in-einer-zelle-schon-ein-eintrag-ist">Und wenn in einer Zelle schon ein Eintrag ist?</a></li>
+    <li><a href="#die-beispielgrammatik-g1">Die Beispielgrammatik G1</a></li>
+    <li><a href="#der-lr0-automat-zu-g1">Der LR(0)-Automat zu G1</a></li>
+    <li><a href="#die-lr0-parsertabelle-zu-g1">Die LR(0)-Parsertabelle zu G1</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#wrap-up-1">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Syntaxanalyse: LR-Parser (Teil 1)
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show">
+              <a class="topbar-control" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)">
+                <i class="fa-fw fas fa-print"></i>
+              </a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+              <button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More">
+                <i class="fa-fw fas fa-ellipsis-v"></i>
+              </button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Syntaxanalyse: LR-Parser (Teil 1)</h1>
+
+
+
+    
+    
+
+
+
+
+    
+    
+        
+        
+            
+            
+                
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="far fa-file-powerpoint"></i> Annotierte Folien</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/lr-parser1.ann.ma.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Annotierte Folien: LR-Parser1</a></li></ul></div>
+</div>
+
+
+
+
+    <h1 id="wiederholung">Wiederholung</h1>
+<h2 id="top-down-analyse">Top-Down-Analyse</h2>
+<ul>
+<li>Baumaufbau von oben nach unten</li>
+<li>die Grammatik muss reduziert sein</li>
+<li>recursive-descent parser</li>
+<li><em>First-</em> und <em>Follow</em>-Mengen bestimmen Wahl der Ableitungen</li>
+<li>tabellengesteuert</li>
+<li>nicht mehr rekursiv, sondern mit PDA</li>
+</ul>
+<h1 id="motivation">Motivation</h1>
+<h2 id="ll-ist-nicht-alles"><em>LL</em> ist nicht alles</h2>
+<p>Die Menge der <em>LL</em>-Sprachen ist eine echte Teilmenge der deterministisch kontextfreien Sprachen. Wir brauchen ein Verfahren, mit dem man alle deterministisch kontextfreien Sprachen parsen kann.</p>
+<h1 id="bottom-up-analyse">Bottom-Up-Analyse</h1>
+<h2 id="von-unten-nach-oben">Von unten nach oben</h2>
+<p>Bei 
+<span class="math align-center">$LL$</span>-Sprachen muss man nach den ersten 
+<span class="math align-center">$k$</span> Eingabezeichen entscheiden, welche Ableitung ganz oben im Baum als erste durchgeführt wird, also eine, die im Syntaxbaum ganz weit weg ist von den Terminalen, die die Entschiedung bestimmen.Es gibt deterministisch kontextfreie Sprachen, die nicht 
+<span class="math align-center">$LL(k)$</span> sind für irgendein <em>k</em>.</p>
+<p>Bei der Bottom-Up-Analyse geht man den umgekehrten Weg. Der Parse Tree wird von unten nach oben aufgebaut, die Entscheidung, welche Produktion angewandt wird, erfolgt &quot;näher&quot; am Terminal. Mit Hilfe der Produktionen und der Vorschautoken werden die Ableitungen &quot;rückwärts&quot; angewandt und &quot;Reduktionen&quot; genannt.</p>
+<p>Fehlermeldungen können näher am Programmtext erfolgen.</p>
+<h2 id="baumaufbau-von-unten">Baumaufbau von unten</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="kann-ein-stack-helfen">Kann ein Stack helfen?</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="probleme-damit">Probleme damit?</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h1 id="konfliktfälle">Konfliktfälle</h1>
+<h2 id="mehrdeutigkeiten--konflikte-beim-parsen">Mehrdeutigkeiten = Konflikte beim Parsen</h2>
+<p>Es gibt Grammatiken, bei denen nicht aus dem Inhalt des Stacks und dem Eingabezeichen entschieden werden kann, wie fortgefahren wird, auch nicht, wenn man, wie auch schon im Fall 
+<span class="math align-center">$LL$</span>, eine feste Zahl 
+<span class="math align-center">$k$</span> von Vorschautoken berücksichtigt. Diese Grammatiken können mehrdeutig sein.</p>
+<p>Folgen von falschen Entscheidungen:</p>
+<ul>
+<li>falscher Baum, falsche Bäume</li>
+<li>kein Baum</li>
+</ul>
+<h2 id="mögliche-konflikte">Mögliche Konflikte</h2>
+<ul>
+<li>Reduce-Reduce-Konflikt: Es sind zwei oder mehr verschiedene Reduktionen möglich</li>
+<li>Shift-Reduce-Konflikt: Es kann nicht entschieden werden, ob eine Reduktion oder ein Shift durchgeführt werden soll.</li>
+</ul>
+<p>Shiften bedeutet, das nächste Eingabesymbol miteinbeziehen.</p>
+<h1 id="lr-parsing">LR-Parsing</h1>
+<h2 id="da-wollen-wir-hin">Da wollen wir hin</h2>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/Parser-Automat.png" alt="Parser-Automat" width="80%" height="auto">
+    <figcaption><p>Parser-Automat</p></figcaption>
+</figure>
+<h2 id="so-geht-es">So geht es</h2>
+<p>Der Stack enthält Zustände, keine Terminals oder Nonterminals.</p>
+<p>Der Top-of-Stack ist immer der aktuelle Zustand, am Anfang
+
+<span class="math align-center">$I_0$</span>. Im Stack steht 
+<span class="math align-center">$I_0\ \bot$</span>.</p>
+<p>Vorgehen:
+Im aktuellen Zustand nachschauen, ob das Eingabezeichen auf einem Pfeil steht.</p>
+<ul>
+<li>
+<p>ja: Shiften, d. h. dem Pfeil folgen und den Zustand am Ende des Pfeils pushen. Dort weiter.</p>
+</li>
+<li>
+<p>nein: Reduzieren nach der Regel aus dem aktuellen Zustand mit dem Punkt hinten, d. h. so viele Zustände poppen, wie die Regel Elemente auf der rechten Seite hat. Der Zustand darunter wird aktuell, dem Pfeil mit dem zu reduzierenden Nonterminal der linken Seite der Regel folgen und pushen.</p>
+</li>
+</ul>
+<p>Am Schluss kann nur noch mit 
+<span class="math align-center">$\bot$</span> akzeptiert werden.</p>
+<h2 id="beispiel">Beispiel</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="definitionen">Definitionen</h2>
+<p><strong>Def.:</strong> Bei einer kontextfreien Grammatik <em>G</em> ist die <em>Rechtsableitung</em> von 
+<span class="math align-center">$\alpha \in (N \cup T)^{\ast}$</span> die Ableitung, die man erhält, wenn das am weitesten rechts stehende Nichtterminal in 
+<span class="math align-center">$\alpha$</span> abgeleitet wird. Man schreibt 
+<span class="math align-center">$\alpha \overset{\ast}{\Rightarrow}_r \beta$</span>.</p>
+<p><strong>Def.:</strong> Eine <em>Rechtssatzform</em> 
+<span class="math align-center">$\alpha$</span> einer Grammatik <em>G</em> ist ein Element aus
+
+<span class="math align-center">$(N \cup T)^{\ast}$</span> mit 
+<span class="math align-center">$S \overset{\ast}{\Rightarrow}_r \alpha$</span>.</p>
+<p><strong>Def.:</strong> In dem Syntaxbaum von 
+<span class="math align-center">$S \overset{\ast}{\Rightarrow}_r \alpha\ A\ w  \Rightarrow_r \alpha\ \beta\ w$</span> einer kontextfreien Grammatik ist 
+<span class="math align-center">$\beta$</span> ein <em>Handle</em> von der Produktion 
+<span class="math align-center">$A \rightarrow \beta$</span>.</p>
+<h2 id="lr-parsing-1">LR-Parsing</h2>
+<p>Bei der <em>LR</em>-Analyse eines Wortes <em>w</em> wird <em>w</em> von links nach rechts gelesen, dabei wird die Rechtsableitung von <em>w</em> in <em>G</em> von unten nach oben aufgebaut.
+Man spricht nicht nicht mehr von Ableitungen, sondern von Reduktionen.</p>
+<p>Mehrdeutige Grammatiken können nicht <em>LR</em> sein.</p>
+<ul>
+<li>Vor der Konstruktion des Automaten wird die Grammatik um eine neues Nonterminal 
+<span class="math align-center">$S'$</span> und die neue Produktion 
+<span class="math align-center">$S' \rightarrow S$</span> erweitert. 
+<span class="math align-center">$S'$</span> ist dann Startsymbol.</li>
+<li>Es wird ein Automat erstellt (s.o.)</li>
+<li>Es wird eine Parse Table aus dem Automaten erstellt, die den Parse-Vorgang steuert, mit Aktionsteil und Sprungteil.</li>
+</ul>
+<h2 id="steuerung-des-parsens-mittels-der-parse-table">Steuerung des Parsens mittels der Parse Table</h2>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/ParserProgram.png" alt="Parser Schema" width="80%" height="auto">
+    <figcaption><p>Parser Schema</p></figcaption>
+</figure>
+<h2 id="arbeitsweise">Arbeitsweise</h2>
+<p>Im Stack stehen nur Zustandsnummern, am Anfang die Nummer des Startzustandes (+ Bottomzeichen, oft auch 
+<span class="math align-center">$\$$</span>). Es ist nicht nötig, Symbole zu stacken.</p>
+<ul>
+<li>Lesen des obersten Stackelements ergibt Zustand <em>q</em></li>
+<li>Lesen des nächsten Eingabezeichens ergibt Zeichen <em>a</em></li>
+<li>Nachschlagen der Reaktion auf 
+<span class="math align-center">$(q, a)$</span> in der Parse Table</li>
+<li>Durchführung der Reaktion</li>
+</ul>
+<h2 id="mögliche-actions-ohne-berücksichtigung-von-vorschautoken">Mögliche &quot;Actions&quot; ohne Berücksichtigung von Vorschautoken</h2>
+<ul>
+<li>Shift: Schiebe logisch das nächste Eingabesymbol auf den Stack (in Wirklichkeit Zustandsnummern)</li>
+<li>Reduce: (Identifiziere ein Handle oben auf dem Stack und ersetze es durch das Nichtterminal der dazugehörigen Produktion.) Das ist gleichbedeutend mit: Entferne so viele Zustände vom Stack wie die rechte Seite der zu reduzierenden Regel Elemente hat, und schreibe den Zustand, der im Goto-Teil für 
+<span class="math align-center">$(q, a)$</span> steht, auf den Stack.</li>
+<li>Accept: Beende das Parsen erfolgreich</li>
+<li>Reagiere auf einen Syntaxfehler</li>
+</ul>
+<h1 id="0-vorschautoken--lr0-parsing">0 Vorschautoken = LR(0)-Parsing</h1>
+<h2 id="lr-parsing-ohne-vorschautoken">LR-Parsing ohne Vorschautoken</h2>
+<p>Wichtig: Das Handle, d. h. die rechte Seite einer zu reduzierenden Regel, erscheint oben auf dem Stack, nie weiter unten.</p>
+<p>Je nach Anwendungsfall müssen beim Reduzieren von Handles weitere Aktionen ausgeführt werden: z. B. Syntaxbäume aufgebaut, Werte in Tabellen geschrieben werden, usw. Nicht alle rechten Seiten von Produktionen, die oben auf dem Stack stehen, sind auch Handles, manchmal muss nur geshiftet werden.</p>
+<p>Bsp: Steht bei der Beispielgrammatik von Folie 8 oben auf dem Stack ein 
+<span class="math align-center">$T$</span> mit dem nächsten Eingabezeichen 
+<span class="math align-center">$\ast$</span>, darf 
+<span class="math align-center">$T$</span> nicht zu 
+<span class="math align-center">$E$</span> reduziert werden.</p>
+<p>Lösung: Der Parser merkt sich, wo er steht in noch nicht komplett reduzierten Regeln. Dazu benutzt er sogenannte <em>Items</em> oder <em>LR(0)-Items</em>, auch <em>dotted Items</em> oder <em>(kanonische) LR(0)-Elemente</em> genannt.</p>
+<h2 id="items">Items</h2>
+<p><strong>Def.:</strong> Ein <em>Item</em> einer Grammatik <em>G</em> ist eine Produktion von <em>G</em> mit einem Punkt auf der rechten Seite der Regel vor, zwischen oder nach den Elementen.</p>
+<p>Bsp.:</p>
+<p>Zu der Produktion 
+<span class="math align-center">$A \rightarrow BC$</span> gehören die Items:</p>
+
+<span class="math align-center">$[A\rightarrow \cdot B C]$</span>
+<p>
+<span class="math align-center">$[A\rightarrow B \cdot C$</span>]</p>
+
+<span class="math align-center">$[A\rightarrow B C \cdot]$</span>
+<p>Das zu 
+<span class="math align-center">$A \rightarrow \epsilon$</span> gehörende Item ist 
+<span class="math align-center">$[A \rightarrow \cdot]$</span></p>
+<h2 id="was-bedeuten-die-items">Was bedeuten die Items?</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="berechnung-der-closure_0-von-einer-menge-i-von-items">Berechnung der <em>Closure_0</em> von einer Menge <em>I</em> von Items</h2>
+<ol>
+<li>
+<p>füge 
+<span class="math align-center">$I$</span> zu 
+<span class="math align-center">$CLOSURE_0 (I)$</span> hinzu</p>
+</li>
+<li>
+<p>gibt es ein Item 
+<span class="math align-center">$[A \rightarrow \alpha \cdot B\beta]$</span> aus 
+<span class="math align-center">$CLOSURE_0 (I)$</span> und eine Produktion 
+<span class="math align-center">$(B \rightarrow \gamma)$</span>, füge 
+<span class="math align-center">$[B \rightarrow \cdot \gamma]$</span> zu 
+<span class="math align-center">$CLOSURE_0 (I)$</span> hinzu</p>
+</li>
+</ol>
+<h2 id="berechnung-der-goto_0-sprungmarken">Berechnung der <em>GOTO_0</em>-Sprungmarken</h2>
+
+<span class="math align-center">$GOTO_0(I, X) = CLOSURE_0(\lbrace[A \rightarrow \alpha X \cdot \beta] \mid [A \rightarrow \alpha \cdot X \beta] \in I\rbrace)$</span>
+<p>für eine Itemmenge <em>I</em> und 
+<span class="math align-center">$X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$</span>.</p>
+<h2 id="konstruktion-des-hahahugoshortcode23s44hbhb---automaten">Konstruktion des 
+<span class="math align-center">$LR(0)$</span> - Automaten</h2>
+<ol>
+<li>
+<p>Bilde die Hülle von 
+<span class="math align-center">$S' \rightarrow S$</span> und mache sie zum ersten Zustand.</p>
+</li>
+<li>
+<p>Für jedes noch nicht betrachtete 
+<span class="math align-center">$\cdot X, X \in (N \cup T)$</span> in einem Zustand 
+<span class="math align-center">$q$</span> des Automaten berechne 
+<span class="math align-center">$GOTO_0(q, X)$</span> und mache 
+<span class="math align-center">$GOTO_0(q, X)$</span> zu einem neuen Zustand 
+<span class="math align-center">$r$</span>. Verbinde 
+<span class="math align-center">$q$</span> mit einem Pfeil mit 
+<span class="math align-center">$r$</span> und schreibe 
+<span class="math align-center">$X$</span> an den Pfeil. Ist ein zu 
+<span class="math align-center">$r$</span> identischer Zustand schon vorhanden, wird 
+<span class="math align-center">$p$</span> mit diesem verbunden und kein neuer erzeugt.</p>
+</li>
+</ol>
+<h2 id="konstruktion-der-parse-table">Konstruktion der Parse Table</h2>
+<ol>
+<li>
+<p>Erstelle eine leere Tabelle mit den Zuständen als Zeilenüberschriften. Für den Aktionstabellenteil überschreibe die Spalten mit den Terminalen, für den Sprungtabellenteil mit den Nonterminals.</p>
+</li>
+<li>
+<p>Shift: Für jeden mit einem Terminal beschrifteten Pfeil aus einem Zustand erstelle in der Aktionstabelle die Aktion shift mit der Nummer des Zustands, auf den der Pfeil zeigt. Für Pfeile mit Nonterminals schreibe in die Sprungtabelle nur die Nummer des Folgezustands.</p>
+</li>
+<li>
+<p>Schreibe beim Zustand 
+<span class="math align-center">$[S' \rightarrow S \cdot]$</span> ein 
+<span class="math align-center">$accept$</span> bei dem Symbol 
+<span class="math align-center">$\bot$</span>.</p>
+</li>
+<li>
+<p>Für jedes Item mit 
+<span class="math align-center">$[A \rightarrow \beta \cdot]$</span> aus allen Zuständen schreibe für alle Terminals 
+<span class="math align-center">$reduce$</span> und die Nummer der entsprechenden Grammatikregel in die Tabelle.</p>
+</li>
+</ol>
+<h2 id="und-wenn-in-einer-zelle-schon-ein-eintrag-ist">Und wenn in einer Zelle schon ein Eintrag ist?</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="die-beispielgrammatik-g1">Die Beispielgrammatik G1</h2>
+<p>(0) 
+<span class="math align-center">$S^{'} \rightarrow S$</span></p>
+<p>(1) 
+<span class="math align-center">$S     \rightarrow a A b S c S$</span></p>
+<p>(2) 
+<span class="math align-center">$S     \rightarrow a A b S$</span></p>
+<p>(3) 
+<span class="math align-center">$S     \rightarrow d$</span></p>
+<p>(4) 
+<span class="math align-center">$A     \rightarrow e$</span></p>
+<h2 id="der-lr0-automat-zu-g1">Der LR(0)-Automat zu G1</h2>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/LR_0-SLR_1-Automat.png" alt="LR(0)-Automat" width="auto" height="auto">
+    <figcaption><p>LR(0)-Automat</p></figcaption>
+</figure>
+<h2 id="die-lr0-parsertabelle-zu-g1">Die LR(0)-Parsertabelle zu G1</h2>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1/LR_0-Table.png" alt="LR(0)-Parsertabelle" width="60%" height="auto">
+    <figcaption><p>LR(0)-Parsertabelle</p></figcaption>
+</figure>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="wrap-up-1">Wrap-Up</h2>
+<ul>
+<li>
+<p>LR-Analyse baut den Ableitungbaum von unten nach oben auf.</p>
+</li>
+<li>
+<p>Es wird ein DFA benutzt zusammen mit einem Stack, der Zustände speichert.</p>
+</li>
+<li>
+<p>Eine Parse-Tabelle steuert über Aktions- und Sprungbefehle das Verhalten des Parsers.</p>
+</li>
+<li>
+<p>Die Tabelle wird mit Items und Closures konstruiert.</p>
+</li>
+</ul>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Aho2008'>[Aho2008] <strong>Compiler: Prinzipien, Techniken und Werkzeuge</strong><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7097-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-8273-7097-6</a>.<br><em>Kapitel 4.5 bis 4.8</em></li> <li id='id_aho2013compilers'>[aho2013compilers] <strong>Compilers: Pearson New International Edition: Principles, Techniques, and Tools</strong><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Education Limited, 2013. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-2920-3723-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-2920-3723-3</a>.</li> <li id='id_hopcroft2003'>[hopcroft2003] <strong>Einführung in die Automatentheorie, formale Sprachen und Komplexitätstheorie</strong><br>Hopcroft, J. E. und Motwani, R. und Ullman, J. D., Pearson Education Deutschland GmbH, 2003. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7020-4' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-8273-7020-4</a>.</li> <li id='id_Kunert2018'>[Kunert2018] <a href='http://amor.cms.hu-berlin.de/\~kunert/papers/lr-analyse/lr.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>LR(k)-Analyse für Pragmatiker</strong></a><br>Kunert, A., 2018.</li> <li id='id_Wagenknecht2014'>[Wagenknecht2014] <strong>Formale Sprachen, abstrakte Automaten und Compiler</strong><br>Wagenknecht, C. und Hielscher, M., Springer Fachmedien Wiesbaden, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-658-02692-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-658-02692-9</a>. DOI <a href='https://doi.org/10.1007/978-3-658-02692-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-658-02692-9</a>.</li></ul></div>
+</div>
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K1) Prinzipien der Bottom-Up-Analyse</li> <li>(K1) Items</li> <li>(K1) Closure</li> <li>(K1) Parse Table</li> <li>(K2) LR(0)-Parsing</li> <li>(K3) Konstruktion der Parse Tables</li> <li>(K3) Durchführen des Parsens</li></ul></div>
+</div>
+
+
+
+    
+
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+        <form action="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get"><div class="searchbox default-animation">
+          <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div></form>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.en.min.js?1704710917" defer></script>
+        <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1704710917" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/intro.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html">Überblick<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-925e5bfbd01266c727d74ae1db5ab0c6" class="morespace collapsible-menu">
+          <li data-nav-id="/intro/overview.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html">Struktur eines Compilers<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/languages.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html">Programmiersprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/intro/applications.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html">Anwendungen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend.html" class="parent "><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html">Frontend<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-1f846e8dcef1e4719580d68fa558c953" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/lexing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html">Lexer<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-cdb85067b64f23a8375ce1382008d411" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/lexing/regular.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html">Reguläre Sprachen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/table.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">Tabellenbasierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/recursive.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html">Handcodierte Implementierung<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/lexing/antlr-lexing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">Lexer mit ANTLR generieren<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/parsing.html" class="parent "><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html">Parser<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-3d952dd8be57a29c3491d54b27381fe9" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/parsing/cfg.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">CFG<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-parser-theory.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html">LL-Parser (Theorie)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-parser-impl.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html">LL-Parser implementieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/ll-advanced.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html">LL: Fortgeschrittene Techniken<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/antlr-parsing.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">Parser mit ANTLR generieren<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/finalwords.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html">Grenze Lexer und Parser<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/lr-parser1.html" class="active"><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">LR-Parser 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/lr-parser2.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html">LR-Parser 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/parsing/recovery.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">Error-Recovery<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/semantics.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html">Semantische Analyse<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-59ae8b9e1a0121460e9e72eed15dfcf4" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/semantics/symboltables.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html">Symboltabellen<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-b170d4e1d268d0405c96200a11a57acb" class="morespace collapsible-menu">
+          <li data-nav-id="/frontend/semantics/symboltables/intro-symbtab.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html">Überblick Symboltabellen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/scopes.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html">Nested Scopes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/functions.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html">Funktionen<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/frontend/semantics/symboltables/classes.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html">Strukturen und Klassen<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/frontend/semantics/attribgrammars.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html">Attributierte Grammatiken<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/backend.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html">Backend<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-5d85b052b2506f4b0363622e3c0670d3" class="morespace collapsible-menu">
+          <li data-nav-id="/backend/optimization.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html">Optimierung u. Datenflussanalyse<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html">Interpreter<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-5c8b601f75fa660b497d1e71ee84e9f4" class="morespace collapsible-menu">
+          <li data-nav-id="/backend/interpretation/syntaxdriven.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/astdriven-part1.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html">AST-basierte Interpreter 1<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/astdriven-part2.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html">AST-basierte Interpreter 2<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/backend/interpretation/gc.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">Garbage Collection<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/backend/machinecode.html" class=""><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">Maschinencode<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#praktikum"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions"><i class='fas fa-external-link-alt'></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-auto" value="auto" selected>Auto</option>
+                      <option id="R-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1704710917" defer></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1704710917" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1704710917"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1704710917" defer></script>
+  </body>
+</html>

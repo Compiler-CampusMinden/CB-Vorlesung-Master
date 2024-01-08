@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="generator" content="Relearn 5.23.2">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/recovery.png">
+    <meta name="twitter:title" content="Error-Recovery">
+    <meta name="twitter:description" content="">
+    <meta property="og:title" content="Error-Recovery">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">
+    <meta property="og:image" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/recovery.png">
+    <title>Error-Recovery</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html" rel="canonical" type="text/html" title="Error-Recovery">
+
+    
+    
+
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1704710916" rel="icon" type="image/png">
+
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710917" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1704710917" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1704710917" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710917" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1704710917" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1704710917" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710917" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1704710917" rel="stylesheet"></noscript>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1704710917" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1704710917" rel="stylesheet" id="R-variant-style">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1704710917" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1704710917" rel="stylesheet" media="print">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1704710917" rel="stylesheet">
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/ie.css?1704710917" rel="stylesheet">
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/url.js?1704710917"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1704710917"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      var root_url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_Reset_view = 'Reset view';
+      window.T_View_reset = 'View reset!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207/';
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+              <button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)">
+                <i class="fa-fw fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Error-Recovery
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Error-Recovery</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p>Umgang mit Fehlern ist im Compiler sehr wichtig: Falscher Code darf nicht in ein ausführbares Programm
+umgewandelt werden oder ausgeführt werden, gleichzeitig erwarten Nutzer zielführende Fehlermeldungen
+und auch das Erkennen von möglichst mehreren Fehlern in einem Lauf.</p>
+<p>Auf der Ebene des Parsers kann man Fehler in Bezug auf die Grammatik erkennen. Typische Strategien sind
+das Entfernen von Token aus dem Eingabestrom, bis wieder ein Token erscheint, welches die weitere Abarbeitung
+der aktuellen Regel erlaubt (&quot;Synchronisierung&quot;). Dies sind oft Zeilenenden, ein Semikolon oder eine schließende
+geschweifte Klammer. Dieses recht einfache, aber grobe Vorgehen kann verfeinert werden, indem man versucht,
+überschüssige Token zu entfernen oder fehlender Token zu ersetzen. In ANTLR wird beispielsweise maximal ein
+fehlendes Token virtuell &quot;ersetzt&quot; bzw. max. ein überschüssiges Token entfernt, damit man den restlichen Code
+weiter parsen kann. Wenn mehr als ein Token fehlt oder zu viel ist, geht ANTLR in einen &quot;Panic Mode&quot; und
+entfernt so lange Token aus dem Eingabestrom, bis das aktuelle Token in einem <em>Resynchronization Set</em> enthalten
+ist. Die Bildung dieser Menge erinnert an die Regeln zum Bilden der <em>FOLLOW</em>-Mengen, ist aber an den Kontext
+der &quot;aufgerufenen&quot; Parser-Regeln gebunden. Zusätzlich gibt es weitere Strategien zum Behandeln von Fehlern in
+Schleifen sowie zur Vermeidung von Endlos-Fehlerbehebungsschleifen (&quot;Fail-Save&quot;). In Bison wird dagegen mit
+einem speziellen <em>error</em>-Token gearbeitet und man fügt an &quot;strategischen&quot; Stellen Regeln der Form Regel 
+<span class="math align-center">$A \to
+\operatorname{error} \alpha$</span> hinzu. Dabei ist 
+<span class="math align-center">$\alpha$</span> ein Token, welches zur Synchronisierung genutzt werden
+soll. Im Fehlerfall werden so lange Token vom Stack entfernt, bis man eine Regel 
+<span class="math align-center">$A \to \operatorname{error}
+\alpha$</span> anwenden kann und das <em>error</em>-Token shiften kann. Danach werden ggf. so lange Token aus dem Eingabestrom
+entfernt, bis das Token 
+<span class="math align-center">$\alpha$</span> auftaucht und man die Regel mit einem <em>reduce</em> abschließen kann. Diese Form
+der Behandlung stellt einen Kompromiss zwischen Aufwand (auch Zeit) und Nutzen dar.</p>
+<p>Zusätzlich kann man in der Grammatik bereits typische Fehler (vergessene Klammern oder Typos wie Dreher bei
+Schlüsselwörtern) schon über &quot;Fehlerproduktionen&quot; vorwegnehmen. Das bedeutet, dass man eine Regel formuliert,
+die diesen typischen Tippfehler akzeptiert (und korrigiert), aber zusätzlich eine Warnung generiert. Es muss
+dann aber jeweils entschieden werden, ob der entsprechende Quellcode in ein ausführbares Programm übersetzt
+werden darf.</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/9sFdI7pYMQs' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Error-Recovery</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Error-Recovery</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K2) Varianten der Fehler bei Parsern</li> <li>(K2) Fehlerbehandlung bei LL-Parsern: <em>single token deletion</em>, <em>single token insertion</em>, <em>sync-and-return</em></li> <li>(K2) Berechnung und Anwendung des <em>Resynchronization Sets</em></li> <li>(K3) Ändern der Fehlermeldungen bei ANTLR</li> <li>(K3) Eigene Errorhandler in ANTLR-Parser bauen und einbinden</li> <li>(K3) Nutzen von speziellen Fehler-Alternativen in Grammatiken</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="fehler-beim-parsen">Fehler beim Parsen</h2>
+<p><a href="#R-image-efa74e483324335265cec219feb17a2c" class="lightbox-link"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/bc_xml-parsing-error.png?width=auto&amp;height=auto" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-efa74e483324335265cec219feb17a2c"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/bc_xml-parsing-error.png?width=auto&amp;height=auto" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><span class='origin'>Quelle: Vorlesung &quot;Einführung in die Programmierung mit Skriptsprachen&quot; by <a href="mailto:bc.george@hsbi.de">BC George</a> (<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>)</span></p>
+<ul>
+<li>Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern</li>
+<li>Wichtige Eigenschaften:
+<ul>
+<li>Reproduzierbare Ergebnisse</li>
+<li>Aussagekräftige Fehlermeldungen</li>
+<li>Nach Erkennen eines Fehlers: (vorläufige) Korrektur und Parsen des restlichen Codes
+=&gt; weitere Fehler anzeigen.
+Problem: Bis wohin &quot;gobbeln&quot;, d.h. was als Synchronisationspunkt nehmen? Semikolon?</li>
+<li>Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!</li>
+</ul>
+</li>
+</ul>
+<h2 id="typische-fehler-beim-parsing">Typische Fehler beim Parsing</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#66d9ef">grammar</span> <span style="color:#a6e22e">VarDef</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alt   : stmt <span style="color:#f92672">|</span> stmt2 ;
+</span></span><span style="display:flex;"><span>stmt  : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span> ;
+</span></span><span style="display:flex;"><span>stmt2 : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;=&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span>  ;</span></span></code></pre></div><p><em>Anmerkung</em>: Die nachfolgenden Fehler werden am Beispiel der Grammatik
+<a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/VarDef.g4" target="_blank">VarDef.g4</a>
+und ANTLR demonstriert.</p>
+<h3 id="lexikalische-fehler">Lexikalische Fehler</h3>
+<p>Eingabe: <code>int x1;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>token recognition error at: '1'</code></p>
+<p>Die ist ein Fehler aus dem Lexer, wenn beim Erkennen eines Tokens ein komplett
+unbekanntes Zeichen auftritt.</p>
+<h3 id="ein-extra-token">Ein extra Token</h3>
+<p>Eingabe: <code>int x y;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>extraneous input 'y' expecting ';'</code></p>
+<p>Wenn nur ein Token zu viel ist, dann kann der von ANTLR generierte Parser eine
+passende Fehlermeldung ausgeben.</p>
+<h3 id="mehrere-extra-token">Mehrere extra Token</h3>
+<p>Eingabe: <code>int x y z;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>mismatched input 'y' expecting ';'</code></p>
+<p>Wenn dagegen mehr als ein Token zu viel ist, dann gibt der von ANTLR generierte
+Parser eine generische Fehlermeldung aus.</p>
+<h3 id="fehlendes-token">Fehlendes Token</h3>
+<p>Eingabe: <code>int ;</code> (Startregel <code>stmt</code>)</p>
+<p>Fehlermeldung: <code>missing ID at ';'</code></p>
+<p>Ein anderer typischer Fehler sind fehlende Token, die kann der Parser analog zu
+überzähligen Token erkennen und ausgeben.</p>
+<h3 id="fehlendes-token-am-entscheidungspunkt">Fehlendes Token am Entscheidungspunkt</h3>
+<p>Eingabe: <code>int ;</code> (Startregel <code>alt</code>)</p>
+<p>Fehlermeldung: <code>no viable alternative at input 'int;'</code></p>
+<p>Hier fehlt ein Token, aber an einer Stelle, wo sich der Parser zwischen zwei
+Alternativen (Sub-Regeln) entscheiden muss.</p>
+<h2 id="überblick-recovery-bei-parser-fehlern">Überblick Recovery bei Parser-Fehlern</h2>
+<p><a href="#R-image-5110ea437ce509dbeb34fcfad0ac2c9d" class="lightbox-link"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/recovery.png?width=auto&amp;height=auto" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5110ea437ce509dbeb34fcfad0ac2c9d"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/recovery.png?width=auto&amp;height=auto" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<ul>
+<li>Fehler im Lexer (hier nicht weiter betrachtet):
+<ul>
+<li>Aktuelles Zeichen passt zu keinem Token: Entfernen oder Hinzufügen
+von Zeichen (plus Rückmeldung an den Parser)</li>
+<li>Spezielle Token, die typische fehlerhafte Zeichenketten als Token
+erkennen (mit Weiterverarbeitung im Parser)</li>
+</ul>
+</li>
+<li>Fehler im Parser:
+<ul>
+<li>Token passt nicht: Token entfernen oder ein Dummy-Token erzeugen</li>
+<li>Panic-Mode: Entferne Token bis zu einem Synchronisationspunkt.
+Problem: Dabei nicht zu weit zu springen!</li>
+<li>Spezielle Fehlerproduktionen: Spezielle Regeln in der Grammatik,
+die typische Fehler matchen.</li>
+</ul>
+</li>
+</ul>
+<p>Anmerkung LR-Parser: Ein Syntaxfehler wird entdeckt, wenn die Action-Tabelle
+für Top-of-Stack und akt. Token leer ist =&gt; Stack und/oder Token modifizieren,
+aber deutlich schwieriger als bei LL ...</p>
+<h2 id="skizze-generierte-parser-regeln-antlr">Skizze: Generierte Parser-Regeln (ANTLR)</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt  : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span> ;</span></span></code></pre></div><div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stmt</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>: <span style="color:#66d9ef">match</span>(<span style="color:#e6db74">&#34;int&#34;</span>); <span style="color:#66d9ef">match</span>(ID); <span style="color:#66d9ef">match</span>(<span style="color:#e6db74">&#34;;&#34;</span>)
+</span></span><span style="display:flex;"><span>    catch (RecognitionException re):
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>reportError(self)               <span style="color:#75715e"># let&#39;s report it</span>
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>recover(self)                   <span style="color:#75715e"># Panic-Mode</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">match</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lookahead <span style="color:#f92672">==</span> x: consume()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: _errHandler<span style="color:#f92672">.</span>recoverInline(self)           <span style="color:#75715e"># Inline-Mode</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Der im Parser registrierte ErrorHandler erzeugt in der Methode
+<code>reportError()</code> eine geeignete Meldung und gibt sie an den Parser
+über dessen Methode <code>notifyErrorListeners()</code> weiter.</p>
+<p>Die eigentliche Fehlerbehandlung findet in der Methode <code>recover()</code>
+bzw. <code>recoverInline()</code> des ErrorHandlers statt.</p>
+<h2 id="inline-recovery-bei-token-mismatch-skizze">Inline-Recovery bei Token-Mismatch (Skizze)</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recoverInline</span>(parser):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SINGLE TOKEN DELETION</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> singleTokenDeletion(parser):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getMatchedSymbol(parser)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SINGLE TOKEN INSERTION</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> singleTokenInsertion(parser):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getMissingSymbol(parser)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># that didn&#39;t work, throw a new exception</span>
+</span></span><span style="display:flex;"><span>    throw new InputMismatchException(parser)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Die Klasse <code>InputMismatchException</code> drückt aus, dass das aktuelle Token nicht
+zur Erwartung des Parsers passt. Deshalb wird diese Exception am Ende von
+<code>recoverInline()</code> geworfen. Die Klasse <code>RecognitionException</code>, die in den
+Parserregeln wie <code>stmt</code> gefangen wird, ist die gemeinsame Oberklasse aller
+Parser-Exceptions.</p>
+<p>Liste der wichtigsten Exceptions (nach
+<a href="https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/parser-rules.md</a>):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Exception</th>
+<th style="text-align:left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RecognitionException</code></td>
+<td style="text-align:left">Basisklasse für alle Parser-Exceptions</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>NoViableAltException</code></td>
+<td style="text-align:left">Parser konnte sich nicht für (mind.) einen Pfad entscheiden angesichts des Tokenstroms</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>LexerNoViableAltException</code></td>
+<td style="text-align:left">Lexer-Pendant zu <code>NoViableAltException</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>InputMismatchException</code></td>
+<td style="text-align:left">Das aktuelle Token ist nicht das, was der Parser erwartet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="panic-mode-sync-and-return-skizze">Panic Mode: Sync-and-Return (Skizze)</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rule</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>: <span style="color:#f92672">...</span> rule<span style="color:#f92672">-</span>body <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    catch (RecognitionException re):
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>reportError(self)       <span style="color:#75715e"># let&#39;s report it</span>
+</span></span><span style="display:flex;"><span>        _errHandler<span style="color:#f92672">.</span>recover(self)           <span style="color:#75715e"># Panic-Mode</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>=&gt; Entferne solange Token, bis aktuelles Token im &quot;<em>Resynchronization Set</em>&quot;</p>
+<h2 id="antlr-einsatz-des-resynchronization-set">ANTLR: Einsatz des &quot;<em>Resynchronization Set</em>&quot;</h2>
+<ul>
+<li><strong>Following Set</strong>: Menge der Token, die direkt auf eine Regel-Referenz folgen,
+ohne dass die aktuelle Regel/Alternative verlassen wird</li>
+<li><strong>Resynchronization Set</strong>: Vereinigung der <em>Following Sets</em> für alle Regeln im
+aktuellen Aufruf-Stack</li>
+</ul>
+<p><span class='origin'>Quelle: nach <a href="#id_Parr2014">[Parr2014, pp. 161-163]</a></span></p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt : <span style="color:#e6db74">&#39;if&#39;</span> expr <span style="color:#e6db74">&#39;:&#39;</span> stmt           <span style="color:#75715e">// Following Set für &#34;expr&#34;: {&#39;:&#39;}</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;while&#39;</span> <span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span> stmt ;  <span style="color:#75715e">// Following Set für &#34;expr&#34;: {&#39;)&#39;}</span>
+</span></span><span style="display:flex;"><span>expr : term <span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#66d9ef">INT</span> ;               <span style="color:#75715e">// Following Set für &#34;term&#34;: {&#39;+&#39;}</span></span></span></code></pre></div><ul>
+<li>Eingabe: <code>if :</code></li>
+<li>Aufruf-Stack nach Bearbeitung von <code>if</code>: <code>[stmt, expr, term]</code></li>
+<li><strong>Resynchronization Set</strong>: <code>{'+', ':'}</code></li>
+</ul>
+<h3 id="hinweis-follow-hahahugoshortcode25s0hbhb-following">Hinweis: <em>FOLLOW</em> 
+<span class="math align-center">$\ne$</span> <em>Following</em></h3>
+<p><strong>FOLLOW</strong> ist die Menge aller Token, die auf eine Regel folgen können</p>
+<ul>
+<li><code>FOLLOW(term) = {'+'}</code></li>
+<li><code>FOLLOW(expr) = {':', ')'}</code></li>
+</ul>
+<p><strong>Following</strong> ist dagegen <strong>abhängig vom aktuellen Kontext</strong>!</p>
+<ul>
+<li>Stack: <code>[stmt, expr, term]</code> =&gt; <em>Resynchronization Set</em>: <code>{'+', ':'}</code></li>
+</ul>
+<h3 id="beispiele-resynchronisation-im-panic-mode-antlr">Beispiele Resynchronisation im Panic Mode (ANTLR)</h3>
+<p><strong>Hinweis</strong>: Die Regel <code>term</code> ist in obigem Beispiel nicht weiter detailliert. Hier wird
+angenommen, dass das aktuelle Token <code>':'</code> nicht passt.</p>
+<ul>
+<li>Eingabe: <code>if :</code>
+<ul>
+<li>In Regel <code>term</code>: Token <code>':'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{'+', ':'}</code>
+(d.h. hier bleibt <code>':'</code> das aktuelle Token)</li>
+<li>Rückkehr zu Regel <code>expr</code></li>
+</ul>
+</li>
+<li>In Regel <code>expr</code>: Token <code>':'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{':'}</code>
+(d.h. hier bleibt <code>':'</code> das aktuelle Token)</li>
+<li>Rückkehr zu Regel <code>stmt</code></li>
+</ul>
+</li>
+<li>In Regel <code>stmt</code>: Token <code>':'</code> passt jetzt
+<ul>
+<li>Abschluss des Parsing (mit Fehlermeldung)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Eingabe: <code>if x + 42 ))):</code>
+<ul>
+<li>In Regel <code>stmt</code>: Token <code>')'</code> passt nicht
+<ul>
+<li><code>consume()</code>, bis aktuelles Token in <em>Resynchronization Set</em>: <code>{':'}</code> (d.h.
+hier werden alle <code>')'</code> entfernt)</li>
+</ul>
+</li>
+<li>In Regel <code>stmt</code>: Token <code>':'</code> passt jetzt
+<ul>
+<li>Abschluss des Parsing (mit Fehlermeldung)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="antlr-anmerkungen-fehlerbehandlung-in-sub-regeln">ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln</h2>
+<p>Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
+(d.h. eine Regel enthält <code>(...)*</code> oder <code>(...)+</code>) geht ANTLR etwas anders vor.</p>
+<ol>
+<li>
+<p>Start einer Sub-Regel/Alternative: Versuch einer <em>single token deletion</em></p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># am Anfang einer Alternative oder Schleife</span>
+</span></span><span style="display:flex;"><span>_errHandler<span style="color:#f92672">.</span>sync(self)</span></span></code></pre></div></li>
+<li>
+<p>Schleifenkonstrukte: <code>(...)*</code> oder <code>(...)+</code></p>
+<p>Versuche, in der Schleife zu bleiben! Im Fehlerfall <code>consume()</code> bis</p>
+<ul>
+<li>Weitere Iteration der Schleife erkannt</li>
+<li>Token, welches der Schleife folgt, erkannt</li>
+<li>Token im <em>Resynchronization Set</em> des aktuellen Aufruf-Stacks</li>
+</ul>
+<p>Anmerkung: Im Prinzip entspricht dies dem <em>Panic Mode</em>, der Unterschied liegt
+darin, bis wohin der Parser nach der Recovery in einer Funktion/Methode (Regel)
+zurückspringt. D.h. wenn es verschiedene Möglichkeiten gibt, haben diese die
+obige Priorisierung.</p>
+</li>
+<li>
+<p>Fail-Save</p>
+<p>Um Endlos-Schleifen durch die Schritte (1) bzw. (2) zu vermeiden, löst der Parser
+beim zweiten Versuch, die selbe Parser-Stelle und Input-Position zu bearbeiten
+(also bei bereits aktivem Fehler), einen &quot;<em>Fail-Safe</em>&quot; aus. Der Parser konsumiert
+dann ein Token und fährt dann mit der Recovery fort.</p>
+</li>
+</ol>
+<p>Zu Details zur Fehlerbehandlung durch ANTLR vergleiche <a href="#id_Parr2014">[Parr2014, S. 170 ff.]</a>.</p>
+<h2 id="antlr-ändern-der-fehlerbehandlungs-strategie">ANTLR: Ändern der Fehlerbehandlungs-Strategie</h2>
+<h3 id="ändern-der-fehlerbehandlungs-strategie-global">Ändern der Fehlerbehandlungs-Strategie (global)</h3>
+<p><a href="#R-image-9ed5b5885b4f03506fcda7dbbb522dfe" class="lightbox-link"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/handler.png?width=auto&amp;height=auto" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ed5b5885b4f03506fcda7dbbb522dfe"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/handler.png?width=auto&amp;height=auto" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>Sie überschreiben die Klasse <code>DefaultErrorStrategy</code> und müssen die oben gezeigten Methoden
+<code>recover()</code> und <code>recoverInline()</code>aufrufen. Die eigene Fehlerbehandlung setzen Sie über die
+Methode <code>setErrorHandler</code> des Parsers.</p>
+<h3 id="ändern-der-fehlerbehandlungs-strategie-lokal">Ändern der Fehlerbehandlungs-Strategie (lokal)</h3>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>r : <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>  ;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">catch</span>[RecognitionException e] { throw e; }</span></span></code></pre></div><p>Es lassen sich auch andere bzw. mehrere Exceptions fangen. Der <code>catch</code>-Block ersetzt den
+Default-<code>catch</code>-Block der generierten Methode. Das bedeutet, dass sich der geänderte Modus
+nur für die eine Regel auswirkt.</p>
+<h3 id="ändern-der-fehler-meldungen">Ändern der Fehler-Meldungen</h3>
+<p><a href="#R-image-180cc7caa6153ed8ee5fdee029080ae0" class="lightbox-link"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/listener.png?width=auto&amp;height=auto" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-180cc7caa6153ed8ee5fdee029080ae0"><img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery/listener.png?width=auto&amp;height=auto" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>Für einen eigenen Listener leitet man sinnvollerweise von <code>BaseErrorListener</code> ab und
+überschreibt die leere Implementierung von <code>syntaxError()</code>.</p>
+<p>Damit die Fehlermeldungen nicht mehrfach ausgegeben werden, entfernt man zunächst alle
+Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.</p>
+<h2 id="panic-mode-in-bison-error-recovery">Panic Mode in Bison (Error Recovery)</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span>     { printf(&#34;%s\n&#34;, <span style="color:#960050;background-color:#1e0010">$</span>2); }
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> error <span style="color:#e6db74">&#39;\n&#39;</span>       { yyerror(); yyerrok; }
+</span></span><span style="display:flex;"><span>     ;</span></span></code></pre></div><p>Bison kennt ein spezielles Fehler-Token <code>error</code>. Dieses Token wird genutzt, um
+einen Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
+<em>höchstwahrscheinlich</em> weiter parsen kann.</p>
+<h3 id="parsen-mit-error-token">Parsen mit <em>error</em>-Token</h3>
+<p>Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch.
+Im Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der
+Form 
+<span class="math align-center">$A \to \operatorname{error} \alpha$</span> anwendbar ist. Dann wird das Token
+<code>error</code> auf den Stack geschoben und so lange Eingabe-Token gelesen und verworfen,
+bis eines gefunden wird, welches auf das <code>error</code>-Token folgen kann. Dies nennt
+Bison &quot;Resynchronisation&quot;. Anschließend wird im Recovery-Modus normal fortgefahren,
+bis drei weitere Token auf den Stack geschoben wurden und damit der Recovery-Modus
+verlassen wird. Falls bereits vorher weitere Fehler auftreten, werden diese nicht
+separat gemeldet.</p>
+<h3 id="anwendung-im-obigen-beispiel">Anwendung im obigen Beispiel</h3>
+<p>Im obigen Beispiel ist die Regel <code>stmt : error '\n'</code> enthalten. Im Fehlerfall
+werden die Symbole vom Stack entfernt, bis ein Zustand erreicht ist, der eine
+Shift-Aktion auf das Token <code>error</code> hat. Das Error-Token wird auf den Stack
+geschoben und alle Eingabetoken bis zum nächsten <code>'\n'</code> gelesen und direkt
+entfernt. Mit dem Erreichen des Zeilenumbruchs wird die zugeordnete Aktion
+ausgeführt. Diese gibt den Fehler auf der Konsole aus und führt mit dem Makro
+<code>yyerrok</code> einen Reset des Parsers aus (d.h. er verlässt den Recovery-Modus
+<strong>vor</strong> dem Shiften der per Default drei gültigen Token). Anschließend ist der
+Bison-Parser wieder im normalen Modus. Die fehlerhaften Symbole/Token wurden
+aus dem Eingabestrom entfernt.</p>
+<h3 id="wo-kommen-die-error-token-am-besten-hin">Wo kommen die <em>error</em>-Token am besten hin?</h3>
+<p>Die &quot;schwarze Kunst&quot; ist, die Error-Token an geeigneten Stellen unterzubringen,
+d.h. vorherzusehen, wo der Parser am sinnvollsten wieder aufsetzen kann. Häufig
+sind dies beispielsweise das ein Statement beendende Semikolon oder die einen
+Block beendende schließende geschweifte Klammer. Beispielsweise könnte man für
+die Sprache C bei der Definition von Statements mehrere Synchronisationspunkte
+einbauen:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt : <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> error <span style="color:#e6db74">&#39;;&#39;</span>    <span style="color:#75715e">/* Synchronisation für &#39;return&#39; */</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> error <span style="color:#e6db74">&#39;}&#39;</span>    <span style="color:#75715e">/* Synchronisation nach Block */</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> error <span style="color:#e6db74">&#39;\n&#39;</span>   <span style="color:#75715e">/* Synchronisation nach Zeilenumbruch */</span>
+</span></span><span style="display:flex;"><span>     ;</span></span></code></pre></div><h3 id="bison-und-c-und-speichermanagement-im-fehlerfall">Bison und C und Speichermanagement im Fehlerfall</h3>
+<p>Wenn Bison im Recovery-Modus ist, werden Symbole und ihre Werte vom Stack entfernt.
+Falls diese Werte (vgl. <code>%union</code>) Pointer mit dynamisch alloziertem Speicher sind,
+muss Bison diesen Speicher freigeben.</p>
+<p>Dazu kann man sich über die Direktive <code>%destructor { code } symbols</code> oder
+<code>%destructor { code } &lt;types&gt;</code> Code definieren, der dann für die jeweiligen Symbole
+oder Typen ausgeführt wird.</p>
+<p>Die Typangabe <code>&lt;*&gt;</code> dient dabei als Catch-All für Symbole, für die ein Typ definiert
+wurde, aber kein Destruktor.</p>
+<p>Beispiel:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%</span>union {
+</span></span><span style="display:flex;"><span>    char* str;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%token</span> <span style="color:#960050;background-color:#1e0010">&lt;str&gt;</span> <span style="color:#960050;background-color:#1e0010">ID</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%destructor</span> { free(<span style="color:#960050;background-color:#1e0010">$$</span>); } <span style="color:#960050;background-color:#1e0010">&lt;str&gt;</span></span></span></code></pre></div><p>Für weitere Details vergleiche <a href="#id_Levine2009">[Levine2009, Kap. 8]</a>.</p>
+<h2 id="fehlerproduktionen">Fehlerproduktionen</h2>
+<p>Häufig vorkommende Fehler kann man bereits in der Grammatik berücksichtigen.
+Dadurch kommt es nicht zu einem Parser-Error mit Recovery-Mechanismus, sondern
+der Fehler wird über eine entsprechende Alternative in der Grammatik korrigiert.</p>
+<p>Es bietet sich an, in diesem Fall eine entsprechende Ausgabe zu tätigen. Dies
+wird in der folgenden Grammatik über eingebettete Aktionen erledigt.</p>
+<h3 id="antlr">ANTLR</h3>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>     : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span>             {notifyErrorListeners(&#34;Missing &#39;;&#39;&#34;);}
+</span></span><span style="display:flex;"><span>     : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span> <span style="color:#e6db74">&#39;;&#39;</span>     {notifyErrorListeners(&#34;Too many &#39;;&#39;&#34;);}
+</span></span><span style="display:flex;"><span>     ;</span></span></code></pre></div><p>Der aus der Grammatik generierte Parser leitet von der Basisklasse <code>Parser</code>
+ab. Dort wird eine Methode <code>notifyErrorListeners()</code> implementiert, die man
+mit Hilfe von in die Grammatik eingebetteten Aktionen aufrufen kann (Vorgriff
+auf <a href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a>).
+Letztlich steht im generierten Parser in der generierten Methode <code>stmt()</code> an
+der passenden Stelle ein Aufruf <code>notifyErrorListeners(Too many ';'&quot;);</code> ...</p>
+<h3 id="flex-und-bison">Flex und Bison</h3>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span>     { <span style="color:#960050;background-color:#1e0010">$$</span> = <span style="color:#960050;background-color:#1e0010">$</span>2; }
+</span></span><span style="display:flex;"><span>     : <span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#66d9ef">ID</span>         { yyerror(&#34;unterminated id&#34;);
+</span></span><span style="display:flex;"><span>                          <span style="color:#960050;background-color:#1e0010">$$</span> = <span style="color:#960050;background-color:#1e0010">$</span>2; }
+</span></span><span style="display:flex;"><span>     ;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%%</span>
+</span></span><span style="display:flex;"><span>void <span style="color:#960050;background-color:#1e0010">yyerror(char</span> <span style="color:#960050;background-color:#1e0010">*s,</span> <span style="color:#960050;background-color:#1e0010">...)</span> {
+</span></span><span style="display:flex;"><span>    va_list ap; va_start(ap, s);
+</span></span><span style="display:flex;"><span>    fprintf(stderr, &#34;%d: error: &#34;, yylineno);
+</span></span><span style="display:flex;"><span>    vfprintf(stderr, s, ap); fprintf(stderr, &#34;\n&#34;);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Analog zu ANTLR ist es auch in Flex/Bison üblich, für typische Szenarien
+&quot;nicht ganz korrekte&quot; Eingaben zu akzeptieren. Dazu definiert man zusätzliche
+Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
+und eine zusätzliche Warnung ausgeben.</p>
+<p>Dabei definiert man sich typischerweise die Funktion <code>yyerror()</code>. Über
+<code>yytext</code> hat man Zugriff auf den Eingabetext des aktuellen Tokens, und
+mit <code>yylineno</code> hat man Zugriff auf die aktuelle Eingabezeile (<code>yylineno</code>
+wird automatisch bei jedem <code>\n</code> inkrementiert). Wenn man weitere Informationen
+benötigt, muss man mit dem Bison-Feature &quot;Locations&quot; arbeiten. Dies ist ein
+spezieller Datentyp <code>YYLTYPE</code>.</p>
+<p>Für weitere Details vergleiche <a href="#id_Levine2009">[Levine2009, Kap. 8]</a>.</p>
+<h2 id="anmerkung-nicht-eindeutige-grammatiken">Anmerkung: Nicht eindeutige Grammatiken</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stat: expr <span style="color:#e6db74">&#39;;&#39;</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;;&#39;</span> ;
+</span></span><span style="display:flex;"><span>expr: <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">INT</span> ;</span></span></code></pre></div><p>=&gt; Was passiert bei der Eingabe: <code>a+b</code> ??! Welche Regel/Alternative soll
+jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!</p>
+<h3 id="antlr-1">ANTLR</h3>
+<p>Nicht eindeutige Grammatiken führen <strong>nicht</strong> zu einer Fehlermeldung,
+da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
+in der Grammatik selbst steckt.</p>
+<p>Während des Debuggings von Grammatiken lohnt es sich aber, diese
+Warnungen zu aktivieren. Dies kann entweder mit der Option &quot;<code>-diagnostics</code>&quot;
+beim Aufruf des <code>grun</code>-Tools geschehen oder über das Setzen des
+<code>DiagnosticErrorListener</code> aus der ANTLR-Runtime als ErrorListener.</p>
+<h3 id="bison">Bison</h3>
+<p>Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
+(vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
+jeweils für eine Operation (wobei Shift bevorzugt wird). Dies kann
+man im über die Option <code>-v</code> erzeugten <code>&lt;name&gt;.output</code>-File überprüfen.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Fehler bei <code>match()</code>: <em>single token deletion</em> oder <em>single token insertion</em></p>
+</li>
+<li>
+<p>Panic Mode: <em>sync-and-return</em> bis Token in <em>Resynchronization Set</em> (ANTLR)
+oder <code>error</code>-Token shiftbar (Bison)</p>
+<ul>
+<li>ANTLR: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen</li>
+<li>ANTLR: Fail-Save zur Vermeidung von Endlosschleifen</li>
+</ul>
+</li>
+<li>
+<p>Fehler-Alternativen in Grammatik einbauen</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle note">
+  <div class="box-label"><i class="fas fa-puzzle-piece"></i> Challenges</div>
+  <div class="box-content">
+
+<ul>
+<li>Erklären Sie, welche Fehler typischerweise beim Parsen auftreten können.</li>
+<li>Wie reagiert der von ANTLR generierte LL-Parser auf typische Fehler?</li>
+<li>Was sind &quot;Fehlerproduktionen&quot;, wozu sind sie gut?</li>
+</ul>
+</div>
+</div>
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Levine2009'>[Levine2009] <strong>flex & bison</strong><br>Levine, J., O'Reilly, 2009. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-5961-5597-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-0-5961-5597-1</a>.<br><em>Kapitel 7 und 8</em></li> <li id='id_Parr2010'>[Parr2010] <strong>Language Implementation Patterns</strong><br>Parr, T., Pragmatic Bookshelf, 2010. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5645-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5645-6</a>.<br><em>Kapitel 2 und 3</em></li> <li id='id_Parr2014'>[Parr2014] <strong>The Definitive ANTLR 4 Reference</strong><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.</li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1704710917" defer></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1704710917" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1704710917"></script>
+    <script src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1704710917" defer></script>
+  </body>
+</html>
