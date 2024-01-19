@@ -196,7 +196,7 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 |  _06_  | _Mi, 07.02._                         | Mündliche Prüfung CB (PO18): [Termine siehe Buchungsliste CB]                                                                             | Carsten, BC |                                                       |
 |  _06_  | _Fr, 09.02._                         | Mündliche Prüfung CPL (PO23): [Termine siehe Buchungsliste CPL]                                                                           | Carsten, BC |                                                       |
 
-[**Bitte geben Sie mir Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau / Concepts of Programming Languages teil.**]{.alert}
+[**Bitte geben Sie uns Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau / Concepts of Programming Languages teil.**]{.alert}
 
 [Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331974&client_id=FH-Bielefeld
 [Termine siehe Buchungsliste CB]: https://www.hsbi.de/elearning/goto.php?target=book_1334199&client_id=FH-Bielefeld
