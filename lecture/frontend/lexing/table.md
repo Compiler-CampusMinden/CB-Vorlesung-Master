@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
-menuTitle: "Tabellenbasierte Implementierung"
+linkTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2008"

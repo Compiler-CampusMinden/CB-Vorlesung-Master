@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "AST-basierte Interpreter: Basics"
-menuTitle: "AST-basierte Interpreter 1"
+linkTitle: "AST-basierte Interpreter 1"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Nystrom2021"

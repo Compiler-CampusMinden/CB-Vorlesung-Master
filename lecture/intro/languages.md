@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Bandbreite der Programmiersprachen"
-menuTitle: "Programmiersprachen"
+linkTitle: "Programmiersprachen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2008"

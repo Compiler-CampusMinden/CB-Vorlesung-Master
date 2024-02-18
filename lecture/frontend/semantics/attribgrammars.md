@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "Typen, Type Checking und Attributierte Grammatiken"
-menuTitle: "Attributierte Grammatiken"
+linkTitle: "Attributierte Grammatiken"
 author: "BC George (HSBI)"
 readings:
   - key: "Aho2008"

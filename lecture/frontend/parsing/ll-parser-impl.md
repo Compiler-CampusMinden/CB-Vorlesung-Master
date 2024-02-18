@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "LL-Parser selbst implementiert"
-menuTitle: "LL-Parser implementieren"
+linkTitle: "LL-Parser implementieren"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Parr2010"
