@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "Reguläre Sprachen, Ausdrucksstärke"
-menuTitle: "Reguläre Sprachen"
+linkTitle: "Reguläre Sprachen"
 author: "BC George (HSBI)"
 readings:
   - key: "aho2013compilers"

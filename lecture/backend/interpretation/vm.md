@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Bytecode und Virtuelle Maschinen"
-menuTitle: "Bytecode/VM"
+linkTitle: "Bytecode/VM"
 ---
 
 

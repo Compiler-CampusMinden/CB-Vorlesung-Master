@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Semantische Analyse: Symboltabellen"
-menuTitle: "Überblick Symboltabellen"
+linkTitle: "Überblick Symboltabellen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Mogensen2017"

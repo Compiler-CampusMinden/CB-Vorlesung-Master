@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Lexer: Handcodierte Implementierung"
-menuTitle: "Handcodierte Implementierung"
+linkTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2008"

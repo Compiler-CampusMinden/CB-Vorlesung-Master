@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "Optimierung und Datenflussanalyse"
-menuTitle: "Optimierung u. Datenflussanalyse"
+linkTitle: "Optimierung u. Datenflussanalyse"
 author: "BC George (HSBI)"
 readings:
   - key: "Güting1999"

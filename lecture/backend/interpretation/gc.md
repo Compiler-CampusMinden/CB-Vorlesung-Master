@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Garbage Collection"
-menuTitle: "Garbage Collection"
+linkTitle: "Garbage Collection"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Nystrom2021"

@@ -1,7 +1,7 @@
 ---
 archetype: lecture-cg
 title: "Generierung von Maschinencode (Skizze)"
-menuTitle: "Maschinencode"
+linkTitle: "Maschinencode"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Mogensen2017"
