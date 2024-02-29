@@ -39,10 +39,10 @@
 
 ## Readings data template
 READINGS   = data/readings.yaml
-BIBTEX     = cb.bib
+BIBTEX     = cpl.bib
 
 ## Metadata (for Pandoc)
-METADATA   = pandoc_meta.yaml
+METADATA   = cpl.yaml
 
 ## Top level directory for source files
 SRC_DIR    = lecture
