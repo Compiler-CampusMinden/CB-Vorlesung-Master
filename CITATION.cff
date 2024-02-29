@@ -2,9 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: >-
-  Lectures "Compilerbau" and "Concepts of Programming
-  Languages" (M.Sc.)
+title: Lecture "Concepts of Programming Languages" (M.Sc.)
 message: >-
   If you use this lecture material, please cite it using the
   metadata from this file.
@@ -22,12 +20,12 @@ authors:
 repository-code: >-
   https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master
 url: >-
-  https://www.hsbi.de/elearning/goto.php?target=crs_1089779&client_id=FH-Bielefeld
+  https://www.hsbi.de/elearning/goto.php?target=crs_1302203&client_id=FH-Bielefeld
 abstract: >-
-  This represents the lecture material for the lectures
-  "Compilerbau" and "Concepts of Programming Languages"
-  (M.Sc.), courses developed and taught at Bielefeld
-  University of Applied Sciences.
+  This represents the lecture material for the lecture
+  "Concepts of Programming Languages" (M.Sc.) (formerly
+  known as "Compilerbau" (M.Sc.)), a course developed and
+  taught at Bielefeld University of Applied Sciences.
 keywords:
   - compiler construction
   - grammar
