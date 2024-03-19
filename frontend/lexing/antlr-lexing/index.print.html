@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.0">
+    <meta name="generator" content="Relearn 5.26.2">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lexer mit ANTLR generieren">
+    <meta name="twitter:description" content="">
+    <meta property="og:title" content="Lexer mit ANTLR generieren">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">
+    <title>Lexer mit ANTLR generieren</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html" rel="canonical" type="text/html" title="Lexer mit ANTLR generieren">
+
+    
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1710829924" rel="icon" type="image/png">
+
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1710829925" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1710829925" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1710829925" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1710829925" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1710829925" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1710829925" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1710829925" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1710829925" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1710829925" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1710829925" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1710829925" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1710829925" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1710829925" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1710829925" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/ie.css?1710829925" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/url.js?1710829925"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1710829925"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Lexer mit ANTLR generieren
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Lexer mit ANTLR generieren</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p>ANTLR ist ein Parser-Generator, der aus einer Grammatik einen Parser in verschiedenen
+Zielsprachen (Java, Python, C++, ...) generieren kann.</p>
+<p>In der ANTLR-Grammatik werden die Parser-Regeln klein geschrieben, die Lexer-Regeln werden
+mit <strong>Großbuchstaben</strong> geschrieben. Jede Lexer-Regel liefert ein Token zurück, dabei
+ist der Tokenname die linke Seite der Regel. Wie bei Flex gewinnt der längste Match,
+und bei Gleichstand (mehrere längste Regeln matchen) gewinnt die zuerst definierte Regel.</p>
+<p>Die Lexer-Regeln können mit Aktionen annotiert werden, die beim Matchen der jeweiligen Regel
+abgearbeitet werden. Diese Aktionen müssen in der Zielprogrammiersprache formuliert werden,
+da sie in die generierte Lexerklasse in die jeweiligen Methoden eingebettet werden.</p>
+<p>ANTLR kennt Lexer-Kommandos wie <code>skip</code> (entferne das aktuelle Zeichen), <code>more</code> (lese mehr
+Input, um ein Token zu generieren) und andere. Mit &quot;Fragmenten&quot; kann man Hilfsregeln definieren,
+die keine Token darstellen.</p>
+<p>ANTLR kennt &quot;Modes&quot;, mit denen man zustandsbehaftete Lexer erzeugen kann. Dies ist nützlich
+für &quot;Insel-Grammatiken&quot;, etwa für das Bearbeiten von XML oder HTML. Zusätzlich gibt es &quot;Channels&quot;
+zum Vorsortieren von Tokens in verschiedene parallele Tokenstreams.</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+        
+        
+            
+        
+    
+        
+        
+            
+        
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/I119N04WIYA' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Lexer mit ANTLR</a></li> <li><a href='https://youtu.be/pbjGThqVLkU' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Demo ANTLR Basics</a></li> <li><a href='https://youtu.be/vnJIm6S-898' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Demo Verhalten Lexer-Regeln</a></li> <li><a href='https://youtu.be/bNpgqctiQM8' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Demo Lexer-Regeln mit Aktionen</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/10e0ed907bb767e8304c0cf197293588f9497a217e0dee792c458887ec73299a415da96fd2ea12e0f054ba478772239ec2581db5cedadb3aba14203c590493d1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Lexer mit ANTLR</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K3) Lexer-Regeln in ANTLR formulieren und einsetzen</li> <li>(K2) Verhalten des Lexers: längste Matches, Reihenfolge</li> <li>(K3) Nutzung von Lexer-Aktionen</li> <li>(K3) Einsatz von Fragmenten</li> <li>(K3) Nutzung von Lexer-Kommandos</li> <li>(K3) Zustandsbehaftete Lexer (Modes)</li> <li>(K3) Nutzung von Channels</li> <li>(K2) Importieren von Grammatiken</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="hello-world">Hello World</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#66d9ef">grammar</span> <span style="color:#a6e22e">Hello</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>start       : <span style="color:#e6db74">&#39;hello&#39;</span> <span style="color:#66d9ef">GREETING</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GREETING    : [a-zA-Z]<span style="color:#f92672">+</span> ;
+</span></span><span style="display:flex;"><span>WHITESPACE  : [ \t\n]<span style="color:#f92672">+</span> <span style="color:#f92672">-&gt;</span> skip ;</span></span></code></pre></div><div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/src/Hello.g4" target="_blank"><span class="title">Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)</span></a></span></div>
+<h3 id="hinweis-zur-grammatik-regeln">Hinweis zur Grammatik (Regeln)</h3>
+<ul>
+<li><code>start</code> ist eine <span class='alert'>Parser-Regel</span>
+=&gt; Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
+Parser am Ende auch starten kann ...</li>
+<li>Die anderen beiden Regeln (mit großem Anfangsbuchstaben) aus der obigen Grammatik
+zählen zum Lexer</li>
+</ul>
+<h3 id="antlr-einrichten">ANTLR einrichten</h3>
+<ul>
+<li>Aktuelle Version herunterladen: <a href="https://www.antlr.org/download.html" target="_blank">antlr.org</a>,
+für Java als Zielsprache: <a href="https://www.antlr.org/download/antlr-4.11.1-complete.jar" target="_blank">&quot;Complete ANTLR 4.x Java binaries jar&quot;</a></li>
+<li>CLASSPATH setzen: <code>export CLASSPATH=&quot;.:/&lt;pathToJar&gt;/antlr-4.11.1-complete.jar:$CLASSPATH&quot;</code></li>
+<li>Aliase einrichten (<code>.bashrc</code>):
+<ul>
+<li><code>alias antlr='java org.antlr.v4.Tool'</code></li>
+<li><code>alias grun='java org.antlr.v4.gui.TestRig'</code></li>
+</ul>
+</li>
+<li>Alternativ über den Python-Installer: <code>pip install antlr4-tools</code></li>
+<li>Im Web ohne lokale Installation: <a href="http://lab.antlr.org/" target="_blank">ANTLR Lab</a></li>
+</ul>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/getting-started.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/getting-started.md</a>)</p>
+<h3 id="hello-world-übersetzen-und-ausführen">&quot;Hello World&quot; übersetzen und ausführen</h3>
+<ol>
+<li>Grammatik übersetzen und Code generieren: <code>antlr Hello.g4</code></li>
+<li>Java-Code kompilieren: <code>javac *.java</code></li>
+<li>Lexer ausführen:
+<ul>
+<li>
+<p><code>grun Hello start -tokens</code> (Grammatik &quot;Hello&quot;, Startregel &quot;start&quot;)</p>
+</li>
+<li>
+<p>Alternativ mit kleinem Java-Programm:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.antlr.v4.runtime.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Lexer l <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HelloLexer(CharStreams.<span style="color:#a6e22e">fromStream</span>(System.<span style="color:#a6e22e">in</span>));
+</span></span><span style="display:flex;"><span>        Token t <span style="color:#f92672">=</span> l.<span style="color:#a6e22e">nextToken</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (t.<span style="color:#a6e22e">getType</span>() <span style="color:#f92672">!=</span> Token.<span style="color:#a6e22e">EOF</span>) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(t);
+</span></span><span style="display:flex;"><span>            t <span style="color:#f92672">=</span> l.<span style="color:#a6e22e">nextToken</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h3 id="generierte-dateien-und-klassen">Generierte Dateien und Klassen</h3>
+<p>Nach dem Übersetzen finden sich folgende Dateien und Klassen vor:</p>
+<pre><code>.
+├── bin
+│   ├── HelloBaseListener.class
+│   ├── HelloBaseVisitor.class
+│   ├── HelloLexer.class
+│   ├── HelloListener.class
+│   ├── HelloParser.class
+│   ├── HelloParser$RContext.class
+│   ├── HelloVisitor.class
+│   └── Main.class
+├── Hello.g4
+└── src
+    ├── HelloBaseListener.java
+    ├── HelloBaseVisitor.java
+    ├── HelloLexer.java
+    ├── HelloLexer.tokens
+    ├── HelloListener.java
+    ├── HelloParser.java
+    ├── Hello.tokens
+    ├── HelloVisitor.java
+    └── Main.java
+</code></pre>
+<p><em>Anmerkung</em>: Die Ordnerstruktur wurde durch ein ANTLR-Plugin für Eclipse
+erzeugt. Bei Ausführung in der Konsole liegen alle Dateien in einem Ordner.</p>
+<p><em>Anmerkung</em>: Per Default werden nur die Listener angelegt, für die Visitoren
+muss eine extra Option mitgegeben werden.</p>
+<p>Die Dateien <code>Hello.tokens</code> und <code>HelloLexer.tokens</code> enthalten die Token samt
+einer internen Nummer. (Der Inhalt beider Dateien ist identisch.)</p>
+<p>Die Datei <code>HelloLexer.java</code> enthält den generierten Lexer, der eine
+Spezialisierung der abstrakten Basisklasse <code>Lexer</code> darstellt. Über den
+Konstruktor wird der zu scannende <code>CharStream</code> gesetzt. Über die Methode
+<code>Lexer#nextToken()</code> kann man sich die erkannten Token der Reihe nach
+zurückgeben lassen. (Diese Methode wird letztlich vom Parser benutzt.)</p>
+<p>Die restlichen Dateien werden für den Parser und verschiedene Arten der
+Traversierung des AST generiert (vgl.
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html">AST-basierte Interpreter</a>).</p>
+<h3 id="bedeutung-der-ausgabe">Bedeutung der Ausgabe</h3>
+<p>Wenn man dem Hello-Lexer die Eingabe</p>
+<pre><code>hello world
+&lt;EOF&gt;
+</code></pre>
+<p>(das <code>&lt;EOF&gt;</code> wird durch die Tastenkombination <code>STRG-D</code> erreicht) gibt, dann
+lautet die Ausgabe</p>
+<pre><code>$ grun Hello start -tokens
+hello world
+&lt;EOF&gt;
+[@0,0:4='hello',&lt;'hello'&gt;,1:0]
+[@1,6:10='world',&lt;GREETING&gt;,1:6]
+[@2,12:11='&lt;EOF&gt;',&lt;EOF&gt;,2:0]
+</code></pre>
+<p>Die erkannten Token werden jeweils auf einer eigenen Zeile ausgegeben.</p>
+<ul>
+<li><code>@0</code>: Das erste Token (fortlaufend nummeriert, beginnend mit 0)</li>
+<li><code>0:4</code>: Das Token umfasst die Zeichen 0 bis 4 im Eingabestrom</li>
+<li><code>='hello'</code>: Das gefundene Lexem (Wert des Tokens)</li>
+<li><code>&lt;'hello'&gt;</code>: Das Token (Name/Typ des Tokens)</li>
+<li><code>1:0</code>: Das Token wurde in Zeile 1 gefunden (Start der Nummerierung mit
+Zeile 1), und startet in dieser Zeile an Position 0</li>
+</ul>
+<p>Entsprechend bekommt man mit</p>
+<pre><code>$ grun Hello start -tokens
+hello
+  world
+
+&lt;EOF&gt;
+[@0,0:4='hello',&lt;'hello'&gt;,1:0]
+[@1,8:12='world',&lt;GREETING&gt;,2:2]
+[@2,15:14='&lt;EOF&gt;',&lt;EOF&gt;,4:0]
+</code></pre>
+<h3 id="antlr-grammatik-für-die-lexer-generierung">ANTLR-Grammatik für die Lexer-Generierung</h3>
+<ul>
+<li>
+<p>Start der Grammatik mit dem Namen &quot;<code>XYZ</code>&quot; mit</p>
+<pre><code>grammar XYZ;
+</code></pre>
+<p>oder (nur Lexer)</p>
+<pre><code>lexer grammar XYZ;
+</code></pre>
+</li>
+<li>
+<p>Token und Lexer-Regeln starten mit <em>großen Anfangsbuchstaben</em>
+(Ausblick: Parser-Regeln starten mit kleinen Anfangsbuchstaben)</p>
+<p>Format: <code>TokenName : Alternative1 | ... | AlternativeN ;</code></p>
+<p>Rekursive Lexer-Regeln sind erlaubt. <strong>Achtung</strong>: Es dürfen keine
+<em>links-rekursiven</em> Regeln genutzt werden, etwa wie <code>ID : ID '*' ID ;</code> ...
+(Eine genauere Definition und die Transformation in nicht-linksrekursive
+Regeln siehe <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html">LL-Parser</a>).</p>
+</li>
+<li>
+<p>Alle Literale werden in <em>einfache</em> Anführungszeichen eingeschlossen
+(es erfolgt keine Unterscheidung zwischen einzelnen Zeichen und Strings
+wie in anderen Sprachen)</p>
+</li>
+<li>
+<p>Zeichenmengen: <code>[a-z\n]</code> umfasst alle Zeichen von <code>'a'</code> bis <code>'z'</code> sowie
+<code>'\n'</code></p>
+<p><code>'a'..'z'</code> ist identisch zu <code>[a-z]</code></p>
+</li>
+<li>
+<p>Schlüsselwörter: Die folgenden Strings stellen reservierte Schlüsselwörter
+dar und dürfen nicht als Token, Regel oder Label genutzt werden:</p>
+<pre><code>import, fragment, lexer, parser, grammar, returns, locals, throws, catch, finally, mode, options, tokens
+</code></pre>
+<p><em>Anmerkung</em>: <code>rule</code> ist zwar kein Schlüsselwort, wird aber als Methodenname
+bei der Codegenerierung verwendet. =&gt; Wie ein Schlüsselwort behandeln!</p>
+</li>
+</ul>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/lexicon.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/lexicon.md</a>)</p>
+<h3 id="greedy-und-non-greedy-lexer-regeln">Greedy und Non-greedy Lexer-Regeln</h3>
+<p>Die regulären Ausdrücke <code>(...)?</code>, <code>(...)*</code> und <code>(...)+</code> sind <em>greedy</em> und
+versuchen soviel Input wie möglich zu matchen.</p>
+<p>Falls dies nicht sinnvoll sein sollte, kann man mit einem weiteren <code>?</code> das
+Verhalten auf <em>non-greedy</em> umschalten. Allerdings können non-greedy Regeln
+das Verhalten des Lexers u.U. schwer vorhersehbar machen!</p>
+<p>Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen
+(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/wildcard.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/wildcard.md</a>).</p>
+<h2 id="verhalten-des-lexers-1-längster-match">Verhalten des Lexers: 1. Längster Match</h2>
+<p>Primäres Ziel: Erkennen der längsten Zeichenkette</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>CHARS   : [a-z]<span style="color:#f92672">+</span> ;
+</span></span><span style="display:flex;"><span>DIGITS  : [0-9]<span style="color:#f92672">+</span> ;
+</span></span><span style="display:flex;"><span>FOO     : [a-z]<span style="color:#f92672">+</span> [0-9]<span style="color:#f92672">+</span> ;</span></span></code></pre></div><p>Die Regel, die den längsten Match für die aktuelle Eingabesequenz produziert,
+&quot;gewinnt&quot;.</p>
+<p>Im Beispiel würde ein &quot;foo42&quot; als <code>FOO</code> erkannt und nicht als <code>CHARS DIGITS</code>.</p>
+<h2 id="verhalten-des-lexers-2-reihenfolge">Verhalten des Lexers: 2. Reihenfolge</h2>
+<p>Reihenfolge in Grammatik definiert Priorität</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>FOO     : <span style="color:#e6db74">&#39;f&#39;</span> <span style="color:#f92672">.*?</span> <span style="color:#e6db74">&#39;r&#39;</span> ;
+</span></span><span style="display:flex;"><span>BAR     : <span style="color:#e6db74">&#39;foo&#39;</span> <span style="color:#f92672">.*?</span> <span style="color:#e6db74">&#39;bar&#39;</span> ;</span></span></code></pre></div><p>Falls mehr als eine Lexer-Regel die selbe Inputsequenz matcht, dann
+hat die in der Grammatik zuerst genannte Regel Priorität.</p>
+<p>Im Beispiel würden für die Eingabe &quot;foo42bar&quot; beide Regeln den selben längsten
+Match liefern - die Regel <code>FOO</code> ist in der Grammatik früher definiert und
+&quot;gewinnt&quot;.</p>
+<h2 id="verhalten-des-lexers-3-non-greedy-regeln">Verhalten des Lexers: 3. Non-greedy Regeln</h2>
+<p>Non-greedy Regeln versuchen <em>so wenig</em> Zeichen wie möglich zu matchen</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>FOO     : <span style="color:#e6db74">&#39;foo&#39;</span> <span style="color:#f92672">.*?</span> <span style="color:#e6db74">&#39;bar&#39;</span> ;
+</span></span><span style="display:flex;"><span>BAR     : <span style="color:#e6db74">&#39;bar&#39;</span> ;</span></span></code></pre></div><p>Hier würde ein &quot;foo42barbar&quot; zu <code>FOO</code> gefolgt von <code>BAR</code> erkannt werden.</p>
+<p><span class='alert'>Achtung</span>: Nach dem Abarbeiten einer non-greedy Sub-Regel in einer Lexer-Regel
+gilt &quot;<em>first match wins</em>&quot;</p>
+<p><code>.*? ('4' | '42')</code></p>
+<p>=&gt; Der Teil <code>'42'</code> auf der rechten Seite ist
+&quot;toter Code&quot; (wegen der non-greedy Sub-Regel <code>.*?</code>)!</p>
+<p>Die Eingabe &quot;x4&quot; würde korrekt erkannt, währende &quot;x42&quot; nur als &quot;x4&quot; erkannt wird und für
+die verbleibende &quot;2&quot; würde ein <em>token recognition error</em> geworfen.</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/wildcard.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/wildcard.md</a>)</p>
+<h2 id="attribute-und-aktionen">Attribute und Aktionen</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#66d9ef">grammar</span> <span style="color:#a6e22e">Demo</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@header {
+</span></span><span style="display:flex;"><span>import java.util.*;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@members {
+</span></span><span style="display:flex;"><span>String s = &#34;&#34;;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>start   : <span style="color:#66d9ef">TYPE</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;=&#39;</span> <span style="color:#66d9ef">INT</span> <span style="color:#e6db74">&#39;;&#39;</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TYPE    : <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;int&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;float&#39;</span><span style="color:#f92672">)</span> {s = getText();} ;
+</span></span><span style="display:flex;"><span>INT     : [0-9]<span style="color:#f92672">+</span>            {System.out.println(s+&#34;:&#34;+Integer.valueOf(getText()));};
+</span></span><span style="display:flex;"><span>ID      : [a-z]<span style="color:#f92672">+</span>            {setText(String.valueOf(getText().charAt(0)));} ;
+</span></span><span style="display:flex;"><span>WS      : [ \t\n]<span style="color:#f92672">+</span> <span style="color:#f92672">-&gt;</span> skip ;</span></span></code></pre></div><h3 id="attribute-bei-token-auswahl">Attribute bei Token (Auswahl)</h3>
+<p>Token haben Attribute, die man abfragen kann. Dies umfasst u.a. folgende Felder:</p>
+<ul>
+<li><code>text</code>: Das gefundene Lexem als String</li>
+<li><code>type</code>: Der Token-Typ als Integer</li>
+<li><code>index</code>: Das wievielte Token (als Integer)</li>
+</ul>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/actions.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/actions.md</a>)</p>
+<p>Zur Auswertung in den Lexer-Regeln muss man anders vorgehen als in
+Parser-Regeln: Nach der Erstellung eines Tokens kann man die zum Attribut
+gehörenden <code>getX()</code> und <code>setX()</code>-Methoden aufrufen, um die Werte abzufragen
+oder zu ändern.</p>
+<p>Dies passiert im obigen Beispiel für das Attribut <code>text</code>: Abfrage mit
+<code>getText()</code>, Ändern/Setzen mit <code>setText()</code>.</p>
+<p>Die Methodenaufrufe wirken sich immer auf das gerade erstellte Token aus.</p>
+<p><em>Achtung</em>: Bei Aktionen in Parser-Regeln gelten andere Spielregeln!</p>
+<h3 id="aktionen-mit-den-lexer-regeln">Aktionen mit den Lexer-Regeln</h3>
+<p>Aktionen für Lexer-Regeln sind Code-Blöcke in der Zielsprache, eingeschlossen
+in geschweifte Klammern. Die Code-Blöcke werden direkt in die generierten
+Lexer-Methoden kopiert.</p>
+<p>Zusätzlich:</p>
+<ul>
+<li><code>@header</code>: Package-Deklarationen und/oder Importe (wird vor der
+Klassendefinition eingefügt)</li>
+<li><code>@members</code>: zusätzliche Attribute für die generierten Lexer- (und
+Parser-) Klassen.</li>
+</ul>
+<p>Mit <code>@lexer::header</code> bzw. <code>@lexer::members</code> werden diese Codeblöcke nur in den
+generierten Lexer eingefügt.</p>
+<p><em>Anmerkung</em>: Lexer-Aktionen müssen am Ende der äußersten Alternative erscheinen.
+Wenn eine Lexer-Regel mehr als eine Alternative hat, müssen diese in runde
+Klammern eingeschlossen werden.</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/grammars.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/grammars.md</a>)</p>
+<h2 id="hilfsregeln-mit-fragmenten">Hilfsregeln mit Fragmenten</h2>
+<p>Fragmente sind Lexer-Regeln, die keine Token darstellen/erzeugen, aber
+bei der Formulierung von Regeln für mehr Übersicht oder Wiederverwendung
+sorgen. Fragmente werden mit dem Schlüsselwort <code>fragment</code> eingeleitet.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>NUM         : <span style="color:#66d9ef">DIGIT</span><span style="color:#f92672">+</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fragment</span>
+</span></span><span style="display:flex;"><span>DIGIT       : [0-9] ;</span></span></code></pre></div><p>=&gt; Keine Token (für den Parser)!</p>
+<p>Hier würde der Parser nur <code>NUM</code> &quot;bekommen&quot;, aber keine <code>DIGIT</code>-Token.</p>
+<h2 id="lexer-kommandos-auswahl">Lexer Kommandos (Auswahl)</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>TokenName : <span style="color:#66d9ef">Alternative</span> <span style="color:#f92672">-&gt;</span> command<span style="color:#960050;background-color:#1e0010">-</span>name</span></span></code></pre></div><ul>
+<li>
+<p><code>skip</code></p>
+<p>Verwerfe den aktuellen Text: <code>WS : [ \t]+ -&gt; skip ;</code>
+(liefert kein Token)</p>
+</li>
+<li>
+<p><code>more</code></p>
+<p>Lese weiter ...</p>
+<p>Die Regel matcht zwar, aber es wird kein Token erzeugt. Die nächste
+matchende Regel wird den hier gematchten Text mit in ihr Token einbauen.
+Der Token-Typ ist der der zuletzt matchenden Regel.</p>
+<p><em>Anmerkung</em>: Wird typischerweise zusammen mit Modes verwendet.</p>
+</li>
+<li>
+<p><code>mode</code> (siehe unten)</p>
+</li>
+<li>
+<p><code>channel</code> (siehe unten)</p>
+</li>
+</ul>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/lexer-rules.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/lexer-rules.md</a>)</p>
+<h2 id="modes-und-insel-grammatiken">Modes und Insel-Grammatiken</h2>
+<p>Umschalten zwischen verschiedenen Lexer-Modes: Wie verschiedene Sub-Lexer -
+einen für jeden Kontext.</p>
+<p>=&gt; Parsen von &quot;<em>Insel-Grammatiken</em>&quot; (beispielsweise XML).</p>
+<p><em>Anmerkung</em>: <code>mode</code>-Spezifikation sind nur im Lexer-Teil der Grammatik erlaubt.</p>
+<h3 id="allgemeines-schema">Allgemeines Schema</h3>
+<pre><code>rules in default mode
+...
+
+mode MODE_1;
+rules in MODE_1
+...
+
+mode MODE_N;
+rules in MODE_N
+...
+</code></pre>
+<h3 id="beispiel">Beispiel</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#66d9ef">lexer</span> <span style="color:#66d9ef">grammar</span> <span style="color:#a6e22e">ModeLexer</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LCOMMENT    : <span style="color:#e6db74">&#39;/*&#39;</span> <span style="color:#f92672">-&gt;</span> more, mode<span style="color:#f92672">(</span><span style="color:#66d9ef">CMNT</span><span style="color:#f92672">)</span> ;
+</span></span><span style="display:flex;"><span>WS          : [ \t\n]<span style="color:#f92672">+</span> <span style="color:#f92672">-&gt;</span> skip ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mode <span style="color:#960050;background-color:#1e0010">CMNT;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">COMMENT</span>     : <span style="color:#e6db74">&#39;*/&#39;</span> <span style="color:#f92672">-&gt;</span> mode<span style="color:#f92672">(</span><span style="color:#66d9ef">DEFAULT_MODE</span><span style="color:#f92672">)</span> ;
+</span></span><span style="display:flex;"><span>CHAR        : <span style="color:#f92672">.</span> <span style="color:#f92672">-&gt;</span> more ;</span></span></code></pre></div><p>Nach dem Matchen des Tokens wird mit <code>mode(X)</code> in den Mode <code>X</code> umgeschaltet.
+Der Lexer beachtet dann nur die Lexer-Regeln unter Mode <code>X</code>.</p>
+<p>Mit <code>pushMode(X)</code> erreicht man das selbe Verhalten wie mit <code>mode(X)</code>,
+allerdings wird vor dem Umschalten der aktuelle Mode auf einem Stack abgelegt.
+Mit <code>popMode</code> kann der oberste Mode vom Stack wieder herunter genommen werden
+und als aktueller Lexer-Mode gesetzt werden.</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/lexer-rules.md" target="_blank">github.com/antlr/antlr4/blob/master/doc/lexer-rules.md</a>)</p>
+<h2 id="channels">Channels</h2>
+<p>Man kann die Token in verschiedene Kanäle (&quot;Channels&quot;) schicken. Beispielsweise
+werden beim Parsen von Python-Programmen die White-Spaces evtl. noch benötigt.</p>
+<p>Anstatt diese mit <code>skip</code> komplett zu verwerfen, kann man sie in einen anderen
+Channel schicken, wo man sie im Parser bei Bedarf wieder abfragen kann. Der
+Token-Index bleibt dabei erhalten, auch wenn die Token in verschiedene Kanäle
+verteilt werden.</p>
+<p><strong>Anmerkung</strong>: Channel-Spezifikationen sind nur im Lexer-Teil der Grammatik
+erlaubt.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>channels { WHITESPACE, COMMENTS }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">BLOCK_COMMENT</span> : <span style="color:#e6db74">&#39;/*&#39;</span> <span style="color:#f92672">.*?</span> <span style="color:#e6db74">&#39;*/&#39;</span> <span style="color:#f92672">-&gt;</span> channel<span style="color:#f92672">(</span><span style="color:#66d9ef">COMMENTS</span><span style="color:#f92672">)</span> ;
+</span></span><span style="display:flex;"><span>LINE_COMMENT  : <span style="color:#e6db74">&#39;//&#39;</span> <span style="color:#f92672">~</span>[\n]<span style="color:#f92672">*</span>   <span style="color:#f92672">-&gt;</span> channel<span style="color:#f92672">(</span><span style="color:#66d9ef">COMMENTS</span><span style="color:#f92672">)</span> ;
+</span></span><span style="display:flex;"><span>WS            : [ \t\n]<span style="color:#f92672">+</span>      <span style="color:#f92672">-&gt;</span> channel<span style="color:#f92672">(</span><span style="color:#66d9ef">WHITESPACE</span><span style="color:#f92672">)</span> ;</span></span></code></pre></div><h2 id="grammatiken-importieren">Grammatiken importieren</h2>
+<p>Mit <code>import XZY;</code> bindet man eine andere Grammatik <code>XYZ</code> ein. Dabei werden nur
+Regeln eingebunden, die bisher noch nicht definiert wurden.</p>
+<p>Aus einer anderen Perspektive kann man diesen Mechanismus mit dem Überschreiben
+von Methoden in einer abgeleiteten Klasse vergleichen: Dann bekommt man beim
+Aufruf einer überschriebenen Methode ebenfalls nur die &quot;neueste&quot;
+Implementierung ...</p>
+<p>Wenn mehrere verschachtelte Grammatiken eingebunden werden (wie im Beispiel),
+dann wird per <em>Tiefensuche</em> der Einbindungsbaum durchlaufen.</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/grammars.md#grammar-imports" target="_blank">github.com/antlr/antlr4/blob/master/doc/grammars.md</a>)</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<p>Lexer mit ANTLR generieren: Lexer-Regeln werden mit <strong>Großbuchstaben</strong> geschrieben</p>
+<ul>
+<li>Längster Match gewinnt, Gleichstand: zuerst definierte Regel</li>
+<li><em>non greedy</em>-Regeln: versuche so <em>wenig</em> Zeichen zu matchen wie möglich</li>
+<li>Aktionen beim Matchen</li>
+<li>Hilfsregeln mit &quot;Fragments&quot;</li>
+<li>Lexer Kommandos: <code>skip</code>, <code>more</code>, ...</li>
+<li>Modes für Insel-Grammatiken</li>
+<li>Channels als parallele Tokenstreams (Vorsortieren)</li>
+<li>Teilgrammatiken importieren</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle note">
+  <div class="box-label"><i class="fas fa-puzzle-piece"></i> Challenges</div>
+  <div class="box-content">
+
+<p><strong>Token und Lexer-Regeln mit ANTLR</strong></p>
+<p>Formulieren Sie für ANTLR Lexer-Regeln, mit denen folgende Token erkannt werden:</p>
+<ul>
+<li>White-Space: Leerzeichen, Tabs, Zeilenumbrüche</li>
+<li>Vergleichsoperatoren: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>&lt;&gt;</code></li>
+<li>If: <code>if</code></li>
+<li>Then: <code>then</code></li>
+<li>Else: <code>else</code></li>
+<li>Namen: Ein Buchstabe, gefolgt von beliebig vielen weiteren Buchstaben und/oder Ziffern</li>
+<li>Numerische Konstanten: Mindestens eine Ziffer, gefolgt von maximal einem Paar bestehend aus einem Punkt und mindestens einer Ziffer, gefolgt von maximal einem Paar bestehend aus dem Buchstaben &quot;E&quot; gefolgt von einem &quot;+&quot; oder &quot;-&quot; und mindestens einer Ziffer.</li>
+</ul>
+<p>Formulieren Sie Hilfskonstrukte zur Verwendung in mehreren Lexer-Regeln als ANTLR-Fragmente.</p>
+<p>White-Spaces sollen entfernt werden und nicht als Token weitergereicht werden.</p>
+<p><strong>Real-World-Lexer mit ANTLR: Programmiersprache Lox</strong></p>
+<p>Betrachten Sie folgenden Code-Schnipsel in der Sprache <a href="https://www.craftinginterpreters.com/the-lox-language.html" target="_blank">&quot;Lox&quot;</a>:</p>
+<pre><code>fun fib(x) {
+    if (x == 0) {
+        return 0;
+    } else {
+        if (x == 1) {
+            return 1;
+        } else {
+            fib(x - 1) + fib(x - 2);
+        }
+    }
+}
+
+var wuppie = fib(4);
+</code></pre>
+<p>Erstellen Sie für diese fiktive Sprache einen Lexer mit ANTLR. Die genauere Sprachdefinition finden Sie unter <a href="https://www.craftinginterpreters.com/the-lox-language.html" target="_blank">craftinginterpreters.com/the-lox-language.html</a>.</p>
+<p><strong>Pig-Latin mit ANTLR-Lexer</strong></p>
+<p>Schreiben Sie eine Lexer-Grammatik mit eingebetteten Aktionen für ANTLR sowie ein passendes Programm zur Einbindung des generierten Lexers, welches einen Text nach <a href="https://de.wikipedia.org/wiki/Pig_Latin" target="_blank">Pig Latin</a> übersetzt:</p>
+<ul>
+<li>Ist der erste Buchstabe eines Wortes ein Konsonant, schiebe ihn ans Ende des Wortes und füge &quot;ay&quot; an.</li>
+<li>Ist der erste Buchstabe eines Wortes ein Vokal, hänge an das Wort ein &quot;ay&quot; an.</li>
+</ul>
+<p><strong>Lexing mit ANTLR</strong></p>
+<p>In einem Telefonbuch sind zeilenweise Namen und Telefonnummern gespeichert.</p>
+<p>Definieren Sie eine Lexer-Grammatik für ANTLR, mit der Sie die Zeilen einlesen können. Können Sie dabei verschiedene Formate der Telefonnummern berücksichtigen?</p>
+<pre><code>Heinz 030 5346 983
+Kalle +49 30 1234 567
+Lina +49.571.8385-255
+Rosi (0571) 8385-268
+</code></pre>
+<p>Können Sie die Grammatik so anpassen, dass Sie nur möglichst wenige verschiedene Token an den Parser weitergeben?</p>
+<p>Ergänzen Sie Ihre Grammatik um Lexer-Aktionen, so dass Sie die Zeilen, die Zeichen (in den Namen) und die Ziffern (in den Telefonnummern) zählen können.</p>
+<p><strong>Lexing mit ANTLR</strong></p>
+<p>IBAN für Deutschland bestehen aus dem Kürzel &quot;DE&quot; sowie einer zweistelligen Checksumme, gefolgt von 2x 4 Ziffern für die
+Bank (ehemalige Bankleitzahl) sowie 2x 4 Ziffern für die ehemalige Kontonummer sowie zwei weiteren Ziffern. Typisch sind
+zwei Formate:</p>
+<ul>
+<li>Menschenlesbares Format: <code>DEcc bbbb bbbb kkkk kkkk xx</code></li>
+<li>Maschinenlesbares Format: <code>DEccbbbbbbbbkkkkkkkkxx</code></li>
+</ul>
+<p>Definieren Sie eine Lexer-Grammatik für ANTLR, mit der Sie die verschiedenen IBAN-Formate für Deutschland einlesen können.</p>
+</div>
+</div>
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Parr2014'>[Parr2014] <strong>The Definitive ANTLR 4 Reference</strong><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.</li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1710829925" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1710829925" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1710829925"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1710829925" defer></script>
+  </body>
+</html>
