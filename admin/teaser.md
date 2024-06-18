@@ -23,7 +23,7 @@ hidden: true
 \bigskip
 \bigskip
 
-2 SWS Vorlesung (mdl. Prüfung), 3 SWS Praktikum mit Testat
+2 SWS Vorlesung, 3 SWS Praktikum
 
 
 
