@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="generator" content="Relearn 6.0.0">
+    <meta name="description" content="Einordnung Quelle: A Map of the Territory (mountain.png) by Bob Nystrom on Github.com (MIT)
+Die Erzeugung von Maschinencode ist in gewisser Weise ein &#34;Parallelweg&#34; zum Erzeugen von Bytecode. Die Schwierigkeit liegt darin, die technischen Besonderheiten der Zielplattform (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.
+Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Generierung von Maschinencode (Skizze)">
+    <meta name="twitter:description" content="Einordnung Quelle: A Map of the Territory (mountain.png) by Bob Nystrom on Github.com (MIT)
+Die Erzeugung von Maschinencode ist in gewisser Weise ein &#34;Parallelweg&#34; zum Erzeugen von Bytecode. Die Schwierigkeit liegt darin, die technischen Besonderheiten der Zielplattform (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.
+Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">
+    <meta property="og:title" content="Generierung von Maschinencode (Skizze)">
+    <meta property="og:description" content="Einordnung Quelle: A Map of the Territory (mountain.png) by Bob Nystrom on Github.com (MIT)
+Die Erzeugung von Maschinencode ist in gewisser Weise ein &#34;Parallelweg&#34; zum Erzeugen von Bytecode. Die Schwierigkeit liegt darin, die technischen Besonderheiten der Zielplattform (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.
+Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)">
+    <meta property="og:locale" content="de-DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Generierung von Maschinencode (Skizze)">
+    <meta itemprop="description" content="Einordnung Quelle: A Map of the Territory (mountain.png) by Bob Nystrom on Github.com (MIT)
+Die Erzeugung von Maschinencode ist in gewisser Weise ein &#34;Parallelweg&#34; zum Erzeugen von Bytecode. Die Schwierigkeit liegt darin, die technischen Besonderheiten der Zielplattform (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.
+Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)">
+    <meta itemprop="wordCount" content="1859">
+    <title>Generierung von Maschinencode (Skizze)</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/index.print.html" rel="alternate" type="text/html" title="Generierung von Maschinencode (Skizze)">
+
+    
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1718704076" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1718704076" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1718704076" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1718704076" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1718704076"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#einordnung">Einordnung</a></li>
+    <li><a href="#prozessorarchitektur">Prozessorarchitektur</a></li>
+    <li><a href="#virtueller-speicher">Virtueller Speicher</a>
+      <ul>
+        <li><a href="#segmente-des-virtuellen-speichers-text">Segmente des virtuellen Speichers: Text</a></li>
+        <li><a href="#segmente-des-virtuellen-speichers-stack">Segmente des virtuellen Speichers: Stack</a></li>
+        <li><a href="#segmente-des-virtuellen-speichers-data-heap">Segmente des virtuellen Speichers: Data (Heap)</a></li>
+      </ul>
+    </li>
+    <li><a href="#befehlszyklus-von-neumann-architektur">Befehlszyklus (von-Neumann-Architektur)</a></li>
+    <li><a href="#aufgaben-bei-der-erzeugung-von-maschinen-code">Aufgaben bei der Erzeugung von Maschinen-Code</a></li>
+    <li><a href="#übersetzen-von-zwischencode-in-maschinencode">Übersetzen von Zwischencode in Maschinencode</a></li>
+    <li><a href="#aufruf-von-funktionen">Aufruf von Funktionen</a>
+      <ul>
+        <li><a href="#funktionsaufruf">Funktionsaufruf</a></li>
+        <li><a href="#parameter">Parameter</a></li>
+        <li><a href="#lokale-variablen">Lokale Variablen</a></li>
+        <li><a href="#rückgabewerte">Rückgabewerte</a></li>
+        <li><a href="#sichern-von-lokalen-variablen-der-alten-funktion">Sichern von lokalen Variablen der &quot;alten&quot; Funktion</a></li>
+      </ul>
+    </li>
+    <li><a href="#funktionsaufruf-prolog">Funktionsaufruf: Prolog</a></li>
+    <li><a href="#funktionsaufruf-epilog">Funktionsaufruf: Epilog</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Generierung von Maschinencode (Skizze)
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Generierung von Maschinencode (Skizze)</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p>Dies ist ein Ausblick und soll die Erzeugung von Maschinencode skizzieren.</p>
+<p>Die Erzeugung von Maschinencode ist der Erzeugung von Bytecode relativ ähnlich, allerdings muss
+man die Eigenschaften der Zielhardware (Register, Maschinenbefehle, ...) beachten. Insbesondere
+muss man ein Text-Segment erstellen, welches die aus dem Zwischencode übersetzten Maschinenbefehle
+enthält. Ähnlich wie beim Bytecode werden Konstanten und Literale am Ende vom Text-Segment
+gesammelt.</p>
+<p>Ein wichtiger (und schwieriger) Schritt ist die Zuordnung von Variablen und Daten zu Registern
+oder Adressen. Auch für Sprünge o.ä. müssen immer wieder Adressen berechnet werden.</p>
+<p>Der Aufruf von Funktionen funktioniert ähnlich wie bei der stackbasierten VM: Die Codegenerierung
+muss dafür sorgen, dass für einen Funktionsaufruf der passende <em>Stack-Frame</em> erzeugt wird und
+der Prozessor bei der Ausführung in das richtige Code-Segment springt (bei der VM war das einfach:
+Die Pointer auf den Byte-Code und der Instruction-Pointer wurden einfach passend &quot;umgebogen&quot;). Für
+den Rücksprung muss der Instruction-Pointer mit auf dem Stack abgelegt werden.</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/R2anlIWZqGY' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Maschinencode</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/3321732b51dab72206dd0f6ee1d07449b80c37c2e0880192b38f1e835d10e2c7aea5e75632ea174d44d4d5dbb6864910990cfef160dedd06213ee8ffdf0c9a36' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Maschinencode</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K3) Code-Generierung (Maschinencode) erfordert Auflösung von Speicheradressen und -breiten</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="einordnung">Einordnung</h2>
+<p><a href="#R-image-072420a99b6d221fe5e84d0375098e4a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-072420a99b6d221fe5e84d0375098e4a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png?width=auto&height=auto"></a></p>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png" rel="external" target="_blank">A Map of the Territory (mountain.png)</a> by <a href="https://github.com/munificent" rel="external" target="_blank">Bob Nystrom</a> on Github.com (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE" rel="external" target="_blank">MIT</a>)</span></p>
+<p>Die Erzeugung von Maschinencode ist in gewisser Weise ein &quot;Parallelweg&quot; zum Erzeugen von
+Bytecode. Die Schwierigkeit liegt darin, die <strong>technischen Besonderheiten</strong> der
+<strong>Zielplattform</strong> (Register, Maschinenbefehle) gut zu kennen und sinnvoll zu nutzen.</p>
+<p>Häufig nutzt man als Ausgangsbasis den Drei-Adressen-Code als IR, der strukturell dem zu
+erzeugenden Maschinencode bereits recht ähnlich ist. Oder man macht sich die Sache einfach
+und generiert LLVM IR und lässt die LLVM-Toolchain übernehmen ;-)</p>
+<p>Hier der Vollständigkeit halber ein Ausblick ...</p>
+<h2 id="prozessorarchitektur">Prozessorarchitektur</h2>
+<p><span class='origin'>Quelle: <a href="https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg" rel="external" target="_blank">Intel i80286 arch</a> by <a href="https://commons.wikimedia.org/wiki/User:Appaloosa" rel="external" target="_blank">Appaloosa</a> on Wikimedia.org (<a href="https://creativecommons.org/licenses/by-sa/3.0" rel="external" target="_blank">CC BY-SA 3.0</a>)</span></p>
+<p>Am Beispiel der noch übersichtlichen Struktur des Intel i80286 lassen sich verschiedene
+Grundbausteine eines Prozessors identifizieren.</p>
+<p>Zunächst hat man eine Ausführungseinheit (<em>Execution Unit</em>), die sich vor allem aus
+verschiedenen Registern und der Recheneinheit (<em>ALU</em>) zusammen setzen. Hier kann man
+Adressen berechnen oder eben auch Dinge wie Addition ...</p>
+<p>Über die Register wird auch die Adressierung des Speichers vorgenommen. Aus Sicht eines
+Prozesses greift dieser auf einen zusammenhängenden, linearen Speicher zu (&quot;Virtueller
+Speicher&quot;, siehe nächste Folie). Dieser setzt sich in der Realität aus verschiedenen
+Segmenten zusammen, die auch auf unterschiedliche Speichertypen (RAM, Cache, SSD, ...)
+verteilt sein können. In der <em>Address Unit</em> werden aus <em>logischen</em> Adressen die konkreten
+<em>physikalischen</em> Adressen berechnet.</p>
+<p>Über die <em>Bus Unit</em> erfolgt der physikalische Zugriff auf die konkrete Hardware.</p>
+<p>In der <em>Instruction Unit</em> wird der nächste Befehl geholt und dekodiert und zur Ausführung
+gebracht.</p>
+<h2 id="virtueller-speicher">Virtueller Speicher</h2>
+<p><a href="#R-image-c9e2159044e1429c3c169fa1a96038db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/virtueller-speicher.png?width=40%25&height=auto" style=" height: auto; width: 40%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9e2159044e1429c3c169fa1a96038db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/virtueller-speicher.png?width=40%25&height=auto"></a></p>
+<ul>
+<li>Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu<br>
+Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer
+maximalen Adresse</li>
+<li>Verwaltung durch MMU (<em>Memory Management Unit</em>)<br>
+MMU bildet logische Adressen aus virtuellem Speicher auf den
+physikalischen Speicher ab (transparent für den Prozess)</li>
+</ul>
+<h3 id="segmente-des-virtuellen-speichers-text">Segmente des virtuellen Speichers: Text</h3>
+<ul>
+<li><strong>Text Segment</strong> (read-only)
+<ul>
+<li>Programm Code</li>
+<li>Konstanten, String Literale</li>
+</ul>
+</li>
+<li>Bereich initialisierter Daten
+<ul>
+<li>globale und static Variablen (explizit initialisiert)</li>
+</ul>
+</li>
+<li>Bereich uninitialisierter Daten
+<ul>
+<li>globale und static Variablen (uninitialisiert) =&gt; Wert 0</li>
+</ul>
+</li>
+</ul>
+<p><strong>ACHTUNG</strong>: Bereich (un-) initialisierter Daten nicht in Abbildung dargestellt!</p>
+<h3 id="segmente-des-virtuellen-speichers-stack">Segmente des virtuellen Speichers: Stack</h3>
+<ul>
+<li>Stackframe je Funktionsaufruf:
+<ul>
+<li>Lokale Variablen (&quot;automatische&quot; Variablen)</li>
+<li>Argumente und Return-Werte</li>
+</ul>
+</li>
+<li>Dynamisch wachsend und schrumpfend</li>
+<li><span class='alert'>Automatische</span> Pflege
+<ul>
+<li>Nach Funktionsrückkehr wird der Stackpointer (&quot;Top of Stack&quot;) weiter gesetzt</li>
+<li>Dadurch &quot;Bereinigung&quot;: Speicher der lokalen Variablen wird freigegeben</li>
+</ul>
+</li>
+</ul>
+<h3 id="segmente-des-virtuellen-speichers-data-heap">Segmente des virtuellen Speichers: Data (Heap)</h3>
+<ul>
+<li>Bereich für dynamischen Speicher (Allokation während der Laufzeit)</li>
+<li>Dynamisch wachsend und schrumpfend</li>
+<li>Zugriff und Verwaltung aus <span class='alert'>laufendem</span> Programm =&gt; <strong>Pointer</strong>
+<ul>
+<li><code>malloc()</code>/<code>calloc()</code>/<code>free()</code> (C)</li>
+<li><code>new</code>/<code>delete</code> (C++)</li>
+<li>typischerweise <span class='alert'><strong>Pointer</strong></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="befehlszyklus-von-neumann-architektur">Befehlszyklus (von-Neumann-Architektur)</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>op <span style="color:#f92672">=</span> read_next_op(pc)
+</span></span><span style="display:flex;"><span>decode(op)
+</span></span><span style="display:flex;"><span>pc <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>args <span style="color:#f92672">=</span> nil
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> operands_needed(op):
+</span></span><span style="display:flex;"><span>    args <span style="color:#f92672">=</span> read_operands(pc)
+</span></span><span style="display:flex;"><span>    pc <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>execute(op, args)</span></span></code></pre></div><p>Typischerweise hat man neben dem Stack und dem Heap noch diverse Register auf dem Prozessor,
+die man wie (schnelle Hardware-) Variablen nutzen kann. Es gibt normalerweise einige spezielle
+Register:</p>
+<ul>
+<li>Program Counter (<em>PC</em>): Zeigt auf die Stelle im Textsegment, die gerade ausgeführt wird</li>
+<li>Stack Pointer (<em>SP</em>): Zeigt auf den nächsten freien Stackeintrag</li>
+<li>Frame Pointer (<em>FP</em>): Zeigt auf die Rücksprungadresse auf dem Stack</li>
+<li>Akkumulator: Speichern von Rechenergebnissen</li>
+</ul>
+<p>Der Prozessor holt sich die Maschinenbefehle, auf die der PC aktuell zeigt und dekodiert sie,
+d.h. holt sich die Operanden, und führt die Anweisung aus. Danach wird der PC entsprechend
+erhöht und der <em>Fetch-Decode-Execute</em>-Zyklus startet erneut. (OK, diese Darstellung ist stark
+vereinfacht und lässt beispielsweise <em>Pipelining</em> außen vor ...)</p>
+<p><em>Anmerkung</em>: In der obigen Skizze wird der <em>PC</em> für jede Instruktion oder jeden Operanden
+um 1 erhöht. Dies soll andeuten, dass man die nächste Instruktion lesen möchte. In der Realität
+muss hier auf die nächste relevante Speicheradresse gezeigt werden, d.h. das Inkrement muss
+die Breite eines Op-Codes etc. berücksichtigen.</p>
+<p>Ein Sprung bzw. Funktionsaufruf kann erreicht werden, in dem der <em>PC</em> auf die Startadresse der
+Funktion gesetzt wird.</p>
+<p>Je nach Architektur sind die Register, Adressen und Instruktionen 4 Bytes (32 Bit) oder 8 Bytes
+(64 Bit) &quot;breit&quot;.</p>
+<h2 id="aufgaben-bei-der-erzeugung-von-maschinen-code">Aufgaben bei der Erzeugung von Maschinen-Code</h2>
+<p>Relativ ähnlich wie bei der Erzeugung von Bytecode, nur muss diesmal die Zielhardware
+(Register, Maschinenbefehle, ...) beachtet werden:</p>
+<ul>
+<li>
+<p>Übersetzen des Zwischencodes in Maschinenbefehle für die jeweilige Zielhardware</p>
+</li>
+<li>
+<p>Sammeln von Konstanten und Literalen am Ende vom Text-Segment</p>
+</li>
+<li>
+<p>Auflösen von Adressen:</p>
+<ul>
+<li>Sprünge: relativ (um wie viele Bytes soll gesprungen werden) oder
+absolut (Adresse, zu der gesprungen werden soll)</li>
+<li>Strukturen (Arrays, Structs)haben ein Speicherlayout: Zugriff
+auf Elemente/Felder über Adresse (muss berechnet werden)</li>
+<li>Zugriffe auf Konstanten oder Literalen: Muss ersetzt werden durch
+Zugriff auf Text-Segment</li>
+</ul>
+</li>
+<li>
+<p>Zuordnung der Variablen und Daten zu Registern oder Adressen</p>
+</li>
+<li>
+<p>Aufruf von Funktionen: Anlegen der <em>Stack-Frames</em> (auch <em>Activation Record</em> genannt)</p>
+</li>
+<li>
+<p>Aufbau des Binärformats und Linking auf der Zielmaschine (auch Betriebssystem) beachten</p>
+</li>
+</ul>
+<h2 id="übersetzen-von-zwischencode-in-maschinencode">Übersetzen von Zwischencode in Maschinencode</h2>
+<p>Für diese Aufgabe muss man den genauen Befehlssatz für den Zielprozessor kennen.
+Im einfachsten Fall kann man jede Zeile im Zwischencode mit Hilfe von Tabellen
+und Pattern Matching direkt in den passenden Maschinencode übertragen. Beispiel
+vgl. Tabelle 7.1 in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html#id_Mogensen2017">[Mogensen2017, S.162]</a>.</p>
+<p>Je nach Architektur sind die Register, Adressen und Instruktionen 4 Bytes (32 Bit)
+oder 8 Bytes (64 Bit) &quot;breit&quot;.</p>
+<p>Da in einer Instruktion wie <code>ldr r0, x</code> die Adresse von <code>x</code> mit codiert werden
+muss, hat man hier nur einen eingeschränkten Wertebereich. Üblicherweise ist dies
+relativ zum <em>PC</em> zu betrachten, d.h. beispielsweise <code>ldr r0, #4[pc]</code> (4 Byte plus <em>PC</em>).
+Dadurch kann man mit <em>PC-relativer Adressierung</em> dennoch größere Adressbereiche
+erreichen. Alternativ muss man mit indirekter Adressierung arbeiten und im Textsegment
+die Adresse der Variablen im Datensegment ablegen: <code>ldr r0, ax</code>, wobei <code>ax</code> eine
+mit <em>PC-relativer Adressierung</em> erreichbare Adresse im Textsegment ist, wo die
+Adresse der Variablen <code>x</code> im Datensegment hinterlegt ist. Anschließend kann man
+dann <code>x</code> laden: <code>ldr ro, [ro]</code>.</p>
+<p>Ähnliches gilt für Konstanten: Wenn diese direkt geladen werden sollen, steht
+quasi nur der &quot;Rest&quot; der Bytes vom Opcode zur Verfügung. Deshalb sammelt man die
+Konstanten am Ende vom Text-Segment und ruft sie von dort ab.</p>
+<div class='columns'>
+<div class='column'>
+<p><strong>Beispiel</strong></p>
+<p>In dem kurzen IR-Snippet soll zum Label &quot;L&quot; verweigt werden, wenn ein Wert x kleiner
+ein anderer Wert v ist.</p>
+<pre><code>L:  ...
+    ...
+    if x &lt; v goto L
+</code></pre>
+</div>
+<div class='column'>
+<p>Bei der Erzeugung des Maschinencodes wird das Label &quot;L&quot; an einer konkreten Adresse
+im Text-Segment angesiedelt, beispielsweise bei 1000. Für die If-Abfrage müssen
+zunächst die beiden Werte in Register geladen werden und die Register subtrahiert
+werden. Anschließend kann man in dem angenommenen Op-Code <code>bltz</code> (&quot;branch if less
+than zero&quot;) zur Adresse 1000 springen, wenn der Wert in Register R0 kleiner als Null
+ist. Anderenfalls würde einfach hinter der Adresse 1108 weiter gemacht.</p>
+<pre><code>1000: ...               ;; L
+      ...
+1080: ldr   r0, x       ;; R0 = x
+1088: ldr   r1, v       ;; R1 = v
+1096: sub   r0, r0, r1  ;; R0 = R0-R1
+1108: bltz  r0, 1000    ;; if R0&lt;0 jump to 1000 (L)
+</code></pre>
+<p><em>Anmerkungen</em>: In der Skizze hier stehen <code>x</code> und <code>v</code> für die Adressen, wo die
+Werte von <code>x</code> und <code>v</code> gespeichert werden. D.h. im Maschinencode steht nicht
+<code>x</code>, sondern die Adresse von <code>x</code>.</p>
+<p>Beachten Sie auch die unterschiedlichen Adressen: Im Beispiel wurde für <code>ldr r0</code>
+ein 4 Byte großer Op-Code angenommen plus 4 Byte für die Adresse <code>x</code>. Für das <code>sub</code>
+wurden dagegen 3x 4 Byte gebraucht (Op-Code, R0, R1).</p>
+</div>
+</div>
+<h2 id="aufruf-von-funktionen">Aufruf von Funktionen</h2>
+<p>Es soll Maschinencode für den folgenden Funktionsaufruf erzeugt werden:</p>
+<pre><code>x = f(p1, ..., pn)
+</code></pre>
+<p>Dies könnte sich ungefähr in folgenden (fiktiven) Assembler-Code übersetzen lassen:</p>
+<div class='columns'>
+<div class='column'>
+<pre><code>    FP = SP             ;; Framepointer auf aktuellen Stackpointer setzen
+    Stack[SP] = R       ;; Rücksprungadresse auf Stack
+    Stack[SP-4] = p1    ;; Parameter p1 auf Stack
+    ...
+    Stack[SP-4*n] = pn  ;; Parameter pn auf Stack
+    SP = SP - 4*(n+1)   ;; Stackpointer auf nächste freie Stelle
+    Goto f              ;; Setze den PC auf die Adresse von f im Textsegment
+R:  x = Stack[SP+4]     ;; Hole Rückgabewert
+    SP = SP + 4         ;; Stackpointer auf nächste freie Stelle
+</code></pre>
+</div>
+<div class='column'>
+<p><a href="#R-image-eabbf2a3f07f4315ceb1745429c8816b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/f-stackframe.png?width=30%25&height=auto" style=" height: auto; width: 30%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eabbf2a3f07f4315ceb1745429c8816b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/f-stackframe.png?width=30%25&height=auto"></a></p>
+</div>
+</div>
+<h3 id="funktionsaufruf">Funktionsaufruf</h3>
+<p>Ein Funktionsaufruf entspricht einem Sprung an die Stelle im
+Textsegment, wo der Funktionscode abgelegt ist. Dies erreicht man, in
+dem man diese Adresse in den <em>PC</em> schreibt. Bei einem <code>return</code> muss
+man wieder zum ursprünglichen Programmcode zurückspringen, weshalb man
+diese Adresse auf dem Stack hinterlegt.</p>
+<h3 id="parameter">Parameter</h3>
+<p>Zusätzlich müssen Parameter für die Funktion auf dem Stack abgelegt
+werden, damit die Funktion auf diese zugreifen kann. Im Funktionscode
+greift man dann statt auf die Variablen auf die konkreten Adressen im
+Stack-Frame zu. Dazu verwendet man den <em>Framepointer</em> bzw. <em>FP</em>, der
+auf die Adresse des ersten Parameters, d.h. auf die Adresse <em>hinter</em>
+der Rücksprungadresse, zeigt. Die Parameter sind dann je Funktion über
+konstante Offsets relativ zum <em>FP</em> erreichbar. Ähnlich wie die
+Rücksprungadresse muss der <em>FP</em> des aufrufenden Kontexts im Stack-Frame
+der aufgerufenen Funktion gesichert werden (in der Skizze nicht dargestellt)
+und am Ende des Aufrufs wieder hergestellt werden.</p>
+<h3 id="lokale-variablen">Lokale Variablen</h3>
+<p>Lokale Variablen einer Funktion werden ebenfalls auf dem Stack
+angelegt, falls nicht genügend Register zur Verfügung stehen, und
+relativ zum <em>FP</em> adressiert. Die Größe des dafür verwendeten Speichers
+wird oft als <em>Framesize</em> oder <em>Rahmengröße</em> bezeichnet. Am Ende eines
+Funktionsaufrufs wird dieser Speicher freigegeben indem der
+<em>Stackpointer</em> bzw. <em>SP</em> auf den <em>FP</em> zurückgesetzt wird.</p>
+<p>Die Adressierung von Parametern und Variablen kann auch relativ zum
+<em>SP</em> erfolgen, so dass kein <em>FP</em> benötigt wird. Der dazu erzeugte
+Maschinencode kann aber deutlich komplexer sein, da Stack und <em>SP</em>
+auch für arithmetische Berechnungen verwendet werden und der <em>SP</em>
+somit für die Dauer eines Funktionsaufrufs nicht zwingend konstant
+ist.</p>
+<h3 id="rückgabewerte">Rückgabewerte</h3>
+<p>Falls eine Funktion Rückgabewerte hat, werden diese ebenfalls auf dem
+Stack abgelegt (Überschreiben der ursprünglichen Parameter).</p>
+<p>Zusammengefasst gibt es für jeden Funktionsaufruf die in der obigen
+Skizze dargestellte Struktur (&quot;Stack Frame&quot; oder auch &quot;Activation
+Record&quot; genannt):</p>
+<ul>
+<li>Funktionsparameter (falls vorhanden)</li>
+<li>Rücksprungadresse (d.h. aktueller <em>PC</em>)</li>
+<li>Lokale Variablen der Funktion (falls vorhanden)</li>
+</ul>
+<h3 id="sichern-von-lokalen-variablen-der-alten-funktion">Sichern von lokalen Variablen der &quot;alten&quot; Funktion</h3>
+<ul>
+<li>Vor Funktionsaufrufen müssen aktuell verwendete Register (lokale Variablen) gesichert werden</li>
+<li>Register werden in den Speicher (Stack) ausgelagert</li>
+<li>Sicherung kann durch aufrufende Funktion (<em>Caller-Saves</em>) oder aufgerufene Funktion (<em>Callee-Saves</em>) erfolgen
+<ul>
+<li>Caller-Safes: nur &quot;lebende&quot; Register müssen gesichert werden</li>
+<li>Callee-Safes: nur tatsächlich verwendete Register müssen gesichert werden</li>
+</ul>
+</li>
+<li>Nachteile: unnötiges Sichern von Registern bei beiden Varianten möglich</li>
+<li>In der Praxis daher meist gemischter Ansatz aus Caller-Saves und Callee-Saves Registern</li>
+</ul>
+<h2 id="funktionsaufruf-prolog">Funktionsaufruf: Prolog</h2>
+<pre><code>f:  ...                 ;; Label f: hier startet die Funktion
+    p1 = Stack[SP+4*n]  ;; Zugriff auf p1 (per SP)
+    p1 = Stack[FP-4]    ;; Zugriff auf p1 (per FP)
+    ...                 ;; hier Funktionskram
+</code></pre>
+<p>Die Parameter einer Funktion werden vom aufrufenden Kontext auf dem Stack abgelegt. Nach dem Sprung
+in die Funktion kann über den Stack-Pointer oder den Frame-Pointer darauf zugegriffen werden. Alternativ
+könnte man die Parameter auch in vorhandene Register laden und entsprechend den <em>SP</em> hochzählen.</p>
+<h2 id="funktionsaufruf-epilog">Funktionsaufruf: Epilog</h2>
+<div class='columns'>
+<div class='column'>
+<pre><code>    SP = FP - 4             ;; Position über Rücksprungadresse auf Stack
+    FP = Stack[FP]          ;; Sichere Rücksprungadresse (R)
+    Stack[SP+4] = Ergebnis  ;; Ergebnis auf Stack (statt Rücksprung-Adresse)
+    Goto FP                 ;; Setze den PC auf die Rücksprung-Adresse
+</code></pre>
+</div>
+<div class='column'>
+<p><a href="#R-image-119f5e6b608ee0d619513292592f5701" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/f-epilog.png?width=30%25&height=auto" style=" height: auto; width: 30%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-119f5e6b608ee0d619513292592f5701"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode/f-epilog.png?width=30%25&height=auto"></a></p>
+</div>
+</div>
+<p>Beim Rücksprung aus einer Funktion wird der Rückgabewert an die Stelle der Rücksprungadresse
+geschrieben und der restliche Stack freigegeben.</p>
+<p>Der Rückgabewert wird dann vom Aufrufer an der Stelle <code>Stack[SP+4]</code> abgerufen und freigegeben
+(siehe Beispiel oben).</p>
+<p><em>Anmerkung</em>: Das Handling des <em>FP</em> ist im obigen Beispiel nicht konsistent bzw. vollständig.
+Nach dem Rücksprung in den Aufrufer muss der <em>FP</em> auf die Speicheradresse im Stack zeigen, wo
+die Rücksprungadresse dessen Aufrufers steht ...</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<p>Skizze zur Erzeugung von Assembler-Code</p>
+<ul>
+<li>Relativ ähnlich wie die Erzeugung von Bytecode</li>
+<li>Beachtung der Eigenschaften der Zielhardware (Register, Maschinenbefehle, ...)
+<ul>
+<li>Übersetzen des Zwischencodes in Maschinenbefehle</li>
+<li>Sammeln von Konstanten und Literalen am Ende vom Text-Segment</li>
+<li>Auflösen von Adressen</li>
+<li>Zuordnung der Variablen und Daten zu Registern oder Adressen</li>
+<li>Aufruf von Funktionen: Op-Codes zum Anlegen der <em>Stack-Frames</em></li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 7 Machine-Code Generation</em></li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1718704076" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html">Überblick</a><ul id="R-subsections-d5efd0a842116e4053b2a67d87eea20a" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html">Frontend</a><ul id="R-subsections-85aabb9721911d432d0c9c491c5a6ccb" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html">Lexer</a><ul id="R-subsections-e04ee3f837a23fdc5bf3a65fbb1147a2" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">Tabellenbasierte Implementierung</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html">Handcodierte Implementierung</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html">Parser</a><ul id="R-subsections-09952fbf38992ea2b55da5a9398e25ea" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html">LL-Parser (Theorie)</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html">LL-Parser implementieren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html">LL: Fortgeschrittene Techniken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html">Grenze Lexer und Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">LR-Parser 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html">LR-Parser 2</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">Error-Recovery</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html">Semantische Analyse</a><ul id="R-subsections-9224d7df85af7bd61eacb9084e167bed" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html">Symboltabellen</a><ul id="R-subsections-967b46af463f713c947c08ce2dfc6c96" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html">Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html">Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html">Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html">Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html">Attributierte Grammatiken</a></li></ul></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html">Backend</a><ul id="R-subsections-9a5cf8da07713c78ee52a8d0397cb806" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html">Optimierung u. Datenflussanalyse</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html">Interpreter</a><ul id="R-subsections-470e6f9272f65a611fb733ec05a0440f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">Garbage Collection</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">Maschinencode</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#praktikum"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions"><i class='fas fa-external-link-alt'></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1718704076" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1718704076" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1718704076"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1718704076" defer></script>
+  </body>
+</html>

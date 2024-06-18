@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="generator" content="Relearn 6.0.0">
+    <meta name="description" content="Ist das Code oder kann das weg? x = 42 y = &#39;wuppie&#39; y = &#39;fluppie&#39; print(y) def foo(): x = &#39;wuppie&#39; def bar(): print(x) return f fn = foo() fn() Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten. Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die Konstanten typischerweise am Ende des Text-Segments.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Garbage Collection">
+    <meta name="twitter:description" content="Ist das Code oder kann das weg? x = 42 y = &#39;wuppie&#39; y = &#39;fluppie&#39; print(y) def foo(): x = &#39;wuppie&#39; def bar(): print(x) return f fn = foo() fn() Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten. Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die Konstanten typischerweise am Ende des Text-Segments.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">
+    <meta property="og:title" content="Garbage Collection">
+    <meta property="og:description" content="Ist das Code oder kann das weg? x = 42 y = &#39;wuppie&#39; y = &#39;fluppie&#39; print(y) def foo(): x = &#39;wuppie&#39; def bar(): print(x) return f fn = foo() fn() Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten. Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die Konstanten typischerweise am Ende des Text-Segments.">
+    <meta property="og:locale" content="de-DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Garbage Collection">
+    <meta itemprop="description" content="Ist das Code oder kann das weg? x = 42 y = &#39;wuppie&#39; y = &#39;fluppie&#39; print(y) def foo(): x = &#39;wuppie&#39; def bar(): print(x) return f fn = foo() fn() Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten. Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die Konstanten typischerweise am Ende des Text-Segments.">
+    <meta itemprop="wordCount" content="2176">
+    <title>Garbage Collection</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html" rel="canonical" type="text/html" title="Garbage Collection">
+
+    
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1718704076" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1718704076" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1718704076" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1718704076" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1718704076" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1718704076"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Garbage Collection
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Garbage Collection</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p>Bei der Abarbeitung des Bytecodes in der VM werden immer wieder Objekte auf dem Laufzeit-Heap angelegt.
+Nicht benötigte Objekte müssen von Zeit zu Zeit wieder frei gegeben werden.</p>
+<p>Für die <strong>Mark-Sweep-Garbage-Collection</strong> pflegt man in der VM eine verkettete Liste aller Objekte, die
+auf dem Heap angelegt werden. Bei der Durchführung eines Mark-Sweep-Laufs markiert man zunächst alle
+&quot;Wurzeln&quot;, d.h. die über den Stack der VM oder die Hashtabelle der VM mit den globalen Variablen und
+Funktionen oder die Konstanten-Arrays der VM direkt erreichbaren Objekte. Von hier aus traversiert man
+alle verwiesenen Objekte und markiert diese ebenfalls. Anschließend iteriert man über die verkettete
+Liste aller Objekte in der VM und entfernt alle Objekte, die im vorigen Schritt nicht markiert wurden.</p>
+<p>Wenn man GC zu selten durchführt, dauert ein GC-Lauf u.U. sehr lange (viele Objekte): hohe Latenz.
+Wenn man GC zu oft durchführt, dauert ein einzelner Lauf zwar nur recht kurz, aber das Verhältnis
+von Zeit im &quot;User-Modus&quot; vs. Zeit im &quot;GC-Modus&quot; wird ebenfalls schlecht: niedriger Durchsatz. Hier
+kann man mit der Heuristik des &quot;self-adjusting&quot; Heaps arbeiten: Wenn die Gesamtgröße der allozierten
+Objekte einen Schwellwert überschreitet, führt man GC durch und vergrößert den Schwellwert: Größe der
+verbleibenden Objekte multipliziert mit einem Faktor.</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/Loo3Ver5pyc' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Garbage Collection</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/6f634388ae21b10f85827208a3a00606fef9550c5ab1fb94fd750ff0f6ebf24f9e1873213cb14c93406b2512041a49bc3bede5a995750d82ce6299669476b4b3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Garbage Collection</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K3) Prinzipien der Garbage Collection</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="ist-das-code-oder-kann-das-weg">Ist das Code oder kann das weg?</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wuppie&#39;</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;fluppie&#39;</span>
+</span></span><span style="display:flex;"><span>print(y)</span></span></code></pre></div></div>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>():
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wuppie&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bar</span>():
+</span></span><span style="display:flex;"><span>        print(x)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fn <span style="color:#f92672">=</span> foo()
+</span></span><span style="display:flex;"><span>fn()</span></span></code></pre></div></div>
+</div>
+<p>Bei der Erzeugung von Bytecode für eine VM kann man die Konstanten direkt in einem
+Konstanten-Array sammeln und im Bytecode mit den entsprechenden Indizes arbeiten.
+Das entspricht dem Vorgehen bei der Maschinencode-Erzeugung, dort sammelt man die
+Konstanten typischerweise am Ende des Text-Segments.</p>
+<p>Bei der Abarbeitung des Bytecodes durch die VM legt diese Objekte für globale und
+lokale Variablen, Strings sowie für Funktionen etc. an. Der Speicher dafür wird
+dynamisch auf dem Heap reserviert, und die Adressen beispielsweise im Stack (bei
+lokalen Variablen) oder in Hashtabellen (Funktionsnamen, globale Variablen) o.ä.
+gespeichert.</p>
+<p>Wenn Objekte nicht mehr benötigt werden, sollten sie entsprechend wieder freigegeben
+werden, da sonst der Heap der VM voll läuft. Im obigen Beispiel wird der Speicher
+für <code>wuppie</code> unerreichbar, sobald man die Zuweisung <code>y = 'fluppie'</code> ausführt.
+Andererseits darf man aber auch nicht zu großzügig Objekt aufräumen: Die lokale
+Variable <code>x</code> in <code>foo</code> wird in der beim Aufruf erzeugten Funktion <code>bar</code> benötigt
+(<em>Closure</em>) und muss deshalb von der Lebensdauer wie eine globale Variable behandelt
+werden.</p>
+<h2 id="erreichbarkeit">Erreichbarkeit</h2>
+<p><a href="#R-image-77820462ee94a97b2d2f999d536616d5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/reachable.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-77820462ee94a97b2d2f999d536616d5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/reachable.png?width=auto&height=auto"></a></p>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png" rel="external" target="_blank">reachable.png</a> by <a href="https://github.com/munificent" rel="external" target="_blank">Bob Nystrom</a> on Github.com (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE" rel="external" target="_blank">MIT</a>)</span></p>
+<ol>
+<li>
+<p>Erreichbar sind zunächst alle &quot;Wurzeln&quot;, d.h. alle Objekte, die direkt über den
+Stack oder die Konstanten-Arrays oder die Hashtabelle mit den globalen Variablen
+(und Funktionen) erreichbar sind.</p>
+</li>
+<li>
+<p>Alle Objekte, die von erreichbaren Objekten aus erreichbar sind, sind ebenfalls
+erreichbar.</p>
+</li>
+</ol>
+<p>&quot;Objekt&quot; meint dabei im Zuge der Bytecode-Generierung oder während der Bearbeitung
+durch die VM erstellte Werte/Objekte, die auf dem Heap alloziert wurden und durch
+die VM aktiv freigegeben werden müssen.</p>
+<h2 id="präzises-gc-mark-sweep-garbage-collection">&quot;Präzises GC&quot;: Mark-Sweep Garbage Collection</h2>
+<p>Das führt zu einem zweistufigen Algorithmus:</p>
+<ol>
+<li><strong>Mark</strong>: Starte mit den Wurzeln und traversiere so lange durch die Objektreferenzen,
+bis alle erreichbaren Objekte besucht wurden.</li>
+<li><strong>Sweep</strong>: Lösche alle anderen Objekte.</li>
+</ol>
+<p><a href="#R-image-a535c6d9c48b15fdf5d399354567c990" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a535c6d9c48b15fdf5d399354567c990"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png?width=auto&height=auto"></a></p>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png" rel="external" target="_blank">mark-sweep.png</a> by <a href="https://github.com/munificent" rel="external" target="_blank">Bob Nystrom</a> on Github.com (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE" rel="external" target="_blank">MIT</a>)</span></p>
+<p>Die Strukturen für Objekte und die VM werden ergänzt: Objekte erhalten noch
+ein Flag für die Markierung.</p>
+<p>Zum Auffinden der erreichbaren Objekte wird mit einem Färbungsalgorithmus
+gearbeitet. Initial sind alle Objekte &quot;weiß&quot; (nicht markiert).</p>
+<h3 id="phase-mark-wurzeln-markieren">Phase &quot;Mark&quot;: Wurzeln markieren</h3>
+<p>Im ersten Schritt färbt man alle &quot;Wurzeln&quot; &quot;grau&quot; ein. Dabei werden alle
+Objektreferenzen im Stack der VM, in der Hashtabelle für globale Variablen
+der VM, in der Konstantentabelle des Bytecode-Chunks sowie in den Funktionspointern
+betrachtet: Über diese Datenstrukturen wird iteriert und alle auf dem Heap
+der Laufzeitumgebung allozierten Strukturen/Objekte werden markiert, indem
+ihr Flag gesetzt wird. Zusätzlich werden die Pointer auf diese Objekte in
+einen &quot;<code>grayStack</code>&quot; hinzugefügt. Damit sind alle Wurzeln &quot;grau&quot; markiert&quot;.</p>
+<h3 id="phase-mark-trace">Phase &quot;Mark&quot;: Trace</h3>
+<p>Nachdem alle Wurzeln &quot;grau&quot; markiert wurden und auf den <code>grayStack</code> der VM
+gelegt wurden, müssen nun mögliche Verweise in den Wurzeln verfolgt werden.
+Dazu entfernt man schrittweise die Objekte vom Stack und betrachtet sie damit
+als &quot;schwarz&quot;. (Das Markierungs-Flag bleibt gesetzt, &quot;schwarz&quot; sind die &quot;grau&quot;
+markierten Objekte, weil sie nicht mehr auf dem <code>grayStack</code> der VM liegen.)
+Sofern das aktuell betrachtete Objekt seinerseits wieder Referenzen hat
+(beispielsweise haben Funktionen wieder einen Bytecode-Chunk mit einem
+Konstanten-Array), werden diese Referenzen iteriert und alle dabei aufgefundenen
+Objekte auf den <code>grayStack</code> der VM gelegt und ihr Flag gesetzt.</p>
+<p>Dieser Prozess wird so lange durchgeführt, bis der <code>grayStack</code> leer ist. Dann
+sind alle erreichbaren Objekte markiert.</p>
+<h3 id="phase-sweep">Phase &quot;Sweep&quot;</h3>
+<p>Jetzt sind alle erreichbaren Objekte markiert. Objekte, deren Flag nicht gesetzt
+ist, sind nicht mehr erreichbar und können freigegeben werden.</p>
+<p>Wenn die Objekte nicht erreichbar sind, wie kommt man dann an diese heran?</p>
+<p>Die Strukturen für Objekte und die VM werden erneut ergänzt: Objekte erhalten noch
+einen <code>next</code>-Pointer, mit dem <em>alle</em> Objekte in einer verketteten Liste gehalten
+werden können.</p>
+<p>Wann immer für ein Objekt Speicher auf dem Laufzeit-Heap angefordert wird,
+wird dieses Objekt in eine verkettete Liste aller Objekte der VM eingehängt.
+Über diese Liste wird nun iteriert und dabei werden alle &quot;weißen&quot; (nicht markierten)
+Objekte ausgehängt und freigegeben.</p>
+<p>Zusätzlich müssen alle verbleibenden Objekte für den nächsten GC-Lauf wieder
+entfärbt werden, d.h. die Markierung muss wieder zurückgesetzt werden.</p>
+<h3 id="hinweise">Hinweise</h3>
+<p>Die Mark-and-Sweep-GC-Variante wird auch &quot;präzises Garbage Collection&quot; genannt,
+da dabei <em>alle</em> nicht mehr benötigten Objekte entfernt werden.</p>
+<p>Da während der Durchführung der GC die Abarbeitung des Programms pausiert wird,
+hat sich deshalb auch die Bezeichnung <em>stop-the-world GC</em> eingebürgert.</p>
+<h2 id="metriken-latenz-und-durchsatz">Metriken: Latenz und Durchsatz</h2>
+<ul>
+<li>
+<p><strong>Latenz</strong>: Längste Zeitdauer, während der das eigentliche Programm (des Users)
+pausiert, beispielsweise weil gerade eine Garbage Collection läuft</p>
+</li>
+<li>
+<p><strong>Durchsatz</strong>: Verhältnis aus Zeit für den User-Code zu Zeit für Garbage Collection</p>
+<p>Beispiel: Ein Durchsatz von 90% bedeutet, dass 90% der Rechenzeit für den User
+zur Verfügung steht und 10% für GC verwendet werden.</p>
+</li>
+</ul>
+<p><a href="#R-image-f29f5c89a0ac10902d923f436319573d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f29f5c89a0ac10902d923f436319573d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png?width=80%25&height=auto"></a></p>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png" rel="external" target="_blank">latency-throughput.png</a> by <a href="https://github.com/munificent" rel="external" target="_blank">Bob Nystrom</a> on Github.com (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE" rel="external" target="_blank">MIT</a>)</span></p>
+<h2 id="heuristik-self-adjusting-heap">Heuristik: Self-adjusting Heap</h2>
+<ul>
+<li>GC selten: Hohe Latenz (lange Pausen)</li>
+<li>GC oft: Geringer Durchsatz</li>
+</ul>
+<p><strong>Heuristik</strong></p>
+<ul>
+<li>Beobachte den allozierten Speicher der VM</li>
+<li>Wenn vorher festgelegte (willkürliche) Grenze überschritten: GC</li>
+<li>Größe des verbliebenen belegten Speichers mal Faktor =&gt; neue Grenze</li>
+</ul>
+<p>Die Objekte bzw. der Speicherverbrauch, der nach einem GC-Lauf übrig bleibt, ist
+ein Indikator für den aktuell nötigen Speicher. Deshalb setzt man die neue Schwelle,
+ab der der nächste GC-Lauf gestartet wird, ungefähr auf diesen Speicherverbrauch mal
+einem gewissen Faktor (beispielsweise den Wert 2), um nicht sofort wieder einen
+GC starten zu müssen ...</p>
+<h2 id="generational-gc">Generational GC</h2>
+<ul>
+<li>Teile Heap in zwei Bereiche: &quot;<em>Kinderstube</em>&quot; und &quot;<em>Erwachsenenbereich</em>&quot;</li>
+<li>Neue Objekte werden in der Kinderstube angelegt</li>
+<li>Häufiges GC in Kinderstube</li>
+<li>Überlebende Objekte werden nach 
+<span class="math align-center">$N$</span> Generation in den Erwachsenenbereich verschoben</li>
+<li>Deutlich selteneres GC im Erwachsenenbereich</li>
+</ul>
+<p>Die meisten Objekte haben oft eher eine kurze Lebensdauer. Wenn sie aber ein gewisses
+&quot;Alter&quot; erreicht haben, werden sie oft noch weiterhin benötigt.</p>
+<p>Man teilt den Heap in zwei unterschiedlich große Bereiche auf: Die &quot;Kinderstube&quot;
+(<em>Nursery</em>) und den größeren Heap-Bereich für die &quot;Erwachsenen&quot;. Neue Objekte kommen
+zunächst in die Kinderstube, und dort wird regelmäßig GC ausgeführt. Bei jedem GC-Lauf
+wird der Generationen-Zähler der &quot;überlebenden&quot; Objekte inkrementiert. Wenn die Objekte
+eine bestimmte Anzahl an Generationen überlebt haben, werden sie in den Erwachsenenbereich
+verschoben, wo deutlich seltener eine GC durchgeführt wird.</p>
+<h2 id="konservatives-gc-boehm-gc">&quot;Konservatives GC&quot;: Boehm GC</h2>
+<p>Man unterscheidet zusätzlich noch zwischen <em>konservativem</em> und <em>präzisem</em> GC:</p>
+<ul>
+<li><em>Konservatives GC</em> geht eher vorsichtig vor: Wenn ein Speicherbereich
+möglicherweise noch benötigt werden <em>könnte</em>, wird er nicht angefasst;
+alles, was auch nur so aussieht wie ein Pointer wird entsprechend behandelt.</li>
+<li><em>Präzises GC</em> &quot;weiss&quot; dagegen genau, welche Werte Pointer sind und welche
+nicht und handelt entsprechend.</li>
+</ul>
+<p>Boehm, Weiser und Demers: <a href="https://hboehm.info/gc/" rel="external" target="_blank">&quot;<strong>Boehm GC</strong>&quot;</a>
+=&gt; Konservativer GC (Variante des Mark-and-Sweep-GC)</p>
+<p><a href="#R-image-079e673b3e9dc4593c3bf246cb8a6b63" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/freispeicherverwaltung.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-079e673b3e9dc4593c3bf246cb8a6b63"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/freispeicherverwaltung.png?width=80%25&height=auto"></a></p>
+<ul>
+<li>Idee: Nutze die interne Verwaltung des Heaps zum Finden von Objekten</li>
+</ul>
+<h3 id="ablauf">Ablauf</h3>
+<ul>
+<li><strong>Mark</strong>:
+<ol>
+<li>Suche alle potentiell zu bereinigenden Objekte: Inspiziere Stack, statische
+Daten, Prozessor-Register, ...</li>
+<li>Behandle alle gefundenen Adressen zunächst als &quot;unsichere Pointer&quot;<br>
+Es ist noch nicht klar, ob das wirklich gültige Adressen in den Heap sind ...</li>
+<li>Prüfe alle unsicheren Pointer:
+<ul>
+<li>Liegt die Adresse tatsächlich <em>im</em> Heap?</li>
+<li>Zeigt der Pointer auf den Anfang eines Blockes?</li>
+<li>Ist der Block nicht in der Free-List enthalten?
+=&gt; Ergebnis: gültige Pointer (&quot;Root-Pointer&quot;): markiere diese Objekte als &quot;erreichbar&quot;</li>
+</ul>
+</li>
+<li>Wiederhole die Schritte (1) bis (3) durch die Untersuchung der gefundenen Objekte</li>
+</ol>
+</li>
+<li><strong>Sweep</strong>: Iteriere über den Heap (blockweise) und gebe alle belegten Blöcke frei, die
+nicht als &quot;erreichbar&quot; markiert wurden</li>
+</ul>
+<h3 id="exkurs-heap-verwaltung">Exkurs Heap-Verwaltung</h3>
+<p>Der Heap ist ein zusammenhängender Speicherbereich, der durch die Allokation und Freigabe
+von Blöcken in mehrere Blöcke segmentiert wird. Die freien Blöcke werden dabei in eine
+verkettete Liste &quot;Free-List&quot; (im Bild &quot;freemem&quot;) eingehängt. Diese verkettete Liste wird
+direkt im Heap abgebildet.</p>
+<p>Es wird dazu eine Verwaltungsstruktur definiert, die neben Informationen wie der Größe des
+freien Blocks einen Pointer auf den nächsten freien Block aufweist. Jeder Speicherblock im
+Heap beginnt stets mit dieser Struktur, so dass alle freien Blöcke in die Freispeicherliste
+eingehängt werden können:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> memblock {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">size_t</span> size;
+</span></span><span style="display:flex;"><span>    uint marked;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> memblock <span style="color:#f92672">*</span>next;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div><ul>
+<li><code>size</code> kann die Gesamtgröße des Blockes bedeuten oder aber nur die Größe der Nutzdaten,
+die sich hinter der Verwaltungsstruktur befinden
+=&gt; letztere Deutung wird in Linux verwendet</li>
+<li>In Linux hat man eine doppelt verkettete Liste (statt wie hier nur einfach verkettet)</li>
+</ul>
+<p>Bei <code>malloc</code> durchsucht man diese Liste im Heap, bis man einen passenden Block gefunden hat.
+Dann setzt man den <code>next</code>-Pointer des Vorgängerblocks auf den Wert des eigenen <code>next</code>-Pointers
+und hängt damit den gefundenen Block aus der Freispeicherliste aus. Der <code>next</code>-Pointer wird
+ungültig gemacht, indem man ihn auf einen vordefinierten (und nur zu diesem Zweck genutzten)
+Wert setzt (alternativ kann man dazu ein weiteres Flag in der Struktur spendieren). Dann
+bestimmt man per Pointerarithmetik die Adresse des ersten Bytes hinter der Verwaltungsstruktur
+und liefert diese Adresse als Ergebnis (Pointer auf den Nutzbereich des Blockes) an den Aufrufer
+zurück. Wenn der gefundene freie Block &quot;viel zu groß&quot; ist, kann man den Block auch splitten:
+Einen Teil gibt man als allozierten Block an den Aufrufer zurück, den anderen Teil (den Rest)
+hängt man als neuen Block in die Freispeicherliste ein.</p>
+<p>Bei einem <code>free</code> bekommt man den Pointer auf das erste Byte der Nutzdaten eines Speicherblockes
+und muss per Pointerarithmetik den Beginn der Verwaltungsstruktur des Blockes bestimmen. Dann
+setzt man den <code>next</code>-Pointer des Blockes auf den Wert des Freispeicherlisten-Pointers, und
+dieser wird auf die Startadresse der Verwaltungsstruktur des Blockes &quot;umgebogen&quot;. Damit hat man
+den Block vorn in die Freispeicherliste eingehängt.</p>
+<h3 id="vor--und-nachteile-des-konservativen-gc">Vor- und Nachteile des konservativen GC</h3>
+<ul>
+<li>(+) Keine explizite Kooperation mit der Speicherverwaltung nötig<br>
+Die Speicherverwaltung muss nur eine Bedingung erfüllen: Jedes benutzte Objekt hat einen
+Pointer auf den Anfang des Blockes</li>
+<li>(+) Explizite Deallocation (<code>free</code>) ist möglich</li>
+<li>(+) Kann jederzeit abgebrochen werden<br>
+Praktisch in Verbindung mit opportunistischer GC in interaktiven Applikationen</li>
+<li>(+) Keine separate Buchführung über alle in der VM erzeugten Objekte nötig</li>
+<li>(-) Mark-Phase dauert durch die zusätzlichen Tests länger</li>
+<li>(-) Die Möglichkeit einer Fragmentierung des Speichers ist hoch</li>
+<li>(-) Fehlinterpretationen können dafür sorgen, dass unsichere Pointer nicht freigegeben werden</li>
+<li>(-) Bei hoch optimierenden Compilern ist die GC nicht zuverlässig, da die Adressen u.U. nicht
+mehr auf die benutzen Objekte zeigen</li>
+</ul>
+<h2 id="reference-counting">Reference Counting</h2>
+<p>Beim Reference Counting erhält jedes Objekt einen Referenz-Zähler.</p>
+<p>Beim Erstellen weiterer Referenzen oder Pointer auf ein Objekt wird der Zähler entsprechend
+inkrementiert.</p>
+<p>Sobald ein Objekt seinen Gültigskeitsbereich (Scope) verlässt, wird versucht, das Objekt
+freizugeben. Dazu wird der interne Referenz-Zähler dekrementiert. Erst wenn der Zähler dabei
+den Wert 0 erreicht, bedeutet dies, dass es keine weitere Referenz oder Pointer auf dieses Objekt
+gibt und das Objekt wird vom Heap entfernt (freigegeben). Wenn der Zähler noch größer Null ist,
+wird das Objekt nicht weiter verändert.</p>
+<p>Dies ist eine einfach Form des GC, die ohne zyklische Sammelphasen auskommt. Allerdings hat
+diese Form ein Problem mit zyklischen Datenstrukturen.</p>
+<h3 id="algorithmus-skizze">Algorithmus (Skizze)</h3>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new</span>():
+</span></span><span style="display:flex;"><span>    obj <span style="color:#f92672">=</span> alloc_memory()
+</span></span><span style="display:flex;"><span>    obj<span style="color:#f92672">.</span>set_ref_counter(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> obj</span></span></code></pre></div><p><code>new()</code> wird beim Erstellen eines Objektes aufgerufen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete</span>(obj):
+</span></span><span style="display:flex;"><span>    obj<span style="color:#f92672">.</span>dec_ref_counter()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> obj<span style="color:#f92672">.</span>get_ref_counter() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> children(obj):
+</span></span><span style="display:flex;"><span>            delete(child)
+</span></span><span style="display:flex;"><span>        free_object(obj)</span></span></code></pre></div><p><code>delete()</code> wird aufgerufen, wenn das Objekt nicht weiter vom Programm verwendet wird, es
+beispielsweise seinen Scope verlässt. Hierbei wird geprüft, ob noch anderweitig auf dieses
+Objekt referenziert wird.</p>
+</div>
+<div class='column'>
+<p><a href="#R-image-6ddd57b883205b9919bcbc5317a9faaf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/delete_example.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6ddd57b883205b9919bcbc5317a9faaf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/delete_example.png?width=auto&height=auto"></a></p>
+<p>Im Beispiel wird <code>delete(A)</code> ausgeführt: Der Referenz-Zähler (<em>RC</em>) von A wird dekrementiert,
+und da er den Wert 0 erreicht, werden rekursiv die von A verwiesenen Kinder gelöscht. In B
+wird dabei ebenfalls der Wert 0 erreicht und <code>delete(D)</code> aufgerufen. Da dort der RC größer 0
+bleibt, wird dessen Kind E nicht weiter beachtet. Anschließend werden A und B aus dem Speicher
+freigegeben.</p>
+</div>
+</div>
+<h3 id="probleme">Probleme</h3>
+<p>Das größte Problem beim Referenz Counting ist der Umgang mit zyklischen Datenstrukturen, wie
+verkettete Listen oder einfache Graphen. Es dazu kommen, dass zyklische Datenstrukturen nicht
+gelöscht und freigegeben werden können und ein Speicherverlust entsteht.</p>
+<p>Das folgende Beispiel erläutert dieses Problem:</p>
+<p><a href="#R-image-3bb96539f11e96eac8dd5f798a08948f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/delete_problem.png?width=80&height=auto" style=" height: auto; width: 80;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3bb96539f11e96eac8dd5f798a08948f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc/delete_problem.png?width=80&height=auto"></a></p>
+<h2 id="stop-and-copy-garbage-collection">Stop-and-Copy Garbage Collection</h2>
+<ul>
+<li>Teile Heap in zwei Bereiche (A und B)</li>
+<li>Alloziere nur Speicher aus A (bis der Bereich voll ist)</li>
+<li>Stoppe Programmausführung und kopiere alle erreichbaren Objekte von A nach B</li>
+<li>Gebe gesamten Speicher in A frei</li>
+<li>Setze Programmausführung mit vertauschten Rollen von A und B fort</li>
+</ul>
+<h3 id="vor--und-nachteile-von-stop-and-copy-gc">Vor- und Nachteile von Stop-and-Copy GC</h3>
+<ul>
+<li>(+) Nur ein Lauf über Daten nötig</li>
+<li>(+) Automatische Speicherdefragmentierung</li>
+<li>(+) Aufwand proportional zur Menge der erreichbaren Objekte und nicht zur Größe des Speichers</li>
+<li>(+) Zyklische Referenzen sind kein Problem</li>
+<li>(-) Benötigt doppelten Speicherplatz für gegebene Heap-Größe</li>
+<li>(-) Objekte werden im Speicher bewegt (Update von Referenzen nötig)</li>
+<li>(-) Programm muss für GC angehalten werden</li>
+</ul>
+<h2 id="benchmarking">Benchmarking</h2>
+<h3 id="ziel">Ziel</h3>
+<ul>
+<li>Vergleich von verschiedenen GC-Algorithmen</li>
+<li>Wahl des optimalen Algorithmus für konkreten Anwendungsfall</li>
+<li>Overhead durch GC möglichst gering halten</li>
+</ul>
+<h3 id="setup">Setup</h3>
+<ul>
+<li>&quot;Warm up&quot;: einige Iterationen des Benchmarks ohne Messung vorlaufen lassen,
+um bspw. Just-in-Time Kompilierung und Initialisierung aller Laufzeitkomponenten abzuschließen</li>
+<li>Anpassung der Heap-Größe an den Benchmark (falls Heap zu bestimmter Rate gefüllt werden soll)</li>
+<li>Überprüfung und Eliminierung von externen Faktoren, die das Ergebnis beeinflussen können
+<ul>
+<li>andere Prozesse</li>
+<li>dynamische Frequenzskalierung der CPU</li>
+<li>Vermeidung von Lese- und Schreibzugriffen, sofern diese nicht durch Test-Infrastruktur vorgegeben sind</li>
+</ul>
+</li>
+</ul>
+<h3 id="relevante-metriken-für-tests">Relevante Metriken für Tests</h3>
+<ul>
+<li>Durchsatz (welchen Anteil hat GC an der Laufzeit?)</li>
+<li>Latenz (welche Verzögerung erzeugt GC?)</li>
+</ul>
+<h3 id="szenarien">Szenarien</h3>
+<p>(stark vom getesteten GC-Algorithmus abhängig)</p>
+<ul>
+<li>konstant gefüllter Heap/leerer Heap</li>
+<li>Erzeugen und Löschen von stark referenzierten Objekten/temporären Objekten</li>
+<li>Für Generational GC: Testen von Overhead von Schreib- und Lesebarrieren durch Objektreferenzierung</li>
+</ul>
+<p><a href="https://ionutbalosin.com/2019/12/jvm-garbage-collectors-benchmarks-report-19-12/" rel="external" target="_blank">Beispiele für GC-Benchmarks der JVM</a></p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Pflege verkette Liste aller Objekte in der VM</p>
+</li>
+<li>
+<p>Mark-Sweep-GC:</p>
+<ol>
+<li>Markiere alle Wurzeln (&quot;grau&quot;, aus Stack und Hashtabelle)</li>
+<li>Traversiere ausgehend von den Wurzeln alle Objekte und markiere sie</li>
+<li>Gehe die verkettete Liste aller Objekte durch und entferne alle nicht markierten</li>
+</ol>
+</li>
+<li>
+<p>Problem: Latenz und Durchsatz =&gt; Idee des &quot;self-adjusting&quot; Heaps</p>
+</li>
+<li>
+<p>Varianten/Alternativen: Generational GC, Boehm-GC, Reference Counting, Stop-and-Copy GC, ...</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_GCHandbook2011'>[GCHandbook2011] <strong>The Garbage Collection Handbook: The Art of Automatic Memory Management</strong><br>Jones, R. und Hosking, A. und Moss, E., Routledge, 2011. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4200-8279-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4200-8279-1</a>.</li> <li id='id_Nystrom2021'>[Nystrom2021] <a href='https://github.com/munificent/craftinginterpreters' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Crafting Interpreters</strong></a><br>Nystrom, R., Genever Benning, 2021. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-0-9905829-3-9</a>.<br><em>Kapitel 26: Garbage Collection</em></li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1718704076" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1718704076" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1718704076"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1718704076" defer></script>
+  </body>
+</html>

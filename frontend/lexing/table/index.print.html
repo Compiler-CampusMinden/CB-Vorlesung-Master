@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="generator" content="Relearn 6.0.0">
+    <meta name="description" content="Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ;erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&lt;ID, &#34;a&#34;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt; Input: Zeichenstrom (Eingabedatei o.ä.) Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&#34;Lexeme&#34;), Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert) Ausgabe: Tokenstrom Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder Kommentare entfernt.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lexer: Tabellenbasierte Implementierung">
+    <meta name="twitter:description" content="Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ;erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&lt;ID, &#34;a&#34;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt; Input: Zeichenstrom (Eingabedatei o.ä.) Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&#34;Lexeme&#34;), Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert) Ausgabe: Tokenstrom Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder Kommentare entfernt.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">
+    <meta property="og:title" content="Lexer: Tabellenbasierte Implementierung">
+    <meta property="og:description" content="Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ;erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&lt;ID, &#34;a&#34;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt; Input: Zeichenstrom (Eingabedatei o.ä.) Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&#34;Lexeme&#34;), Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert) Ausgabe: Tokenstrom Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder Kommentare entfernt.">
+    <meta property="og:locale" content="de-DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Lexer: Tabellenbasierte Implementierung">
+    <meta itemprop="description" content="Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom Aus dem Eingabe(-quell-)text
+/* demo */ a= [5 , 6] ;erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:
+&lt;ID, &#34;a&#34;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt; Input: Zeichenstrom (Eingabedatei o.ä.) Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&#34;Lexeme&#34;), Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert) Ausgabe: Tokenstrom Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder Kommentare entfernt.">
+    <meta itemprop="wordCount" content="1220">
+    <title>Lexer: Tabellenbasierte Implementierung</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html" rel="canonical" type="text/html" title="Lexer: Tabellenbasierte Implementierung">
+
+    
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1718704076" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1718704076" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1718704076" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1718704076" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1718704076" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1718704076"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Lexer: Tabellenbasierte Implementierung
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Lexer: Tabellenbasierte Implementierung</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p><a href="#R-image-2d076b17dc4a682f66c82cf10f67f6b0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/lexing/images/architektur_cb_lexer.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2d076b17dc4a682f66c82cf10f67f6b0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/lexing/images/architektur_cb_lexer.png?width=auto&height=auto"></a></p>
+<p>Der Lexer (auch &quot;Scanner&quot;) soll den Zeichenstrom in eine Folge von Token
+zerlegen. Zur Spezifikation der Token werden reguläre Ausdrücke verwendet.
+Diese können über verschiedene Schritte in einen zugehörigen DFA transformiert
+werden, der wiederum über Tabellen dargestellt werden kann (vgl. auch
+<a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/regular.md" rel="external" target="_blank">Reguläre Sprachen, Ausdrucksstärke</a>).</p>
+<p>Mit Hilfe der (üblicherweise von Scanner-Generatoren generierten) Tabellen kann
+ein Lexer implementiert werden (&quot;tabellenbasierte Implementierung&quot;). Zur Steigerung
+der Effizienz kann die Tabelle in den Code integriert werden (etwa mit Sprungbefehlen,
+&quot;direkt codierte Implementierung&quot;). Diese Lexer sind nur schwer nachvollziehbar und
+werden üblicherweise generiert (vgl. <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/flex.md" rel="external" target="_blank">Flex</a>
+und <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/antlr-lexing.md" rel="external" target="_blank">ANTLR</a>).</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/2GeEaU3qB6c' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Tabellenbasierte Scanner</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/36f62768351b19aa6453c819afa64cf2cc9ac698d3cf29137f3c7a5aeb5229de7c1102b8cf87981c27cbc1b250f03f1572e690dc96fb69e89a982f8200d54eb2' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Tabellenbasierte Scanner</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K1) Aufgaben eines Lexers</li> <li>(K2) Erkennen von Lexemen mit RE und DFA</li> <li>(K2) DFA-nahe Implementierung: Tabellenbasiert und direkt codiert</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="lexer-erzeugen-eines-token-stroms-aus-einem-zeichenstrom">Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom</h2>
+<p>Aus dem Eingabe(-quell-)text</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* demo */</span>
+</span></span><span style="display:flex;"><span>a<span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>  , <span style="color:#ae81ff">6</span>]     ;</span></span></code></pre></div><p>erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:</p>
+<pre><code>&lt;ID, &quot;a&quot;&gt; &lt;ASSIGN&gt; &lt;LBRACK&gt; &lt;NUM, 5&gt; &lt;COMMA&gt; &lt;NUM, 6&gt; &lt;RBRACK&gt; &lt;SEMICOL&gt;
+</code></pre>
+<ul>
+<li>Input: Zeichenstrom (Eingabedatei o.ä.)</li>
+<li>Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom (&quot;Lexeme&quot;),
+Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert)</li>
+<li>Ausgabe: Tokenstrom</li>
+</ul>
+<p>Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space
+oder Kommentare entfernt.</p>
+<p>Durch diese Vorverarbeitung wird eine höhere Abstraktionsstufe erreicht und es
+können erste grobe Fehler gefunden werden. Dadurch kann der Parser auf einer
+abstrakteren Stufe arbeiten und muss nicht mehr den gesamten ursprünglichen
+Zeichenstrom verarbeiten.</p>
+<p><em>Anmerkung</em>: In dieser Phase steht die Geschwindigkeit stark im Vordergrund:
+Der Lexer &quot;sieht&quot; <em>alle</em> Zeichen im Input. Deshalb findet man häufig von
+Hand kodierte Lexer, obwohl die Erstellung der Lexer auch durch Generatoren
+erledigt werden könnte ...</p>
+<p><em>Anmerkung</em>: Die Token sind die Terminalsymbole in den Parserregeln (Grammatik).</p>
+<h2 id="definition-wichtiger-begriffe">Definition wichtiger Begriffe</h2>
+<ul>
+<li>
+<p><strong>Token</strong>: Tupel (Tokenname, optional: Wert)</p>
+<p>Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische
+Einheit repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole
+für den Parser.</p>
+<p>Token werden i.d.R. einfach über ihren Namen referenziert. Token werden
+häufig zur Unterscheidung von anderen Symbolen in der Grammatik in
+Fettschrift oder mit großen Anfangsbuchstaben geschrieben.</p>
+<p>Ein Token kann einen Wert haben, etwa eine Zahl oder einen Bezeichner, der
+auf das zum Token gehörende Pattern gematcht hatte (also das Lexem). Wenn
+der Wert des Tokens eindeutig über den Namen bestimmt ist (im Beispiel oben
+beim Komma oder den Klammern), dann wird häufig auf den Wert verzichtet.</p>
+</li>
+<li>
+<p><strong>Lexeme</strong>: Sequenz von Zeichen im Eingabestrom, die auf ein Tokenpattern
+matcht und vom Lexer als Instanz dieses Tokens identifiziert wird.</p>
+</li>
+<li>
+<p><strong>Pattern</strong>: Beschreibung der Form eines Lexems</p>
+<p>Bei Schlüsselwörtern oder Klammern etc. sind dies die Schlüsselwörter oder
+Klammern selbst. Bei Zahlen oder Bezeichnern (Namen) werden i.d.R.
+reguläre Ausdrücke zur Beschreibung der Form des Lexems formuliert.</p>
+</li>
+</ul>
+<h2 id="erkennung-mit-re-und-dfa">Erkennung mit RE und DFA</h2>
+<p><a href="#R-image-11dc8a2f0bfa94582dce4940aaed2fbb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/lexer.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11dc8a2f0bfa94582dce4940aaed2fbb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/lexer.png?width=auto&height=auto"></a></p>
+<p>Die obige Skizze ist eine Kurzzusammenfassung der Theorie-Vorlesung in der
+letzten Woche und stellt die Verbindung zur heutigen Vorlesung her:</p>
+<p>Die Lexeme werden mit Hilfe von <em>DFA</em> bestimmt. Die Formulierung der DFA ist
+eher komplex (zumindest sehr umständlich), weshalb man die Pattern für die
+Lexeme ersatzweise mit Hilfe von <em>Regulären Ausdrücken</em> (&quot;<em>RE</em>&quot;) formuliert.</p>
+<p>Mit Hilfe der <em>Thompson's Construction</em> kann man diese in äquivalente <em>NFA</em>
+umformen. Über die <em>Subset Construction</em> kann man daraus <em>DFA</em> erzeugen, die
+wiederum mit Hilfe des <em>Hopcroft's Algorithm</em> minimiert werden.</p>
+<p>Diese DFA erkennen die selbe Sprache wie die ursprünglichen REs. Man könnte
+also durch Simulation der DFA die Lexeme erkennen und die Token bilden. Dabei
+würde pro Eingabezeichen ein Übergang im DFA stattfinden und bei Erreichen
+eines akzeptierenden Zustandes hätte man das durch diesen DFA (bzw. dessen
+ursprünglichen RE) beschriebene Lexem identifiziert.</p>
+<p>Falls mehrere REs matchen, muss man in geeigneter Weise entscheiden. I.d.R.
+nimmt man den längsten Match. Zusätzlich wird eine Reihenfolge unter den REs
+festgelegt, um bei mehreren gleich langen Matches ein Token bestimmen zu
+können.</p>
+<p>In der Praxis werden die DFA als Ausgangspunkt für die Implementierung des
+Lexers genutzt (ob nun bei einer &quot;handgeklöppelten&quot; Implementierung oder beim
+Einsatz eines Lexer-Generators). Als typische Implementierungsansätze sollen
+nachfolgend die <em>tabellenbasierte Implementierung</em> sowie als etwas schnellere
+Variante die <em>direkt codierte Implementierung</em> betrachtet werden. Während diese
+beiden Varianten noch sehr nah an der Simulation eines DFA sind, ist die
+<em>manuelle Implementierung</em>
+(vgl. <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html">Handcodierte Implementierung</a>)
+noch einfacher in bestehenden Code zu integrieren (zum Preis einer erschwerten
+Änderbarkeit).</p>
+<p>Über die <em>Kleene's Construction</em> könnte man aus den DFA wieder <em>RE</em> erzeugen
+und damit den Kreis schließen :-)</p>
+<h2 id="erkennen-von-zeichenketten-für-strickmuster-10lrl">Erkennen von Zeichenketten für Strickmuster: &quot;10LRL&quot;</h2>
+<p><a href="#R-image-7f32cb7969f4d2244782fc7f3ea620f8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/dfa.png?width=45%25&height=auto" style=" height: auto; width: 45%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7f32cb7969f4d2244782fc7f3ea620f8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/dfa.png?width=45%25&height=auto"></a></p>
+<p>DFA zur Erkennung von Strickanweisungen: Das erste Zeichen muss ein
+Digit im Bereich 1..9 sein, gefolgt von weiteren Digits, gefolgt von
+einer Anweisung für linke Maschen (&quot;L&quot;) oder rechte Maschen (&quot;R&quot;).</p>
+<p>Ein passender regulärer Ausdruck dafür wäre &quot;<code>[1-9][0-9]*[LR]+</code>&quot;.</p>
+<p>Die Eingabezeichen werden in relevante Kategorien sortiert. Dabei
+werden nur die für die Aufgabe interessanten Zeichen (&quot;R&quot; bzw. &quot;L&quot;
+und die Ziffern) einer konkreten Kategorie zugewiesen, der Rest wird
+als &quot;<code>*</code>&quot; zusammengefasst.</p>
+<p><a href="#R-image-d110f52c18a16515dec812490cab3f04" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/delta.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d110f52c18a16515dec812490cab3f04"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table/delta.png?width=auto&height=auto"></a></p>
+<p>Für jeden Zustand wird in der Tabelle vermerkt, in welchen Folgezustand beim
+Auftreten eines Zeichens einer bestimmten Kategorie gewechselt werden soll.
+Dies ist eine alternative Darstellung des DFA in der obigen Darstellung.</p>
+<p>Die Zustände des DFA werden den Tokentypen zugeordnet. Alle Zustände außer
+&quot;<code>s2</code>&quot; entsprechen keinem gültigen Token, dies könnte man etwa als Token-Typ
+&quot;<code>invalid</code>&quot; realisieren.</p>
+<p><em>Anmerkung</em>: &quot;<code>se</code>&quot; ist ein Fehlerzustand, der im Automaten oben nicht
+dargestellt ist und der dazu dient, falsche Zeichen zu erkennen und
+entsprechend zu antworten.</p>
+<h2 id="tabellenbasierte-implementierung">Tabellenbasierte Implementierung</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextToken</span>():
+</span></span><span style="display:flex;"><span>    state <span style="color:#f92672">=</span> s0; lexeme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>; stack <span style="color:#f92672">=</span> Stack()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (state <span style="color:#f92672">!=</span> se):
+</span></span><span style="display:flex;"><span>        consume()       <span style="color:#75715e"># hole nächstes Zeichen (peek)</span>
+</span></span><span style="display:flex;"><span>        lexeme <span style="color:#f92672">+=</span> peek
+</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">.</span>push(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> TransitionTable[state, peek]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (state <span style="color:#f92672">!=</span> s2 <span style="color:#f92672">and</span> stack<span style="color:#f92672">.</span>notEmpty()):
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> stack<span style="color:#f92672">.</span>pop(); putBack(lexeme<span style="color:#f92672">.</span>truncate())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> state <span style="color:#f92672">==</span> s2: <span style="color:#66d9ef">return</span> s2(lexeme)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> invalid()</span></span></code></pre></div><p>Der dargestellte Code implementiert direkt den DFA zur Erkennung von
+Register-Namen unter Nutzung der Tabellen aus dem letzten Abschnitt.</p>
+<p>Die Funktion <code>consume()</code> &quot;verbraucht&quot; das aktuelle Zeichen &quot;<code>peek</code>&quot; und
+holt das nächste Zeichen aus dem Eingabestrom:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consume</span>():
+</span></span><span style="display:flex;"><span>    peek <span style="color:#f92672">=</span> nextChar()</span></span></code></pre></div><p>Nach einer Initialisierung wird in der Hauptschleife nach dem nächsten
+Zeichen im Eingabestrom gefragt und das Lexem erweitert. Anschließend
+wird der aktuelle Zustand auf dem Stack gesichert und mit Hilfe der
+Transitionstabelle und des aktuellen Zustands sowie des aktuellen Zeichens
+<code>peek</code> der Folgezustand bestimmt. Sobald der Fehlerzustand &quot;<code>se</code>&quot; erreicht
+wird, bricht die Schleife ab.</p>
+<p><em>Anmerkung</em>: Wenn wir in &quot;<code>s2</code>&quot; sind, wird so lange nach weiteren Buchstaben
+&quot;L&quot; oder &quot;R&quot; gesucht, bis im Strom irgendetwas anderes auftaucht und wir
+entsprechend in &quot;<code>se</code>&quot; landen.</p>
+<p>In der zweiten Schleife wird der Stack aufgerollt, um zu schauen, ob wir
+früher bereits in &quot;<code>s2</code>&quot; waren oder nicht. Das erste Element wird vom Stack
+genommen, das Lexem wird um das letzte Zeichen gekürzt und dieses letzte
+Zeichen wird mit <code>putBack()</code> in den Eingabestrom zurückgelegt. Falls wir
+früher bereits in &quot;<code>s2</code>&quot; waren, wird dieser Zustand irgendwann vom Stack
+genommen. Anderenfalls ist der Stack irgendwann leer.</p>
+<p>Falls &quot;<code>s2</code>&quot; erreicht wurde, wird ein neues &quot;<code>s2</code>&quot;-Token generiert und das
+Lexem wird als Attribut direkt gesetzt. Anderenfalls lag ein Fehler vor.</p>
+<p><em>Anmerkung</em>: Diese Implementierung ist generisch: Wenn man im Code die
+direkte Nennung des akzeptierenden Zustands &quot;<code>s2</code>&quot; durch einen Vergleich
+mit einer Menge aller akzeptierender Zustände ersetzt (&quot;<code>state == s2</code>&quot;
+=&gt; &quot;<code>state in acceptedStates</code>&quot;), bestimmen nur die Tabellen die
+konkrete Funktionsweise.</p>
+<p>Die Tabellen können allerdings schnell sehr groß werden, insbesondere
+die Zustandsübergangstabelle!</p>
+<h2 id="direkt-codierte-implementierung">Direkt codierte Implementierung</h2>
+<p>Die Implementierung über die Tabellen ist sowohl generisch als auch effizient.
+Allerdings kostet jeder Zugriff auf die Tabelle konstanten Aufwand (Erinnerung:
+Zugriff auf Arrays, Pointerarithmetik), der sich in der Praxis deutlich
+summieren kann. Außerdem müssen der Stack gepflegt (erweitert und später wieder
+reduziert) werden und Objekte für die Zustände angelegt werden.</p>
+<p>Die Lösung: Aufrollen der <code>while</code>-Schleife und direkt Umsetzung der Tabelle im
+Code mit Sprungbefehlen (&quot;<code>goto</code>&quot;):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nextToken</span>():
+</span></span><span style="display:flex;"><span>    lexeme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>; stack <span style="color:#f92672">=</span> Stack()
+</span></span><span style="display:flex;"><span>    goto s0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s0:
+</span></span><span style="display:flex;"><span>    consume()       <span style="color:#75715e"># hole nächstes Zeichen (peek)</span>
+</span></span><span style="display:flex;"><span>    lexeme <span style="color:#f92672">+=</span> peek
+</span></span><span style="display:flex;"><span>    stack<span style="color:#f92672">.</span>push(s0)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> peek <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">...</span> <span style="color:#f92672">||</span> peek <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;9&#34;</span>:
+</span></span><span style="display:flex;"><span>        goto s1
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        goto se
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span></span></span></code></pre></div><p>Durch die direkte Kodierung der Tabellen in Form von Sprungzielen für
+<code>goto</code>-Befehle spart man sich die Formulierung der Tabellen und den Zugriff
+auf die Inhalte. Allerdings ist der Code deutlich schwerer lesbar und auch
+deutlich schwerer an eine andere Sprache anpassbar. Dies stellt aber keinen
+echten Nachteil dar, wenn er durch einen Generator aus einer Grammatik o.ä.
+erzeugt wird.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Zusammenhang DFA, RE und Lexer</p>
+</li>
+<li>
+<p>Implementierungsansatz: Tabellenbasiert (DFA-Tabellen)</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Aho2008'>[Aho2008] <strong>Compiler: Prinzipien, Techniken und Werkzeuge</strong><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7097-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-8273-7097-6</a>.<br><em>Abschnitt 2.6 und Kapitel 3</em></li> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 1 (insbesondere Abschnitt 1.8)</em></li> <li id='id_Torczon2012'>[Torczon2012] <strong>Engineering a Compiler</strong><br>Torczon, L. und Cooper, K., Elsevier MK, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-1208-8478-0' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-0-1208-8478-0</a>.<br><em>Kapitel 2</em></li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1718704076" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1718704076" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1718704076"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1718704076" defer></script>
+  </body>
+</html>

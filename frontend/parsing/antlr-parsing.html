@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="generator" content="Relearn 6.0.0">
+    <meta name="description" content="Hello World grammar Hello; start : stmt* ; stmt : ID &#39;=&#39; expr &#39;;&#39; | expr &#39;;&#39; ; expr : term (&#39;&#43;&#39; term)* ; term : atom (&#39;*&#39; atom)* ; atom : ID | NUM ; ID : [a-z][a-zA-Z]* ; NUM : [0-9]&#43; ; WS : [ \t\n]&#43; -&gt; skip ;Konsole: Hello (grun, Parse-Tree) Starten des Parsers Grammatik übersetzen und Code generieren: antlr Hello.g4 Java-Code kompilieren: javac *.java Parser ausführen: grun Hello start -tree oder grun Hello start -gui (Grammatik &#34;Hello&#34;, Startregel &#34;start&#34;)">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Parser mit ANTLR generieren">
+    <meta name="twitter:description" content="Hello World grammar Hello; start : stmt* ; stmt : ID &#39;=&#39; expr &#39;;&#39; | expr &#39;;&#39; ; expr : term (&#39;&#43;&#39; term)* ; term : atom (&#39;*&#39; atom)* ; atom : ID | NUM ; ID : [a-z][a-zA-Z]* ; NUM : [0-9]&#43; ; WS : [ \t\n]&#43; -&gt; skip ;Konsole: Hello (grun, Parse-Tree) Starten des Parsers Grammatik übersetzen und Code generieren: antlr Hello.g4 Java-Code kompilieren: javac *.java Parser ausführen: grun Hello start -tree oder grun Hello start -gui (Grammatik &#34;Hello&#34;, Startregel &#34;start&#34;)">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">
+    <meta property="og:title" content="Parser mit ANTLR generieren">
+    <meta property="og:description" content="Hello World grammar Hello; start : stmt* ; stmt : ID &#39;=&#39; expr &#39;;&#39; | expr &#39;;&#39; ; expr : term (&#39;&#43;&#39; term)* ; term : atom (&#39;*&#39; atom)* ; atom : ID | NUM ; ID : [a-z][a-zA-Z]* ; NUM : [0-9]&#43; ; WS : [ \t\n]&#43; -&gt; skip ;Konsole: Hello (grun, Parse-Tree) Starten des Parsers Grammatik übersetzen und Code generieren: antlr Hello.g4 Java-Code kompilieren: javac *.java Parser ausführen: grun Hello start -tree oder grun Hello start -gui (Grammatik &#34;Hello&#34;, Startregel &#34;start&#34;)">
+    <meta property="og:locale" content="de-DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Parser mit ANTLR generieren">
+    <meta itemprop="description" content="Hello World grammar Hello; start : stmt* ; stmt : ID &#39;=&#39; expr &#39;;&#39; | expr &#39;;&#39; ; expr : term (&#39;&#43;&#39; term)* ; term : atom (&#39;*&#39; atom)* ; atom : ID | NUM ; ID : [a-z][a-zA-Z]* ; NUM : [0-9]&#43; ; WS : [ \t\n]&#43; -&gt; skip ;Konsole: Hello (grun, Parse-Tree) Starten des Parsers Grammatik übersetzen und Code generieren: antlr Hello.g4 Java-Code kompilieren: javac *.java Parser ausführen: grun Hello start -tree oder grun Hello start -gui (Grammatik &#34;Hello&#34;, Startregel &#34;start&#34;)">
+    <meta itemprop="wordCount" content="2381">
+    <title>Parser mit ANTLR generieren</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/index.print.html" rel="alternate" type="text/html" title="Parser mit ANTLR generieren">
+
+    
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1718704076" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1718704076" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1718704076" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1718704076" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1718704076" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1718704076" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1718704076"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#hello-world">Hello World</a>
+      <ul>
+        <li><a href="#starten-des-parsers">Starten des Parsers</a></li>
+        <li><a href="#startregeln">Startregeln</a></li>
+        <li><a href="#formen-der-subregeln">Formen der Subregeln</a></li>
+        <li><a href="#reihenfolge-in-grammatik-definiert-priorität">Reihenfolge in Grammatik definiert Priorität</a></li>
+        <li><a href="#parse-tree">Parse-Tree</a></li>
+        <li><a href="#to-eof-not-to-eof">To EOF not to EOF?</a></li>
+      </ul>
+    </li>
+    <li><a href="#expressions-und-vorrang-operatoren">Expressions und Vorrang (Operatoren)</a>
+      <ul>
+        <li><a href="#direkte-vs-indirekte-links-rekursion">Direkte vs. indirekte Links-Rekursion</a></li>
+        <li><a href="#konflikte-in-regeln">Konflikte in Regeln</a></li>
+      </ul>
+    </li>
+    <li><a href="#kontext-objekte-für-parser-regeln">Kontext-Objekte für Parser-Regeln</a></li>
+    <li><a href="#benannte-regel-elemente-oder-alternativen">Benannte Regel-Elemente oder Alternativen</a></li>
+    <li><a href="#arbeiten-mit-antlr-listeners">Arbeiten mit ANTLR-Listeners</a></li>
+    <li><a href="#arbeiten-mit-dem-visitor-pattern">Arbeiten mit dem Visitor-Pattern</a></li>
+    <li><a href="#eingebettete-aktionen-und-attribute">Eingebettete Aktionen und Attribute</a></li>
+    <li><a href="#ausblick">Ausblick</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Parser mit ANTLR generieren
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Parser mit ANTLR generieren</h1>
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-graduation-cap"></i> TL;DR</div>
+  <div class="box-content">
+
+<p>Mit ANTLR kann aus einer Grammatik ein LL(*)-Parser generiert werden. Die Parser-Regeln
+in der Grammatik fangen dabei mit einem <strong>Kleinbuchstaben</strong> an (Erinnerung: Lexer-Regel
+starten mit einem Großbuchstaben).</p>
+<p>Regeln haben einen Namen (linke Seite) und eine Produktion (rechte Seite). Dabei
+können beliebige Abfolgen von Lexer- und Parser-Regeln auf der rechten Seite
+einer Parser-Regel auftauchen. Die Token müssen jeweils matchen, die Parser-Regeln
+werden in einen Aufruf der jeweiligen generierten Funktion übersetzt.</p>
+<p>Parser-Regeln können aus mehreren Alternativen bestehen, diese werden per <code>|</code> separiert.
+Dabei hat bei Mehrdeutigkeiten die erste passende Alternative Vorrang. Wie bei Lexer-Regeln
+können Teile per <code>?</code> ein- oder keinmal vorkommen, per <code>*</code> beliebig oft oder per <code>+</code> ein-
+oder mehrfach.</p>
+<p>ANTLR erlaubt im Gegensatz zu allgemeinen LL-Parsern direkte Links-Rekursion. (Indirekte
+Links-Rekursion funktioniert allerdings nicht.)</p>
+<p>Der von ANTLR generierte Parser erzeugt auf der Eingabe einen Parse-Tree, der die Strukturen
+der Grammatik widerspiegelt: Die Token bilden die Blätter und jede erfolgreich durchlaufene
+Parser-Regel bildet einen entsprechenden Knoten im Baum.</p>
+<p>Für die Traversierung des Parse-Tree kann man die generierten Listener- oder Visitor-Klassen
+nutzen. Beim Einsatz der Listener nutzt man die vorgegebene Klasse <code>ParseTreeWalker</code>, die
+mit dem Parse-Tree und dem Listener den Baum per Tiefensuche traversiert und immer die
+jeweiligen <code>enterRegel</code>- und <code>exitRegel</code>-Methoden aufruft. Beim Visitor muss die Traversierung
+selbst erledigt werden, hier steht die aus der Klassenhierarchie geerbte Methode <code>visit</code>
+als Startpunkt zur Verfügung. In dieser Methode wird basierend auf dem Knotentyp die in den
+Visitor-Klassen implementierte <code>visitRegel</code>-Methode aufgerufen und man muss darauf achten,
+die Kindknoten durch passende Aufrufe zu traversieren. Sowohl bei den generierten Listener-
+als auch den Visitor-Klassen kann man die leeren Defaultmethoden bei Bedarf selbst überschreiben.
+Für den Zugriff auf die Regel-Elemente werden die sogenannten Kontextobjekte als Parameter
+übergeben.</p>
+<p>Benannte Alternativen und Regel-Elemente sind nützlich, weil für die benannten Alternativen
+zusätzliche Kontextklassen erzeugt werden, über die dann auf die Bestandteile der Alternativen
+zugegriffen werden kann. Außerdem werden zusätzlich passende <code>enterAlternative</code>- und <code>exitAlternative</code>-
+bzw. <code>visitAlternative</code>-Methoden generiert. Für benannte Regel-Elemente wird ein entsprechend
+benanntes Attribut im Kontextobjekt angelegt, welches <code>public</code> sichtbar ist.</p>
+</div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (YouTube)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://youtu.be/YuUHBvPUS4k' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Parser mit ANTLR</a></li> <li><a href='https://youtu.be/FJOEPY-TMmw' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Demo ANTLR Parser</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)</div>
+  <div class="box-content">
+
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/19925b756d6fc934bfe0b5107eb5fa58373a53af49c690ebce86e15f2b212c89c80ea7665e42c78abdc8dfe0718ea46f6a9817eeba4ad1293bdb4c84f7c8f084' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Parser mit ANTLR</a></li></ul></div>
+</div>
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fas fa-lightbulb"></i> Lernziele</div>
+  <div class="box-content">
+
+<ul> <li>(K2) Aufbau der Parser-Regeln</li> <li>(K3) Alternativen und optionale/mehrfache Regelteile in Parser-Regeln</li> <li>(K3) Vorrang von Alternativen (bei Mehrdeutigkeiten)</li> <li>(K3) Benannte Alternativen und Regel-Elemente</li> <li>(K2) Aufbau des Parse-Tree</li> <li>(K3) Umgang mit Kontext-Objekten</li> <li>(K3) Traversierung des Parse-Tree mit den generierten Listenern oder Visitors</li></ul></div>
+</div>
+
+
+
+
+    <h2 id="hello-world">Hello World</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span><span style="color:#66d9ef">grammar</span> <span style="color:#a6e22e">Hello</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>start : stmt<span style="color:#f92672">*</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>stmt  : <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;=&#39;</span> expr <span style="color:#e6db74">&#39;;&#39;</span> <span style="color:#f92672">|</span> expr <span style="color:#e6db74">&#39;;&#39;</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>expr  : term <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> term<span style="color:#f92672">)*</span> ;
+</span></span><span style="display:flex;"><span>term  : atom <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;*&#39;</span> atom<span style="color:#f92672">)*</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>atom  : <span style="color:#66d9ef">ID</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">NUM</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ID    : [a-z][a-zA-Z]<span style="color:#f92672">*</span> ;
+</span></span><span style="display:flex;"><span>NUM   : [0-9]<span style="color:#f92672">+</span> ;
+</span></span><span style="display:flex;"><span>WS    : [ \t\n]<span style="color:#f92672">+</span> <span style="color:#f92672">-&gt;</span> skip ;</span></span></code></pre></div><div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/Hello.g4" target="_blank"><span class="title">Konsole: Hello (grun, Parse-Tree)</span></a></span></div>
+<h3 id="starten-des-parsers">Starten des Parsers</h3>
+<ol>
+<li>Grammatik übersetzen und Code generieren: <code>antlr Hello.g4</code></li>
+<li>Java-Code kompilieren: <code>javac *.java</code></li>
+<li>Parser ausführen:
+<ul>
+<li>
+<p><code>grun Hello start -tree</code> oder <code>grun Hello start -gui</code> (Grammatik &quot;Hello&quot;, Startregel &quot;start&quot;)</p>
+</li>
+<li>
+<p>Alternativ mit kleinem Java-Programm:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.antlr.v4.runtime.CharStreams;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.antlr.v4.runtime.CommonTokenStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.antlr.v4.runtime.tree.ParseTree;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        HelloLexer lexer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HelloLexer(CharStreams.<span style="color:#a6e22e">fromStream</span>(System.<span style="color:#a6e22e">in</span>));
+</span></span><span style="display:flex;"><span>        CommonTokenStream tokens <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CommonTokenStream(lexer);
+</span></span><span style="display:flex;"><span>        HelloParser parser <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HelloParser(tokens);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ParseTree tree <span style="color:#f92672">=</span> parser.<span style="color:#a6e22e">start</span>();  <span style="color:#75715e">// Start-Regel</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(tree.<span style="color:#a6e22e">toStringTree</span>(parser));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h3 id="startregeln">Startregeln</h3>
+<ul>
+<li><code>start</code> ist eine <span class='alert'>Parser-Regel</span>
+=&gt; Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
+Parser am Ende auch starten kann ...</li>
+<li>Alle Regeln mit kleinem Anfangsbuchstaben sind Parser-Regeln</li>
+<li>Alle Regeln mit großem Anfangsbuchstaben sind Lexer-Regeln</li>
+</ul>
+<h3 id="formen-der-subregeln">Formen der Subregeln</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt  : <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;=&#39;</span> expr <span style="color:#e6db74">&#39;;&#39;</span> ;</span></span></code></pre></div><p>Um die Regel <code>stmt</code> anwenden zu können, müssen alle Elemente auf der rechten
+Seite der Regel erfüllt werden. Dabei müssen die Token wie <code>ID</code>, <code>=</code> und <code>;</code>
+matchen und die Subregel <code>expr</code> muss erfüllt werden können. Beachten Sie das
+abschließende Semikolon am Ende einer ANTLR-Regel!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stmt  : <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;=&#39;</span> expr <span style="color:#e6db74">&#39;;&#39;</span> <span style="color:#f92672">|</span> expr <span style="color:#e6db74">&#39;;&#39;</span> ;</span></span></code></pre></div><p>Alternativen werden durch ein <code>|</code> getrennt. Hier muss genau eine Alternative
+erfüllt werden. Falls nötig, trennt man die Alternativen durch Einschließung
+in runden Klammern vom Rest der Regel ab: <code>r : a (b | c) d ;</code>.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr  : term <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> term<span style="color:#f92672">)*</span> ;</span></span></code></pre></div><p>Der durch den <code>*</code> gekennzeichnete Teil kann beliebig oft vorkommen oder auch
+fehlen. Bei einem <code>+</code> müsste der Teil mind. einmal vorkommen und bei einem
+<code>?</code> entsprechend einmal oder keinmal.</p>
+<p>Auch hier kann man die Operatoren durch ein zusätzliches <code>?</code> auf non-greedy
+umschalten (analog zu den Lexer-Regeln).</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules" rel="external" target="_blank">github.com/antlr/antlr4/blob/master/doc/parser-rules.md</a>)</p>
+<h3 id="reihenfolge-in-grammatik-definiert-priorität">Reihenfolge in Grammatik definiert Priorität</h3>
+<p>Falls mehr als eine Parser-Regel die selbe Input-Sequenz matcht, löst ANTLR
+diese Mehrdeutigkeit auf, indem es die erste Alternative nimmt, die an der
+Entscheidung beteiligt ist.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>start : stmt ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>stmt  : expr <span style="color:#f92672">|</span> <span style="color:#66d9ef">ID</span>  ;
+</span></span><span style="display:flex;"><span>expr  : <span style="color:#66d9ef">ID</span>   <span style="color:#f92672">|</span> <span style="color:#66d9ef">NUM</span> ;</span></span></code></pre></div><p>Bei der Eingabe &quot;foo&quot; würde die Alternative <code>ID</code> in der Regel <code>expr</code> &quot;gewinnen&quot;,
+weil sie in der Grammatik vor der Alternative <code>ID</code> in der Regel <code>stmt</code> kommt und
+damit Vorrang hat.</p>
+<h3 id="parse-tree">Parse-Tree</h3>
+<p>Betrachten wir erneut die obige Grammatik.</p>
+<p>Die Eingabe von &quot;<code>a = 42;</code>&quot; führt zu folgendem Parse-Tree:</p>
+<p><a href="#R-image-39c702fd2f0924bcea886825c4eae682" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/hello_ex1.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-39c702fd2f0924bcea886825c4eae682"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/hello_ex1.png?width=auto&height=auto"></a></p>
+<p>Diese Eingabe führt zur Erkennung der Token <code>[ID, WS, =, WS, NUM, ;]</code>, wobei die
+<code>WS</code>-Token verworfen werden und der Parser den Tokenstream <code>[ID, =, NUM, ;]</code>
+erhält.</p>
+<p>Die Startregel hat auf der rechten Seite kein oder mehrere <code>stmt</code>-Regeln. Die
+<code>stmt</code>-Regel fordert auf der rechten Seite entweder die Token <code>ID</code>und <code>=</code> sowie
+die Regel <code>expr</code> gefolgt vom Token <code>;</code>, oder die Regel <code>expr</code> gefolgt vom Token
+<code>;</code>. In unserem Beispiel kann für das &quot;a&quot; das Token <code>ID</code> produziert werden, das
+&quot;=&quot; matcht ebenfalls. Die &quot;42&quot; wird erklärt, indem für <code>expr</code> ein <code>term</code> und
+dort ein <code>atom</code> aufgerufen wird. Für das <code>atom</code> muss entweder ein Token <code>ID</code>
+oder <code>NUM</code> als nächstes Token kommen - hier wird die &quot;42&quot; wird als Token <code>NUM</code>
+verarbeitet. Da die weiteren Regelteile in <code>term</code> und <code>expr</code> optional sind,
+haben wir damit ein <code>expr</code> erfüllt und das nachfolgende <code>;</code>-Token schließt die
+erste Alternative der Regel <code>stmt</code> erfolgreich ab.</p>
+<p>Im entstehenden Parse-Tree sind diese Abläufe und grammatikalischen Strukturen
+direkt erkennbar. Jede erfolgreich durchlaufene Parserregel wird zu einem
+Knoten im Parse-Tree. Die Token werden als Terminale (Blätter) in den Baum
+eingehängt.</p>
+<p><em>Anmerkung</em>: Der Parse-Tree ist das Ergebnis der Parsers-Phase im Compiler und
+dient damit als Input für die folgenden Compilerstufen. In der Regel benötigt
+man die oft recht komplexen Strukturen aber später nicht mehr und vereinfacht
+den Baum zu einem <em>Abstract Syntax Tree</em> (AST). Im Beispiel könnte man den Zweig
+<code>stmt - expr - term - atom - 42</code> zu <code>stmt - 42</code> vereinfachen.</p>
+<p>Betrachten wir nun die Eingabe <code>foo = 2+3*4; bar = 3*4+2;</code>. Diese führt zu
+folgendem Parse-Tree:</p>
+<p><a href="#R-image-a0cf61fe130d66eef634865b0e13bda5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/hello_ex2.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a0cf61fe130d66eef634865b0e13bda5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/hello_ex2.png?width=auto&height=auto"></a></p>
+<p>Wie man sehen kann, sind in der Grammatik die üblichen Vorrangregeln für die
+Operationen <code>+</code> und <code>*</code> berücksichtigt - die Multiplikation wird in beiden
+Fällen korrekt &quot;unter&quot; der Addition im Baum eingehängt.</p>
+<h3 id="to-eof-not-to-eof">To EOF not to EOF?</h3>
+<p>Startregeln müssen nicht unbedingt den gesamten Input &quot;konsumieren&quot;. Sie müssen
+per Default nur eine der Alternativen in der Startregel erfüllen.</p>
+<p>Betrachten wir noch einmal einen leicht modifizierten Ausschnitt aus der obigen
+Grammatik:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>start : stmt ;</span></span></code></pre></div><p>Die Startregel wurde so geändert, dass sie nur noch genau ein Statement
+akzeptieren soll.</p>
+<p>In diesem Fall würde die Startregel bei der Eingabe &quot;aa; bb;&quot; nur den ersten
+Teil &quot;aa;&quot; konsumieren (als Token <code>ID</code>) und das folgende &quot;bb;&quot; ignorieren.
+Das wäre in diesem Fall aber auch kein Fehler.</p>
+<p>Wenn der gesamte Eingabestrom durch die Startregel erklärt werden soll,
+dann muss das vordefinierte Token <code>EOF</code> am Ende der Startregel eingesetzt
+werden:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>start : stmt <span style="color:#66d9ef">EOF</span>;</span></span></code></pre></div><p>Hier würde die Eingabe &quot;aa; bb;&quot; zu einem Fehler führen, da nur der Teil &quot;aa;&quot;
+durch die Startregel abgedeckt ist (Token <code>ID</code>), und der Rest &quot;bb;&quot; zwar sogar
+ein gültiges Token wären (ebenfalls <code>ID</code> und <code>;</code>), aber eben nicht mehr von der
+Startregel akzeptiert. Durch das <code>EOF</code> soll die Startregel aber den gesamten
+Input konsumieren und erklären, was hier nicht geht und entsprechend zum Fehler
+führt.</p>
+<p>(vgl. <a href="https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof" rel="external" target="_blank">github.com/antlr/antlr4/blob/master/doc/parser-rules.md</a>)</p>
+<h2 id="expressions-und-vorrang-operatoren">Expressions und Vorrang (Operatoren)</h2>
+<p>Betrachten wir noch einmal den Ausschnitt für die Ausdrücke (<em>Expressions</em>) in
+der obigen Beispielgrammatik:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr  : term <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> term<span style="color:#f92672">)*</span> ;
+</span></span><span style="display:flex;"><span>term  : atom <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;*&#39;</span> atom<span style="color:#f92672">)*</span> ;
+</span></span><span style="display:flex;"><span>atom  : <span style="color:#66d9ef">ID</span> ;</span></span></code></pre></div><p>Diese typische, etwas komplex anmutende Struktur soll sicher stellen, dass die
+Vorrangregeln für Addition und Multiplikation korrekt beachtet werden, d.h. dass
+<code>2+3*4</code> als <code>2+(3*4)</code> geparst wird und nicht fälschlicherweise als <code>(2+3)*4</code>
+erkannt wird.</p>
+<p>Zusätzlich muss bei LL-Parsern Links-Rekursion vermieden werden: Die Parser-Regeln
+werden in Funktionsaufrufe übersetzt, d.h. bei einer Links-Rekursion würde man die
+selbe Regel immer wieder aufrufen, ohne ein Token aus dem Token-Strom zu entnehmen.</p>
+<p>ANTLR (ab Version 4) kann mit beiden Aspekten automatisch umgehen:</p>
+<ul>
+<li>ANTLR kann direkte Linksrekursion automatisch auflösen. Die Regel <code>r : r T U | V ;</code>
+kann also in ANTLR verarbeitet werden.</li>
+<li>ANTLR besitzt einen Mechanismus zur Auflösung von Mehrdeutigkeiten. Wie oben
+geschrieben, wird bei der Anwendbarkeit von mehreren Alternativen die erste
+Alternative genutzt.</li>
+</ul>
+<p>Damit lässt sich die typische Struktur für Expression-Grammatiken deutlich lesbarer
+gestalten:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr  : expr <span style="color:#e6db74">&#39;*&#39;</span> expr
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">|</span> expr <span style="color:#e6db74">&#39;+&#39;</span> expr
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">|</span> <span style="color:#66d9ef">ID</span>
+</span></span><span style="display:flex;"><span>      ;</span></span></code></pre></div><p>Die Regel <code>expr</code> ist links-rekursiv, was normalerweise bei LL-Parsern problematisch
+ist. ANTLR löst diese Links-Rekursion automatisch auf (vgl.
+<a href="https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md" rel="external" target="_blank">github.com/antlr/antlr4/blob/master/doc/left-recursion.md</a>).</p>
+<p>Da bei Mehrdeutigkeit in der Grammatik, also bei der Anwendbarkeit mehrerer Alternativen
+stets die erste Alternative genommen wird, lassen sich die Vorrangregeln durch die
+Reihenfolge der Alternativen in der <code>expr</code>-Regel implementieren: Die Multiplikation
+hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer einfachen <code>ID</code>.</p>
+<h3 id="direkte-vs-indirekte-links-rekursion">Direkte vs. indirekte Links-Rekursion</h3>
+<p>ANTLR kann nur <em>direkte</em> Links-Rekursion auflösen. Regeln wie <code>r : r T U | V ;</code> stellen
+in ANTLR also kein Problem dar.</p>
+<p><em>Indirekte</em> Links-Rekursion erkennt ANTLR dagegen nicht:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>r : s <span style="color:#66d9ef">T</span> <span style="color:#66d9ef">U</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">V</span> ;
+</span></span><span style="display:flex;"><span>s : r <span style="color:#66d9ef">W</span> <span style="color:#66d9ef">X</span> ;</span></span></code></pre></div><p>Hier würden sich die Regeln <code>r</code> und <code>s</code> gegenseitig aufrufen und kein Token aus dem
+Tokenstrom entfernen, so dass der generierte LL-Parser hier in einer Endlosschleife
+stecken bleiben würde. Mit indirekter Links-Rekursion kann ANTLR nicht umgehen.</p>
+<h3 id="konflikte-in-regeln">Konflikte in Regeln</h3>
+<p>Wenn mehrere Alternativen einer Regel anwendbar sind, entscheidet sich ANTLR für die
+erste Alternative.</p>
+<p>Wenn sich mehrere Tokenregeln überlappen, &quot;gewinnt&quot; auch hier die zuerst definierte
+Regel.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>def : <span style="color:#e6db74">&#39;func&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;(&#39;</span> <span style="color:#e6db74">&#39;)&#39;</span> block ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FOR : <span style="color:#e6db74">&#39;for&#39;</span> ;
+</span></span><span style="display:flex;"><span>ID  : [a-z][a-zA-Z]<span style="color:#f92672">*</span> ;</span></span></code></pre></div><p>Hier werden ein implizites Token <code>'func'</code> sowie die expliziten Token <code>FOR</code> und <code>ID</code>
+definiert. Dabei sind die Lexeme für <code>'func'</code> und <code>FOR</code> auch in <code>ID</code> enthalten.
+Dennoch werden <code>'func'</code> und <code>FOR</code> erkannt und nicht über <code>ID</code> gematcht, weil sie
+<em>vor</em> der Regel <code>ID</code> definiert sind.</p>
+<p>Tatsächlich sortiert ANTLR die Regeln intern um, so dass alle Parser-Regeln <em>vor</em> den
+Lexer-Regeln definiert sind. Die impliziten Token werden dabei noch vor den expliziten
+Token-Regeln angeordnet. Im obigen Beispiel hat also <code>'func'</code> eine höhere Priorität
+als <code>FOR</code>, und <code>FOR</code> hat eine höhere Priorität als <code>ID</code>. Aus diesem Grund gibt es die
+Konvention, die Parser-Regeln in der Grammatik vor den Lexer-Regeln zu definieren - dies
+entspricht quasi der Anordnung, die ANTLR bei der Verarbeitung sowieso erzeugen würde.</p>
+<p>Aus diesem Grund würde auch eine Umsortierung der obigen Grammatik funktionieren:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>FOR : <span style="color:#e6db74">&#39;for&#39;</span> ;
+</span></span><span style="display:flex;"><span>ID  : [a-z][a-zA-Z]<span style="color:#f92672">*</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def : <span style="color:#e6db74">&#39;func&#39;</span> <span style="color:#66d9ef">ID</span> <span style="color:#e6db74">&#39;(&#39;</span> <span style="color:#e6db74">&#39;)&#39;</span> block ;</span></span></code></pre></div><p>Intern würde ANTLR die Parser-Regel <code>def</code> wieder vor den beiden Lexer-Regeln anordnen,
+und zwischen den Parser-Regeln und den Lexer-Regeln die impliziten Token (hier <code>'func'</code>).</p>
+<h2 id="kontext-objekte-für-parser-regeln">Kontext-Objekte für Parser-Regeln</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>s    : expr         {List&lt;EContext&gt; x = $expr.ctx.e();}
+</span></span><span style="display:flex;"><span>     ;
+</span></span><span style="display:flex;"><span>expr : e <span style="color:#e6db74">&#39;*&#39;</span> e ;</span></span></code></pre></div><p><a href="#R-image-81bdfb9b378401437ee94cbf891ec1d0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParserRuleContext.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-81bdfb9b378401437ee94cbf891ec1d0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParserRuleContext.png?width=80%25&height=auto"></a></p>
+<p>Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt
+zurück. Darüber kann man das/die Kontextobjekt(e) der Sub-Regeln abfragen.</p>
+<p>Die Regel <code>s</code> liefert entsprechend ein <code>SContext</code>-Objekt und die Regel
+<code>expr</code> liefert ein <code>ExprContext</code>-Objekt zurück.</p>
+<p>In der Aktion fragt man das Kontextobjekt über <code>ctx</code> ab, in den Listener-
+und Visitor-Methoden erhält man die Kontextobjekte als Parameter.</p>
+<p>Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein
+einziges Kontextobjekt (statt einer Liste) zurück.</p>
+<p><strong>Anmerkung</strong>: ANTLR generiert nur dann <em>Felder</em> für die Regel-Elemente im
+Kontextobjekt, wenn diese in irgendeiner Form referenziert werden. Dies
+kann beispielsweise durch Benennung (Definition eines Labels, siehe nächste
+Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.</p>
+<h2 id="benannte-regel-elemente-oder-alternativen">Benannte Regel-Elemente oder Alternativen</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>stat  : <span style="color:#e6db74">&#39;return&#39;</span> value<span style="color:#f92672">=</span>e <span style="color:#e6db74">&#39;;&#39;</span>    <span style="color:#f92672">#</span> <span style="color:#66d9ef">Return</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;break&#39;</span> <span style="color:#e6db74">&#39;;&#39;</span>             <span style="color:#f92672">#</span> <span style="color:#66d9ef">Break</span>
+</span></span><span style="display:flex;"><span>      ;</span></span></code></pre></div><div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StatContext</span> <span style="color:#66d9ef">extends</span> ParserRuleContext { ... }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReturnContext</span> <span style="color:#66d9ef">extends</span> StatContext {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> EContext value;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> EContext <span style="color:#a6e22e">e</span>() { ... }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BreakContext</span> <span style="color:#66d9ef">extends</span> StatContext { ... }</span></span></code></pre></div><p>Mit <code>value=e</code> wird der Aufruf der Regel <code>e</code> mit dem Label <code>value</code> belegt,
+d.h. man kann mit <code>$e.text</code> oder <code>$value.text</code> auf das <code>text</code>-Attribut von
+<code>e</code> zugreifen. Falls es in einer Produktion mehrere Aufrufe einer anderen
+Regel gibt, <strong>muss</strong> man für den Zugriff auf die Attribute eindeutige Label
+vergeben.</p>
+<p>Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.</p>
+<h2 id="arbeiten-mit-antlr-listeners">Arbeiten mit ANTLR-Listeners</h2>
+<p>ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und
+leere Basisimplementierung). Beim Traversieren mit dem Default-<code>ParseTreeWalker</code>
+wird der Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in
+bzw. beim Austritt aus einen/m Knoten der passende Listener mit dem passenden
+Kontext-Objekt aufgerufen.</p>
+<p>Damit kann man die Grammatik &quot;für sich&quot; halten, d.h. unabhängig von einer
+konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
+ausführen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr : e1<span style="color:#f92672">=</span>expr <span style="color:#e6db74">&#39;*&#39;</span> e2<span style="color:#f92672">=</span>expr      <span style="color:#f92672">#</span> <span style="color:#66d9ef">MULT</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> e1<span style="color:#f92672">=</span>expr <span style="color:#e6db74">&#39;+&#39;</span> e2<span style="color:#f92672">=</span>expr      <span style="color:#f92672">#</span> <span style="color:#66d9ef">ADD</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">DIGIT</span>                    <span style="color:#f92672">#</span> <span style="color:#66d9ef">ZAHL</span>
+</span></span><span style="display:flex;"><span>     ;</span></span></code></pre></div><p>ANTLR kann zu dieser Grammatik <code>calc.g4</code> einen passenden Listener (Interface
+<code>calcListener</code>) generieren (Option <code>-listener</code> beim Aufruf von <code>antlr</code>).
+Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse <code>calcBaseListener</code>):</p>
+<p><a href="#R-image-e5cf54b26561355ccc7d46397d62fe4a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParseTreeListener.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e5cf54b26561355ccc7d46397d62fe4a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParseTreeListener.png?width=80%25&height=auto"></a></p>
+<p>(Nur &quot;interessante&quot; Methoden gezeigt.)</p>
+<p>Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert
+die Methoden, die man benötigt.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyListener</span> <span style="color:#66d9ef">extends</span> calcBaseListener {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exitMULT</span>(calcParser.<span style="color:#a6e22e">MULTContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exitADD</span>(calcParser.<span style="color:#a6e22e">ADDContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exitZAHL</span>(calcParser.<span style="color:#a6e22e">ZAHLContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Anschließend baut man das alles in eine Traversierung des Parse-Trees ein:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMyListener</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyListener</span> <span style="color:#66d9ef">extends</span> calcBaseListener {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        calcLexer lexer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> calcLexer(CharStreams.<span style="color:#a6e22e">fromStream</span>(System.<span style="color:#a6e22e">in</span>));
+</span></span><span style="display:flex;"><span>        CommonTokenStream tokens <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CommonTokenStream(lexer);
+</span></span><span style="display:flex;"><span>        calcParser parser <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> calcParser(tokens);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ParseTree tree <span style="color:#f92672">=</span> parser.<span style="color:#a6e22e">s</span>();    <span style="color:#75715e">// Start-Regel</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ParseTreeWalker walker <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ParseTreeWalker();
+</span></span><span style="display:flex;"><span>        MyListener eval <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyListener();
+</span></span><span style="display:flex;"><span>        walker.<span style="color:#a6e22e">walk</span>(eval, tree);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyListener.java" target="_blank"><span class="title">Beispiel: TestMyListener.java und calc.g4</span></a></span></div>
+<p>In <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a>
+werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.</p>
+<h2 id="arbeiten-mit-dem-visitor-pattern">Arbeiten mit dem Visitor-Pattern</h2>
+<p>ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren
+(Interface und leere Basisimplementierung).</p>
+<p>Hier muss man im Gegensatz zu den Listeners allerdings selbst für eine geeignete
+Traversierung des Parse-Trees sorgen. Dafür hat man mehr Freiheiten im Vergleich
+zum Einsatz von Listeners, insbesondere im Hinblick auf Rückgabewerte.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr : e1<span style="color:#f92672">=</span>expr <span style="color:#e6db74">&#39;*&#39;</span> e2<span style="color:#f92672">=</span>expr      <span style="color:#f92672">#</span> <span style="color:#66d9ef">MULT</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> e1<span style="color:#f92672">=</span>expr <span style="color:#e6db74">&#39;+&#39;</span> e2<span style="color:#f92672">=</span>expr      <span style="color:#f92672">#</span> <span style="color:#66d9ef">ADD</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">DIGIT</span>                    <span style="color:#f92672">#</span> <span style="color:#66d9ef">ZAHL</span>
+</span></span><span style="display:flex;"><span>     ;</span></span></code></pre></div><p>ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface <code>calcVisitor&lt;T&gt;</code>)
+generieren (Option <code>-visitor</code> beim Aufruf von <code>antlr</code>). Weiterhin generiert ANTLR
+eine leere Basisimplementierung (Klasse <code>calcBaseVisitor&lt;T&gt;</code>):</p>
+<p><a href="#R-image-bfc25c9f1f67174f83c24dd6f1b4b890" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParseTreeVisitor.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bfc25c9f1f67174f83c24dd6f1b4b890"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing/ParseTreeVisitor.png?width=80%25&height=auto"></a></p>
+<p>(Nur &quot;interessante&quot; Methoden gezeigt.)</p>
+<p>Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt
+die Methoden, die man benötigt. Wichtig ist, dass man selbst für das &quot;Besuchen&quot;
+der Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode <code>visit()</code>).</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyVisitor</span> <span style="color:#66d9ef">extends</span> calcBaseVisitor<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Integer <span style="color:#a6e22e">visitMULT</span>(calcParser.<span style="color:#a6e22e">MULTContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Integer <span style="color:#a6e22e">visitADD</span>(calcParser.<span style="color:#a6e22e">ADDContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Integer <span style="color:#a6e22e">visitZAHL</span>(calcParser.<span style="color:#a6e22e">ZAHLContext</span> ctx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Anschließend baut man das alles in eine manuelle Traversierung des Parse-Trees ein:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMyVisitor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyVisitor</span> <span style="color:#66d9ef">extends</span> calcBaseVisitor<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        calcLexer lexer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> calcLexer(CharStreams.<span style="color:#a6e22e">fromStream</span>(System.<span style="color:#a6e22e">in</span>));
+</span></span><span style="display:flex;"><span>        CommonTokenStream tokens <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CommonTokenStream(lexer);
+</span></span><span style="display:flex;"><span>        calcParser parser <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> calcParser(tokens);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ParseTree tree <span style="color:#f92672">=</span> parser.<span style="color:#a6e22e">s</span>();    <span style="color:#75715e">// Start-Regel</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        MyVisitor eval <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyVisitor();
+</span></span><span style="display:flex;"><span>        eval.<span style="color:#a6e22e">visit</span>(tree);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyVisitor.java" target="_blank"><span class="title">Beispiel: TestMyVisitor.java und calc.g4</span></a></span></div>
+<p>In <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a>
+werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.</p>
+<h2 id="eingebettete-aktionen-und-attribute">Eingebettete Aktionen und Attribute</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>s   : expr                      {System.err.println($expr.v);}
+</span></span><span style="display:flex;"><span>    ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>expr <span style="color:#66d9ef">returns</span> [int v]
+</span></span><span style="display:flex;"><span>    : e1<span style="color:#f92672">=</span>expr <span style="color:#e6db74">&#39;*&#39;</span> e2<span style="color:#f92672">=</span>expr       {$v = $e1.v * $e2.v;}
+</span></span><span style="display:flex;"><span>    ;</span></span></code></pre></div><p>Auch die Parser-Regeln können mit eingebetteten Aktionen ergänzt werden, die
+in die (für die jeweilige Regel) generierte Methode eingefügt werden und bei
+erfolgreicher Anwendung der Parser-Regel ausgeführt werden.</p>
+<p>Über <code>returns [int v]</code> fügt man der Regel <code>expr</code> ein Attribut <code>v</code> (Integer)
+hinzu, welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert
+als Rückgabewert der generierten Methode). Auf diesen Wert kann in den
+Aktionen mit <code>$v</code> zugegriffen werden.</p>
+<p>In <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html">Attributierte Grammatiken</a>
+werfen wir einen genaueren Blick auf die attributierten Grammatiken. In
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a>
+werden wir eingebettete Aktionen und Attribute nutzen, um einen einfachen
+syntaxgesteuerten Interpreter aufzubauen.</p>
+<p><em>Anmerkung</em>: Durch den Einsatz von eingebetteten Aktionen und Attributen wird
+die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!</p>
+<h2 id="ausblick">Ausblick</h2>
+<p>Damit haben wir die sprichwörtliche &quot;Spitze des Eisbergs&quot; gesehen. Mit ANTLR
+sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
+auf <a href="https://github.com/antlr/antlr4" rel="external" target="_blank">github.com/antlr/antlr4</a>.</p>
+<p>Mit Hilfe von semantischen Prädikaten (vgl.
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html">LL-Parser: Fortgeschrittene Techniken</a>)
+können Parser-Regeln aktiviert oder abgeschaltet werden, je nachdem, was vorher
+gesehen wurde.</p>
+<p>Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">Error-Recovery</a>.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<p>Parser mit ANTLR generieren: Parser-Regeln werden mit <strong>Kleinbuchstaben</strong> geschrieben</p>
+<ul>
+<li>Regeln können Lexer- und Parser-Regeln &quot;aufrufen&quot;</li>
+<li>Regeln können Alternativen haben</li>
+<li>Bei Mehrdeutigkeit: Vorrang für erste Alternative</li>
+<li>ANTLR erlaubt direkte Links-Rekursion</li>
+<li>ANTLR erzeugt Parse-Tree</li>
+<li>Benannte Alternativen und Regel-Elemente</li>
+<li>Traversierung des Parse-Tree: Listener oder Visitoren, Zugriff auf Kontextobjekte</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    
+<div class="box notices cstyle note">
+  <div class="box-label"><i class="fas fa-puzzle-piece"></i> Challenges</div>
+  <div class="box-content">
+
+<p><strong>Lexer und Parser mit ANTLR: Programmiersprache Lox</strong></p>
+<p>Betrachten Sie folgenden Code-Schnipsel in der Sprache <a href="https://www.craftinginterpreters.com/the-lox-language.html" rel="external" target="_blank">&quot;Lox&quot;</a>:</p>
+<pre><code>fun fib(x) {
+    if (x == 0) {
+        return 0;
+    } else {
+        if (x == 1) {
+            return 1;
+        } else {
+            fib(x - 1) + fib(x - 2);
+        }
+    }
+}
+
+var wuppie = fib(4);
+</code></pre>
+<p>Erstellen Sie für diese fiktive Sprache einen Lexer+Parser mit ANTLR.
+Implementieren Sie mit Hilfe des Parse-Trees und der Listener oder Visitoren einen einfachen Pretty-Printer.</p>
+<p>(Die genauere Sprachdefinition finden Sie bei Bedarf unter <a href="https://www.craftinginterpreters.com/the-lox-language.html" rel="external" target="_blank">craftinginterpreters.com/the-lox-language.html</a>.)</p>
+</div>
+</div>
+
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    
+<div class="box notices cstyle info">
+  <div class="box-label"><i class="fas fa-book-reader"></i> Quellen</div>
+  <div class="box-content">
+
+<ul> <li id='id_Parr2014'>[Parr2014] <strong>The Definitive ANTLR 4 Reference</strong><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.</li></ul></div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1718704076" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1718704076" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro.html">Überblick</a><ul id="R-subsections-d5efd0a842116e4053b2a67d87eea20a" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend.html">Frontend</a><ul id="R-subsections-85aabb9721911d432d0c9c491c5a6ccb" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing.html">Lexer</a><ul id="R-subsections-e04ee3f837a23fdc5bf3a65fbb1147a2" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/table.html">Tabellenbasierte Implementierung</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/recursive.html">Handcodierte Implementierung</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing.html">Parser</a><ul id="R-subsections-09952fbf38992ea2b55da5a9398e25ea" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-theory.html">LL-Parser (Theorie)</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-parser-impl.html">LL-Parser implementieren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/ll-advanced.html">LL: Fortgeschrittene Techniken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/finalwords.html">Grenze Lexer und Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser1.html">LR-Parser 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/lr-parser2.html">LR-Parser 2</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/recovery.html">Error-Recovery</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics.html">Semantische Analyse</a><ul id="R-subsections-9224d7df85af7bd61eacb9084e167bed" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables.html">Symboltabellen</a><ul id="R-subsections-967b46af463f713c947c08ce2dfc6c96" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/intro-symbtab.html">Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/scopes.html">Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/functions.html">Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/symboltables/classes.html">Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/semantics/attribgrammars.html">Attributierte Grammatiken</a></li></ul></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend.html">Backend</a><ul id="R-subsections-9a5cf8da07713c78ee52a8d0397cb806" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/optimization.html">Optimierung u. Datenflussanalyse</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation.html">Interpreter</a><ul id="R-subsections-470e6f9272f65a611fb733ec05a0440f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/interpretation/gc.html">Garbage Collection</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/backend/machinecode.html">Maschinencode</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#praktikum"><i class='fas fa-bookmark'></i> Praktikum</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions"><i class='fas fa-external-link-alt'></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/frontend/parsing/antlr-parsing.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1718704076" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1718704076" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1718704076"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1718704076" defer></script>
+  </body>
+</html>
