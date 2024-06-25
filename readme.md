@@ -1,6 +1,6 @@
 ---
 archetype: "home"
-title: "MIF 1.10: Compilerbau / MIF 1.5: Concepts of Programming Languages (Winter 2023/24)"
+title: "MIF 1.5 (PO23): Concepts of Programming Languages (Winter 2024/25)"
 ---
 
 
@@ -25,7 +25,6 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
     *   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction),
         NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
     *   Manuelle Implementierung, Generierung mit ANTLR und Flex
-
 2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG), Chomsky
     *   LL-Parser (Top-Down-Parser)
@@ -38,25 +37,20 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
         *   Shift-Reduce
         *   LR(0), SLR(1), LR(1), LALR(1)
     *   Generierung mit ANTLR und Bison
-
 3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
     *   Namen und Scopes
     *   Typen, Klassen, Polymorphie
-
 4.  Semantische Analyse und Optimierungen
     *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
     *   Typen, Typ-Inferenz, Type Checking
     *   Datenfluss-Analyse
     *   Optimierungen: Peephole u.a.
-
 5.  Zwischencode: Intermediate Representation (IR), LLVM
-
 6.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
     *   Resolver: Beschleunigung der Interpretation
-
 7.  Code-Generierung, Byte-Code
     *   Speicherlayout
     *   Erzeugen von Byte-Code
@@ -66,43 +60,42 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
 ## Team
 
 *   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
-*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips) (Sprechstunde nach Vereinbarung)
 
 
 ## Kursformat
 
-:::::: {.tabs groupid="pruefungsordnung"}
-::: {.tab title="Compilerbau"}
+:::::: {.tabs groupid="vl-pr"}
+::: {.tab title="Vorlesung"}
 
-| Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
-|:----------------------|:----------------------|
-| Di, 13:30 - 15:00 Uhr | Di, 15:15 - 16:45 Uhr |
-| online/C1             | online/C1             |
+**Vorlesung (2 SWS)**
+
+Mi, 08:00 - 09:30 Uhr (online)
+
+Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
 
 :::
-::: {.tab title="Concepts of Programming Languages"}
+::: {.tab title="Praktikum"}
 
-| Vorlesung (2 SWS)     | Praktikum (3 SWS)     |
-|:----------------------|:----------------------|
-| Di, 13:30 - 15:00 Uhr | Di, 15:15 - 17:30 Uhr |
-| online/C1             | online/C1             |
+**Praktikum (3 SWS)**
+
+Fr, 15:15 - 16:45 Uhr (online)
 
 :::
 ::::::
 
-Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC):
-alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
+Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
+Sie _können_ hierzu den Raum J104 nutzen.
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1254534&client_id=FH-Bielefeld
 
+
 ## Prüfungsform, Note und Credits
 
-:::::: {.tabs groupid="pruefungsordnung"}
-::: {.tab title="Compilerbau"}
-
-**Mündliche Prüfung plus Testat**, 5 ECTS (PO18)
+**Mündliche Prüfung plus Testat**, 10 ECTS (PO23)
 
 *   **Testat**: Vergabe der Credit-Points
+
     Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
     Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
     ein Testat bescheinigt wird.
@@ -115,24 +108,6 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 *   **Gesamtnote**:
     Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen.
-
-:::
-::: {.tab title="Concepts of Programming Languages"}
-
-**Parcoursprüfung**, 10 ECTS (PO23)
-
-*   **unbenotet**: Aktive Mitarbeit im [Praktikum] und an den Meilensteinen
-*   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
-*   **unbenotet**: Vortrag I mit Edmonton zu Spezialisierung/Baustein in Projekt, ca. 6 Minuten pro Person (60 bis 90 Minuten gesamt)
-*   **unbenotet**: Vortrag II: Vorstellung der Projektergebnisse, ca. 12 Minuten pro Person (2x 90 Minuten gesamt)
-*   **benotet (30%)**: [Vortrag III]: Vortrag zu Paper-Analyse (extra-Leistung neue PO)
-    plus Diskussion (Vorbereitung/Leitung), 30 Minuten Dauer (20' Vortrag + 10' Diskussion); Zusammenfassung als Blog-Eintrag
-*   **benotet (70%)**: Mündliche Prüfung am Ende des Semesters, angeboten in beiden Prüfungszeiträumen
-
-**Gesamtnote: 30% Vortrag III plus 70% mdl. Prüfung**
-
-:::
-::::::
 
 
 ## Materialien
@@ -160,48 +135,54 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Tools
 
-*   [github.com/antlr](https://github.com/antlr/antlr4)
+*   [ANTLR v4](https://github.com/antlr/antlr4)
+*   JDK: Java SE 21 (LTS) ([Oracle](https://www.oracle.com/java/technologies/downloads/) oder
+    [Alternativen](https://code.visualstudio.com/docs/languages/java#_install-a-java-development-kit-jdk),
+    bitte 64-bit Version nutzen)
+*   IDE: [Eclipse IDE for Java Developers](https://www.eclipse.org/downloads/) oder
+    [IntelliJ IDEA (Community Edition)](https://www.jetbrains.com/idea/) oder
+    [Visual Studio Code](https://code.visualstudio.com/) oder [Vim](https://www.vim.org/) oder ...
+*   [Git](https://git-scm.com/)
 *   [Compiler Explorer](https://godbolt.org/)
 
 
 ## Fahrplan
 
-Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com/calendar/ical/02297ee2a58f34113eeb16e51ad329dc2ca11d2649b8f196b2478fa75fd4893a%40group.calendar.google.com/public/basic.ics) mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
-
 ### Vorlesung
 
-| Woche  | Datum                                | Themen                                                                                                                                    | Lead        | Bemerkung                                             |
-|:------:|:-------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------|:------------------------------------------------------|
-|   41   | Di, 10.10.                           | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                                           | BC, Carsten |                                                       |
-|   42   | Di, 17.10.                           | [Reguläre Sprachen]                                                                                                                       | BC          |                                                       |
-|   42   | Di, 17.10. (**Praktikum**)           | [Tabellenbasierte Lexer] \| [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                    | Carsten     |                                                       |
-|   43   | Di, 24.10.                           | [CFG]                                                                                                                                     | BC          |                                                       |
-|   43   | Di, 24.10. (**Praktikum**)           | [LL-Parser (Theorie)]                                                                                                                     | BC          |                                                       |
-|   44   | **Mo, 30.10., 17:00-18:00 Uhr**      | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                                                  |             | online bzw. H10                                       |
-|   44   | Di, 31.10.                           | [LL-Parser (Praxis)] \| [LL: Fortgeschrittene Techniken] \| [Parser mit ANTLR] \| [Grenze Lexer und Parser]                               | Carsten     |                                                       |
-|   45   | Di, 07.11.                           | [LR-Parser (Teil 1)]                                                                                                                      | BC          | Meilenstein 1                                         |
-| ~~46~~ | ~~Di, 14.11.~~                       | ~~[LR-Parser (Teil 2)]~~                                                                                                                  | ~~BC~~      | ~~Exposé [Vortrag III]~~                              |
-|   47   | Di, 21.11.                           | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen]                       | Carsten     |                                                       |
-|   47   | Di, 21.11. (**Praktikum**)           | [LR-Parser (Teil 2)]                                                                                                                      | BC          |                                                       |
-|   48   | Di, 28.11.                           | [Attributierte Grammatiken]                                                                                                               | BC          |                                                       |
-|   48   | **Di, 28.11., 18:00-19:00 Uhr**      | **Edmonton II**: Vortrag Mindener Projekte (DE) (**Vortrag I**)                                                                           |             | Meilenstein 2 (Kein Praktikum - Termin mit Edmonton!) |
-|   49   | Di, 05.12.                           | [Optimierung und Datenflussanalyse]                                                                                                       | BC          | Exposé [Vortrag III]                                  |
-|   49   | **Mi, 06.12., 18:00-19:00 Uhr**      | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                                        |             |                                                       |
-|   50   | Di, 12.12.                           | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2] \| [Garbage Collection] \| [Maschinencode] | Carsten     |                                                       |
-|   51   | Di, 19.12.                           | Freies Arbeiten                                                                                                                           | Carsten     | Meilenstein 3                                         |
-|   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                                           | Carsten     |                                                       |
-|   03   | Di, 16.01. (**13:30-16:45 Uhr**)     | Vortrag II                                                                                                                                | BC, Carsten |                                                       |
-|   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                                                 | BC          |                                                       |
-|   04   | Di, 23.01.  (**13:30-16:45 Uhr**)    | [Vortrag III]: [Termine siehe Etherpad]                                                                                                   | BC, Carsten |                                                       |
-|  _06_  | _Mi, 07.02._                         | Mündliche Prüfung CB (PO18): [Termine siehe Buchungsliste CB]                                                                             | Carsten, BC |                                                       |
-|  _06_  | _Fr, 09.02._                         | Mündliche Prüfung CPL (PO23): [Termine siehe Buchungsliste CPL]                                                                           | Carsten, BC |                                                       |
+Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
-[**Bitte geben Sie uns Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau / Concepts of Programming Languages teil.**]{.alert}
+| Monat    | Tag                         | Vorlesung                                                                                                                                            | Praktikum                                               | Lead        | Bemerkung                                          |
+|:---------|:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------|:------------|:---------------------------------------------------|
+| Oktober  | 09.                         | [Orga] (Zoom); [Überblick], [Sprachen], [Anwendungen]                                                                                                |                                                         | Carsten, BC |                                                    |
+|          | 16.                         | [Reguläre Sprachen], [Tabellenbasierte Lexer]                                                                                                        |                                                         | BC          |                                                    |
+|          | 23.                         | [CFG], [LL-Parser (Theorie)]                                                                                                                         |                                                         | BC          |                                                    |
+|          | 30.                         | [Lexer mit ANTLR], [Parser mit ANTLR], [Grenze Lexer und Parser]                                                                                     | **Edmonton I: ANTLR + Live-Coding (CA)**                | Carsten     |                                                    |
+| November | 06.                         | [LR-Parser (Teil 1)]                                                                                                                                 |                                                         | BC          |                                                    |
+|          | 13.                         | [LR-Parser (Teil 2)]                                                                                                                                 |                                                         | BC          |                                                    |
+|          | 20.                         | [Attributierte Grammatiken]                                                                                                                          |                                                         | BC          |                                                    |
+|          | 27.                         | _Freies Arbeiten - Vorbereitung Vortrag_                                                                                                             | **Edmonton II: Vortrag Mindener Projekte (Master, DE)** |             |                                                    |
+| Dezember | 04.                         | [Optimierung und Datenflussanalyse]                                                                                                                  |                                                         | BC          | **Edmonton III: Vortrag Edmontoner Projekte (CA)** |
+|          | 11.                         | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                                        |                                                         | Carsten     |                                                    |
+|          | 18.                         | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2], [Garbage Collection], [Maschinencode], [Bytecode und VM] |                                                         | Carsten     |                                                    |
+|          | 25.                         | _Weihnachtspause_                                                                                                                                    |                                                         |             |                                                    |
+| Januar   | 01.                         | _Weihnachtspause_                                                                                                                                    |                                                         |             |                                                    |
+|          | 08.                         | _Freies Arbeiten_                                                                                                                                    |                                                         |             |                                                    |
+|          | 15.                         | _Freies Arbeiten_                                                                                                                                    |                                                         |             |                                                    |
+|          | 22.                         | **Vortrag**: Vorstellung Interpreter                                                                                                                 |                                                         |             |                                                    |
+|          |                             |                                                                                                                                                      |                                                         |             |                                                    |
+|          | _(Prüfungsphase 1. Termin)_ | **Mdl. Prüfung (ALL\*)**                                                                                                                             |                                                         |             |                                                    |
+|          | _(Prüfungsphase 2. Termin)_ | **Mdl. Prüfung (ALL\*)**                                                                                                                             |                                                         |             |                                                    |
 
-[Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331974&client_id=FH-Bielefeld
-[Termine siehe Buchungsliste CB]: https://www.hsbi.de/elearning/goto.php?target=book_1334199&client_id=FH-Bielefeld
-[Termine siehe Buchungsliste CPL]: https://www.hsbi.de/elearning/goto.php?target=book_1334202&client_id=FH-Bielefeld
-[Umfrage]: https://www.hsbi.de/elearning/goto.php?target=svy_1339633&client_id=FH-Bielefeld
+**TODO**
+1.  Praktikum:
+    -   Sprachparadigmen und -konzepte (logisch/Prolog, imperativ/C, funktional/Haskell(?), oop/Klassen+Vererbung Java, LISP)- Sprache und Konzepte vorstellen
+    -   Parser bauen
+    -   Interpreter bauen
+2.  Praktikum: Paper vorstellen und diskutieren
+
+
+[Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -209,14 +190,14 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 
 [Reguläre Sprachen]: lecture/frontend/lexing/regular.md
 [Tabellenbasierte Lexer]: lecture/frontend/lexing/table.md
-[Handcodierter Lexer]: lecture/frontend/lexing/recursive.md
+<!-- [Handcodierter Lexer]: lecture/frontend/lexing/recursive.md -->
 [Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
 <!-- [Lexer mit Flex]: lecture/frontend/lexing/flex.md -->
 
 [CFG]: lecture/frontend/parsing/cfg.md
 [LL-Parser (Theorie)]: lecture/frontend/parsing/ll-parser-theory.md
-[LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md
-[LL: Fortgeschrittene Techniken]: lecture/frontend/parsing/ll-advanced.md
+<!-- [LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md -->
+<!-- [LL: Fortgeschrittene Techniken]: lecture/frontend/parsing/ll-advanced.md -->
 [Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
 <!-- [Parser mit Bison]: lecture/frontend/parsing/bison.md -->
 [LR-Parser (Teil 1)]: lecture/frontend/parsing/lr-parser1.md
@@ -239,7 +220,7 @@ Hier finden Sie einen abonierbaren [Google Kalender](https://calendar.google.com
 [AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
 [Garbage Collection]: lecture/backend/interpretation/gc.md
-<!-- [Bytecode und VM]: lecture/backend/interpretation/vm.md -->
+[Bytecode und VM]: lecture/backend/interpretation/vm.md
 
 [Optimierung und Datenflussanalyse]: lecture/backend/optimization.md
 [Maschinencode]: lecture/backend/machinecode.md
