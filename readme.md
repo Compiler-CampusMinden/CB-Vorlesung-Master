@@ -154,7 +154,7 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 
 | Monat    | Tag                         | Vorlesung                                                                                                                                            | Praktikum                                               | Lead        | Bemerkung                                          |
 |:---------|:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------|:------------|:---------------------------------------------------|
-| Oktober  | 09.                         | [Orga] (Zoom); [Überblick], [Sprachen], [Anwendungen]                                                                                                |                                                         | Carsten, BC |                                                    |
+| Oktober  | 09.                         | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                                                            |                                                         | Carsten, BC |                                                    |
 |          | 16.                         | [Reguläre Sprachen], [Tabellenbasierte Lexer]                                                                                                        |                                                         | BC          |                                                    |
 |          | 23.                         | [CFG], [LL-Parser (Theorie)]                                                                                                                         |                                                         | BC          |                                                    |
 |          | 30.                         | [Lexer mit ANTLR], [Parser mit ANTLR], [Grenze Lexer und Parser]                                                                                     | **Edmonton I: ANTLR + Live-Coding (CA)**                | Carsten     |                                                    |
@@ -183,6 +183,8 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
+
+[Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions/categories/q-a?discussions_q=is%3Aopen+category%3AQ%26A
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
