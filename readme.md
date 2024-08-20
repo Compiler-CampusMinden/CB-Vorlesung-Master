@@ -14,8 +14,10 @@ Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithm
 Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
 In diesem Modul geht es um ein fortgeschrittenes Verständnis für interessante Konzepte
-im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen
-diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Java ein.
+im Compilerbau sowie um grundlegende Konzepte von Programmiersprachen und -paradigmen.
+Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei
+der Erstellung eines Bytecode-Compilers für unterschiedliche Programmiersprachen für
+die Java-VM ein.
 
 
 ## Überblick Modulinhalte
@@ -36,26 +38,26 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
         *   Shift-Reduce
         *   LR(0), SLR(1), LR(1), LALR
     *   Generierung mit ANTLR oder Bison
-3.  Symboltabellen
-    *   Berücksichtigung unterschiedlicher Sprachparadigmen
-    *   Namen und Scopes
-    *   Typen, Klassen, Polymorphie
-4.  Semantische Analyse und Optimierungen
+3.  Semantische Analyse und Optimierungen
+    *   Symboltabellen
+        *   Namen und Scopes
+        *   Typen, Klassen, Polymorphie
     *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
     *   Typen, Typ-Inferenz, Type Checking
     *   Datenfluss- und Kontrollfluss-Analyse
     *   Optimierungen: Peephole u.a.
-5.  Zwischencode: Intermediate Representation (IR), LLVM-IR
-6.  Interpreter
+4.  Zwischencode: Intermediate Representation (IR), LLVM-IR
+5.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
     *   Resolver: Beschleunigung der Interpretation
-7.  Code-Generierung, Bytecode/VM
+6.  Code-Generierung, Bytecode/VM
     *   Speicherlayout
     *   Erzeugen von Bytecode
     *   Ausführen in einer Virtuellen Maschine
     *   Garbage Collection
-8.  Programmiersprachen: Ruby, Prolog, Haskell und die Auswirkungen der Konzepte auf den Compiler/Interpreter und die Laufzeitumgebung
+7.  Programmiersprachen: Ruby, Prolog, Haskell, Lisp und die Auswirkungen der Konzepte
+    auf den Compiler/Interpreter und die Laufzeitumgebung
 
 
 ## Team
@@ -66,12 +68,10 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
 
 ## Kursformat
 
-| Vorlesung (2 SWS)     | Praktikum (3 SWS)     |
-|:----------------------|:----------------------|
-| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 18:00 Uhr |
-| online                | online                |
-
-Durchführung Vorlesung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
+| Vorlesung (2 SWS)                                                               | Praktikum (3 SWS)              |
+|:--------------------------------------------------------------------------------|:-------------------------------|
+| Di, 14:00 - 15:30 Uhr (online)                                                  | Di, 15:45 - 18:00 Uhr (online) |
+| Durchführung Vorlesung als *Flipped Classroom* (Carsten) bzw. *Vorlesung* (BC). |                                |
 
 Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
 Sie _können_ hierzu den Raum J101 nutzen.
@@ -102,8 +102,6 @@ Sie _können_ hierzu den Raum J101 nutzen.
 
 ## Materialien
 
-### Literatur
-
 1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
     ISBN [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
@@ -124,15 +122,6 @@ Sie _können_ hierzu den Raum J101 nutzen.
     ISBN [978-1-93435-659-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-93435-659-3).
     [Online](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
-### Tools
-
-*   [ANTLR v4](https://github.com/antlr/antlr4)
-*   JDK: Java SE 21 (LTS) ([Oracle](https://www.oracle.com/java/technologies/downloads/) oder
-    [Alternativen](https://code.visualstudio.com/docs/languages/java#_install-a-java-development-kit-jdk),
-    bitte 64-bit Version nutzen)
-*   [Git](https://git-scm.com/)
-*   [Compiler Explorer](https://godbolt.org/)
-
 
 ## Fahrplan
 
@@ -149,7 +138,7 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 |          | 19.                         | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                    | [B04] (Symboltabellen)                                  | Carsten     |
 |          | 26.                         | **[Workshop II]**: Sprache und Features (aus Compiler-Sicht)                                                  | **Edmonton II: Vortrag Mindener Projekte (Master, DE)** |             |
 | Dezember | 03.                         | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                        | **Edmonton III: Vortrag Edmontoner Projekte (CA)**      | BC          |
-|          | 10.                         | Projekt-Pitch: Vorstellen und Diskussion der Projektinhalte/-konzepte                                         | [B05] (Interpreter, Optimierung)                        | Carsten     |
+|          | 10.                         | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                       | [B05] (Interpreter, Optimierung)                        | Carsten     |
 |          | 17.                         | _Freies Arbeiten_                                                                                             | [Meilenstein 1]                                         |             |
 |          | 24.                         | _Weihnachtspause_                                                                                             |                                                         |             |
 |          | 31.                         | _Weihnachtspause_                                                                                             |                                                         |             |
@@ -213,6 +202,7 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 [B03]: homework/sheet03.md
 [B04]: homework/sheet04.md
 [B05]: homework/sheet05.md
+[Projekt-Pitch]: homework/project.md
 [Meilenstein 1]: homework/project.md
 [Meilenstein 2]: homework/project.md
 [Meilenstein 3]: homework/project.md
