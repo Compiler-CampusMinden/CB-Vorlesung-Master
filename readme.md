@@ -110,13 +110,13 @@ Sie _können_ hierzu den Raum J101 nutzen.
     Nystrom, R., Genever Benning, 2021.
     ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
     [Online](https://www.craftinginterpreters.com/).
-3.  ["**The Definitive ANTLR 4 Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
-    Parr, T., Pragmatic Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
-    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-4.  ["Engineering a Compiler"](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/).
+3.  ["Engineering a Compiler"](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/).
     Torczon, L. und Cooper, K., Morgan Kaufmann, 2012.
     ISBN [978-0-1208-8478-0](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-1208-8478-0).
     [Online](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+4.  ["Introduction to Compilers and Language Design"](https://www3.nd.edu/~dthain/compilerbook/).
+    Thain, D., 2023. ISBN [979-8-655-18026-0](https://fhb-bielefeld.digibib.net/openurl?isbn=979-8-655-18026-0).
+    [Online](https://www3.nd.edu/~dthain/compilerbook/).
 5.  ["**Seven Languages in Seven Weeks**"](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/).
     Tate, B.A., Pragmatic Bookshelf, 2010.
     ISBN [978-1-93435-659-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-93435-659-3).
