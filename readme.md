@@ -17,7 +17,7 @@ In diesem Modul geht es um ein fortgeschrittenes Verständnis für interessante 
 im Compilerbau sowie um grundlegende Konzepte von Programmiersprachen und -paradigmen.
 Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei
 der Erstellung eines Bytecode-Compilers für unterschiedliche Programmiersprachen für
-die Java-VM ein.
+die Java-VM oder WASM ein.
 
 
 ## Überblick Modulinhalte
