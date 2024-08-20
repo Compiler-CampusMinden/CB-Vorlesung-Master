@@ -68,10 +68,10 @@ die Java-VM oder WASM ein.
 
 ## Kursformat
 
-| Vorlesung (2 SWS)                                                     | Praktikum (3 SWS)              |
-|:----------------------------------------------------------------------|:-------------------------------|
-| Di, 14:00 - 15:30 Uhr (online)                                        | Di, 15:45 - 18:00 Uhr (online) |
-| Durchführung als *Flipped Classroom* (Carsten) bzw. *Vorlesung* (BC). |                                |
+| Vorlesung (2 SWS)                               | Praktikum (3 SWS)              |
+|:------------------------------------------------|:-------------------------------|
+| Di, 14:00 - 15:30 Uhr (online)                  | Di, 15:45 - 18:00 Uhr (online) |
+| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) |                                |
 
 Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
 Sie _können_ hierzu den Raum J101 nutzen.
