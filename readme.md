@@ -66,24 +66,12 @@ diese bei der Erstellung eines Byte-Code-Compilers samt Virtual Machine für Jav
 
 ## Kursformat
 
-:::::: {.tabs groupid="vl-pr"}
-::: {.tab title="Vorlesung"}
+| Vorlesung (2 SWS)     | Praktikum (3 SWS)     |
+|:----------------------|:----------------------|
+| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 18:00 Uhr |
+| online                | online                |
 
-**Vorlesung (2 SWS)**
-
-Di, 14:00 - 15:30 Uhr (online)
-
-Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
-
-:::
-::: {.tab title="Praktikum"}
-
-**Praktikum (3 SWS)**
-
-Di, 15:45 - 18:00 Uhr (online)
-
-:::
-::::::
+Durchführung Vorlesung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
 
 Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
 Sie _können_ hierzu den Raum J101 nutzen.
