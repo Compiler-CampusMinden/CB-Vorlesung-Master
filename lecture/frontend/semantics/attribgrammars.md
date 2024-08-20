@@ -4,7 +4,7 @@ title: "Typen, Type Checking und Attributierte Grammatiken"
 linkTitle: "Attributierte Grammatiken"
 author: "BC George (HSBI)"
 readings:
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: "Kapitel 2.3 und 5"
   - key: "Levine2009"
 outcomes:

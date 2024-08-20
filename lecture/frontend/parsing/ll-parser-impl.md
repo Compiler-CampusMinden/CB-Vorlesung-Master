@@ -9,7 +9,7 @@ readings:
   - key: "Parr2014"
   - key: "Mogensen2017"
     comment: "Kapitel 2 (insbesondere Abschnitte 2.3 bis (einschließlich) 2.19)"
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: "Abschnitte 2.4 und 4.4"
   - key: "Grune2012"
     comment: "Abschnitte 3.1 bis (einschließlich) 3.4"

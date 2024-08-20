@@ -4,7 +4,7 @@ title: "Bandbreite der Programmiersprachen"
 linkTitle: "Programmiersprachen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: "Kapitel 1 Introduction"
   - key: "Grune2012"
     comment: "Kapitel 1 Introduction"

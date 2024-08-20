@@ -3,7 +3,7 @@ archetype: lecture-cg
 title: "Überblick Zwischencode"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: "Kapitel 6 und 8"
   - key: "Mogensen2017"
     comment: "Kapitel 6 und 7"

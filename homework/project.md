@@ -1,13 +1,72 @@
 ---
 archetype: assignment
-title: "Aufgabe: Java-Compiler und -VM"
+title: "Aufgabe: TODO"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
 ---
 
 
-## Aufgabe
+## Projekt-Aufgabe
+
+
+Prolog: Interpreter (Anfragen, Unifikation/Resolution)
+Haskell: Typ-Inferenz (Hindley-Milner-Typsystem/inferenz), higher-order Functions, lazy Evaluation
+Ruby: Klassen, (Multi-) Vererbung, Traits, Monkey-Patching, dynamische Typisierung/Duck-Typing
+Lisp: Interpreter (schrittweise Ergänzung, Makros vs. Funktionen)
+
+
+Vortrag I: Sprache und Features
+Vortrag II: CB-Algorithmen
+Vortrag III: Projektvorstellung
+
+
+Sprachen: Ruby, Haskell, Prolog, Lisp/Clojure(?)
+
+Workshop I: Vorstellung Sprachen (Kernkonzepte)
+Workshop II:
+-   Garbage Collection & Borrow Checking/Lifetime-Analysis
+-   Hindley-Milner-Typsystem/-inferenz
+-   Unifikation/Resolution (PK1)
+-   Byte-Code und VM: WASM, Java-VM
+-   PEG, Pratt Parser und Parser Combinators, ALL\*
+-   IR/Optimierung: SeaOfNodes, MLIR, E-Graphs
+Workshop III: Umsetzung als Compiler/Interpreter, Vorstellung der Bausteine und Einordnung; Lexer+Parser selbst implementieren inkl. Fehlerbehandlung; attrib. Grammatik
+
+
+Ruby: OO
+-   Imperative Konzepte (Statements, Expression, Funktionen)
+-   Klassen
+    -   Offene Klassen/Monkey Patching
+    -   Überladene und überschriebene Methoden
+    -   (Mehrfach-) Vererbung
+-   Dynamisches vs. statisches Binden
+-   Module/Importe (benannte Scopes)
+-   Duck-Typing, Type-Checking, Type Coercion
+-   Templates (?)
+
+Haskell: FP
+-   Offside Rule
+-   Listen, List Comprehensions
+-   Pattern Matching
+-   Polymorphic Typing, HM-Typinferenz
+-   Higher-order Functions
+-   Lazy Evaluation
+-   Compiler (Desugaring, Graph-Reduction, Strictness Analysis) und Laufzeit ("functional core")
+
+Prolog: LP
+-   Horn-Klauseln
+-   Unifikation, Substitution
+-   Resolutionskalkül
+-   Abarbeitung
+-   Listen, Prädikate, Terme
+-   Cut
+
+Literatur siehe Literaturquellen im Grune; zusätzlich Tate (7W7S, O'Reilly)
+
+
+
+
 
 Konzipieren und implementieren Sie im Laufe des Semesters gemeinsam in der gesamten Gruppe einen Compiler `cmjavac` sowie eine Virtual Machine `cmjava` für die Programmiersprache Java.
 
@@ -53,3 +112,9 @@ Im Rahmen des **Vortrags II** sollen am Ende des Semesters die Projektergebnisse
 
 **Hinweis zu Meilenstein 2**:
 Stellen Sie gemeinsam als Gruppe das Projekt den Studierenden der University of Alberta vor: Was ist die Aufgabe, welche Konzepte und Strukturen haben Sie erarbeitet, wie sehen erste Arbeitsergebnisse aus? Jede(r) sollte ca. 6 Minuten vortragen. Dieser Vortrag findet in englischer Sprache statt und ist Teil der Prüfungsleistung.
+
+
+## Workshops
+
+TODO
+

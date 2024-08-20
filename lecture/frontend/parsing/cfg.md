@@ -3,7 +3,7 @@ archetype: lecture-bc
 title: "CFG"
 author: "BC George (HSBI)"
 readings:
-  - key: "aho2013compilers"
+  - key: "Aho2023"
   - key: "hopcroft2003"
 outcomes:
   - k1: "PDAs"

@@ -4,7 +4,7 @@ title: "Reguläre Sprachen, Ausdrucksstärke"
 linkTitle: "Reguläre Sprachen"
 author: "BC George (HSBI)"
 readings:
-  - key: "aho2013compilers"
+  - key: "Aho2023"
     comment: "Abschnitt 2.6 und Kapitel 3"
   - key: "Torczon2012"
     comment: "Kapitel 2"

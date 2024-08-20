@@ -4,7 +4,7 @@ title: "Lexer: Handcodierte Implementierung"
 linkTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: " Abschnitt 2.6 und Kapitel 3"
   - key: "Torczon2012"
     comment: "Kapitel 2"

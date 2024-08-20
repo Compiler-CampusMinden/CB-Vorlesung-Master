@@ -8,7 +8,7 @@ readings:
     comment: "Kapitel 8"
   - key: "Grune2012"
     comment: "Kapitel 9.3"
-  - key: "Aho2008"
+  - key: "Aho2023"
     comment: "Kapitel 9"
   - key: "Mogensen2017"
     comment: "Kapitel 8, 10 und 11"
