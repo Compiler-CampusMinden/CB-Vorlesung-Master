@@ -158,47 +158,47 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 
 [Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions/categories/q-a?discussions_q=is%3Aopen+category%3AQ%26A
 
-[Überblick]: lecture/intro/overview.md
-[Sprachen]: lecture/intro/languages.md
-[Anwendungen]: lecture/intro/applications.md
+[Überblick]: lecture/00-intro/overview.md
+[Sprachen]: lecture/00-intro/languages.md
+[Anwendungen]: lecture/00-intro/applications.md
 
-[Reguläre Sprachen]: lecture/frontend/lexing/regular.md
-<!-- [Tabellenbasierte Lexer]: lecture/frontend/lexing/table.md -->
-<!-- [Handcodierter Lexer]: lecture/frontend/lexing/recursive.md -->
-<!-- [Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md -->
-<!-- [Lexer mit Flex]: lecture/frontend/lexing/flex.md -->
+[Reguläre Sprachen]: lecture/01-lexing/regular.md
+<!-- [Tabellenbasierte Lexer]: lecture/01-lexing/table.md -->
+<!-- [Handcodierter Lexer]: lecture/01-lexing/recursive.md -->
+<!-- [Lexer mit ANTLR]: lecture/01-lexing/antlr-lexing.md -->
+<!-- [Lexer mit Flex]: lecture/01-lexing/flex.md -->
 
-[CFG]: lecture/frontend/parsing/cfg.md
-[LL-Parser]: lecture/frontend/parsing/ll-parser-theory.md
-<!-- [LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md -->
-<!-- [LL: Fortgeschrittene Techniken]: lecture/frontend/parsing/ll-advanced.md -->
-<!-- [Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md -->
-<!-- [Parser mit Bison]: lecture/frontend/parsing/bison.md -->
-[LR-Parser (LR(0), LALR)]: lecture/frontend/parsing/lr-parser.md
-<!-- [LR-Parser (Teil 1)]: lecture/frontend/parsing/lr-parser1.md -->
-<!-- [LR-Parser (Teil 2)]: lecture/frontend/parsing/lr-parser2.md -->
-<!-- [PEG-Parser, Pratt-Parser]: lecture/frontend/parsing/parsercombinator.md -->
-<!-- [Error Revocery]: lecture/frontend/parsing/recovery.md -->
-<!-- [Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md -->
+[CFG]: lecture/02-parsing/cfg.md
+[LL-Parser]: lecture/02-parsing/ll-parser-theory.md
+<!-- [LL-Parser (Praxis)]: lecture/02-parsing/ll-parser-impl.md -->
+<!-- [LL: Fortgeschrittene Techniken]: lecture/02-parsing/ll-advanced.md -->
+<!-- [Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md -->
+<!-- [Parser mit Bison]: lecture/02-parsing/bison.md -->
+[LR-Parser (LR(0), LALR)]: lecture/02-parsing/lr-parser.md
+<!-- [LR-Parser (Teil 1)]: lecture/02-parsing/lr-parser1.md -->
+<!-- [LR-Parser (Teil 2)]: lecture/02-parsing/lr-parser2.md -->
+<!-- [PEG-Parser, Pratt-Parser]: lecture/02-parsing/parsercombinator.md -->
+<!-- [Error Revocery]: lecture/02-parsing/recovery.md -->
+<!-- [Grenze Lexer und Parser]: lecture/02-parsing/finalwords.md -->
 
-[Attributierte Grammatiken]: lecture/frontend/semantics/attribgrammars.md
+[Attributierte Grammatiken]: lecture/03-semantics/attribgrammars.md
 
-[Überblick Symboltabellen]: lecture/frontend/semantics/symboltables/intro-symbtab.md
-[Symboltabellen: Scopes]: lecture/frontend/semantics/symboltables/scopes.md
-[Symboltabellen: Funktionen]: lecture/frontend/semantics/symboltables/functions.md
-[Symboltabellen: Klassen]: lecture/frontend/semantics/symboltables/classes.md
+[Überblick Symboltabellen]: lecture/03-semantics/symboltables/intro-symbtab.md
+[Symboltabellen: Scopes]: lecture/03-semantics/symboltables/scopes.md
+[Symboltabellen: Funktionen]: lecture/03-semantics/symboltables/functions.md
+[Symboltabellen: Klassen]: lecture/03-semantics/symboltables/classes.md
 
-<!-- [Überblick Zwischencode]: lecture/intermediate/intro-ir.md -->
-<!-- [LLVM als IR]: lecture/intermediate/llvm-ir.md -->
+<!-- [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md -->
+<!-- [LLVM als IR]: lecture/04-intermediate/llvm-ir.md -->
 
-[Syntaxgesteuerte Interpreter]: lecture/backend/interpretation/syntaxdriven.md
-[AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
-[AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
-<!-- [Garbage Collection]: lecture/backend/interpretation/gc.md -->
-<!-- [Bytecode und VM]: lecture/backend/interpretation/vm.md -->
+[Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md
+[AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
+[AST-basierte Interpreter 2]: lecture/06-interpretation/astdriven-part2.md
+<!-- [Garbage Collection]: lecture/06-interpretation/gc.md -->
+<!-- [Bytecode und VM]: lecture/06-interpretation/vm.md -->
 
-[Optimierung und Datenfluss- und Kontrollflussanalyse]: lecture/backend/optimization.md
-<!-- [Maschinencode]: lecture/backend/machinecode.md -->
+[Optimierung und Datenfluss- und Kontrollflussanalyse]: lecture/05-optimization/optimization.md
+<!-- [Maschinencode]: lecture/07-codegen/machinecode.md -->
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md

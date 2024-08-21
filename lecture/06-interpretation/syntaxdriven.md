@@ -14,7 +14,7 @@ readings:
 tldr: |
   Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen Ergebnisse:
 
-  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/backend/interpretation/images/architektur_cb.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/06-interpretation/images/architektur_cb.png)
 
   |   | Phase                          | Ergebnis                                                        |
   |:--|:-------------------------------|:----------------------------------------------------------------|
@@ -41,9 +41,9 @@ tldr: |
   syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung mit
   dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber
   zusätzlich noch Speicherstrukturen, die wir in
-  [AST-basierte Interpreter: Basics](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/backend/interpretation/astdriven-part1.md)
+  [AST-basierte Interpreter: Basics](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part1.md)
   und
-  [AST-basierte Interpreter: Funktionen und Klassen](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/backend/interpretation/astdriven-part2.md)
+  [AST-basierte Interpreter: Funktionen und Klassen](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part2.md)
   betrachten.
 outcomes:
   - k3: "Attribute und eingebettete Aktionen in Bison und ANTLR"
@@ -369,7 +369,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/interpretation/src/TestMyListener.java"}
+[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyListener.java"}
 :::
 
 
@@ -447,7 +447,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/interpretation/src/TestMyVisitor.java"}
+[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyVisitor.java"}
 :::
 
 

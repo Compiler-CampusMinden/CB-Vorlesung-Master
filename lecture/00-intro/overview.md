@@ -16,7 +16,7 @@ tldr: |
   von Stufe zu Stufe zu: Der ursprüngliche Input ist ein Strom von Zeichen, daraus wird ein
   Strom von Wörtern (Token), daraus ein Baum (Parse Tree), Zwischencode (IC), ...
 
-  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/intro/images/architektur_cb.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/00-intro/images/architektur_cb.png)
 
   Die gezeigten Phasen werden traditionell unterschieden. Je nach Aufgabe können verschiedene
   Stufen zusammengefasst werden oder sogar gar nicht auftreten.

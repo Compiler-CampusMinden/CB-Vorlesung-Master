@@ -1,12 +1,12 @@
 ---
 archetype: "default"
-title: "Backend"
+title: "Code Generierung"
 ---
 
 
-Unter dem "Backend" versteht man die hinteren Stufen eines Compilers,
-die mit der **Synthese** der Ausgabe beschäftigt sind. Dies sind in
-der Regel verschiedene Optimierungen und letztlich die Code-Generierung
+Die Code Generierung ist eine Phase im "Backend" des Compilers und schließt
+üblicherweise die Compiler-Pipeline ab. Hier wird beispielsweise Bytecode
+(Java-VM, WASM) oder Assembler oder auch (selten) Binärcode generiert.
 
 
 `{{< children showhidden="true" >}}`{=markdown}

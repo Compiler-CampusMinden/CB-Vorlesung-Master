@@ -15,7 +15,7 @@ readings:
     comment: "Abschnitte 3.1 bis (einschließlich) 3.4"
   - key: "Packrat2006"
 tldr: |
-  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/frontend/parsing/images/architektur_cb_parser.png)
+  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/02-parsing/images/architektur_cb_parser.png)
 
   Man kann einen LL(k)-Parser bei Bedarf um ein "spekulatives Matching" ergänzen. Dies ist in Situationen
   relevant, wo man das $k$ nicht vorhersehen kann, etwa bei der Unterscheidung einer Vorwärtsdeklaration

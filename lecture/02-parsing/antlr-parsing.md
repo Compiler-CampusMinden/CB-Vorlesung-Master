@@ -106,7 +106,7 @@ NUM   : [0-9]+ ;
 WS    : [ \t\n]+ -> skip ;
 ```
 
-[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/Hello.g4"}
+[Konsole: Hello (grun, Parse-Tree)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/Hello.g4"}
 
 ::::::::: notes
 ### Starten des Parsers
@@ -522,9 +522,9 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyListener.java"}
+[Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyListener.java"}
 
-In [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
+In [Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -599,9 +599,9 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/TestMyVisitor.java"}
+[Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyVisitor.java"}
 
-In [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
+In [Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -627,9 +627,9 @@ hinzu, welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert
 als Rückgabewert der generierten Methode). Auf diesen Wert kann in den
 Aktionen mit `$v` zugegriffen werden.
 
-In [Attributierte Grammatiken](../semantics/attribgrammars.md)
+In [Attributierte Grammatiken](../03-semantics/attribgrammars.md)
 werfen wir einen genaueren Blick auf die attributierten Grammatiken. In
-[Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)
+[Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
 werden wir eingebettete Aktionen und Attribute nutzen, um einen einfachen
 syntaxgesteuerten Interpreter aufzubauen.
 

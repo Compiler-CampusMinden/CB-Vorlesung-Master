@@ -136,7 +136,7 @@ GREETING    : [a-zA-Z]+ ;
 WHITESPACE  : [ \t\n]+ -> skip ;
 ```
 
-[Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/lexing/src/Hello.g4"}
+[Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/01-lexing/src/Hello.g4"}
 
 
 ::::::::: notes
@@ -228,7 +228,7 @@ zurückgeben lassen. (Diese Methode wird letztlich vom Parser benutzt.)
 
 Die restlichen Dateien werden für den Parser und verschiedene Arten der
 Traversierung des AST generiert (vgl.
-[AST-basierte Interpreter](../../backend/interpretation/astdriven-part1.md)).
+[AST-basierte Interpreter](../../06-interpretation/astdriven-part1.md)).
 
 ### Bedeutung der Ausgabe
 
@@ -295,7 +295,7 @@ hello
     Rekursive Lexer-Regeln sind erlaubt. **Achtung**: Es dürfen keine
     _links-rekursiven_ Regeln genutzt werden, etwa wie `ID : ID '*' ID ;` ...
     (Eine genauere Definition und die Transformation in nicht-linksrekursive
-    Regeln siehe [LL-Parser](../parsing/ll-parser-theory.md)).
+    Regeln siehe [LL-Parser](../02-parsing/ll-parser-theory.md)).
 
 *   Alle Literale werden in _einfache_ Anführungszeichen eingeschlossen
     (es erfolgt keine Unterscheidung zwischen einzelnen Zeichen und Strings

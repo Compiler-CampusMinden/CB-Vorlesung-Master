@@ -85,13 +85,13 @@ stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
 ::: slides
-[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/VarDef.g4"}
+[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/VarDef.g4"}
 :::
 
 
 ::::::::: notes
 *Anmerkung*: Die nachfolgenden Fehler werden am Beispiel der Grammatik
-[VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/frontend/parsing/src/VarDef.g4)
+[VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/VarDef.g4)
 und ANTLR demonstriert.
 
 ### Lexikalische Fehler
@@ -502,7 +502,7 @@ stmt : 'int' ID ';'
 Der aus der Grammatik generierte Parser leitet von der Basisklasse `Parser`
 ab. Dort wird eine Methode `notifyErrorListeners()` implementiert, die man
 mit Hilfe von in die Grammatik eingebetteten Aktionen aufrufen kann (Vorgriff
-auf [Syntaxgesteuerte Interpreter](../../backend/interpretation/syntaxdriven.md)).
+auf [Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)).
 Letztlich steht im generierten Parser in der generierten Methode `stmt()` an
 der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 :::

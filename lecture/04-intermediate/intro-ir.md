@@ -104,7 +104,7 @@ vornehmen.
 Anschließend können diverse *Writer* den AST in das gewünschte Zielformat überführen.
 :::
 
-[Konsole: pandoc hello.md -s -t native]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intermediate/src/hello.md"}
+[Konsole: pandoc hello.md -s -t native]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.md"}
 
 
 ## Zwischenformat: Drei-Adressen-Code
@@ -201,7 +201,7 @@ define i32 @main() #0 {
 :::
 ::::::
 
-[Beispiel: clang -emit-llvm -S -o - hello.c]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intermediate/src/hello.c"}
+[Beispiel: clang -emit-llvm -S -o - hello.c]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
 Der obige Output ist auf die *relevanten Zeilen gekürzt*; der gesamte Output im LLVM-Format
@@ -274,7 +274,7 @@ y = x + 35
 :::
 ::::::
 
-[Beispiel: python -m dis hello.py]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intermediate/src/hello.py"}
+[Beispiel: python -m dis hello.py]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.py"}
 
 ::: notes
 Python pflegt 3 Listen: `co_names` für die Namen plus `co_values` für die dazugehörigen Werte sowie
@@ -337,7 +337,7 @@ public class Hello {
 :::
 ::::::
 
-[Beispiel: javac Hello.java && javap -c Hello.class]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intermediate/src/Hello.java"}
+[Beispiel: javac Hello.java && javap -c Hello.class]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/Hello.java"}
 
 ::: notes
 Für jeden Methodenaufruf wird ein entsprechender Frame auf den Stack gepusht.
@@ -409,7 +409,7 @@ main:
 :::
 ::::::
 
-[Beispiel: gcc -S -o - hello.c]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/intermediate/src/hello.c"}
+[Beispiel: gcc -S -o - hello.c]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
 Die Ausgabe unterscheidet sich je nach Architektur, auf dem der C-Code
