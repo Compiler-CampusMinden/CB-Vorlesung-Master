@@ -247,7 +247,7 @@ Starten würde man den Parser nach dem Erzeugen einer Instanz (dabei wird ein Le
 durchgereicht) über den Aufruf der Start-Regel, also beispielsweise `parser.list()`.
 
 *Anmerkung*: Mit dem generierten Parse-Tree bzw. *AST* beschäftigen wir uns später
-(=> [AST-basierte Interpreter](../../06-interpretation/astdriven-part1.md)).
+(=> [AST-basierte Interpreter](../06-interpretation/astdriven-part1.md)).
 :::
 
 

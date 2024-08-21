@@ -228,7 +228,7 @@ zurückgeben lassen. (Diese Methode wird letztlich vom Parser benutzt.)
 
 Die restlichen Dateien werden für den Parser und verschiedene Arten der
 Traversierung des AST generiert (vgl.
-[AST-basierte Interpreter](../../06-interpretation/astdriven-part1.md)).
+[AST-basierte Interpreter](../06-interpretation/astdriven-part1.md)).
 
 ### Bedeutung der Ausgabe
 
