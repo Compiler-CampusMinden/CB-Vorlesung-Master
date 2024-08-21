@@ -1,6 +1,6 @@
 ---
 archetype: lecture-bc
-title: "LL-Parser (Theorie)"
+title: "LL-Parser"
 author: "BC George (HSBI)"
 readings:
   - key: "Aho2023"

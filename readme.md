@@ -169,7 +169,7 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 <!-- [Lexer mit Flex]: lecture/01-lexing/flex.md -->
 
 [CFG]: lecture/02-parsing/cfg.md
-[LL-Parser]: lecture/02-parsing/ll-parser-theory.md
+[LL-Parser]: lecture/02-parsing/ll-parser.md
 <!-- [LL-Parser (Praxis)]: lecture/02-parsing/ll-parser-impl.md -->
 <!-- [LL: Fortgeschrittene Techniken]: lecture/02-parsing/ll-advanced.md -->
 <!-- [Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md -->
