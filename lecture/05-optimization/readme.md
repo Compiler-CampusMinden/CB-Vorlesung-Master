@@ -6,9 +6,10 @@ title: "Optimierung"
 
 Üblicherweise finden sich die verschiedenen Optimierungsmöglichkeiten in
 der Backend-Phase. Man kann u.a. zwischen lokaler und globaler Optimierung
-unterscheiden. Es kann sehr unterschiedliche Ziele für die Optimierung geben,
-beispielsweise möchte man den Code kleiner gestalten oder die Laufzeit für
-das Programm verringern oder sogar Energieaspekte berücksichtigen.
+oder beispielsweise JIT unterscheiden. Es kann sehr unterschiedliche Ziele
+für die Optimierung geben, beispielsweise möchte man den Code kleiner(kürzer,
+kompakter) gestalten oder die Laufzeit für das Programm verringern oder sogar
+Energieaspekte berücksichtigen.
 
 
 `{{< children showhidden="true" >}}`{=markdown}

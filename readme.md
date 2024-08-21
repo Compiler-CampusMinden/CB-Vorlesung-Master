@@ -194,7 +194,7 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 [Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md
 [AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/06-interpretation/astdriven-part2.md
-<!-- [Garbage Collection]: lecture/06-interpretation/gc.md -->
+<!-- [Garbage Collection]: lecture/08-memory/gc.md -->
 <!-- [Bytecode und VM]: lecture/06-interpretation/vm.md -->
 
 [Optimierung und Datenfluss- und Kontrollflussanalyse]: lecture/05-optimization/optimization.md
