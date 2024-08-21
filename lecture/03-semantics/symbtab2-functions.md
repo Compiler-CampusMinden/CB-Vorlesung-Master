@@ -1,6 +1,6 @@
 ---
 archetype: lecture-cg
-title: "Funktionen"
+title: "SymbTab2: Funktionen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Mogensen2017"

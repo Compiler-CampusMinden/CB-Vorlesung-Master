@@ -1,6 +1,6 @@
 ---
 archetype: lecture-cg
-title: "Strukturen und Klassen"
+title: "SymbTab3: Strukturen und Klassen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Mogensen2017"
