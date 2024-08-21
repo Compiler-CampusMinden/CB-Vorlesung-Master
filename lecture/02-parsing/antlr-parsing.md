@@ -524,7 +524,7 @@ public class TestMyListener {
 
 [Beispiel: TestMyListener.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyListener.java"}
 
-In [Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
+In [Syntaxgesteuerte Interpreter](../06-interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -601,7 +601,7 @@ public class TestMyVisitor {
 
 [Beispiel: TestMyVisitor.java und calc.g4]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyVisitor.java"}
 
-In [Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
+In [Syntaxgesteuerte Interpreter](../06-interpretation/syntaxdriven.md)
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
@@ -629,7 +629,7 @@ Aktionen mit `$v` zugegriffen werden.
 
 In [Attributierte Grammatiken](../03-semantics/attribgrammars.md)
 werfen wir einen genaueren Blick auf die attributierten Grammatiken. In
-[Syntaxgesteuerte Interpreter](../../06-interpretation/syntaxdriven.md)
+[Syntaxgesteuerte Interpreter](../06-interpretation/syntaxdriven.md)
 werden wir eingebettete Aktionen und Attribute nutzen, um einen einfachen
 syntaxgesteuerten Interpreter aufzubauen.
 
