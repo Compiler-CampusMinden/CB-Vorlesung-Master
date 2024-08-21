@@ -183,10 +183,10 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 
 [Attributierte Grammatiken]: lecture/03-semantics/attribgrammars.md
 
-[Überblick Symboltabellen]: lecture/03-semantics/symboltables/intro-symbtab.md
-[Symboltabellen: Scopes]: lecture/03-semantics/symboltables/scopes.md
-[Symboltabellen: Funktionen]: lecture/03-semantics/symboltables/functions.md
-[Symboltabellen: Klassen]: lecture/03-semantics/symboltables/classes.md
+[Überblick Symboltabellen]: lecture/03-semantics/symbtab0-intro.md
+[Symboltabellen: Scopes]: lecture/03-semantics/symbtab1-scopes.md
+[Symboltabellen: Funktionen]: lecture/03-semantics/symbtab2-functions.md
+[Symboltabellen: Klassen]: lecture/03-semantics/symbtab3-classes.md
 
 <!-- [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md -->
 <!-- [LLVM als IR]: lecture/04-intermediate/llvm-ir.md -->
