@@ -3,6 +3,7 @@
 /lecture/01-lexing/regular.md @bcg7 @cagix
 /lecture/02-parsing/cfg.md @bcg7 @cagix
 /lecture/02-parsing/ll-parser.md @bcg7 @cagix
+/lecture/02-parsing/lr-parser.md @bcg7 @cagix
 /lecture/02-parsing/lr-parser1.md @bcg7 @cagix
 /lecture/02-parsing/lr-parser2.md @bcg7 @cagix
 /lecture/02-parsing/parsercombinator.md @bcg7 @cagix
