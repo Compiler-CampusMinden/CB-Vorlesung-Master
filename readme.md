@@ -182,7 +182,6 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 <!-- [Grenze Lexer und Parser]: lecture/02-parsing/finalwords.md -->
 
 [Attributierte Grammatiken]: lecture/03-semantics/attribgrammars.md
-
 [Überblick Symboltabellen]: lecture/03-semantics/symbtab0-intro.md
 [Symboltabellen: Scopes]: lecture/03-semantics/symbtab1-scopes.md
 [Symboltabellen: Funktionen]: lecture/03-semantics/symbtab2-functions.md
@@ -191,14 +190,17 @@ Abgabe der Übungsblätter jeweils **bis Dienstag, 14:00 Uhr** [im ILIAS](https:
 <!-- [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md -->
 <!-- [LLVM als IR]: lecture/04-intermediate/llvm-ir.md -->
 
+[Optimierung und Datenfluss- und Kontrollflussanalyse]: lecture/05-optimization/optimization.md
+
 [Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md
 [AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/06-interpretation/astdriven-part2.md
-<!-- [Garbage Collection]: lecture/08-memory/gc.md -->
-<!-- [Bytecode und VM]: lecture/06-interpretation/vm.md -->
+<!-- [VM]: lecture/06-interpretation/vm.md -->
 
-[Optimierung und Datenfluss- und Kontrollflussanalyse]: lecture/05-optimization/optimization.md
+<!-- [Bytecode]: lecture/07-codegen/bytecode.md -->
 <!-- [Maschinencode]: lecture/07-codegen/machinecode.md -->
+
+<!-- [Garbage Collection]: lecture/08-memory/gc.md -->
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md

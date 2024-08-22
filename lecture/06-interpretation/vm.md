@@ -1,10 +1,10 @@
 ---
 archetype: lecture-cg
-title: "Bytecode und Virtuelle Maschinen"
-linkTitle: "Bytecode/VM"
+title: "Virtuelle Maschinen"
+linkTitle: "VM"
 ---
 
 
--- Vortragsthema --
+-- Vortragsthema -- (gehört zu [Bytecode](../07-codegen/bytecode.md))
 
 <!-- Material in alter Veranstaltung vorhanden -->
