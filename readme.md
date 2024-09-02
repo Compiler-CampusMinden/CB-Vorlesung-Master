@@ -81,23 +81,22 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 ## Prüfungsform, Note und Credits
 
-**Projektabgabe plus Testat**, 10 ECTS (PO23)
+**Parcoursprüfung plus Testat**, 10 ECTS (PO23)
 
 *   **Testat**: Vergabe der Credit-Points
 
-    1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04] und [B05] erfolgreich bearbeitet, **und**
-    2.  **aktive** Teilnahme an [Workshop I], **und**
-    3.  **aktive** Teilnahme an allen 3 Edmonton-Terminen, **und**
-    4.  **aktive** Teilnahme an den Meilensteinen 1 bis 3.
+    1.  Mindestens 3 der Übungsblätter [B01], [B02], [B03], [B04] und [B05] erfolgreich bearbeitet, **und**
+    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
 
-    ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 80% bearbeitet,
+    ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 60% bearbeitet,
     fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
 
 *   **Gesamtnote**:
 
-    Der Vortrag ([Workshop II]) sowie die Projektarbeit und -übergabe ([Workshop III])
-    werden bewertet. Die Gesamtnote setzt sich zu 40% für den Vortrag und zu 60% für
-    die Projektübergabe zusammen.
+    Die Workshops werden bewertet und ergeben in folgender Gewichtung die Gesamtnote:
+    *   20% [Workshop I],
+    *   30% [Workshop II],
+    *   50% [Workshop III].
 
 
 ## Materialien
@@ -152,7 +151,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 | Januar             | 07. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 2]                  |
 |                    | 14. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 3]                  |
 |                    | 21. | [**[Workshop III]: Projektvorstellung/-übergabe**]{.alert}                                                                                  |                |                                  |
-| _(Prüfungsphasen)_ |     | _Keine separate Prüfung - Projektabgabe_                                                                                                    |                |                                  |
+| _(Prüfungsphasen)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                                  |
 
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
