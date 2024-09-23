@@ -127,6 +127,12 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 ## Fahrplan
 
+<!--
+`{{% notice style="note" title="News" %}}`{=markdown}
+Here be dragons ...
+`{{% /notice %}}`{=markdown}
+-->
+
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
 Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1421692&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
