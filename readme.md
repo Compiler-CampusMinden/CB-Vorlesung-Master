@@ -162,7 +162,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/4ba4736f0bc2005e4bcd75d48671e49cd4c9f3839988bf4f522f45a8bfbf676b%40group.calendar.google.com/public/basic.ics
 
-[Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions/categories/q-a?discussions_q=is%3Aopen+category%3AQ%26A
+[Orga]: https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#überblick-modulinhalte
 
 [Überblick]: lecture/00-intro/overview.md
 [Sprachen]: lecture/00-intro/languages.md
