@@ -160,7 +160,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 | _(Prüfungsphasen)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                                  |
 
 
-[Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
+[Google Kalender]: https://calendar.google.com/calendar/ical/4ba4736f0bc2005e4bcd75d48671e49cd4c9f3839988bf4f522f45a8bfbf676b%40group.calendar.google.com/public/basic.ics
 
 [Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/discussions/categories/q-a?discussions_q=is%3Aopen+category%3AQ%26A
 
