@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Blatt 05: TODO"
-author: "BC George, Carsten Gips (HSBI)"
+title: "Blatt 05: Interpreter, Optimierung"
+author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

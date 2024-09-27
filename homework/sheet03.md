@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Blatt 03: Optimierung und Datenflussanalyse"
+title: "Blatt 03: Attributierte Grammatiken"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

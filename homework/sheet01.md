@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Blatt 01: Grammatik, Parser und AST"
+title: "Blatt 01: CFG, LL"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

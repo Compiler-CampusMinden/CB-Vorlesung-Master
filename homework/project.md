@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Aufgabe: TODO"
+title: "Projekt"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

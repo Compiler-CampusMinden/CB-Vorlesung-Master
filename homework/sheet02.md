@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Blatt 02: AST und Semantische Analyse"
+title: "Blatt 02: LR"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

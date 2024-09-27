@@ -1,9 +1,11 @@
 ---
 archetype: assignment
-title: "Blatt 04: Freie Aufgabe"
-author: "BC George, Carsten Gips (HSBI)"
+title: "Blatt 04: Symboltabellen"
+author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 
