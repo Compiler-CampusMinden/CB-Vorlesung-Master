@@ -79,52 +79,6 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1400613&client_id=FH-Bielefeld
 
 
-## Prüfungsform, Note und Credits
-
-**Parcoursprüfung plus Testat**, 10 ECTS (PO23)
-
-*   **Testat**: Vergabe der Credit-Points
-
-    1.  Mindestens 3 der Übungsblätter [B01], [B02], [B03], [B04] und [B05] erfolgreich bearbeitet, **und**
-    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
-
-    ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 60% bearbeitet,
-    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
-
-*   **Gesamtnote**:
-
-    Die Workshops werden bewertet und ergeben in folgender Gewichtung die Gesamtnote:
-    *   20% [Workshop I],
-    *   30% [Workshop II],
-    *   50% [Workshop III].
-
-
-## Materialien
-
-1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
-    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
-    ISBN [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
-    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
-    Nystrom, R., Genever Benning, 2021.
-    ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
-    [Online](https://www.craftinginterpreters.com/).
-3.  ["**Engineering a Compiler**"](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/).
-    Torczon, L. und Cooper, K., Morgan Kaufmann, 2012.
-    ISBN [978-0-1208-8478-0](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-1208-8478-0).
-    [Online](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-4.  ["Introduction to Compilers and Language Design"](https://www3.nd.edu/~dthain/compilerbook/).
-    Thain, D., 2023. ISBN [979-8-655-18026-0](https://fhb-bielefeld.digibib.net/openurl?isbn=979-8-655-18026-0).
-    [Online](https://www3.nd.edu/~dthain/compilerbook/).
-5.  ["Writing a C Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
-    Sandler, N., No Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
-    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-6.  ["**Seven Languages in Seven Weeks**"](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/).
-    Tate, B.A., Pragmatic Bookshelf, 2010.
-    ISBN [978-1-93435-659-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-93435-659-3).
-    [Online](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-
-
 ## Fahrplan
 
 <!--
@@ -220,6 +174,52 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 [Workshop I]: homework/project.md
 [Workshop II]: homework/project.md
 [Workshop III]: homework/project.md
+
+
+## Prüfungsform, Note und Credits
+
+**Parcoursprüfung plus Testat**, 10 ECTS (PO23)
+
+*   **Testat**: Vergabe der Credit-Points
+
+    1.  Mindestens 3 der Übungsblätter [B01], [B02], [B03], [B04] und [B05] erfolgreich bearbeitet, **und**
+    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+
+    ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 60% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
+
+*   **Gesamtnote**:
+
+    Die Workshops werden bewertet und ergeben in folgender Gewichtung die Gesamtnote:
+    *   20% [Workshop I],
+    *   30% [Workshop II],
+    *   50% [Workshop III].
+
+
+## Materialien
+
+1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
+    ISBN [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
+    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
+    Nystrom, R., Genever Benning, 2021.
+    ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
+    [Online](https://www.craftinginterpreters.com/).
+3.  ["**Engineering a Compiler**"](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/).
+    Torczon, L. und Cooper, K., Morgan Kaufmann, 2012.
+    ISBN [978-0-1208-8478-0](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-1208-8478-0).
+    [Online](https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+4.  ["Introduction to Compilers and Language Design"](https://www3.nd.edu/~dthain/compilerbook/).
+    Thain, D., 2023. ISBN [979-8-655-18026-0](https://fhb-bielefeld.digibib.net/openurl?isbn=979-8-655-18026-0).
+    [Online](https://www3.nd.edu/~dthain/compilerbook/).
+5.  ["Writing a C Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
+    Sandler, N., No Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
+    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+6.  ["**Seven Languages in Seven Weeks**"](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/).
+    Tate, B.A., Pragmatic Bookshelf, 2010.
+    ISBN [978-1-93435-659-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-93435-659-3).
+    [Online](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
 
 ## Förderungen und Kooperationen
