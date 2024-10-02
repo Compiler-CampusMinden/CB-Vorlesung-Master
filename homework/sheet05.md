@@ -4,8 +4,6 @@ title: "Blatt 05: Interpreter, Optimierung"
 author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
-
-sketch: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 sheet05.md -o xxx.md  -->
