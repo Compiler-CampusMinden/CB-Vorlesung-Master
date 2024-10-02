@@ -11,7 +11,8 @@ hidden: true
 ## Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines einfachen
-Type-Checkers für eine fiktive statisch typisierte Sprache.
+Type-Checkers für eine fiktive statisch typisierte Sprache mit Expressions, Kontrollstrukturen
+und Funktionen.
 
 ## Methodik
 
@@ -273,59 +274,13 @@ werten diesen aus und geben das Ergebnis auf der Standardausgabe aus.
 
 Unsere Sprache hat drei eingebaute Datentypen:
 
-| Datentyp | Definition                                                                                                                                            |
-|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `int`    | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`.                                                                               |
-| `string` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
-| `bool`   | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False`                                                                                     |
+| Datentyp | Definition der Literale                                       |
+|:---------|:--------------------------------------------------------------|
+| `int`    | eine beliebige Folge der Ziffern `0-9`                        |
+| `string` | eine beliebige Folge von ASCII-Zeichen, eingeschlossen in `"` |
+| `bool`   | eines der beiden Schlüsselwörter `True` oder `False`          |
 
-## Aufgaben
-
-### A4.1: Beispielprogramme (1P)
-
-Sie finden unten einige Beispielprogramme.
-
-Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
-Ausdrücken bis hin zu komplexeren Programmen reichen.
-
-Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
-zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
-
-### A4.2: Grammatik und ANTLR (3P)
-
-Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
-
-Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
-folgenden Aufgaben nutzen.
-
-Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der die Struktur Ihrer Grammatik
-widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschachtelt.
-
-Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
-benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
-Ihnen hier formulierten AST-Strukturen.
-
-### A4.3: Aufbau der Symboltabelle und Typprüfung (6P)
-
-Bauen Sie für den AST eine Symboltabelle auf. Führen Sie die Typprüfung durch. Geben Sie
-erkannte Fehler auf der Konsole aus.
-
-Entwickeln Sie eine Ausgabefunktion, so dass auch die Symboltabelle geeignet formatiert
-ausgegeben wird. Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.
-
-
-### A4.X: Pointer und Arrays
-
-Ergänzen Sie diese Sprache
-um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
-
-*Anmerkung*: Hier sind nur die syntaktischen Elemente und ihre semantischen Auswirkungen
-interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
-nicht implementieren!
-
-
-
-## Beispiele
+### Beispiele
 
 ``` c
 print_string("Hello World");
@@ -364,3 +319,48 @@ int f95(int n) {
 int n = 10;
 print_int(f95(n));
 ```
+
+## Aufgaben
+
+### A4.1: Beispielprogramme (1P)
+
+Sie finden unten einige Beispielprogramme.
+
+Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
+Ausdrücken bis hin zu komplexeren Programmen reichen.
+
+Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
+zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
+
+### A4.2: Grammatik und ANTLR (3P)
+
+Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
+
+Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
+folgenden Aufgaben nutzen.
+
+Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der die Struktur Ihrer Grammatik
+widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschachtelt.
+
+Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
+benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
+Ihnen hier formulierten AST-Strukturen.
+
+### A4.3: Aufbau der Symboltabelle und Typprüfung (6P)
+
+Bauen Sie für den AST eine Symboltabelle auf. Führen Sie die Typprüfung durch. Geben Sie
+erkannte Fehler auf der Konsole aus.
+
+Entwickeln Sie eine Ausgabefunktion, so dass auch die Symboltabelle geeignet formatiert
+ausgegeben wird. Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.
+
+
+
+### A4.X: Pointer und Arrays
+
+Ergänzen Sie diese Sprache
+um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
+
+*Anmerkung*: Hier sind nur die syntaktischen Elemente und ihre semantischen Auswirkungen
+interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
+nicht implementieren!
