@@ -6,7 +6,7 @@ author: "Carsten Gips, BC George (HSBI)"
 hidden: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 sheet05.md -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet05.md  -o xxx.md  -->
 
 ## Zusammenfassung
 
@@ -15,15 +15,17 @@ eine Lisp-artige Sprache.
 
 ## Methodik
 
-Definieren Sie zunächst eine passende kontextfreie Grammatik und erstellen Sie mit ANTLR
-wieder einen Lexer und Parser. Führen Sie eine semantische Analyse durch und interpretieren
-Sie den AST.
+Sie finden im [Sample Project] eine [Grammatik], die (teilweise) zu der Zielsprache auf diesem
+Blatt passt. Analysieren Sie diese Grammatik und vervollständigen Sie diese bzw. passen Sie
+diese an.
+
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 
 Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:
 
-1.  Parsen der Eingaben
+1.  Einlesen aus einer Datei und Parsen der Inhalte
 2.  Aufbauen der Symboltabelle und Durchführung der semantischen Analyse
-3.  Ablaufen des AST und Auswerten der Ausdrücke
+3.  Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke
 
 ## Sprachdefinition
 
@@ -63,15 +65,18 @@ ist äquivalent zu `(+ (+ (+ 1 2) 3) 4)` und löst sich nach $1+2+3+4$ auf.
 
 ### Eingebaute Funktionen
 
-Mit der Funktion `print` kann der Wert eines Ausdrucks auf der Konsole ausgegeben werden:
+Es gibt zwei Funktionen, die fest in der Sprache integriert sind.
+
+Mit der eingebauten Funktion `print` kann der Wert eines Ausdrucks auf der Konsole ausgegeben
+werden:
 
 ``` clojure
 (print "hello world")
 (print "wuppie\nfluppie\nfoo\nbar")
 ```
 
-Die Funktion `str` verknüpft ihre Argumente und bildet einen String. Falls nötig, werden die
-Argumente vorher in einen String umgewandelt.
+Die eingebaute Funktion `str` verknüpft ihre Argumente und bildet einen String. Falls nötig,
+werden die Argumente vorher in einen String umgewandelt.
 
 ``` clojure
 (str 42)                              ;; liefert "42" zurück
@@ -91,6 +96,9 @@ Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.
 | Größer     |   `>`    |
 | Kleiner    |   `<`    |
 
+Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer`
+zulässig. Das Ergebnis ist immer vom Typ `Boolean`.
+
 #### Arithmetische Operatoren
 
 | Operation      | Operator |
@@ -99,6 +107,9 @@ Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.
 | Subtraktion    |   `-`    |
 | Multiplikation |   `*`    |
 | Division       |   `/`    |
+
+Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer`
+zulässig. Das Ergebnis ist vom Typ der Operanden.
 
 ### Kontrollstrukturen (If-Else)
 
@@ -111,7 +122,7 @@ Die `if-then-else`-Abfrage gibt es mit und ohne den `else`-Zweig:
 ```
 
 Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge
-berechnen möchte, nutzt man die `do`-Funktion:
+berechnen möchte, nutzt man `do`:
 
 ``` clojure
 (do (print "wuppie") (print "fluppie") (print "foo") (print "bar"))
@@ -226,25 +237,29 @@ bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 ### A5.1: Grammatik und ANTLR (3P)
 
-1.  Erstellen Sie selbst einige Programme in der Zielsprache. Diese sollten von einfachsten
+1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von einfachsten
     Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie beispielsweise eine
     Funktion, die rekursiv die Länge einer Liste berechnet.
 
     Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
     zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
 
-2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik und erzeugen Sie sich
-    mithilfe der Grammatik und ANTLR einen Lexer und Parser.
+2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können dabei die
+    [Grammatik] im [Sample Project] als Ausgangspunkt nutzen und diese anpassen und
+    vervollständigen. Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser.
 
-3.  Führen Sie die semantische Analyse durch. Sind alle Symbole bekannt, passen die Scopes?
+3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die Scopes?
 
 ### A5.2: Tree-Walking-Interpreter (5P)
 
 Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein.
 
-Realisieren Sie die eingebauten Funktionen `print` und `str` als *native* Funktionen.
-Realisieren Sie `list`, `nth`, `head` und `tail` sowie `def`, `let`, `defn` und die Operatoren
-und die Kontrollstrukturen geeignet.
+Realisieren Sie die eingebauten Funktionen `print` und `str` dabei als *native* Funktionen.
+Realisieren Sie `list`, `nth`, `head` und `tail` sowie `def`, `let`, `defn`, `do` und die
+Operatoren und die Kontrollstrukturen geeignet.
+
+Achten Sie auf die Datentypen. Die Typen von Variablen etc. sind erst zur Laufzeit bekannt und
+müssen dann passen.
 
 Lesen Sie den zu interpretierenden Code aus einer Datei ein.
 
@@ -254,3 +269,6 @@ Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.
 
 Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und
 verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?
+
+  [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
+  [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLisp.g4
