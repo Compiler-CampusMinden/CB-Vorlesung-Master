@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'antlr'
+    id 'com.diffplug.spotless' version '6.25.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.13.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.1'
+    testImplementation 'org.mockito:mockito-core:5.14.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+generateGrammarSource {
+    maxHeapSize = '64m'
+    arguments += ['-visitor', '-listener', '-long-messages']
+}
+
+
+application {
+    // TODO: Define your main class here
+    mainClass = 'Main'
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+spotless {
+    java {
+        targetExclude('build/generated-src/**')
+        googleJavaFormat()
+
+        target '**/*.java'
+    }
+}
