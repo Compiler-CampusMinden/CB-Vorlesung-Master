@@ -99,12 +99,12 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 |                    | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                                    |                |                                  |
 |                    | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                                  |
 | November           | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | [B02] (LR)                       |
-|                    | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        | [B03] (Attr. Grammar)            |
-|                    | 19. | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                  | Carsten        | [B04] (Symboltabellen)           |
+|                    | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        |                                  |
+|                    | 19. | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                  | Carsten        | [B03] (Semantische Analyse)      |
 |                    | 26. | [**18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**]{.alert}: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                                  |
 | Dezember           | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                                  |
 | Dezember           | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                                  |
-|                    | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        | [B05] (Interpreter, Optimierung) |
+|                    | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        | [B04] (Interpreter, Optimierung) |
 |                    | 17. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 1]                  |
 |                    | 24. | _Weihnachtspause_                                                                                                                           |                |                                  |
 |                    | 31. | _Weihnachtspause_                                                                                                                           |                |                                  |
@@ -166,7 +166,6 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 [B02]: homework/sheet02.md
 [B03]: homework/sheet03.md
 [B04]: homework/sheet04.md
-[B05]: homework/sheet05.md
 [Projekt-Pitch]: homework/project.md
 [Meilenstein 1]: homework/project.md
 [Meilenstein 2]: homework/project.md
@@ -182,7 +181,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 *   **Testat**: Vergabe der Credit-Points
 
-    1.  Mindestens 3 der Übungsblätter [B01], [B02], [B03], [B04] und [B05] erfolgreich bearbeitet, **und**
+    1.  Mindestens 2 der Übungsblätter [B01], [B02], [B03] und [B04] erfolgreich bearbeitet, **und**
     2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
 
     ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 60% bearbeitet,
