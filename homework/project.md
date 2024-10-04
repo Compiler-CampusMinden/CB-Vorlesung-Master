@@ -10,26 +10,29 @@ hidden: true
 ## Projekt-Aufgabe
 
 
-Prolog: Interpreter (Anfragen, Unifikation/Resolution)
-Haskell: Typ-Inferenz (Hindley-Milner-Typsystem/inferenz), higher-order Functions, lazy Evaluation
+Prolog: Interpreter (Anfragen, Pattern Matching/Unifikation, Resolution, Tiefensuche mit Backtracking)
+Haskell: Currying, Lambda-Kalkül, Typ-Inferenz (Hindley-Milner-Typsystem/inferenz), higher-order Functions, lazy Evaluation
 Ruby: Klassen, (Multi-) Vererbung, Traits, Monkey-Patching, dynamische Typisierung/Duck-Typing
-Lisp: Interpreter (schrittweise Ergänzung, Makros vs. Funktionen)
+Lisp: Interpreter (schrittweise Ergänzung, Makros vs. Funktionen, symbolische Programmierung)
 
 
-Vortrag I: Sprache und Features
-Vortrag II: CB-Algorithmen
+Vortrag I: Sprache und Features: Sprache vorstellen
+Vortrag II: CB-Algorithmen: Auswirkung auf Compiler vorstellen (Auswirkungen auf semantische Analyse und Interpreter und Laufzeit)
 Vortrag III: Projektvorstellung
 
+Dick Grune "Modern Compiler Design" - Chap. 11, 12, 13 (OO, FP, Prolog)
 
 Sprachen: Ruby, Haskell, Prolog, Lisp/Clojure(?)
 
 Workshop I: Vorstellung Sprachen (Kernkonzepte)
 Workshop II:
--   Garbage Collection & Borrow Checking/Lifetime-Analysis
--   Hindley-Milner-Typsystem/-inferenz
+-   Parser:
+    -   LALR vs. ALL*
+    -   PEG, Pratt Parsing und Parser Combinators
+-   Memory Management: Garbage Collection & Borrow Checking/Lifetime-Analysis
+-   Semantische Analyse/Typen: Hindley-Milner-Typsystem/-inferenz
 -   Unifikation/Resolution (PK1)
 -   Byte-Code und VM: WASM, Java-VM
--   PEG, Pratt Parser und Parser Combinators, ALL\*
 -   IR/Optimierung: SeaOfNodes, MLIR, E-Graphs
 Workshop III: Umsetzung als Compiler/Interpreter, Vorstellung der Bausteine und Einordnung; Lexer+Parser selbst implementieren inkl. Fehlerbehandlung; attrib. Grammatik
 
