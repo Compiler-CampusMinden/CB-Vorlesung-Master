@@ -271,5 +271,12 @@ Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.
 Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und
 verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?
 
+
+**TODO**
+
+- Parser selbst bauen oder ANTLR? Grammatik sollte eigentlich einfach genug sein?
+- Wo und wie kriegen wir hier Optimierung/Datenfluss- u. Kontrollflussanalyse mit rein?
+
+
   [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
   [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLisp.g4
