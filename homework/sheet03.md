@@ -371,5 +371,14 @@ Konsole aus.
 Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch. Geben Sie erkannte
 Fehler auf der Konsole aus.
 
+
+**TODO**
+
+- Klassen als weitere Schwierigkeit
+- Attributierte Grammatiken -> ANTLR (?!)
+- Parser selbst bauen, mit First/Follow und Bestimmung der Vorschautoken
+- Vergleich ANTLR und manuelle Codierung ...
+
+
   [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/tree/master/homework/src/sample_project
   [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/homework/src/sample_project/src/main/antlr/MiniC.g4
