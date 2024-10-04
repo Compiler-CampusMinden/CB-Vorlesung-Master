@@ -2,11 +2,12 @@
 archetype: assignment
 title: "Blatt 04: Semantische Analyse"
 author: "Carsten Gips, BC George (HSBI)"
+points: "10 Punkte"
 
 hidden: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 sheet04.md -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet04.md  -o xxx.md  -->
 
 ## Zusammenfassung
 
@@ -16,14 +17,18 @@ und Funktionen.
 
 ## Methodik
 
-Definieren Sie zunächst eine passende kontextfreie Grammatik und erstellen Sie mit ANTLR
-wieder einen Lexer und Parser. Definieren Sie einen AST und konvertieren Sie Ihren Parse-Tree
-in einen AST.
+Sie finden im [Sample Project] eine [Grammatik], die (teilweise) zu der Zielsprache auf diesem
+Blatt passt. Analysieren Sie diese Grammatik und vervollständigen Sie diese bzw. passen Sie
+diese an.
 
-Es ist empfehlenswert, den Type-Checker zweistufig zu realisieren:
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser. Definieren Sie
+einen AST und konvertieren Sie Ihren Parse-Tree in einen AST.
 
-1.  Aufbauen der Symboltabelle und Prüfung von Deklaration vs. Definition vs. Benutzung
-2.  Prüfen der verwendeten Typen
+Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
+
+1.  Aufbauen der Symboltabelle und Prüfen von Deklaration/Definition vs. Benutzung (Variablen)
+2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
+3.  Prüfen der verwendeten Typen
 
 ## Sprachdefinition
 
@@ -38,19 +43,20 @@ mit einem Semikolon abgeschlossen werden. Eine Anweisung hat keinen Wert.
 ``` python
 int a;           # Definition der Integer-Variablen a
 int b = 10 - 5;  # Definition der Integer-Variablen b und Zuweisung des Ausdruckes 10-5 (Integer-Wert 5)
-c = "foo";       # Zuweisung des Ausdrucks "foo" (String) an die Variable c
-bool foo();      # Deklaration der Funktion foo
+c = "foo";       # Zuweisung des Ausdrucks "foo" (String) an die Variable c (diese muss dazu vorher definiert und sichtbar sein)
 func1(a, c);     # Funktionsaufruf mit Variablen a und c
 ```
 
-Kontrollstrukturen zählen ebenfalls als Anweisung.
+Kontrollstrukturen und Code-Blöcke zählen ebenfalls als Anweisung.
 
-### Blöcke
+### Code-Blöcke und Scopes
 
 Code-Blöcke werden in geschweifte Klammern eingeschlossen und enthalten ein oder mehrere
-Anweisungen. Jeder Code-Block ist ein eigener Scope - alle Deklarationen/Definition in diesem
-Scope sind im äußeren Scope nicht sichtbar. Im Scope kann auf die Symbole des umgebenden
-Scopes zugegriffen werden. Symbole in einem Scope können gleichnamige Symbole im äußeren Scope
+Anweisungen.
+
+Jeder Code-Block bildet einen eigenen Scope - alle Deklarationen/Definition in diesem Scope
+sind im äußeren Scope nicht sichtbar. Im Scope kann auf die Symbole des/der umgebenden Scopes
+zugegriffen werden. Symbole in einem Scope können gleichnamige Symbole im äußeren Scope
 verdecken.
 
 ``` python
@@ -96,6 +102,9 @@ Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 | Größer       |   `>`    |
 | Kleiner      |   `<`    |
 
+Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `string` und `int`
+zulässig. Das Ergebnis ist immer vom Typ `bool`.
+
 #### Arithmetische Operatoren
 
 | Operation                            | Operator |
@@ -105,17 +114,21 @@ Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 | Multiplikation                       |   `*`    |
 | Division                             |   `/`    |
 
+Die Operanden müssen jeweils beide den selben Typ haben. Für `+` sind `string` und `int`
+zulässig, für die anderen Operatoren (`-`, `*`, `/`) nur `int`. Das Ergebnis ist vom Typ der
+Operanden.
+
 #### Beispiele für Ausdrücke
 
 ``` python
 10 - 5       # Der Integer-Wert 5
 "foo"        # Der String "foo"
-a            # Wert der Variablen a
+a            # Wert der Variablen a (Zugriff auf a)
 a + b        # Ergebnis der Addition der Variablen a und b
 func1(a, b)  # Ergebnis des Funktionsaufrufs
 ```
 
-Ausdrücke werden nicht mit einem Semikolon abgeschlossen.
+Ausdrücke werden nicht mit einem Semikolon abgeschlossen. Sie sind also Teil einer Anweisung.
 
 ### Bezeichner
 
@@ -134,11 +147,24 @@ int a;         # Definition der Variablen a (Typ: Integer)
 int a = 7;     # Definition und Initialisierung einer Variablen
 a = 5;         # Zuweisung des Wertes 5 an die Variable a
 a = 2 + 3;     # Zuweisung des Wertes 5 an die Variable a
-print_int(a);  # Ausgabe des Wertes 5 auf der Standardausgabe
 ```
 
-Variablen müssen vor ihrer Benutzung definiert sein. Die Initialisierung kann zusammen mit der
-Definition erfolgen.
+Variablen müssen vor ihrer Benutzung (Zugriff, Zuweisung) definiert und im aktuellen Scope
+sichtbar sein. Die Initialisierung kann zusammen mit der Definition erfolgen.
+
+Variablen können in einem Scope nicht mehrfach definiert werden.
+
+``` python
+int a = 42;
+
+{
+    a = 7;  # zulässig - a ist hier sichtbar, Zugriff auf globalen Scope
+    b = 9;  # unzulässig - b ist nicht definiert
+
+    int a;  # zulässig - erste Definition in diesem Scope
+    int a;  # unzulässig - a ist in diesem Scope bereits definiert
+}
+```
 
 ### Kommentare
 
@@ -153,7 +179,7 @@ While-Schleifen werden mit dem Schlüsselwort `while` eingeleitet. Sie bestehen 
 einer Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Block mit
 ein oder mehreren Anweisungen.
 
-Die Bedingung kann aus einem atomaren Boolean-Wert oder einem Vergleichsausdruck bestehen.
+Die Bedingung besteht aus einem Vergleichsausdruck oder einem Wahrheitswert.
 
 ``` c
 while (<Bedingung>) {
@@ -164,9 +190,9 @@ while (<Bedingung>) {
 
 ``` c
 int a = 10;
+
 while (a >= 0) {
-    print_int(a);
-    a = a- 1;
+    a = a - 1;
 }
 ```
 
@@ -178,6 +204,8 @@ Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, und einer 
 Eine `if`-Anweisung wird mit dem Schlüsselwort `if` eingeleitet und besteht aus einer
 Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Block mit ein
 oder mehreren Anweisungen.
+
+Die Bedingung besteht aus einem Vergleichsausdruck oder einem Wahrheitswert.
 
 Eine `else`-Anweisung wird mit dem Schlüsselwort `else` eingeleitet. Auf das Schlüsselwort
 folgt in geschweiften Klammern formulierter Block mit ein oder mehreren Anweisungen.
@@ -198,43 +226,33 @@ if (<Bedingung>) {
 ```
 
 ``` c
-int a = "abc";
-if (a < "adc") {
-    print_string("a kleiner als ", "adc");
+int a = 42;
+
+if (a > 0) {
+    a = a - 1;
+    if (a > 0) {
+        a = a - 1;
+    }
 } else {
-    print_string("a passt nicht");
+    a = a + 1;
 }
 ```
 
 ### Funktionen
 
-#### Funktionsdeklaration
-
-Jede Funktion muss vor ihrer Benutzung mindestens deklariert sein. Dabei wird die Signatur
-bekannt gegeben: Rückgabetyp, Funktionsname, Parameterliste. Die Parameterliste ist eine
-Komma-separierte Liste mit der Deklaration der Parameter (jeweils Typ und Variablenname). Die
-Parameterliste kann auch leer sein.
-
-``` c
-type bezeichner(type param1, type param2);
-```
-
-``` c
-bool func1(int a, string b);
-```
-
-Eine Funktionsdeklaration kann beliebig oft im Programm vorkommen, so lange sie sich nicht
-ändert.
-
-Funktionen können nicht überladen werden.
-
 #### Funktionsdefinition
 
-Eine Funktionsdefinition macht dem Compiler die Implementierung der Funktion bekannt. Sie ist
-gleichzeitig auch eine Funktionsdeklaration und fügt nach der Deklaration den Funktionskörper
-als Code-Block an.
+Eine Funktionsdefinition macht dem Compiler die Implementierung einer Funktion bekannt.
 
-Eine Funktionsdefinition darf es jeweils nur einmal im Programm geben.
+Sie gibt zunächst die Signatur der Funktion (den "Funktionskopf") bekannt: Rückgabetyp,
+Funktionsname, Parameterliste.
+
+Die Parameterliste ist eine Komma-separierte Liste mit der Deklaration der Parameter (jeweils
+Typ und Variablenname). Die Parameterliste kann auch leer sein.
+
+Nach dem Funktionskopf folgt der Körper der Funktion als Code-Block.
+
+Funktionen können in einem Scope nicht mehrfach definiert werden.
 
 ``` c
 type bezeichner(type param1, type param2) {
@@ -246,8 +264,8 @@ type bezeichner(type param1, type param2) {
 
 ``` c
 bool func1(int a, string b) {
-    int c = a + b;
-    return c == a + b;
+    int c = a + f2(b);
+    return c == 42;
 }
 ```
 
@@ -258,17 +276,26 @@ angegebenen Parameterliste, die auch leer sein kann. Als Parameter können alle 
 typisierten Ausdrücke dienen.
 
 ``` python
-func1(var1, 5)
+func1(5, var1)
 func1(func2(), 1 + 1)
 ```
 
-Funktionen müssen vor dem Aufruf mindestens deklariert sein.
+Die aufgerufene Funktion muss im aktuellen Scope sichtbar sein, der Funktionsaufruf muss zur
+Definition passen.
 
-#### Eingebaute Funktionen
+Die aufgerufene Funktion muss (im Gegensatz zum Zugriff auf Variablen) nicht vor dem ersten
+Aufruf definiert sein. Folgender Code ist also zulässig:
 
-Die Funktionen `print_int`, `print_string` und `print_bool` sind in der Sprache eingebaut. Sie
-nehmen einen Ausdruck mit dem jeweiligen Typ (`int`, `string`, `bool`) als Parameter entgegen,
-werten diesen aus und geben das Ergebnis auf der Standardausgabe aus.
+``` python
+int a = 42;
+if (a == 42) {
+    foo(5);    # zulässig: foo ist erst nach diesem Aufruf definiert, aber in diesem Scope sichtbar
+}
+
+int foo(int a) {
+    return a+37;
+}
+```
 
 ### Datentypen
 
@@ -283,84 +310,66 @@ Unsere Sprache hat drei eingebaute Datentypen:
 ### Beispiele
 
 ``` c
-print_string("Hello World");
-```
-
-``` c
 string a = "wuppie fluppie";
 ```
 
 ``` c
 int a = 0;
 if (10<1) {
-    print_string("10<1");
     a = 42;
 } else {
-    print_string("kaputt");
+    foo();
 }
 ```
 
 ``` c
 int f95(int n) {
     if (n == 0) {
-        print_string("\t n==0");
         return 1;
     } else {
         if (n == 1) {
-            print_string("\t n==1");
             return 1;
         } else {
-            print_string("\t rekursiv...");
             return f95(n - 1) + f95(n - 2) + f95(n - 3) + f95(n - 4) + f95(n - 5);
         }
     }
 }
 
 int n = 10;
-print_int(f95(n));
+f95(n);
 ```
 
 ## Aufgaben
 
-### A4.1: Beispielprogramme (1P)
+### A4.1: Grammatik und AST (2P)
 
-Sie finden unten einige Beispielprogramme.
+Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die [Grammatik] im
+[Sample Project] als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
 
-Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
-Ausdrücken bis hin zu komplexeren Programmen reichen.
+Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem Eingabeprogramm
+müssen repräsentiert werden?
 
-Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
-zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
+Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Testen Sie dies mit
+den obigen Beispielprogrammen und definieren Sie sich selbst weitere Programme für diesen
+Zweck.
 
-### A4.2: Grammatik und ANTLR (3P)
+### A4.2: Aufbau der Symboltabelle (2P)
 
-Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
+Bauen Sie für den AST eine Symboltabelle auf. Führen Sie dabei die im ersten Lauf möglichen
+Prüfungen durch, beispielsweise ob zugegriffene Variablen tatsächlich bereits definiert und
+sichtbar sind oder ob eine Funktion in einem Scope mehrfach definiert wird. Geben Sie erkannte
+Fehler auf der Konsole aus.
 
-Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
-folgenden Aufgaben nutzen.
+### A4.3: Symboltabelle: Funktionsaufrufe (1P)
 
-Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der die Struktur Ihrer Grammatik
-widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschachtelt.
+Implementieren Sie einen zweiten Lauf. Dabei soll für Funktionsaufrufe geprüft werden, ob
+diese bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte Fehler auf der
+Konsole aus.
 
-Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
-benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
-Ihnen hier formulierten AST-Strukturen.
+### A4.4: Symboltabelle: Typprüfungen (5P)
 
-### A4.3: Aufbau der Symboltabelle und Typprüfung (6P)
+Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch. Geben Sie erkannte
+Fehler auf der Konsole aus.
 
-Bauen Sie für den AST eine Symboltabelle auf. Führen Sie die Typprüfung durch. Geben Sie
-erkannte Fehler auf der Konsole aus.
-
-Entwickeln Sie eine Ausgabefunktion, so dass auch die Symboltabelle geeignet formatiert
-ausgegeben wird. Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.
-
-
-
-### A4.X: Pointer und Arrays
-
-Ergänzen Sie diese Sprache
-um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
-
-*Anmerkung*: Hier sind nur die syntaktischen Elemente und ihre semantischen Auswirkungen
-interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
-nicht implementieren!
+  [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/tree/master/homework/src/sample_project
+  [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/homework/src/sample_project/src/main/antlr/MiniC.g4
