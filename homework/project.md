@@ -170,3 +170,79 @@ Edmonton-Treffen (englische Sprache). Dieser Vortrag wird benotet.
         kompetent beantwortet?
 
 Gesamtbewertung: 100 Punkte
+
+
+
+
+---
+
+
+
+**Projektbeschreibung:**
+Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die praktischen Aspekte des Compilerbaus zu vertiefen. 
+
+**Aufgabenübersicht:**
+
+1. **Wahl der Programmiersprache:**
+
+Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
+
+- Objektorientiert: Ruby
+- Funktional: Haskell
+- Logisch: Prolog
+- Lisp-Varianten: Clojure
+  
+Dokumentieren Sie Ihre Wahl und begründen Sie, warum Sie sich für diese Sprache entschieden haben.
+
+2. **Workshop 1: Präsentation der Programmiersprache**  **Datum:** [Datum]
+
+Bereiten Sie eine Präsentation (ca. 20 Minuten) vor, in der Sie die zentralen Sprachkonzepte Ihrer gewählten Programmiersprache vorstellen. Folgende Punkte sollten Sie abdecken:
+
+- Syntax und Semantik der Sprache
+- Wichtige Sprachmerkmale und Konzepte (z. B. Typisierung, Paradigmen)
+- Praktische Beispiele, um die Konzepte zu veranschaulichen
+
+Reichen Sie ein Begleitdokument zu Ihrer Präsentation ein, das eine Übersicht Ihrer Darstellung enthält.
+
+3. **Workshop 2: Analyse der Compiler-Technologien**  **Datum:** [Datum]
+
+Analysieren Sie, wie spezifische Sprachkonzepte den Compiler und seine verschiedenen Phasen beeinflussen. Berücksichtigen Sie dabei:
+
+- Semantische Analyse
+- Interpreter-Entwicklung
+- Codegenerierung
+- Laufzeitumgebung
+
+Untersuchen Sie passend zu Ihrer gewählten Sprache spezielle Themen wie Typensysteme (z. B. Hindley-Milner), Currying, Continuations, Pattern Matching, Resolution, Monkey-Patching und Traits.
+
+Bereiten Sie auch eine kurze Präsentation (ca. 20 Minuten) vor, die Ihre Ergebnisse zusammenfasst.
+
+4. **Workshop 3: Implementierung eines einfachen Compilers**  **Datum:** [Datum]
+
+Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die Implementierung sollte grundlegende Sprachfeatures unterstützen (z. B. einfache Datentypen, Kontrollstrukturen) und eine einfache Codegenerierung beinhalten.
+
+Dokumentieren Sie den Entwicklungsprozess, die Herausforderungen und die Lösungen, die Sie gefunden haben.- Halten Sie eine Präsentation von ca. 30 Minuten, in der Sie den Compiler vorstellen, seine Architektur und die von Ihnen gewählten Lösungsansätze erläutern.
+
+**Abgabeformat:**- Reichen Sie alle relevanten Unterlagen elektronisch über ILIAS ein. Dazu gehören:
+
+- Präsentationen und Begleitdokumente für jeden Workshop
+- Der Quellcode Ihres Compilers (mit Kommentaren und Anleitungen zur Ausführung)
+- Eine umfassende Projektdokumentation, die die folgenden Punkte behandelt:
+    - Einführung ins Projekt
+    - Technische Architektur des Compilers
+    - Reflexion: Herausforderungen und Lösungen
+    - Fazit und Ausblick
+
+**Bewertung:**
+
+Die Bewertung erfolgt anhand der Qualität der Präsentationen, der Tiefe der Analyse, der technischen Umsetzung des Compilers sowie der Reflexion über den gesamten Prozess.
+
+Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser Programmiersprachen auf Compiler-Designs und beschreiben Sie eventuelle Inspirationsquellen oder alternative Ansätze.
+
+**Fristen:**
+
+- Präsentation der Programmiersprache: [Datum]
+- Präsentation der Analyse der Compiler-Technologien: [Datum]
+- Abgabe des Compilers und der Dokumentation: [Datum]
+
+Wir freuen uns darauf, Sie in diesem herausfordernden und spannenden Projekt zu begleiten und wünschen Ihnen viel Erfolg! Bei Fragen wenden Sie sich bitte jederzeit an die Lehrperson(en).
