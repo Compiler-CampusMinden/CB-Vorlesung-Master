@@ -1,12 +1,11 @@
 ---
 archetype: lecture-cg
-title: "Compiler-Projekt"
-author: "BC George, Carsten Gips (HSBI)"
-readings:
-  - key: "@Tate2011"
-  - key: "@Tate2014"
-
+author: BC George, Carsten Gips (HSBI)
 hidden: true
+readings:
+- key: "@Tate2011"
+- key: "@Tate2014"
+title: Compiler-Projekt
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  project.md  -o xxx.md  -->
@@ -183,7 +182,7 @@ technischen Umsetzung des Compilers sowie der Reflexion über den gesamten Proze
 Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser Programmiersprachen auf
 Compiler-Designs und beschreiben Sie eventuelle Inspirationsquellen oder alternative Ansätze.
 
-* * * * *
+----------------------------------------------------------------------------------------------
 
 Wir freuen uns darauf, Sie in diesem herausfordernden und spannenden Projekt zu begleiten und
 wünschen Ihnen viel Erfolg!
