@@ -92,14 +92,12 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
     -   Flex und Bison vs. [Tree-Sitter]
 2.  Advanced Parsing:
     -   Pratt-Parsing, PEG-Parser, Parser-Kombinatoren
-    -   LALR
+    -   LALR-Parsing
     -   LL(\*) und Adaptive LL(\*) in ANTLR v4
         -   T. Parr: "*LL(\*): The Foundation of the ANTLR Parser Generator*"
         -   T. Parr: "*Adaptive LL(\*) Parsing: The Power of Dynamic Analysis*"
         -   T. Parr: [*LL(\*) grammar analysis*]
     -   [flap: A Deterministic Parser with Fused Lexing]
-    -   [Interval Parsing Grammars for File Format Parsing]
-    -   [Resolvable Ambiguity: Principled Resolution of Syntactically Ambiguous Programs]
 3.  VM und Bytecode:
     -   [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]
     -   [An Introduction to Interpreters and JIT Compilation]
@@ -132,8 +130,8 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
     -   [On Understanding Types, Data Abstraction, and Polymorphism]
     -   [Propositions as Types]
 8.  IR
-    -   MLIR
-    -   SeaOfNodes
+    -   [Multi-Level Intermediate Representation (MLIR)](https://mlir.llvm.org/)
+    -   [Sea-of-Nodes IR](https://github.com/SeaOfNodes/Simple)
 
 Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.
 
