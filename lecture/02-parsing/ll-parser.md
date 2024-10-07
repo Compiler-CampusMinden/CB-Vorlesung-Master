@@ -51,13 +51,6 @@ attachments:
 
 # Syntaxanalyse
 
-## Was brauchen wir für die Syntaxanalyse von Programmen?
-
-*   einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt
-
-*   einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik
-
-
 ## Arten der Syntaxanalyse
 
 Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.
@@ -191,9 +184,8 @@ In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parserg
 
 
 ![Algorithmus zur Generierung einer LL-Parsertabelle](images/LL-Parsertabelle.png){width="60%"}
-\ \
 
-\ \
+\medskip
 
 \color{black}{Hier ist $\perp$ das Endezeichen des Inputs.\ \
 Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und $Follow(\alpha)$ geschrieben.}
