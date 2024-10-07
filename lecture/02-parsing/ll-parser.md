@@ -43,50 +43,30 @@ attachments:
 
 ## Themen für heute
 
-*   Arten der Syntaxanlyse
-*   mehrdeutige Sprachen
+*   Syntaxanlyse
 *   Top-down-Analyse
-*   LL(k)-Grammtiken
+*   rekursiver Abstieg
+*   LL(k)-Analyse
 
 
 # Syntaxanalyse
 
-## Syntax
+## Was brauchen wir für die Syntaxanalyse von Programmen?
 
-Wir verstehen unter Syntax eine Menge von Regeln, die die Struktur von Daten (z. B. Programmen) bestimmen.
+*   einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt
 
-Syntaxanalyse ist die Bestimmung, ob Eingabedaten einer vorgegebenen Syntax entsprechen.
-
-Diese vorgegebene Syntax wird im Compilerbau mit einer Grammatik beschrieben.
-
-## Ziele der Syntaxanalyse
-
-*   aussagekräftige Fehlermeldungen, wenn ein Eingabeprogramm syntaktisch nicht korrekt ist
-*   evtl. Fehlerkorrektur
-*   Bestimmung der syntaktischen Struktur eines Programms
-*   Erstellung des AST (abstrakter Syntaxbaum): Der Parse Tree ohne Symbole, die nach der Syntaxanalyse inhaltlich irrelevant sind (z. B. Semikolons, manche Schlüsselwörter)
-*   die Symboltablelle(n) mit Informationen bzgl. Bezeichner (Variable, Funktionen und Methoden, Klassen, benutzerdefinierte Typen, Parameter, ...), aber auch die Gültigkeitsbereiche.
+*   einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik
 
 
 ## Arten der Syntaxanalyse
 
 Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.
 
-*   Top-Down-Analyse: Aufbau des Parse trees von oben
+*   Top-Down-Analyse: Aufbau des Parse trees von oben nach unten
     *   Parsen durch rekursiven Abstieg
-    *   LL-Parsing
+    *   tabellengesteuertes LL-Parsing
 *   Bottom-Up-Analyse: LR-Parsing
 
-
-## Mehrdeutigkeiten
-
-Wir können nur mit eindeutigen Grammatiken arbeiten, aber:
-
-**Def.:**  Eine formale Sprache  L heißt *inhärent mehrdeutige Sprache*, wenn jede formale Grammatik *G* mit $L(G) = L$ mehrdeutig ist.
-
-Das heißt, solche Grammatiken existieren.
-
-$\Rightarrow$ Es gibt keinen generellen Algorithmus, um Grammatiken eindeutig zu machen.
 
 
 ## Bevor wir richtig anfangen...
@@ -98,94 +78,18 @@ $\Rightarrow$ Es gibt keinen generellen Algorithmus, um Grammatiken eindeutig zu
 Bevor mit einer Grammatik weitergearbeitet wird, müssen erst alle nutzlosen und dann alle unerreichbaren Symbole eliminiert werden. Wir betrachten ab jetzt nur reduzierte Grammatiken.
 
 
-# Top-Down-Analyse
 
-## Wie würden Sie manuell parsen?
+#  Algorithmus: Rekursiver Abstieg
 
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
-
-
-##  Algorithmus: Rekursiver Abstieg
-
-Hier ist ein einfacher Algorithmus, der (indeterministisch) einen Ableitungsbaum vom Nonterminal *X* von oben nach unten aufbaut:
+Hier ist ein einfacher Algorithmus, der (indeterministisch) top-down Ableitungen vom Nonterminal *X* aufbaut:
 
 **Eingabe:** Ein Nichtterminal $X$ und das nächste zu verarbeitende Eingabezeichen $a$.
+
 
 ![Recursive Descent-Algorithmus](images/recursive_descent.png){width="55%"}
 
 
-## Grenzen des Algorithmus
-
-Was ist mit
-
-1) $X \rightarrow a \alpha \mid b \beta$
-2) $X \rightarrow B\alpha \mid C \beta$
-3) $X \rightarrow B \alpha \mid B \beta$
-4) $X \rightarrow  B \alpha \mid C \beta$ und $C\rightarrow B$
-5) $X \rightarrow X \beta$
-6) $X \rightarrow B \alpha$ und $B \rightarrow X \beta$
-
-\vspace{2cm}
-
-$X, B, C, D \in N^{\ast};  a, b, c, d \in T^{\ast};  \beta$, $\alpha, \beta \in (N \cup T)^{\ast}$
-
-
-## Linksfaktorisierung
-$X \rightarrow BC\  \vert \  BD$
-\vfill
-\vfill
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
-##  Algorithmus: Linksfaktorisierung
-
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)
-
-**Ausgabe:** Eine äquivalente links-faktorisierte Grammatik $G'$
-
-![Algorithmus zur Linksfaktorisierung](images/Linksfaktorisierung.png){width="85%"}
-
-
-
-## Linksrekursion
-
-**Def.:** Eine Grammatik $G=(N, T, P, S)$ heißt *linksrekursiv*, wenn sie ein Nichtterminal *X* hat, für das es eine Ableitung $X \overset{+}{\Rightarrow} X\ \alpha$ für ein $\alpha \in (N \cup T)^{\ast}$ gibt.
-
-Linksrekursion gibt es
-
-*direkt*: $X \rightarrow X \alpha$
-
-und
-
-*indirekt*: $X \rightarrow \ldots \rightarrow \ldots \rightarrow X \alpha$
-
-##  Algorithmus: Entfernung von direkter Linksrekursion {.fragile}
-
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)
-
-**Ausgabe:** Eine äquivalente Grammatik $G'$ ohne direkte Linksrekursion
-
-![Algorithmus zur Entfernung direkter Linksrekursion](images/direkte_Linksrekursion_Elim.png){width="55%"}
-
-
-##  Algorithmus: Entfernung von indirekter Linksrekursion {.fragile}
-
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)  mit $N= \lbrace X_1, X_2, \ldots X_n\rbrace$ ohne $\epsilon$-Regeln oder Zyklen der Form $X_1 \rightarrow X_2, X_2 \rightarrow X_3, \ldots X_{m-1} \rightarrow X_m, X_m \rightarrow X_1$
-
-**Ausgabe:** Eine äquivalente Grammatik $G'$ ohne Linksrekursion
-
-![Algorithmus zur Entfernung indirekter Linksrekursion](images/indirekte_Linksrekursion_Elim.png){width="60%"}
-
-
-
-# Arbeiten mit generierten Parsern: LL(k)-Grammatiken
+# Tabellengesteuerte Parser: LL(k)-Grammatiken
 
 ## First-Mengen
 
@@ -193,13 +97,16 @@ $S \rightarrow A \ \vert \ B \ \vert \ C$
 
 Welche Produktion nehmen?
 
-Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um eindeutig die nächste zu benutzende Produktion festzulegen. $k$ ist dabei die Anzahl der Vorschautoken.
+Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um eindeutig die nächste zu benutzende Produktion festzulegen. $k$ ist dabei die Anzahl der sog. *Vorschautoken*.
 
 **Def.:** Wir definieren $First$ - Mengen einer Grammatik wie folgt:
 
 *   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a\rbrace$
+
 *   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$
-*   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
+
+*   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha
+\overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
 
 
 ## Linksableitungen
@@ -239,7 +146,7 @@ $\alpha = \beta$
 
 
 
-## LL(k)-Grammatiken
+## LL(1)-Grammatiken
 
 Das hilft manchmal:
 
@@ -264,13 +171,6 @@ $(\epsilon \in First_1(\beta)) \Rightarrow (First_1(\alpha) \cap Follow_1(A) = \
 $(\epsilon \in First_1(\alpha)) \Rightarrow (First_1(\beta) \cap Follow_1(A) = \emptyset)$
 
 
-## LL(1)-Grammatiken
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
 
 ## LL(k)-Sprachen
 
@@ -289,16 +189,15 @@ In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parserg
 
 **Ausgabe:** Eine Parsertabelle *P*
 
+
 ![Algorithmus zur Generierung einer LL-Parsertabelle](images/LL-Parsertabelle.png){width="60%"}
+\ \
 
-Hier ist $\perp$ das Endezeichen des Inputs.
-Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und $Follow(\alpha)$ geschrieben.
+\ \
 
-## LL-Parsertabellen
+\color{black}{Hier ist $\perp$ das Endezeichen des Inputs.\ \
+Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und $Follow(\alpha)$ geschrieben.}
 
-:::notes
-Hier entsteht ein Tafelbild.
-:::
 
 ## LL-Parsertabellen
 
@@ -310,10 +209,7 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt (
 
 **Ausgabe:** Wenn $w \in L(G)$,  eine Linksableitung von $w$, Fehler sonst
 
-![Algorithmus zum tabellengesteuerten LL-Parsen](images/LL-Parser.png){width="50%"}
-
-
-Der Eingabestring sei $w\perp$, der initiale Kellerinhalt sei $\perp$.
+![Algorithmus zum tabellengesteuerten LL-Parsen](images/LL-Parser.png){width="49%"}
 
 
 
@@ -323,7 +219,7 @@ Der Eingabestring sei $w\perp$, der initiale Kellerinhalt sei $\perp$.
 *   Eine Teilmenge der dazu gehörigen Sprachen lässt sich top-down parsen.
 *   Ein einfacher Recursive-Descent-Parser arbeitet mit Backtracking.
 *   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus einer LL(k)-Grammatik generiert werden.
-*   Der Parser liefert in der Regel einen abstrakten Syntaxbaum.
+*   Der Parser liefert in der Regel einen abstrakten Syntaxbaum (AST).
 
 
 
