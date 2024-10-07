@@ -145,7 +145,7 @@ und wird von Ihnen in englischer Sprache gehalten.
 
 Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die Implementierung
 sollte grundlegende Sprachfeatures unterstützen (z.B. einfache Datentypen, Kontrollstrukturen)
-und eine einfache Codegenerierung (etwa nach C oder Java, oder nach WASM o.ä.) beinhalten.
+und eine einfache Codegenerierung (etwa nach C oder Java, oder nach WASM o.ä.) beinhalten. Berücksichtigen Sie dabei nach Möglichkeit die von Ihnen in Workshop II vorgestellten Techniken und Algorithmen.
 
 Sie finden in [@Grune2012] in den Kapiteln 11 bis 13 wertvolle Ideen zu verschiedenen
 Sprachparadigmen.
