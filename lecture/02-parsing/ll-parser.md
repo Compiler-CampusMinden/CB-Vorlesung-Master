@@ -178,7 +178,7 @@ In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parserg
 
 ##  Algorithmus: Konstruktion einer LL-Parsertabelle {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)
+**Eingabe:** Eine  Grammatik G = (N, T, P, S) mit $\perp \in T$ als Endezeichen
 
 **Ausgabe:** Eine Parsertabelle *P*
 
@@ -187,8 +187,7 @@ In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parserg
 
 \medskip
 
-\color{black}{Hier ist $\perp$ das Endezeichen des Inputs.\ \
-Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und $Follow(\alpha)$ geschrieben.}
+Statt $First_1(\alpha)$ und $Follow_1(\alpha)$ wird oft nur $First(\alpha)$ und $Follow(\alpha)$ geschrieben.
 
 
 ## LL-Parsertabellen
