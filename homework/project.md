@@ -58,10 +58,6 @@ Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
     -   Abarbeitung
     -   Listen, Prädikate, Terme
     -   Cut
--   Lisp-Varianten: Clojure
-    -   REPL
-    -   Makros vs. Funktionen
-    -   symbolische Programmierung
 
 Die genannten Sprachen sind als Beispiele zu verstehen. Sie können gern auch andere Sprachen
 und Paradigmen einbringen.
