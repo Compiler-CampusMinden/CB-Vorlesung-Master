@@ -130,7 +130,8 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
     -   [On Understanding Types, Data Abstraction, and Polymorphism]
     -   [Propositions as Types]
 8.  IR
-    -   [Multi-Level Intermediate Representation (MLIR)]
+    -   [Multi-Level Intermediate Representation (MLIR)] und [Clang IR (CIR)], [MLIR: A
+        Compiler Infrastructure for the End of Moore's Law]
     -   [Sea-of-Nodes IR]
 
 Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.
@@ -217,4 +218,6 @@ wissenschaftliche Literatur.
   [On Understanding Types, Data Abstraction, and Polymorphism]: http://lucacardelli.name/Papers/OnUnderstanding.A4.pdf
   [Propositions as Types]: https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf
   [Multi-Level Intermediate Representation (MLIR)]: https://mlir.llvm.org/
+  [Clang IR (CIR)]: https://llvm.github.io/clangir/
+  [MLIR: A Compiler Infrastructure for the End of Moore's Law]: https://arxiv.org/abs/2002.11054
   [Sea-of-Nodes IR]: https://github.com/SeaOfNodes/Simple
