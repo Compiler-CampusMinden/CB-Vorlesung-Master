@@ -37,9 +37,8 @@ Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
         -   Überladene und überschriebene Methoden
         -   (Mehrfach-) Vererbung
         -   Traits
-    -   Dynamisches vs. statisches Binden
     -   Module/Importe (benannte Scopes)
-    -   Duck-Typing, Type-Checking, Type Coercion
+    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
 -   Funktional: Haskell
     -   Offside Rule
     -   Listen, List Comprehensions
