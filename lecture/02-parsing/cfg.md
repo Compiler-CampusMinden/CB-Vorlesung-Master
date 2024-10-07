@@ -152,7 +152,7 @@ Vorgehensweise im Compilerbau: Eine Grammatik für die gewünschte Sprache defin
 *   Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.
 *   Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.
 *   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
-*   Von DPDAs akzeptierte Srpachen haben eindeutige Grammatiken.
+*   Von DPDAs akzeptierte Sprachen haben eindeutige Grammatiken.
 
 
 
