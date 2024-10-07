@@ -84,7 +84,7 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
  **Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
-$L(A) = \{Wörter\ w\ |\ \delta^*(q_0, w) \in F\}$
+$L(A) = \{\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\}$
 
 
 ## Wozu NFAs im Compilerbau?
@@ -93,7 +93,7 @@ Pattern Matching (Erkennung von Schlüsselwörtern, Bezeichnern, ...) geht mit N
 
 NFAs sind so nicht zu programmieren, aber:
 
-\ \
+\medskip
 
  **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
 
@@ -141,7 +141,7 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 *    *P*: endliche Menge von **Produktionen** der Form
 
-\ \
+\medskip
 
 $\qquad X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 
@@ -154,7 +154,7 @@ $(N \cup T)^{\ast}$ und sei $A$ $\rightarrow \gamma$ eine Produktion von $G$.
 Wir schreiben:
 $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alpha \gamma \beta$ ab).
 
-\ \
+\medskip
 
 **Def.:** Wir definieren die Relation $\overset{\ast}{\Rightarrow}$ induktiv wie folgt:
 
@@ -164,11 +164,11 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
         $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
 
-        \ \
+ \medskip
 
 
 **Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik.
-    Dann ist $L(G) = \lbrace$Wörter\ $w$\ über\ $T \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
+    Dann ist $L(G) = $\{\text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w$\} die von $G$ erzeugte Sprache.
 
 
 ## Reguläre Grammatiken
