@@ -55,7 +55,7 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 
 Einordnung: Erweiterung der Automatenklasse DFA um einen Stack
 
-\ \
+\medskip
 
 **Def.:** Ein **Kellerautomat** (PDA) $P = (Q,\ \Sigma,\ \Gamma,\  \delta,\ q_0,\ \perp,\ F)$
 ist ein Septupel aus
@@ -63,7 +63,7 @@ ist ein Septupel aus
 
 ![Definition eines PDAs](images/Def_PDA.png){width="60%"}
 
-\ \
+\medskip
 
 Ein PDA ist per Definition nichtdeterministisch und kann spontane Zustandsübergänge durchführen.
 
