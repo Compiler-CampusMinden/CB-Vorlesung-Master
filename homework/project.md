@@ -89,7 +89,7 @@ Interpreter-Entwicklung und Codegenerierung sowie Einfluss auf die Laufzeitumgeb
 Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beispielsweise
 
 1.  LR-Parsergeneratoren im Vergleich:
-    -   Flex und Bison vs. [Tree-Sitter]
+    -   Flex und Bison vs. [Tree-Sitter]
 2.  Advanced Parsing:
     -   Pratt-Parsing, PEG-Parser, Parser-Kombinatoren
     -   LALR
@@ -101,10 +101,10 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
     -   [Interval Parsing Grammars for File Format Parsing]
     -   [Resolvable Ambiguity: Principled Resolution of Syntactically Ambiguous Programs]
 3.  VM und Bytecode:
-    -   [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]
+    -   [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]
     -   [An Introduction to Interpreters and JIT Compilation]
     -   [Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic Algorithm]
-    -   WASM vs. Java-VM
+    -   WASM vs. Java-VM
 4.  Memory Management:
     -   Garbage Collection:
         -   [Unified Theory of Garbage Collection]
@@ -196,7 +196,7 @@ wissenschaftliche Literatur.
   [flap: A Deterministic Parser with Fused Lexing]: https://dl.acm.org/doi/pdf/10.1145/3591269
   [Interval Parsing Grammars for File Format Parsing]: https://dl.acm.org/doi/10.1145/3591264
   [Resolvable Ambiguity: Principled Resolution of Syntactically Ambiguous Programs]: https://people.kth.se/~dbro/papers/palmkvist-et-al-2021-resolvable-ambiguity.pdf
-  [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]: https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf
+  [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]: https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf
   [An Introduction to Interpreters and JIT Compilation]: https://stefan-marr.de/2023/09/pliss-summer-school/
   [Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic Algorithm]: https://stefan-marr.de/downloads/acmsac23-huang-et-al-optimizing-the-order-of-bytecode-handlers-in-interpreters-using-a-genetic-algorithm.pdf
   [Unified Theory of Garbage Collection]: https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&as_vis=1&q=Unified+Theory+of+Garbage+Collection&btnG=
