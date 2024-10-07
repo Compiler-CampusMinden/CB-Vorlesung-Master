@@ -21,6 +21,8 @@ outcomes:
 attachments:
   - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/lr-parser1.ann.ma.pdf"
     name: "Annotierte Folien: LR-Parser1"
+
+sketch: true
 ---
 
 
