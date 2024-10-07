@@ -91,27 +91,27 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 
 Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1421692&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
-| Monat              | Tag | Vorlesung                                                                                                                                   | Lead           | Praktikum                        |
-|:-------------------|:----|:--------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:---------------------------------|
-| Oktober            | 08. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                     | Carsten, BC    |                                  |
-|                    | 15. | [Reguläre Sprachen], [CFG], [LL-Parser]                                                                                                     | BC             |                                  |
-|                    | 22. | [LR-Parser (LR(0), LALR)]                                                                                                                   | BC             | [B01] (CFG, LL)                  |
-|                    | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                                    |                |                                  |
-|                    | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                                  |
-| November           | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | [B02] (LR)                       |
-|                    | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        |                                  |
-|                    | 19. | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                  | Carsten        | [B03] (Semantische Analyse)      |
-|                    | 26. | [**18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**]{.alert}: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                                  |
-| Dezember           | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                                  |
-| Dezember           | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                                  |
-|                    | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        | [B04] (Interpreter, Optimierung) |
-|                    | 17. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 1]                  |
-|                    | 24. | _Weihnachtspause_                                                                                                                           |                |                                  |
-|                    | 31. | _Weihnachtspause_                                                                                                                           |                |                                  |
-| Januar             | 07. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 2]                  |
-|                    | 14. | _Freies Arbeiten_                                                                                                                           |                | [Meilenstein 3]                  |
-|                    | 21. | [**[Workshop III]: Projektvorstellung/-übergabe**]{.alert}                                                                                  |                |                                  |
-| _(Prüfungsphasen)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                                  |
+| Monat              | Tag | Vorlesung                                                                                                                                   | Lead           | Praktikum           |
+|:-------------------|:----|:--------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------|
+| Oktober            | 08. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                     | Carsten, BC    |                     |
+|                    | 15. | [Reguläre Sprachen], [CFG], [LL-Parser]                                                                                                     | BC             | Verteilung Themen   |
+|                    | 22. | [LR-Parser (LR(0), LALR)]                                                                                                                   | BC             | Status Workshop I   |
+|                    | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                                    |                |                     |
+|                    | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                     |
+| November           | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | Status Workshop II  |
+|                    | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        | Status Workshop II  |
+|                    | 19. | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                  | Carsten        | Status Workshop II  |
+|                    | 26. | [**18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**]{.alert}: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                     |
+| Dezember           | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                     |
+| Dezember           | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                     |
+|                    | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        |                     |
+|                    | 17. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
+|                    | 24. | _Weihnachtspause_                                                                                                                           |                |                     |
+|                    | 31. | _Weihnachtspause_                                                                                                                           |                |                     |
+| Januar             | 07. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
+|                    | 14. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
+|                    | 21. | [**[Workshop III]: Projektvorstellung/-übergabe**]{.alert}                                                                                  |                |                     |
+| _(Prüfungsphasen)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                     |
 
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/4ba4736f0bc2005e4bcd75d48671e49cd4c9f3839988bf4f522f45a8bfbf676b%40group.calendar.google.com/public/basic.ics
@@ -162,14 +162,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 <!-- [Garbage Collection]: lecture/08-memory/gc.md -->
 
-[B01]: homework/sheet01.md
-[B02]: homework/sheet02.md
-[B03]: homework/sheet03.md
-[B04]: homework/sheet04.md
 [Projekt-Pitch]: homework/project.md
-[Meilenstein 1]: homework/project.md
-[Meilenstein 2]: homework/project.md
-[Meilenstein 3]: homework/project.md
 [Workshop I]: homework/project.md
 [Workshop II]: homework/project.md
 [Workshop III]: homework/project.md
@@ -181,11 +174,8 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 *   **Testat**: Vergabe der Credit-Points
 
-    1.  Mindestens 2 der Übungsblätter [B01], [B02], [B03] und [B04] erfolgreich bearbeitet, **und**
+    1.  **Aktive** Teilnahme an mind. 5 der 7 "Status Workshop"-Termine, **und**
     2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
-
-    ("erfolgreich bearbeitet": Bearbeitung in 2er Teams, je mindestens 60% bearbeitet,
-    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
 
 *   **Gesamtnote**:
 
