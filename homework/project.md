@@ -38,7 +38,7 @@ Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
         -   (Mehrfach-) Vererbung
         -   Traits
     -   Module/Importe (benannte Scopes)
-    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
+    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
 -   Funktional: Haskell
     -   Offside Rule
     -   Listen, List Comprehensions
@@ -89,7 +89,7 @@ Interpreter-Entwicklung und Codegenerierung sowie Einfluss auf die Laufzeitumgeb
 Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beispielsweise
 
 1.  LR-Parsergeneratoren im Vergleich:
-    -   Flex und Bison vs. [Tree-Sitter]
+    -   Flex und Bison vs. [Tree-Sitter]
 2.  Advanced Parsing:
     -   Pratt-Parsing, PEG-Parser, Parser-Kombinatoren
     -   LALR-Parsing
@@ -99,10 +99,10 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
         -   T. Parr: [*LL(\*) grammar analysis*]
     -   [flap: A Deterministic Parser with Fused Lexing]
 3.  VM und Bytecode:
-    -   [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]
+    -   [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]
     -   [An Introduction to Interpreters and JIT Compilation]
     -   [Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic Algorithm]
-    -   WASM vs. Java-VM
+    -   WASM vs. Java-VM
 4.  Memory Management:
     -   Garbage Collection:
         -   [Unified Theory of Garbage Collection]
@@ -130,8 +130,8 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
     -   [On Understanding Types, Data Abstraction, and Polymorphism]
     -   [Propositions as Types]
 8.  IR
-    -   [Multi-Level Intermediate Representation (MLIR)](https://mlir.llvm.org/)
-    -   [Sea-of-Nodes IR](https://github.com/SeaOfNodes/Simple)
+    -   [Multi-Level Intermediate Representation (MLIR)]
+    -   [Sea-of-Nodes IR]
 
 Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.
 
@@ -145,7 +145,9 @@ und wird von Ihnen in englischer Sprache gehalten.
 
 Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die Implementierung
 sollte grundlegende Sprachfeatures unterstützen (z.B. einfache Datentypen, Kontrollstrukturen)
-und eine einfache Codegenerierung (etwa nach C oder Java, oder nach WASM o.ä.) beinhalten. Berücksichtigen Sie dabei nach Möglichkeit die von Ihnen in Workshop II vorgestellten Techniken und Algorithmen.
+und eine einfache Codegenerierung (etwa nach C oder Java, oder nach WASM o.ä.) beinhalten.
+Berücksichtigen Sie dabei nach Möglichkeit die von Ihnen in Workshop II vorgestellten
+Techniken und Algorithmen.
 
 Sie finden in [@Grune2012] in den Kapiteln 11 bis 13 wertvolle Ideen zu verschiedenen
 Sprachparadigmen.
@@ -176,7 +178,7 @@ technischen Umsetzung des Compilers sowie der Reflexion über den gesamten Proze
 Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser Programmiersprachen auf
 Compiler-Designs und beschreiben Sie eventuelle Inspirationsquellen oder alternative Ansätze.
 
-* * * * *
+----------------------------------------------------------------------------------------------
 
 Wir freuen uns darauf, Sie in diesem herausfordernden und spannenden Projekt zu begleiten und
 wünschen Ihnen viel Erfolg!
@@ -192,9 +194,7 @@ wissenschaftliche Literatur.
   [Tree-Sitter]: http://tree-sitter.github.io/tree-sitter/
   [*LL(\*) grammar analysis*]: https://theantlrguy.atlassian.net/wiki/spaces/~admin/pages/524294/LL+grammar+analysis
   [flap: A Deterministic Parser with Fused Lexing]: https://dl.acm.org/doi/pdf/10.1145/3591269
-  [Interval Parsing Grammars for File Format Parsing]: https://dl.acm.org/doi/10.1145/3591264
-  [Resolvable Ambiguity: Principled Resolution of Syntactically Ambiguous Programs]: https://people.kth.se/~dbro/papers/palmkvist-et-al-2021-resolvable-ambiguity.pdf
-  [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]: https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf
+  [AST vs. Bytecode: Interpreters in the Age of Meta-Compilation]: https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf
   [An Introduction to Interpreters and JIT Compilation]: https://stefan-marr.de/2023/09/pliss-summer-school/
   [Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic Algorithm]: https://stefan-marr.de/downloads/acmsac23-huang-et-al-optimizing-the-order-of-bytecode-handlers-in-interpreters-using-a-genetic-algorithm.pdf
   [Unified Theory of Garbage Collection]: https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&as_vis=1&q=Unified+Theory+of+Garbage+Collection&btnG=
@@ -216,3 +216,5 @@ wissenschaftliche Literatur.
   [Testing Language Implementations]: https://youtu.be/ZJUk8_k1HbY?si=Mis0l6M07vbI8Rqx
   [On Understanding Types, Data Abstraction, and Polymorphism]: http://lucacardelli.name/Papers/OnUnderstanding.A4.pdf
   [Propositions as Types]: https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf
+  [Multi-Level Intermediate Representation (MLIR)]: https://mlir.llvm.org/
+  [Sea-of-Nodes IR]: https://github.com/SeaOfNodes/Simple
