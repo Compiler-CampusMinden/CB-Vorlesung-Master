@@ -35,166 +35,91 @@ Hier entsteht ein Tafelbild.
 
 
 ## Themen für heute
-- Endliche Automaten
-- Reguläre Ausdrücke
+* Endliche Automaten
+* Reguläre Sprachen
 
 
 
 # Endliche Automaten
 
-## Alphabete
-
-**Def.:** Ein *Alphabet* $\Sigma$ ist eine endliche, nicht-leere Menge von  Symbolen. Die Symbole eines Alphabets heißen *Buchstaben*.
-
-**Def.:** Ein _Wort_ $w$ _über einem Alphabet_ $\Sigma$ ist eine endliche Folge von Symbolen aus $\Sigma$.
-$\epsilon$ ist das leere Wort.
-Die _Länge_ $\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält (Kardinalität).
-
-**Def.:**
-$\Sigma^k = \lbrace w\ \text{über}\ \Sigma\ \vert\ \vert w \vert = k \rbrace$
-
-$\Sigma^{\ast} = \bigcup\limits_{i \in \mathbb{N}_0} \Sigma^i$ (die Kleene-Hülle von $\Sigma$)
-
-$\Sigma^+ = \bigcup\limits_{i \in \mathbb{N}} \Sigma^i$
-
-## Sprachen über Alphabete
-
-**Def.:** Seien $x = a_1 a_2 \ \ldots  \ a_n$ und $y = b_1b_2 \  \ldots  \  b_m$ Wörter. Wir nennen $xy = x \circ y = a_1 \  \ldots \  a_nb_1 \ \ldots \ b_m$ die *Konkatenation* von $x$ und $y$.
-
-**Def.:** *Eine Sprache* $L$ *über einem Alphabet* $\Sigma$ ist eine Teilmenge von $\Sigma^{\ast} :\ L \subseteq\Sigma^{\ast}$
 
 
 ## Deterministische endliche Automaten
 
-**Def.:** Ein *deterministischer endlicher Automat* (DFA) ist ein 5-Tupel
+**Def.:** Ein **deterministischer endlicher Automat** (DFA) ist ein 5-Tupel
 $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
-* $Q$ : eine endliche Menge von Zuständen
-* $\Sigma$ : ein Alphabet von Eingabesymbolen
-* $\delta$ : die Übergangsfunktion $(Q \times \Sigma) \rightarrow Q,
+* $Q$ : endliche Menge von **Zuständen**
+
+* $\Sigma$ : Alphabet von **Eingabesymbolen**
+
+* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q,
   \delta$ kann partiell sein
-* $q_0 \in Q$ : der Startzustand
-* $F \subseteq Q$ : die Menge der Endzustände
+
+* $q_0 \in Q$ : der **Startzustand**
+
+* $F \subseteq Q$ : die Menge der **Endzustände**
 
 
-## Die Übergangsfunktion
-
- **Def.:** Wir definieren  $\delta^{\ast}: (Q \times \Sigma^{\ast}) \rightarrow Q$: induktiv wie folgt:
-
-* Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
-* Induktion: $\delta^{\ast}(q, a_1, \ldots, a_n) = \delta(\delta^{\ast}(q, a_1, \ldots , a_{n-1}), a_n)$
-
- **Def.:** Ein DFA akzeptiert ein Wort $w \in \Sigma^{\ast}$ genau dann, wenn $\delta^{\ast}(q_0, w) \in F.$
-
- **Def.:** Die Sprache eines DFA $A\ L(A)$ ist definiert durch:
-
-$L(A) =\lbrace w\ \vert \delta^{\ast}(q_0, w) \in F \rbrace$
-
-## Beispiel
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
 
 
 ## Nichtdeterministische endliche Automaten
 
- **Def.:** Ein *nichtdeterministischer endlicher Automat* (NFA) ist ein 5-Tupel
+ **Def.:** Ein **nichtdeterministischer endlicher Automat** (NFA) ist ein 5-Tupel
     $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
-* $Q$: eine endliche Menge von Zuständen
-* $\Sigma$: ein Alphabet von Eingabesymbolen
-* $\delta$: die Übergangsfunktion  $(Q \times \Sigma) \rightarrow \mathcal{P}(Q)$
-* $q_0 \in Q$: der Startzustand
-* $F \subseteq Q$: die Menge der Endzustände
+
+* $Q$ : endliche Menge von **Zuständen**
+
+* $\Sigma$ : Alphabet von **Eingabesymbolen**
+
+* $\delta$ : die (eventuell partielle) Übergangsfunktion $(Q \times \Sigma) \rightarrow Q$
+
+* $q_0 \in Q$ : der **Startzustand**
+
+* $F \subseteq Q$ : die Menge der **Endzustände**
 
 
-## Die Übergangsfunktion eines NFAs
+## Akzeptierte Sprachen
 
- **Def.:** Wir definieren  $\delta^{\ast}: (Q \times \Sigma) \rightarrow \mathcal{P}(Q):$
-    induktiv wie folgt:
+ **Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
-* Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
-* Induktion: Sei $w \in \Sigma^{\ast}, w = xa, x \in \Sigma^{\ast}, a \in \Sigma$ mit
-
-     $\delta^{\ast}(q, x) =  \lbrace p_1,\ \ldots,\  p_k \rbrace, p_i \in Q$, sei
-
-     $A = \bigcup\limits_{i = 1}^k \delta(p_i, a) = \lbrace r_1, \ldots r_m \rbrace, r_j \in Q$.
-
-     Dann ist $\delta^{\ast}(q, w) = \lbrace r_1,\  \ldots\ , r_m\rbrace$.
+$L(A) = \{Wörter\ w\ |\ \delta^*(q_0, w) \in F\}$
 
 
 ## Wozu NFAs im Compilerbau?
 
-Pattern Matching geht mit NFAs.
+Pattern Matching (Erkennung von Schlüsselwörtern, Bezeichnern, ...) geht mit NFAs.
 
 NFAs sind so nicht zu programmieren, aber:
 
+\ \
+
  **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
 
+D. h. es existieren Algorithmen zur
 
-## Konvertierung eines NFAs in einen DFA
-
-Gegeben: Ein NFA $A = (Q, \Sigma, \delta, q_0, F)$
-
-Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
-
-\bigskip
-
-![Konvertierung NFA in DFA](images/nfa2dfa.png){width="45%"}
+*   Umwandlung von NFAs in DFAS
+*   Minimierung von DFAs
 
 
 
-## Beispiel
+# Reguläre Sprachen
 
-|          $\delta$ |          a           |             b             |
-|------------------:|:--------------------:|:-------------------------:|
-| $\rightarrow q_0$ | $\lbrace q_0\rbrace$ | $\lbrace q_1, q_2\rbrace$ |
-|             $q_1$ | $\lbrace q_2\rbrace$ |   $\lbrace q_1\rbrace$    |
-|            *$q_2$ |          -           | $\lbrace q_0, q_2\rbrace$ |
-
-
-
-| $\delta$'                          | a                         | b                              |
-|:-----------------------------------|:--------------------------|:-------------------------------|
-| $\rightarrow$ $\lbrace q_0\rbrace$ | $\lbrace q_0\rbrace$      | $\lbrace q_1,q_2\rbrace$       |
-| *$\lbrace q_1 q_2\rbrace$          | $\lbrace q_2\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$ |
-| *$\lbrace q_2\rbrace$              | -                         | $\lbrace q_0,q_2\rbrace$       |
-| *$\lbrace q_0, q_2\rbrace$         | $\lbrace q_0\rbrace$      | $\lbrace q_0, q_1, q_2\rbrace$ |
-| *$\lbrace q_0, q_1, q_2\rbrace$    | $\lbrace q_0, q_2\rbrace$ | $\lbrace q_0, q_1, q_2\rbrace$ |
-
-
-## Minimierung eines DFAs
-
-Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.
-
-Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
-
-![DFA Minimierung](images/minimize_dfa.png){width="50%"}
-
-# Reguläre Ausdrücke
-
-## Operatoren auf Sprachen
-
- **Def.:** Seien *L* und *M* Sprachen.
-
-*    $L \cup M = \lbrace w \mid w \in L \vee w \in M \rbrace$
-*    $LM = L \cdot M = L \circ M = \lbrace vw \mid v \in L \land w \in M\rbrace$
-*    Die Kleene-Hülle einer Sprache:
-        *    Basis: $L^0 = \lbrace \epsilon\rbrace$
-        *    Induktion: $L^i = \lbrace xw\mid x \in L^{i-1}, w \in L, i >
-             0\rbrace$, \newline $L^{\ast} = \bigcup\limits_{i \ge 0}L^i$, \newline $L^+ = \bigcup\limits_{i > 0}L^i$
 
 
 ## Reguläre Ausdrücke
 
- **Def.:** Induktive Definition von regulären Ausdrücken (*regex*) und der von ihnen repräsentierten Sprache:
+ **Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von ihnen repräsentierten Sprache **L**:
 
 *    Basis:
+
      *    $\epsilon$ und $\emptyset$ sind reguläre Ausdrücke mit $L(\epsilon) =
             \lbrace \epsilon\rbrace$, $L(\emptyset)=\emptyset$
      *    Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit $L(a) = \lbrace a\rbrace$
+
 *    Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
+
      *    $E+F$ ist ein regex und bezeichnet die Vereinigung $L(E + F) = L(E)\cup L(F)$
      *    $EF$ ist ein regex und bezeichnet die Konkatenation $L(EF) = L(E)L(F)$
      *    $E^{\ast}$ ist ein regex und bezeichnet die Kleene-Hülle $L(E^{\ast})=(L(E))^{\ast}$
@@ -203,27 +128,22 @@ Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden
 Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 
-## Wichtige Identitäten
-
-**Satz:** Sei $A$ ein DFA $\Rightarrow \exists$ regex $R$ mit $L(A) = L(R)$.
-
-**Satz:** Sei $E$ ein regex $\Rightarrow \exists$ DFA $A$ mit $L(E) = L(A)$.
-
-## Beispiel: Umwandlung eines regex in einen NFA
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
 
 ## Formale Grammatiken
 
 **Def.:** Eine *formale Grammatik* ist ein 4-Tupel $G=(N,T,P,S)$ aus
 
-*    $N$: einer endlichen Menge von $Nichtterminalen$
-*    *T*: einer endlichen Menge von *Terminalen*, $N \cap T = \emptyset$
-*    $S \in N$: dem *Startsymbol*
-*    *P*: einer endlichen Menge von *Produktionen* der Form: $X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
+*    $N$: endliche Menge von **Nichtterminalen**
+
+*    *T*: endliche Menge von **Terminalen**, $N \cap T = \emptyset$
+
+*    $S \in N$: **Startsymbol**
+
+*    *P*: endliche Menge von **Produktionen** der Form
+
+\ \
+
+$\qquad X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 
 
 ## Ableitungen
@@ -231,100 +151,85 @@ Hier entsteht ein Tafelbild.
 **Def.:** Sei $G = (N, T, P, S)$ eine Grammatik, sei $\alpha A \beta$ eine Zeichenkette über
 $(N \cup T)^{\ast}$ und sei $A$ $\rightarrow \gamma$ eine Produktion von $G$.
 
-Wir sagen:
+Wir schreiben:
 $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alpha \gamma \beta$ ab).
+
+\ \
 
 **Def.:** Wir definieren die Relation $\overset{\ast}{\Rightarrow}$ induktiv wie folgt:
 
 *    Basis: $\forall \alpha \in (N \cup T)^{\ast} \alpha \overset{\ast}{\Rightarrow} \alpha$ (Jede Zeichenkette leitet sich selbst ab.)
+
 *    Induktion: Wenn $\alpha \overset{\ast}{\Rightarrow} \beta$ und
         $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
+
+        \ \
+
+
 **Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik.
-    Dann ist $L(G) = \lbrace w \in T^{\ast} \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
+    Dann ist $L(G) = \lbrace$Wörter\ $w$\ über\ $T \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
 
 
 ## Reguläre Grammatiken
 
-**Def.:** Eine *reguläre (oder type-3-) Grammatik* ist eine formale Grammatik mit den folgenden Einschränkungen:
+**Def.:** Eine **reguläre (oder type-3-) Grammatik** ist eine formale Grammatik mit den folgenden Einschränkungen:
 
 *    Alle Produktionen sind entweder von der Form
 
      *    $X \to aY$  mit $X \in N, a \in T, Y \in N$ (*rechtsreguläre* Grammatik) oder
      *    $X \to Ya$  mit $X \in N, a \in T, Y \in N$ (*linksreguläre* Grammatik)
 
-*    $X\rightarrow\epsilon$ ist in beiden Fällen erlaubt.
+*    $X\rightarrow\epsilon$ ist erlaubt
 
 
-## Reguläre Sprachen
-
-**Satz:** Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden *reguläre* Sprachen genannt.
-
-**Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
+## Reguläre Sprachen und ihre Grenzen
 
 
-## Das Pumping Lemma für reguläre Sprachen
+**Satz:** Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären Ausdrücken beschriebene Sprachklasse und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und heißen **reguläre Sprachen**.
 
-**Satz:** Das *Pumping Lemma für reguläre Sprachen*:
+  \ \
 
-Sei $L$ eine reguläre Sprache.
-
-$\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
-
-$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
-
-$\underset{k \geq 0} \forall xy^{k}z \in L$
+**Reguläre Sprachen**
+*   einfache Struktur
+*   Matchen von Symbolen (z. B. Klammern) nicht möglich, da  die fixe Anzahl von Zuständen eines DFAs die Erkennung solcher Sprachen verhindert.
 
 
-## Abschlusseigenschaften regulärer Sprachen
+## Wozu reguläre Sprachen im Compilerbau?
 
-Die Klasse der regulären Sprachen ist abgeschlossen unter
+*   Reguläre Ausdrücke
 
-*   Vereinigung
-*   Konkatenation
-*   Kleene-Stern
-*   Komplementbildung
-*   Durchschnitt
+    *   definieren Schlüsselwörter und alle weiteren Symbole einer Programmiersprache, z. B. den Aufbau von Gleitkommazahlen
+    *   werden (oft von einem Generator) in DFAs umgewandelt
+    *   sind die Basis des *Scanners* oder *Lexers*
 
-
-## Entscheidbarkeit für reguläre Sprachen
-
-**Satz:** Es ist entscheidbar,
-
-*    ob eine gegebene reguläre Sprache leer ist
-*    ob $w \in \Sigma^{\ast}$ in einer gegebenen regulären Sprache enthalten ist (Das "Wort-Problem")
-*    ob zwei reguläre Sprachen äquivalent sind
-
-
-## Grenzen der regulären Sprachen
-
-Reguläre Sprachen sind von ihrer Struktur her einfach. Schon Sprachen, in denen etwas "gematcht" werden muss, lassen sich nicht mehr regulär beschreiben, weil z. B.  die fixe Anzahl von Zuständen eines DFAs die Erkennung solcher Sprachen verhindert.
-
-
-## Wozu das Ganze?
-
-Im Compilerbau werden reguläre Ausdrücke benutzt, um die Schlüsselwörter und weitere Symbole der zu erkennenden Sprache anzugeben. Daraus wird mit Hilfe eines Generators, der aus den regulären Ausdrücken DFAs (oder einen großen DFA) macht, der sog. Scanner oder Lexer genannt, generiert. Seine Aufgabe ist es, die Folge von Zeichen in der Quelldatei in eine Folge von sog. Token umzuwandeln. Z. B. wird so aus den Zeichen des Schlüsselwortes *while* im Programmtext das Token für *while* gemacht, das in der Syntaxanalyse weiterverarbeitet wird. Die Tokenfolge eines Programms ist ein Wort einer Sprache, die der Parser erkennt. Jedes vom Lexer erkannte Token ist dort also ein terminales Symbol.
 
 
 ## Ein Lexer ist mehr als ein DFA
 
-Was ist zu beachten:
+*   Ein **Lexer**
 
-*   Man braucht mindestens eine Liste von Paaren aus regulären Ausdrücken und Tokennamen.
-*   Neben den Schlüsselwörtern und Symbolen wie (,), *, $\ldots$ müssen auch Namen für Variablen, Funktionen, Klassen, Methoden, $\ldots$ (sog. Identifier) erkannt werden
-*   Namen haben meist eine gewisse Struktur, die sich mit regulären Ausdrücken beschreiben lassen.
-*   Erlaubte Token sind in der Grammatik des Parsers beschrieben, d. h. für literale Namen, Strings, Zahlen liefert der Scanner  zwei Werte:
-	*  z. B. `<ID, "radius">`, `<Integerzahl, 558>`
-*   Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
+    * wandelt mittels DFAs aus regulären Ausdrücken die Folge von Zeichen der Quelldatei in eine Folge von sog. Token um
 
-Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für die regulären Ausdrücke implementieren.
+    * bekommt als Input eine Liste von Paaren aus regulären Ausdrücken und Tokennamen, z. B. ("while", WHILE)
+
+    * Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
+
+    * liefert Paare von Token und deren Werte, sofern benötigt, z. B. (WHILE, _), oder (IDENTIFIER, "radius") oder (INTEGERZAHL, "334")
 
 
-## Automatisch oder händisch
+## Wie geht es weiter?
 
-:::notes
-Hier entsteht ein Tafelbild.
-:::
+*   Ein **Parser**
+
+    * führt mit Hilfe des Tokenstreams vom Lexer die Syntaxanalyse durch
+
+    * basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token sind
+
+    * liefert die syntaktische Struktur in Form eines Ableitungsbaums (**syntax tree**, **parse tree**), bzw. einen **AST** (abstract syntax tree) ohne redundante Informationen im Ableitungsbaum (z. B. Semikolons)
+
+    * liefert evtl. Fehlermeldungen
+
 
 
 # Wrap-Up
