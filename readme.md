@@ -95,7 +95,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 |:-------------------|:----|:--------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------|
 | Oktober            | 08. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                     | Carsten, BC    |                     |
 |                    | 15. | [Reguläre Sprachen], [CFG], [LL-Parser]                                                                                                     | BC             | Verteilung Themen   |
-|                    | 22. | [LR-Parser (LR(0), LALR)]                                                                                                                   | BC             | Status Workshop I   |
+|                    | 22. | [LR-Parser]                                                                                                                                 | BC             | Status Workshop I   |
 |                    | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                                    |                |                     |
 |                    | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                     |
 | November           | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | Status Workshop II  |
@@ -134,7 +134,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 <!-- [LL: Fortgeschrittene Techniken]: lecture/02-parsing/ll-advanced.md -->
 <!-- [Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md -->
 <!-- [Parser mit Bison]: lecture/02-parsing/bison.md -->
-[LR-Parser (LR(0), LALR)]: lecture/02-parsing/lr-parser.md
+[LR-Parser]: lecture/02-parsing/lr-parser.md
 <!-- [LR-Parser (Teil 1)]: lecture/02-parsing/lr-parser1.md -->
 <!-- [LR-Parser (Teil 2)]: lecture/02-parsing/lr-parser2.md -->
 <!-- [PEG-Parser, Pratt-Parser]: lecture/02-parsing/parsercombinator.md -->
