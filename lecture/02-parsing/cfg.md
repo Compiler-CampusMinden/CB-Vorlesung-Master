@@ -48,23 +48,22 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 *   DPDAs und deterministisch kontextfreie Grammatiken: die Grundlage der Syntaxanalyse im Compilerbau
 
 
-## Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können
-
-Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speicher, um zählen und matchen zu können. Wir suchen dabei konzeptionell die "kleinstmögliche" Erweiterung, die die akzeptierte Sprachklasse gegenüber DFAs vergrößert.
-
-*   Der konzeptionell einfachste Speicher ist ein Stack. Wir haben keinen wahlfreien Zugriff auf die gespeicherten Werte.
-*   Es soll eine deterministische und eine indeterministische Variante der neuen Automatenklasse geben.
-*   In diesem Zusammenhang wird der Stack auch Keller genannt.
+# Kellerautomaten (Push-Down-Automata, PDAs)
 
 
 ## Kellerautomaten (Push-Down-Automata, PDAs)
 
-**Def.:** Ein Kellerautomat (PDA) $P = (Q,\ \Sigma,\ \Gamma,\  \delta,\ q_0,\ \perp,\ F)$
-ist ein Septupel mit:
+Einordnung: Erweiterung der Automatenklasse DFA um einen Stack
+
+\ \
+
+**Def.:** Ein **Kellerautomat** (PDA) $P = (Q,\ \Sigma,\ \Gamma,\  \delta,\ q_0,\ \perp,\ F)$
+ist ein Septupel aus
 
 
 ![Definition eines PDAs](images/Def_PDA.png){width="60%"}
 
+\ \
 
 Ein PDA ist per Definition nichtdeterministisch und kann spontane Zustandsübergänge durchführen.
 
@@ -84,69 +83,8 @@ Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 ![](images/pda2.png){width="45%"}
 
 
-## Konfigurationen von PDAs
-
-**Def.:** Eine Konfiguration (ID) eines PDAs 3-Tupel $(q, w, \gamma)$
-mit
-
-* $q$ ist ein Zustand
-* $w$ ist der verbleibende Input, $w\in\Sigma^{\ast}$
-* $\gamma$ ist der Kellerinhalt $\gamma\in \Gamma^{\ast}$
-
-eines PDAs zu einem gegebenen Zeitpunkt.
 
 
-## Die Übergangsrelation eines PDAs
-
-**Def.:** Die Relation $\vdash$ definiert Übergänge von einer Konfiguration zu einer anderen:
-
-Sei $(p, \alpha) \in \delta(q, a, X)$, dann gilt $\forall w\ \epsilon \ \Sigma^{\ast}$ und
-$\beta \in \Gamma^{\ast}$:
-
-$(q, aw, X\beta)\vdash(p, w, \alpha\beta)$.
-
-\bigskip
-
-**Def.:** Wir definieren mit $\overset{\ast}{\vdash}$ 0 oder endlich viele Schritte des PDAs
-induktiv wie folgt:
-
-*   Basis: $I\overset{\ast}{\vdash} I$ für eine ID $I$.
-*   Induktion: $I\overset{\ast}{\vdash}J$, wenn $\exists$ ID $K$ mit $I\vdash K$ und $K \overset{\ast}{\vdash}J$.
-
-## Eigenschaften der Konfigurationsübergänge
-
-**Satz:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$ ein PDA und $(q, x,\alpha)\overset{\ast}{\vdash}
-(p, y, \beta)$. Dann gilt für beliebige Strings $w\in\Sigma^{\ast}$, $\gamma$ in $\Gamma^{\ast}$:
-
-$(q, xw, \alpha \gamma) \overset{\ast}{\vdash}(p, yw, \beta\gamma)$
-
-**Satz:** Sei $P = (Q, \Sigma, \Gamma, \gamma, q_0, \perp, F)$ ein PDA und $(q,xw,\alpha) \overset{\ast}{\vdash}
-(p,y w, \beta)$.
-
-Dann gilt: $(q, x, a) \overset{\ast}{\vdash} (p, y, \beta)$
-
-
-## Akzeptierte Sprachen
-
-**Def.:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$ ein PDA. Dann ist die *über einen Endzustand*
-akzeptierte Sprache $L(P) = \lbrace w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \alpha)\rbrace$
-für einen Zustand $q \in F, \alpha \in \Gamma^{\ast}$.
-
-**Def.:** Für einen PDA $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$
-definieren wir die über den *leeren Keller* akzeptierte Sprache
-$N(P) = \lbrace (w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\rbrace$.
-
-
-## Akzeptanzäquivalenzen
-
-**Satz:** Wenn $L = N(P_N)$ für einen PDA $P_N$, dann gibt es einen PDA $P_L$ mit
-$L = L(P_L)$.
-
-**Satz:** Für einen PDA $P$ mit $\epsilon$-Transitionen existiert ein PDA $Q$ ohne
-$\epsilon$-Transitionen mit $L(P) = N(P) = L(Q) = N(Q)$.
-
-Die Transitionsfunktion $\delta$ ist dann von der Form
-$\delta: Q \times \Sigma \times \Gamma \to2^{Q \times \Gamma^{\ast}}$.
 
 
 ## Deterministische PDAs
@@ -165,7 +103,7 @@ Deterministische PDAs werden auch *DPDAs* genannt.
 **Satz:** Die von DPDAs akzeptierten Sprachen sind eine echte Teilmenge der von
 PDAs akzeptierten Sprachen.
 
-Die Sprachen, die von *regex* beschrieben werden, sind eine echte Teilmenge der von
+Reguläre Sprachen sind eine echte Teilmenge der von
 DPDAs akzeptierten Sprachen.
 
 
@@ -178,28 +116,16 @@ DPDAs akzeptierten Sprachen.
 
 $X \rightarrow Y$ mit $X \in N, Y \in {(N \cup T)}^{\ast}$.
 
-$\Rightarrow, \overset{\ast}{\Rightarrow}$ sind definiert wie bei regulären Sprachen. Bei cf-Grammatiken nennt man die Ableitungsbäume oft *Parse trees*.
+$\Rightarrow, \overset{\ast}{\Rightarrow}$ sind definiert wie bei regulären Sprachen.
 
 
-## Beispiel
-
-\vspace{-2.5cm}
-
-$S \rightarrow a \mid S\ +\  S\ |\  S \ast S$
-
-Ableitungsbäume für $a + a \ast a$:
-\vfill
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
-## Mehrdeutige Grammatiken
+## Nicht jede kontextfreie Grammatik ist eindeutig
 
 **Def.:** Gibt es in einer von einer kontextfreien Grammatik erzeugten Sprache ein
 Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 *mehrdeutig*. Anderenfalls heißt sie *eindeutig*.
+
+**Satz:** Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
 
 **Satz:** Es gibt kontextfreie Sprachen, für die keine eindeutige Grammatik existiert.
 
@@ -209,69 +135,12 @@ Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 **Satz:** Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe
 Sprachklasse.
 
-**Satz:** Sei $L = N(P)$ für einen DPDA *P*, dann hat *L* eine eindeutige Grammatik.
+**Satz:** Eine von einem DPDA akzeptierteSprache hat eine eindeutige Grammatik.
 
 **Def.:** Die Klasse der Sprachen, die von einem DPDA akzeptiert werden, heißt
 Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
 
-
-## Das Pumping Lemma für kontextfreie Sprachen
-
-Wenn wir beweisen müssen, dass eine Sprache nicht cf ist, hilft das Pumping Lemma für cf-Sprachen:
-
-**Satz:** Sei *L* eine kontextfreie Sprache
-
-$\Rightarrow \exists$ eine Konstante $p \in \mathbb{N}$:
-
-$\underset{\underset{|z| \geq p} {z \in L}}\forall \exists$ $u, v, w, x, y \in
-\Sigma ^{\ast}$ mit $z = uvwxy$ und
-
-*   $\mid vwx\mid \leq p$
-*   $vx \neq \epsilon$
-*   $\forall i \geq 0 : uv^i wx^i y \in L$
-
-
-## Abschlusseigenschaften von kontextfreien Sprachen
-
-**Satz:** Die kontextfreien Sprachen sind abgeschlossen unter:
-
-*   Vereinigung
-*   Konkatenation
-*   Kleene-Hüllen $L^{\ast}$ und $L^+$
-
-**Satz:** Wenn *L* kontextfrei ist, dann ist $L^R$ kontextfrei.
-
-
-## Entscheidbarkeit von kontextfreien Grammatiken und Sprachen
-
-**Satz:** Es ist entscheidbar für eine kontextfreie Grammatik *G*,
-
-*   ob $L(G) = \emptyset$
-*   welche Symbole nach $\epsilon$ abgeleitet werden können
-*   welche Symbole erreichbar sind
-*   ob $w  \in L(G)$ für ein gegebenes $w \in {\Sigma}^{\ast}$
-
-
-**Satz:** Es ist nicht entscheidbar,
-
-*   ob eine gegebene kontextfreie Grammatik eindeutig ist
-*   ob der Durchschnitt zweier kontextfreier Sprachen leer ist
-*   ob zwei kontextfreie Sprachen identisch sind
-*   ob eine gegebene kontextfreie Sprache gleich $\Sigma^{\ast}$ ist
-
-
-## Abschlusseigenschaften deterministisch kontextfreier Sprachen
-
-**Satz:** Deterministisch kontextfreie Sprachen sind abgeschlossen unter
-
-*   Durchschnitt mit regulären Sprachen
-*   Komplement
-
-Sie sind nicht abgeschlossen unter
-
-*   Umkehrung
-*   Vereinigung
-*   Konkatenation
+Vorgehensweise im Compilerbau: Eine Grammatik für die gewünschte Sprache definieren und schauen, ob sich daraus ein DPDA generieren lässt (automatisch).
 
 
 # Wrap-Up
@@ -283,6 +152,7 @@ Sie sind nicht abgeschlossen unter
 *   Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.
 *   Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.
 *   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
+*   Von DPDAs akzeptierte Srpachen haben eindeutige Grammatiken.
 
 
 
