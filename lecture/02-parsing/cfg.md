@@ -14,8 +14,8 @@ outcomes:
 attachments:
   - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/frontend_parsing_cfg.ann.ma.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
-
 ---
+
 
 # Wiederholung
 
