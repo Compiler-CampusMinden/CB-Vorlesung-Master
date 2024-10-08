@@ -19,9 +19,6 @@ attachments:
 ---
 
 
-
-
-
 # Wiederholung
 
 ## PDAs und kontextfreie Grammatiken
