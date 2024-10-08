@@ -143,7 +143,7 @@ Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +
 
 \medskip
 
-$\qquad X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
+$\qquad X \rightarrow Y\ \text{mit}\ X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 
 
 ## Ableitungen
