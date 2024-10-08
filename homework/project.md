@@ -26,6 +26,10 @@ Workshops werden bewertet und gehen in die Gesamtnote ein.
 -   Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November
 -   Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 21. Januar
 
+**Teams**
+
+Die Aufgaben (Workshops) werden in 2er Teams bearbeitet.
+
 ## Wahl der Programmiersprache
 
 Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
