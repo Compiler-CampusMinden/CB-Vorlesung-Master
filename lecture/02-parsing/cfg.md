@@ -135,7 +135,7 @@ Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 **Satz:** Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe
 Sprachklasse.
 
-**Satz:** Eine von einem DPDA akzeptierteSprache hat eine eindeutige Grammatik.
+**Satz:** Eine von einem DPDA akzeptierte Sprache hat eine eindeutige Grammatik.
 
 **Def.:** Die Klasse der Sprachen, die von einem DPDA akzeptiert werden, heißt
 Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
