@@ -184,6 +184,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
     *   30% [Workshop II],
     *   50% [Workshop III].
 
+Die Bearbeitung der Aufgaben (Workshops) erfolgt in 2er Teams.
 
 ## Materialien
 
