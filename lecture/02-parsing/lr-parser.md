@@ -136,7 +136,7 @@ Das zu $A \rightarrow \epsilon$ gehörende Item ist $[A \rightarrow \cdot]$
 
 $GOTO_0(I, X) = CLOSURE_0(\lbrace[A \rightarrow \alpha X \cdot \beta] \mid [A \rightarrow \alpha \cdot X \beta] \in I\rbrace)$
 
-für eine Itemmenge *I* und $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
+für eine Itemmenge $I$ und $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 
 
 ## Konstruktion des $LR(0)$ - Automaten
