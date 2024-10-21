@@ -90,7 +90,7 @@ Im Stack stehen nur Zustandsnummern, am Anfang die Nummer des Startzustandes (+ 
 
 *   Lesen des obersten Stackelements ergibt Zustand $q$
 
-*   Lesen des nächsten Eingabezeichens ergibt Zeichen *a*
+*   Lesen des nächsten Eingabezeichens ergibt Zeichen $a$
 
 *   Nachschlagen der Reaktion auf $(q, a)$ in der Parse Table
 
