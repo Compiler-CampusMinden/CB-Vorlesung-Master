@@ -88,7 +88,7 @@ Hier entsteht ein Tafelbild.
 
 Im Stack stehen nur Zustandsnummern, am Anfang die Nummer des Startzustandes (+ Bottomzeichen, oft auch $\$$).
 
-*   Lesen des obersten Stackelements ergibt Zustand *q*
+*   Lesen des obersten Stackelements ergibt Zustand $q$
 
 *   Lesen des nächsten Eingabezeichens ergibt Zeichen *a*
 
