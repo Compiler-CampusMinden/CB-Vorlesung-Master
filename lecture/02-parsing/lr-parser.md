@@ -52,7 +52,7 @@ Bei $LL$-Sprachen muss man nach den ersten $k$ Eingabezeichen entscheiden, welch
 
 # Von unten nach oben
 
-Bei der Bottom-Up-Analyse wird der Parse Tree wird von unten nach oben aufgebaut, von links nach rechts.Dabei entsteht eine *Rechtsableitung*.
+Bei der Bottom-Up-Analyse wird der Parse Tree wird von unten nach oben aufgebaut, von links nach rechts. Dabei entsteht eine *Rechtsableitung*.
 
 **Def.:** Bei einer kontextfreien Grammatik *G* ist die *Rechtsableitung* von $\alpha \in (N \cup T)^{\ast}$ die Ableitung, die man erhält, wenn das am weitesten rechts stehende Nichtterminal in $\alpha$ abgeleitet wird. Man schreibt $\alpha \overset{\ast}{\Rightarrow}_r \beta$.
 
