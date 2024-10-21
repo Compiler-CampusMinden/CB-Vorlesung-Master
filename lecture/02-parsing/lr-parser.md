@@ -109,7 +109,7 @@ Im Stack stehen nur Zustandsnummern, am Anfang die Nummer des Startzustandes (+ 
 
 ## Berechnung derustände: Items
 
-**Def.:** Ein *(dotted) Item* einer Grammatik *G* ist eine Produktion von *G* mit einem Punkt auf der rechten Seite der Regel vor, zwischen oder nach den Elementen.
+**Def.:** Ein *(dotted) Item* einer Grammatik $G$ ist eine Produktion von $G$ mit einem Punkt auf der rechten Seite der Regel vor, zwischen oder nach den Elementen.
 
 Bsp.:
 
