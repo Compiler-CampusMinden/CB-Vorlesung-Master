@@ -81,11 +81,17 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 ## Fahrplan
 
-<!--
 `{{% notice style="note" title="News" %}}`{=markdown}
-Here be dragons ...
+`{{% expand title="23.10.24" %}}`{=markdown}
+
+### Sitzung am 19.11. fängt erst um 15:30 Uhr an
+
+Mein Beitrag zur [#DLK24](https://conference.hsbi.de/goto.php?target=grp_656&client_id=conferencefhbielefeld)
+wurde akzeptiert. Da mein Vortrag mitten zu unserer Vorlesungzeit eingeplant wurde, müssen wir in CPL etwas
+später beginnen. Wir starten mit unserer Interpreter-Sitzung am 19.11. um 15:30 Uhr.
+
+`{{% /expand %}}`{=markdown}
 `{{% /notice %}}`{=markdown}
--->
 
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
@@ -100,7 +106,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 |                    | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                     |
 | November           | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | Status Workshop II  |
 |                    | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        | Status Workshop II  |
-|                    | 19. | [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                  | Carsten        | Status Workshop II  |
+|                    | 19. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                             | Carsten        | Status Workshop II  |
 |                    | 26. | [**18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**]{.alert}: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                     |
 | Dezember           | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                     |
 | Dezember           | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                     |
