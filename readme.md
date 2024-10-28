@@ -82,6 +82,22 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ## Fahrplan
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="28.10.24" %}}`{=markdown}
+
+### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+
+Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
+Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl. [ILIAS]).
+
+**Bitte fügt eurem im Zoom angezeigten Namen ein _" (DE)"_ hinten an.**
+
+_Beispiel_: Euer angezeigter Name wäre normalerweise `Vorname Nachname`. Für die Sitzung am Dienstag hängt
+ihr bitte ein "` (DE)`" hinten dran und habt entsprechend den Anzeigenamen **`Vorname Nachname (DE)`**.
+
+Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="23.10.24" %}}`{=markdown}
 
 ### Sitzung am 19.11. fängt erst um 15:30 Uhr an
