@@ -232,7 +232,7 @@ Die in einer Produktion p definierten Attribute sind
 
 *AF(p)* = $\lbrace X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\rbrace$
 
-Disjunkte Teilmengen de Attribute: abgeleitete (synthesized) Attributen *AS(X)* und ererbte (inherited) Attributen *AI(X)*:
+Disjunkte Teilmengen der Attribute: abgeleitete (synthesized) Attributen *AS(X)* und ererbte (inherited) Attributen *AI(X)*:
 
 *   *AS(X)* = $\lbrace X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)\rbrace$
 
