@@ -122,7 +122,7 @@ Ausdrücke können hier sein:
 
 *   Kalkül mit sog. Inferenzregeln der Form
 
-$$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
+    $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 
 *(Wenn f den Typ* $s \rightarrow t$ *hat und x den Typ s,
 dann hat der Ausdruck f(x) den Typ t.)*
