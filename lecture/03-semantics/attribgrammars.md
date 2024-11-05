@@ -1,4 +1,3 @@
-
 ---
 archetype: lecture-bc
 title: "Typen, Type Checking und Attributierte Grammatiken"
