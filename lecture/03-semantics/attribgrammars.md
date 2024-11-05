@@ -124,8 +124,8 @@ Ausdrücke können hier sein:
 
     $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 
-*(Wenn f den Typ* $s \rightarrow t$ *hat und x den Typ s,
-dann hat der Ausdruck f(x) den Typ t.)*
+    *(Wenn f den Typ* $s \rightarrow t$ *hat und x den Typ s,
+    dann hat der Ausdruck f(x) den Typ t.)*
 
 *   z. B. zur Auflösung von Überladung und Polymorphie zur Laufzeit
 
