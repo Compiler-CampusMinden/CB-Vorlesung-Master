@@ -447,6 +447,8 @@ t' : e {t'.syn = t'.inh;} ;
 
 # Implementierung im rekursiven Abstieg
 
+## Implementierung im rekursiven Abstieg
+
 *   Geerbte Attribute sind Parameter für die Funktionen für die Nicht-Terminalsymbole
 
 *   berechnete Attribute sind Rückgabewerte dieser Funktionen.
