@@ -124,7 +124,7 @@ Ausdrücke können hier sein:
 
     $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 
-    *(Wenn f den Typ* $s \rightarrow t$ *hat und x den Typ s,
+    *(Wenn f den Typ $s \rightarrow t$ hat und x den Typ s,
     dann hat der Ausdruck f(x) den Typ t.)*
 
 *   z. B. zur Auflösung von Überladung und Polymorphie zur Laufzeit
@@ -156,7 +156,7 @@ Ausdrücke können hier sein:
 
 ## Nicht grundsätzlich statisch mögliche Typprüfungen
 
-**Bsp.:** Der ^ - Operator $(a^b)$:
+**Bsp.:** Der `^`-Operator $(a^b)$:
 
 | Typ 1. Operand | Typ 2. Operand | Ergebnistyp |
 |:--------------:|:--------------:|:-----------:|
@@ -284,7 +284,7 @@ def visit(N):
 
 ## L-Attributgrammatiken
 
-*   Grammatiken, deren gerbte Atribute nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind
+*   Grammatiken, deren geerbte Atribute nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind
 
 *   können während des Parsens mit LL-Parsern berechnet werden
 
