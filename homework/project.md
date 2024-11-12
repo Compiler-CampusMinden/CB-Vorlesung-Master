@@ -140,8 +140,8 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
 
 Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.
 
-Bereiten Sie pro Team eine kurze Präsentation (ca. 20 Minuten) vor, in der Sie die Konzepte
-vorstellen und deren Arbeitsweise an ausgewählten Beispielen verdeutlichen.
+Bereiten Sie pro Team eine kurze Präsentation (ca. 20 bis 30 Minuten) vor, in der Sie die
+Konzepte vorstellen und deren Arbeitsweise an ausgewählten Beispielen verdeutlichen.
 
 Die Präsentation findet im Rahmen des zweiten Edmonton-Treffens ("Edmonton II", 26. November)
 und wird von Ihnen in englischer Sprache gehalten.
