@@ -37,59 +37,8 @@ attachments:
 05  }
 ```
 
+# Thema für heute: Optimierungen
 
-# Zwischencode ist eine gute Idee
-
-## Eine Sprache, viele Maschinen vs. viele Sprachen, eine Maschine
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
-
-## ... und beides zusammen?
-
-:::notes
-Hier entsteht ein Tafelbild.
-:::
-
-
-
-## Zwischencode (intermediate code); hier: Drei-Adress-Code
-
-*   registerbasiert
-*   Formen: `x = y op z, x = op z, x = y`
-*   temporäre Variablen für Zwischenergebnisse
-*   bedingte und unbedingte Sprünge
-*   Pointerarithmetik für Indizierung
-
-\bigskip
-
-:::::: columns
-::: {.column width="40%"}
-```
-i = 0
-while(f[i] > 100)
-	i = i + 1;
-```
-:::
-::: {.column width="40%"}
-```
-	i = 0
-L1: t1 = i * 8
-	t2 = f + t1
-	if t2 <= 100 goto L2
-	t3 = i + 1
-	i = t3
-	goto L1
-L2: ...
-```
-:::
-::::::
-
-# Optimierungen
-<!-- 20 Minuten: 7 Folien (3 Minuten je Folie) -->
 
 ## Was ist Optimierung in Compilern?
 
@@ -171,6 +120,11 @@ $V = \lbrace B_i \ \vert \ B_i \text{ ist ein Basisblock des zu compilierenden P
 
 $E = \lbrace (B_i, B_j)\ \vert \text{ es gibt einen Programmlauf, in dem } B_j \text{ direkt hinter } B_i \text{ ausgeführt wird} \rbrace$
 
+## Beispiel
+
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 ## Häufig benutzte Strategie: Peephole-Optimierung
 
@@ -222,6 +176,37 @@ Diese Umformungen können zusätzlich mittels Peephole-Optimierung in späteren 
     *   Schleifenoptimierung
 
 
+## Zwischencode (intermediate code); hier: Drei-Adress-Code
+
+*   registerbasiert
+*   Formen: `x = y op z, x = op z, x = y`
+*   temporäre Variablen für Zwischenergebnisse
+*   bedingte und unbedingte Sprünge
+*   Pointerarithmetik für Indizierung
+
+\bigskip
+
+:::::: columns
+::: {.column width="40%"}
+```
+i = 0
+while(f[i] > 100)
+	i = i + 1;
+```
+:::
+::: {.column width="40%"}
+```
+	i = 0
+L1: t1 = i * 8
+	t2 = f + t1
+	if t2 <= 100 goto L2
+	t3 = i + 1
+	i = t3
+	goto L1
+L2: ...
+```
+:::
+::::::
 
 # Lokale Optimierung
 
