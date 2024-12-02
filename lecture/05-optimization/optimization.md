@@ -125,6 +125,7 @@ $E = \lbrace (B_i, B_j)\ \vert \text{ es gibt einen Programmlauf, in dem } B_j \
 :::notes
 Hier entsteht ein Tafelbild.
 :::
+
 ## Häufig benutzte Strategie: Peephole-Optimierung
 
 Ein Fenster mit wenigen Zeilen Inhalt gleitet über den Quellcode, Zwischencode oder den Maschinencode. Der jeweils sichtbare Code  wird mit Hilfe verschiedener Verfahren optimiert, wenn möglich.
