@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="In der lexikalischen Analyse soll ein Lexer (auch &#34;Scanner&#34;) den Zeichenstrom in eine Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke verwendet.
+Reguläre Sprachen, Ausdrucksstärke">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lexikalische Analyse">
+    <meta name="twitter:description" content="In der lexikalischen Analyse soll ein Lexer (auch &#34;Scanner&#34;) den Zeichenstrom in eine Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke verwendet.
+Reguläre Sprachen, Ausdrucksstärke">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">
+    <meta property="og:title" content="Lexikalische Analyse">
+    <meta property="og:description" content="In der lexikalischen Analyse soll ein Lexer (auch &#34;Scanner&#34;) den Zeichenstrom in eine Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke verwendet.
+Reguläre Sprachen, Ausdrucksstärke">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Lexikalische Analyse">
+    <meta itemprop="description" content="In der lexikalischen Analyse soll ein Lexer (auch &#34;Scanner&#34;) den Zeichenstrom in eine Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke verwendet.
+Reguläre Sprachen, Ausdrucksstärke">
+    <meta itemprop="wordCount" content="31">
+    <title>Lexikalische Analyse</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" rel="canonical" type="text/html" title="Lexikalische Analyse">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1736351933" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='.';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Lexikalische Analyse
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id="lexikalische-analyse">Lexikalische Analyse</h1>
+
+<p>In der lexikalischen Analyse soll ein Lexer (auch &quot;Scanner&quot;) den Zeichenstrom in eine
+Folge von Token zerlegen. Zur Spezifikation der Token werden in der Regel reguläre
+Ausdrücke verwendet.</p>
+<ul class="children children-li children-sort-">
+  <li><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen, Ausdrucksstärke</a></li>
+</ul>
+
+            <footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Lexikalische Analyse</h1>
+<article class="default">
+<h1>Reguläre Sprachen, Ausdrucksstärke</h1>
+
+
+
+    
+    
+
+
+
+
+    
+    
+        
+        
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="far fa-file-powerpoint"></i> Annotierte Folien
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/lexing_regular.ann.ma.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    <h1 id="motivation">Motivation</h1>
+<h2 id="was-muss-ein-compiler-wohl-als-erstes-tun">Was muss ein Compiler wohl als erstes tun?</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="themen-für-heute">Themen für heute</h2>
+<ul>
+<li>Endliche Automaten</li>
+<li>Reguläre Sprachen</li>
+</ul>
+<h1 id="endliche-automaten">Endliche Automaten</h1>
+<h2 id="deterministische-endliche-automaten">Deterministische endliche Automaten</h2>
+<p><strong>Def.:</strong> Ein <strong>deterministischer endlicher Automat</strong> (DFA) ist ein 5-Tupel
+<span class="math align-center">$A = (Q, \Sigma, \delta, q_0, F)$</span> mit</p>
+<ul>
+<li>
+<p><span class="math align-center">$Q$</span> : endliche Menge von <strong>Zuständen</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$\Sigma$</span> : Alphabet von <strong>Eingabesymbolen</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$\delta$</span> : die (eventuell partielle) <strong>Übergangsfunktion</strong> <span class="math align-center">$(Q \times \Sigma) \rightarrow Q,
+    \delta$</span> kann partiell sein</p>
+</li>
+<li>
+<p><span class="math align-center">$q_0 \in Q$</span> : der <strong>Startzustand</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$F \subseteq Q$</span> : die Menge der <strong>Endzustände</strong></p>
+</li>
+</ul>
+<h2 id="nichtdeterministische-endliche-automaten">Nichtdeterministische endliche Automaten</h2>
+<p><strong>Def.:</strong> Ein <strong>nichtdeterministischer endlicher Automat</strong> (NFA) ist ein 5-Tupel
+<span class="math align-center">$A = (Q, \Sigma, \delta, q_0, F)$</span> mit</p>
+<ul>
+<li>
+<p><span class="math align-center">$Q$</span> : endliche Menge von <strong>Zuständen</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$\Sigma$</span> : Alphabet von <strong>Eingabesymbolen</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$\delta$</span> : die (eventuell partielle) Übergangsfunktion <span class="math align-center">$(Q \times \Sigma) \rightarrow Q$</span></p>
+</li>
+<li>
+<p><span class="math align-center">$q_0 \in Q$</span> : der <strong>Startzustand</strong></p>
+</li>
+<li>
+<p><span class="math align-center">$F \subseteq Q$</span> : die Menge der <strong>Endzustände</strong></p>
+</li>
+</ul>
+<h2 id="akzeptierte-sprachen">Akzeptierte Sprachen</h2>
+<p><strong>Def.:</strong> Sei A ein DFA oder ein NFA. Dann ist <strong>L(A)</strong> die von A akzeptierte Sprache, d. h.</p>
+<span class="math align-center">$L(A) = \lbrace\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\rbrace$</span>
+<h2 id="wozu-nfas-im-compilerbau">Wozu NFAs im Compilerbau?</h2>
+<p>Pattern Matching (Erkennung von Schlüsselwörtern, Bezeichnern, ...) geht mit NFAs.</p>
+<p>NFAs sind so nicht zu programmieren, aber:</p>
+<p><strong>Satz:</strong> Eine Sprache <span class="math align-center">$L$</span> wird von einem NFA akzeptiert <span class="math align-center">$\Leftrightarrow L$</span> wird von einem DFA akzeptiert.</p>
+<p>D. h. es existieren Algorithmen zur</p>
+<ul>
+<li>Umwandlung von NFAs in DFAS</li>
+<li>Minimierung von DFAs</li>
+</ul>
+<h1 id="reguläre-sprachen">Reguläre Sprachen</h1>
+<h2 id="reguläre-ausdrücke">Reguläre Ausdrücke</h2>
+<p><strong>Def.:</strong> Induktive Definition von <strong>regulären Ausdrücken</strong> (regex) und der von ihnen repräsentierten Sprache <strong>L</strong>:</p>
+<ul>
+<li>
+<p>Basis:</p>
+<ul>
+<li><span class="math align-center">$\epsilon$</span> und <span class="math align-center">$\emptyset$</span> sind reguläre Ausdrücke mit <span class="math align-center">$L(\epsilon) =
+          \lbrace \epsilon\rbrace$</span>, <span class="math align-center">$L(\emptyset)=\emptyset$</span></li>
+<li>Sei <span class="math align-center">$a$</span> ein Symbol <span class="math align-center">$\Rightarrow$</span> <span class="math align-center">$a$</span> ist ein regex mit <span class="math align-center">$L(a) = \lbrace a\rbrace$</span></li>
+</ul>
+</li>
+<li>
+<p>Induktion: Seien <span class="math align-center">$E,\ F$</span> reguläre Ausdrücke. Dann gilt:</p>
+<ul>
+<li><span class="math align-center">$E+F$</span> ist ein regex und bezeichnet die Vereinigung <span class="math align-center">$L(E + F) = L(E)\cup L(F)$</span></li>
+<li><span class="math align-center">$EF$</span> ist ein regex und bezeichnet die Konkatenation <span class="math align-center">$L(EF) = L(E)L(F)$</span></li>
+<li><span class="math align-center">$E^{\ast}$</span> ist ein regex und bezeichnet die Kleene-Hülle <span class="math align-center">$L(E^{\ast})=(L(E))^{\ast}$</span></li>
+<li><span class="math align-center">$(E)$</span> ist ein regex mit <span class="math align-center">$L((E)) = L(E)$</span></li>
+</ul>
+</li>
+</ul>
+<p>Vorrangregeln der Operatoren für reguläre Ausdrücke: *, Konkatenation, +</p>
+<h2 id="formale-grammatiken">Formale Grammatiken</h2>
+<p><strong>Def.:</strong> Eine <em>formale Grammatik</em> ist ein 4-Tupel <span class="math align-center">$G=(N,T,P,S)$</span> aus</p>
+<ul>
+<li>
+<p><span class="math align-center">$N$</span>: endliche Menge von <strong>Nichtterminalen</strong></p>
+</li>
+<li>
+<p><em>T</em>: endliche Menge von <strong>Terminalen</strong>, <span class="math align-center">$N \cap T = \emptyset$</span></p>
+</li>
+<li>
+<p><span class="math align-center">$S \in N$</span>: <strong>Startsymbol</strong></p>
+</li>
+<li>
+<p><em>P</em>: endliche Menge von <strong>Produktionen</strong> der Form</p>
+</li>
+</ul>
+<span class="math align-center">$\qquad X \rightarrow Y\ \text{mit}\ X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$</span>
+<h2 id="ableitungen">Ableitungen</h2>
+<p><strong>Def.:</strong> Sei <span class="math align-center">$G = (N, T, P, S)$</span> eine Grammatik, sei <span class="math align-center">$\alpha A \beta$</span> eine Zeichenkette über
+<span class="math align-center">$(N \cup T)^{\ast}$</span> und sei <span class="math align-center">$A$</span> <span class="math align-center">$\rightarrow \gamma$</span> eine Produktion von <span class="math align-center">$G$</span>.</p>
+<p>Wir schreiben:
+<span class="math align-center">$\alpha A \beta \Rightarrow \alpha \gamma \beta$</span> (<span class="math align-center">$\alpha A \beta$</span> leitet <span class="math align-center">$\alpha \gamma \beta$</span> ab).</p>
+<p><strong>Def.:</strong> Wir definieren die Relation <span class="math align-center">$\overset{\ast}{\Rightarrow}$</span> induktiv wie folgt:</p>
+<ul>
+<li>
+<p>Basis: <span class="math align-center">$\forall \alpha \in (N \cup T)^{\ast} \alpha \overset{\ast}{\Rightarrow} \alpha$</span> (Jede Zeichenkette leitet sich selbst ab.)</p>
+</li>
+<li>
+<p>Induktion: Wenn <span class="math align-center">$\alpha \overset{\ast}{\Rightarrow} \beta$</span> und
+<span class="math align-center">$\beta\Rightarrow \gamma$</span> dann <span class="math align-center">$\alpha \overset{\ast}{\Rightarrow} \gamma$</span></p>
+</li>
+</ul>
+<p><strong>Def.:</strong> Sei <span class="math align-center">$G = (N, T ,P, S)$</span> eine formale Grammatik.
+Dann ist <span class="math align-center">$L(G) = \lbrace\text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\rbrace$</span> die von <span class="math align-center">$G$</span> erzeugte Sprache.</p>
+<h2 id="reguläre-grammatiken">Reguläre Grammatiken</h2>
+<p><strong>Def.:</strong> Eine <strong>reguläre (oder type-3-) Grammatik</strong> ist eine formale Grammatik mit den folgenden Einschränkungen:</p>
+<ul>
+<li>
+<p>Alle Produktionen sind entweder von der Form</p>
+<ul>
+<li><span class="math align-center">$X \to aY$</span> mit <span class="math align-center">$X \in N, a \in T, Y \in N$</span> (<em>rechtsreguläre</em> Grammatik) oder</li>
+<li><span class="math align-center">$X \to Ya$</span> mit <span class="math align-center">$X \in N, a \in T, Y \in N$</span> (<em>linksreguläre</em> Grammatik)</li>
+</ul>
+</li>
+<li>
+<p><span class="math align-center">$X\rightarrow\epsilon$</span> ist erlaubt</p>
+</li>
+</ul>
+<h2 id="reguläre-sprachen-und-ihre-grenzen">Reguläre Sprachen und ihre Grenzen</h2>
+<p><strong>Satz:</strong> Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären Ausdrücken beschriebene Sprachklasse und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und heißen <strong>reguläre Sprachen</strong>.</p>
+<p><strong>Reguläre Sprachen</strong></p>
+<ul>
+<li>einfache Struktur</li>
+<li>Matchen von Symbolen (z. B. Klammern) nicht möglich, da die fixe Anzahl von Zuständen eines DFAs die Erkennung solcher Sprachen verhindert.</li>
+</ul>
+<h2 id="wozu-reguläre-sprachen-im-compilerbau">Wozu reguläre Sprachen im Compilerbau?</h2>
+<ul>
+<li>
+<p>Reguläre Ausdrücke</p>
+<ul>
+<li>definieren Schlüsselwörter und alle weiteren Symbole einer Programmiersprache, z. B. den Aufbau von Gleitkommazahlen</li>
+<li>werden (oft von einem Generator) in DFAs umgewandelt</li>
+<li>sind die Basis des <em>Scanners</em> oder <em>Lexers</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="ein-lexer-ist-mehr-als-ein-dfa">Ein Lexer ist mehr als ein DFA</h2>
+<ul>
+<li>
+<p>Ein <strong>Lexer</strong></p>
+<ul>
+<li>
+<p>wandelt mittels DFAs aus regulären Ausdrücken die Folge von Zeichen der Quelldatei in eine Folge von sog. Token um</p>
+</li>
+<li>
+<p>bekommt als Input eine Liste von Paaren aus regulären Ausdrücken und Tokennamen, z. B. (&quot;while&quot;, WHILE)</p>
+</li>
+<li>
+<p>Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)</p>
+</li>
+<li>
+<p>liefert Paare von Token und deren Werte, sofern benötigt, z. B. (WHILE, _), oder (IDENTIFIER, &quot;radius&quot;) oder (INTEGERZAHL, &quot;334&quot;)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="wie-geht-es-weiter">Wie geht es weiter?</h2>
+<ul>
+<li>
+<p>Ein <strong>Parser</strong></p>
+<ul>
+<li>
+<p>führt mit Hilfe des Tokenstreams vom Lexer die Syntaxanalyse durch</p>
+</li>
+<li>
+<p>basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token sind</p>
+</li>
+<li>
+<p>liefert die syntaktische Struktur in Form eines Ableitungsbaums (<strong>syntax tree</strong>, <strong>parse tree</strong>), bzw. einen <strong>AST</strong> (abstract syntax tree) ohne redundante Informationen im Ableitungsbaum (z. B. Semikolons)</p>
+</li>
+<li>
+<p>liefert evtl. Fehlermeldungen</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="wrap-up-1">Wrap-Up</h2>
+<ul>
+<li>Definition und Aufgaben von Lexern</li>
+<li>DFAs und NFAs</li>
+<li>Reguläre Ausdrücke</li>
+<li>Reguläre Grammatiken</li>
+<li>Zusammenhänge zwischen diesen Mechanismen und Lexern, bzw. Lexergeneratoren</li>
+</ul>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Abschnitt 2.6 und Kapitel 3</em></li> <li id='id_Parr2014'>[Parr2014] <a href='https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>The Definitive ANTLR 4 Reference</strong></a><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.</li> <li id='id_Torczon2012'>[Torczon2012] <a href='https://learning.oreilly.com/library/view/engineering-a-compiler/9780080916613/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Engineering a Compiler</strong></a><br>Torczon, L. und Cooper, K., Morgan Kaufmann, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-1208-8478-0' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-0-1208-8478-0</a>.<br><em>Kapitel 2</em></li></ul>
+  </div>
+</div>
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) DFAs</li> <li>(K1) NFAs</li> <li>(K1) Reguläre Ausdrücke</li> <li>(K1) Reguläre Grammatiken</li> <li>(K2) Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte</li> <li>(K3) DFAs, NFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln</li> <li>(K3) Herausfinden, ob eine Sprache regulär ist</li> <li>(K3) Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert</li></ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

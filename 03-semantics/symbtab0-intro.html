@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Was passiert nach der Syntaxanalyse? int x = 42; int f(int x) { int y = 9; return y&#43;x; } x = f(x); Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen semantische Analyse, Optimierung und Codegenerierung Informationen über Bezeichner, z.B.
+Welcher Bezeichner ist gemeint? Welchen Typ hat ein Bezeichner? Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten, bevor wir uns (in Interpreter) um die Auswertung (Interpretation) des AST kümmern können.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SymbTab0: Überblick Symboltabellen">
+    <meta name="twitter:description" content="Was passiert nach der Syntaxanalyse? int x = 42; int f(int x) { int y = 9; return y&#43;x; } x = f(x); Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen semantische Analyse, Optimierung und Codegenerierung Informationen über Bezeichner, z.B.
+Welcher Bezeichner ist gemeint? Welchen Typ hat ein Bezeichner? Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten, bevor wir uns (in Interpreter) um die Auswertung (Interpretation) des AST kümmern können.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">
+    <meta property="og:title" content="SymbTab0: Überblick Symboltabellen">
+    <meta property="og:description" content="Was passiert nach der Syntaxanalyse? int x = 42; int f(int x) { int y = 9; return y&#43;x; } x = f(x); Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen semantische Analyse, Optimierung und Codegenerierung Informationen über Bezeichner, z.B.
+Welcher Bezeichner ist gemeint? Welchen Typ hat ein Bezeichner? Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten, bevor wir uns (in Interpreter) um die Auswertung (Interpretation) des AST kümmern können.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="SymbTab0: Überblick Symboltabellen">
+    <meta itemprop="description" content="Was passiert nach der Syntaxanalyse? int x = 42; int f(int x) { int y = 9; return y&#43;x; } x = f(x); Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen semantische Analyse, Optimierung und Codegenerierung Informationen über Bezeichner, z.B.
+Welcher Bezeichner ist gemeint? Welchen Typ hat ein Bezeichner? Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten, bevor wir uns (in Interpreter) um die Auswertung (Interpretation) des AST kümmern können.">
+    <meta itemprop="wordCount" content="1352">
+    <title>SymbTab0: Überblick Symboltabellen</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/index.print.html" rel="alternate" type="text/html" title="SymbTab0: Überblick Symboltabellen">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#was-passiert-nach-der-syntaxanalyse">Was passiert nach der Syntaxanalyse?</a>
+      <ul>
+        <li><a href="#logische-compilierungsphasen">Logische Compilierungsphasen</a></li>
+        <li><a href="#abgrenzung-der-phasen">Abgrenzung der Phasen</a></li>
+      </ul>
+    </li>
+    <li><a href="#semantische-analyse-und-symboltabellen">Semantische Analyse und Symboltabellen</a></li>
+    <li><a href="#syntax-und-semantik">Syntax und Semantik</a></li>
+    <li><a href="#aufgaben-der-semantischen-analyse">Aufgaben der semantischen Analyse</a>
+      <ul>
+        <li><a href="#identifizierung-von-objekten">Identifizierung von Objekten</a></li>
+        <li><a href="#validieren-der-nutzung-von-symbolen">Validieren der Nutzung von Symbolen</a></li>
+        <li><a href="#das-mittel-der-wahl-tabellen-für-die-symbole--bezeichner">Das Mittel der Wahl: Tabellen für die Symbole (= Bezeichner)</a></li>
+      </ul>
+    </li>
+    <li><a href="#einfache-verwaltung-von-variablen-primitiven-typs">Einfache Verwaltung von Variablen primitiven Typs</a></li>
+    <li><a href="#was-kann-jetzt-weiter-passieren">Was kann jetzt weiter passieren?</a>
+      <ul>
+        <li><a href="#definitionen-und-deklarationen-von-bezeichnern">Definitionen und Deklarationen von Bezeichnern</a></li>
+      </ul>
+    </li>
+    <li><a href="#wo-werden-verweise-in-symboltabellen-gebraucht">Wo werden Verweise in Symboltabellen gebraucht?</a></li>
+    <li><a href="#grenzen-der-semantischen-analyse">Grenzen der semantischen Analyse</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            SymbTab0: Überblick Symboltabellen
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>SymbTab0: Überblick Symboltabellen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Auf die lexikalische Analyse und die Syntaxanalyse folgt die semantische Analyse. Nach dem
+Parsen steht fest, dass ein Programm syntaktisch korrekt ist. Nun muss geprüft werden, ob
+es auch semantisch korrekt ist. Dies umfasst in der Regel die Identifikation und Sammlung
+von Bezeichnern und die Zuordnung zur richtigen Ebene (Scopes). Außerdem muss die Nutzung
+von Symbolen validiert werden: Je nach Sprache müssen beispielsweise Variablen und Funktionen
+vor ihrer Benutzung zumindest deklariert sein; Funktionen sollten sich nicht wie Variablen
+benutzen lassen, ...</p>
+<p>Als Werkzeug werden (hierarchische) Tabellen eingesetzt, um die verschiedenen Symbole und
+Informationen darüber zu verwalten. Dabei werden die Symboltabelleneinträge oft an verschiedenen
+Stellen im Compiler generiert und benutzt.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/5637iNH0wWk' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Symboltabellen (Intro)</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/af37ca12a1e720f50544efd742b34a297da3e96b74904cb521e51cf42138b083510c8e4456377c945a6e9def30c039b207d572b8dae163b02f8509c137eb6446' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Symboltabellen (Intro)</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K2) Aufgaben der semantischen Analyse</li> <li>(K2) Bedeutung von Symboltabellen: Aufgaben, Verbindung zu Compiler-Phasen</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="was-passiert-nach-der-syntaxanalyse">Was passiert nach der Syntaxanalyse?</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> y<span style="color:#f92672">+</span>x;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span>(x);</span></span></code></pre></div>
+</div>
+<div class='column'>
+<p><a href="#R-image-30128a10a39fe24e412f4a5388300982" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/parsetree.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-30128a10a39fe24e412f4a5388300982"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/parsetree.png?width=80%25&height=auto"></a></p>
+</div>
+</div>
+<p>Nach der Syntaxanalyse braucht der Compiler für die darauf folgenden Phasen
+<strong>semantische Analyse</strong>, Optimierung und Codegenerierung <strong>Informationen
+über Bezeichner</strong>, z.B.</p>
+<ul>
+<li>Welcher Bezeichner ist gemeint?</li>
+<li>Welchen Typ hat ein Bezeichner?</li>
+</ul>
+<p>Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet
+werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene
+Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten,
+bevor wir uns (in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Interpreter</a>)
+um die Auswertung (Interpretation) des AST kümmern können.</p>
+<h3 id="logische-compilierungsphasen">Logische Compilierungsphasen</h3>
+<ul>
+<li>
+<p>Die lexikalische Analyse generiert eine Folge von Token.</p>
+</li>
+<li>
+<p>Die Syntaxanalyse generiert einen Parse Tree.</p>
+</li>
+<li>
+<p>Die semantische Analyse macht folgendes:</p>
+<ul>
+<li>Der Parse Tree wird in einen abstrakten Syntaxbaum (AST) umgewandelt.</li>
+<li>Dieser wird häufig mit Attributen annotiert.</li>
+<li>Dabei sind oft mehrere Baumdurchläufe nötig (z.B. wegen der Abhängigkeiten
+der Attribute).</li>
+</ul>
+</li>
+<li>
+<p>Nachfolgende Stufen:</p>
+<ul>
+<li>Der AST wird in einen Zwischencode umgewandelt mit Registern und virtuellen
+Adressen.</li>
+<li>Der Zwischencode wird optimiert.</li>
+<li>Aus dem optimierten Zwischencode wird der endgültige Code, aber immer noch
+mit virtuellen Adressen, generiert.</li>
+<li>Der generierte Code wird nachoptimiert.</li>
+<li>Der Linker ersetzt die virtuellen Adressen durch reale Adressen.</li>
+</ul>
+</li>
+</ul>
+<h3 id="abgrenzung-der-phasen">Abgrenzung der Phasen</h3>
+<p>Diese Phasen sind oft nicht klar unterscheidbar. Schon allein zur Verbesserung der
+Laufzeit baut der Parser oft schon den abstrakten Syntaxbaum auf, der Lexer trägt schon
+Bezeichner in Symboltabellen ein, der Parser berechnet beim Baumaufbau schon Attribute,
+...</p>
+<p>Oft werden gar nicht alle Phasen und alle Zwischendarstellungen benötigt.</p>
+<h2 id="semantische-analyse-und-symboltabellen">Semantische Analyse und Symboltabellen</h2>
+<p><a href="#R-image-e3a66e653c4a9dbb169f7eabe06f418a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/architektur_cb.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e3a66e653c4a9dbb169f7eabe06f418a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/architektur_cb.png?width=80%25&height=auto"></a></p>
+<h2 id="syntax-und-semantik">Syntax und Semantik</h2>
+<ul>
+<li>
+<p><strong>Syntaxregeln</strong>: Formaler Aufbau eines Programms</p>
+</li>
+<li>
+<p><strong>Semantik</strong>: Bedeutung eines (syntaktisch korrekten) Programms</p>
+</li>
+</ul>
+<p>=&gt; Keine Codegenerierung für syntaktisch/semantisch inkorrekte Programme!</p>
+<p>Zur Erinnerung: Die <em>Syntaxregeln</em> einer Programmiersprache bestimmen den formalen
+Aufbau eines zu übersetzenden Programms. Die <em>Semantik</em> gibt die Bedeutung eines
+syntaktisch richtigen Programms an.</p>
+<p>Lexikalische und syntaktische Analyse können formalisiert mit regulären Ausdrücken und
+endlichen Automaten, sowie mit CFG und Parsern durchgeführt werden.</p>
+<p>Die Durchführung der semantischen Analyse ist stark von den Eigenschaften der zu
+übersetzenden Sprache, sowie der Zielsprache abhängig und kann hier nur beispielhaft
+für einige Eigenschaften erklärt werden.</p>
+<p>Es darf kein lauffähiges Programm erstellt werden können, dass nicht syntaktisch und
+semantisch korrekt ist. Ein lauffähiges Programm muss syntaktisch und semantisch korrekt
+sein!</p>
+<h2 id="aufgaben-der-semantischen-analyse">Aufgaben der semantischen Analyse</h2>
+<ul>
+<li>
+<p>Identifikation und Sammlung der Bezeichner</p>
+</li>
+<li>
+<p>Zuordnung zur richtigen Ebene (Scopes)</p>
+</li>
+<li>
+<p>Typ-Inferenz</p>
+</li>
+<li>
+<p>Typkonsistenz (Ausdrücke, Funktionsaufrufe, ...)</p>
+</li>
+<li>
+<p>Validieren der Nutzung von Symbolen</p>
+<ul>
+<li>Vermeidung von Mehrfachdefinition</li>
+<li>Zugriff auf nicht definierte Bezeichner</li>
+<li>(Lesender) Zugriff auf nicht initialisierte Bezeichner</li>
+<li>Funktionen werden nicht als Variablen genutzt</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<p>Die semantische Analyse überprüft die Gültigkeit eines syntaktisch korrekten Programms
+bzgl. statischer semantischer Eigenschaften und liefert die Grundlage für die (Zwischen-)
+Codeerzeugung und -optimierung. Insbesondere wird hier die Typkonsistenz (in Ausdrücken,
+von Parametern, ...) überprüft, und implizite Typumwandlungen werden vorgenommen. Oft
+müssen Typen automatisch bestimmt werden (z.B. bei Polymorphie, Typinferenz). Damit
+Typen bestimmt oder angepasst werden können, müssen Bezeichner zunächst identifiziert
+werden, d.h. bei namensgleichen Bezeichnern der richtige Bezug bestimmt werden.</p>
+<p>Zu Annotationen/Attributen, Typen und Type-Checks siehe VL
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Typprüfungen, Attributgrammatiken</a></p>
+<p>=&gt; Ein wichtiges Hilfsmittel dazu sind <strong>Symboltabellen</strong></p>
+<h3 id="identifizierung-von-objekten">Identifizierung von Objekten</h3>
+<p>Beim Compiliervorgang müssen Namen immer wieder den dazugehörigen Definitionen
+zugeordnet, ihre Eigenschaften gesammelt und geprüft und darauf zugegriffen werden.
+Symboltabellen werden im Compiler fast überall gebraucht (siehe Abbildung unter
+&quot;Einordnung&quot;).</p>
+<p>Welche Informationen zu einem Bezeichner gespeichert und ermittelt werden, ist dann
+abhängig von der Klasse des Bezeichners.</p>
+<h3 id="validieren-der-nutzung-von-symbolen">Validieren der Nutzung von Symbolen</h3>
+<p>Hier sind unendlich viele Möglichkeiten denkbar. Dies reicht von den unten aufgeführten
+Basisprüfungen bis hin zum Prüfen der Typkompatibilität bei arithmetischen Operationen.
+Dabei müssen für alle Ausdrücke die Ergebnistypen berechnet werden und ggf. automatische
+Konvertierungen vorgenommen werden, etwa bei <code>3+4.1</code> ...</p>
+<ul>
+<li>Zugriff auf Variablen: Müssen sichtbar sein</li>
+<li>Zugriff auf Funktionen: Vorwärtsreferenzen sind OK</li>
+<li>Variablen werden nicht als Funktionen genutzt</li>
+<li>Funktionen werden nicht als Variablen genutzt</li>
+</ul>
+<p>=&gt; Verweis auf VL <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Typprüfungen, Attributgrammatiken</a></p>
+<p>Da Funktionen bereits vor dem Bekanntmachen der Definition aufgerufen werden dürfen, bietet
+sich ein <strong>zweimaliger Durchlauf</strong> (<em>pass</em>) an: Beim ersten Traversieren des AST werden alle
+Definitionen in der Symboltabelle gesammelt. Beim zweiten Durchlauf werden dann die Referenzen
+aufgelöst.</p>
+<h3 id="das-mittel-der-wahl-tabellen-für-die-symbole--bezeichner">Das Mittel der Wahl: Tabellen für die Symbole (= Bezeichner)</h3>
+<p><strong>Def.:</strong> <em>Symboltabellen</em> sind die zentrale Datenstruktur zur Identifizierung und
+Verwaltung von bezeichneten Elementen.</p>
+<p>Die Organisation der Symboltabellen ist stark anwendungsabhängig. Je nach Sprachkonzept
+gibt es eine oder mehrere Symboltabellen, deren Einträge vom Lexer oder Parser angelegt
+werden. Die jeweiligen Inhalte jedes einzelnen Eintrags kommen aus den verschiedenen
+Phasen der Compilierung. Symboltabellen werden oft als Hashtables oder auch als Bäume
+implementiert, manchmal als verkettete Listen. In seltenen Fällen kommt man auch mit
+einem Stack aus.</p>
+<p>Eine Symboltabelle enthält benutzerdefinierte Bezeichner (oder Verweise in eine Hashtable
+mit allen vorkommenden Namen), manchmal auch die Schlüsselwörter der Programmiersprache.
+Die einzelnen Felder eines Eintrags variieren stark, abhängig vom Typ des Bezeichners
+(= Bezeichnerklasse).</p>
+<p>Manchmal gibt es für Datentypen eine Extra-Tabelle, ebenso eine für die Werte von Konstanten.</p>
+<p>Manchmal werden die Namen selbst in eine (Hash-) Tabelle geschrieben. Die Symboltabelle
+enthält dann statt der Namen Verweise in diese (Hash-) Tabelle.</p>
+<h2 id="einfache-verwaltung-von-variablen-primitiven-typs">Einfache Verwaltung von Variablen primitiven Typs</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class='column'>
+<p><a href="#R-image-74ab57e2a0d6875f3a0ef3ae3f37201c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/simpletable.png?width=20%25&height=auto" style=" height: auto; width: 20%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-74ab57e2a0d6875f3a0ef3ae3f37201c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro/simpletable.png?width=20%25&height=auto"></a></p>
+</div>
+</div>
+<p><strong>Bsp.:</strong> Die zu übersetzende Sprache hat nur einen (den globalen) Scope und kennt nur
+Bezeichner für Variablen.</p>
+<ul>
+<li><strong>Eine</strong> Symboltabelle für <strong>alle</strong> Bezeichner</li>
+<li>Jeder Bezeichner ist der Name einer Variablen</li>
+<li>Symboltabelle wird evtl. mit Einträgen aller Schlüsselwörter initialisiert -- warum?</li>
+<li>Scanner erkennt Bezeichner und sucht ihn in der Symboltabelle</li>
+<li>Ist der Bezeichner nicht vorhanden, wird ein (bis auf den Namen leerer) Eintrag angelegt</li>
+<li>Scanner übergibt dem Parser das erkannte Token und einen Verweis auf den
+Symboltabelleneintrag</li>
+</ul>
+<p>Die Symboltabelle könnte hier eine (Hash-) Tabelle oder eine einfache verkettete Liste sein.</p>
+<h2 id="was-kann-jetzt-weiter-passieren">Was kann jetzt weiter passieren?</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;</span></span></code></pre></div>
+<p>In vielen Sprachen muss überprüft werden, ob es ein definierendes Vorkommen des Bezeichners oder
+ein angewandtes Vorkommen ist.</p>
+<h3 id="definitionen-und-deklarationen-von-bezeichnern">Definitionen und Deklarationen von Bezeichnern</h3>
+<p><strong>Def.:</strong> Die <em>Definition</em> eines (bisher nicht existenten) Bezeichners in einem Programm
+generiert einen neuen Bezeichner und legt für ihn seinem Typ entsprechend Speicherplatz an.</p>
+<p><strong>Def.:</strong> Unter der <em>Deklaration</em> eines (bereits existierenden) Bezeichners verstehen wir
+seine Bekanntmachung, damit er benutzt werden kann. Er ist oft in einem anderen Scope
+definiert und bekommt dort Speicherplatz zugeteilt.</p>
+<p>Insbesondere werden auch Typen deklariert. Hier gibt es in der Regel gar keine
+Speicherplatzzuweisung.</p>
+<p>Ein Bezeichner kann beliebig oft deklariert werden, während er in einem Programm nur einmal
+definiert werden kann. Oft wird bei der Deklarationen eines Elements sein Namensraum mit
+angegeben.</p>
+<p><strong>Vorsicht</strong>: Die Begriffe werden auch anders verwendet. Z.B. findet sich in der
+Java-Literatur der Begriff <em>Deklaration</em> anstelle von <em>Definition</em>.</p>
+<p><strong>Anmerkung</strong>:
+Deklarationen beziehen sich auf Definitionen, die woanders in einer Symboltabelle stehen, evtl.
+in einer anderen Datei, also in diesem Compilerlauf nicht zugänglich sind und erst von Linker
+aufgelöst werden können. Beim Auftreten einer Deklaration muss die dazugehörige Definition gesucht
+werden,und wenn vorhanden, im Symboltabelleneintrag für den deklarierten Bezeichner festgehalten
+werden. Hier ist evtl. ein zweiter Baumdurchlauf nötig, um alle offenen Deklarationen, die sich
+auf Definitionen in derselben Datei beziehen, aufzulösen.</p>
+<p>Wird bei objektorientierten Sprachen ein Objekt definiert, dessen Klassendefinition in einer anderen
+Datei liegt, kann man die Definition des Objekts gleichzeitig als Deklaration der Klasse auffassen
+(Java).</p>
+<h2 id="wo-werden-verweise-in-symboltabellen-gebraucht">Wo werden Verweise in Symboltabellen gebraucht?</h2>
+<p>=&gt; Parse Tree und AST enthalten Verweise auf Symboltabelleneinträge</p>
+<ul>
+<li>Im Parse Tree enthält der Knoten für einen Bezeichner einen Verweis auf den
+Symboltabelleneintrag.</li>
+<li>Parser und semantische Analyse (AST) vervollständigen die Einträge.</li>
+<li>Attribute des AST können Feldern der Symboltabelle entsprechen, bzw. sich aus
+ihnen berechnen.</li>
+<li>Für Debugging-Zwecke können die Symboltabellen die ganze Compilierung und das
+Linken überleben.</li>
+</ul>
+<h2 id="grenzen-der-semantischen-analyse">Grenzen der semantischen Analyse</h2>
+<p><strong>Welche semantischen Eigenschaften einer Sprache kann die semantische Analyse nicht überprüfen?</strong></p>
+<ul>
+<li>Wer ist dann dafür verantwortlich?</li>
+<li>Wie äußert sich das im Fehlerfall?</li>
+</ul>
+<p>Dinge, die erst durch eine Ausführung/Interpretation eines Programms berechnet werden können.</p>
+<p>Beispielsweise können Werte von Ausdrücken oft erst zur Laufzeit bestimmt werden. Insbesondere
+kann die semantische Analyse in der Regel nicht feststellen, ob ein Null-Pointer übergeben wird
+und anschließend dereferenziert wird.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Semantische Analyse:</p>
+<ul>
+<li>Identifikation und Sammlung der Bezeichner</li>
+<li>Zuordnung zur richtigen Ebene (Scopes)</li>
+<li>Validieren der Nutzung von Symbolen</li>
+<li>Typ-Inferenz</li>
+<li>Typkonsistenz (Ausdrücke, Funktionsaufrufe, ...)</li>
+</ul>
+</li>
+<li>
+<p>Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)</p>
+</li>
+<li>
+<p>Symboltabelleneinträge werden an verschiedenen Stellen des Compilers generiert und benutzt</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 3</em></li> <li id='id_Parr2010'>[Parr2010] <a href='https://learning.oreilly.com/library/view/language-implementation-patterns/9781680500097/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Language Implementation Patterns</strong></a><br>Parr, T., Pragmatic Bookshelf, 2010. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5645-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5645-6</a>.<br><em>Kapitel 6, 7 und 8</em></li> <li id='id_Parr2014'>[Parr2014] <a href='https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>The Definitive ANTLR 4 Reference</strong></a><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.<br><em>Kapitel 6.4 und 8.4</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1736351933" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">LL-Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html">LR-Parser</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Attributierte Grammatiken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html">Optimierung</a><ul id="R-subsections-001244c959ebc0073b4b882124888ea9" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">Optimierung u. Datenflussanalyse</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

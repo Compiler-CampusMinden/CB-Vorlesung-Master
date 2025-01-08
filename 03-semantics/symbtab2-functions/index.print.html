@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Funktionen und Scopes int x = 42; int y; void f() { int x; x = 1; y = 2; { int y = x; } } void g(int z){} Behandlung von Funktionsdefinitionen Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ... Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter. Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen. Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt. Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der Funktion angelegt and entsprechend als Parameter gekennzeichnet. Behandlung von Funktionsaufrufen Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen Parameter. Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und ein Verweis darauf in der Symboltabelle gespeichert. Erweiterung des Klassendiagramms für Funktions-Scopes">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SymbTab2: Funktionen">
+    <meta name="twitter:description" content="Funktionen und Scopes int x = 42; int y; void f() { int x; x = 1; y = 2; { int y = x; } } void g(int z){} Behandlung von Funktionsdefinitionen Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ... Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter. Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen. Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt. Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der Funktion angelegt and entsprechend als Parameter gekennzeichnet. Behandlung von Funktionsaufrufen Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen Parameter. Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und ein Verweis darauf in der Symboltabelle gespeichert. Erweiterung des Klassendiagramms für Funktions-Scopes">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">
+    <meta property="og:title" content="SymbTab2: Funktionen">
+    <meta property="og:description" content="Funktionen und Scopes int x = 42; int y; void f() { int x; x = 1; y = 2; { int y = x; } } void g(int z){} Behandlung von Funktionsdefinitionen Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ... Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter. Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen. Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt. Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der Funktion angelegt and entsprechend als Parameter gekennzeichnet. Behandlung von Funktionsaufrufen Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen Parameter. Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und ein Verweis darauf in der Symboltabelle gespeichert. Erweiterung des Klassendiagramms für Funktions-Scopes">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="SymbTab2: Funktionen">
+    <meta itemprop="description" content="Funktionen und Scopes int x = 42; int y; void f() { int x; x = 1; y = 2; { int y = x; } } void g(int z){} Behandlung von Funktionsdefinitionen Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ... Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter. Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen. Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt. Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der Funktion angelegt and entsprechend als Parameter gekennzeichnet. Behandlung von Funktionsaufrufen Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet. Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen Parameter. Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und ein Verweis darauf in der Symboltabelle gespeichert. Erweiterung des Klassendiagramms für Funktions-Scopes">
+    <meta itemprop="wordCount" content="544">
+    <title>SymbTab2: Funktionen</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" rel="canonical" type="text/html" title="SymbTab2: Funktionen">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1736351933" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            SymbTab2: Funktionen
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>SymbTab2: Funktionen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Eine Funktion sind selbst ein Symbol, welches in einem Scope gilt und entsprechend
+in der Symboltabelle eingetragen wird. Darüber hinaus bildet sie einen neuen
+verschachtelten Scope, in dem die Funktionsparameter und der Funktionskörper definiert
+werden müssen.</p>
+<p>Entsprechend müssen die Strukturen für die Symboltabellen sowie das Eintragen und das
+Auflösen von Symbolen erweitert werden.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/yk2x6WGhgVg' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Funktionen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/eddc0526dca0dd506e7f1a4ea426319fca05126ebacadb328ab8ccf68f2d0b038bc58b98ab51fdf3774db1b3a4ffe5b3d2279c7db4a37fe277ed2f3b27b9e495' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Funktionen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K3) Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener</li> <li>(K3) Attribute von Klassen und Strukturen auflösen</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="funktionen-und-scopes">Funktionen und Scopes</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> y;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    { <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x; }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">int</span> z){}</span></span></code></pre></div>
+</div>
+<div class='column'>
+<p><a href="#R-image-cba8059244723ae8702a2abd1f832e73" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions/functionscopes.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cba8059244723ae8702a2abd1f832e73"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions/functionscopes.png?width=auto&height=auto"></a></p>
+</div>
+</div>
+<h3 id="behandlung-von-funktionsdefinitionen">Behandlung von Funktionsdefinitionen</h3>
+<ul>
+<li>Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine
+Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ...</li>
+<li>Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem
+die Funktion definiert wird.</li>
+<li>Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter.</li>
+<li>Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen.</li>
+<li>Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt.</li>
+<li>Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der
+Funktion angelegt and entsprechend als Parameter gekennzeichnet.</li>
+</ul>
+<h3 id="behandlung-von-funktionsaufrufen">Behandlung von Funktionsaufrufen</h3>
+<ul>
+<li>Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem
+die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet.</li>
+<li>Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen
+Parameter.</li>
+<li>Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und
+ein Verweis darauf in der Symboltabelle gespeichert.</li>
+</ul>
+<h2 id="erweiterung-des-klassendiagramms-für-funktions-scopes">Erweiterung des Klassendiagramms für Funktions-Scopes</h2>
+<p><a href="#R-image-f1e2bc6962177f55991888757a8aa1f5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions/functionscopesuml.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f1e2bc6962177f55991888757a8aa1f5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions/functionscopesuml.png?width=80%25&height=auto"></a></p>
+<p><span class='origin'>Quelle: Eigene Modellierung nach einer Idee in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html#id_Parr2010">[Parr2010, p. 147]</a></span></p>
+<h2 id="funktionen-sind-symbole-und-scopes">Funktionen sind Symbole <em>und</em> Scopes</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Function</span>(Scope, Symbol):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(name, retType, enclScope):
+</span></span><span style="display:flex;"><span>        Symbol<span style="color:#f92672">.</span>__init__(name, retType)      <span style="color:#75715e"># we are &#34;Symbol&#34; ...</span>
+</span></span><span style="display:flex;"><span>        enclosingScope <span style="color:#f92672">=</span> enclScope          <span style="color:#75715e"># ... and &#34;Scope&#34;</span></span></span></code></pre></div>
+<h2 id="funktionen-listener">Funktionen: Listener</h2>
+<p>Den Listener zum Aufbau der Scopes könnte man entsprechend erweitern:</p>
+<ul>
+<li><code>enterFuncDecl</code>:
+<ul>
+<li>löse den Typ der Funktion im aktuellen Scope auf</li>
+<li>lege neues Funktionssymbol an, wobei der aktuelle Scope der Elternscope ist</li>
+<li>definiere das Funktionssymbol im aktuellen Scope</li>
+<li>ersetze den aktuellen Scope durch das Funktionssymbol</li>
+</ul>
+</li>
+<li><code>exitFuncDecl</code>:
+<ul>
+<li>ersetze den aktuellen Scope durch dessen Elternscope</li>
+</ul>
+</li>
+<li><code>exitParam</code>: analog zu <code>exitVarDecl</code>
+<ul>
+<li>löse den Typ der Variablen im aktuellen Scope auf</li>
+<li>definiere ein neues Variablensymbol im aktuellen Scope</li>
+</ul>
+</li>
+<li><code>exitCall</code>: analog zu <code>exitVar</code>
+<ul>
+<li>löse das Funktionssymbol (und die Argumente) im aktuellen Scope auf</li>
+</ul>
+</li>
+</ul>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-yacc" data-lang="yacc">funcDecl : type ID &#39;(&#39; params? &#39;)&#39; block ;
+params   : param (&#39;,&#39; param)* ;
+param    : type ID ;
+
+call     : ID &#39;(&#39; exprList? &#39;)&#39; ;
+exprList : expr (&#39;,&#39; expr)* ;</code></pre></div>
+<p>Relevanter Ausschnitt aus der Grammatik</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span>(x);</span></span></code></pre></div>
+</div>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">enterFuncDecl</span>(Parser<span style="color:#f92672">.</span>FuncDeclContext ctx):
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> ctx<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()
+</span></span><span style="display:flex;"><span>    type <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>resolve(ctx<span style="color:#f92672">.</span>type()<span style="color:#f92672">.</span>getText())
+</span></span><span style="display:flex;"><span>    func <span style="color:#f92672">=</span> Function(name, type, scope)
+</span></span><span style="display:flex;"><span>    scope<span style="color:#f92672">.</span>bind(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># change current scope to function scope</span>
+</span></span><span style="display:flex;"><span>    scope <span style="color:#f92672">=</span> func
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitFuncDecl</span>(Parser<span style="color:#f92672">.</span>FuncDeclContext ctx):
+</span></span><span style="display:flex;"><span>    scope <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>enclosingScope
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitParam</span>(Parser<span style="color:#f92672">.</span>ParamContext ctx):
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>resolve(ctx<span style="color:#f92672">.</span>type()<span style="color:#f92672">.</span>getText())
+</span></span><span style="display:flex;"><span>    var <span style="color:#f92672">=</span> Variable(ctx<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText(), t)
+</span></span><span style="display:flex;"><span>    scope<span style="color:#f92672">.</span>bind(var)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitCall</span>(Parser<span style="color:#f92672">.</span>CallContext ctx):
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> ctx<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()
+</span></span><span style="display:flex;"><span>    func <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>resolve(name)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func <span style="color:#f92672">==</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>        error(<span style="color:#e6db74">&#34;no such function: &#34;</span> <span style="color:#f92672">+</span> name)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> Variable:
+</span></span><span style="display:flex;"><span>        error(name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; is not a function&#34;</span>)</span></span></code></pre></div>
+<p><em>Anmerkung</em>: Um den Code auf die Folie zu bekommen, ist dies wieder ein Mix aus Java und Python geworden. Sry ;)</p>
+</div>
+</div>
+<p>Im Vergleich zu den einfachen <em>nested scopes</em> kommt hier nur ein weiterer
+Scope für den Funktionskopf dazu. Dieser spielt eine Doppelrolle: Er ist
+sowohl ein Symbol (welches im Elternscope bekannt ist) als auch ein eigener
+(lokaler) Scope für die Funktionsparameter.</p>
+<p>Um später im Interpreter eine Funktion tatsächlich auswerten zu können, muss
+im Scope der Funktion zusätzlich der AST-Knoten der Funktionsdefinition
+gespeichert werden (weiteres Feld/Attribut in <code>Function</code>)!</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)</p>
+</li>
+<li>
+<p>Funktionen: Nested Scopes =&gt; hierarchische Organisation</p>
+</li>
+<li>
+<p>Umgang mit dem Funktionsnamen, den Parametern und dem Funktionskörper</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fas fa-puzzle-piece"></i> Challenges
+  </div>
+  <div class="box-content">
+<p>Diskutieren Sie folgende Fragen:</p>
+<ul>
+<li>Warum werden überhaupt Symboltabellen eingesetzt?</li>
+<li>Warum muss man zwischen Deklaration und Definition unterscheiden?</li>
+<li>Erklären Sie die Verbindung einer Symboltabelle zu den einzelnen Phasen einer Compiler-Pipeline.</li>
+<li>Wo liegen die Grenzen der semantischen Analyse?</li>
+<li>Warum kann man im Allgemeinen nicht die Symboltabellen nutzen, um die Werte von Symbolen mit zu speichern?</li>
+<li>Wieso sind Funktionen Scope und Symbol gleichzeitig?</li>
+<li>Skizzieren Sie für eine Funktionsdeklaration mit Parametern die resultierende Symboltabelle.</li>
+<li>Erklären Sie, wie man beim Funktionsaufruf vorgehen würde. Werden dabei Einträge in der Symboltabelle erzeugt?</li>
+</ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 3</em></li> <li id='id_Parr2010'>[Parr2010] <a href='https://learning.oreilly.com/library/view/language-implementation-patterns/9781680500097/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Language Implementation Patterns</strong></a><br>Parr, T., Pragmatic Bookshelf, 2010. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5645-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5645-6</a>.<br><em>Kapitel 6, 7 und 8</em></li> <li id='id_Parr2014'>[Parr2014] <a href='https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>The Definitive ANTLR 4 Reference</strong></a><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.<br><em>Kapitel 6.4 und 8.4</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Zusammenfassung Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die praktischen Aspekte des Compilerbaus zu vertiefen.
+Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese Workshops werden bewertet und gehen in die Gesamtnote ein.
+Fristen (siehe Orga-Seite) Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online) Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online) Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online) Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Compiler-Projekt">
+    <meta name="twitter:description" content="Zusammenfassung Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die praktischen Aspekte des Compilerbaus zu vertiefen.
+Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese Workshops werden bewertet und gehen in die Gesamtnote ein.
+Fristen (siehe Orga-Seite) Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online) Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online) Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online) Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html">
+    <meta property="og:title" content="Compiler-Projekt">
+    <meta property="og:description" content="Zusammenfassung Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die praktischen Aspekte des Compilerbaus zu vertiefen.
+Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese Workshops werden bewertet und gehen in die Gesamtnote ein.
+Fristen (siehe Orga-Seite) Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online) Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online) Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online) Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Compiler-Projekt">
+    <meta itemprop="description" content="Zusammenfassung Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die praktischen Aspekte des Compilerbaus zu vertiefen.
+Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese Workshops werden bewertet und gehen in die Gesamtnote ein.
+Fristen (siehe Orga-Seite) Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online) Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online) Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online) Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)">
+    <meta itemprop="wordCount" content="909">
+    <title>Compiler-Projekt</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project/index.print.html" rel="alternate" type="text/html" title="Compiler-Projekt">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#zusammenfassung">Zusammenfassung</a>
+      <ul>
+        <li><a href="#fristen-siehe-orga-seite">Fristen (siehe Orga-Seite)</a></li>
+        <li><a href="#teams">Teams</a></li>
+      </ul>
+    </li>
+    <li><a href="#wahl-der-programmiersprache">Wahl der Programmiersprache</a></li>
+    <li><a href="#workshop-i-präsentation-der-programmiersprache">Workshop I: Präsentation der Programmiersprache</a></li>
+    <li><a href="#workshop-ii-analyse-von-compiler-technologien">Workshop II: Analyse von Compiler-Technologien</a></li>
+    <li><a href="#workshop-iii-implementierung-eines-einfachen-compilers">Workshop III: Implementierung eines einfachen Compilers</a></li>
+    <li><a href="#bewertung">Bewertung</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Compiler-Projekt
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Compiler-Projekt</h1>
+
+
+
+    
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    <h2 id="zusammenfassung">Zusammenfassung</h2>
+<p>Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer
+Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die
+praktischen Aspekte des Compilerbaus zu vertiefen.</p>
+<p>Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese
+Workshops werden bewertet und gehen in die Gesamtnote ein.</p>
+<h3 id="fristen-siehe-orga-seite">Fristen (siehe Orga-Seite)</h3>
+<ul>
+<li>Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online)</li>
+<li>Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online)</li>
+<li>Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online)</li>
+</ul>
+<p>Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)</p>
+<h3 id="teams">Teams</h3>
+<p>Die Aufgaben (Workshops) werden in 2er Teams bearbeitet.</p>
+<h2 id="wahl-der-programmiersprache">Wahl der Programmiersprache</h2>
+<p>Wählen Sie eine Programmiersprache aus den folgenden Kategorien:</p>
+<ul>
+<li>Objektorientiert: Ruby
+<ul>
+<li>Imperative Konzepte (Statements, Expression, Funktionen)</li>
+<li>Klassen
+<ul>
+<li>Monkey Patching</li>
+<li>Überladene und überschriebene Methoden</li>
+<li>(Mehrfach-) Vererbung</li>
+<li>Traits</li>
+</ul>
+</li>
+<li>Module/Importe (benannte Scopes)</li>
+<li>Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion</li>
+</ul>
+</li>
+<li>Funktional: Haskell
+<ul>
+<li>Offside Rule</li>
+<li>Listen, List Comprehensions</li>
+<li>Pattern Matching</li>
+<li>Currying, Lambda-Kalkül</li>
+<li>Funktionen höherer Ordnung</li>
+<li>algebraische Datentypen</li>
+<li>Polymorphic Typing, Hindley-Milner-Typinferenz</li>
+<li>Lazy Evaluation</li>
+<li>Compiler (Desugaring, Graph-Reduction, Strictness Analysis) und Laufzeit (&quot;functional
+core&quot;)</li>
+</ul>
+</li>
+<li>Logisch: Prolog
+<ul>
+<li>Horn-Klauseln</li>
+<li>Unifikation, Substitution</li>
+<li>Resolutionskalkül</li>
+<li>Abarbeitung</li>
+<li>Listen, Prädikate, Terme</li>
+<li>Cut</li>
+</ul>
+</li>
+</ul>
+<p>Die genannten Sprachen sind als Beispiele zu verstehen. Sie können gern auch andere Sprachen
+und Paradigmen einbringen.</p>
+<p>Dokumentieren Sie Ihre Wahl und begründen Sie, warum Sie sich für diese Sprache entschieden
+haben.</p>
+<h2 id="workshop-i-präsentation-der-programmiersprache">Workshop I: Präsentation der Programmiersprache</h2>
+<p>Bereiten Sie pro Team eine Präsentation (ca. 20 Minuten) vor, in der Sie die zentralen
+Sprachkonzepte Ihrer gewählten Programmiersprache vorstellen. Folgende Punkte sollten Sie
+abdecken:</p>
+<ul>
+<li>Syntax und Semantik der Sprache</li>
+<li>Wichtige Sprachmerkmale und Konzepte (z.B. Typisierung, Paradigmen)</li>
+<li>Praktische Beispiele, um die Konzepte zu veranschaulichen</li>
+</ul>
+<p>Reichen Sie ein Begleitdokument (PDF) zu Ihrer Präsentation ein, das eine Übersicht Ihrer
+Darstellung enthält.</p>
+<p>Sie können sich inhaltlich an <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html#id_Tate2011">[Tate2011]</a> und <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html#id_Tate2014">[Tate2014]</a> orientieren. Beide Werke finden Sie
+im HSBI-Online-Zugang auf der Plattform O'Reilly.</p>
+<h2 id="workshop-ii-analyse-von-compiler-technologien">Workshop II: Analyse von Compiler-Technologien</h2>
+<p>Analysieren Sie, wie spezifische Sprachkonzepte den Compiler und seine verschiedenen Phasen
+beeinflussen. Berücksichtigen Sie dabei u.a. die Semantische Analyse, die
+Interpreter-Entwicklung und Codegenerierung sowie Einfluss auf die Laufzeitumgebung.</p>
+<p>Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beispielsweise</p>
+<ol>
+<li>LR-Parsergeneratoren im Vergleich:
+<ul>
+<li>Flex und Bison vs. <a href="http://tree-sitter.github.io/tree-sitter/" rel="external" target="_blank">Tree-Sitter</a></li>
+</ul>
+</li>
+<li>Advanced Parsing:
+<ul>
+<li>Pratt-Parsing, PEG-Parser, Parser-Kombinatoren</li>
+<li>LALR-Parsing</li>
+<li>LL(*) und Adaptive LL(*) in ANTLR v4
+<ul>
+<li>T. Parr: &quot;<em>LL(*): The Foundation of the ANTLR Parser Generator</em>&quot;</li>
+<li>T. Parr: &quot;<em>Adaptive LL(*) Parsing: The Power of Dynamic Analysis</em>&quot;</li>
+<li>T. Parr: <a href="https://theantlrguy.atlassian.net/wiki/spaces/~admin/pages/524294/LL+grammar+analysis" rel="external" target="_blank"><em>LL(*) grammar analysis</em></a></li>
+</ul>
+</li>
+<li><a href="https://dl.acm.org/doi/pdf/10.1145/3591269" rel="external" target="_blank">flap: A Deterministic Parser with Fused Lexing</a></li>
+</ul>
+</li>
+<li>VM und Bytecode:
+<ul>
+<li><a href="https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf" rel="external" target="_blank">AST vs. Bytecode: Interpreters in the Age of Meta-Compilation</a></li>
+<li><a href="https://stefan-marr.de/2023/09/pliss-summer-school/" rel="external" target="_blank">An Introduction to Interpreters and JIT Compilation</a></li>
+<li><a href="https://stefan-marr.de/downloads/acmsac23-huang-et-al-optimizing-the-order-of-bytecode-handlers-in-interpreters-using-a-genetic-algorithm.pdf" rel="external" target="_blank">Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic Algorithm</a></li>
+<li>WASM vs. Java-VM</li>
+</ul>
+</li>
+<li>Memory Management:
+<ul>
+<li>Garbage Collection:
+<ul>
+<li><a href="https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&as_vis=1&q=Unified+Theory+of+Garbage+Collection&btnG=" rel="external" target="_blank">Unified Theory of Garbage Collection</a></li>
+<li><a href="https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&as_vis=1&q=Fast+Conservative+Garbage+Collection&btnG=" rel="external" target="_blank">Fast Conservative Garbage Collection</a></li>
+<li><a href="https://arxiv.org/pdf/2303.10515.pdf" rel="external" target="_blank">Ownership guided C to Rust translation</a></li>
+<li><a href="https://www-old.cs.utah.edu/plt/publications/ismm09-rwrf.pdf" rel="external" target="_blank">Precise Garbage Collection for C</a></li>
+</ul>
+</li>
+<li>Borrow Checking/Lifetime-Analysis</li>
+</ul>
+</li>
+<li>Optimierung:
+<ul>
+<li><a href="https://dl.acm.org/doi/10.1145/277652.277670" rel="external" target="_blank">Alias-Based Optimization</a></li>
+<li><a href="https://stefan-marr.de/downloads/manlang17-grimmer-et-al-applying-optimizations-for-dynamically-typed-languages-to-java.pdf" rel="external" target="_blank">Applying Optimizations for Dynamically-typed Languages to Java</a></li>
+<li><a href="https://web.ist.utl.pt/nuno.lopes/pubs/alive-pldi15.pdf" rel="external" target="_blank">Provably Correct Peephole Optimizations with Alive</a></li>
+<li><a href="https://stefan-marr.de/downloads/mplr23-burchell-et-al-dont-trust-your-profiler.pdf" rel="external" target="_blank">Don't Trust Your Profiler: An Empirical Study on the Precision and Accuracy of Java
+Profilers</a></li>
+</ul>
+</li>
+<li>Testing:
+<ul>
+<li><a href="https://users.cs.utah.edu/~regehr/papers/pldi11-preprint.pdf" rel="external" target="_blank">Finding and Understanding Bugs in C Compilers</a></li>
+<li><a href="https://connglli.github.io/pdfs/artemis_sosp23.pdf" rel="external" target="_blank">Validating JIT Compilers via Compilation Space Exploration</a></li>
+<li><a href="https://software-lab.org/publications/csur2019_compiler_testing.pdf" rel="external" target="_blank">A Survey of Compiler Testing</a></li>
+<li><a href="https://xiongyingfei.github.io/papers/ICSE16.pdf" rel="external" target="_blank">An empirical comparison of compiler testing techniques</a></li>
+<li><a href="https://arxiv.org/abs/1810.02718" rel="external" target="_blank">Compiler Testing: A Systematic Literature Analysis</a></li>
+<li><a href="https://www.cs.cornell.edu/~asampson/blog/turnt.html" rel="external" target="_blank">Snapshot Testing for Compilers</a></li>
+<li><a href="https://github.com/cucapra/turnt" rel="external" target="_blank">Tiny Unified Runner N' Tester (Turnt)</a></li>
+<li><a href="https://youtu.be/ZJUk8_k1HbY?si=Mis0l6M07vbI8Rqx" rel="external" target="_blank">Testing Language Implementations</a></li>
+</ul>
+</li>
+<li>Typen und Typinferenzsysteme:
+<ul>
+<li>Hindley-Milner Typinferenzsystem</li>
+<li><a href="http://lucacardelli.name/Papers/OnUnderstanding.A4.pdf" rel="external" target="_blank">On Understanding Types, Data Abstraction, and Polymorphism</a></li>
+<li><a href="https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf" rel="external" target="_blank">Propositions as Types</a></li>
+</ul>
+</li>
+<li>IR
+<ul>
+<li><a href="https://mlir.llvm.org/" rel="external" target="_blank">Multi-Level Intermediate Representation (MLIR)</a> und <a href="https://llvm.github.io/clangir/" rel="external" target="_blank">Clang IR (CIR)</a>, <a href="https://arxiv.org/abs/2002.11054" rel="external" target="_blank">MLIR: A
+Compiler Infrastructure for the End of Moore's Law</a></li>
+<li><a href="https://github.com/SeaOfNodes/Simple" rel="external" target="_blank">Sea-of-Nodes IR</a></li>
+</ul>
+</li>
+</ol>
+<p>Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.</p>
+<p>Bereiten Sie pro Team eine kurze Präsentation (ca. 20 bis 30 Minuten) vor, in der Sie die
+Konzepte vorstellen und deren Arbeitsweise an ausgewählten Beispielen verdeutlichen.</p>
+<p>Die Präsentation findet im Rahmen des zweiten Edmonton-Treffens (&quot;Edmonton II&quot;, 26. November)
+und wird von Ihnen in englischer Sprache gehalten.</p>
+<h2 id="workshop-iii-implementierung-eines-einfachen-compilers">Workshop III: Implementierung eines einfachen Compilers</h2>
+<p>Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die Implementierung
+sollte grundlegende Sprachfeatures unterstützen (z.B. einfache Datentypen, Kontrollstrukturen)
+und eine einfache Codegenerierung (etwa nach C oder Java, oder nach WASM o.ä.) beinhalten.
+Berücksichtigen Sie dabei nach Möglichkeit die von Ihnen in Workshop II vorgestellten
+Techniken und Algorithmen.</p>
+<p>Sie finden in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html#id_Grune2012">[Grune2012]</a> in den Kapiteln 11 bis 13 wertvolle Ideen zu verschiedenen
+Sprachparadigmen.</p>
+<p>Dokumentieren Sie den Entwicklungsprozess, die Herausforderungen und die Lösungen, die Sie
+gefunden haben.</p>
+<p>Halten Sie eine Präsentation von ca. 30 Minuten, in der Sie den Compiler vorstellen, seine
+Architektur und die von Ihnen gewählten Lösungsansätze erläutern.</p>
+<p><strong>Abgabeformat</strong></p>
+<p>Reichen Sie alle relevanten Unterlagen elektronisch über ILIAS ein. Dazu gehören:</p>
+<ul>
+<li>Präsentationen und Begleitdokumente für jeden Workshop</li>
+<li>Der Quellcode Ihres Compilers (mit Kommentaren und Anleitungen zur Ausführung)</li>
+<li>Eine umfassende Projektdokumentation, die die folgenden Punkte behandelt:
+<ul>
+<li>Einführung ins Projekt</li>
+<li>Technische Architektur des Compilers</li>
+<li>Reflexion: Herausforderungen und Lösungen</li>
+<li>Fazit und Ausblick</li>
+</ul>
+</li>
+</ul>
+<h2 id="bewertung">Bewertung</h2>
+<p>Die Bewertung erfolgt anhand der Qualität der Präsentationen, der Tiefe der Analyse, der
+technischen Umsetzung des Compilers sowie der Reflexion über den gesamten Prozess.</p>
+<p>Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser Programmiersprachen auf
+Compiler-Designs und beschreiben Sie eventuelle Inspirationsquellen oder alternative Ansätze.</p>
+<hr>
+<p>Wir freuen uns darauf, Sie in diesem herausfordernden und spannenden Projekt zu begleiten und
+wünschen Ihnen viel Erfolg!</p>
+<p>Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie sich aktiv
+Feedback.</p>
+<p><strong>Hinweis</strong>: Wir werden in der Vorlesung nicht alle benötigten Techniken besprechen können
+(und auch möglicherweise nicht rechtzeitig). Es besteht die Erwartung, dass Sie sich
+selbstständig und rechtzeitig mit den jeweiligen Themen auseinander setzen. Nutzen Sie
+wissenschaftliche Literatur.</p>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+    
+        
+        
+
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.</li> <li id='id_Tate2011'>[Tate2011] <a href='https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Seven Languages in Seven Weeks</strong></a><br>Tate, B. A., Pragmatic Bookshelf, 2010. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-93435-659-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-93435-659-3</a>.</li> <li id='id_Tate2014'>[Tate2014] <a href='https://learning.oreilly.com/library/view/seven-more-languages/9781680500516/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Seven More Languages in Seven Weeks</strong></a><br>B. A. Tate, I. Dees, F. Daoud, Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-94122-215-7' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-94122-215-7</a>.</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1736351933" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">LL-Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html">LR-Parser</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Attributierte Grammatiken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html">Optimierung</a><ul id="R-subsections-001244c959ebc0073b4b882124888ea9" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">Optimierung u. Datenflussanalyse</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/homework/project.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Motivation Was geschieht hier? 01 { 02 var a; 03 var b = 2; 04 b = a; 05 } Thema für heute: Optimierungen Was ist Optimierung in Compilern? Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,
+Laufzeit, Speicherplatz oder Energieverbrauch zu verbessern.
+Was ist machbar? Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.
+Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Optimierung und Datenflussanalyse">
+    <meta name="twitter:description" content="Motivation Was geschieht hier? 01 { 02 var a; 03 var b = 2; 04 b = a; 05 } Thema für heute: Optimierungen Was ist Optimierung in Compilern? Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,
+Laufzeit, Speicherplatz oder Energieverbrauch zu verbessern.
+Was ist machbar? Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.
+Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">
+    <meta property="og:title" content="Optimierung und Datenflussanalyse">
+    <meta property="og:description" content="Motivation Was geschieht hier? 01 { 02 var a; 03 var b = 2; 04 b = a; 05 } Thema für heute: Optimierungen Was ist Optimierung in Compilern? Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,
+Laufzeit, Speicherplatz oder Energieverbrauch zu verbessern.
+Was ist machbar? Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.
+Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Optimierung und Datenflussanalyse">
+    <meta itemprop="description" content="Motivation Was geschieht hier? 01 { 02 var a; 03 var b = 2; 04 b = a; 05 } Thema für heute: Optimierungen Was ist Optimierung in Compilern? Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,
+Laufzeit, Speicherplatz oder Energieverbrauch zu verbessern.
+Was ist machbar? Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.
+Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.">
+    <meta itemprop="wordCount" content="1688">
+    <title>Optimierung und Datenflussanalyse</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization/index.print.html" rel="alternate" type="text/html" title="Optimierung und Datenflussanalyse">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#was-geschieht-hier">Was geschieht hier?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#was-ist-optimierung-in-compilern">Was ist Optimierung in Compilern?</a></li>
+    <li><a href="#was-ist-machbar">Was ist machbar?</a></li>
+    <li><a href="#anforderungen-an-optimierung">Anforderungen an Optimierung</a></li>
+    <li><a href="#optimierung-zur-übersetzungszeit-vs-optimierung-zur-laufzeit">Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit</a></li>
+    <li><a href="#welcher-code-wird-optimiert">Welcher Code wird optimiert?</a></li>
+    <li><a href="#welche-arten-von-transformationen-sind-möglich">Welche Arten von Transformationen sind möglich?</a></li>
+    <li><a href="#basisblöcke-und-flussgraphen">Basisblöcke und Flussgraphen</a></li>
+    <li><a href="#beispiel">Beispiel</a></li>
+    <li><a href="#häufig-benutzte-strategie-peephole-optimierung">Häufig benutzte Strategie: Peephole-Optimierung</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#ersetzen-von-teilbäumen-im-ast-durch-andere-bäume">Ersetzen von Teilbäumen im AST durch andere Bäume</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#maschinenunabhängige-optimierung-1">Maschinenunabhängige Optimierung</a></li>
+    <li><a href="#zwischencode-intermediate-code-hier-drei-adress-code">Zwischencode (intermediate code); hier: Drei-Adress-Code</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#constant-folding-und-common-subexpression-elimination">Constant Folding und Common Subexpression elimination</a></li>
+    <li><a href="#elimination-redundanter-berechnungen-in-einem-basisblock-mitels-dags">Elimination redundanter Berechnungen in einem Basisblock mitels DAGs</a></li>
+    <li><a href="#copy-propagation">Copy propagation</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#control-flow-und-dead-code">Control Flow und Dead Code</a></li>
+    <li><a href="#schleifenoptimierung">Schleifenoptimierung</a></li>
+    <li><a href="#kombination-zweier-verfahren">Kombination zweier Verfahren</a></li>
+    <li><a href="#datenflussanalyse">Datenflussanalyse</a></li>
+    <li><a href="#forward-any-analysis">Forward-any-analysis</a></li>
+    <li><a href="#forward-all-analysis">Forward-all-analysis</a></li>
+    <li><a href="#backward-any-analysis">Backward-any-analysis</a></li>
+    <li><a href="#backward-all-analysis">Backward-all-analysis</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#elimination-redundanter-lade--speicher--und-sprungoperationen">Elimination redundanter Lade-, Speicher- und Sprungoperationen</a></li>
+    <li><a href="#register-allocation-liveness-analysis">Register Allocation: Liveness Analysis</a></li>
+    <li><a href="#berechnung-der-minimal-benötigten-anzahl-von-registern">Berechnung der minimal benötigten Anzahl von Registern</a></li>
+    <li><a href="#und-wenn-man-nicht-so-viele-register-zur-verfügung-hat">Und wenn man nicht so viele Register zur Verfügung hat?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#energieverbrauch-verschiedener-maschinenbefehle">Energieverbrauch verschiedener Maschinenbefehle</a></li>
+    <li><a href="#energieeinsparung-durch-laufzeitbezogene-optimierung">Energieeinsparung durch laufzeitbezogene Optimierung</a></li>
+    <li><a href="#prozessorspannung-variieren">Prozessorspannung variieren</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#wrap-up-1">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Optimierung und Datenflussanalyse
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Optimierung und Datenflussanalyse</h1>
+
+
+
+    
+    
+
+
+
+
+    
+    
+        
+        
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="far fa-file-powerpoint"></i> Annotierte Folien
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/optimization.ann.ma.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Annotierte Folien: Optimierung und Datenflussanalyse</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    <h1 id="motivation">Motivation</h1>
+<h2 id="was-geschieht-hier">Was geschieht hier?</h2>
+<pre><code>01  {
+02    var a;
+03    var b = 2;
+04    b = a;
+05  }
+</code></pre>
+<h1 id="thema-für-heute-optimierungen">Thema für heute: Optimierungen</h1>
+<h2 id="was-ist-optimierung-in-compilern">Was ist Optimierung in Compilern?</h2>
+<p>Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,</p>
+<ul>
+<li>Laufzeit,</li>
+<li>Speicherplatz oder</li>
+<li>Energieverbrauch</li>
+</ul>
+<p>zu verbessern.</p>
+<h2 id="was-ist-machbar">Was ist machbar?</h2>
+<p>Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.</p>
+<p>Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.</p>
+<ul>
+<li>
+<p>Heuristiken kommen zum Einsatz.</p>
+</li>
+<li>
+<p>Der Code wird verbessert, nicht in jedem Fall optimiert, manchmal auch verschlechtert.</p>
+</li>
+<li>
+<p>Der Einsatz eines Debuggers ist meist nicht mehr möglich.</p>
+</li>
+</ul>
+<h2 id="anforderungen-an-optimierung">Anforderungen an Optimierung</h2>
+<ul>
+<li>
+<p>sichere Transformationen durchführen</p>
+</li>
+<li>
+<p>möglichst keine nachteiligen Effekte erzeugen</p>
+</li>
+</ul>
+<h2 id="optimierung-zur-übersetzungszeit-vs-optimierung-zur-laufzeit">Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit</h2>
+<ul>
+<li>
+<p>Just-in-time-Compilierung (JIT), z. B. Java:</p>
+<p>Fast alle Optimierungsmaßnahmen finden in der virtuellen Maschine zur Laufzeit statt.</p>
+</li>
+<li>
+<p>Ahead-of-time-Compilierung (AOT), z. B. C:</p>
+<p>Der Compiler erzeugt Maschinencode, die Optimierung findet zur Übersetzungszeit statt.</p>
+</li>
+</ul>
+<p>Beide haben ihre eigenen Optimierungsmöglichkeiten, es gibt aber auch Methoden, die bei beiden einsetzbar sind.</p>
+<h2 id="welcher-code-wird-optimiert">Welcher Code wird optimiert?</h2>
+<ul>
+<li>
+<p>Algebraische Optimierung:
+Transformationen des Quellcodes</p>
+</li>
+<li>
+<p>Maschinenunabhängige Optimierung:
+Transformationen des Zwischencodes</p>
+</li>
+<li>
+<p>Maschinenabhängige Optimierung:
+Transformationen des Assemblercodes oder Maschinencodes</p>
+</li>
+</ul>
+<p>Viele Transformationen sind auf mehr als einer Ebene möglich. Wir wenden hier die meisten auf den Zwischencode an.</p>
+<h2 id="welche-arten-von-transformationen-sind-möglich">Welche Arten von Transformationen sind möglich?</h2>
+<ul>
+<li>
+<p>Eliminierung unnötiger Berechnungen</p>
+</li>
+<li>
+<p>Ersetzung von teuren Operationen durch kostengünstigere</p>
+</li>
+</ul>
+<h2 id="basisblöcke-und-flussgraphen">Basisblöcke und Flussgraphen</h2>
+<p><strong>Def.:</strong> Ein <em>Basisblock</em> ist eine Sequenz maximaler Länge von Anweisungen, die immer hintereinander ausgeführt werden.</p>
+<p>Ein Sprungbefehl kann nur der letzte Befehl eines Basisblocks sein.</p>
+<p><strong>Def.:</strong> Ein <em>(Kontroll)Flussgraph</em> <span class="math align-center">$G = (V, E)$</span> ist ein Graph mit</p>
+<p><span class="math align-center">$V = \lbrace B_i \ \vert \ B_i \text{ ist ein Basisblock des zu compilierenden Programms} \rbrace$</span>,</p>
+<span class="math align-center">$E = \lbrace (B_i, B_j)\ \vert \text{ es gibt einen Programmlauf, in dem } B_j \text{ direkt hinter } B_i \text{ ausgeführt wird} \rbrace$</span>
+<h2 id="beispiel">Beispiel</h2>
+<p>Hier entsteht ein Tafelbild.</p>
+<h2 id="häufig-benutzte-strategie-peephole-optimierung">Häufig benutzte Strategie: Peephole-Optimierung</h2>
+<p>Ein Fenster mit wenigen Zeilen Inhalt gleitet über den Quellcode, Zwischencode oder den Maschinencode. Der jeweils sichtbare Code wird mit Hilfe verschiedener Verfahren optimiert, wenn möglich.</p>
+<p>Peephole-Optimierung ist zunächst ein lokales Verfahren, kann aber auch auf den gesamten Kontrollflussgraphen erweitert werden.</p>
+<p>=&gt;
+Anwendung von Graphalgorithmen!</p>
+<h1 id="algebraische-optimierung">Algebraische Optimierung</h1>
+<h2 id="ersetzen-von-teilbäumen-im-ast-durch-andere-bäume">Ersetzen von Teilbäumen im AST durch andere Bäume</h2>
+<pre><code>    x = x*2         =&gt;      x &lt;&lt; 1
+
+    x = x + 0       // k.w.
+    x = x * 1       // k.w.
+
+    x = x*0         =&gt;      x = 0
+    x = x*8         =&gt;      x = x &lt;&lt; 3
+</code></pre>
+<p>Sei <span class="math align-center">$s = 2^a + 2^b$</span> die Summe zweier Zweierpotenzen:</p>
+<pre><code>    x = n*s         =&gt;      (n &lt;&lt; a) + (n &lt;&lt; b)
+</code></pre>
+<p>Diese Umformungen können zusätzlich mittels Peephole-Optimierung in späteren Optimierungsphasen durchgeführt werden.</p>
+<h1 id="maschinenunabhängige-optimierung">Maschinenunabhängige Optimierung</h1>
+<h2 id="maschinenunabhängige-optimierung-1">Maschinenunabhängige Optimierung</h2>
+<ul>
+<li>
+<p>lokal (= innerhalb eines Basisblocks), z. B. Peephole-Optimierung</p>
+<p>Einige Strategien sind auch global einsetzbar (ohne die sog. Datenflussanalyse s. u.)</p>
+</li>
+<li>
+<p>global, braucht nicht-lokale Informationen</p>
+<ul>
+<li>meist unter Zuhilfenahme der Datenflussanalyse</li>
+<li>Schleifenoptimierung</li>
+</ul>
+</li>
+</ul>
+<h2 id="zwischencode-intermediate-code-hier-drei-adress-code">Zwischencode (intermediate code); hier: Drei-Adress-Code</h2>
+<ul>
+<li>registerbasiert</li>
+<li>Formen: <code>x = y op z, x = op z, x = y</code></li>
+<li>temporäre Variablen für Zwischenergebnisse</li>
+<li>bedingte und unbedingte Sprünge</li>
+<li>Pointerarithmetik für Indizierung</li>
+</ul>
+<div class='columns'>
+<div class='column'>
+<pre><code>i = 0
+while(f[i] &gt; 100)
+    i = i + 1;
+</code></pre>
+</div>
+<div class='column'>
+<pre><code>    i = 0
+L1: t1 = i * 8
+    t2 = f + t1
+    if t2 &lt;= 100 goto L2
+    t3 = i + 1
+    i = t3
+    goto L1
+L2: ...
+</code></pre>
+</div>
+</div>
+<h1 id="lokale-optimierung">Lokale Optimierung</h1>
+<h2 id="constant-folding-und-common-subexpression-elimination">Constant Folding und Common Subexpression elimination</h2>
+<ul>
+<li>
+<p>&quot;<em>Constant Folding</em>&quot;: Auswerten von Konstanten zur Compile-Zeit</p>
+<pre><code>x = 6 * 7         =&gt;      x = 42
+if 2 &gt; 0 jump L   =&gt;      jump L
+</code></pre>
+</li>
+<li>
+<p>&quot;<em>Common Subexpression Elimination</em>&quot;</p>
+<div class='columns'>
+<div class='column'>
+<pre><code>x = y + z
+...
+a = y + z
+</code></pre>
+</div>
+<div class='column'>
+<p>ersetze mit (falls in <code>...</code> keine weiteren Zuweisungen an <code>x</code>, <code>y</code>, <code>z</code> erfolgen)</p>
+</div>
+<div class='column'>
+<pre><code>x = y + z
+...
+a = x
+</code></pre>
+</div>
+</div>
+</li>
+</ul>
+<h2 id="elimination-redundanter-berechnungen-in-einem-basisblock-mitels-dags">Elimination redundanter Berechnungen in einem Basisblock mitels DAGs</h2>
+<p>Hier werden sog. <em>DAG</em>s benötigt:</p>
+<p>Ein DAG <em>directed acyclic graph</em> ist ein gerichteter, kreisfreier Graph.</p>
+<p>DAGs werden für Berechnungen in Basisblöcken generiert, um gemeinsame Teilausdrücke zu erkennen.</p>
+<p><em>Bsp.:</em> a = (b + c) * (b + c) / 2</p>
+<h2 id="copy-propagation">Copy propagation</h2>
+<ul>
+<li>
+<p>&quot;<em>Copy Propagation</em>&quot;</p>
+<div class='columns'>
+<div class='column'>
+<pre><code>x = y + z
+a = x
+b = 2*a
+</code></pre>
+</div>
+<div class='column'>
+<p>ersetze mit</p>
+</div>
+<div class='column'>
+<pre><code>x = y + z
+a = x
+b = 2*x
+</code></pre>
+</div>
+</div>
+</li>
+</ul>
+<p>Wenn auf <em>a</em> vor seiner nächsten Zuweisung nicht mehr lesend zugegriffen wird, kann <em>a</em> hier entfallen.</p>
+<h1 id="globale-optimierung">Globale Optimierung</h1>
+<h2 id="control-flow-und-dead-code">Control Flow und Dead Code</h2>
+<ul>
+<li>
+<p>Kontrollfluss-Optimierungen</p>
+<pre><code>    if debug == 1 goto L1           if debug != 1 goto L2
+    goto L2                         print debug info
+L1: print debug info            L2: ...
+L2: ...
+</code></pre>
+</li>
+<li>
+<p>Elimination of unreachable code</p>
+<pre><code>     goto L1                        L1: a = b+c
+     ...
+ L1: a = b+c
+</code></pre>
+</li>
+</ul>
+<h2 id="schleifenoptimierung">Schleifenoptimierung</h2>
+<p>Loop unrolling:</p>
+<pre><code>        for i = 1 to 3                  print(&quot;1&quot;)
+            print(i)                    print(&quot;2&quot;)
+                                        print(&quot;3&quot;)
+</code></pre>
+<p>Code Hoisting:</p>
+<ul>
+<li>
+<p>Invarianten vor die Schleife schieben</p>
+<pre><code>   x = 0                           x = 0
+L: a = n*7                         a = n*7
+   x = x + a                    L: x = x + a
+   if x&lt;42 jump L                  if x&lt;42 jump L
+</code></pre>
+</li>
+</ul>
+<h2 id="kombination-zweier-verfahren">Kombination zweier Verfahren</h2>
+<ul>
+<li>
+<p>Loop Unrolling (für eine Iteration), danach Common Subexpression Elimination</p>
+<pre><code>while (cond) {                  if (cond) {
+    body                            body
+}                                   while (cond) {
+                                        body
+                                    }
+                                }
+</code></pre>
+</li>
+</ul>
+<h2 id="datenflussanalyse">Datenflussanalyse</h2>
+<p>Die Datenflussanalyse (auf 3-Adress-Code) basiert auf dem Wissen der Verfügbarkeit von Variablen und Ausdrücken am Anfang oder Ende von Basisblöcken, und zwar für alle möglichen Programmläufe.</p>
+<p>Man unterscheidet:</p>
+<ul>
+<li>
+<p>Vorwärtsanalyse (in Richtung der Nachfolger eines Basisblocks)</p>
+</li>
+<li>
+<p>Rückwärtsanalyse (in Richtung der Vorgänger eines Basisblocks)</p>
+</li>
+</ul>
+<p>In beiden Fällen gibt es zwei Varianten:</p>
+<ul>
+<li>
+<p>any analysis: Es wird die Vereinigung von Informationen benachbarter Block berücksichtigt.</p>
+</li>
+<li>
+<p>all analysis: Es wird die Schnittmenge von Informationen benachbarter Block berücksichtigt.</p>
+</li>
+</ul>
+<h2 id="forward-any-analysis">Forward-any-analysis</h2>
+<p>Diese Analyse wird zur Propagation von Konstanten und Variablen benutzt und bildet sukzessive Mengen von Zeilen mit Variablendefinitionen.</p>
+<span class="math align-center">$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$</span>
+<p><span class="math align-center">$out(B_i)$</span>: alle Zeilennummern von Variablendefinitionen, die am Ende von <span class="math align-center">$B_i$</span> gültig sind</p>
+<p><span class="math align-center">$in(B_i)$</span>: alle Zeilennummern von Variablendefinitionen, die am Ende von Vorgängerblöcken von <span class="math align-center">$B_i$</span> gültig sind</p>
+<p><span class="math align-center">$gen(B_i)$</span>: alle Zeilennummern von letzten Variablendefinitionen in <span class="math align-center">$B_i$</span></p>
+<p><span class="math align-center">$kill(B_i)$</span>: alle Zeilennummern von Variablendefinitionen außerhalb von <span class="math align-center">$B_i$</span>, die in <span class="math align-center">$B_i$</span> überschrieben werden</p>
+<p>Zunächst ist <span class="math align-center">$in(B_1) = \emptyset$</span>, danach ist <span class="math align-center">$in(B_i) = \bigcup  out(B_j)$</span> mit <span class="math align-center">$B_j$</span> ist Vorgänger von <span class="math align-center">$B_i$</span>.</p>
+<h2 id="forward-all-analysis">Forward-all-analysis</h2>
+<p>Diese Analyse wird zur Berechnung verfügbarer Ausdrücke der Form <span class="math align-center">$x = y\ op\ z$</span> für die Eliminierung redundanter Berechnungen benutzt und bildet sukzessive Mengen von Ausdrücken.</p>
+<span class="math align-center">$$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$</span>
+<p><span class="math align-center">$out(B_i)$</span>: alle am Ende von <span class="math align-center">$B_i$</span> verfügbaren Ausdrücke</p>
+<p><span class="math align-center">$in(B_i)$</span>: alle Ausdrücke, die am Anfang von <span class="math align-center">$B_i$</span> verfügbar sind</p>
+<p><span class="math align-center">$gen(B_i)$</span>: alle in <span class="math align-center">$B_i$</span> berechneten Ausdrücke</p>
+<p><span class="math align-center">$kill(B_i)$</span>: alle Ausdrücke <span class="math align-center">$x\ op\ y$</span> mit einer Definition von <span class="math align-center">$x$</span> oder <span class="math align-center">$y$</span> in <span class="math align-center">$B_i$</span> und <span class="math align-center">$x\ op\ y$</span> ist nicht in <span class="math align-center">$B_i$</span></p>
+<p>Zunächst ist <span class="math align-center">$gen(B_1) = \emptyset$</span>, danach ist <span class="math align-center">$in(B_i) = \bigcap  out(B_j)$</span> mit <span class="math align-center">$B_j$</span> ist Vorgänger von <span class="math align-center">$B_i$</span>.</p>
+<h2 id="backward-any-analysis">Backward-any-analysis</h2>
+<p>Diese Analyse dient der Ermittlung von lebenden und toten Variablen (für die Registerzuweisung) und bildet sukzessive Mengen von Variablen.</p>
+<span class="math align-center">$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$</span>
+<p><span class="math align-center">$out(B_i)$</span>: alle Variablen, die am Ende von <span class="math align-center">$B_i$</span> lebendig sind</p>
+<p><span class="math align-center">$in(B_i)$</span>: alle Variablen, die am Ende von Vorgängerblöcken von <span class="math align-center">$B_i$</span> lebendig sind</p>
+<p><span class="math align-center">$gen(B_i)$</span>: alle Variablen, deren erstes Vorkommen auf der echten Seite einer Zuweisung steht</p>
+<p><span class="math align-center">$kill(B_i)$</span>: alle Variablen, denen in <span class="math align-center">$B_i$</span> Werte zugewiesen werden.</p>
+<p>Zunächst ist <span class="math align-center">$out(B_n) = \emptyset$</span>, danach ist <span class="math align-center">$out(B_i) = \bigcup in(B_j)$</span> mit <span class="math align-center">$B_j$</span> ist Nachfolger von <span class="math align-center">$B_i$</span>.</p>
+<h2 id="backward-all-analysis">Backward-all-analysis</h2>
+<p>Diese Analyse wird zur Berechnung von &quot;very busy&quot; Ausdrücken der Form <span class="math align-center">$x = y\ op\ z$</span>, die auf allen möglichen Wegen im Flussgraphen vom aktuellen Basisblock aus mindestens einmal benutzt werden. Ausdrücke sollten dort berechnet werden, wo sie very busy sind, um den Code kürzer zu machen.</p>
+<span class="math align-center">$$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$</span>
+<p><span class="math align-center">$out(B_i)$</span>: alle Ausdrücke <span class="math align-center">$x\ op\ y$</span>, die am Ende von <span class="math align-center">$B_i$</span> very busy sind</p>
+<p><span class="math align-center">$in(B_i)$</span>: alle Ausdrücke, die am Anfang von <span class="math align-center">$B_i$</span> very busy sind</p>
+<p><span class="math align-center">$gen(B_i)$</span>: alle in <span class="math align-center">$B_i$</span> benutzen Ausdrücke</p>
+<p><span class="math align-center">$kill(B_i)$</span>: alle Ausdrücke <span class="math align-center">$x\ op\ y$</span>, deren Operanden in <span class="math align-center">$B_i$</span> nicht redefiniert werden.</p>
+<p>Zunächst ist <span class="math align-center">$out(B_n) = \emptyset$</span>, danach ist <span class="math align-center">$out(B_i) = \bigcap in(B_j)$</span> mit <span class="math align-center">$B_j$</span> ist Nachfolger von <span class="math align-center">$B_i$</span>.</p>
+<h1 id="maschinenabhängige-optimierung">Maschinenabhängige Optimierung</h1>
+<h2 id="elimination-redundanter-lade--speicher--und-sprungoperationen">Elimination redundanter Lade-, Speicher- und Sprungoperationen</h2>
+<pre><code>    LD a, R0
+    ST R0, a        // k.w.
+
+        goto L1         goto L2
+        ...             ...
+    L1: goto L2     L1: goto L2
+</code></pre>
+<h2 id="register-allocation-liveness-analysis">Register Allocation: Liveness Analysis</h2>
+<div class='columns'>
+<div class='column'>
+<pre><code>a = b + c
+d = a + b
+e = d - 1
+</code></pre>
+</div>
+<div class='column'>
+<p><code>a</code>, <code>d</code>, <code>e</code> können auf <strong>ein</strong> Register abgebildet werden!</p>
+<pre><code>r1 = r2 + r3
+r1 = r1 + r2
+r1 = r1 - 1
+</code></pre>
+</div>
+</div>
+<p>=&gt; <code>a</code> und <code>d</code> sind nach Gebrauch &quot;<em>tot</em>&quot;</p>
+<h2 id="berechnung-der-minimal-benötigten-anzahl-von-registern">Berechnung der minimal benötigten Anzahl von Registern</h2>
+<p>=&gt; Liveness-Graph, Färbungsproblem für Graphen!</p>
+<p>Es wird ein Graph <span class="math align-center">$G = (V, E)$</span> erzeugt mit</p>
+<p><span class="math align-center">$V = \lbrace v \ \vert \ v \text{ ist eine benötigte Variable} \rbrace$</span> und
+<span class="math align-center">$E = \lbrace (v_1, v_2)\ \vert \ v_1  \text{ und } v_2 \text{ sind zur selben Zeit "lebendig"} \rbrace$</span></p>
+<p>Heuristisch wird jetzt die minimale Anzahl von Farben für Knoten bestimmt, bei der benachbarte Knoten nicht dieselbe Farbe bekommen.</p>
+<p>=&gt; Das Ergebnis ist die Zahl der benötigten Register.</p>
+<h2 id="und-wenn-man-nicht-so-viele-register-zur-verfügung-hat">Und wenn man nicht so viele Register zur Verfügung hat?</h2>
+<p>Registerinhalte temporär in den Speicher auslagern (&quot;<em>Spilling</em>&quot;).</p>
+<p>Kandidaten dafür werden mit Heuristiken gefunden, z. B. Register mit vielen Konflikten (= Kanten) oder Register mit selten genutzten Variablen.</p>
+<p>In Schleifen genutzte Variablen werden eher nicht ausgelagert.</p>
+<h1 id="optimierung-zur-reduzierung-des-energieverbrauchs">Optimierung zur Reduzierung des Energieverbrauchs</h1>
+<h2 id="energieverbrauch-verschiedener-maschinenbefehle">Energieverbrauch verschiedener Maschinenbefehle</h2>
+<p>Maschinenoperationen, die nur auf Registern arbeiten, verbrauchen die wenigste Energie.</p>
+<p>Operationen, die nur lesend auf Speicherzellen zugreifen, verbrauchen ca. ein Drittel mehr Energie.</p>
+<p>Operationen, die Speicherzellen beschreiben, benötigen zwei Drittel mehr Energie als die Operationen ausschließlich auf Register.</p>
+<h2 id="energieeinsparung-durch-laufzeitbezogene-optimierung">Energieeinsparung durch laufzeitbezogene Optimierung</h2>
+<p>Kürzere Programmlaufzeiten führen in der Regel auch zu Energieeinsparungen.</p>
+<p><strong>gcc -O1</strong> spart 2% bis 70% (durchschnittlich 20%) Energie</p>
+<p>Umgekehrt: Energiebezogene Optimierung führt in der Regel zu kürzeren Laufzeiten.</p>
+<h2 id="prozessorspannung-variieren">Prozessorspannung variieren</h2>
+<p>Viele Prozessoren ermöglichen es, die Betriebsspannung per Maschinenbefehl zu verändern.</p>
+<p>Eine höhere Spannung bewirkt eine proportionale Steigerung der Prozessorgeschwindigkeit und des fließenden Stroms, aber einen quadratischen Anstieg des Energieverbrauchs. <span class="math align-center">$(P = U \times I, U = R \times I)$</span></p>
+<p>Folgendes kann man ausnutzen:</p>
+<p>Die Verringerung der Spannung um 20% führt zu einer um 20% geringeren Prozessorgeschwindigkeit, d. h. das Programm braucht 25% mehr Zeit, verbraucht aber 36% <span class="math align-center">$(1-(1-0,2)^2)$</span> weniger Energie.</p>
+<p>=&gt; Wenn das Programm durch Optimierung um 25% schneller wird und die Prozessorspannung um 20% verringert wird, verändert sich die Laufzeit des Programms nicht, man spart aber 36% Energie.</p>
+<h1 id="wrap-up">Wrap-Up</h1>
+<h2 id="wrap-up-1">Wrap-Up</h2>
+<ul>
+<li>Verschiedene Optimierungsverfahren auf verschiedenen Ebenen, Peephole</li>
+<li>Datenflussanalyse</li>
+<li>Senkung des Energieverbrauchs durch Optimierung</li>
+</ul>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Kapitel 9</em></li> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.<br><em>Kapitel 9.3</em></li> <li id='id_Güting1999'>[Güting1999] <strong>Übersetzerbau: Techniken, Werkzeuge, Anwendungen</strong><br>Güting, R. H., Springer, 1999. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-5406-5389-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-5406-5389-9</a>.<br><em>Kapitel 8</em></li> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 8, 10 und 11</em></li></ul>
+  </div>
+</div>
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Algebraische Optimierungen</li> <li>(K1) Maschinenunabhängige Optimierungen</li> <li>(K1) Maschinenabhängige Optimierungen</li> <li>(K1) Datenflussanalyse auf 3-Adress-Code</li></ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1736351933" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">LL-Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html">LR-Parser</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Attributierte Grammatiken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html">Optimierung</a><ul id="R-subsections-001244c959ebc0073b4b882124888ea9" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">Optimierung u. Datenflussanalyse</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

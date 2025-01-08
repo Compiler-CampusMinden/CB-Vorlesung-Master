@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Anwendung: Compiler Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers, am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.
+Beispiele: gcc, clang, ...
+Anwendung: Interpreter">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Anwendungen">
+    <meta name="twitter:description" content="Anwendung: Compiler Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers, am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.
+Beispiele: gcc, clang, ...
+Anwendung: Interpreter">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">
+    <meta property="og:title" content="Anwendungen">
+    <meta property="og:description" content="Anwendung: Compiler Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers, am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.
+Beispiele: gcc, clang, ...
+Anwendung: Interpreter">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Anwendungen">
+    <meta itemprop="description" content="Anwendung: Compiler Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers, am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.
+Beispiele: gcc, clang, ...
+Anwendung: Interpreter">
+    <meta itemprop="wordCount" content="1136">
+    <title>Anwendungen</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/index.print.html" rel="alternate" type="text/html" title="Anwendungen">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#anwendung-compiler">Anwendung: Compiler</a></li>
+    <li><a href="#anwendung-interpreter">Anwendung: Interpreter</a></li>
+    <li><a href="#anwendung-virtuelle-maschinen">Anwendung: Virtuelle Maschinen</a></li>
+    <li><a href="#anwendung-c-toolchain">Anwendung: C-Toolchain</a></li>
+    <li><a href="#anwendung-c-compiler">Anwendung: C++-Compiler</a></li>
+    <li><a href="#anwendung-bugfinder">Anwendung: Bugfinder</a></li>
+    <li><a href="#anwendung-pandoc">Anwendung: Pandoc</a></li>
+    <li><a href="#was-bringt-mir-das">Was bringt mir das?</a>
+      <ul>
+        <li><a href="#auswahl-einiger-gründe-für-den-besuch-des-moduls-compilerbau">Auswahl einiger Gründe für den Besuch des Moduls &quot;Compilerbau&quot;</a></li>
+        <li><a href="#parser-generatoren-auswahl">Parser-Generatoren (Auswahl)</a></li>
+        <li><a href="#statische-analyse-type-checking-und-linter">Statische Analyse, Type-Checking und Linter</a></li>
+        <li><a href="#dsl-domain-specific-language">DSL (Domain Specific Language)</a></li>
+        <li><a href="#konverter-von-x-nach-y">Konverter von X nach Y</a></li>
+        <li><a href="#odds-and-ends">Odds and Ends</a></li>
+        <li><a href="#als-weitere-anregung-themen-der-mini-projekte-im-w17">Als weitere Anregung: Themen der Mini-Projekte im W17</a></li>
+      </ul>
+    </li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Anwendungen
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Anwendungen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Es gibt verschiedene Anwendungsmöglichkeiten für Compiler. Je nach Bedarf wird dabei
+die komplette Toolchain durchlaufen oder es werden Stufen ausgelassen. Häufig genutzte
+Varianten sind dabei:</p>
+<ul>
+<li>&quot;Echte&quot; Compiler: Übersetzen Sourcecode nach ausführbarem Maschinencode</li>
+<li>Interpreter: Interaktive Ausführung von Sourcecode</li>
+<li>Virtuelle Maschinen als Zwischending zwischen Compiler und Interpreter</li>
+<li>Transpiler: Übersetzen formalen Text nach formalem Text</li>
+<li>Analysetools: Parsen den Sourcecode, werten die Strukturen aus</li>
+</ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/gt9ROh-qRIU' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Anwendungen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/7fb03ad60cf2c17a163bd4a1dceae2a0afb3c70203d632062843c2518e9d2bf833a118630d0eb153cb6a451a27b396caa9b8eb5f3b46925169f43b8a9aaaf35e' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Anwendungen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Verschiedene Anwendungen für Compiler durch Einsatz bestimmter Stufen der Compiler-Pipeline</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="anwendung-compiler">Anwendung: Compiler</h2>
+<p><a href="#R-image-1a038ed0afed04909fe00b393639f72b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/compiler.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1a038ed0afed04909fe00b393639f72b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/compiler.png?width=auto&height=auto"></a></p>
+<p>Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers,
+am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und
+ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das
+erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.</p>
+<p>Beispiele: gcc, clang, ...</p>
+<h2 id="anwendung-interpreter">Anwendung: Interpreter</h2>
+<p><a href="#R-image-b655efb07a53c6ff0f1092321396584b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/interpreter.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b655efb07a53c6ff0f1092321396584b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/interpreter.png?width=auto&height=auto"></a></p>
+<p>Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.
+Es wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen
+im AST bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt
+werden. Typischerweise hat man hier eine &quot;Read-Eval-Print-Loop&quot; (<em>REPL</em>).</p>
+<p>Beispiele: Python</p>
+<h2 id="anwendung-virtuelle-maschinen">Anwendung: Virtuelle Maschinen</h2>
+<p><a href="#R-image-65e4a1954eab3b2cf9a94e59a2a90cfe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/virtualmachine.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-65e4a1954eab3b2cf9a94e59a2a90cfe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/virtualmachine.png?width=auto&height=auto"></a></p>
+<p>Hier liegt eine Art Mischform aus Compiler und Interpreter vor: Der Compiler
+übersetzt den Quellcode in ein maschinenunabhängiges Zwischenformat
+(&quot;Byte-Code&quot;). Dieser wird von der virtuellen Maschine (&quot;VM&quot;) gelesen und
+ausgeführt. Die VM kann also als Interpreter für Byte-Code betrachtet werden.</p>
+<p>Beispiel: Java mit seiner JVM</p>
+<h2 id="anwendung-c-toolchain">Anwendung: C-Toolchain</h2>
+<p><a href="#R-image-df062a60c44bee86f60af43ef3df5915" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/c-toolchain.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-df062a60c44bee86f60af43ef3df5915"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/c-toolchain.png?width=80%25&height=auto"></a></p>
+<p>Erinnern Sie sich an die LV &quot;Systemprogrammierung&quot; im dritten Semester :-)</p>
+<p>Auch wenn es so aussieht, als würde der C-Compiler aus dem Quelltext direkt das
+ausführbare Programm erzeugen, finden hier dennoch verschiedene Stufen statt.
+Zuerst läuft ein Präprozessor über den Quelltext und ersetzt alle <code>#include</code>
+und <code>#define</code> etc., danach arbeitet der C-Compiler, dessen Ausgabe wiederum
+durch einen Assembler zu ausführbarem Maschinencode transformiert wird.</p>
+<p>Beispiele: gcc, clang, ...</p>
+<h2 id="anwendung-c-compiler">Anwendung: C++-Compiler</h2>
+<p><a href="#R-image-47806924659768195ef46cde006c3651" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/cpp-toolchain.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-47806924659768195ef46cde006c3651"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/cpp-toolchain.png?width=80%25&height=auto"></a></p>
+<p>C++ hat meist keinen eigenen (vollständigen) Compiler :-)</p>
+<p>In der Regel werden die C++-Konstrukte durch <code>cfront</code> nach C übersetzt, so dass
+man anschließend auf die etablierten Tools zurückgreifen kann.</p>
+<p>Dieses Vorgehen werden Sie relativ häufig finden. Vielleicht sogar in Ihrem
+Projekt ...</p>
+<p>Beispiel: g++</p>
+<h2 id="anwendung-bugfinder">Anwendung: Bugfinder</h2>
+<p><a href="#R-image-84eb71dcd957d02da85532813254e6d4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/findbugs.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-84eb71dcd957d02da85532813254e6d4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/findbugs.png?width=80%25&height=auto"></a></p>
+<p>Tools wie FindBugs analysieren den (Java-) Quellcode und suchen nach bekannten
+Fehlermustern. Dazu benötigen sie nur den Analyse-Teil eines Compilers!</p>
+<p>Auf dem AST kann dann nach vorab definierten Fehlermustern gesucht werden
+(Stichwort &quot;Graphmatching&quot;). Dazu fällt die semantische Analyse entsprechend
+umfangreicher aus als normal.</p>
+<p>Zusätzlich wird noch eine Reporting-Komponente benötigt, da die normalen
+durch die Analysekette erzeugten Fehlermeldungen nicht helfen (bzw. sofern
+der Quellcode wohlgeformter Code ist, würden ja keine Fehlermeldungen durch
+die Analyseeinheit generiert).</p>
+<p>Beispiele: SpotBugs, Checkstyle, ESLint, ...</p>
+<h2 id="anwendung-pandoc">Anwendung: Pandoc</h2>
+<p><a href="https://pandoc.org/" rel="external" target="_blank">Pandoc</a> ist ein universeller und modular aufgebauter
+Textkonverter, der mit Hilfe verschiedener <em>Reader</em> unterschiedliche
+Textformate einlesen und in ein Zwischenformat (hier JSON) transformieren
+kann. Über verschiedene <em>Writer</em> können aus dem Zwischenformat dann Dokumente
+in den gewünschten Zielformaten erzeugt werden.</p>
+<p>Die Reader entsprechen der Analyse-Phase und die Writer der Synthese-Phase
+eines Compilers. Anstelle eines ausführbaren Programms (Maschinencode) wird
+ein anderes Textformat erstellt/ausgegeben.</p>
+<p>Beispielsweise wird aus diesem Markdown-Schnipsel ...</p>
+<pre><code>Dies ist ein Satz mit
+*  einem Stichpunkt, und
+*  einem zweiten Stichpunkt.
+</code></pre>
+<p>... dieses Zwischenformat erzeugt, ...</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;blocks&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Para&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Dies&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;ist&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;ein&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Satz&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;mit&#34;</span>}]},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;BulletList&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Plain&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;einem&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Stichpunkt,&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;und&#34;</span>}]}],[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Plain&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;einem&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;zweiten&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Stichpunkt.&#34;</span>}]}]]}],<span style="color:#f92672">&#34;pandoc-api-version&#34;</span>:[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">4</span>],<span style="color:#f92672">&#34;meta&#34;</span>:{}}</span></span></code></pre></div>
+<p>... und daraus schließlich dieser TeX-Code.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>Dies ist ein Satz mit
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{itemize}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tightlist</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\item</span> einem Stichpunkt, und
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\item</span> einem zweiten Stichpunkt.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{itemize}</span></span></code></pre></div>
+<p>Im Prinzip ist Pandoc damit ein Beispiel für Compiler, die aus einem formalen Text nicht
+ein ausführbares Programm erzeugen (Maschinencode), sondern einen anderen formalen Text.
+Dieser werden häufig auch &quot;Transpiler&quot; genannt.</p>
+<p>Weitere Beispiele:</p>
+<ul>
+<li>Lexer-/Parser-Generatoren: ANTLR, Flex, Bison, ...: formale Grammatik nach Sourcecode</li>
+<li>CoffeeScript: CoffeeScript (eine Art &quot;JavaScript light&quot;) nach JavaScript</li>
+<li>Emscripten: C/C++ nach LLVM nach WebAssembly (tatsächlich kann LLVM-IR auch direkt
+als Input verwendet werden)</li>
+<li>Fitnesse: Word/Wiki nach ausführbare Unit-Tests</li>
+</ul>
+<h2 id="was-bringt-mir-das">Was bringt mir das?</h2>
+<div style="text-align:center;">
+<span class="badge cstyle primary"><span class="badge-content"><p><span class='alert'><strong>Beschäftigung mit dem schönsten Thema in der Informatik ;-)</strong></span></p>
+</span></span>
+</div>
+<h3 id="auswahl-einiger-gründe-für-den-besuch-des-moduls-compilerbau">Auswahl einiger Gründe für den Besuch des Moduls &quot;Compilerbau&quot;</h3>
+<ul>
+<li>Erstellung eigener kleiner Interpreter/Compiler
+<ul>
+<li>Einlesen von komplexen Daten</li>
+<li>DSL als Brücke zwischen Stakeholdern</li>
+<li>DSL zum schnelleren Programmieren (denken Sie etwa an <a href="http://coffeescript.org/" rel="external" target="_blank">CoffeeScript</a> ...)</li>
+</ul>
+</li>
+<li>Wie funktionieren FindBugs, Lint und ähnliche Tools?
+<ul>
+<li>Statische Codeanalyse: Dead code elimination</li>
+</ul>
+</li>
+<li>Language-theoretic Security: <a href="http://langsec.org/" rel="external" target="_blank">LangSec</a></li>
+<li>Verständnis für bestimmte Sprachkonstrukte und -konzepte (etwa <code>virtual</code> in C++)</li>
+<li>Vertiefung durch Besuch &quot;echter&quot; Compilerbau-Veranstaltungen an Uni möglich :-)</li>
+<li>Wie funktioniert:
+<ul>
+<li>ein Python-Interpreter?</li>
+<li>das Syntaxhighlighting in einem Editor oder in Doxygen?</li>
+<li>ein Hardwarecompiler (etwa VHDL)?</li>
+<li>ein Text-Formatierer (TeX, LaTeX, ...)?</li>
+<li>CoffeeScript oder Emscripten?</li>
+</ul>
+</li>
+<li>Wie kann man einen eigenen Compiler/Interpreter basteln, etwa für
+<ul>
+<li>MiniJava (mit C-Backend)</li>
+<li>Brainfuck</li>
+<li>Übersetzung von JSON nach XML</li>
+</ul>
+</li>
+<li>Um eine profundes Kenntnis von Programmiersprachen zu erlangen, ist eine
+Beschäftigung mit ihrer Implementierung unerlässlich.</li>
+<li>Viele Grundtechniken der Informatik und elementare Datenstrukturen wie
+Keller, Listen, Abbildungen, Bäume, Graphen, Automaten etc. finden im
+Compilerbau Anwendung. Dadurch schließt sich in gewisser Weise der Kreis
+in der Informatikausbildung ...</li>
+<li>Aufgrund seiner Reife gibt es hervorragende Beispiele von formaler
+Spezifikation im Compilerbau.</li>
+<li>Mit dem Gebiet der formalen Sprachen berührt der Compilerbau interessante
+Aspekte moderner Linguistik. Damit ergibt sich letztlich eine Verbindung
+zur KI ...</li>
+<li>Die Unterscheidung von Syntax und Semantik ist eine grundlegende Technik
+in fast allen formalen Systeme.</li>
+</ul>
+<h3 id="parser-generatoren-auswahl">Parser-Generatoren (Auswahl)</h3>
+<p>Diese Tools könnte man beispielsweise nutzen, um seine eigene Sprache zu basteln.</p>
+<ul>
+<li>ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing, executing, or translating structured text or binary files: <a href="https://github.com/antlr/antlr4" rel="external" target="_blank">github.com/antlr/antlr4</a></li>
+<li>Grammars written for ANTLR v4; expectation that the grammars are free of actions: <a href="https://github.com/antlr/grammars-v4" rel="external" target="_blank">github.com/antlr/grammars-v4</a></li>
+<li>An incremental parsing system for programmings tools: <a href="https://github.com/tree-sitter/tree-sitter" rel="external" target="_blank">github.com/tree-sitter/tree-sitter</a></li>
+<li>Flex, the Fast Lexical Analyzer - scanner generator for lexing in C and C++: <a href="https://github.com/westes/flex" rel="external" target="_blank">github.com/westes/flex</a></li>
+<li>Bison is a general-purpose parser generator that converts an annotated context-free grammar into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables: <a href="https://www.gnu.org/software/bison/" rel="external" target="_blank">gnu.org/software/bison</a></li>
+<li>Parser combinators for binary formats, in C: <a href="https://github.com/UpstandingHackers/hammer" rel="external" target="_blank">github.com/UpstandingHackers/hammer</a></li>
+<li>Eclipse Xtext is a language development framework: <a href="https://github.com/eclipse/xtext" rel="external" target="_blank">github.com/eclipse/xtext</a></li>
+</ul>
+<h3 id="statische-analyse-type-checking-und-linter">Statische Analyse, Type-Checking und Linter</h3>
+<p>Als Startpunkt für eigene Ideen. Oder Verbessern/Erweitern der Projekte ...</p>
+<ul>
+<li>Pluggable type-checking for Java: <a href="https://github.com/typetools/checker-framework" rel="external" target="_blank">github.com/typetools/checker-framework</a></li>
+<li>SpotBugs is FindBugs' successor. A tool for static analysis to look for bugs in Java code: <a href="https://github.com/spotbugs/spotbugs" rel="external" target="_blank">github.com/spotbugs/spotbugs</a></li>
+<li>An extensible cross-language static code analyzer: <a href="https://github.com/pmd/pmd" rel="external" target="_blank">github.com/pmd/pmd</a></li>
+<li>Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard: <a href="https://github.com/checkstyle/checkstyle" rel="external" target="_blank">github.com/checkstyle/checkstyle</a></li>
+<li>JaCoCo - Java Code Coverage Library: <a href="https://github.com/jacoco/jacoco" rel="external" target="_blank">github.com/jacoco/jacoco</a></li>
+<li>Sanitizers: memory error detector: <a href="https://github.com/google/sanitizers" rel="external" target="_blank">github.com/google/sanitizers</a></li>
+<li>JSHint is a tool that helps to detect errors and potential problems in your JavaScript code: <a href="https://github.com/jshint/jshint" rel="external" target="_blank">github.com/jshint/jshint</a></li>
+<li>Haskell source code suggestions: <a href="https://github.com/ndmitchell/hlint" rel="external" target="_blank">github.com/ndmitchell/hlint</a></li>
+<li>Syntax checking hacks for vim: <a href="https://github.com/vim-syntastic/syntastic" rel="external" target="_blank">github.com/vim-syntastic/syntastic</a></li>
+</ul>
+<h3 id="dsl-domain-specific-language">DSL (Domain Specific Language)</h3>
+<ul>
+<li>NVIDIA Material Definition Language SDK: <a href="https://github.com/NVIDIA/MDL-SDK" rel="external" target="_blank">github.com/NVIDIA/MDL-SDK</a></li>
+<li>FitNesse -- The Acceptance Test Wiki: <a href="https://github.com/unclebob/fitnesse" rel="external" target="_blank">github.com/unclebob/fitnesse</a></li>
+</ul>
+<p>Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:</p>
+<ul>
+<li>Eclipse Xtext is a language development framework: <a href="https://github.com/eclipse/xtext" rel="external" target="_blank">github.com/eclipse/xtext</a></li>
+</ul>
+<h3 id="konverter-von-x-nach-y">Konverter von X nach Y</h3>
+<ul>
+<li>Emscripten: An LLVM-to-JavaScript Compiler: <a href="https://github.com/kripken/emscripten" rel="external" target="_blank">github.com/kripken/emscripten</a></li>
+<li>&quot;Unfancy JavaScript&quot;: <a href="https://github.com/jashkenas/coffeescript" rel="external" target="_blank">github.com/jashkenas/coffeescript</a></li>
+<li>Universal markup converter: <a href="https://github.com/jgm/pandoc" rel="external" target="_blank">github.com/jgm/pandoc</a></li>
+<li>Übersetzung von JSON nach XML</li>
+</ul>
+<h3 id="odds-and-ends">Odds and Ends</h3>
+<ul>
+<li>How to write your own compiler: <a href="http://staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm" rel="external" target="_blank">staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm</a></li>
+<li>Building a modern functional compiler from first principles: <a href="https://github.com/sdiehl/write-you-a-haskell" rel="external" target="_blank">github.com/sdiehl/write-you-a-haskell</a></li>
+<li>Language-theoretic Security: <a href="http://langsec.org/" rel="external" target="_blank">LangSec</a></li>
+<li>Generierung von automatisierten Tests mit <a href="http://esprima.org/" rel="external" target="_blank">Esprima</a>: <a href="https://www.heise.de/developer/artikel/Generierung-von-automatisierten-Tests-mit-Esprima-4129726.html?view=print" rel="external" target="_blank">heise.de/-4129726</a></li>
+<li>Eigener kleiner Compiler/Interpreter, etwa für
+<ul>
+<li>MiniJava mit C-Backend oder sogar <a href="http://llvm.org/" rel="external" target="_blank">LLVM</a>-Backend</li>
+<li>Brainfuck</li>
+</ul>
+</li>
+</ul>
+<h3 id="als-weitere-anregung-themen-der-mini-projekte-im-w17">Als weitere Anregung: Themen der Mini-Projekte im W17</h3>
+<ul>
+<li>Java2UMLet</li>
+<li>JavaDoc-to-Markdown</li>
+<li>Validierung und Übersetzung von Google Protocol Buffers v3 nach JSON</li>
+<li>svg2tikz</li>
+<li>SwaggerLang -- Schreiben wie im Tagebuch</li>
+<li>Markdown zu LaTeX</li>
+<li>JavaDocToLaTeX</li>
+<li>MySQL2REDIS-Parser</li>
+</ul>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen formalen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Nicht alle Stufen kommen immer vor =&gt; unterschiedliche Anwendungen</p>
+<ul>
+<li>&quot;Echte&quot; Compiler: Sourcecode nach Maschinencode</li>
+<li>Interpreter: Interaktive Ausführung</li>
+<li>Virtuelle Maschinen als Zwischending zwischen Compiler und Interpreter</li>
+<li>Transpiler: formaler Text nach formalem Text</li>
+<li>Analysetools: Parsen den Sourcecode, werten die Strukturen aus</li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Kapitel 1 Introduction</em></li> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.<br><em>Kapitel 1 Introduction</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1736351933" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">LL-Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html">LR-Parser</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Attributierte Grammatiken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html">Optimierung</a><ul id="R-subsections-001244c959ebc0073b4b882124888ea9" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">Optimierung u. Datenflussanalyse</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Scopes und Name Spaces Def.: Unter dem Gültigkeitsbereich (Sichtbarkeitsbereich, Scope) eines Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes, die ein eigenes Element dieses Namens benutzen.
+Scopes sind fast immer hierarchisch angeordnet.
+Def.: Unter einem Namensraum (name space) versteht man die Menge der zu einem Zeitpunkt sichtbaren Bezeichner.
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B. C&#43;&#43;).">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SymbTab1: Nested Scopes">
+    <meta name="twitter:description" content="Scopes und Name Spaces Def.: Unter dem Gültigkeitsbereich (Sichtbarkeitsbereich, Scope) eines Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes, die ein eigenes Element dieses Namens benutzen.
+Scopes sind fast immer hierarchisch angeordnet.
+Def.: Unter einem Namensraum (name space) versteht man die Menge der zu einem Zeitpunkt sichtbaren Bezeichner.
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B. C&#43;&#43;).">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">
+    <meta property="og:title" content="SymbTab1: Nested Scopes">
+    <meta property="og:description" content="Scopes und Name Spaces Def.: Unter dem Gültigkeitsbereich (Sichtbarkeitsbereich, Scope) eines Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes, die ein eigenes Element dieses Namens benutzen.
+Scopes sind fast immer hierarchisch angeordnet.
+Def.: Unter einem Namensraum (name space) versteht man die Menge der zu einem Zeitpunkt sichtbaren Bezeichner.
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B. C&#43;&#43;).">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="SymbTab1: Nested Scopes">
+    <meta itemprop="description" content="Scopes und Name Spaces Def.: Unter dem Gültigkeitsbereich (Sichtbarkeitsbereich, Scope) eines Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes, die ein eigenes Element dieses Namens benutzen.
+Scopes sind fast immer hierarchisch angeordnet.
+Def.: Unter einem Namensraum (name space) versteht man die Menge der zu einem Zeitpunkt sichtbaren Bezeichner.
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B. C&#43;&#43;).">
+    <meta itemprop="wordCount" content="1263">
+    <title>SymbTab1: Nested Scopes</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/index.print.html" rel="alternate" type="text/html" title="SymbTab1: Nested Scopes">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#scopes-und-name-spaces">Scopes und Name Spaces</a></li>
+    <li><a href="#symbole-und-nested-scopes">Symbole und (nested) Scopes</a>
+      <ul>
+        <li><a href="#hinzunahme-von-scopes">Hinzunahme von Scopes</a></li>
+        <li><a href="#grundlegendes-vorgehen">Grundlegendes Vorgehen</a></li>
+      </ul>
+    </li>
+    <li><a href="#nested-scopes-symbole-und-scopes">Nested Scopes: Symbole und Scopes</a>
+      <ul>
+        <li><a href="#implementierung-mit-hierarchischen-verketteten-tabellen">Implementierung mit hierarchischen (verketteten) Tabellen</a></li>
+        <li><a href="#klassenhierarchie-für-scopes">Klassenhierarchie für Scopes</a></li>
+        <li><a href="#klassen-und-interfaces-für-symbole">Klassen und Interfaces für Symbole</a></li>
+        <li><a href="#alternative-implementierung-über-einen-stack">Alternative Implementierung über einen Stack</a></li>
+      </ul>
+    </li>
+    <li><a href="#nested-scopes-definieren-und-auflösen-von-namen">Nested Scopes: Definieren und Auflösen von Namen</a></li>
+    <li><a href="#nested-scopes-listener">Nested Scopes: Listener</a></li>
+    <li><a href="#löschen-von-symboltabellen">Löschen von Symboltabellen</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            SymbTab1: Nested Scopes
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>SymbTab1: Nested Scopes</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>In Symboltabellen werden Informationen über Bezeichner verwaltet. Wenn es in der zu
+übersetzenden Sprache <em>Nested Scopes</em> gibt, spiegelt sich dies in den Symboltabellen
+wider: Auch hier wird eine entsprechende hierarchische Organisation notwendig. In der
+Regel nutzt man Tabellen, die untereinander verlinkt sind.</p>
+<p>Eine wichtige Aufgabe ist das Binden von Bezeichner gleichen Namens an ihren jeweiligen
+Scope =&gt; <code>bind()</code>. Zusätzlich müssen Symboltabellen auch das Abrufen von Bezeichnern
+aus dem aktuellen Scope oder den Elternscopes unterstützen =&gt; <code>resolve()</code>.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/CdM1gvsi6P0' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Nested Scopes</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/1ce547df40e91e7a07497e6a070076157868b7d4b1fa18c2f1e17ee5c348e9063582da157de251ae1eb5daff45cfa97efdff7367b4bdd4634da0c00498c876ab' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Nested Scopes</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K3) Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener</li> <li>(K3) Auflösen von Symbolen über die Scopes</li> <li>(K3) Einfache statische Prüfungen anhand der Symboltabellen</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="scopes-und-name-spaces">Scopes und Name Spaces</h2>
+<p><strong>Def.:</strong> Unter dem <em>Gültigkeitsbereich</em> (Sichtbarkeitsbereich, Scope) eines
+Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar
+und nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene
+Scopes, die ein eigenes Element dieses Namens benutzen.</p>
+<p>Scopes sind fast immer hierarchisch angeordnet.</p>
+<p><strong>Def.:</strong> Unter einem <em>Namensraum</em> (name space) versteht man die Menge der zu
+einem Zeitpunkt sichtbaren Bezeichner.</p>
+<p>Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B.
+C++).</p>
+<p>Vorsicht: Diese Begriffe werden nicht immer gleich definiert und auch gerne
+verwechselt.</p>
+<h2 id="symbole-und-nested-scopes">Symbole und (nested) Scopes</h2>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> y;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    { <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x; }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class='column'>
+<p><a href="#R-image-d04dec3b7e111d490243c23461f116e2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/nestedscopes.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d04dec3b7e111d490243c23461f116e2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/nestedscopes.png?width=auto&height=auto"></a></p>
+</div>
+</div>
+<p><strong>Aufgaben</strong>:</p>
+<ul>
+<li><code>bind()</code>: Symbole im Scope definieren</li>
+<li><code>resolve()</code>: Symbole aus Scope oder Eltern-Scope abrufen</li>
+</ul>
+<h3 id="hinzunahme-von-scopes">Hinzunahme von Scopes</h3>
+<p><strong>Bsp.:</strong> Die zu übersetzende Sprache ist scope-basiert und kennt nur Bezeichner
+für Variablen</p>
+<p>Scopes können ineinander verschachtelt sein. Die Spezifikation der zu übersetzenden
+Sprache legt fest, in welcher Reihenfolge Scopes zu durchsuchen sind, wenn auf einen
+Bezeichner Bezug genommen wird, der nicht im aktuellen Scope definiert ist.</p>
+<p>Insgesamt bilden die Scopes oft eine Baumstruktur, wobei jeder Knoten einen Scope
+repräsentiert und seine Kinder die direkt in ihm enthaltenen Scopes sind. Dabei ist
+es in der Regel so, dass Scopes sich entweder vollständig überlappen oder gar nicht.
+Wenn ein Bezeichner nicht im aktuellen Scope vorhanden ist, muss er in der Regel in
+umschließenden Scopes gesucht werden. Hier kann ein Stack aller &quot;offenen&quot; Scopes
+benutzt werden.</p>
+<h3 id="grundlegendes-vorgehen">Grundlegendes Vorgehen</h3>
+<p>Das Element, das einen neuen Scope definiert, steht selbst in dem aktuell
+behandelten Scope. Wenn dieses Element selbst ein Bezeichner ist, gehört
+dieser in den aktuellen Scope. Nur das, was nur innerhalb des oben genannten
+Elements oder Bezeichners definiert wird, gehört in den Scope des Elements
+oder Bezeichners.</p>
+<h2 id="nested-scopes-symbole-und-scopes">Nested Scopes: Symbole und Scopes</h2>
+<h3 id="implementierung-mit-hierarchischen-verketteten-tabellen">Implementierung mit hierarchischen (verketteten) Tabellen</h3>
+<p>Pro Scope wird eine Symboltabelle angelegt, dabei enthält jede Symboltabelle zusätzlich
+einen Verweis auf ihre Vorgängersymboltabelle für den umgebenden Scope. Die globale
+Symboltabelle wird typischerweise mit allen Schlüsselwörtern initialisiert.</p>
+<ul>
+<li>Wenn ein neuer Scope betreten wird, wird eine neue Symboltabelle erzeugt.</li>
+<li>Scanner: Erkennt Bezeichner und sucht ihn in der Symboltabelle des aktuellen
+Scopes bzw. trägt ihn dort ein und übergibt dem Parser das erkannte Token und
+einen Verweis auf den Symboltabelleneintrag (<strong>Erinnerung</strong>: Der Scanner wird
+i.d.R. vom Parser aus aufgerufen, d.h. der Parser setzt den aktuellen Scope!)</li>
+<li>Parser:
+<ul>
+<li>Wird ein neues Element (ein Bezeichner) definiert, muss bestimmt werden, ob
+es einen eigenen Scope hat. Wenn ja, wird eine neue Symboltabelle für den
+Scope angelegt. Sie enthält alle Definitionen von Elementen, die in diesem
+Scope liegen. Der Bezeichner selbst wird in die aktuelle Symboltabelle eingetragen
+mit einem Verweis auf die neue Tabelle, die all die Bezeichner beinhaltet, die
+außerhalb dieses Scopes nicht sichtbar sein sollen. Die Tabellen werden untereinander
+verzeigert.</li>
+<li>Wird ein Element deklariert oder benutzt, muss sein Eintrag in allen sichtbaren
+Scopes in der richtigen Reihenfolge entlang der Verzeigerung gesucht (und je nach
+Sprachdefinition auch gefunden) werden.</li>
+</ul>
+</li>
+<li>Der Parse-Tree enthält im Knoten für den Bezeichner den Verweis in die Symboltabelle</li>
+</ul>
+<h3 id="klassenhierarchie-für-scopes">Klassenhierarchie für Scopes</h3>
+<p>Für die Scopes wird eine Klasse <code>Scope</code> definiert mit den Methoden <code>bind()</code> (zum
+Definieren von Symbolen im Scope) und <code>resolve()</code> (zum Abrufen von Symbolen aus
+dem Scope oder dem umgebenden Scope).</p>
+<p>Für lokale Scopes wird eine Instanz dieser Klasse angelegt, die eine Referenz auf
+den einschließenden Scope im Attribut <code>enclosingScope</code> hält. Für den globalen Scope
+ist diese Referenz einfach leer (<code>None</code>).</p>
+<h3 id="klassen-und-interfaces-für-symbole">Klassen und Interfaces für Symbole</h3>
+<p>Für die Symbole gibt es die Klasse <code>Symbol</code>, wo für jedes Symbol Name und Typ gespeichert
+wird. Variablensymbole leiten direkt von dieser Klasse ab. Für die eingebauten Typen wird
+ein &quot;Marker-Interface&quot; <code>Type</code> erstellt, um Variablen- und Typ-Symbole unterscheiden zu
+können.</p>
+<p><a href="#R-image-acd0aa88bc3554d1021b65e545a52a8b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/nestedscopesuml.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-acd0aa88bc3554d1021b65e545a52a8b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes/nestedscopesuml.png?width=80%25&height=auto"></a></p>
+<p><span class='origin'>Quelle: Eigene Modellierung nach einer Idee in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html#id_Parr2010">[Parr2010, p. 142]</a></span></p>
+<h3 id="alternative-implementierung-über-einen-stack">Alternative Implementierung über einen Stack</h3>
+<ul>
+<li>Der Parse Tree bzw. der AST enthalten an den Knoten, die jeweils einen ganzen
+Scope repräsentieren, einen Verweis auf die Symboltabelle dieses Scopes.</li>
+<li>Die Scopes werden in einem Stack verwaltet.</li>
+<li>Wird ein Scope betreten beim Baumdurchlauf, wird ein Verweis auf seine
+Symboltabelle auf den Stack gepackt.</li>
+<li>Die Suche von Bezeichnern in umliegenden Scopes erfordert ein Durchsuchen
+des Stacks von oben nach unten.</li>
+<li>Beim Verlassen eines Scopes beim Baumdurchlauf wird der Scope vom Stack entfernt.</li>
+</ul>
+<h2 id="nested-scopes-definieren-und-auflösen-von-namen">Nested Scopes: Definieren und Auflösen von Namen</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Scope</span>:
+</span></span><span style="display:flex;"><span>    Scope enclosingScope    <span style="color:#75715e"># None if global (outermost) scope</span>
+</span></span><span style="display:flex;"><span>    Symbol<span style="color:#f92672">&lt;</span>String, Symbol<span style="color:#f92672">&gt;</span> symbols
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve</span>(name):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># do we know &#34;name&#34; here?</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> symbols[name]: <span style="color:#66d9ef">return</span> symbols[name]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># if not here, check any enclosing scope</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> enclosingScope: <span style="color:#66d9ef">return</span> enclosingScope<span style="color:#f92672">.</span>resolve(name)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>     <span style="color:#75715e"># not found</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bind</span>(symbol):
+</span></span><span style="display:flex;"><span>        symbols[symbol<span style="color:#f92672">.</span>name] <span style="color:#f92672">=</span> symbol
+</span></span><span style="display:flex;"><span>        symbol<span style="color:#f92672">.</span>scope <span style="color:#f92672">=</span> self     <span style="color:#75715e"># track the scope in each symbol</span></span></span></code></pre></div>
+<p><span class='origin'>Quelle: Eigene Implementierung nach einer Idee in <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html#id_Parr2010">[Parr2010, p. 169]</a></span></p>
+<p><strong>Anmerkung</strong>: In der Klasse <code>Symbol</code> kann man ein Feld <code>scope</code> vom Typ <code>Scope</code>
+implementieren. Damit &quot;weiss&quot; jedes Symbol, in welchem Scope es definiert ist und
+man muss sich auf der Suche nach dem Scope eines Symbols ggf. nicht erst durch
+die Baumstruktur hangeln. Aus technischer Sicht verhindert das Attribut das
+Aufräumen eines lokalen Scopes durch den Garbage Collector, wenn man den lokalen
+Scope wieder verlässt: Jeder Scope hat eine Referenz auf den umgebenden (Eltern-)
+Scope (Feld <code>enclosingScope</code>). Wenn man den aktuellen Scope &quot;nach oben&quot; verlässt,
+würde der eben verlassene lokale Scope bei nächster Gelegenheit aufgeräumt, wenn
+es keine weiteren Referenzen auf diesen gäbe. Da nun aber die Symbole, die in
+diesem Scope definiert wurden, auf diesen verweisen, passiert das nicht :)</p>
+<h2 id="nested-scopes-listener">Nested Scopes: Listener</h2>
+<p>Mit einem passenden Listener kann man damit die nötigen Scopes aufbauen:</p>
+<ul>
+<li><code>enterStart</code>:
+<ul>
+<li>erzeuge neuen globalen Scope</li>
+<li>definiere und pushe die eingebauten Typen</li>
+</ul>
+</li>
+<li><code>exitVarDecl</code>:
+<ul>
+<li>löse den Typ der Variablen im aktuellen Scope auf</li>
+<li>definiere ein neues Variablensymbol im aktuellen Scope</li>
+</ul>
+</li>
+<li><code>exitVar</code>:
+<ul>
+<li>löse die Variable im aktuellen Scope auf</li>
+</ul>
+</li>
+<li><code>enterBlock</code>:
+<ul>
+<li>erzeuge neuen lokalen Scope, wobei der aktuelle Scope der Elternscope ist</li>
+<li>ersetze den aktuellen Scope durch den lokalen Scope</li>
+</ul>
+</li>
+<li><code>exitBlock</code>:
+<ul>
+<li>ersetze den aktuellen Scope durch dessen Elternscope</li>
+</ul>
+</li>
+</ul>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-yacc" data-lang="yacc">start   :   stat+ ;
+
+stat    : block | varDecl | expr &#39;;&#39; ;
+block   : &#39;{&#39; stat* &#39;}&#39; ;
+
+varDecl : type ID (&#39;=&#39; expr)? &#39;;&#39; ;
+expr    : var &#39;=&#39; INT ;
+
+var     : ID ;
+type    : &#39;float&#39; | &#39;int&#39; ;</code></pre></div>
+<p>Relevanter Ausschnitt aus der Grammatik</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{ <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>; x <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>; }</span></span></code></pre></div>
+</div>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyListener</span>(BaseListener):
+</span></span><span style="display:flex;"><span>    Scope scope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">enterStart</span>(Parser<span style="color:#f92672">.</span>FileContext ctx):
+</span></span><span style="display:flex;"><span>        globals <span style="color:#f92672">=</span> Scope()
+</span></span><span style="display:flex;"><span>        globals<span style="color:#f92672">.</span>bind(BuiltIn(<span style="color:#e6db74">&#34;int&#34;</span>))
+</span></span><span style="display:flex;"><span>        globals<span style="color:#f92672">.</span>bind(BuiltIn(<span style="color:#e6db74">&#34;float&#34;</span>))
+</span></span><span style="display:flex;"><span>        scope <span style="color:#f92672">=</span> globals
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">enterBlock</span>(Parser<span style="color:#f92672">.</span>BlockContext ctx):
+</span></span><span style="display:flex;"><span>        scope <span style="color:#f92672">=</span> Scope(scope)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitBlock</span>(Parser<span style="color:#f92672">.</span>BlockContext ctx):
+</span></span><span style="display:flex;"><span>        scope <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>enclosingScope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitVarDecl</span>(Parser<span style="color:#f92672">.</span>VarDeclContext ctx):
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>resolve(ctx<span style="color:#f92672">.</span>type()<span style="color:#f92672">.</span>getText())
+</span></span><span style="display:flex;"><span>        var <span style="color:#f92672">=</span> Variable(ctx<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText(), t)
+</span></span><span style="display:flex;"><span>        scope<span style="color:#f92672">.</span>bind(var)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exitVar</span>(Parser<span style="color:#f92672">.</span>VarContext ctx):
+</span></span><span style="display:flex;"><span>        name <span style="color:#f92672">=</span> ctx<span style="color:#f92672">.</span>ID()<span style="color:#f92672">.</span>getText()
+</span></span><span style="display:flex;"><span>        var <span style="color:#f92672">=</span> scope<span style="color:#f92672">.</span>resolve(name)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> var <span style="color:#f92672">==</span> <span style="color:#66d9ef">None</span>: error(<span style="color:#e6db74">&#34;no such var: &#34;</span> <span style="color:#f92672">+</span> name)</span></span></code></pre></div>
+<p><em>Anmerkung</em>: Um den Code auf die Folie zu bekommen, ist dies ein Mix aus Java und Python geworden. Sry ;)</p>
+</div>
+</div>
+<p>In der Methode <code>exitVar()</code> wird das Variablensymbol beim Ablaufen des AST
+lediglich aufgelöst und ein Fehler geworfen, wenn das Variablensymbol (noch)
+nicht bekannt ist. Hier könnte man weiteres Type-Checking und/oder -Propagation
+ansetzen.</p>
+<p>Später im Interpreter muss an dieser Stelle dann aber auch der <strong>Wert</strong> der
+Variablen abgerufen werden ...</p>
+<h2 id="löschen-von-symboltabellen">Löschen von Symboltabellen</h2>
+<p>Möglicherweise sind die Symboltabellen nach der Identifizierungsphase der Elemente
+überflüssig, weil die zusammengetragenen Informationen als Attribute im AST stehen.
+Die Knoten enthalten dann Verweise auf definierende Knoten von Elementen, nicht mehr
+auf Einträge in den Symboltabellen. In diesem Fall können die Symboltabellen nach der
+Identifizierung gelöscht werden, wenn sie nicht z.B. für einen symbolischen Debugger
+noch gebraucht werden.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)</p>
+</li>
+<li>
+<p>Blöcke: Nested Scopes =&gt; hierarchische Organisation</p>
+</li>
+<li>
+<p>Binden von Bezeichner gleichen Namens an ihren jeweiligen Scope =&gt; <code>bind()</code></p>
+</li>
+<li>
+<p>Abrufen von Bezeichnern aus dem aktuellen Scope oder den Elternscopes =&gt; <code>resolve()</code></p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+                    
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Mogensen2017'>[Mogensen2017] <strong>Introduction to Compiler Design</strong><br>Mogensen, T., Springer, 2017. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-319-66966-3</a>. DOI <a href='https://doi.org/10.1007/978-3-319-66966-3' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>10.1007/978-3-319-66966-3</a>.<br><em>Kapitel 3</em></li> <li id='id_Parr2010'>[Parr2010] <a href='https://learning.oreilly.com/library/view/language-implementation-patterns/9781680500097/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Language Implementation Patterns</strong></a><br>Parr, T., Pragmatic Bookshelf, 2010. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5645-6' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5645-6</a>.<br><em>Kapitel 6, 7 und 8</em></li> <li id='id_Parr2014'>[Parr2014] <a href='https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>The Definitive ANTLR 4 Reference</strong></a><br>Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-9343-5699-9</a>.<br><em>Kapitel 6.4 und 8.4</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/auto-complete.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.stemmer.support.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.multi.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/lunr/lunr.de.min.js?1736351933" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/search.js?1736351933" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/01-lexing/regular.html">Reguläre Sprachen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">LL-Parser</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/lr-parser.html">LR-Parser</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/attribgrammars.html">Attributierte Grammatiken</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/syntaxdriven.html">Syntaxgesteuerte Interpreter</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization.html">Optimierung</a><ul id="R-subsections-001244c959ebc0073b4b882124888ea9" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/05-optimization/optimization.html">Optimierung u. Datenflussanalyse</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/03-semantics/symbtab1-scopes.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

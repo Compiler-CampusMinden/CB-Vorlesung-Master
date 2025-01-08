@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Wiederholung PDAs und kontextfreie Grammatiken Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen? Wie könnnen wir sie minimal erweitern? Sind PDAs deterministisch? Wie sind kontextfreie Grammatiken definiert? Sind kontextfreie Grammatiken eindeutig? Motivation Was brauchen wir für die Syntaxanalyse von Programmen? einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik Themen für heute Syntaxanlyse Top-down-Analyse rekursiver Abstieg LL(k)-Analyse Syntaxanalyse Arten der Syntaxanalyse Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="LL-Parser">
+    <meta name="twitter:description" content="Wiederholung PDAs und kontextfreie Grammatiken Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen? Wie könnnen wir sie minimal erweitern? Sind PDAs deterministisch? Wie sind kontextfreie Grammatiken definiert? Sind kontextfreie Grammatiken eindeutig? Motivation Was brauchen wir für die Syntaxanalyse von Programmen? einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik Themen für heute Syntaxanlyse Top-down-Analyse rekursiver Abstieg LL(k)-Analyse Syntaxanalyse Arten der Syntaxanalyse Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">
+    <meta property="og:title" content="LL-Parser">
+    <meta property="og:description" content="Wiederholung PDAs und kontextfreie Grammatiken Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen? Wie könnnen wir sie minimal erweitern? Sind PDAs deterministisch? Wie sind kontextfreie Grammatiken definiert? Sind kontextfreie Grammatiken eindeutig? Motivation Was brauchen wir für die Syntaxanalyse von Programmen? einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik Themen für heute Syntaxanlyse Top-down-Analyse rekursiver Abstieg LL(k)-Analyse Syntaxanalyse Arten der Syntaxanalyse Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="LL-Parser">
+    <meta itemprop="description" content="Wiederholung PDAs und kontextfreie Grammatiken Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen? Wie könnnen wir sie minimal erweitern? Sind PDAs deterministisch? Wie sind kontextfreie Grammatiken definiert? Sind kontextfreie Grammatiken eindeutig? Motivation Was brauchen wir für die Syntaxanalyse von Programmen? einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik Themen für heute Syntaxanlyse Top-down-Analyse rekursiver Abstieg LL(k)-Analyse Syntaxanalyse Arten der Syntaxanalyse Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.">
+    <meta itemprop="wordCount" content="909">
+    <title>LL-Parser</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html" rel="canonical" type="text/html" title="LL-Parser">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1736351933" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            LL-Parser
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>LL-Parser</h1>
+
+
+
+    
+    
+
+
+
+
+    
+    
+        
+        
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="far fa-file-powerpoint"></i> Annotierte Folien
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/ll-parser-theory.ann.ma.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>Annotierte Folien: LL-Parser (Theorie)</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    <h1 id="wiederholung">Wiederholung</h1>
+<h2 id="pdas-und-kontextfreie-grammatiken">PDAs und kontextfreie Grammatiken</h2>
+<ul>
+<li>Warum reichen uns DFAs nicht zum Matchen von Eingabezeichen?</li>
+<li>Wie könnnen wir sie minimal erweitern?</li>
+<li>Sind PDAs deterministisch?</li>
+<li>Wie sind kontextfreie Grammatiken definiert?</li>
+<li>Sind kontextfreie Grammatiken eindeutig?</li>
+</ul>
+<h1 id="motivation">Motivation</h1>
+<h2 id="was-brauchen-wir-für-die-syntaxanalyse-von-programmen">Was brauchen wir für die Syntaxanalyse von Programmen?</h2>
+<ul>
+<li>einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse erstellen lässt</li>
+<li>einen Algorithmus zum sog. Parsen von Programmen mit Hilfe einer solchen Grammatik</li>
+</ul>
+<h2 id="themen-für-heute">Themen für heute</h2>
+<ul>
+<li>Syntaxanlyse</li>
+<li>Top-down-Analyse</li>
+<li>rekursiver Abstieg</li>
+<li>LL(k)-Analyse</li>
+</ul>
+<h1 id="syntaxanalyse">Syntaxanalyse</h1>
+<h2 id="arten-der-syntaxanalyse">Arten der Syntaxanalyse</h2>
+<p>Die Syntax bezieht sich auf die Struktur der zu analysierenden Eingabe, z. B. einem Computerprogramm in einer Hochsprache. Diese Struktur wird mit formalen Grammatiken beschrieben. Einsetzbar sind Grammatiken, die deterministisch kontextfreie Sprachen erzeugen.</p>
+<ul>
+<li>Top-Down-Analyse: Aufbau des Parse trees von oben nach unten
+<ul>
+<li>Parsen durch rekursiven Abstieg</li>
+<li>tabellengesteuertes LL-Parsing</li>
+</ul>
+</li>
+<li>Bottom-Up-Analyse: LR-Parsing</li>
+</ul>
+<h2 id="bevor-wir-richtig-anfangen">Bevor wir richtig anfangen...</h2>
+<p><strong>Def.:</strong> Ein Nichtterminal <em>A</em> einer kontextfreien Grammatik <em>G</em> heißt <em>unerreichbar</em>, falls es kein <span class="math align-center">$a,b \in {(N \cup T)}^{\ast}$</span> gibt mit <span class="math align-center">$S \overset{\ast}{\Rightarrow} aAb$</span>. Ein Nichtterminal <em>A</em> einer Grammatik <em>G</em> heißt <em>nutzlos</em>, wenn es kein Wort <span class="math align-center">$w \in T^{\ast}$</span> gibt mit <span class="math align-center">$A \overset{\ast}{\Rightarrow} w$</span>.</p>
+<p><strong>Def.:</strong> Eine kontextfreie Grammatik <span class="math align-center">$G=(N, T, P, S)$</span> heißt <em>reduziert</em>, wenn es keine nutzlosen oder unerreichbaren Nichtterminale in <em>N</em> gibt.</p>
+<p>Bevor mit einer Grammatik weitergearbeitet wird, müssen erst alle nutzlosen und dann alle unerreichbaren Symbole eliminiert werden. Wir betrachten ab jetzt nur reduzierte Grammatiken.</p>
+<h1 id="algorithmus-rekursiver-abstieg">Algorithmus: Rekursiver Abstieg</h1>
+<p>Hier ist ein einfacher Algorithmus, der (indeterministisch) top-down Ableitungen vom Nonterminal <em>X</em> aufbaut:</p>
+<p><strong>Eingabe:</strong> Ein Nichtterminal <span class="math align-center">$X$</span> und das nächste zu verarbeitende Eingabezeichen <span class="math align-center">$a$</span>.</p>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser/recursive_descent.png" alt="Recursive Descent-Algorithmus" width="55%" height="auto">
+    <figcaption><p>Recursive Descent-Algorithmus</p></figcaption>
+</figure>
+<h1 id="tabellengesteuerte-parser-llk-grammatiken">Tabellengesteuerte Parser: LL(k)-Grammatiken</h1>
+<h2 id="first-mengen">First-Mengen</h2>
+<span class="math align-center">$S \rightarrow A \ \vert \ B \ \vert \ C$</span>
+<p>Welche Produktion nehmen?</p>
+<p>Wir brauchen die &quot;terminalen k-Anfänge&quot; von Ableitungen von Nichtterminalen, um eindeutig die nächste zu benutzende Produktion festzulegen. <span class="math align-center">$k$</span> ist dabei die Anzahl der sog. <em>Vorschautoken</em>.</p>
+<p><strong>Def.:</strong> Wir definieren <span class="math align-center">$First$</span> - Mengen einer Grammatik wie folgt:</p>
+<ul>
+<li>
+<span class="math align-center">$a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a\rbrace$</span>
+</li>
+<li>
+<span class="math align-center">$a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$</span>
+</li>
+<li>
+<span class="math align-center">$\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha
+    \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$</span>
+</li>
+</ul>
+<h2 id="linksableitungen">Linksableitungen</h2>
+<p><strong>Def.:</strong> Bei einer kontextfreien Grammatik <span class="math align-center">$G$</span> ist die <em>Linksableitung</em> von <span class="math align-center">$\alpha \in (N \cup T)^{\ast}$</span> die Ableitung, die man erhält, wenn in jedem Schritt das am weitesten links stehende Nichtterminal in <span class="math align-center">$\alpha$</span> abgeleitet wird.</p>
+<p>Man schreibt <span class="math align-center">$\alpha \overset{\ast}{\Rightarrow}_l \beta.$</span></p>
+<h2 id="follow-mengen">Follow-Mengen</h2>
+<p>Manchmal müssen wir wissen, welche terminalen Zeichen hinter einem Nichtterminal stehen können.</p>
+<p><strong>Def.</strong> Wir definieren <em>Follow</em> - Mengen einer Grammatik wie folgt:</p>
+<span class="math align-center">$\forall \beta \in (N \cup T)^*:$</span>
+<span class="math align-center">$$Follow_k(\beta) = \lbrace w \in T^\ast \mid \exists \alpha, \gamma \in  (N \cup T)^\ast\ \text{ mit }\ S \overset{\ast}{\Rightarrow}_l \alpha \beta \gamma\ \text{ und }\ w \in First_k(\gamma) \rbrace$$</span>
+<h2 id="llk-grammatiken">LL(k)-Grammatiken</h2>
+<p><strong>Def.:</strong> Eine kontextfreie Grammatik <em>G = (N, T, P, S)</em> ist genau dann eine <em>LL(k)</em>-Grammatik, wenn für alle Linksableitungen der Form:</p>
+<span class="math align-center">$S \overset{\ast}{\Rightarrow}_l\ wA \gamma\ {\Rightarrow}_l\ w\alpha\gamma \overset{\ast}{\Rightarrow}_l wx$</span>
+<p>und</p>
+<span class="math align-center">$S \overset{\ast}{\Rightarrow}_l wA \gamma {\Rightarrow}_l w\beta\gamma \overset{\ast}{\Rightarrow}_l wy$</span>
+<p>mit <span class="math align-center">$(w, x, y \in T^\ast, \alpha, \beta, \gamma \in (N \cup T)^\ast, A \in N)$</span> und <span class="math align-center">$First_k(x) = First_k(y)$</span>
+gilt:</p>
+<span class="math align-center">$\alpha = \beta$</span>
+<h2 id="ll1-grammatiken">LL(1)-Grammatiken</h2>
+<p>Das hilft manchmal:</p>
+<p>Für <span class="math align-center">$k = 1$</span>:
+G ist <span class="math align-center">$LL(1): \forall A \rightarrow \alpha, A \rightarrow \beta \in P, \alpha \neq \beta$</span> gilt:</p>
+<ol>
+<li><span class="math align-center">$\lnot \exists a \in T: \alpha  \overset{\ast}{\Rightarrow}_l  a\alpha_1$</span> und <span class="math align-center">$\beta \overset{\ast}{\Rightarrow}_l a\beta_1$</span></li>
+<li><span class="math align-center">$((\alpha \overset{\ast}{\Rightarrow}_l \epsilon) \Rightarrow (\lnot (\beta \overset{\ast}{\Rightarrow}_l \epsilon)))$</span> und <span class="math align-center">$((\beta \overset{\ast}{\Rightarrow}_l \epsilon) \Rightarrow (\lnot (\alpha\overset{\ast}{\Rightarrow}_l \epsilon)))$</span></li>
+<li><span class="math align-center">$((\beta \overset{\ast}{\Rightarrow}_l \epsilon)$</span> und <span class="math align-center">$(\alpha \overset{\ast}{\Rightarrow}_l a\alpha_1)) \Rightarrow a \notin Follow(A)$</span></li>
+<li><span class="math align-center">$((\alpha \overset{\ast}{\Rightarrow}_l \epsilon)$</span> und <span class="math align-center">$(\beta \overset{\ast}{\Rightarrow}_l a\beta_1)) \Rightarrow a \notin Follow(A)$</span></li>
+</ol>
+<p>Die ersten beiden Zeilen bedeuten:</p>
+<p><span class="math align-center">$\alpha$</span> und <span class="math align-center">$\beta$</span> können nicht beide <span class="math align-center">$\epsilon$</span> ableiten, <span class="math align-center">$First_1(\alpha) \cap First_1(\beta) = \emptyset$</span></p>
+<p>Die dritte und vierte Zeile bedeuten:</p>
+<span class="math align-center">$(\epsilon \in First_1(\beta)) \Rightarrow (First_1(\alpha) \cap Follow_1(A) = \emptyset)$</span>
+<span class="math align-center">$(\epsilon \in First_1(\alpha)) \Rightarrow (First_1(\beta) \cap Follow_1(A) = \emptyset)$</span>
+<h2 id="llk-sprachen">LL(k)-Sprachen</h2>
+<p>Die von <em>LL(k)</em>-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der deterministisch parsbaren Sprachen.</p>
+<p>Die von <em>LL(k)</em>-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der von <em>LL(k+1)</em>-Grammatiken erzeugten Sprachen.</p>
+<p>Für eine kontextfreie Grammatik <em>G</em> ist nicht entscheidbar, ob es eine <em>LL(1)</em> - Grammatik <em>G'</em> gibt mit <span class="math align-center">$L(G) = L(G')$</span>.</p>
+<p>In der Praxis reichen <span class="math align-center">$LL(1)$</span> - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren, deren Eingabe eine LL(k)- (meist LL(1)-) Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.</p>
+<h2 id="algorithmus-konstruktion-einer-ll-parsertabelle" class="fragile">Algorithmus: Konstruktion einer LL-Parsertabelle</h2>
+<p><strong>Eingabe:</strong> Eine Grammatik G = (N, T, P, S) mit <span class="math align-center">$\perp \in T$</span> als Endezeichen</p>
+<p><strong>Ausgabe:</strong> Eine Parsertabelle <em>P</em></p>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser/LL-Parsertabelle.png" alt="Algorithmus zur Generierung einer LL-Parsertabelle" width="60%" height="auto">
+    <figcaption><p>Algorithmus zur Generierung einer LL-Parsertabelle</p></figcaption>
+</figure>
+<p>Statt <span class="math align-center">$First_1(\alpha)$</span> und <span class="math align-center">$Follow_1(\alpha)$</span> wird oft nur <span class="math align-center">$First(\alpha)$</span> und <span class="math align-center">$Follow(\alpha)$</span> geschrieben.</p>
+<h2 id="ll-parsertabellen">LL-Parsertabellen</h2>
+<p>Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt (bei einem Recursive-Descent-Parser, aber auch bei der Parsertabelle). Diesen Stack kann man auch &quot;selbst programmieren&quot;, d. h. einen PDA implementieren. Dabei wird ebenfalls die oben genannte Tabelle zur Bestimmung der nächsten anzuwendenden Produktion benutzt. Der Stack enthält die zu erwartenden Eingabezeichen, wenn immer eine Linksableitung gebildet wird. Diese Zeichen im Stack werden mit dem Input gematcht.</p>
+<h2 id="algorithmus-tabellengesteuertes-ll-parsen-mit-einem-pda" class="fragile">Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA</h2>
+<p><strong>Eingabe:</strong> Eine Grammatik G = (N, T, P, S), eine Parsertabelle <em>P</em> mit <span class="math align-center">$w\perp$</span> als initialem Kellerinhalt</p>
+<p><strong>Ausgabe:</strong> Wenn <span class="math align-center">$w \in L(G)$</span>, eine Linksableitung von <span class="math align-center">$w$</span>, Fehler sonst</p>
+<figure class="center">
+    <img src="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/02-parsing/ll-parser/LL-Parser.png" alt="Algorithmus zum tabellengesteuerten LL-Parsen" width="49%" height="auto">
+    <figcaption><p>Algorithmus zum tabellengesteuerten LL-Parsen</p></figcaption>
+</figure>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>Syntaxanalyse wird mit deterministisch kontextfreien Grammatiken durchgeführt.</li>
+<li>Eine Teilmenge der dazu gehörigen Sprachen lässt sich top-down parsen.</li>
+<li>Ein einfacher Recursive-Descent-Parser arbeitet mit Backtracking.</li>
+<li>Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus einer LL(k)-Grammatik generiert werden.</li>
+<li>Der Parser liefert in der Regel einen abstrakten Syntaxbaum (AST).</li>
+</ul>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.</li> <li id='id_hopcroft2003'>[hopcroft2003] <strong>Einführung in die Automatentheorie, formale Sprachen und Komplexitätstheorie</strong><br>Hopcroft, J. E. und Motwani, R. und Ullman, J. D., Pearson Education Deutschland GmbH, 2003. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7020-4' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-8273-7020-4</a>.</li></ul>
+  </div>
+</div>
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Top-Down-Analyse</li> <li>(K1) Recursive-Descent-Parser</li> <li>(K1) First- und Follow-Mengen</li> <li>(K1) LL-Parser</li> <li>(K2) Zusammenhang zwischen PDAs und kontextfreien Grammatiken</li> <li>(K2) Schreiben von LL-Parsern</li> <li>(K3) Top-Down Analyse programmieren</li></ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>

@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben diese?
+Struktur eines Compilers Bandbreite der Programmiersprachen Anwendungen">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Überblick">
+    <meta name="twitter:description" content="Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben diese?
+Struktur eines Compilers Bandbreite der Programmiersprachen Anwendungen">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">
+    <meta property="og:title" content="Überblick">
+    <meta property="og:description" content="Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben diese?
+Struktur eines Compilers Bandbreite der Programmiersprachen Anwendungen">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Überblick">
+    <meta itemprop="description" content="Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben diese?
+Struktur eines Compilers Bandbreite der Programmiersprachen Anwendungen">
+    <meta itemprop="wordCount" content="20">
+    <title>Überblick</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html" rel="canonical" type="text/html" title="Überblick">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/images/logo.png?1736351933" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fontawesome-all.min.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/nucleus.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/auto-complete.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/perfect-scrollbar.min.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/fonts.css?1736351933" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/theme-auto.css?1736351933" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/chroma-auto.css?1736351933" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/variant.css?1736351933" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/print.css?1736351933" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/css/format-print.css?1736351933" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/variant.js?1736351933"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='.';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1603207';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.search.js?1736351933";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Überblick
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id="überblick">Überblick</h1>
+
+<p>Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben
+diese?</p>
+<ul class="children children-li children-sort-">
+  <li><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview.html">Struktur eines Compilers</a></li>
+  <li><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages.html">Bandbreite der Programmiersprachen</a></li>
+  <li><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications.html">Anwendungen</a></li>
+</ul>
+
+            <footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Überblick</h1>
+<article class="default">
+<h1>Struktur eines Compilers</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Compiler übersetzen (formalen) Text in ein anderes Format.</p>
+<p>Typischerweise kann man diesen Prozess in verschiedene Stufen/Phasen einteilen. Dabei
+verarbeitet jede Phase den Output der vorangegangenen Phase und erzeugt ein (kompakteres)
+Ergebnis, welches an die nächste Phase weitergereicht wird. Dabei nimmt die Abstraktion
+von Stufe zu Stufe zu: Der ursprüngliche Input ist ein Strom von Zeichen, daraus wird ein
+Strom von Wörtern (Token), daraus ein Baum (Parse Tree), Zwischencode (IC), ...</p>
+<p><a href="#R-image-518ee4c8d77e18a7cfcab5f4e36854eb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/00-intro/images/architektur_cb.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-518ee4c8d77e18a7cfcab5f4e36854eb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/00-intro/images/architektur_cb.png?width=auto&height=auto"></a></p>
+<p>Die gezeigten Phasen werden traditionell unterschieden. Je nach Aufgabe können verschiedene
+Stufen zusammengefasst werden oder sogar gar nicht auftreten.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/zpELDC_3G7Q' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Überblick</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/ec65309e6ba36d1d63e1aa8523f1f06b96af927d88c547083f1960ebf716e9d121701813bc1972dcf83779a007a62f839bf97f19bff3abc22c60dae523be7c0e' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Überblick</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K2) Struktur eines Compilers: Phasen und deren Aufgaben</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="sprachen-verstehen-texte-transformieren">Sprachen verstehen, Texte transformieren</h2>
+<blockquote>
+<p>The cat runs quickly.</p>
+</blockquote>
+<p>=&gt; Struktur? Bedeutung?</p>
+<p>Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:</p>
+<ul>
+<li>
+<p>Sequenz von Zeichen</p>
+</li>
+<li>
+<p>Wörter: Zeichenketten mit bestimmten Buchstaben, getrennt durch bestimmte
+andere Zeichen; Wörter könnten im Wörterbuch nachgeschlagen werden</p>
+</li>
+<li>
+<p>Sätze: Anordnung von Wörtern nach einer bestimmten Grammatik, Grenze: Satzzeichen</p>
+<p>Hier (vereinfacht): Ein Satz besteht aus Subjekt und Prädikat. Das Subjekt
+besteht aus einem oder keinen Artikel und einem Substantiv. Das Prädikat
+besteht aus einem Verb und einem oder keinem Adverb.</p>
+</li>
+<li>
+<p>Sprache: Die Menge der in einer Grammatik erlaubten Sätze</p>
+</li>
+</ul>
+<h2 id="compiler-big-picture">Compiler: Big Picture</h2>
+<p><a href="#R-image-d21f7d175487365bb528370416228765" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d21f7d175487365bb528370416228765"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png?width=auto&height=auto"></a></p>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png" rel="external" target="_blank">A Map of the Territory (mountain.png)</a> by <a href="https://github.com/munificent" rel="external" target="_blank">Bob Nystrom</a> on Github.com (<a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE" rel="external" target="_blank">MIT</a>)</span></p>
+<p><strong>Begriffe und Phasen</strong></p>
+<p>Die obige Bergsteige-Metapher kann man in ein nüchternes Ablaufdiagramm mit verschiedenen
+Stufen und den zwischen den Stufen ausgetauschten Artefakten übersetzen:</p>
+<p><a href="#R-image-667076cbc29b65ff6215e3783aca9879" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview/architektur_cb.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-667076cbc29b65ff6215e3783aca9879"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/overview/architektur_cb.png?width=80%25&height=auto"></a></p>
+<h3 id="frontend-analyse">Frontend, Analyse</h3>
+<p>Die ersten Stufen eines Compilers, die mit der <strong>Analyse</strong> des
+Inputs beschäftigt sind. Dies sind in der Regel der Scanner, der
+Parser und die semantische Analyse.</p>
+<ul>
+<li>
+<p>Scanner, Lexer, Tokenizer, Lexikalische Analyse</p>
+<p>Zerteilt den Zeichenstrom in eine Folge von Wörtern. Mit regulären
+Ausdrücken kann definiert werden, was Klassen gültiger Wörter (&quot;Token&quot;)
+sind. Ein Token hat i.d.R. einen Namen und einen Wert.</p>
+</li>
+<li>
+<p>Parser, Syntaxanalyse</p>
+<p>Der Parser erhält als Eingabe die Folge der Token und versucht mit
+Hilfe einer Grammatik zu bestimmen, ob es sich bei der Tokensequenz
+um gültige Sätze im Sinne der Grammatik handelt. Hier gibt es viele
+Algorithmen, die im Wesentlichen in die Klassen &quot;top-down&quot; und &quot;bottom-up&quot;
+fallen.</p>
+</li>
+<li>
+<p>Semantische Analyse, Kontexthandling</p>
+<p>In den vorigen Stufen wurde eher lokal gearbeitet. Hier wird über den
+gesamten Baum und die Symboltabelle hinweg geprüft, ob beispielsweise
+Typen korrekt verwendet wurden, in welchen Scope ein Name gehört etc.
+Mit diesen Informationen wird der AST angereichert.</p>
+</li>
+<li>
+<p>Symboltabellen</p>
+<p>Datenstrukturen, um Namen, Werte, Scopes und weitere Informationen zu
+speichern. Die Symboltabellen werden vor allem beim Parsen befüllt und
+bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
+diese Informationen.</p>
+</li>
+</ul>
+<h3 id="backend-synthese">Backend, Synthese</h3>
+<p>Die hinteren Stufen eines Compilers, die mit der <strong>Synthese</strong> der
+Ausgabe beschäftigt sind. Dies sind in der Regel verschiedene
+Optimierungen und letztlich die Code-Generierung</p>
+<ul>
+<li>
+<p>Codegenerierung</p>
+<p>Erzeugung des Zielprogramms aus der (optimierten) Zwischendarstellung.
+Dies ist oft Maschinencode, kann aber auch C-Code oder eine andere
+Ziel-Sprache sein.</p>
+</li>
+<li>
+<p>Optimierung</p>
+<p>Diverse Maßnahmen, um den resultierenden Code kleiner und/oder schneller
+zu gestalten.</p>
+</li>
+<li>
+<p>Symboltabellen</p>
+<p>Datenstrukturen, um Namen, Werte, Scopes und weitere Informationen zu
+speichern. Die Symboltabellen werden vor allem beim Parsen befüllt und
+bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
+diese Informationen.</p>
+</li>
+</ul>
+<h3 id="weitere-begriffe">Weitere Begriffe</h3>
+<ul>
+<li>
+<p>Parse Tree, Concrete Syntax Tree</p>
+<p>Repräsentiert die Struktur eines Satzes, wobei jeder Knoten dem Namen einer
+Regel der Grammatik entspricht. Die Blätter bestehen aus den Token samt
+ihren Werten.</p>
+</li>
+<li>
+<p>AST, (Abstract) Syntax Tree</p>
+<p>Vereinfachte Form des Parse Tree, wobei der Bezug auf die Element der
+Grammatik (mehr oder weniger) weggelassen wird.</p>
+</li>
+<li>
+<p>Annotierter AST</p>
+<p>Anmerkungen am AST, die für spätere Verarbeitungsstufen interessant
+sein könnten: Typ-Informationen, Optimierungsinformationen, ...</p>
+</li>
+<li>
+<p>Zwischen-Code, IC</p>
+<p>Zwischensprache, die abstrakter ist als die dem AST zugrunde liegenden
+Konstrukte der Ausgangssprache. Beispielsweise könnten <code>while</code>-Schleifen
+durch entsprechende Label und Sprünge ersetzt werden. Wie genau dieser
+Zwischen-Code aussieht, muss der Compilerdesigner entscheiden. Oft findet
+man den Assembler-ähnlichen &quot;3-Adressen-Code&quot;.</p>
+</li>
+<li>
+<p>Sprache</p>
+<p>Eine Sprache ist eine Menge gültiger Sätze. Die Sätze werden aus
+Wörtern gebildet, diese wiederum aus Zeichenfolgen.</p>
+</li>
+<li>
+<p>Grammatik</p>
+<p>Eine Grammatik beschreibt formal die Syntaxregeln für eine
+Sprache. Jede Regel in der Grammatik beschreibt dabei die Struktur eines
+Satzes oder einer Phrase.</p>
+</li>
+</ul>
+<h2 id="lexikalische-analyse-wörter-token-erkennen">Lexikalische Analyse: Wörter (&quot;<em>Token</em>&quot;) erkennen</h2>
+<p>Die lexikalische Analyse (auch <em>Scanner</em> oder <em>Lexer</em> oder <em>Tokenizer</em> genannt)
+zerteilt den Zeichenstrom in eine Folge von Wörtern (&quot;<em>Token</em>&quot;). Die geschieht
+i.d.R. mit Hilfe von <em>regulären Ausdrücken</em>.</p>
+<p>Dabei müssen unsinnige/nicht erlaubte Wörter erkannt werden.</p>
+<p>Überflüssige Zeichen (etwa Leerzeichen) werden i.d.R. entfernt.</p>
+<pre><code>sp = 100;
+
+&lt;ID, sp&gt;, &lt;OP, =&gt;, &lt;INT, 100&gt;, &lt;SEM&gt;
+</code></pre>
+<p><em>Anmerkung</em>: In der obigen Darstellung werden die Werte der Token (&quot;<em>Lexeme</em>&quot;)
+zusammen mit den Token &quot;gespeichert&quot;. Alternativ können die Werte der Token
+auch direkt in der Symboltabelle gespeichert werden und in den Token nur der
+Verweis auf den jeweiligen Eintrag in der Tabelle.</p>
+<h2 id="syntaxanalyse-sätze-erkennen">Syntaxanalyse: Sätze erkennen</h2>
+<p>In der Syntaxanalyse (auch <em>Parser</em> genannt) wird die Tokensequenz
+in gültige Sätze unterteilt. Dazu werden in der Regel <em>kontextfreie
+Grammatiken</em> und unterschiedliche Parsing-Methoden (<em>top-down</em>, <em>bottom-up</em>)
+genutzt.</p>
+<p>Dabei müssen nicht erlaubte Sätze erkannt werden.</p>
+<pre><code>&lt;ID, sp&gt;, &lt;OP, =&gt;, &lt;INT, 100&gt;, &lt;SEM&gt;
+</code></pre>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-lex" data-lang="lex">statement : assign SEM ;
+assign : ID OP INT ;</code></pre></div>
+<pre><code>                   statement                  =
+                   /       \                 / \
+               assign      SEM             sp  100
+             /   |   \      |
+           ID    OP  INT    ;
+           |     |    |
+           sp    =   100
+</code></pre>
+<p>Mit Hilfe der Produktionsregeln der Grammatik wird versucht, die Tokensequenz
+zu erzeugen. Wenn dies gelingt, ist der Satz (also die Tokensequenz) ein
+gültiger Satz im Sinne der Grammatik. Dabei sind die Token aus der lexikalischen
+Analyse die hier betrachteten Wörter!</p>
+<p>Dabei entsteht ein sogenannter <em>Parse-Tree</em> (oder auch &quot;<em>Syntax Tree</em>&quot;; in der
+obigen Darstellung der linke Baum). In diesen Bäumen spiegeln sich die Regeln
+der Grammatik wider, d.h. zu einem Satz kann es durchaus verschiedene
+Parse-Trees geben.</p>
+<p>Beim <em>AST</em> (&quot;<em>Abstract Syntax Tree</em>&quot;) werden die Knoten um alle später nicht
+mehr benötigten Informationen bereinigt (in der obigen Darstellung der rechte
+Baum).</p>
+<p><em>Anmerkung</em>: Die Begriffe werden oft nicht eindeutig verwendet. Je nach
+Anwendung ist das Ergebnis des Parsers ein AST oder ein Parse-Tree.</p>
+<p><em>Anmerkung</em>: Man könnte statt <code>OP</code> auch etwa ein <code>ASSIGN</code> nutzen und müsste
+dann das &quot;<code>=</code>&quot; nicht extra als Inhalt speichern, d.h. man würde die Information
+im Token-Typ kodieren.</p>
+<h2 id="vorschau-parser-implementieren">Vorschau: Parser implementieren</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-lex" data-lang="lex">stat : assign | ifstat | ... ;
+assign : ID &#39;=&#39; expr &#39;;&#39; ;</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stat</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (<span style="color:#f92672">&lt;&lt;</span>current token<span style="color:#f92672">&gt;&gt;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> ID : assign(); <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> IF : ifstat(); <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span> : <span style="color:#f92672">&lt;&lt;</span>raise exception<span style="color:#f92672">&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assign</span>() {
+</span></span><span style="display:flex;"><span>    match(ID);
+</span></span><span style="display:flex;"><span>    match(<span style="color:#e6db74">&#39;=&#39;</span>);
+</span></span><span style="display:flex;"><span>    expr();
+</span></span><span style="display:flex;"><span>    match(<span style="color:#e6db74">&#39;;&#39;</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Der gezeigte Parser ist ein sogenannter &quot;LL(1)&quot;-Parser und geht von oben nach unten
+vor, d.h. ist ein Top-Down-Parser.</p>
+<p>Nach dem Betrachten des aktuellen Tokens wird entschieden, welche Alternative
+vorliegt und in die jeweilige Methode gesprungen.</p>
+<p>Die <code>match()</code>-Methode entspricht dabei dem Erzeugen von Blättern, d.h. hier
+werden letztlich die Token der Grammatik erkannt.</p>
+<h2 id="semantische-analyse-bedeutung-erkennen">Semantische Analyse: Bedeutung erkennen</h2>
+<p>In der semantischen Analyse (auch <em>Context Handling</em> genannt) wird der AST
+zusammen mit der Symboltabelle geprüft. Dabei spielen Probleme wie Scopes,
+Namen und Typen eine wichtige Rolle.</p>
+<p>Die semantische Analyse ist direkt vom Programmierparadigma der zu
+übersetzenden Sprache abhängig, d.h. müssen wir beispielsweise das Konzept
+von Klassen verstehen?</p>
+<p>Als Ergebnis dieser Phase entsteht typischerweise ein <em>annotierter AST</em>.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span>;    <span style="color:#75715e">// ???
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<pre><code>                                              = {type: real, loc: tmp1}
+sp = 100;                                    / \
+                                            /   \
+                                          sp     inttofloat
+                                  {type: real,       |
+                                   loc: var b}      100
+</code></pre>
+<h2 id="zwischencode-generieren">Zwischencode generieren</h2>
+<p>Aus dem annotierten AST wird in der Regel ein Zwischencode (&quot;<em>Intermediate Code</em>&quot;,
+auch &quot;IC&quot;) generiert. oft findet man hier den Assembler-ähnlichen &quot;3-Adressen-Code&quot;,
+in manchen Compilern wird als IC aber auch der AST selbst genutzt.</p>
+<pre><code>                 = {type: real, loc: tmp1}
+                / \
+               /   \
+             sp     inttofloat
+     {type: real,       |
+      loc: var b}      100
+</code></pre>
+<p>=&gt; <code>t1 = inttofloat(100)</code></p>
+<h2 id="code-optimieren">Code optimieren</h2>
+<p>An dieser Stelle verlassen wir das Compiler-Frontend und begeben uns in das
+sogenannte <em>Backend</em>. Die Optimierung des Codes kann sehr unterschiedlich
+ausfallen, beispielsweise kann man den Zwischencode selbst optimieren, dann
+nach sogenanntem &quot;Targetcode&quot; übersetzen und diesen weiter optimieren, bevor
+das Ergebnis im letzten Schritt in Maschinencode übersetzt wird.</p>
+<p>Die Optimierungsphase ist sehr stark abhängig von der Zielhardware. Hier kommen
+fortgeschrittene Mengen- und Graphalgorithmen zur Anwendung. Die Optimierung
+stellt den wichtigsten Teil aktueller Compiler dar.</p>
+<p>Aus zeitlichen und didaktischen Gründen werden wir in dieser Veranstaltung den
+Fokus auf die Frontend-Phasen legen und die Optimierung nur grob streifen.</p>
+<p><code>t1 = inttofloat(100)</code> =&gt; <code>t1 = 100.0</code></p>
+<p><code>x = y*0;</code> =&gt; <code>x = 0;</code></p>
+<h2 id="code-generieren">Code generieren</h2>
+<ul>
+<li>
+<p>Maschinencode:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-gnuassembler" data-lang="gnuassembler">STD  t1, 100.0</code></pre></div>
+</li>
+<li>
+<p>Andere Sprache:</p>
+<ul>
+<li>Bytecode</li>
+<li>C</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h2 id="probleme">Probleme</h2>
+<pre><code>5*4+3
+</code></pre>
+<p><strong>AST</strong>?</p>
+<p>Problem: Vorrang von Operatoren</p>
+<ul>
+<li>Variante 1: <code>+(*(5, 4), 3)</code></li>
+<li>Variante 2: <code>*(5, +(4, 3))</code></li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code class="language-lex" data-lang="lex">stat : expr &#39;;&#39;
+     | ID &#39;(&#39; &#39;)&#39; &#39;;&#39;
+     ;
+expr : ID &#39;(&#39; &#39;)&#39;
+     | INT
+     ;</code></pre></div>
+<h2 id="unbedingt-lesenswert">Unbedingt lesenswert</h2>
+<p>Sie sollten diese beiden Paper unbedingt als Einstieg in das Modul lesen:</p>
+<ol>
+<li><a href="https://www.cs.nott.ac.uk/~pszgmh/123.pdf" rel="external" target="_blank">Programming Language Semantics</a></li>
+<li><a href="http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf" rel="external" target="_blank">An Incremental Approach to Compiler Construction</a></li>
+</ol>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Typische Phasen:</p>
+<ol>
+<li>Lexikalische Analyse</li>
+<li>Syntaxanalyse</li>
+<li>Semantische Analyse</li>
+<li>Generierung von Zwischencode</li>
+<li>Optimierung des (Zwischen-) Codes</li>
+<li>Codegenerierung</li>
+</ol>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Kapitel 1 Introduction</em></li> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.<br><em>Kapitel 1 Introduction</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+<article class="default">
+<h1>Bandbreite der Programmiersprachen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Am Beispiel des Abzählreims &quot;99 Bottles of Beer&quot; werden (ganz kurz) verschiedene
+Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept
+(Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene Strategie
+zur Speicherverwaltung und Abarbeitung.</p>
+<p>Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich,
+dass Compiler teilweise sehr unterschiedliche Konzepte &quot;verstehen&quot; müssen.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/prsc8cf4cJ8' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Programmiersprachen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Programmiersprachen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="99-bottles-of-beer">99 Bottles of Beer</h2>
+<blockquote>
+<p>99 bottles of beer on the wall, 99 bottles of beer.
+Take one down and pass it around, 98 bottles of beer on the wall.</p>
+<p>98 bottles of beer on the wall, 98 bottles of beer.
+Take one down and pass it around, 97 bottles of beer on the wall.</p>
+<p>[...]</p>
+<p>2 bottles of beer on the wall, 2 bottles of beer.
+Take one down and pass it around, 1 bottle of beer on the wall.</p>
+<p>1 bottle of beer on the wall, 1 bottle of beer.
+Take one down and pass it around, no more bottles of beer on the wall.</p>
+<p>No more bottles of beer on the wall, no more bottles of beer.
+Go to the store and buy some more, 99 bottles of beer on the wall.</p>
+</blockquote>
+<p><span class='origin'>Quelle: nach <a href="https://www.99-bottles-of-beer.net/lyrics.html" rel="external" target="_blank">&quot;Lyrics of the song 99 Bottles of Beer&quot;</a> on 99-bottles-of-beer.net</span></p>
+<h2 id="imperativ-hardwarenah-c">Imperativ, Hardwarenah: C</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span> <span style="color:#75715e">#define MAXBEER (99)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chug</span>(<span style="color:#66d9ef">int</span> beers);
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">register</span> beers;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(beers <span style="color:#f92672">=</span> MAXBEER; beers; <span style="color:#a6e22e">chug</span>(beers<span style="color:#f92672">--</span>))  <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Time to buy more beer!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chug</span>(<span style="color:#66d9ef">register</span> beers) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> howmany[<span style="color:#ae81ff">8</span>], <span style="color:#f92672">*</span>s;
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> beers <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d bottle%s of beer on the wall,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, beers, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d bottle%s of beeeeer . . . ,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, beers, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Take one down, pass it around,</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>beers) <span style="color:#a6e22e">sprintf</span>(howmany, <span style="color:#e6db74">&#34;%d&#34;</span>, beers); <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">strcpy</span>(howmany, <span style="color:#e6db74">&#34;No more&#34;</span>);
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> beers <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s bottle%s of beer on the wall.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, howmany, s);
+</span></span><span style="display:flex;"><span> }</span></span></code></pre></div>
+<p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-c-116.html" rel="external" target="_blank">&quot;Language C&quot;</a> by Bill Wein on 99-bottles-of-beer.net</span></p>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Procedural</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Resourcenschonend, aber &quot;unsicher&quot;: Programmierer muss wissen, was er tut</p>
+</li>
+<li>
+<p>Relativ hardwarenah</p>
+</li>
+<li>
+<p>Einsatz: Betriebssysteme, Systemprogrammierung</p>
+</li>
+</ul>
+<h2 id="imperativ-objektorientiert-java">Imperativ, Objektorientiert: Java</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">bottles</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
+</span></span><span style="display:flex;"><span>        String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> beers<span style="color:#f92672">=</span>99; beers<span style="color:#f92672">&gt;-</span>1;) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer on the wall, &#34;</span>);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer, &#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (beers<span style="color:#f92672">==</span>0) {
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;Go to the store, buy some more, &#34;</span>);
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;99 bottles of beer on the wall.\n&#34;</span>);
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">exit</span>(0);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;Take one down, pass it around, &#34;</span>);
+</span></span><span style="display:flex;"><span>            s <span style="color:#f92672">=</span> (<span style="color:#f92672">--</span>beers <span style="color:#f92672">==</span> 1)<span style="color:#f92672">?</span><span style="color:#e6db74">&#34;&#34;</span>:<span style="color:#e6db74">&#34;s&#34;</span>;
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(beers <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; bottle&#34;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; of beer on the wall.\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-java-4.html" rel="external" target="_blank">&quot;Language Java&quot;</a> by Sean Russell on 99-bottles-of-beer.net</span></p>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Objektorientiert</p>
+</li>
+<li>
+<p>Multi-Threading</p>
+</li>
+<li>
+<p>Basiert auf C/C++</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Automatische Garbage Collection</p>
+</li>
+<li>
+<p>&quot;Sichere&quot; Architektur: Laufzeitumgebung fängt viele Probleme ab</p>
+</li>
+<li>
+<p>Architekturneutral: Nutzt Bytecode und eine JVM</p>
+</li>
+<li>
+<p>Einsatz: High-Level All-Purpose Language</p>
+</li>
+</ul>
+<h2 id="logisch-prolog">Logisch: Prolog</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-prolog" data-lang="prolog"><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#f92672">:-</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bottles</span>(<span style="color:#ae81ff">99</span>).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span>(<span style="color:#ae81ff">1</span>) :-
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;1 bottle of beer on the wall, 1 bottle of beer,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Take one down, and pass it around,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Now they are all gone.&#39;</span>), <span style="color:#e6db74">nl</span>,!.
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span>(X) :-
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(X), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer on the wall,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(X), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;Take one down and pass it around,&#39;</span>), <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    NX <span style="color:#f92672">is</span> X <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">write</span>(NX), <span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39; bottles of beer on the wall.&#39;</span>), <span style="color:#e6db74">nl</span>, <span style="color:#e6db74">nl</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bottles</span>(NX).</span></span></code></pre></div>
+<p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-prolog-965.html" rel="external" target="_blank">&quot;Language Prolog&quot;</a> by M@ on 99-bottles-of-beer.net</span></p>
+<ul>
+<li>
+<p>Deklarativ</p>
+</li>
+<li>
+<p>Logisch: Definition von Fakten und Regeln; eingebautes Beweissystem</p>
+</li>
+<li>
+<p>Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme, ...</p>
+</li>
+</ul>
+<h2 id="funktional-haskell">Funktional: Haskell</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-haskell" data-lang="haskell"><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;no more bottles&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1 bottle&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bottles</span> n <span style="color:#f92672">=</span> show n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; bottles&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">verse</span> <span style="color:#ae81ff">0</span>   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;No more bottles of beer on the wall, no more bottles of beer.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;Go to the store and buy some more, 99 bottles of beer on the wall.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">verse</span> n   <span style="color:#f92672">=</span> bottles n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer on the wall, &#34;</span> <span style="color:#f92672">++</span> bottles n <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;Take one down and pass it around, &#34;</span> <span style="color:#f92672">++</span> bottles (n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                                                 <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34; of beer on the wall.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">main</span>      <span style="color:#f92672">=</span> mapM (putStrLn <span style="color:#f92672">.</span> verse) [<span style="color:#ae81ff">99</span>,<span style="color:#ae81ff">98</span><span style="color:#f92672">..</span><span style="color:#ae81ff">0</span>]</span></span></code></pre></div>
+<p><span class='origin'>Quelle: <a href="https://www.99-bottles-of-beer.net/language-haskell-1070.html" rel="external" target="_blank">&quot;Language Haskell&quot;</a> by Iavor on 99-bottles-of-beer.net</span></p>
+<ul>
+<li>
+<p>Deklarativ</p>
+</li>
+<li>
+<p>Funktional</p>
+</li>
+<li>
+<p>Lazy, pure</p>
+</li>
+<li>
+<p>Statisches Typsystem</p>
+</li>
+<li>
+<p>Typinferenz</p>
+</li>
+<li>
+<p>Algebraische Datentypen, Patternmatching</p>
+</li>
+<li>
+<p>Einsatz: Compiler, DSL, Forschung</p>
+</li>
+</ul>
+<h2 id="brainfuck">Brainfuck</h2>
+<p><a href="#R-image-ee931922d298649c55cfc68b7ef06901" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages/screenshot_brainfuck_99bottles.png?width=15%25&height=auto" style=" height: auto; width: 15%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ee931922d298649c55cfc68b7ef06901"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/languages/screenshot_brainfuck_99bottles.png?width=15%25&height=auto"></a></p>
+<p><span class='origin'>Quelle: Screenshot of <a href="https://99-bottles-of-beer.net/language-brainfuck-2542.html" rel="external" target="_blank">&quot;Language Brainfuck&quot;</a> by Michal Wojciech Tarnowski on 99-bottles-of-beer.net</span></p>
+<ul>
+<li>
+<p>Imperativ</p>
+</li>
+<li>
+<p>Feldbasiert (analog zum Band der Turingmaschine)</p>
+</li>
+<li>
+<p>8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe, Sprungbefehle</p>
+</li>
+</ul>
+<h2 id="programmiersprache-lox">Programmiersprache Lox</h2>
+<pre><code>fun fib(x) {
+    if (x == 0) {
+        return 0;
+    } else {
+        if (x == 1) {
+            return 1;
+        } else {
+            fib(x - 1) + fib(x - 2);
+        }
+    }
+}
+
+var wuppie = fib;
+wuppie(4);
+</code></pre>
+<ul>
+<li>
+<p>Die Sprache &quot;Lox&quot; finden Sie hier: <a href="https://www.craftinginterpreters.com/the-lox-language.html" rel="external" target="_blank">craftinginterpreters.com/the-lox-language.html</a></p>
+</li>
+<li>
+<p>C-ähnliche Syntax</p>
+</li>
+<li>
+<p>Imperativ, objektorientiert, Funktionen als <em>First Class Citizens</em>, Closures</p>
+</li>
+<li>
+<p>Dynamisch typisiert</p>
+</li>
+<li>
+<p>Garbage Collector</p>
+</li>
+<li>
+<p>Statements und Expressions</p>
+</li>
+<li>
+<p>(Kleine) Standardbibliothek eingebaut</p>
+</li>
+</ul>
+<p>Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem
+Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren :)</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen formalen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Berücksichtigung von unterschiedlichen</p>
+<ul>
+<li>Sprachkonzepten (Programmierparadigmen)</li>
+<li>Typ-Systemen</li>
+<li>Speicherverwaltungsstrategien</li>
+<li>Abarbeitungsstrategien</li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Kapitel 1 Introduction</em></li> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.<br><em>Kapitel 1 Introduction</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+<article class="default">
+<h1>Anwendungen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Es gibt verschiedene Anwendungsmöglichkeiten für Compiler. Je nach Bedarf wird dabei
+die komplette Toolchain durchlaufen oder es werden Stufen ausgelassen. Häufig genutzte
+Varianten sind dabei:</p>
+<ul>
+<li>&quot;Echte&quot; Compiler: Übersetzen Sourcecode nach ausführbarem Maschinencode</li>
+<li>Interpreter: Interaktive Ausführung von Sourcecode</li>
+<li>Virtuelle Maschinen als Zwischending zwischen Compiler und Interpreter</li>
+<li>Transpiler: Übersetzen formalen Text nach formalem Text</li>
+<li>Analysetools: Parsen den Sourcecode, werten die Strukturen aus</li>
+</ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/gt9ROh-qRIU' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Anwendungen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (HSBI-Medienportal)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://www.hsbi.de/medienportal/m/7fb03ad60cf2c17a163bd4a1dceae2a0afb3c70203d632062843c2518e9d2bf833a118630d0eb153cb6a451a27b396caa9b8eb5f3b46925169f43b8a9aaaf35e' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL Anwendungen</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Verschiedene Anwendungen für Compiler durch Einsatz bestimmter Stufen der Compiler-Pipeline</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="anwendung-compiler">Anwendung: Compiler</h2>
+<p><a href="#R-image-1a038ed0afed04909fe00b393639f72b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/compiler.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1a038ed0afed04909fe00b393639f72b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/compiler.png?width=auto&height=auto"></a></p>
+<p>Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers,
+am Ende fällt ein ausführbares Programm heraus. Dieses kann man starten und
+ggf. mit Inputdaten versehen und erhält den entsprechenden Output. Das
+erzeugte Programm läuft i.d.R. nur auf einer bestimmten Plattform.</p>
+<p>Beispiele: gcc, clang, ...</p>
+<h2 id="anwendung-interpreter">Anwendung: Interpreter</h2>
+<p><a href="#R-image-b655efb07a53c6ff0f1092321396584b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/interpreter.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b655efb07a53c6ff0f1092321396584b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/interpreter.png?width=auto&height=auto"></a></p>
+<p>Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.
+Es wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen
+im AST bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt
+werden. Typischerweise hat man hier eine &quot;Read-Eval-Print-Loop&quot; (<em>REPL</em>).</p>
+<p>Beispiele: Python</p>
+<h2 id="anwendung-virtuelle-maschinen">Anwendung: Virtuelle Maschinen</h2>
+<p><a href="#R-image-65e4a1954eab3b2cf9a94e59a2a90cfe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/virtualmachine.png?width=auto&height=auto" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-65e4a1954eab3b2cf9a94e59a2a90cfe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/virtualmachine.png?width=auto&height=auto"></a></p>
+<p>Hier liegt eine Art Mischform aus Compiler und Interpreter vor: Der Compiler
+übersetzt den Quellcode in ein maschinenunabhängiges Zwischenformat
+(&quot;Byte-Code&quot;). Dieser wird von der virtuellen Maschine (&quot;VM&quot;) gelesen und
+ausgeführt. Die VM kann also als Interpreter für Byte-Code betrachtet werden.</p>
+<p>Beispiel: Java mit seiner JVM</p>
+<h2 id="anwendung-c-toolchain">Anwendung: C-Toolchain</h2>
+<p><a href="#R-image-df062a60c44bee86f60af43ef3df5915" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/c-toolchain.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-df062a60c44bee86f60af43ef3df5915"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/c-toolchain.png?width=80%25&height=auto"></a></p>
+<p>Erinnern Sie sich an die LV &quot;Systemprogrammierung&quot; im dritten Semester :-)</p>
+<p>Auch wenn es so aussieht, als würde der C-Compiler aus dem Quelltext direkt das
+ausführbare Programm erzeugen, finden hier dennoch verschiedene Stufen statt.
+Zuerst läuft ein Präprozessor über den Quelltext und ersetzt alle <code>#include</code>
+und <code>#define</code> etc., danach arbeitet der C-Compiler, dessen Ausgabe wiederum
+durch einen Assembler zu ausführbarem Maschinencode transformiert wird.</p>
+<p>Beispiele: gcc, clang, ...</p>
+<h2 id="anwendung-c-compiler">Anwendung: C++-Compiler</h2>
+<p><a href="#R-image-47806924659768195ef46cde006c3651" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/cpp-toolchain.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-47806924659768195ef46cde006c3651"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/cpp-toolchain.png?width=80%25&height=auto"></a></p>
+<p>C++ hat meist keinen eigenen (vollständigen) Compiler :-)</p>
+<p>In der Regel werden die C++-Konstrukte durch <code>cfront</code> nach C übersetzt, so dass
+man anschließend auf die etablierten Tools zurückgreifen kann.</p>
+<p>Dieses Vorgehen werden Sie relativ häufig finden. Vielleicht sogar in Ihrem
+Projekt ...</p>
+<p>Beispiel: g++</p>
+<h2 id="anwendung-bugfinder">Anwendung: Bugfinder</h2>
+<p><a href="#R-image-84eb71dcd957d02da85532813254e6d4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/findbugs.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-84eb71dcd957d02da85532813254e6d4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/00-intro/applications/findbugs.png?width=80%25&height=auto"></a></p>
+<p>Tools wie FindBugs analysieren den (Java-) Quellcode und suchen nach bekannten
+Fehlermustern. Dazu benötigen sie nur den Analyse-Teil eines Compilers!</p>
+<p>Auf dem AST kann dann nach vorab definierten Fehlermustern gesucht werden
+(Stichwort &quot;Graphmatching&quot;). Dazu fällt die semantische Analyse entsprechend
+umfangreicher aus als normal.</p>
+<p>Zusätzlich wird noch eine Reporting-Komponente benötigt, da die normalen
+durch die Analysekette erzeugten Fehlermeldungen nicht helfen (bzw. sofern
+der Quellcode wohlgeformter Code ist, würden ja keine Fehlermeldungen durch
+die Analyseeinheit generiert).</p>
+<p>Beispiele: SpotBugs, Checkstyle, ESLint, ...</p>
+<h2 id="anwendung-pandoc">Anwendung: Pandoc</h2>
+<p><a href="https://pandoc.org/" rel="external" target="_blank">Pandoc</a> ist ein universeller und modular aufgebauter
+Textkonverter, der mit Hilfe verschiedener <em>Reader</em> unterschiedliche
+Textformate einlesen und in ein Zwischenformat (hier JSON) transformieren
+kann. Über verschiedene <em>Writer</em> können aus dem Zwischenformat dann Dokumente
+in den gewünschten Zielformaten erzeugt werden.</p>
+<p>Die Reader entsprechen der Analyse-Phase und die Writer der Synthese-Phase
+eines Compilers. Anstelle eines ausführbaren Programms (Maschinencode) wird
+ein anderes Textformat erstellt/ausgegeben.</p>
+<p>Beispielsweise wird aus diesem Markdown-Schnipsel ...</p>
+<pre><code>Dies ist ein Satz mit
+*  einem Stichpunkt, und
+*  einem zweiten Stichpunkt.
+</code></pre>
+<p>... dieses Zwischenformat erzeugt, ...</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;blocks&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Para&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Dies&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;ist&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;ein&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Satz&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;mit&#34;</span>}]},
+</span></span><span style="display:flex;"><span>           {<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;BulletList&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Plain&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;einem&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Stichpunkt,&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;und&#34;</span>}]}],[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Plain&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:[{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;einem&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;zweiten&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Space&#34;</span>},{<span style="color:#f92672">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;Str&#34;</span>,<span style="color:#f92672">&#34;c&#34;</span>:<span style="color:#e6db74">&#34;Stichpunkt.&#34;</span>}]}]]}],<span style="color:#f92672">&#34;pandoc-api-version&#34;</span>:[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">4</span>],<span style="color:#f92672">&#34;meta&#34;</span>:{}}</span></span></code></pre></div>
+<p>... und daraus schließlich dieser TeX-Code.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>Dies ist ein Satz mit
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{itemize}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tightlist</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\item</span> einem Stichpunkt, und
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\item</span> einem zweiten Stichpunkt.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{itemize}</span></span></code></pre></div>
+<p>Im Prinzip ist Pandoc damit ein Beispiel für Compiler, die aus einem formalen Text nicht
+ein ausführbares Programm erzeugen (Maschinencode), sondern einen anderen formalen Text.
+Dieser werden häufig auch &quot;Transpiler&quot; genannt.</p>
+<p>Weitere Beispiele:</p>
+<ul>
+<li>Lexer-/Parser-Generatoren: ANTLR, Flex, Bison, ...: formale Grammatik nach Sourcecode</li>
+<li>CoffeeScript: CoffeeScript (eine Art &quot;JavaScript light&quot;) nach JavaScript</li>
+<li>Emscripten: C/C++ nach LLVM nach WebAssembly (tatsächlich kann LLVM-IR auch direkt
+als Input verwendet werden)</li>
+<li>Fitnesse: Word/Wiki nach ausführbare Unit-Tests</li>
+</ul>
+<h2 id="was-bringt-mir-das">Was bringt mir das?</h2>
+<div style="text-align:center;">
+<span class="badge cstyle primary"><span class="badge-content"><p><span class='alert'><strong>Beschäftigung mit dem schönsten Thema in der Informatik ;-)</strong></span></p>
+</span></span>
+</div>
+<h3 id="auswahl-einiger-gründe-für-den-besuch-des-moduls-compilerbau">Auswahl einiger Gründe für den Besuch des Moduls &quot;Compilerbau&quot;</h3>
+<ul>
+<li>Erstellung eigener kleiner Interpreter/Compiler
+<ul>
+<li>Einlesen von komplexen Daten</li>
+<li>DSL als Brücke zwischen Stakeholdern</li>
+<li>DSL zum schnelleren Programmieren (denken Sie etwa an <a href="http://coffeescript.org/" rel="external" target="_blank">CoffeeScript</a> ...)</li>
+</ul>
+</li>
+<li>Wie funktionieren FindBugs, Lint und ähnliche Tools?
+<ul>
+<li>Statische Codeanalyse: Dead code elimination</li>
+</ul>
+</li>
+<li>Language-theoretic Security: <a href="http://langsec.org/" rel="external" target="_blank">LangSec</a></li>
+<li>Verständnis für bestimmte Sprachkonstrukte und -konzepte (etwa <code>virtual</code> in C++)</li>
+<li>Vertiefung durch Besuch &quot;echter&quot; Compilerbau-Veranstaltungen an Uni möglich :-)</li>
+<li>Wie funktioniert:
+<ul>
+<li>ein Python-Interpreter?</li>
+<li>das Syntaxhighlighting in einem Editor oder in Doxygen?</li>
+<li>ein Hardwarecompiler (etwa VHDL)?</li>
+<li>ein Text-Formatierer (TeX, LaTeX, ...)?</li>
+<li>CoffeeScript oder Emscripten?</li>
+</ul>
+</li>
+<li>Wie kann man einen eigenen Compiler/Interpreter basteln, etwa für
+<ul>
+<li>MiniJava (mit C-Backend)</li>
+<li>Brainfuck</li>
+<li>Übersetzung von JSON nach XML</li>
+</ul>
+</li>
+<li>Um eine profundes Kenntnis von Programmiersprachen zu erlangen, ist eine
+Beschäftigung mit ihrer Implementierung unerlässlich.</li>
+<li>Viele Grundtechniken der Informatik und elementare Datenstrukturen wie
+Keller, Listen, Abbildungen, Bäume, Graphen, Automaten etc. finden im
+Compilerbau Anwendung. Dadurch schließt sich in gewisser Weise der Kreis
+in der Informatikausbildung ...</li>
+<li>Aufgrund seiner Reife gibt es hervorragende Beispiele von formaler
+Spezifikation im Compilerbau.</li>
+<li>Mit dem Gebiet der formalen Sprachen berührt der Compilerbau interessante
+Aspekte moderner Linguistik. Damit ergibt sich letztlich eine Verbindung
+zur KI ...</li>
+<li>Die Unterscheidung von Syntax und Semantik ist eine grundlegende Technik
+in fast allen formalen Systeme.</li>
+</ul>
+<h3 id="parser-generatoren-auswahl">Parser-Generatoren (Auswahl)</h3>
+<p>Diese Tools könnte man beispielsweise nutzen, um seine eigene Sprache zu basteln.</p>
+<ul>
+<li>ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing, executing, or translating structured text or binary files: <a href="https://github.com/antlr/antlr4" rel="external" target="_blank">github.com/antlr/antlr4</a></li>
+<li>Grammars written for ANTLR v4; expectation that the grammars are free of actions: <a href="https://github.com/antlr/grammars-v4" rel="external" target="_blank">github.com/antlr/grammars-v4</a></li>
+<li>An incremental parsing system for programmings tools: <a href="https://github.com/tree-sitter/tree-sitter" rel="external" target="_blank">github.com/tree-sitter/tree-sitter</a></li>
+<li>Flex, the Fast Lexical Analyzer - scanner generator for lexing in C and C++: <a href="https://github.com/westes/flex" rel="external" target="_blank">github.com/westes/flex</a></li>
+<li>Bison is a general-purpose parser generator that converts an annotated context-free grammar into a deterministic LR or generalized LR (GLR) parser employing LALR(1) parser tables: <a href="https://www.gnu.org/software/bison/" rel="external" target="_blank">gnu.org/software/bison</a></li>
+<li>Parser combinators for binary formats, in C: <a href="https://github.com/UpstandingHackers/hammer" rel="external" target="_blank">github.com/UpstandingHackers/hammer</a></li>
+<li>Eclipse Xtext is a language development framework: <a href="https://github.com/eclipse/xtext" rel="external" target="_blank">github.com/eclipse/xtext</a></li>
+</ul>
+<h3 id="statische-analyse-type-checking-und-linter">Statische Analyse, Type-Checking und Linter</h3>
+<p>Als Startpunkt für eigene Ideen. Oder Verbessern/Erweitern der Projekte ...</p>
+<ul>
+<li>Pluggable type-checking for Java: <a href="https://github.com/typetools/checker-framework" rel="external" target="_blank">github.com/typetools/checker-framework</a></li>
+<li>SpotBugs is FindBugs' successor. A tool for static analysis to look for bugs in Java code: <a href="https://github.com/spotbugs/spotbugs" rel="external" target="_blank">github.com/spotbugs/spotbugs</a></li>
+<li>An extensible cross-language static code analyzer: <a href="https://github.com/pmd/pmd" rel="external" target="_blank">github.com/pmd/pmd</a></li>
+<li>Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard: <a href="https://github.com/checkstyle/checkstyle" rel="external" target="_blank">github.com/checkstyle/checkstyle</a></li>
+<li>JaCoCo - Java Code Coverage Library: <a href="https://github.com/jacoco/jacoco" rel="external" target="_blank">github.com/jacoco/jacoco</a></li>
+<li>Sanitizers: memory error detector: <a href="https://github.com/google/sanitizers" rel="external" target="_blank">github.com/google/sanitizers</a></li>
+<li>JSHint is a tool that helps to detect errors and potential problems in your JavaScript code: <a href="https://github.com/jshint/jshint" rel="external" target="_blank">github.com/jshint/jshint</a></li>
+<li>Haskell source code suggestions: <a href="https://github.com/ndmitchell/hlint" rel="external" target="_blank">github.com/ndmitchell/hlint</a></li>
+<li>Syntax checking hacks for vim: <a href="https://github.com/vim-syntastic/syntastic" rel="external" target="_blank">github.com/vim-syntastic/syntastic</a></li>
+</ul>
+<h3 id="dsl-domain-specific-language">DSL (Domain Specific Language)</h3>
+<ul>
+<li>NVIDIA Material Definition Language SDK: <a href="https://github.com/NVIDIA/MDL-SDK" rel="external" target="_blank">github.com/NVIDIA/MDL-SDK</a></li>
+<li>FitNesse -- The Acceptance Test Wiki: <a href="https://github.com/unclebob/fitnesse" rel="external" target="_blank">github.com/unclebob/fitnesse</a></li>
+</ul>
+<p>Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:</p>
+<ul>
+<li>Eclipse Xtext is a language development framework: <a href="https://github.com/eclipse/xtext" rel="external" target="_blank">github.com/eclipse/xtext</a></li>
+</ul>
+<h3 id="konverter-von-x-nach-y">Konverter von X nach Y</h3>
+<ul>
+<li>Emscripten: An LLVM-to-JavaScript Compiler: <a href="https://github.com/kripken/emscripten" rel="external" target="_blank">github.com/kripken/emscripten</a></li>
+<li>&quot;Unfancy JavaScript&quot;: <a href="https://github.com/jashkenas/coffeescript" rel="external" target="_blank">github.com/jashkenas/coffeescript</a></li>
+<li>Universal markup converter: <a href="https://github.com/jgm/pandoc" rel="external" target="_blank">github.com/jgm/pandoc</a></li>
+<li>Übersetzung von JSON nach XML</li>
+</ul>
+<h3 id="odds-and-ends">Odds and Ends</h3>
+<ul>
+<li>How to write your own compiler: <a href="http://staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm" rel="external" target="_blank">staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm</a></li>
+<li>Building a modern functional compiler from first principles: <a href="https://github.com/sdiehl/write-you-a-haskell" rel="external" target="_blank">github.com/sdiehl/write-you-a-haskell</a></li>
+<li>Language-theoretic Security: <a href="http://langsec.org/" rel="external" target="_blank">LangSec</a></li>
+<li>Generierung von automatisierten Tests mit <a href="http://esprima.org/" rel="external" target="_blank">Esprima</a>: <a href="https://www.heise.de/developer/artikel/Generierung-von-automatisierten-Tests-mit-Esprima-4129726.html?view=print" rel="external" target="_blank">heise.de/-4129726</a></li>
+<li>Eigener kleiner Compiler/Interpreter, etwa für
+<ul>
+<li>MiniJava mit C-Backend oder sogar <a href="http://llvm.org/" rel="external" target="_blank">LLVM</a>-Backend</li>
+<li>Brainfuck</li>
+</ul>
+</li>
+</ul>
+<h3 id="als-weitere-anregung-themen-der-mini-projekte-im-w17">Als weitere Anregung: Themen der Mini-Projekte im W17</h3>
+<ul>
+<li>Java2UMLet</li>
+<li>JavaDoc-to-Markdown</li>
+<li>Validierung und Übersetzung von Google Protocol Buffers v3 nach JSON</li>
+<li>svg2tikz</li>
+<li>SwaggerLang -- Schreiben wie im Tagebuch</li>
+<li>Markdown zu LaTeX</li>
+<li>JavaDocToLaTeX</li>
+<li>MySQL2REDIS-Parser</li>
+</ul>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen formalen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Nicht alle Stufen kommen immer vor =&gt; unterschiedliche Anwendungen</p>
+<ul>
+<li>&quot;Echte&quot; Compiler: Sourcecode nach Maschinencode</li>
+<li>Interpreter: Interaktive Ausführung</li>
+<li>Virtuelle Maschinen als Zwischending zwischen Compiler und Interpreter</li>
+<li>Transpiler: formaler Text nach formalem Text</li>
+<li>Analysetools: Parsen den Sourcecode, werten die Strukturen aus</li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+                
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Aho2023'>[Aho2023] <a href='https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>Compilers: Principles, Techniques, and Tools, Updated 2nd Edition by Pearson</strong></a><br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. und Bansal, S., Pearson India, 2023. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-9-3570-5488-1</a>.<br><em>Kapitel 1 Introduction</em></li> <li id='id_Grune2012'>[Grune2012] <strong>Modern Compiler Design</strong><br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-4614-4698-9' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-1-4614-4698-9</a>.<br><em>Kapitel 1 Introduction</em></li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/clipboard.min.js?1736351933" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/perfect-scrollbar.min.js?1736351933" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/mathjax/tex-mml-chtml.js?1736351933"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1603207/js/theme.js?1736351933" defer></script>
+  </body>
+</html>
