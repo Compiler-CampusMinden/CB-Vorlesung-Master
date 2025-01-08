@@ -20,13 +20,15 @@ praktischen Aspekte des Compilerbaus zu vertiefen.
 Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese
 Workshops werden bewertet und gehen in die Gesamtnote ein.
 
-**Fristen** (siehe Orga-Seite)
+### Fristen (siehe Orga-Seite)
 
--   Workshop I: Präsentation der Programmiersprache: 29. Oktober
--   Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November
--   Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 21. Januar
+-   Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online)
+-   Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online)
+-   Workshop III: Abgabe und Präsentation des Compilers und der Dokumentation: 31. Januar (10:00 - 12:30 Uhr, online)
 
-**Teams**
+Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)
+
+### Teams
 
 Die Aufgaben (Workshops) werden in 2er Teams bearbeitet.
 
