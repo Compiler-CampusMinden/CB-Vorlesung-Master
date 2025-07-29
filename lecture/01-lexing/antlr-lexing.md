@@ -2,7 +2,7 @@
 title: "Lexer mit ANTLR generieren"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "@Parr2014"
+  - "@Parr2014"
 tldr: |
     ANTLR ist ein Parser-Generator, der aus einer Grammatik einen Parser in verschiedenen
     Zielsprachen (Java, Python, C++, ...) generieren kann.

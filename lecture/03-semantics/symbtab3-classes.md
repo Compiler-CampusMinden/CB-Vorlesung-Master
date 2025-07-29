@@ -2,12 +2,9 @@
 title: "SymbTab3: Strukturen und Klassen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Mogensen2017"
-    comment: "Kapitel 3"
-  - key: "Parr2014"
-    comment: "Kapitel 6.4 und 8.4"
-  - key: "Parr2010"
-    comment: "Kapitel 6, 7 und 8"
+  - "@Mogensen2017: Kapitel 3"
+  - "@Parr2014: Kapitel 6.4 und 8.4"
+  - "@Parr2010: Kapitel 6, 7 und 8"
 tldr: |
   Strukturen und Klassen bilden jeweils einen eigenen verschachtelten Scope, worin
   die Attribute und Methoden definiert werden.

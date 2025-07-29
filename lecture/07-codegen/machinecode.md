@@ -2,8 +2,7 @@
 title: "Generierung von Maschinencode (Skizze)"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Mogensen2017"
-    comment: "Kapitel 7 Machine-Code Generation"
+  - "@Mogensen2017: Kapitel 7 Machine-Code Generation"
 tldr: |
   Dies ist ein Ausblick und soll die Erzeugung von Maschinencode skizzieren.
 

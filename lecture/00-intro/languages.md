@@ -2,10 +2,8 @@
 title: "Bandbreite der Programmiersprachen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Kapitel 1 Introduction"
-  - key: "Grune2012"
-    comment: "Kapitel 1 Introduction"
+  - "@Aho2023: Kapitel 1 Introduction"
+  - "@Grune2012: Kapitel 1 Introduction"
 tldr: |
   Am Beispiel des Abzählreims "99 Bottles of Beer" werden (ganz kurz) verschiedene
   Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept

@@ -2,12 +2,9 @@
 title: "AST-basierte Interpreter: Basics"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Nystrom2021"
-    comment: "Kapitel Kapitel: A Tree-Walk Interpreter, insb. 8. Statements and State"
-  - key: "Grune2012"
-    comment: "Kapitel 6"
-  - key: "Mogensen2017"
-    comment: "Kapitel 4"
+  - "@Nystrom2021: Kapitel: A Tree-Walk Interpreter, insb. 8. Statements and State"
+  - "@Grune2012: Kapitel 6"
+  - "@Mogensen2017: Kapitel 4"
 tldr: |
   Ein AST-basierter Interpreter besteht oft aus einem "Visitor-Dispatcher": Man traversiert
   mit einer `eval()`-Funktion den AST und ruft je nach Knotentyp die passende Funktion auf.

@@ -2,12 +2,9 @@
 title: "SymbTab1: Nested Scopes"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Mogensen2017"
-    comment: "Kapitel 3"
-  - key: "Parr2014"
-    comment: "Kapitel 6.4 und 8.4"
-  - key: "Parr2010"
-    comment: "Kapitel 6, 7 und 8"
+  - "@Mogensen2017: Kapitel 3"
+  - "@Parr2014: Kapitel 6.4 und 8.4"
+  - "@Parr2010: Kapitel 6, 7 und 8"
 tldr: |
   In Symboltabellen werden Informationen über Bezeichner verwaltet. Wenn es in der zu
   übersetzenden Sprache *Nested Scopes* gibt, spiegelt sich dies in den Symboltabellen

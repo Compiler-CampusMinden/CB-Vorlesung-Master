@@ -2,9 +2,8 @@
 title: "Garbage Collection"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Nystrom2021"
-    comment: "Kapitel 26: Garbage Collection"
-  - key: "GCHandbook2011"
+  - "@Nystrom2021: Kapitel 26: Garbage Collection"
+  - "@GCHandbook2011"
 tldr: |
   Bei der Abarbeitung des Bytecodes in der VM werden immer wieder Objekte auf dem Laufzeit-Heap angelegt.
   Nicht benötigte Objekte müssen von Zeit zu Zeit wieder frei gegeben werden.

@@ -2,8 +2,8 @@
 title: "LLVM als IR"
 author: "BC George (HSBI)"
 readings:
-  - key: "LLVM-org"
-  - key: "LLVM-doc"
+  - "@LLVM-org"
+  - "@LLVM-doc"
 outcomes:
   - k1: "Konzept von LLVM"
   - k1: "Module von LLVM"

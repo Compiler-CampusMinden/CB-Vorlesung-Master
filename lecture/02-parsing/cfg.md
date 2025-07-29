@@ -2,8 +2,8 @@
 title: "CFG"
 author: "BC George (HSBI)"
 readings:
-  - key: "Aho2023"
-  - key: "hopcroft2003"
+  - "@Aho2023"
+  - "@hopcroft2003"
 outcomes:
   - k1: "PDAs"
   - k1: "Deterministische PDAs"

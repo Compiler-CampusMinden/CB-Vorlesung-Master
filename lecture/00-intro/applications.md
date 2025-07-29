@@ -2,10 +2,8 @@
 title: "Anwendungen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Kapitel 1 Introduction"
-  - key: "Grune2012"
-    comment: "Kapitel 1 Introduction"
+  - "@Aho2023: Kapitel 1 Introduction"
+  - "@Grune2012: Kapitel 1 Introduction"
 tldr: |
   Es gibt verschiedene Anwendungsmöglichkeiten für Compiler. Je nach Bedarf wird dabei
   die komplette Toolchain durchlaufen oder es werden Stufen ausgelassen. Häufig genutzte

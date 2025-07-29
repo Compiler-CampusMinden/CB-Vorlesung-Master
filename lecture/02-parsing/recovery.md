@@ -2,11 +2,9 @@
 title: "Error-Recovery"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Parr2010"
-    comment: "Kapitel 2 und 3"
-  - key: "Parr2014"
-  - key: "Levine2009"
-    comment: "Kapitel 7 und 8"
+  - "@Parr2010: Kapitel 2 und 3"
+  - "@Parr2014"
+  - "@Levine2009: Kapitel 7 und 8"
 tldr: |
   Umgang mit Fehlern ist im Compiler sehr wichtig: Falscher Code darf nicht in ein ausführbares Programm
   umgewandelt werden oder ausgeführt werden, gleichzeitig erwarten Nutzer zielführende Fehlermeldungen

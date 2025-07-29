@@ -2,14 +2,10 @@
 title: "Überblick Zwischencode"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Kapitel 6 und 8"
-  - key: "Mogensen2017"
-    comment: "Kapitel 6 und 7"
-  - key: "Grune2012"
-    comment: "Kapitel 7"
-  - key: "Parr2010"
-    comment: "Kapitel 11"
+  - "@Aho2023: Kapitel 6 und 8"
+  - "@Mogensen2017: Kapitel 6 und 7"
+  - "@Grune2012: Kapitel 7"
+  - "@Parr2010: Kapitel 11"
 tldr: |
   Für den Zwischencode (**IR**) gibt es kein allgemein definiertes Format. In der Praxis
   trifft man auf eine große Bandbreite an Formaten, wobei teilweise bereits der AST selbst

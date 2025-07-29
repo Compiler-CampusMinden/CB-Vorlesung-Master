@@ -2,11 +2,9 @@
 title: "Reguläre Sprachen, Ausdrucksstärke"
 author: "BC George (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Abschnitt 2.6 und Kapitel 3"
-  - key: "Torczon2012"
-    comment: "Kapitel 2"
-  - key: "Parr2014"
+  - "@Aho2023: Abschnitt 2.6 und Kapitel 3"
+  - "@Torczon2012: Kapitel 2"
+  - "@Parr2014"
 outcomes:
   - k1: "DFAs"
   - k1: "NFAs"

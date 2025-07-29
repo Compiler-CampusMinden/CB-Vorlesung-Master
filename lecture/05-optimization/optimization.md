@@ -2,14 +2,10 @@
 title: "Optimierung und Datenflussanalyse"
 author: "BC George (HSBI)"
 readings:
-  - key: "Güting1999"
-    comment: "Kapitel 8"
-  - key: "Grune2012"
-    comment: "Kapitel 9.3"
-  - key: "Aho2023"
-    comment: "Kapitel 9"
-  - key: "Mogensen2017"
-    comment: "Kapitel 8, 10 und 11"
+  - "@Güting1999: Kapitel 8"
+  - "@Grune2012: Kapitel 9.3"
+  - "@Aho2023: Kapitel 9"
+  - "@Mogensen2017: Kapitel 8, 10 und 11"
 outcomes:
   - k1: "Algebraische Optimierungen"
   - k1: "Maschinenunabhängige Optimierungen"

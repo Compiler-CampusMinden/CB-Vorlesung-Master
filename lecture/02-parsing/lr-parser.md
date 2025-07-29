@@ -2,12 +2,11 @@
 title: "Syntaxanalyse: LR-Parser (LR(0), LALR)"
 author: "BC George (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Kapitel 4.5 bis 4.8"
-  - key: "Aho2023"
-  - key: "hopcroft2003"
-  - key: "Kunert2018"
-  - key: "Wagenknecht2014"
+  - "@Aho2023: Kapitel 4.5 bis 4.8"
+  - "@Aho2023"
+  - "@hopcroft2003"
+  - "@Kunert2018"
+  - "@Wagenknecht2014"
 outcomes:
   - k1: "Prinzipien der Bottom-Up-Analyse"
   - k1: "Items"

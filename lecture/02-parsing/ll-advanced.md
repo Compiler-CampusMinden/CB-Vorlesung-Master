@@ -2,16 +2,12 @@
 title: "LL-Parser: Fortgeschrittene Techniken"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Parr2010"
-    comment: "Kapitel 3"
-  - key: "Parr2014"
-  - key: "Mogensen2017"
-    comment: "Kapitel 2 (insbesondere Abschnitte 2.3 bis (einschließlich) 2.19)"
-  - key: "Aho2023"
-    comment: "Abschnitte 2.4 und 4.4"
-  - key: "Grune2012"
-    comment: "Abschnitte 3.1 bis (einschließlich) 3.4"
-  - key: "Packrat2006"
+  - "@Parr2010: Kapitel 3"
+  - "@Parr2014"
+  - "@Mogensen2017: Kapitel 2 (insbesondere Abschnitte 2.3 bis (einschließlich) 2.19)"
+  - "@Aho2023: Abschnitte 2.4 und 4.4"
+  - "@Grune2012: Abschnitte 3.1 bis (einschließlich) 3.4"
+  - "@Packrat2006"
 tldr: |
   ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/02-parsing/images/architektur_cb_parser.png)
 

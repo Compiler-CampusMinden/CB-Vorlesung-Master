@@ -2,8 +2,8 @@
 title: "Grenze Lexer und Parser"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Nystrom2021"
-  - key: "Parr2014"
+  - "@Nystrom2021"
+  - "@Parr2014"
 tldr: |
   Die Grenze zwischen Lexer und Parser ist gleitend. Das Ziel jeder Verarbeitungsstufe in der
   Compilerpipeline sollte es sein, eine möglichst hohe Abstraktion auf der jeweiligen Ebene

@@ -2,14 +2,10 @@
 title: "Syntaxgesteuerte Interpreter"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Nystrom2021"
-    comment: "Kapitel: A Tree-Walk Interpreter"
-  - key: "Levine2009: Bison"
-    comment: "Kapitel 6"
-  - key: "Parr2014"
-    comment: "Kapitel 6.4 und 8.4"
-  - key: "Parr2010"
-    comment: "Kapitel 8 und 9"
+  - "@Nystrom2021: Kapitel: A Tree-Walk Interpreter"
+  - "@Levine2009: Bison, Kapitel 6"
+  - "@Parr2014: Kapitel 6.4 und 8.4"
+  - "@Parr2010: Kapitel 8 und 9"
 tldr: |
   Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen Ergebnisse:
 

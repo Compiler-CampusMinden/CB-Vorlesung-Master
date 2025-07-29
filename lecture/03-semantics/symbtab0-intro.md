@@ -2,12 +2,9 @@
 title: "SymbTab0: Überblick Symboltabellen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Mogensen2017"
-    comment: "Kapitel 3"
-  - key: "Parr2014"
-    comment: "Kapitel 6.4 und 8.4"
-  - key: "Parr2010"
-    comment: "Kapitel 6, 7 und 8"
+  - "@Mogensen2017: Kapitel 3"
+  - "@Parr2014: Kapitel 6.4 und 8.4"
+  - "@Parr2010: Kapitel 6, 7 und 8"
 tldr: |
   Auf die lexikalische Analyse und die Syntaxanalyse folgt die semantische Analyse. Nach dem
   Parsen steht fest, dass ein Programm syntaktisch korrekt ist. Nun muss geprüft werden, ob

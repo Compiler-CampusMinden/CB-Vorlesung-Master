@@ -2,12 +2,9 @@
 title: "Lexer: Tabellenbasierte Implementierung"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: " Abschnitt 2.6 und Kapitel 3"
-  - key: "Torczon2012"
-    comment: "Kapitel 2"
-  - key: "Mogensen2017"
-    comment: "Kapitel 1 (insbesondere Abschnitt 1.8)"
+  - "@Aho2023: Abschnitt 2.6 und Kapitel 3"
+  - "@Torczon2012: Kapitel 2"
+  - "@Mogensen2017: Kapitel 1 (insbesondere Abschnitt 1.8)"
 tldr: |
   ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/01-lexing/images/architektur_cb_lexer.png)
 

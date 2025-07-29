@@ -2,9 +2,9 @@
 title: "PEG-Parser, Pratt-Parser und Parser Combinators"
 author: "BC George (HSBI)"
 readings:
-  - key: "Mogensen2017"
-  - key: "Ford2004Peg"
-  - key: "Ford2004Proceedings"
+  - "@Mogensen2017"
+  - "@Ford2004Peg"
+  - "@Ford2004Proceedings"
 outcomes:
   - k1: "PEG-Parser"
   - k1: "Operator Prcedence Parser"

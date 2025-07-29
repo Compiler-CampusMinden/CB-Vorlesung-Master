@@ -2,12 +2,9 @@
 title: "AST-basierte Interpreter: Funktionen und Klassen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Nystrom2021"
-    comment: "Kapitel Kapitel: A Tree-Walk Interpreter, insb. 10. Functions u. 12. Classes"
-  - key: "Grune2012"
-    comment: "Kapitel 6"
-  - key: "Mogensen2017"
-    comment: "Kapitel 4"
+  - "@Nystrom2021: Kapitel: A Tree-Walk Interpreter, insb. 10. Functions u. 12. Classes"
+  - "@Grune2012: Kapitel 6"
+  - "@Mogensen2017: Kapitel 4"
 tldr: |
   Üblicherweise können Funktionen auf die Umgebung zurückgreifen, in der die Definition der
   Funktion erfolgt ist (["**Closure**"](https://en.wikipedia.org/wiki/Closure_(computer_programming))).

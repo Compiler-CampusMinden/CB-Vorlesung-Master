@@ -2,7 +2,7 @@
 title: "Parser mit ANTLR generieren"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "@Parr2014"
+  - "@Parr2014"
 tldr: |
     Mit ANTLR kann aus einer Grammatik ein LL(*)-Parser generiert werden. Die Parser-Regeln
     in der Grammatik fangen dabei mit einem **Kleinbuchstaben** an (Erinnerung: Lexer-Regel

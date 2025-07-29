@@ -2,9 +2,8 @@
 title: "Typen, Type Checking und Attributierte Grammatiken"
 author: "BC George (HSBI)"
 readings:
-  - key: "Aho2023"
-    comment: "Kapitel 2.3 und 5"
-  - key: "Levine2009"
+  - "@Aho2023: Kapitel 2.3 und 5"
+  - "@Levine2009"
 outcomes:
   - k2: "Konzept der attributierten Grammatiken: Anreicherung mit Attributen und semantischen Regeln"
   - k2: "Unterschied zwischen geerbten und berechneten Attributen"
