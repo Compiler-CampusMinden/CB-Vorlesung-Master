@@ -1,6 +1,7 @@
 ---
 title: "CFG"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Aho2023"
   - "@hopcroft2003"

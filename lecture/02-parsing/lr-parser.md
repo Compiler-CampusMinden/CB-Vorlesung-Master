@@ -1,6 +1,7 @@
 ---
 title: "Syntaxanalyse: LR-Parser (LR(0), LALR)"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Aho2023: Kapitel 4.5 bis 4.8"
   - "@Aho2023"

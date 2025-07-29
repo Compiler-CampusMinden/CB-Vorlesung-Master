@@ -1,6 +1,7 @@
 ---
 title: "Optimierung und Datenflussanalyse"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Güting1999: Kapitel 8"
   - "@Grune2012: Kapitel 9.3"

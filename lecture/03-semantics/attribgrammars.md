@@ -1,6 +1,7 @@
 ---
 title: "Typen, Type Checking und Attributierte Grammatiken"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Aho2023: Kapitel 2.3 und 5"
   - "@Levine2009"

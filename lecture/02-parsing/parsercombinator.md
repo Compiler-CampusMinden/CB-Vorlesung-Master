@@ -1,6 +1,7 @@
 ---
 title: "PEG-Parser, Pratt-Parser und Parser Combinators"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Mogensen2017"
   - "@Ford2004Peg"

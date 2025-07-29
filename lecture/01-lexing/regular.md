@@ -1,6 +1,7 @@
 ---
 title: "Reguläre Sprachen, Ausdrucksstärke"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Aho2023: Abschnitt 2.6 und Kapitel 3"
   - "@Torczon2012: Kapitel 2"
