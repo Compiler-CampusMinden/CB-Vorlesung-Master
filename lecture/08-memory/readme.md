@@ -1,5 +1,6 @@
 ---
 title: "Memory Management und Runtime"
+no_pdf: true
 ---
 
 

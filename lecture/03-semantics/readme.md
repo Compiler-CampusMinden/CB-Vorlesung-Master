@@ -1,5 +1,6 @@
 ---
 title: "Semantische Analyse"
+no_pdf: true
 ---
 
 

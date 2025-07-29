@@ -1,5 +1,6 @@
 ---
 title: "Syntaktische Analyse"
+no_pdf: true
 ---
 
 

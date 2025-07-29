@@ -1,5 +1,6 @@
 ---
 title: "Lexikalische Analyse"
+no_pdf: true
 ---
 
 
