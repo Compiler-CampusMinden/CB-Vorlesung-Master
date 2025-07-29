@@ -15,7 +15,7 @@ outcomes:
   - k3: "Herausfinden, ob eine Sprache regulär ist"
   - k3: "Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert"
 attachments:
-  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/lexing_regular.ann.ma.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular.ann.ma.pdf"
     name: "Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke"
 ---
 

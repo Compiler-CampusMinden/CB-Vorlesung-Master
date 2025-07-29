@@ -81,7 +81,7 @@ werden.
 
 ## Erreichbarkeit
 
-![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/reachable.png)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png?raw=true)
 
 [[reachable.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
@@ -109,7 +109,7 @@ Das führt zu einem zweistufigen Algorithmus:
 2.  **Sweep**: Lösche alle anderen Objekte.
 :::
 
-![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png?raw=true)
 
 [[mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
@@ -186,7 +186,7 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
     zur Verfügung steht und 10% für GC verwendet werden.
 :::
 
-![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/latency-throughput.png){width="80%"}
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png?raw=true){width="80%"}
 
 [[latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 

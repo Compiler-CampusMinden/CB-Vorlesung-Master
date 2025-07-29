@@ -6,7 +6,7 @@ readings:
   - "@Torczon2012: Kapitel 2"
   - "@Mogensen2017: Kapitel 1 (insbesondere Abschnitt 1.8)"
 tldr: |
-  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Master/master/lecture/01-lexing/images/architektur_cb_lexer.png)
+  ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/01-lexing/images/architektur_cb_lexer.png?raw=true)
 
   Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token zerlegen. Zur
   Spezifikation der Token werden reguläre Ausdrücke verwendet.
