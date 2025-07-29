@@ -1,6 +1,7 @@
 ---
 title: "MIF 1.5 (PO23): Concepts of Programming Languages (Winter 2024/25)"
 has_license: true
+no_beamer: true
 ---
 
 

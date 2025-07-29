@@ -1,6 +1,7 @@
 ---
 title: "Blatt 03: Semantische Analyse"
 author: "Carsten Gips, BC George (HSBI)"
+no_beamer: true
 ---
 
 

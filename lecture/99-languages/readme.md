@@ -1,6 +1,7 @@
 ---
 title: "Programmiersprachen und -konzepte"
 no_pdf: true
+no_beamer: true
 ---
 
 

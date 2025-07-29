@@ -1,6 +1,7 @@
 ---
 title: "Überblick"
 no_pdf: true
+no_beamer: true
 ---
 
 

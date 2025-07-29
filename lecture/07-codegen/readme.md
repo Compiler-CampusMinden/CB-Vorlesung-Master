@@ -1,6 +1,7 @@
 ---
 title: "Code Generierung"
 no_pdf: true
+no_beamer: true
 ---
 
 
