@@ -113,7 +113,7 @@ gebracht.
     *   Lokale Variablen ("automatische" Variablen)
     *   Argumente und Return-Werte
 *   Dynamisch wachsend und schrumpfend
-*   [Automatische]{.alert} Pflege
+*   Automatische Pflege
     *   Nach Funktionsrückkehr wird der Stackpointer ("Top of Stack") weiter gesetzt
     *   Dadurch "Bereinigung": Speicher der lokalen Variablen wird freigegeben
 
@@ -121,10 +121,10 @@ gebracht.
 
 *   Bereich für dynamischen Speicher (Allokation während der Laufzeit)
 *   Dynamisch wachsend und schrumpfend
-*   Zugriff und Verwaltung aus [laufendem]{.alert} Programm  => **Pointer**
+*   Zugriff und Verwaltung aus laufendem Programm  => **Pointer**
     *   `malloc()`/`calloc()`/`free()` (C)
     *   `new`/`delete` (C++)
-    *   typischerweise [**Pointer**]{.alert}
+    *   typischerweise **Pointer**
 :::::::::
 
 

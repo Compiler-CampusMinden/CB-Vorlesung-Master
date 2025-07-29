@@ -134,7 +134,7 @@ WS    : [ \t\n]+ -> skip ;
 
 ### Startregeln
 
-*   `start` ist eine [Parser-Regel]{.alert}
+*   `start` ist eine Parser-Regel
     => Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
     Parser am Ende auch starten kann ...
 *   Alle Regeln mit kleinem Anfangsbuchstaben sind Parser-Regeln

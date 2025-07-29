@@ -141,7 +141,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
 ::::::::: notes
 ### Hinweis zur Grammatik (Regeln)
 
-*   `start` ist eine [Parser-Regel]{.alert}
+*   `start` ist eine Parser-Regel
     => Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
     Parser am Ende auch starten kann ...
 *   Die anderen beiden Regeln (mit großem Anfangsbuchstaben) aus der obigen Grammatik
@@ -386,7 +386,7 @@ Hier würde ein "foo42barbar" zu `FOO` gefolgt von `BAR` erkannt werden.
 \bigskip
 \bigskip
 
-[Achtung]{.alert}: Nach [dem Abarbeiten]{.notes} einer non-greedy Sub-Regel [in einer Lexer-Regel]{.notes}
+Achtung: Nach [dem Abarbeiten]{.notes} einer non-greedy Sub-Regel [in einer Lexer-Regel]{.notes}
 gilt "_first match wins_"
 
 `.*? ('4' | '42')`

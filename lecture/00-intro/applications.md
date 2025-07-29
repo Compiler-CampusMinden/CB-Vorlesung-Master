@@ -193,7 +193,7 @@ Weitere Beispiele:
 
 ::: cbox
 \Large
-[**Beschäftigung mit dem schönsten Thema in der Informatik ;-)**]{.alert}
+**Beschäftigung mit dem schönsten Thema in der Informatik ;-)**
 \normalsize
 :::
 

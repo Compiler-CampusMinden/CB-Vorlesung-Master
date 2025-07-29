@@ -135,7 +135,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 | November             | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | Status Workshop II  |
 |                      | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        | Status Workshop II  |
 |                      | 19. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                             | Carsten        | Status Workshop II  |
-|                      | 26. | [**18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**]{.alert}: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                     |
+|                      | 26. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                     |
 | Dezember             | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                     |
 | Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                     |
 |                      | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        |                     |
@@ -145,7 +145,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 | Januar               | 07. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
 |                      | 14. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
 |                      | 21. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
-| _(Prüfungsphase I)_  | 31. | [**[Workshop III]: Projektvorstellung/-übergabe (10:00 - 12:30 Uhr, online)**]{.alert}                                                      |                |                     |
+| _(Prüfungsphase I)_  | 31. | **[Workshop III]: Projektvorstellung/-übergabe (10:00 - 12:30 Uhr, online)**                                                      |                |                     |
 | _(Prüfungsphase I)_  | 07. | **Feedback-Gespräche (10:00 - 12:00 Uhr, online)**                                                                                          |                |                     |
 | _(Prüfungsphase II)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                     |
 
