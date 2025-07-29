@@ -188,26 +188,26 @@ Nach dem Übersetzen finden sich folgende Dateien und Klassen vor:
 
 ```
 .
-├── bin
-│   ├── HelloBaseListener.class
-│   ├── HelloBaseVisitor.class
-│   ├── HelloLexer.class
-│   ├── HelloListener.class
-│   ├── HelloParser.class
-│   ├── HelloParser$RContext.class
-│   ├── HelloVisitor.class
-│   └── Main.class
-├── Hello.g4
-└── src
-    ├── HelloBaseListener.java
-    ├── HelloBaseVisitor.java
-    ├── HelloLexer.java
-    ├── HelloLexer.tokens
-    ├── HelloListener.java
-    ├── HelloParser.java
-    ├── Hello.tokens
-    ├── HelloVisitor.java
-    └── Main.java
+|-- bin
+|   |-- HelloBaseListener.class
+|   |-- HelloBaseVisitor.class
+|   |-- HelloLexer.class
+|   |-- HelloListener.class
+|   |-- HelloParser.class
+|   |-- HelloParser$RContext.class
+|   |-- HelloVisitor.class
+|   |-- Main.class
+|-- Hello.g4
+|-- src
+    |-- HelloBaseListener.java
+    |-- HelloBaseVisitor.java
+    |-- HelloLexer.java
+    |-- HelloLexer.tokens
+    |-- HelloListener.java
+    |-- HelloParser.java
+    |-- Hello.tokens
+    |-- HelloVisitor.java
+    |-- Main.java
 ```
 
 _Anmerkung_: Die Ordnerstruktur wurde durch ein ANTLR-Plugin für Eclipse
