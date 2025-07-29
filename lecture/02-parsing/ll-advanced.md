@@ -118,7 +118,7 @@ def speculate(fn):
     return success
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [@Parr2010, p. 60]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 60]]{.origin}
 
 ::: notes
 Der Funktion `speculate` wird die zu testende Regel (Funktion) als Parameter übergeben, im obigen
@@ -148,7 +148,7 @@ class Parser:
         start = markers.pop()
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 61/62]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 61/62]]{.origin}
 
 
 ## Spekulatives Matchen: Hilfsmethoden II/II
@@ -170,7 +170,7 @@ def sync(i):
         lookahead.add(lexer.nextToken()); --n
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 61/62]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 61/62]]{.origin}
 
 ::: notes
 `consume` holt wie immer das nächste Token, hier indem der Index `start` weiter gesetzt
@@ -242,7 +242,7 @@ def head():
         finally: head_memo[start_] = (failed ? -1 : start)
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 65/66]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 65/66]]{.origin}
 
 ::: notes
 *   Wenn bereits untersucht (Eintrag vorhanden): Vorspulen bzw. Exception werfen

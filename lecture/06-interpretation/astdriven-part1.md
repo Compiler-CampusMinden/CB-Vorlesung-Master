@@ -279,7 +279,7 @@ class Interpreter(BaseVisitor<Object>):
         self.env = Environment()
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 
 ## Ausführen einer Variablendeklaration
@@ -333,7 +333,7 @@ class Environment:
         else: raise RuntimeError(n, "undefined variable")
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [Environment.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Environment.java#L38) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [Environment.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Environment.java#L38) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Wenn wir bei der Traversierung des AST mit `eval()` bei einer Zuweisung
@@ -376,7 +376,7 @@ def block(self, AST t):
     return None;
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L92) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L92) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Beim Interpretieren von Blöcken muss man einfach nur eine weitere

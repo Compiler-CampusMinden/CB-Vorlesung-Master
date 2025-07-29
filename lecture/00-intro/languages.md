@@ -42,7 +42,7 @@ fhmedia:
 > No more bottles of beer on the wall, no more bottles of beer.
 > Go to the store and buy some more, 99 bottles of beer on the wall.
 
-[Quelle: nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net]{.origin}
+[nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net]{.origin}
 
 
 ## Imperativ, Hardwarenah: C
@@ -67,7 +67,7 @@ fhmedia:
  }
 ```
 
-[Quelle: ["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net]{.origin}
+[["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Imperativ
@@ -103,7 +103,7 @@ class bottles {
 }
 ```
 
-[Quelle: ["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net]{.origin}
+[["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Imperativ
@@ -140,7 +140,7 @@ bottles(X) :-
     bottles(NX).
 ```
 
-[Quelle: ["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net]{.origin}
+[["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Deklarativ
@@ -167,7 +167,7 @@ verse n   = bottles n ++ " of beer on the wall, " ++ bottles n ++ " of beer.\n"
 main      = mapM (putStrLn . verse) [99,98..0]
 ```
 
-[Quelle: ["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net]{.origin}
+[["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Deklarativ
@@ -187,7 +187,7 @@ main      = mapM (putStrLn . verse) [99,98..0]
 
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
-[Quelle: Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
+[Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 *   Imperativ

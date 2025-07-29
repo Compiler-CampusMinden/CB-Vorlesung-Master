@@ -93,7 +93,7 @@ void g(int z){}
 
 ![](images/functionscopesuml.png){width="80%"}
 
-[Quelle: Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
 
 
 ## Funktionen sind Symbole *und* Scopes

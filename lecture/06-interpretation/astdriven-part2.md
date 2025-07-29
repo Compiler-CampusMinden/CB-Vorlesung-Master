@@ -150,7 +150,7 @@ def funcDecl(self, AST t):
 :::
 ::::::
 
-[Quelle: Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Man definiert im aktuellen Environment den Funktionsnamen und hält dazu
@@ -189,7 +189,7 @@ def funcCall(self, AST t):
     self.env = prev
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L57) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L57) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Zunächst wird die `ID` im aktuellen Kontext ausgewertet. In der obigen Grammatik
@@ -252,7 +252,7 @@ def funcCall(self, AST t):
 
 ::: notes
 
-[Quelle: Eigener Code basierend auf einer Idee nach [Return.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Return.java#L4) und [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L74) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [Return.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Return.java#L4) und [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L74) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 Rückgabewerte für den Funktionsaufruf werden innerhalb von `block` berechnet,
 wo eine Reihe von Anweisungen interpretiert werden, weshalb `block` ursprünglich
@@ -290,7 +290,7 @@ def funcCall(self, AST t):
     ...
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [LoxCallable.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxCallable.java#L6) und [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [LoxCallable.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxCallable.java#L6) und [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Normalerweise wird beim Interpretieren eines Funktionsaufrufs der
@@ -337,7 +337,7 @@ def classDef(self, AST t):
     self.env.define(t.ID().getText(), clazz)
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L115) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L115) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 **Anmerkung**: In dieser Darstellung wird der Einfachheit halber nur auf Methoden eingegangen.
@@ -368,7 +368,7 @@ class Instance:
         raise RuntimeError(name, "undefined method")
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [LoxClass.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxClass.java#L11) und [LoxInstance.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxInstance.java#L7) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [LoxClass.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxClass.java#L11) und [LoxInstance.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxInstance.java#L7) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 :::notes
 Instanzen einer Klasse werden durch den funktionsartigen "Aufruf" der Klassen
@@ -414,7 +414,7 @@ class Fun(Callable):
         return Fun(self.decl, e)
 ```
 
-[Quelle: Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L31) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[Eigener Code basierend auf einer Idee nach [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L31) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Nach dem Interpretieren von Klassendefinitionen sind die Methoden in der Klasse
