@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Error-Recovery"
 author: "Carsten Gips (HSBI)"
 readings:

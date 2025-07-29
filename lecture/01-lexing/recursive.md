@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Lexer: Handcodierte Implementierung"
 linkTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (HSBI)"

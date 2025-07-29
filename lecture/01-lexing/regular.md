@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "Reguläre Sprachen, Ausdrucksstärke"
 linkTitle: "Reguläre Sprachen"
 author: "BC George (HSBI)"

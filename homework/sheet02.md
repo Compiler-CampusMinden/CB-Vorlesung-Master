@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 02: LR"
 author: "BC George, Carsten Gips (HSBI)"
 

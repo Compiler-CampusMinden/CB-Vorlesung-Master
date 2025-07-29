@@ -1,5 +1,4 @@
 ---
-archetype: "home"
 title: "MIF 1.5 (PO23): Concepts of Programming Languages (Winter 2024/25)"
 ---
 

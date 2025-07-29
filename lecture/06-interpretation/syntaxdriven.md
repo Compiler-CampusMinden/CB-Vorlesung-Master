@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Syntaxgesteuerte Interpreter"
 author: "Carsten Gips (HSBI)"
 readings:

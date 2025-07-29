@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Compiler-Projekt"
 author: "BC George, Carsten Gips (HSBI)"
 readings:

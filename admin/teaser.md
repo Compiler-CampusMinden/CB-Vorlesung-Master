@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Modulvorstellung CPL (Concepts of Programming Languages)"
 author: "BC George & Carsten Gips (HSBI)"
 youtube:

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "LL-Parser: Fortgeschrittene Techniken"
 linkTitle: "LL: Fortgeschrittene Techniken"
 author: "Carsten Gips (HSBI)"

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Anwendungen"
 author: "Carsten Gips (HSBI)"
 readings:

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "LL-Parser"
 author: "BC George (HSBI)"
 readings:

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 linkTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (HSBI)"

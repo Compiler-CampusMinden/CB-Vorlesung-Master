@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Bandbreite der Programmiersprachen"
 linkTitle: "Programmiersprachen"
 author: "Carsten Gips (HSBI)"

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Grenze Lexer und Parser"
 author: "Carsten Gips (HSBI)"
 readings:

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Überblick Zwischencode"
 author: "Carsten Gips (HSBI)"
 readings:

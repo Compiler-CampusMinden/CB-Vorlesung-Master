@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "SymbTab0: Überblick Symboltabellen"
 author: "Carsten Gips (HSBI)"
 readings:

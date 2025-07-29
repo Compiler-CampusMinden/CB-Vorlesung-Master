@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "SymbTab2: Funktionen"
 author: "Carsten Gips (HSBI)"
 readings:

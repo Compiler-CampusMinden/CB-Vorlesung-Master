@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "CFG"
 author: "BC George (HSBI)"
 readings:

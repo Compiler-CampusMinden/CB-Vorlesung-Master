@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Virtuelle Maschinen"
 linkTitle: "VM"
 ---

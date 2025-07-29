@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Garbage Collection"
 linkTitle: "Garbage Collection"
 author: "Carsten Gips (HSBI)"

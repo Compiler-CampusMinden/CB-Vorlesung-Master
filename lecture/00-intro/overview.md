@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Struktur eines Compilers"
 author: "Carsten Gips (HSBI)"
 readings:

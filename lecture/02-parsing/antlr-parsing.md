@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Parser mit ANTLR generieren"
 author: "Carsten Gips (HSBI)"
 readings:

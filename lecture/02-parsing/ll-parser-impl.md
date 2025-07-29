@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "LL-Parser selbst implementiert"
 linkTitle: "LL-Parser implementieren"
 author: "Carsten Gips (HSBI)"

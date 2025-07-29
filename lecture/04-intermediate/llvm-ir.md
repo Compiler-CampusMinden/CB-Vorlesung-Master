@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "LLVM als IR"
 author: "BC George (HSBI)"
 readings:

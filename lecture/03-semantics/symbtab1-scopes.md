@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "SymbTab1: Nested Scopes"
 author: "Carsten Gips (HSBI)"
 readings:

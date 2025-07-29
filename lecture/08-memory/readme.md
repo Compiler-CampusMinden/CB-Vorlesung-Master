@@ -1,5 +1,4 @@
 ---
-archetype: "default"
 title: "Memory Management und Runtime"
 ---
 

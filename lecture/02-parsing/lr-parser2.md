@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "Syntaxanalyse: LR-Parser (Teil 2)"
 linkTitle: "LR-Parser 2"
 author: "BC George (HSBI)"
