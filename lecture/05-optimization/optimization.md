@@ -1,6 +1,5 @@
 ---
 title: "Optimierung und Datenflussanalyse"
-linkTitle: "Optimierung u. Datenflussanalyse"
 author: "BC George (HSBI)"
 readings:
   - key: "Güting1999"

@@ -1,6 +1,5 @@
 ---
 title: "Generierung von Maschinencode (Skizze)"
-linkTitle: "Maschinencode"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Mogensen2017"

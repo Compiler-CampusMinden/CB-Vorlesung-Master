@@ -1,6 +1,5 @@
 ---
 title: "Lexer: Handcodierte Implementierung"
-linkTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2023"

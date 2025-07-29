@@ -1,6 +1,5 @@
 ---
 title: "Typen, Type Checking und Attributierte Grammatiken"
-linkTitle: "Attributierte Grammatiken"
 author: "BC George (HSBI)"
 readings:
   - key: "Aho2023"

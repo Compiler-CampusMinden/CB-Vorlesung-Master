@@ -1,6 +1,5 @@
 ---
 title: "Reguläre Sprachen, Ausdrucksstärke"
-linkTitle: "Reguläre Sprachen"
 author: "BC George (HSBI)"
 readings:
   - key: "Aho2023"

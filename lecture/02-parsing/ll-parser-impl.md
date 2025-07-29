@@ -1,6 +1,5 @@
 ---
 title: "LL-Parser selbst implementiert"
-linkTitle: "LL-Parser implementieren"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Parr2010"

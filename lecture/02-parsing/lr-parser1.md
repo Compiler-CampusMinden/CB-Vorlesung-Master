@@ -1,6 +1,5 @@
 ---
 title: "Syntaxanalyse: LR-Parser (Teil 1)"
-linkTitle: "LR-Parser 1"
 author: "BC George (HSBI)"
 readings:
   - key: "Aho2023"

@@ -1,6 +1,5 @@
 ---
 title: "Bandbreite der Programmiersprachen"
-linkTitle: "Programmiersprachen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2023"

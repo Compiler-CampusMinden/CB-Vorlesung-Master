@@ -1,6 +1,5 @@
 ---
 title: "Virtuelle Maschinen"
-linkTitle: "VM"
 ---
 
 

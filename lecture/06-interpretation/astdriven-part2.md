@@ -1,6 +1,5 @@
 ---
 title: "AST-basierte Interpreter: Funktionen und Klassen"
-linkTitle: "AST-basierte Interpreter 2"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Nystrom2021"
