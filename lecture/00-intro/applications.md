@@ -189,7 +189,7 @@ Weitere Beispiele:
 
 # Was bringt mir das?
 
-::: cbox
+::: center
 \Large
 **Beschäftigung mit dem schönsten Thema in der Informatik ;-)**
 \normalsize
