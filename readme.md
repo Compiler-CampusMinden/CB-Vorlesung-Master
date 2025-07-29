@@ -71,15 +71,12 @@ die Java-VM oder WASM ein.
 
 # Kursformat
 
-| Vorlesung (2 SWS)                               | Praktikum (3 SWS)              |
-|:------------------------------------------------|:-------------------------------|
-| Di, 14:00 - 15:30 Uhr (online)                  | Di, 15:45 - 18:00 Uhr (online) |
-| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) |                                |
+| Vorlesung (2 SWS)            | Praktikum (3 SWS)            |
+|:-----------------------------|:-----------------------------|
+| Di, 14:00 - 15:30 Uhr (Zoom) | Di, 15:45 - 18:00 Uhr (Zoom) |
 
-Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
-Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
-
-[ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1400613&client_id=FH-Bielefeld
+Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre Vorlesung* (BC).
+Zugangsdaten Zoom siehe [ILIAS](https://www.hsbi.de/elearning/goto.php?target=crs_1400597&client_id=FH-Bielefeld).
 
 
 # Fahrplan
