@@ -4,8 +4,6 @@ author: "BC George, Carsten Gips (HSBI)"
 readings:
   - key: "@Tate2011"
   - key: "@Tate2014"
-
-hidden: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  project.md  -o xxx.md  -->

@@ -4,8 +4,6 @@ author: "BC George & Carsten Gips (HSBI)"
 youtube:
   - link: "https://youtu.be/rpbaSy2iy00"
     name: "Modulvorstellung CPL (Concepts of Programming Languages)"
-
-hidden: true
 ---
 
 
