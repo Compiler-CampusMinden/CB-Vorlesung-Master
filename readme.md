@@ -1,5 +1,5 @@
 ---
-title: "MIF 1.5 (PO23): Concepts of Programming Languages (Winter 2024/25)"
+title: "MIF 1.5: Concepts of Programming Languages (Winter 2025/26)"
 has_license: true
 no_beamer: true
 ---
@@ -82,73 +82,33 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 # Fahrplan
 
-`{{% notice style="note" title="News" %}}`{=markdown}
-`{{% expand title="08.01.25" %}}`{=markdown}
-
-## Verschiebung von Workshop 3 auf den 31. Januar (10:00 - 12:30 Uhr)
-
-Wie am 07.01.25 gemeinsam abgestimmt, verschieben wir auf Wunsch einiger Teams den dritten Workshop auf
-Freitag, den 31.01., 10:00-12:30 Uhr. Wir treffen uns dazu in unserem Zoom-Raum.
-
-Eine Woche später (Freitag, 07.02.) finden von 10-12 Uhr die Feedbackgespräche mit jedem Team
-statt (ebenfalls online).
-
-`{{% /expand %}}`{=markdown}
-
-`{{% expand title="28.10.24" %}}`{=markdown}
-
-## Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
-
-Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
-Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl. [ILIAS]).
-
-**Bitte fügt eurem im Zoom angezeigten Namen ein _" (DE)"_ hinten an.**
-
-_Beispiel_: Euer angezeigter Name wäre normalerweise `Vorname Nachname`. Für die Sitzung am Dienstag hängt
-ihr bitte ein "` (DE)`" hinten dran und habt entsprechend den Anzeigenamen **`Vorname Nachname (DE)`**.
-
-Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
-
-`{{% /expand %}}`{=markdown}
-
-`{{% expand title="23.10.24" %}}`{=markdown}
-
-## Sitzung am 19.11. fängt erst um 15:30 Uhr an
-
-Mein Beitrag zur [#DLK24](https://conference.hsbi.de/goto.php?target=grp_656&client_id=conferencefhbielefeld)
-wurde akzeptiert. Da mein Vortrag mitten zu unserer Vorlesungzeit eingeplant wurde, müssen wir in CPL etwas
-später beginnen. Wir starten mit unserer Interpreter-Sitzung am 19.11. um 15:30 Uhr.
-
-`{{% /expand %}}`{=markdown}
-`{{% /notice %}}`{=markdown}
-
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
 Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1421692&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
-| Monat                | Tag | Vorlesung                                                                                                                                   | Lead           | Praktikum           |
-|:---------------------|:----|:--------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------|
-| Oktober              | 08. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                     | Carsten, BC    |                     |
-|                      | 15. | [Reguläre Sprachen], [CFG], [LL-Parser]                                                                                                     | BC             | Verteilung Themen   |
-|                      | 22. | [LR-Parser]                                                                                                                                 | BC             | Status Workshop I   |
-|                      | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                                    |                |                     |
-|                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                             | _Edmonton_     |                     |
-| November             | 05. | [Attributierte Grammatiken]                                                                                                                 | BC             | Status Workshop II  |
-|                      | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                               | Carsten        | Status Workshop II  |
-|                      | 19. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                             | Carsten        | Status Workshop II  |
+| Monat                | Tag | Vorlesung                                                                                                                         | Lead           | Praktikum           |
+|:---------------------|:----|:----------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------|
+| Oktober              | 08. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                           | Carsten, BC    |                     |
+|                      | 15. | [Reguläre Sprachen], [CFG], [LL-Parser]                                                                                           | BC             | Verteilung Themen   |
+|                      | 22. | [LR-Parser]                                                                                                                       | BC             | Status Workshop I   |
+|                      | 29. | **[Workshop I]**: Sprache und Features (auf Sprachebene)                                                                          |                |                     |
+|                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                   | _Edmonton_     |                     |
+| November             | 05. | [Attributierte Grammatiken]                                                                                                       | BC             | Status Workshop II  |
+|                      | 12. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                     | Carsten        | Status Workshop II  |
+|                      | 19. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter], [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                   | Carsten        | Status Workshop II  |
 |                      | 26. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II]**: Sprache und Features (aus Compiler-Sicht) | _Minden (MIF)_ |                     |
-| Dezember             | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                                      | BC             |                     |
-| Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                  | _Edmonton_     |                     |
-|                      | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                     | Carsten        |                     |
-|                      | 17. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
-|                      | 24. | _Weihnachtspause_                                                                                                                           |                |                     |
-|                      | 31. | _Weihnachtspause_                                                                                                                           |                |                     |
-| Januar               | 07. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
-|                      | 14. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
-|                      | 21. | _Freies Arbeiten_                                                                                                                           |                | Status Workshop III |
+| Dezember             | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse]                                                                            | BC             |                     |
+| Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                        | _Edmonton_     |                     |
+|                      | 10. | [Projekt-Pitch]: Vorstellen und Diskussion der Projektinhalte/-konzepte                                                           | Carsten        |                     |
+|                      | 17. | _Freies Arbeiten_                                                                                                                 |                | Status Workshop III |
+|                      | 24. | _Weihnachtspause_                                                                                                                 |                |                     |
+|                      | 31. | _Weihnachtspause_                                                                                                                 |                |                     |
+| Januar               | 07. | _Freies Arbeiten_                                                                                                                 |                | Status Workshop III |
+|                      | 14. | _Freies Arbeiten_                                                                                                                 |                | Status Workshop III |
+|                      | 21. | _Freies Arbeiten_                                                                                                                 |                | Status Workshop III |
 | _(Prüfungsphase I)_  | 31. | **[Workshop III]: Projektvorstellung/-übergabe (10:00 - 12:30 Uhr, online)**                                                      |                |                     |
-| _(Prüfungsphase I)_  | 07. | **Feedback-Gespräche (10:00 - 12:00 Uhr, online)**                                                                                          |                |                     |
-| _(Prüfungsphase II)_ |     | _Keine separate Prüfung_                                                                                                                    |                |                     |
+| _(Prüfungsphase I)_  | 07. | **Feedback-Gespräche (10:00 - 12:00 Uhr, online)**                                                                                |                |                     |
+| _(Prüfungsphase II)_ |     | _Keine separate Prüfung_                                                                                                          |                |                     |
 
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/4ba4736f0bc2005e4bcd75d48671e49cd4c9f3839988bf4f522f45a8bfbf676b%40group.calendar.google.com/public/basic.ics
@@ -207,7 +167,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 # Prüfungsform, Note und Credits
 
-**Parcoursprüfung plus Testat**, 10 ECTS (PO23)
+**Parcoursprüfung plus Testat**, 10 ECTS
 
 *   **Testat**: Vergabe der Credit-Points
 
