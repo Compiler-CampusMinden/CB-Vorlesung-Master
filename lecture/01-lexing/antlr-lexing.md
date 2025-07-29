@@ -135,7 +135,7 @@ GREETING    : [a-zA-Z]+ ;
 WHITESPACE  : [ \t\n]+ -> skip ;
 ```
 
-[Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/01-lexing/src/Hello.g4"}
+[Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/01-lexing/src/Hello.g4"}
 
 
 ::::::::: notes

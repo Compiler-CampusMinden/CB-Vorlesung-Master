@@ -84,7 +84,7 @@ stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
 ::: slides
-[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/VarDef.g4"}
+[Grammatik: VarDef.g4, Input-Beispiele: VarDef.txt]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/VarDef.g4"}
 :::
 
 
@@ -274,7 +274,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 *   Aufruf-Stack nach Bearbeitung von `if`: `[stmt, expr, term]`
 *   **Resynchronization Set**: `{'+', ':'}`
 
-[[Hinweis: *FOLLOW* $\ne$ *Following*]{.bsp}]{.slides}
+[[Hinweis: *FOLLOW* $\ne$ *Following*]{.ex}]{.slides}
 
 
 ::: notes

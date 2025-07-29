@@ -104,7 +104,7 @@ def eval(self, AST t):
     return None;
 ```
 
-[[Hinweis "Read-Eval-Print-Loop" (REPL)]{.bsp}]{.slides}
+[[Hinweis "Read-Eval-Print-Loop" (REPL)]{.ex}]{.slides}
 
 ::: notes
 Nach dem Aufbau des AST durch Scanner und Parser und der semantischen Analyse

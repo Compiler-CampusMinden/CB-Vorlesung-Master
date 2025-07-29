@@ -325,7 +325,7 @@ Datei liegt, kann man die Definition des Objekts gleichzeitig als Deklaration de
 (Java).
 :::
 
-[[Definition vs. Deklaration]{.bsp}]{.slides}
+[[Definition vs. Deklaration]{.ex}]{.slides}
 
 
 ## Wo werden Verweise in Symboltabellen gebraucht?

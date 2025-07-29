@@ -197,7 +197,7 @@ Speicherplatz erhalten (d.h. `count()` liefert den Wert 0, aber ein `add` müsst
 die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das Token schreiben).
 :::
 
-[[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.bsp}]{.slides}
+[[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.ex}]{.slides}
 
 ::: notes
 ### Backtracking führt zu Problemen
@@ -265,7 +265,7 @@ Die Funktion `consume()` muss passend ergänzt werden: Wann immer man den `looka
 zurücksetzt, werden alle `*_memo` ungültig und müssen ebenfalls zurückgesetzt werden!
 :::
 
-[[Anmerkung Anpassung `consume()`]{.bsp}]{.slides}
+[[Anmerkung Anpassung `consume()`]{.ex}]{.slides}
 
 
 ## Semantische Prädikate

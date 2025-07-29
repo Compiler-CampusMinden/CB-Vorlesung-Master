@@ -264,7 +264,7 @@ Die Tabellen können allerdings schnell sehr groß werden, insbesondere
 die Zustandsübergangstabelle!
 :::
 
-[[Hinweis: Direkt codierte Implementierung]{.bsp}]{.slides}
+[[Hinweis: Direkt codierte Implementierung]{.ex}]{.slides}
 
 
 ::: notes

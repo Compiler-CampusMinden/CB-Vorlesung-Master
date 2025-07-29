@@ -412,7 +412,7 @@ Fokus auf die Frontend-Phasen legen und die Optimierung nur grob streifen.
 5*4+3
 ```
 
-[[AST?]{.bsp}]{.slides}
+[[AST?]{.ex}]{.slides}
 [**AST**?]{.notes}
 
 ::: notes
