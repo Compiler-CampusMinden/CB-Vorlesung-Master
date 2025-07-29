@@ -228,18 +228,3 @@ Folgendes kann bei Mehrdeutigkeiten helfen:
 *   mit Bottom-Up-Parsing LR(1) kann man alle deterministisch kontextfreien Sprachen parsen
 
 *   LR(0)-, SLR- und LALR- Parsing sind vereinfachte  Verfahren für Teilmengen der LR-Sprachen
-
-
-
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::

@@ -483,13 +483,3 @@ T t'(T inh) {
 
     Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw. AST,
     integriert und bei einer (späteren) Traversierung abgearbeitet.
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::

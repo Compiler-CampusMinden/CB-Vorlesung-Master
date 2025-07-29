@@ -152,16 +152,3 @@ Vorgehensweise im Compilerbau: Eine Grammatik für die gewünschte Sprache defin
 *   Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.
 *   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
 *   Von DPDAs akzeptierte Sprachen haben eindeutige Grammatiken.
-
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::

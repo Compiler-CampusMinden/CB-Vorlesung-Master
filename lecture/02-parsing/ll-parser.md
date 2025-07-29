@@ -207,16 +207,3 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt (
 *   Ein einfacher Recursive-Descent-Parser arbeitet mit Backtracking.
 *   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus einer LL(k)-Grammatik generiert werden.
 *   Der Parser liefert in der Regel einen abstrakten Syntaxbaum (AST).
-
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::

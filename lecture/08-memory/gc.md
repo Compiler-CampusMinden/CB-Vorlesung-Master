@@ -506,22 +506,3 @@ Das folgende Beispiel erläutert dieses Problem:
 \smallskip
 
 *   Varianten/Alternativen: Generational GC, Boehm-GC, Reference Counting, Stop-and-Copy GC, ...
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-
-\bigskip
-
-### Exceptions
-*   Image [reachable.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
-*   Image [mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
-*   Image [latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
-:::

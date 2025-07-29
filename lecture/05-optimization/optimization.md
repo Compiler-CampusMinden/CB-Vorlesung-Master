@@ -550,17 +550,3 @@ Die Verringerung der Spannung um 20% führt zu einer um  20% geringeren Prozesso
 *   Verschiedene Optimierungsverfahren auf verschiedenen Ebenen, Peephole
 *   Datenflussanalyse
 *   Senkung des Energieverbrauchs durch Optimierung
-
-
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::
