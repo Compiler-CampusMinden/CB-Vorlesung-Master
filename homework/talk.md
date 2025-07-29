@@ -4,6 +4,8 @@ author: "BC George, Carsten Gips (HSBI)"
 no_beamer: true
 ---
 
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  talk.md  -o xxx.md  -->
+
 
 Der Vortrag III ist Teil der Prüfungsleistung.
 Die Vorträge sollen 20 Minuten dauern und werden in der letzten Vorlesungswoche stattfinden. Planen Sie eine Diskussion von zusätzlich ca. 10 Minuten ein. Zusätzlich ist eine kurze Zusammenfassung des Vortrags als Blog im Discussions-Thread des jeweiligen Exposés zu erstellen.

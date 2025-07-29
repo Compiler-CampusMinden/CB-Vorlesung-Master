@@ -7,7 +7,8 @@ readings:
 no_beamer: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  project.md  -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  project.md  -o xxx.md  -->
+
 
 # Zusammenfassung
 
