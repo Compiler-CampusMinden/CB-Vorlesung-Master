@@ -18,7 +18,7 @@ jobs:
         with:
           mktarget: beamer
           pandoc_data: .pandoc
-          metadata: cb.yaml
+          metadata: cpl.yaml
           publish_dir: _beamer
       - uses: peaceiris/actions-gh-pages@v4
         with:

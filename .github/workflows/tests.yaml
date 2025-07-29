@@ -18,7 +18,7 @@ jobs:
         with:
           mktarget: beamer
           pandoc_data: .pandoc
-          metadata: cb.yaml
+          metadata: cpl.yaml
           publish_dir: _beamer
 
   # try building lecture notes (gfm)
@@ -32,7 +32,7 @@ jobs:
         with:
           mktarget: gfm
           pandoc_data: .pandoc
-          metadata: cb.yaml
+          metadata: cpl.yaml
           publish_dir: _gfm
 
   # try building lecture notes (docsify)
@@ -46,7 +46,7 @@ jobs:
         with:
           mktarget: docsify
           pandoc_data: .pandoc
-          metadata: cb.yaml
+          metadata: cpl.yaml
           publish_dir: _docsify
 
   # try building lecture notes (pdf)
@@ -60,5 +60,5 @@ jobs:
         with:
           mktarget: pdf
           pandoc_data: .pandoc
-          metadata: cb.yaml
+          metadata: cpl.yaml
           publish_dir: _pdf

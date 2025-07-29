@@ -1,5 +1,5 @@
 ## Source files of our project
-METADATA               ?= cb.yaml
+METADATA               ?= cpl.yaml
 OUTPUT_DIR             ?= _gfm
 
 ## Folder to contain the Pandoc-Lecture-Zen project tooling
