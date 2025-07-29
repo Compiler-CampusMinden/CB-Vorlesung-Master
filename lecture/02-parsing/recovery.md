@@ -53,7 +53,7 @@ challenges: |
 ---
 
 
-## Fehler beim Parsen
+# Fehler beim Parsen
 
 ![](images/bc_xml-parsing-error.png)
 
@@ -71,7 +71,7 @@ challenges: |
 :::
 
 
-## Typische Fehler beim Parsing
+# Typische Fehler beim Parsing
 
 ```antlr
 grammar VarDef;
@@ -91,7 +91,7 @@ stmt2 : 'int' ID '=' ID ';'  ;
 [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/VarDef.g4)
 und ANTLR demonstriert.
 
-### Lexikalische Fehler
+## Lexikalische Fehler
 
 Eingabe: `int x1;` (Startregel `stmt`)
 
@@ -100,7 +100,7 @@ Fehlermeldung: `token recognition error at: '1'`
 Die ist ein Fehler aus dem Lexer, wenn beim Erkennen eines Tokens ein komplett
 unbekanntes Zeichen auftritt.
 
-### Ein extra Token
+## Ein extra Token
 
 Eingabe: `int x y;` (Startregel `stmt`)
 
@@ -109,7 +109,7 @@ Fehlermeldung: `extraneous input 'y' expecting ';'`
 Wenn nur ein Token zu viel ist, dann kann der von ANTLR generierte Parser eine
 passende Fehlermeldung ausgeben.
 
-### Mehrere extra Token
+## Mehrere extra Token
 
 Eingabe: `int x y z;` (Startregel `stmt`)
 
@@ -118,7 +118,7 @@ Fehlermeldung: `mismatched input 'y' expecting ';'`
 Wenn dagegen mehr als ein Token zu viel ist, dann gibt der von ANTLR generierte
 Parser eine generische Fehlermeldung aus.
 
-### Fehlendes Token
+## Fehlendes Token
 
 Eingabe: `int ;` (Startregel `stmt`)
 
@@ -127,7 +127,7 @@ Fehlermeldung: `missing ID at ';'`
 Ein anderer typischer Fehler sind fehlende Token, die kann der Parser analog zu
 überzähligen Token erkennen und ausgeben.
 
-### Fehlendes Token am Entscheidungspunkt
+## Fehlendes Token am Entscheidungspunkt
 
 Eingabe: `int ;` (Startregel `alt`)
 
@@ -138,7 +138,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 :::::::::
 
 
-## Überblick Recovery bei Parser-Fehlern
+# Überblick Recovery bei Parser-Fehlern
 
 ![](images/recovery.png)
 
@@ -162,7 +162,7 @@ aber deutlich schwieriger als bei LL ...
 :::
 
 
-## Skizze: Generierte Parser-Regeln (ANTLR)
+# Skizze: Generierte Parser-Regeln (ANTLR)
 
 ```antlr
 stmt  : 'int' ID ';' ;
@@ -193,7 +193,7 @@ bzw. `recoverInline()` des ErrorHandlers statt.
 :::
 
 
-## Inline-Recovery bei Token-Mismatch (Skizze)
+# Inline-Recovery bei Token-Mismatch (Skizze)
 
 ```python
 def recoverInline(parser):
@@ -231,7 +231,7 @@ Liste der wichtigsten Exceptions (nach
 :::
 
 
-## Panic Mode: Sync-and-Return (Skizze)
+# Panic Mode: Sync-and-Return (Skizze)
 
 ```python
 def rule():
@@ -247,7 +247,7 @@ def rule():
 => Entferne solange Token, bis aktuelles Token im "*Resynchronization Set*"
 
 
-## ANTLR: Einsatz des "*Resynchronization Set*"
+# ANTLR: Einsatz des "*Resynchronization Set*"
 
 ::: notes
 *   **Following Set**: Menge der Token, die direkt auf eine Regel-Referenz folgen,
@@ -276,7 +276,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 
 
 ::: notes
-### Hinweis: *FOLLOW* $\ne$ *Following*
+## Hinweis: *FOLLOW* $\ne$ *Following*
 
 **FOLLOW** ist die Menge aller Token, die auf eine Regel folgen können
 
@@ -291,7 +291,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 
 
 ::: notes
-### Beispiele Resynchronisation im Panic Mode (ANTLR)
+## Beispiele Resynchronisation im Panic Mode (ANTLR)
 
 **Hinweis**: Die Regel `term` ist in obigem Beispiel nicht weiter detailliert. Hier wird
 angenommen, dass das aktuelle Token `':'` nicht passt.
@@ -318,7 +318,7 @@ angenommen, dass das aktuelle Token `':'` nicht passt.
 
 
 ::: notes
-## ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln
+# ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln
 
 Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
 (d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR etwas anders vor.
@@ -355,9 +355,9 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 
 ::::::::: notes
-## ANTLR: Ändern der Fehlerbehandlungs-Strategie
+# ANTLR: Ändern der Fehlerbehandlungs-Strategie
 
-### Ändern der Fehlerbehandlungs-Strategie (global)
+## Ändern der Fehlerbehandlungs-Strategie (global)
 
 ![](images/handler.png)
 
@@ -365,7 +365,7 @@ Sie überschreiben die Klasse `DefaultErrorStrategy` und müssen die oben gezeig
 `recover()` und `recoverInline()`aufrufen. Die eigene Fehlerbehandlung setzen Sie über die
 Methode `setErrorHandler` des Parsers.
 
-### Ändern der Fehlerbehandlungs-Strategie (lokal)
+## Ändern der Fehlerbehandlungs-Strategie (lokal)
 
 ```antlr
 r : ...
@@ -377,7 +377,7 @@ Es lassen sich auch andere bzw. mehrere Exceptions fangen. Der `catch`-Block ers
 Default-`catch`-Block der generierten Methode. Das bedeutet, dass sich der geänderte Modus
 nur für die eine Regel auswirkt.
 
-### Ändern der Fehler-Meldungen
+## Ändern der Fehler-Meldungen
 
 ![](images/listener.png)
 
@@ -389,7 +389,7 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 :::::::::
 
 
-## Panic Mode in Bison (Error Recovery)
+# Panic Mode in Bison (Error Recovery)
 
 ```antlr
 stmt : 'int' ID ';'     { printf("%s\n", $2); }
@@ -402,7 +402,7 @@ Bison kennt ein spezielles Fehler-Token `error`. Dieses Token wird genutzt, um
 einen Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
 *höchstwahrscheinlich* weiter parsen kann.
 
-### Parsen mit *error*-Token
+## Parsen mit *error*-Token
 
 Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch.
 Im Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der
@@ -414,7 +414,7 @@ bis drei weitere Token auf den Stack geschoben wurden und damit der Recovery-Mod
 verlassen wird. Falls bereits vorher weitere Fehler auftreten, werden diese nicht
 separat gemeldet.
 
-### Anwendung im obigen Beispiel
+## Anwendung im obigen Beispiel
 
 Im obigen Beispiel ist die Regel `stmt : error '\n'` enthalten. Im Fehlerfall
 werden die Symbole vom Stack entfernt, bis ein Zustand erreicht ist, der eine
@@ -427,7 +427,7 @@ ausgeführt. Diese gibt den Fehler auf der Konsole aus und führt mit dem Makro
 Bison-Parser wieder im normalen Modus. Die fehlerhaften Symbole/Token wurden
 aus dem Eingabestrom entfernt.
 
-### Wo kommen die *error*-Token am besten hin?
+## Wo kommen die *error*-Token am besten hin?
 
 Die "schwarze Kunst" ist, die Error-Token an geeigneten Stellen unterzubringen,
 d.h. vorherzusehen, wo der Parser am sinnvollsten wieder aufsetzen kann. Häufig
@@ -444,7 +444,7 @@ stmt : ...
      ;
 ```
 
-### Bison und C und Speichermanagement im Fehlerfall
+## Bison und C und Speichermanagement im Fehlerfall
 
 Wenn Bison im Recovery-Modus ist, werden Symbole und ihre Werte vom Stack entfernt.
 Falls diese Werte (vgl. `%union`) Pointer mit dynamisch alloziertem Speicher sind,
@@ -473,7 +473,7 @@ Für weitere Details vergleiche [@Levine2009, Kap. 8].
 :::
 
 
-## Fehlerproduktionen
+# Fehlerproduktionen
 
 ::: notes
 Häufig vorkommende Fehler kann man bereits in der Grammatik berücksichtigen.
@@ -485,7 +485,7 @@ wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 :::
 
 ::: notes
-### ANTLR
+## ANTLR
 :::
 
 ```antlr
@@ -507,7 +507,7 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 \bigskip
 
 :::notes
-### Flex und Bison
+## Flex und Bison
 :::
 
 ```antlr
@@ -541,7 +541,7 @@ Für weitere Details vergleiche [@Levine2009, Kap. 8].
 
 
 ::: notes
-## Anmerkung: Nicht eindeutige Grammatiken
+# Anmerkung: Nicht eindeutige Grammatiken
 
 ```antlr
 stat: expr ';' | ID '+' ID ';' ;
@@ -551,7 +551,7 @@ expr: ID '+' ID | INT ;
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
 
-### ANTLR
+## ANTLR
 
 Nicht eindeutige Grammatiken führen **nicht** zu einer Fehlermeldung,
 da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
@@ -562,7 +562,7 @@ Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
 `DiagnosticErrorListener` aus der ANTLR-Runtime als ErrorListener.
 
-### Bison
+## Bison
 
 Bison meldet nicht eindeutige Grammatiken beim Erzeugen des Parsers
 (vgl. Shift/Reduce- und Reduce/Reduce-Konflikte) und entscheidet sich
@@ -571,7 +571,7 @@ man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Fehler bei `match()`: *single token deletion* oder *single token insertion*
 

@@ -28,7 +28,7 @@ fhmedia:
 
 
 ::: notes
-## Scopes und Name Spaces
+# Scopes und Name Spaces
 
 **Def.:** Unter dem *Gültigkeitsbereich* (Sichtbarkeitsbereich, Scope) eines
 Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar
@@ -48,7 +48,7 @@ verwechselt.
 :::
 
 
-## Symbole und (nested) Scopes
+# Symbole und (nested) Scopes
 
 :::::: columns
 ::: {.column width="40%"}
@@ -85,7 +85,7 @@ float y;
 *   `resolve()`: Symbole [aus Scope oder Eltern-Scope]{.notes} abrufen
 
 ::: notes
-### Hinzunahme von Scopes
+## Hinzunahme von Scopes
 
 **Bsp.:** Die zu übersetzende Sprache ist scope-basiert und kennt nur Bezeichner
 für Variablen
@@ -103,7 +103,7 @@ benutzt werden.
 :::
 
 ::: notes
-### Grundlegendes Vorgehen
+## Grundlegendes Vorgehen
 
 Das Element, das einen neuen Scope definiert, steht selbst in dem aktuell
 behandelten Scope. Wenn dieses Element selbst ein Bezeichner ist, gehört
@@ -113,10 +113,10 @@ oder Bezeichners.
 :::
 
 
-## Nested Scopes: Symbole und Scopes
+# Nested Scopes: Symbole und Scopes
 
 ::::::::: notes
-### Implementierung mit hierarchischen (verketteten) Tabellen
+## Implementierung mit hierarchischen (verketteten) Tabellen
 
 Pro Scope wird eine Symboltabelle angelegt, dabei enthält jede Symboltabelle zusätzlich
 einen Verweis auf ihre Vorgängersymboltabelle für den umgebenden Scope. Die globale
@@ -140,7 +140,7 @@ Symboltabelle wird typischerweise mit allen Schlüsselwörtern initialisiert.
         Sprachdefinition auch gefunden) werden.
 *   Der Parse-Tree enthält im Knoten für den Bezeichner den Verweis in die Symboltabelle
 
-### Klassenhierarchie für Scopes
+## Klassenhierarchie für Scopes
 
 Für die Scopes wird eine Klasse `Scope` definiert mit den Methoden `bind()` (zum
 Definieren von Symbolen im Scope) und `resolve()` (zum Abrufen von Symbolen aus
@@ -150,7 +150,7 @@ Für lokale Scopes wird eine Instanz dieser Klasse angelegt, die eine Referenz a
 den einschließenden Scope im Attribut `enclosingScope` hält. Für den globalen Scope
 ist diese Referenz einfach leer (`None`).
 
-### Klassen und Interfaces für Symbole
+## Klassen und Interfaces für Symbole
 
 Für die Symbole gibt es die Klasse `Symbol`, wo für jedes Symbol Name und Typ gespeichert
 wird. Variablensymbole leiten direkt von dieser Klasse ab. Für die eingebauten Typen wird
@@ -163,7 +163,7 @@ können.
 [Eigene Modellierung nach einer Idee in [@Parr2010, p. 142]]{.origin}
 
 ::: notes
-### Alternative Implementierung über einen Stack
+## Alternative Implementierung über einen Stack
 
 *   Der Parse Tree bzw. der AST enthalten an den Knoten, die jeweils einen ganzen
     Scope repräsentieren, einen Verweis auf die Symboltabelle dieses Scopes.
@@ -176,7 +176,7 @@ können.
 :::
 
 
-## Nested Scopes: Definieren und Auflösen von Namen
+# Nested Scopes: Definieren und Auflösen von Namen
 
 ``` python
 class Scope:
@@ -211,7 +211,7 @@ diesem Scope definiert wurden, auf diesen verweisen, passiert das nicht :)
 :::
 
 
-## Nested Scopes: Listener
+# Nested Scopes: Listener
 
 ::: notes
 Mit einem passenden Listener kann man damit die nötigen Scopes aufbauen:
@@ -304,7 +304,7 @@ Variablen abgerufen werden ...
 
 
 ::: notes
-## Löschen von Symboltabellen
+# Löschen von Symboltabellen
 
 Möglicherweise sind die Symboltabellen nach der Identifizierungsphase der Elemente
 überflüssig, weil die zusammengetragenen Informationen als Attribute im AST stehen.
@@ -315,7 +315,7 @@ noch gebraucht werden.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
 

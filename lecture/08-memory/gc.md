@@ -32,7 +32,7 @@ fhmedia:
 ---
 
 
-## Ist das Code oder kann das weg?
+# Ist das Code oder kann das weg?
 
 :::::: columns
 ::: {.column width="45%"}
@@ -79,7 +79,7 @@ werden.
 :::
 
 
-## Erreichbarkeit
+# Erreichbarkeit
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png?raw=true)
 
@@ -99,7 +99,7 @@ die VM aktiv freigegeben werden müssen.
 :::
 
 
-## "Präzises GC": Mark-Sweep Garbage Collection
+# "Präzises GC": Mark-Sweep Garbage Collection
 
 ::: notes
 Das führt zu einem zweistufigen Algorithmus:
@@ -120,7 +120,7 @@ ein Flag für die Markierung.
 Zum Auffinden der erreichbaren Objekte wird mit einem Färbungsalgorithmus
 gearbeitet. Initial sind alle Objekte "weiß" (nicht markiert).
 
-### Phase "Mark": Wurzeln markieren
+## Phase "Mark": Wurzeln markieren
 
 Im ersten Schritt färbt man alle "Wurzeln" "grau" ein. Dabei werden alle
 Objektreferenzen im Stack der VM, in der Hashtabelle für globale Variablen
@@ -130,7 +130,7 @@ der Laufzeitumgebung allozierten Strukturen/Objekte werden markiert, indem
 ihr Flag gesetzt wird. Zusätzlich werden die Pointer auf diese Objekte in
 einen "`grayStack`" hinzugefügt. Damit sind alle Wurzeln "grau" markiert".
 
-### Phase "Mark": Trace
+## Phase "Mark": Trace
 
 Nachdem alle Wurzeln "grau" markiert wurden und auf den `grayStack` der VM
 gelegt wurden, müssen nun mögliche Verweise in den Wurzeln verfolgt werden.
@@ -145,7 +145,7 @@ Objekte auf den `grayStack` der VM gelegt und ihr Flag gesetzt.
 Dieser Prozess wird so lange durchgeführt, bis der `grayStack` leer ist. Dann
 sind alle erreichbaren Objekte markiert.
 
-### Phase "Sweep"
+## Phase "Sweep"
 
 Jetzt sind alle erreichbaren Objekte markiert. Objekte, deren Flag nicht gesetzt
 ist, sind nicht mehr erreichbar und können freigegeben werden.
@@ -164,7 +164,7 @@ Objekte ausgehängt und freigegeben.
 Zusätzlich müssen alle verbleibenden Objekte für den nächsten GC-Lauf wieder
 entfärbt werden, d.h. die Markierung muss wieder zurückgesetzt werden.
 
-### Hinweise
+## Hinweise
 
 Die Mark-and-Sweep-GC-Variante wird auch "präzises Garbage Collection" genannt,
 da dabei *alle* nicht mehr benötigten Objekte entfernt werden.
@@ -174,7 +174,7 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
 :::
 
 
-## Metriken: Latenz und Durchsatz
+# Metriken: Latenz und Durchsatz
 
 ::: notes
 *   **Latenz**: Längste Zeitdauer, während der das eigentliche Programm (des Users)
@@ -191,7 +191,7 @@ hat sich deshalb auch die Bezeichnung *stop-the-world GC* eingebürgert.
 [[latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 
-## Heuristik: Self-adjusting Heap
+# Heuristik: Self-adjusting Heap
 
 *   GC selten: Hohe Latenz (lange Pausen)
 *   GC oft: Geringer Durchsatz
@@ -214,7 +214,7 @@ GC starten zu müssen ...
 :::
 
 
-## Generational GC
+# Generational GC
 
 *   Teile Heap in zwei Bereiche: "*Kinderstube*" und "*Erwachsenenbereich*"
 *   Neue Objekte werden in der Kinderstube angelegt
@@ -235,7 +235,7 @@ verschoben, wo deutlich seltener eine GC durchgeführt wird.
 :::
 
 
-## "Konservatives GC": Boehm GC
+# "Konservatives GC": Boehm GC
 
 ::: notes
 Man unterscheidet zusätzlich noch zwischen *konservativem* und *präzisem* GC:
@@ -258,7 +258,7 @@ Boehm, Weiser und Demers: ["**Boehm GC**"](https://hboehm.info/gc/)
 *   Idee: Nutze die interne Verwaltung des Heaps zum Finden von Objekten
 
 ::::::::: notes
-### Ablauf
+## Ablauf
 
 *   **Mark**:
     1.  Suche alle potentiell zu bereinigenden Objekte: Inspiziere Stack, statische
@@ -274,7 +274,7 @@ Boehm, Weiser und Demers: ["**Boehm GC**"](https://hboehm.info/gc/)
 *   **Sweep**: Iteriere über den Heap (blockweise) und gebe alle belegten Blöcke frei, die
     nicht als "erreichbar" markiert wurden
 
-### Exkurs Heap-Verwaltung
+## Exkurs Heap-Verwaltung
 
 Der Heap ist ein zusammenhängender Speicherbereich, der durch die Allokation und Freigabe
 von Blöcken in mehrere Blöcke segmentiert wird. Die freien Blöcke werden dabei in eine
@@ -316,7 +316,7 @@ setzt man den `next`-Pointer des Blockes auf den Wert des Freispeicherlisten-Poi
 dieser wird auf die Startadresse der Verwaltungsstruktur des Blockes "umgebogen". Damit hat man
 den Block vorn in die Freispeicherliste eingehängt.
 
-### Vor- und Nachteile des konservativen GC
+## Vor- und Nachteile des konservativen GC
 
 *   (+) Keine explizite Kooperation mit der Speicherverwaltung nötig \
     Die Speicherverwaltung muss nur eine Bedingung erfüllen: Jedes benutzte Objekt hat einen
@@ -333,7 +333,7 @@ den Block vorn in die Freispeicherliste eingehängt.
 :::::::::
 
 
-## Reference Counting
+# Reference Counting
 
 ::: notes
 Beim Reference Counting erhält jedes Objekt einen Referenz-Zähler.
@@ -350,7 +350,7 @@ wird das Objekt nicht weiter verändert.
 Dies ist eine einfach Form des GC, die ohne zyklische Sammelphasen auskommt. Allerdings hat
 diese Form ein Problem mit zyklischen Datenstrukturen.
 
-### Algorithmus (Skizze)
+## Algorithmus (Skizze)
 :::
 
 
@@ -407,7 +407,7 @@ freigegeben.
 
 
 ::: notes
-### Probleme
+## Probleme
 
 Das größte Problem beim Referenz Counting ist der Umgang mit zyklischen Datenstrukturen, wie
 verkettete Listen oder einfache Graphen. Es dazu kommen, dass zyklische Datenstrukturen nicht
@@ -419,7 +419,7 @@ Das folgende Beispiel erläutert dieses Problem:
 :::
 
 
-## Stop-and-Copy Garbage Collection
+# Stop-and-Copy Garbage Collection
 
 *   Teile Heap in zwei Bereiche (A und B)
 *   Alloziere nur Speicher aus A (bis der Bereich voll ist)
@@ -429,7 +429,7 @@ Das folgende Beispiel erläutert dieses Problem:
 
 
 ::: notes
-### Vor- und Nachteile von Stop-and-Copy GC
+## Vor- und Nachteile von Stop-and-Copy GC
 
 *   (+) Nur ein Lauf über Daten nötig
 *   (+) Automatische Speicherdefragmentierung
@@ -441,9 +441,9 @@ Das folgende Beispiel erläutert dieses Problem:
 :::
 
 
-## Benchmarking
+# Benchmarking
 
-### Ziel
+## Ziel
 
 *   Vergleich von verschiedenen GC-Algorithmen
 *   Wahl des optimalen Algorithmus für konkreten Anwendungsfall
@@ -451,10 +451,10 @@ Das folgende Beispiel erläutert dieses Problem:
 
 
 ::: slides
-## Benchmarking: Setup
+# Benchmarking: Setup
 :::
 
-### Setup
+## Setup
 
 *   "Warm up": einige Iterationen des Benchmarks ohne Messung vorlaufen lassen,
     um bspw. Just-in-Time Kompilierung und Initialisierung aller Laufzeitkomponenten abzuschließen
@@ -466,15 +466,15 @@ Das folgende Beispiel erläutert dieses Problem:
 
 
 ::: slides
-## Benchmarking: Metriken und Setup
+# Benchmarking: Metriken und Setup
 :::
 
-### Relevante Metriken für Tests
+## Relevante Metriken für Tests
 
 *   Durchsatz (welchen Anteil hat GC an der Laufzeit?)
 *   Latenz (welche Verzögerung erzeugt GC?)
 
-### Szenarien
+## Szenarien
 
 (stark vom getesteten GC-Algorithmus abhängig)
 
@@ -487,7 +487,7 @@ Das folgende Beispiel erläutert dieses Problem:
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Pflege verkette Liste aller Objekte in der VM
 

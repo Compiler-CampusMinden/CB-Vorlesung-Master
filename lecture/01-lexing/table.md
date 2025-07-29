@@ -33,7 +33,7 @@ fhmedia:
 ---
 
 
-## Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
+# Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
 
 \vspace{-20mm}
 
@@ -79,7 +79,7 @@ erledigt werden könnte ...
 :::
 
 
-## Definition wichtiger Begriffe
+# Definition wichtiger Begriffe
 
 *   **Token**: Tupel (Tokenname, optional: Wert)
 
@@ -114,7 +114,7 @@ erledigt werden könnte ...
     :::
 
 
-## Erkennung mit RE und DFA
+# Erkennung mit RE und DFA
 
 ![](images/lexer.png)
 
@@ -157,7 +157,7 @@ und damit den Kreis schließen :-)
 :::
 
 
-## Erkennen von Zeichenketten für Strickmuster: "10LRL"
+# Erkennen von Zeichenketten für Strickmuster: "10LRL"
 
 ![](images/dfa.png){width="45%"}
 
@@ -195,7 +195,7 @@ entsprechend zu antworten.
 :::
 
 
-## Tabellenbasierte Implementierung
+# Tabellenbasierte Implementierung
 
 
 ```python
@@ -265,7 +265,7 @@ die Zustandsübergangstabelle!
 
 
 ::: notes
-## Direkt codierte Implementierung
+# Direkt codierte Implementierung
 
 Die Implementierung über die Tabellen ist sowohl generisch als auch effizient.
 Allerdings kostet jeder Zugriff auf die Tabelle konstanten Aufwand (Erinnerung:
@@ -302,7 +302,7 @@ erzeugt wird.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Zusammenhang DFA, RE und Lexer
 

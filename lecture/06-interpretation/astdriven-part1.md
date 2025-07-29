@@ -44,7 +44,7 @@ fhmedia:
 ---
 
 
-## Aufgaben im Interpreter
+# Aufgaben im Interpreter
 
 ::: notes
 Im Allgemeinen reichen einfache syntaxgesteuerte Interpreter nicht aus. Normalerweise simuliert
@@ -84,7 +84,7 @@ x = f(x);
 ::::::
 
 
-## AST-basierte Interpreter: Visitor-Dispatcher
+# AST-basierte Interpreter: Visitor-Dispatcher
 
 ```python
 def eval(self, AST t):
@@ -133,7 +133,7 @@ verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
 :::
 
 
-## Auswertung von Literalen und Ausdrücken
+# Auswertung von Literalen und Ausdrücken
 
 *   Typen mappen: Zielsprache => Implementierungssprache
 
@@ -193,7 +193,7 @@ verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
     :::
 
 
-## Kontrollstrukturen
+# Kontrollstrukturen
 
 ```antlr
 ifstat: 'if' expr 'then' s1=stat ('else' s2=stat)? ;
@@ -219,7 +219,7 @@ müsste.
 :::
 
 
-## Zustände: Auswerten von Anweisungen
+# Zustände: Auswerten von Anweisungen
 
 :::::: columns
 ::: {.column width="25%"}
@@ -258,7 +258,7 @@ Strukturen für das Halten von Variablen und Werten aufzubauen.
 :::
 
 
-## Detail: Felder im Interpreter
+# Detail: Felder im Interpreter
 
 ::: notes
 Eine mögliche Implementierung für einen Interpreter basierend auf einem
@@ -282,7 +282,7 @@ class Interpreter(BaseVisitor<Object>):
 [Eigener Code basierend auf einer Idee nach [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 
-## Ausführen einer Variablendeklaration
+# Ausführen einer Variablendeklaration
 
 ```antlr
 varDecl: "var" ID ("=" expr)? ";" ;
@@ -310,7 +310,7 @@ vorbeikommen, also etwa `int x;` oder `int x = wuppie + fluppie;`, dann wird im
 :::
 
 
-## Ausführen einer Zuweisung
+# Ausführen einer Zuweisung
 
 ```antlr
 assign: ID "=" expr;
@@ -356,7 +356,7 @@ für Zugriffe auf Attribute einer Struct oder Klasse!
 :::
 
 
-## Blöcke: Umgang mit verschachtelten Environments
+# Blöcke: Umgang mit verschachtelten Environments
 
 ```antlr
 block:  '{' stat* '}' ;
@@ -389,7 +389,7 @@ werden (`finally`-Block).
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Interpreter simulieren die Programmausführung
     *   Namen und Symbole auflösen

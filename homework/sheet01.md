@@ -4,7 +4,7 @@ author: "BC George, Carsten Gips (HSBI)"
 ---
 
 
-## A1.1: Grammatik
+# A1.1: Grammatik
 
 Erstellen Sie eine Grammatik für [**Mini-Python**].
 
@@ -77,13 +77,13 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
 [semantische]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/semantic_definition.md
 
 
-## A1.2: ANTLR
+# A1.2: ANTLR
 
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für
 die folgenden Aufgaben nutzen.
 
 
-## A1.3: AST
+# A1.3: AST
 
 Entwickeln Sie ein Konzept für einen AST.
 

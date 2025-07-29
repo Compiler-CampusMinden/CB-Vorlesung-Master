@@ -29,7 +29,7 @@ fhmedia:
 ---
 
 
-## Was passiert nach der Syntaxanalyse?
+# Was passiert nach der Syntaxanalyse?
 
 :::::: columns
 ::: {.column width="30%"}
@@ -68,7 +68,7 @@ Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbei
 bevor wir uns (in [Interpreter](../06-interpretation/syntaxdriven.md))
 um die Auswertung (Interpretation) des AST kümmern können.
 
-### Logische Compilierungsphasen
+## Logische Compilierungsphasen
 
 *   Die lexikalische Analyse generiert eine Folge von Token.
 *   Die Syntaxanalyse generiert einen Parse Tree.
@@ -92,7 +92,7 @@ um die Auswertung (Interpretation) des AST kümmern können.
     *   Der generierte Code wird nachoptimiert.
     *   Der Linker ersetzt die virtuellen Adressen durch reale Adressen.
 
-### Abgrenzung der Phasen
+## Abgrenzung der Phasen
 
 Diese Phasen sind oft nicht klar unterscheidbar. Schon allein zur Verbesserung der
 Laufzeit baut der Parser oft schon den abstrakten Syntaxbaum auf, der Lexer trägt schon
@@ -103,12 +103,12 @@ Oft werden gar nicht alle Phasen und alle Zwischendarstellungen benötigt.
 :::::::::
 
 
-## Semantische Analyse und Symboltabellen
+# Semantische Analyse und Symboltabellen
 
 ![](images/architektur_cb.png){width="80%"}
 
 
-## Syntax und Semantik
+# Syntax und Semantik
 
 *   **Syntaxregeln**: Formaler Aufbau eines Programms
 
@@ -138,7 +138,7 @@ semantisch korrekt ist. Ein lauffähiges Programm muss syntaktisch und semantisc
 sein!
 :::
 
-## Aufgaben der semantischen Analyse
+# Aufgaben der semantischen Analyse
 
 *   Identifikation und Sammlung der Bezeichner
 *   Zuordnung zur richtigen Ebene (Scopes)
@@ -176,7 +176,7 @@ Zu Annotationen/Attributen, Typen und Type-Checks siehe VL
 => [Ein wichtiges]{.notes} Hilfsmittel dazu sind **Symboltabellen**
 
 ::: notes
-### Identifizierung von Objekten
+## Identifizierung von Objekten
 
 Beim Compiliervorgang müssen Namen immer wieder den dazugehörigen Definitionen
 zugeordnet, ihre Eigenschaften gesammelt und geprüft und darauf zugegriffen werden.
@@ -188,7 +188,7 @@ abhängig von der Klasse des Bezeichners.
 :::
 
 ::: notes
-### Validieren der Nutzung von Symbolen
+## Validieren der Nutzung von Symbolen
 
 Hier sind unendlich viele Möglichkeiten denkbar. Dies reicht von den unten aufgeführten
 Basisprüfungen bis hin zum Prüfen der Typkompatibilität bei arithmetischen Operationen.
@@ -209,7 +209,7 @@ aufgelöst.
 :::
 
 ::: notes
-### Das Mittel der Wahl: Tabellen für die Symbole (= Bezeichner)
+## Das Mittel der Wahl: Tabellen für die Symbole (= Bezeichner)
 
 **Def.:** *Symboltabellen* sind die zentrale Datenstruktur zur Identifizierung und
 Verwaltung von bezeichneten Elementen.
@@ -233,7 +233,7 @@ enthält dann statt der Namen Verweise in diese (Hash-) Tabelle.
 :::
 
 
-## Einfache Verwaltung von Variablen primitiven Typs
+# Einfache Verwaltung von Variablen primitiven Typs
 
 :::::: columns
 ::: {.column width="40%"}
@@ -273,7 +273,7 @@ Die Symboltabelle könnte hier eine (Hash-) Tabelle oder eine einfache verkettet
 :::
 
 
-## Was kann jetzt weiter passieren?
+# Was kann jetzt weiter passieren?
 
 ```c
 int x = 0;
@@ -290,7 +290,7 @@ a = 42;
 In vielen Sprachen muss überprüft werden, ob es ein definierendes Vorkommen des Bezeichners oder
 ein angewandtes Vorkommen ist.
 
-### Definitionen und Deklarationen von Bezeichnern
+## Definitionen und Deklarationen von Bezeichnern
 
 **Def.:** Die *Definition* eines (bisher nicht existenten) Bezeichners in einem Programm
 generiert einen neuen Bezeichner und legt für ihn seinem Typ entsprechend Speicherplatz an.
@@ -325,7 +325,7 @@ Datei liegt, kann man die Definition des Objekts gleichzeitig als Deklaration de
 [[Definition vs. Deklaration]{.ex}]{.slides}
 
 
-## Wo werden Verweise in Symboltabellen gebraucht?
+# Wo werden Verweise in Symboltabellen gebraucht?
 
 => Parse Tree und AST enthalten Verweise auf Symboltabelleneinträge
 
@@ -340,7 +340,7 @@ Datei liegt, kann man die Definition des Objekts gleichzeitig als Deklaration de
 :::
 
 
-## Grenzen der semantischen Analyse
+# Grenzen der semantischen Analyse
 
 **Welche semantischen Eigenschaften [einer Sprache]{.notes} kann die semantische Analyse nicht überprüfen?**
 
@@ -358,7 +358,7 @@ und anschließend dereferenziert wird.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Semantische Analyse:
     *   Identifikation und Sammlung der Bezeichner

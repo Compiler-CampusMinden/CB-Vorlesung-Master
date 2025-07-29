@@ -23,7 +23,7 @@ fhmedia:
 ---
 
 
-## 99 Bottles of Beer
+# 99 Bottles of Beer
 
 > 99 bottles of beer on the wall, 99 bottles of beer.
 > Take one down and pass it around, 98 bottles of beer on the wall.
@@ -45,7 +45,7 @@ fhmedia:
 [nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net]{.origin}
 
 
-## Imperativ, Hardwarenah: C
+# Imperativ, Hardwarenah: C
 
 ``` {.c size="footnotesize"}
  #define MAXBEER (99)
@@ -81,7 +81,7 @@ fhmedia:
 :::
 
 
-## Imperativ, Objektorientiert: Java
+# Imperativ, Objektorientiert: Java
 
 ```java
 class bottles {
@@ -121,7 +121,7 @@ class bottles {
 :::
 
 
-## Logisch: Prolog
+# Logisch: Prolog
 
 ```prolog
 bottles :-
@@ -150,7 +150,7 @@ bottles(X) :-
 :::
 
 
-## Funktional: Haskell
+# Funktional: Haskell
 
 ```haskell
 bottles 0 = "no more bottles"
@@ -183,7 +183,7 @@ main      = mapM (putStrLn . verse) [99,98..0]
 :::
 
 
-## Brainfuck
+# Brainfuck
 
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
@@ -198,7 +198,7 @@ main      = mapM (putStrLn . verse) [99,98..0]
 
 
 
-## Programmiersprache Lox
+# Programmiersprache Lox
 
 ```
 fun fib(x) {
@@ -234,7 +234,7 @@ Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studi
 ::::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Compiler übersetzen formalen Text in ein anderes Format
 

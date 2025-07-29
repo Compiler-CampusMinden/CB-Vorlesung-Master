@@ -1,11 +1,11 @@
 # Lectures "Compilerbau" and "Concepts of Programming Languages" (Master)
 
-## Overview
+# Overview
 
 This represents the lecture material for the lectures ["Compilerbau" and "Concepts of Programming Languages"](https://www.hsbi.de/elearning/goto.php?target=crs_1089779&client_id=FH-Bielefeld) (M.Sc.), courses developed and taught at Bielefeld University of Applied Sciences.
 
 
-## Contributing
+# Contributing
 
 Questions, bug reports, feature requests and pull requests are very welcome.
 
@@ -14,12 +14,12 @@ Please first check whether your request has already been dealt with in other (op
 When submitting pull requests, please make sure that your **feature branch starts at the tip of the current `master` branch**. Upon acceptance (i.e. merging your pull request), your contribution automatically becomes subject to the licence of this repository (CC BY-SA 4.0).
 
 
-## Building Stuff
+# Building Stuff
 
 Please see [https://github.com/cagix/pandoc-lecture](https://github.com/cagix/pandoc-lecture/blob/master/README.md#installing-and-using-pandoc-lecture) for detailed instructions on how to produce teaching materials (PDF slides, website) from the sources maintained in this repository.
 
 
-## Credits
+# Credits
 
 This course was funded by the German Academic Exchange Service (DAAD) and the
 German Federal Ministry of Education and Research (BMBF) as part of the project
@@ -30,7 +30,7 @@ See the [credits](CREDITS.md) for a detailed list of contributing projects.
 
 ---
 
-## License
+# License
 
 <!-- https://creativecommons.org/choose/ -->
 <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>

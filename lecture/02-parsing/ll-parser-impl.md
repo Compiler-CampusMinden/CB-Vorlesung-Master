@@ -47,7 +47,7 @@ challenges: |
 ---
 
 
-## Erinnerung Lexer: Zeichenstrom => Tokenstrom
+# Erinnerung Lexer: Zeichenstrom => Tokenstrom
 
 ``` {.python size="footnotesize"}
 def nextToken():
@@ -81,7 +81,7 @@ in den Puffer einlesen.
 :::
 
 
-## Grundidee LL-Parser
+# Grundidee LL-Parser
 
 [Grammatik:]{.notes}
 
@@ -113,7 +113,7 @@ def r():
 
 
 ::: notes
-## Alternative Subregeln
+# Alternative Subregeln
 
 ```
 a | b | c
@@ -145,7 +145,7 @@ bzw. Methode `a()`.
 
 
 ::: notes
-## Optionale Subregeln: Eins oder keins
+# Optionale Subregeln: Eins oder keins
 
 ```
 (T)?
@@ -162,7 +162,7 @@ if lookahead.predicting_T: match(T)
 
 
 ::: notes
-## Optionale Subregeln: Mindestens eins
+# Optionale Subregeln: Mindestens eins
 
 ```
 (T)+
@@ -180,7 +180,7 @@ while True:
 :::
 
 
-## LL(1)-Parser
+# LL(1)-Parser
 
 [Beispiel: Parsen von Listen, also Sequenzen wie `[1,2,3,4]`:]{.notes}
 
@@ -215,7 +215,7 @@ def elements():
 ```
 
 
-## Detail: *match()* und *consume()*
+# Detail: *match()* und *consume()*
 
 ```python
 def match(x):
@@ -245,7 +245,7 @@ durchgereicht) über den Aufruf der Start-Regel, also beispielsweise `parser.lis
 :::
 
 
-## Vorrangregeln
+# Vorrangregeln
 
 ```
 1+2*3 == 1+(2*3) != (1+2)*3
@@ -285,7 +285,7 @@ expr : expr '*' expr
 ```
 
 
-## Linksrekursion
+# Linksrekursion
 
 ::: notes
 Normalerweise sind linksrekursive Grammatiken nicht mit einem LL-Parser behandelbar. Man muss die Linksrekursion
@@ -331,7 +331,7 @@ expM : expr '*' expr ;
 
 
 ::: notes
-## Assoziativität
+# Assoziativität
 
 Die Eingabe `2^3^4` sollte als `2^(3^4)` geparst werden.  [Analog sollte `a=b=c` in C als `a=(b=c)` verstanden werden.]{.notes}
 
@@ -353,7 +353,7 @@ ignoriert?!
 :::
 
 
-## LL(k)-Parser
+# LL(k)-Parser
 
 ```antlr
 expr : ID '++'    // x++
@@ -377,7 +377,7 @@ expr : ID ('++' | '--') ;    // x++ oder x--
 ```
 
 
-## LL(k)-Parser: Implementierung mit Ringpuffer
+# LL(k)-Parser: Implementierung mit Ringpuffer
 
 ::: notes
 Für einen größeren Lookahead benötigt man einen Puffer für die Token. Für einen Lookahead von
@@ -413,7 +413,7 @@ def lookahead(i):
 [[Tafel: Beispiel mit Ringpuffer: k=3 und "[1,2,3,4,5]"]{.ex}]{.slides}
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   LL(1) und LL(k) mit festem Lookahead
 *   Implementierung von Vorrang- und Assoziativitätsregeln

@@ -124,7 +124,7 @@ challenges: |
 ---
 
 
-## Hello World
+# Hello World
 
 ```antlr
 grammar Hello;
@@ -139,7 +139,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
 
 
 ::::::::: notes
-### Hinweis zur Grammatik (Regeln)
+## Hinweis zur Grammatik (Regeln)
 
 *   `start` ist eine Parser-Regel
     => Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
@@ -147,7 +147,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
 *   Die anderen beiden Regeln (mit großem Anfangsbuchstaben) aus der obigen Grammatik
     zählen zum Lexer
 
-### ANTLR einrichten
+## ANTLR einrichten
 
 *   Aktuelle Version herunterladen: [antlr.org](https://www.antlr.org/download.html),
     für Java als Zielsprache: ["Complete ANTLR 4.x Java binaries jar"](https://www.antlr.org/download/antlr-4.11.1-complete.jar)
@@ -160,7 +160,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
 
 (vgl. [github.com/antlr/antlr4/blob/master/doc/getting-started.md](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md))
 
-### "Hello World" übersetzen und ausführen
+## "Hello World" übersetzen und ausführen
 
 1.  Grammatik übersetzen und Code generieren: `antlr Hello.g4`
 2.  Java-Code kompilieren: `javac *.java`
@@ -182,7 +182,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
         }
         ```
 
-### Generierte Dateien und Klassen
+## Generierte Dateien und Klassen
 
 Nach dem Übersetzen finden sich folgende Dateien und Klassen vor:
 
@@ -229,7 +229,7 @@ Die restlichen Dateien werden für den Parser und verschiedene Arten der
 Traversierung des AST generiert (vgl.
 [AST-basierte Interpreter](../06-interpretation/astdriven-part1.md)).
 
-### Bedeutung der Ausgabe
+## Bedeutung der Ausgabe
 
 Wenn man dem Hello-Lexer die Eingabe
 
@@ -272,7 +272,7 @@ hello
 [@2,15:14='<EOF>',<EOF>,4:0]
 ```
 
-### ANTLR-Grammatik für die Lexer-Generierung
+## ANTLR-Grammatik für die Lexer-Generierung
 
 *   Start der Grammatik mit dem Namen "`XYZ`" mit
 
@@ -318,7 +318,7 @@ hello
 (vgl. [github.com/antlr/antlr4/blob/master/doc/lexicon.md](https://github.com/antlr/antlr4/blob/master/doc/lexicon.md))
 
 
-### Greedy und Non-greedy Lexer-Regeln
+## Greedy und Non-greedy Lexer-Regeln
 
 Die regulären Ausdrücke `(...)?`, `(...)*` und `(...)+` sind _greedy_ und
 versuchen soviel Input wie möglich zu matchen.
@@ -332,7 +332,7 @@ Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen
 :::::::::
 
 
-## Verhalten des Lexers: 1. Längster Match
+# Verhalten des Lexers: 1. Längster Match
 
 Primäres Ziel: Erkennen der längsten Zeichenkette
 
@@ -350,7 +350,7 @@ Im Beispiel würde  ein "foo42" als `FOO` erkannt und nicht als `CHARS DIGITS`.
 :::
 
 
-## Verhalten des Lexers: 2. Reihenfolge
+# Verhalten des Lexers: 2. Reihenfolge
 
 Reihenfolge in Grammatik definiert Priorität
 
@@ -369,7 +369,7 @@ Match liefern - die Regel `FOO` ist in der Grammatik früher definiert und
 :::
 
 
-## Verhalten des Lexers: 3. Non-greedy Regeln
+# Verhalten des Lexers: 3. Non-greedy Regeln
 
 Non-greedy Regeln versuchen _so wenig_ Zeichen wie möglich zu matchen
 
@@ -404,7 +404,7 @@ die verbleibende "2" würde ein _token recognition error_ geworfen.
 :::
 
 
-## Attribute und Aktionen
+# Attribute und Aktionen
 
 ```antlr
 grammar Demo;
@@ -426,7 +426,7 @@ WS      : [ \t\n]+ -> skip ;
 ```
 
 ::: notes
-### Attribute bei Token (Auswahl)
+## Attribute bei Token (Auswahl)
 
 Token haben Attribute, die man abfragen kann. Dies umfasst u.a. folgende Felder:
 
@@ -448,7 +448,7 @@ Die Methodenaufrufe wirken sich immer auf das gerade erstellte Token aus.
 
 _Achtung_: Bei Aktionen in Parser-Regeln gelten andere Spielregeln!
 
-### Aktionen mit den Lexer-Regeln
+## Aktionen mit den Lexer-Regeln
 
 Aktionen für Lexer-Regeln sind Code-Blöcke in der Zielsprache, eingeschlossen
 in geschweifte Klammern. Die Code-Blöcke werden direkt in die generierten
@@ -472,7 +472,7 @@ Klammern eingeschlossen werden.
 :::
 
 
-## Hilfsregeln mit Fragmenten
+# Hilfsregeln mit Fragmenten
 
 ::: notes
 Fragmente sind Lexer-Regeln, die keine Token darstellen/erzeugen, aber
@@ -498,7 +498,7 @@ Hier würde der Parser nur `NUM` "bekommen", aber keine `DIGIT`-Token.
 :::
 
 
-## Lexer Kommandos (Auswahl)
+# Lexer Kommandos (Auswahl)
 
 ```antlr
 TokenName : Alternative -> command-name
@@ -532,7 +532,7 @@ TokenName : Alternative -> command-name
 :::
 
 
-## Modes und Insel-Grammatiken
+# Modes und Insel-Grammatiken
 
 ::: notes
 Umschalten zwischen verschiedenen Lexer-Modes: Wie verschiedene Sub-Lexer -
@@ -542,7 +542,7 @@ einen für jeden Kontext.
 
 _Anmerkung_: `mode`-Spezifikation sind nur im Lexer-Teil der Grammatik erlaubt.
 
-### Allgemeines Schema
+## Allgemeines Schema
 
 ```
 rules in default mode
@@ -557,7 +557,7 @@ rules in MODE_N
 ...
 ```
 
-### Beispiel
+## Beispiel
 :::
 
 ```antlr
@@ -584,7 +584,7 @@ und als aktueller Lexer-Mode gesetzt werden.
 :::
 
 
-## Channels
+# Channels
 
 ::: notes
 Man kann die Token in verschiedene Kanäle ("Channels") schicken. Beispielsweise
@@ -609,7 +609,7 @@ WS            : [ \t\n]+      -> channel(WHITESPACE) ;
 
 
 ::: notes
-## Grammatiken importieren
+# Grammatiken importieren
 
 Mit `import XZY;` bindet man eine andere Grammatik `XYZ` ein. Dabei werden nur
 Regeln eingebunden, die bisher noch nicht definiert wurden.
@@ -626,7 +626,7 @@ dann wird per _Tiefensuche_ der Einbindungsbaum durchlaufen.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrieben
 

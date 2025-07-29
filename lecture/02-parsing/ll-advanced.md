@@ -44,7 +44,7 @@ fhmedia:
 ---
 
 
-## LL-Parser mit Backtracking
+# LL-Parser mit Backtracking
 
 [Problem: Manchmal kennt man den nötigen Lookahead nicht vorher. Beispiel:]{.notes}
 
@@ -86,7 +86,7 @@ Die erste Alternative, die passt, gewinnt. Über die Reihenfolge der Spekulation
 entsprechend Vorrangregeln implementieren.
 
 
-### Anmerkung
+## Anmerkung
 
 Man könnte die obige Grammatik umformen ...
 
@@ -102,7 +102,7 @@ jetzt einfach aus ;)
 :::
 
 
-## Details: Spekulatives Matchen
+# Details: Spekulatives Matchen
 
 ```python
 def speculate(fn):
@@ -132,7 +132,7 @@ wird ja die Regel noch "richtig" aufgerufen).
 :::
 
 
-## Spekulatives Matchen: Hilfsmethoden I/II
+# Spekulatives Matchen: Hilfsmethoden I/II
 
 ```python
 class Parser:
@@ -151,7 +151,7 @@ class Parser:
 [Eigener Code basierend auf einer Idee nach [@Parr2010, pp. 61/62]]{.origin}
 
 
-## Spekulatives Matchen: Hilfsmethoden II/II
+# Spekulatives Matchen: Hilfsmethoden II/II
 
 ```python
 def consume():
@@ -182,7 +182,7 @@ ggf. ein Rollback vornehmen und benötigen also den aktuellen Puffer dann noch.)
 Die Funktion `sync` stellt sicher, dass ab der Position `start` noch `i` unverbrauchte
 Token im Puffer sind.
 
-### Hinweis
+## Hinweis
 
 Die Methode `count` liefert die Anzahl der aktuell gespeicherten Elemente in `lookahead`
 zurück (nicht die Gesamtzahl der Plätze in der Liste -- diese kann größer sein). Mit der
@@ -196,7 +196,7 @@ die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das
 [[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.ex}]{.slides}
 
 ::: notes
-### Backtracking führt zu Problemen
+## Backtracking führt zu Problemen
 
 1.  Backtracking kann _sehr_ langsam sein (Ausprobieren vieler Alternativen)
 2.  Der spekulative Match muss ggf. rückgängig gemacht werden
@@ -204,7 +204,7 @@ die Liste mit weiteren Plätzen erweitern, sondern könnte direkt an Index 0 das
 :::
 
 
-## Verbesserung Backtracking: Packrat Parser (Memoizing)
+# Verbesserung Backtracking: Packrat Parser (Memoizing)
 
 ![](images/packrat.png){width="60%"}
 
@@ -225,7 +225,7 @@ und ist eine zentrales Technik des Packrat Parsers (vgl. @Packrat2006).
 :::
 
 
-## Skizze: Idee des Packrat-Parsing
+# Skizze: Idee des Packrat-Parsing
 
 ``` python
 head_memo = {}
@@ -255,7 +255,7 @@ def head():
         (Stopp-Position) in der Tabelle für diese Regel notieren
     *   Falls Regel nicht erfolgreich, zur Start-Position eine ungültige Position setzen
 
-### Anmerkung *consume()*
+## Anmerkung *consume()*
 
 Die Funktion `consume()` muss passend ergänzt werden: Wann immer man den `lookahead`-Puffer
 zurücksetzt, werden alle `*_memo` ungültig und müssen ebenfalls zurückgesetzt werden!
@@ -264,7 +264,7 @@ zurücksetzt, werden alle `*_memo` ungültig und müssen ebenfalls zurückgesetz
 [[Anmerkung Anpassung `consume()`]{.ex}]{.slides}
 
 
-## Semantische Prädikate
+# Semantische Prädikate
 
 Problem in Java: `enum` ab Java5 Schlüsselwort [(vorher als Identifier-Name verwendbar)]{.notes}
 
@@ -293,10 +293,10 @@ def prog():
 ```
 
 
-## Semantische Prädikate in ANTLR
+# Semantische Prädikate in ANTLR
 
 ::: notes
-### Semantische Prädikate in Parser-Regeln
+## Semantische Prädikate in Parser-Regeln
 :::
 
 ```antlr
@@ -312,7 +312,7 @@ enumDecl : ENUM id '{' id (',' id)* '}' ;
 Prädikate in Parser-Regeln aktivieren bzw. deaktivieren alles, was nach der Abfrage
 des Prädikats gematcht werden könnte.
 
-### Semantische Prädikate in Lexer-Regeln
+## Semantische Prädikate in Lexer-Regeln
 
 Alternativ für Lexer-Regeln:
 :::
@@ -336,7 +336,7 @@ und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribut
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   LL(1) und LL(k): Erweiterungen
     *   Dynamischer Lookahead: BT-Parser mit Packrat-Ergänzung

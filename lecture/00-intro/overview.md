@@ -28,7 +28,7 @@ fhmedia:
 ---
 
 
-## Sprachen verstehen, Texte transformieren
+# Sprachen verstehen, Texte transformieren
 
 > The cat runs quickly.
 
@@ -55,7 +55,7 @@ Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:
 :::
 
 
-## Compiler: Big Picture
+# Compiler: Big Picture
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true)
 
@@ -71,14 +71,14 @@ Stufen und den zwischen den Stufen ausgetauschten Artefakten übersetzen:
 
 
 ::: slides
-## Compiler: Prinzipieller Aufbau
+# Compiler: Prinzipieller Aufbau
 :::
 
 ![](images/architektur_cb.png){width="80%"}
 
 
 ::: notes
-### Frontend, Analyse
+## Frontend, Analyse
 
 Die ersten Stufen eines Compilers, die mit der **Analyse** des
 Inputs beschäftigt sind. Dies sind in der Regel der Scanner, der
@@ -112,7 +112,7 @@ Parser und die semantische Analyse.
     bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
     diese Informationen.
 
-### Backend, Synthese
+## Backend, Synthese
 
 Die hinteren Stufen eines Compilers, die mit der **Synthese** der
 Ausgabe beschäftigt sind. Dies sind in der Regel verschiedene
@@ -136,7 +136,7 @@ Optimierungen und letztlich die Code-Generierung
     bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
     diese Informationen.
 
-### Weitere Begriffe
+## Weitere Begriffe
 
 *   Parse Tree, Concrete Syntax Tree
 
@@ -175,7 +175,7 @@ Optimierungen und letztlich die Code-Generierung
 :::
 
 
-## Lexikalische Analyse: Wörter ("*Token*") erkennen
+# Lexikalische Analyse: Wörter ("*Token*") erkennen
 
 ::: notes
 Die lexikalische Analyse (auch *Scanner* oder *Lexer* oder *Tokenizer* genannt)
@@ -206,7 +206,7 @@ Verweis auf den jeweiligen Eintrag in der Tabelle.
 :::
 
 
-## Syntaxanalyse: Sätze erkennen
+# Syntaxanalyse: Sätze erkennen
 
 ::: notes
 In der Syntaxanalyse (auch *Parser* genannt) wird die Tokensequenz
@@ -265,7 +265,7 @@ im Token-Typ kodieren.
 :::
 
 
-## Vorschau: Parser implementieren
+# Vorschau: Parser implementieren
 
 ```lex
 stat : assign | ifstat | ... ;
@@ -303,7 +303,7 @@ werden letztlich die Token der Grammatik erkannt.
 :::
 
 
-## Semantische Analyse: Bedeutung erkennen
+# Semantische Analyse: Bedeutung erkennen
 
 ::: notes
 In der semantischen Analyse (auch *Context Handling* genannt) wird der AST
@@ -340,7 +340,7 @@ sp = 100;                                    / \
 ```
 
 
-## Zwischencode generieren
+# Zwischencode generieren
 
 ::: notes
 Aus dem annotierten AST wird in der Regel ein Zwischencode ("*Intermediate Code*",
@@ -363,7 +363,7 @@ in manchen Compilern wird als IC aber auch der AST selbst genutzt.
 => `t1 = inttofloat(100)`
 
 
-## Code optimieren
+# Code optimieren
 
 ::: notes
 An dieser Stelle verlassen wir das Compiler-Frontend und begeben uns in das
@@ -388,7 +388,7 @@ Fokus auf die Frontend-Phasen legen und die Optimierung nur grob streifen.
 `x = y*0;` => `x = 0;`
 
 
-## Code generieren
+# Code generieren
 
 *   Maschinencode:
 
@@ -404,7 +404,7 @@ Fokus auf die Frontend-Phasen legen und die Optimierung nur grob streifen.
     *   ...
 
 
-## Probleme
+# Probleme
 
 ```
 5*4+3
@@ -434,7 +434,7 @@ expr : ID '(' ')'
 
 
 ::: notes
-## Unbedingt lesenswert
+# Unbedingt lesenswert
 
 Sie sollten diese beiden Paper unbedingt als Einstieg in das Modul lesen:
 
@@ -443,7 +443,7 @@ Sie sollten diese beiden Paper unbedingt als Einstieg in das Modul lesen:
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Compiler übersetzen Text in ein anderes Format
 

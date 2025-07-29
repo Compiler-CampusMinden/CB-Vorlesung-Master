@@ -8,7 +8,7 @@ readings:
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  project.md  -o xxx.md  -->
 
-## Zusammenfassung
+# Zusammenfassung
 
 Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer
 Programmiersprache zu beschäftigen. Ziel ist es, sowohl die theoretischen als auch die
@@ -17,7 +17,7 @@ praktischen Aspekte des Compilerbaus zu vertiefen.
 Es wird drei Workshops geben, an denen Sie bestimmte Arbeitsergebnisse präsentieren. Diese
 Workshops werden bewertet und gehen in die Gesamtnote ein.
 
-### Fristen (siehe Orga-Seite)
+## Fristen (siehe Orga-Seite)
 
 -   Workshop I: Präsentation der Programmiersprache: 29. Oktober (14:00 - 15:30 Uhr, online)
 -   Workshop II: Präsentation Analyse von Compiler-Technologien: 26. November (18:00 - 19:30 Uhr, online)
@@ -25,11 +25,11 @@ Workshops werden bewertet und gehen in die Gesamtnote ein.
 
 Feedback-Gespräche: 07. Februar (10:00 - 12:00 Uhr, online)
 
-### Teams
+## Teams
 
 Die Aufgaben (Workshops) werden in 2er Teams bearbeitet.
 
-## Wahl der Programmiersprache
+# Wahl der Programmiersprache
 
 Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
 
@@ -67,7 +67,7 @@ und Paradigmen einbringen.
 Dokumentieren Sie Ihre Wahl und begründen Sie, warum Sie sich für diese Sprache entschieden
 haben.
 
-## Workshop I: Präsentation der Programmiersprache
+# Workshop I: Präsentation der Programmiersprache
 
 Bereiten Sie pro Team eine Präsentation (ca. 20 Minuten) vor, in der Sie die zentralen
 Sprachkonzepte Ihrer gewählten Programmiersprache vorstellen. Folgende Punkte sollten Sie
@@ -83,7 +83,7 @@ Darstellung enthält.
 Sie können sich inhaltlich an [@Tate2011] und [@Tate2014] orientieren. Beide Werke finden Sie
 im HSBI-Online-Zugang auf der Plattform O'Reilly.
 
-## Workshop II: Analyse von Compiler-Technologien
+# Workshop II: Analyse von Compiler-Technologien
 
 Analysieren Sie, wie spezifische Sprachkonzepte den Compiler und seine verschiedenen Phasen
 beeinflussen. Berücksichtigen Sie dabei u.a. die Semantische Analyse, die
@@ -145,7 +145,7 @@ Konzepte vorstellen und deren Arbeitsweise an ausgewählten Beispielen verdeutli
 Die Präsentation findet im Rahmen des zweiten Edmonton-Treffens ("Edmonton II", 26. November)
 und wird von Ihnen in englischer Sprache gehalten.
 
-## Workshop III: Implementierung eines einfachen Compilers
+# Workshop III: Implementierung eines einfachen Compilers
 
 Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die Implementierung
 sollte grundlegende Sprachfeatures unterstützen (z.B. einfache Datentypen, Kontrollstrukturen)
@@ -174,7 +174,7 @@ Reichen Sie alle relevanten Unterlagen elektronisch über ILIAS ein. Dazu gehör
     -   Reflexion: Herausforderungen und Lösungen
     -   Fazit und Ausblick
 
-## Bewertung
+# Bewertung
 
 Die Bewertung erfolgt anhand der Qualität der Präsentationen, der Tiefe der Analyse, der
 technischen Umsetzung des Compilers sowie der Reflexion über den gesamten Prozess.

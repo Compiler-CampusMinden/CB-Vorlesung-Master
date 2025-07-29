@@ -4,7 +4,7 @@ author: "Carsten Gips, BC George (HSBI)"
 ---
 
 
-## A4.1: Freie Aufgabe
+# A4.1: Freie Aufgabe
 
 In Blatt 02 und Blatt 03 haben Sie Ihre Aufgaben für dieses Blatt abgestimmt.
 

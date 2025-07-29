@@ -24,7 +24,7 @@ fhmedia:
 ---
 
 
-## Einordnung
+# Einordnung
 
 ![](images/architektur_cb.png)
 
@@ -43,7 +43,7 @@ kann.
 :::
 
 
-## AST als Zwischencode (Beispiel Pandoc)
+# AST als Zwischencode (Beispiel Pandoc)
 
 ::: notes
 Häufig wird der AST selbst als Zwischencode verwendet. Ein Beispiel dafür ist
@@ -102,7 +102,7 @@ Anschließend können diverse *Writer* den AST in das gewünschte Zielformat üb
 [Konsole: pandoc hello.md -s -t native]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.md"}
 
 
-## Zwischenformat: Drei-Adressen-Code
+# Zwischenformat: Drei-Adressen-Code
 
 ::: notes
 Eine weitere häufig eingesetzte Zwischenform kurz vor der Code-Generierung ist der sogenannte
@@ -162,7 +162,7 @@ L:  ...
 :::
 
 
-## LLVM IR
+# LLVM IR
 
 **L**ow **L**evel **V**irtual **M**achine
 
@@ -245,7 +245,7 @@ Vgl. auch [LLVM Language Reference Manual](https://llvm.org/docs/LangRef.html) u
 :::
 
 
-## Bytecode (Beispiel Python)
+# Bytecode (Beispiel Python)
 
 :::::: columns
 ::: {.column width="35%"}
@@ -293,7 +293,7 @@ das Ergebnis wieder auf den Stack. Mit `STORE_NAME 1` wird der Wert in `co_value
 :::
 
 
-## Bytecode (Beispiel Java)
+# Bytecode (Beispiel Java)
 
 :::::: columns
 ::: {.column width="30%"}
@@ -360,7 +360,7 @@ und [www.beyondjava.net/java-programmers-guide-java-byte-code](https://www.beyon
 :::
 
 
-## Assembler
+# Assembler
 
 :::::: columns
 ::: {.column width="35%"}
@@ -432,7 +432,7 @@ und [en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax](https://en.wikibooks.org/wik
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Compiler generieren aus AST Zwischencode ("*IC*" oder "*IR*")
 *   Kein allgemein definiertes Format, große Bandbreite:

@@ -72,7 +72,7 @@ challenges: |
 ---
 
 
-## Funktionen
+# Funktionen
 
 :::::: columns
 ::: {.column width="50%"}
@@ -122,7 +122,7 @@ Interpreter mit `eval()` auswerten ...
 :::
 
 
-## Ausführen einer Funktionsdeklaration
+# Ausführen einer Funktionsdeklaration
 
 ```antlr
 funcDecl : type ID '(' params? ')' block ;
@@ -167,7 +167,7 @@ Scope (Environment).
 :::
 
 
-## Ausführen eines Funktionsaufrufs
+# Ausführen eines Funktionsaufrufs
 
 ```antlr
 funcDecl : type ID '(' params? ')' block ;
@@ -209,7 +209,7 @@ Funktionsauswertung zurück.
 :::
 
 
-## Funktionsaufruf: Rückgabewerte
+# Funktionsaufruf: Rückgabewerte
 
 :::::: columns
 ::: {.column width="45%"}
@@ -268,7 +268,7 @@ die Exception erneut werfen.
 :::
 
 
-## Native Funktionen
+# Native Funktionen
 
 ```python
 class Callable:
@@ -318,7 +318,7 @@ Auswerten des AST.
 :::
 
 
-## Klassen und Instanzen I
+# Klassen und Instanzen I
 
 ```antlr
 classDef : "class" ID "{" funcDecl* "}" ;
@@ -345,7 +345,7 @@ Für Attribute müssten ähnliche Konstrukte implementiert werden.
 :::
 
 
-## Klassen und Instanzen II
+# Klassen und Instanzen II
 
 ``` {.python size="footnotesize"}
 class Clazz(Callable):
@@ -378,7 +378,7 @@ heranzukommen.
 :::
 
 
-## Zugriff auf Methoden (und Attribute)
+# Zugriff auf Methoden (und Attribute)
 
 ```antlr
 getExpr : obj "." ID ;
@@ -403,7 +403,7 @@ interner Hash-Map zugriffen; sonst Exception.
 :::
 
 
-## Methoden und *this* oder *self*
+# Methoden und *this* oder *self*
 
 ```python
 class Fun(Callable):
@@ -431,13 +431,13 @@ eine Referenz auf die Instanz, auf der diese Methode ausgeführt werden soll ...
 
 
 <!-- TODO
-## Vererbung (Skizze)
+# Vererbung (Skizze)
 
 TODO
 -->
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Interpreter simulieren die Programmausführung
     *   Namen und Symbole auflösen

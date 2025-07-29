@@ -86,7 +86,7 @@ challenges: |
 ---
 
 
-## Hello World
+# Hello World
 
 ```antlr
 grammar Hello;
@@ -108,7 +108,7 @@ WS    : [ \t\n]+ -> skip ;
 [Konsole: Hello (grun, Parse-Tree)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/Hello.g4"}
 
 ::::::::: notes
-### Starten des Parsers
+## Starten des Parsers
 
 1.  Grammatik übersetzen und Code generieren: `antlr Hello.g4`
 2.  Java-Code kompilieren: `javac *.java`
@@ -132,7 +132,7 @@ WS    : [ \t\n]+ -> skip ;
         }
         ```
 
-### Startregeln
+## Startregeln
 
 *   `start` ist eine Parser-Regel
     => Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
@@ -140,7 +140,7 @@ WS    : [ \t\n]+ -> skip ;
 *   Alle Regeln mit kleinem Anfangsbuchstaben sind Parser-Regeln
 *   Alle Regeln mit großem Anfangsbuchstaben sind Lexer-Regeln
 
-### Formen der Subregeln
+## Formen der Subregeln
 
 ```antlr
 stmt  : ID '=' expr ';' ;
@@ -172,7 +172,7 @@ umschalten (analog zu den Lexer-Regeln).
 
 (vgl. [github.com/antlr/antlr4/blob/master/doc/parser-rules.md](https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules))
 
-### Reihenfolge in Grammatik definiert Priorität
+## Reihenfolge in Grammatik definiert Priorität
 
 Falls mehr als eine Parser-Regel die selbe Input-Sequenz matcht, löst ANTLR
 diese Mehrdeutigkeit auf, indem es die erste Alternative nimmt, die an der
@@ -189,7 +189,7 @@ Bei der Eingabe "foo" würde die Alternative `ID` in der Regel `expr` "gewinnen"
 weil sie in der Grammatik vor der Alternative `ID` in der Regel `stmt` kommt und
 damit Vorrang hat.
 
-### Parse-Tree
+## Parse-Tree
 
 Betrachten wir erneut die obige Grammatik.
 
@@ -233,7 +233,7 @@ Wie man sehen kann, sind in der Grammatik die üblichen Vorrangregeln für die
 Operationen `+` und `*` berücksichtigt - die Multiplikation wird in beiden
 Fällen korrekt "unter" der Addition im Baum eingehängt.
 
-### To EOF not to EOF?
+## To EOF not to EOF?
 
 Startregeln müssen nicht unbedingt den gesamten Input "konsumieren". Sie müssen
 per Default nur eine der Alternativen in der Startregel erfüllen.
@@ -271,7 +271,7 @@ führt.
 :::::::::
 
 
-## Expressions und Vorrang (Operatoren)
+# Expressions und Vorrang (Operatoren)
 
 ::: notes
 Betrachten wir noch einmal den Ausschnitt für die Ausdrücke (_Expressions_) in
@@ -328,7 +328,7 @@ hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer einfachen
 :::
 
 ::: notes
-### Direkte vs. indirekte Links-Rekursion
+## Direkte vs. indirekte Links-Rekursion
 
 ANTLR kann nur _direkte_ Links-Rekursion auflösen. Regeln wie `r : r T U | V ;` stellen
 in ANTLR also kein Problem dar.
@@ -344,7 +344,7 @@ Hier würden sich die Regeln `r` und `s` gegenseitig aufrufen und kein Token aus
 Tokenstrom entfernen, so dass der generierte LL-Parser hier in einer Endlosschleife
 stecken bleiben würde. Mit indirekter Links-Rekursion kann ANTLR nicht umgehen.
 
-### Konflikte in Regeln
+## Konflikte in Regeln
 
 Wenn mehrere Alternativen einer Regel anwendbar sind, entscheidet sich ANTLR für die
 erste Alternative.
@@ -385,7 +385,7 @@ und zwischen den Parser-Regeln und den Lexer-Regeln die impliziten Token (hier `
 :::
 
 
-## Kontext-Objekte für Parser-Regeln
+# Kontext-Objekte für Parser-Regeln
 
 ```antlr
 s    : expr         {List<EContext> x = $expr.ctx.e();}
@@ -418,7 +418,7 @@ Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 :::
 
 
-## Benannte Regel-Elemente oder Alternativen
+# Benannte Regel-Elemente oder Alternativen
 
 ```antlr
 stat  : 'return' value=e ';'    # Return
@@ -448,7 +448,7 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 :::
 
 
-## Arbeiten mit ANTLR-Listeners
+# Arbeiten mit ANTLR-Listeners
 
 ::: notes
 ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und
@@ -528,7 +528,7 @@ werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
 
-## Arbeiten mit dem Visitor-Pattern
+# Arbeiten mit dem Visitor-Pattern
 
 ::: notes
 ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren
@@ -606,7 +606,7 @@ werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 
 
 ::: notes
-## Eingebettete Aktionen und Attribute
+# Eingebettete Aktionen und Attribute
 
 ```antlr
 s   : expr                      {System.err.println($expr.v);}
@@ -638,7 +638,7 @@ die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 
 
 ::: notes
-## Ausblick
+# Ausblick
 
 Damit haben wir die sprichwörtliche "Spitze des Eisbergs" gesehen. Mit ANTLR
 sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
@@ -654,7 +654,7 @@ Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben** geschrieben
 

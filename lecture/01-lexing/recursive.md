@@ -39,7 +39,7 @@ fhmedia:
 ---
 
 
-## Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
+# Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
 
 \vspace{-20mm}
 
@@ -60,7 +60,7 @@ a= [5  , 6]     ;
 ```
 
 
-## Manuelle Implementierung: Rekursiver Abstieg
+# Manuelle Implementierung: Rekursiver Abstieg
 
 ```python
 def nextToken():
@@ -103,7 +103,7 @@ Ansatz. Dies ist i.d.R. Geschwindigkeitsgründen geschuldet ...
 :::
 
 
-## Read-Ahead: Unterscheiden von "*<*" und "*<=*"
+# Read-Ahead: Unterscheiden von "*<*" und "*<=*"
 
 ```python
 def nextToken():
@@ -139,7 +139,7 @@ gelesene Zeichen wieder in den Eingabestrom zurückgelegt werden (`rollBack()`).
 :::
 
 
-## Puffern des Input-Stroms: Double Buffering
+# Puffern des Input-Stroms: Double Buffering
 
 ::: notes
 Das Einlesen einzelner Zeichen führt zwar zu eleganten algorithmischen
@@ -213,7 +213,7 @@ man die Auflösung zwischen Schlüsselwörtern und Bezeichnern dem Parser überl
 :::
 
 
-## Typische Muster für Erstellung von Token
+# Typische Muster für Erstellung von Token
 
 1.  Schlüsselwörter
     *   Ein eigenes Token (RE/DFA) für jedes Schlüsselwort, oder
@@ -289,7 +289,7 @@ Vorrangregeln bzgl. der Token arbeiten.
 :::
 
 
-## Fehler bei der Lexikalischen Analyse
+# Fehler bei der Lexikalischen Analyse
 
 [Problem: Eingabestrom sieht so aus:]{.notes} `fi (a==42) { ... }`
 
@@ -366,7 +366,7 @@ Optionen:
     :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Zusammenhang DFA, RE und Lexer
 

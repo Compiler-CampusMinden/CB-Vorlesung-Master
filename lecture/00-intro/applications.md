@@ -25,7 +25,7 @@ fhmedia:
 ---
 
 
-## Anwendung: Compiler
+# Anwendung: Compiler
 
 ![](images/compiler.png)
 
@@ -39,7 +39,7 @@ Beispiele: gcc, clang, ...
 :::
 
 
-## Anwendung: Interpreter
+# Anwendung: Interpreter
 
 
 ![](images/interpreter.png)
@@ -54,7 +54,7 @@ Beispiele: Python
 :::
 
 
-## Anwendung: Virtuelle Maschinen
+# Anwendung: Virtuelle Maschinen
 
 ![](images/virtualmachine.png)
 
@@ -68,7 +68,7 @@ Beispiel: Java mit seiner JVM
 :::
 
 
-## Anwendung: C-Toolchain
+# Anwendung: C-Toolchain
 
 ![](images/c-toolchain.png){width="80%"}
 
@@ -85,7 +85,7 @@ Beispiele: gcc, clang, ...
 :::
 
 
-## Anwendung: C++-Compiler
+# Anwendung: C++-Compiler
 
 ![](images/cpp-toolchain.png){width="80%"}
 
@@ -102,7 +102,7 @@ Beispiel: g++
 :::
 
 
-## Anwendung: Bugfinder
+# Anwendung: Bugfinder
 
 ![](images/findbugs.png){width="80%"}
 
@@ -123,7 +123,7 @@ Beispiele: SpotBugs, Checkstyle, ESLint, ...
 :::
 
 
-## Anwendung: Pandoc
+# Anwendung: Pandoc
 
 ::: notes
 [Pandoc](https://pandoc.org/) ist ein universeller und modular aufgebauter
@@ -187,7 +187,7 @@ Weitere Beispiele:
 :::
 
 
-## Was bringt mir das?
+# Was bringt mir das?
 
 ::: cbox
 \Large
@@ -197,7 +197,7 @@ Weitere Beispiele:
 
 
 ::::::::: notes
-### Auswahl einiger Gründe für den Besuch des Moduls "Compilerbau"
+## Auswahl einiger Gründe für den Besuch des Moduls "Compilerbau"
 
 *   Erstellung eigener kleiner Interpreter/Compiler
     *   Einlesen von komplexen Daten
@@ -233,7 +233,7 @@ Weitere Beispiele:
     in fast allen formalen Systeme.
 
 
-### Parser-Generatoren (Auswahl)
+## Parser-Generatoren (Auswahl)
 
 Diese Tools könnte man beispielsweise nutzen, um seine eigene Sprache zu basteln.
 
@@ -246,7 +246,7 @@ Diese Tools könnte man beispielsweise nutzen, um seine eigene Sprache zu bastel
 *   Eclipse Xtext is a language development framework: [github.com/eclipse/xtext](https://github.com/eclipse/xtext)
 
 
-### Statische Analyse, Type-Checking und Linter
+## Statische Analyse, Type-Checking und Linter
 
 Als Startpunkt für eigene Ideen. Oder Verbessern/Erweitern der Projekte ...
 
@@ -261,7 +261,7 @@ Als Startpunkt für eigene Ideen. Oder Verbessern/Erweitern der Projekte ...
 *   Syntax checking hacks for vim: [github.com/vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
 
 
-### DSL (Domain Specific Language)
+## DSL (Domain Specific Language)
 
 *   NVIDIA Material Definition Language SDK: [github.com/NVIDIA/MDL-SDK](https://github.com/NVIDIA/MDL-SDK)
 *   FitNesse -- The Acceptance Test Wiki: [github.com/unclebob/fitnesse](https://github.com/unclebob/fitnesse)
@@ -271,7 +271,7 @@ Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:
 *   Eclipse Xtext is a language development framework: [github.com/eclipse/xtext](https://github.com/eclipse/xtext)
 
 
-### Konverter von X nach Y
+## Konverter von X nach Y
 
 *   Emscripten: An LLVM-to-JavaScript Compiler: [github.com/kripken/emscripten](https://github.com/kripken/emscripten)
 *   "Unfancy JavaScript": [github.com/jashkenas/coffeescript](https://github.com/jashkenas/coffeescript)
@@ -279,7 +279,7 @@ Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:
 *   Übersetzung von JSON nach XML
 
 
-### Odds and Ends
+## Odds and Ends
 
 *   How to write your own compiler: [staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm](http://staff.polito.it/silvano.rivoira/HowToWriteYourOwnCompiler.htm)
 *   Building a modern functional compiler from first principles: [github.com/sdiehl/write-you-a-haskell](https://github.com/sdiehl/write-you-a-haskell)
@@ -290,7 +290,7 @@ Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:
     *   Brainfuck
 
 
-### Als weitere Anregung: Themen der Mini-Projekte im W17
+## Als weitere Anregung: Themen der Mini-Projekte im W17
 
 *   Java2UMLet
 *   JavaDoc-to-Markdown
@@ -303,7 +303,7 @@ Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:
 :::::::::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Compiler übersetzen formalen Text in ein anderes Format
 

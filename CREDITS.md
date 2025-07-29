@@ -11,7 +11,7 @@ notes for the teaching material. These are licensed under their own licences and
 not part of the CC BY-SA 4.0 licence of this project.
 
 
-## Building the Lecture Slides
+# Building the Lecture Slides
 
 *   [Pandoc](https://github.com/jgm/pandoc)
 *   [Pandoc-Lecture](https://github.com/cagix/pandoc-lecture)
@@ -21,13 +21,13 @@ not part of the CC BY-SA 4.0 licence of this project.
 *   [Metropolis](https://github.com/matze/mtheme)
 
 
-## Building the Lecture GitHub Preview
+# Building the Lecture GitHub Preview
 
 *   [Pandoc](https://github.com/jgm/pandoc)
 *   [Pandoc-Lecture](https://github.com/cagix/pandoc-lecture)
 
 
-## Further Tools used
+# Further Tools used
 
 *   [GNU Make](https://www.gnu.org/software/make/)
 *   [Pandoc Dockerfiles](https://github.com/pandoc/dockerfiles)
@@ -35,7 +35,7 @@ not part of the CC BY-SA 4.0 licence of this project.
 *   [GitHub](https://github.com/)
 
 
-## Contributors
+# Contributors
 
 [This project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master)
 has been created and is being maintained by the authors

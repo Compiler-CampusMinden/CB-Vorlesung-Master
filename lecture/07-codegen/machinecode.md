@@ -31,7 +31,7 @@ fhmedia:
 ---
 
 
-## Einordnung
+# Einordnung
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true)
 
@@ -50,7 +50,7 @@ Hier der Vollständigkeit halber ein Ausblick ...
 :::
 
 
-## Prozessorarchitektur
+# Prozessorarchitektur
 
 <!-- TODO Image stopped working w/ Pandoc/Beamer (Slides) -->
 <!--
@@ -81,7 +81,7 @@ gebracht.
 :::
 
 
-## Virtueller Speicher
+# Virtueller Speicher
 
 ![](images/virtueller-speicher.png){width="40%"}
 
@@ -94,7 +94,7 @@ gebracht.
     MMU bildet logische Adressen aus virtuellem Speicher auf den
     physikalischen Speicher ab (transparent für den Prozess)
 
-### Segmente des virtuellen Speichers: Text
+## Segmente des virtuellen Speichers: Text
 
 *   **Text Segment** (read-only)
     *   Programm Code
@@ -106,7 +106,7 @@ gebracht.
 
 **ACHTUNG**: Bereich (un-) initialisierter Daten nicht in Abbildung dargestellt!
 
-### Segmente des virtuellen Speichers: Stack
+## Segmente des virtuellen Speichers: Stack
 
 *   Stackframe je Funktionsaufruf:
     *   Lokale Variablen ("automatische" Variablen)
@@ -116,7 +116,7 @@ gebracht.
     *   Nach Funktionsrückkehr wird der Stackpointer ("Top of Stack") weiter gesetzt
     *   Dadurch "Bereinigung": Speicher der lokalen Variablen wird freigegeben
 
-### Segmente des virtuellen Speichers: Data (Heap)
+## Segmente des virtuellen Speichers: Data (Heap)
 
 *   Bereich für dynamischen Speicher (Allokation während der Laufzeit)
 *   Dynamisch wachsend und schrumpfend
@@ -127,7 +127,7 @@ gebracht.
 :::::::::
 
 
-## Befehlszyklus (von-Neumann-Architektur)
+# Befehlszyklus (von-Neumann-Architektur)
 
 ```python
 op = read_next_op(pc)
@@ -170,7 +170,7 @@ Je nach Architektur sind die Register, Adressen und Instruktionen 4 Bytes (32 Bi
 :::
 
 
-## Aufgaben bei der Erzeugung von Maschinen-Code
+# Aufgaben bei der Erzeugung von Maschinen-Code
 
 ::: notes
 Relativ ähnlich wie bei der Erzeugung von Bytecode, nur muss diesmal die Zielhardware
@@ -200,7 +200,7 @@ Relativ ähnlich wie bei der Erzeugung von Bytecode, nur muss diesmal die Zielha
 *   Aufbau des Binärformats und Linking auf der Zielmaschine (auch Betriebssystem) beachten
 
 
-## Übersetzen von Zwischencode in Maschinencode
+# Übersetzen von Zwischencode in Maschinencode
 
 ::: notes
 Für diese Aufgabe muss man den genauen Befehlssatz für den Zielprozessor kennen.
@@ -279,7 +279,7 @@ wurden dagegen 3x 4 Byte gebraucht (Op-Code, R0, R1).
 :::::::::
 
 
-## Aufruf von Funktionen
+# Aufruf von Funktionen
 
 ::: notes
 Es soll Maschinencode für den folgenden Funktionsaufruf erzeugt werden:
@@ -322,7 +322,7 @@ R:  x = Stack[SP+4]     ;; Hole Rückgabewert
 ::::::
 
 ::: notes
-### Funktionsaufruf
+## Funktionsaufruf
 
 Ein Funktionsaufruf entspricht einem Sprung an die Stelle im
 Textsegment, wo der Funktionscode abgelegt ist. Dies erreicht man, in
@@ -330,7 +330,7 @@ dem man diese Adresse in den *PC* schreibt. Bei einem `return` muss
 man wieder zum ursprünglichen Programmcode zurückspringen, weshalb man
 diese Adresse auf dem Stack hinterlegt.
 
-### Parameter
+## Parameter
 
 Zusätzlich müssen Parameter für die Funktion auf dem Stack abgelegt
 werden, damit die Funktion auf diese zugreifen kann. Im Funktionscode
@@ -343,7 +343,7 @@ Rücksprungadresse muss der *FP* des aufrufenden Kontexts im Stack-Frame
 der aufgerufenen Funktion gesichert werden (in der Skizze nicht dargestellt)
 und am Ende des Aufrufs wieder hergestellt werden.
 
-### Lokale Variablen
+## Lokale Variablen
 
 Lokale Variablen einer Funktion werden ebenfalls auf dem Stack
 angelegt, falls nicht genügend Register zur Verfügung stehen, und
@@ -359,7 +359,7 @@ auch für arithmetische Berechnungen verwendet werden und der *SP*
 somit für die Dauer eines Funktionsaufrufs nicht zwingend konstant
 ist.
 
-### Rückgabewerte
+## Rückgabewerte
 
 Falls eine Funktion Rückgabewerte hat, werden diese ebenfalls auf dem
 Stack abgelegt (Überschreiben der ursprünglichen Parameter).
@@ -372,7 +372,7 @@ Record" genannt):
 *   Rücksprungadresse (d.h. aktueller *PC*)
 *   Lokale Variablen der Funktion (falls vorhanden)
 
-### Sichern von lokalen Variablen der "alten" Funktion
+## Sichern von lokalen Variablen der "alten" Funktion
 
 -   Vor Funktionsaufrufen müssen aktuell verwendete Register (lokale Variablen) gesichert werden
 -   Register werden in den Speicher (Stack) ausgelagert
@@ -384,7 +384,7 @@ Record" genannt):
 :::
 
 
-## Funktionsaufruf: Prolog
+# Funktionsaufruf: Prolog
 
 ```
 f:  ...                 ;; Label f: hier startet die Funktion
@@ -400,7 +400,7 @@ könnte man die Parameter auch in vorhandene Register laden und entsprechend den
 :::
 
 
-## Funktionsaufruf: Epilog
+# Funktionsaufruf: Epilog
 
 
 :::::: columns
@@ -439,7 +439,7 @@ die Rücksprungadresse dessen Aufrufers steht ...
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 Skizze zur Erzeugung von Assembler-Code
 

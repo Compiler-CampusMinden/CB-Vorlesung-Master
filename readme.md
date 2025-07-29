@@ -7,7 +7,7 @@ has_license: true
 ![](admin/images/architektur_cb.png){width="80%"}
 
 
-## Kursbeschreibung
+# Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
@@ -20,7 +20,7 @@ der Erstellung eines Bytecode-Compilers für unterschiedliche Programmiersprache
 die Java-VM oder WASM ein.
 
 
-## Überblick Modulinhalte
+# Überblick Modulinhalte
 
 1.  Lexikalische Analyse: Scanner/Lexer
     *   Reguläre Sprachen
@@ -60,13 +60,13 @@ die Java-VM oder WASM ein.
     auf den Compiler/Interpreter und die Laufzeitumgebung
 
 
-## Team
+# Team
 
 *   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
 *   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips) (Sprechstunde nach Vereinbarung)
 
 
-## Kursformat
+# Kursformat
 
 | Vorlesung (2 SWS)                               | Praktikum (3 SWS)              |
 |:------------------------------------------------|:-------------------------------|
@@ -79,12 +79,12 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1400613&client_id=FH-Bielefeld
 
 
-## Fahrplan
+# Fahrplan
 
 `{{% notice style="note" title="News" %}}`{=markdown}
 `{{% expand title="08.01.25" %}}`{=markdown}
 
-### Verschiebung von Workshop 3 auf den 31. Januar (10:00 - 12:30 Uhr)
+## Verschiebung von Workshop 3 auf den 31. Januar (10:00 - 12:30 Uhr)
 
 Wie am 07.01.25 gemeinsam abgestimmt, verschieben wir auf Wunsch einiger Teams den dritten Workshop auf
 Freitag, den 31.01., 10:00-12:30 Uhr. Wir treffen uns dazu in unserem Zoom-Raum.
@@ -96,7 +96,7 @@ statt (ebenfalls online).
 
 `{{% expand title="28.10.24" %}}`{=markdown}
 
-### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+## Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
 
 Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
 Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl. [ILIAS]).
@@ -112,7 +112,7 @@ Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
 
 `{{% expand title="23.10.24" %}}`{=markdown}
 
-### Sitzung am 19.11. fängt erst um 15:30 Uhr an
+## Sitzung am 19.11. fängt erst um 15:30 Uhr an
 
 Mein Beitrag zur [#DLK24](https://conference.hsbi.de/goto.php?target=grp_656&client_id=conferencefhbielefeld)
 wurde akzeptiert. Da mein Vortrag mitten zu unserer Vorlesungzeit eingeplant wurde, müssen wir in CPL etwas
@@ -204,7 +204,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 [Workshop III]: homework/project.md
 
 
-## Prüfungsform, Note und Credits
+# Prüfungsform, Note und Credits
 
 **Parcoursprüfung plus Testat**, 10 ECTS (PO23)
 
@@ -222,7 +222,7 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im [ILIAS](https:/
 
 Die Bearbeitung der Aufgaben (Workshops) erfolgt in 2er Teams.
 
-## Materialien
+# Materialien
 
 1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
@@ -248,9 +248,9 @@ Die Bearbeitung der Aufgaben (Workshops) erfolgt in 2er Teams.
     [Online](https://learning.oreilly.com/library/view/seven-languages-in/9781680500059/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
 
-## Förderungen und Kooperationen
+# Förderungen und Kooperationen
 
-### Kooperation mit University of Alberta, Edmonton (Kanada)
+## Kooperation mit University of Alberta, Edmonton (Kanada)
 
 Über das Projekt ["We CAN virtuOWL"] der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
 Kooperation mit der [University of Alberta] (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
