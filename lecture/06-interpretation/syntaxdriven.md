@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/0e4ffb9743823767da26cf83c54fa2c87293bb9974ccb5b62e9111cccf01954b96fd29a449fc96097f0b8c549d93c720aed4c3fe079795dbe6246081b7c20a8f"
-  name: VL Syntaxgesteuerte Interpreter
 title: Syntaxgesteuerte Interpreter
 ---
 

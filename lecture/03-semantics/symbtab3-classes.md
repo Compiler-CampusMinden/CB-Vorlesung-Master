@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/61bbea5570ec17a741c3899f0822085deee317d4f5f34268eb6bcc1cc4ce6b443eb2ac397791e1fbeb5ba7a9d6c46cf08307bf3be2ccde9b7d2fc0a6ee9cfcc9"
-  name: VL Strukturen und Klassen
 title: "SymbTab3: Strukturen und Klassen"
 ---
 

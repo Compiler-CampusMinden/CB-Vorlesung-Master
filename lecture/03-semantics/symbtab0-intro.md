@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/af37ca12a1e720f50544efd742b34a297da3e96b74904cb521e51cf42138b083510c8e4456377c945a6e9def30c039b207d572b8dae163b02f8509c137eb6446"
-  name: VL Symboltabellen (Intro)
 title: "SymbTab0: Überblick Symboltabellen"
 ---
 

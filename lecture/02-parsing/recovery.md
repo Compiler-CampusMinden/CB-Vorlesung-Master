@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/eabf5e829fbcd6be866e20b169989c8fef4fd10f13704999d0c1b531d15d4255975cd4490ac127156874d8334d6cade0ece8e2d15f2f2d34cb965a0c1697eade"
-  name: VL Error-Recovery
 title: Error-Recovery
 ---
 

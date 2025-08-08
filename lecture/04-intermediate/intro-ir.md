@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/b9562e9230f0c3174c434445bc4d8bc63fa232001933a7f553b36db9e002f4dcaed1e0952eddc9de9d31c4de805f493cafa03b0eed03567b0ce952564de4fdd9"
-  name: VL Überblick Zwischencode
 title: Überblick Zwischencode
 ---
 

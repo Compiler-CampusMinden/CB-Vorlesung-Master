@@ -1,11 +1,11 @@
 ---
 title: "Modulvorstellung CPL (Concepts of Programming Languages)"
 author: "BC George & Carsten Gips (HSBI)"
-youtube:
-  - link: "https://youtu.be/rpbaSy2iy00"
-    name: "Modulvorstellung CPL (Concepts of Programming Languages)"
 ---
 
+::: youtube
+[Modulvorstellung CPL (Concepts of Programming Languages)](https://youtu.be/rpbaSy2iy00)
+:::
 
 # Sprachen verstehen, (formale) Texte transformieren
 

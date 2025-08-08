@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/3321732b51dab72206dd0f6ee1d07449b80c37c2e0880192b38f1e835d10e2c7aea5e75632ea174d44d4d5dbb6864910990cfef160dedd06213ee8ffdf0c9a36"
-  name: VL Maschinencode
 title: Generierung von Maschinencode (Skizze)
 ---
 

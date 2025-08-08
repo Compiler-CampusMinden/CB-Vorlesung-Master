@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/eddc0526dca0dd506e7f1a4ea426319fca05126ebacadb328ab8ccf68f2d0b038bc58b98ab51fdf3774db1b3a4ffe5b3d2279c7db4a37fe277ed2f3b27b9e495"
-  name: VL Funktionen
 title: "SymbTab2: Funktionen"
 ---
 

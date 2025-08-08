@@ -4,9 +4,6 @@ author: "BC George, Carsten Gips (HSBI)"
 no_beamer: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  sheet02.md  -o xxx.md  -->
-
-
 # A2.1: AST
 
 Setzen Sie Ihr AST-Konzept vom ersten Blatt um. Schreiben Sie die entsprechenden

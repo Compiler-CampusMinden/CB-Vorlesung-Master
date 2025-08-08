@@ -1,8 +1,5 @@
 ---
 author: Carsten Gips (HSBI)
-fhmedia:
-- link: "https://www.hsbi.de/medienportal/m/c3dc479884ce6b50bbd0fe85a8dd49f7b250576ac73742b879c564d6cba4b83c79fa499f9164b947e81e597add85e6addfd91a41a4eb85438c51218846aac0cb"
-  name: "VL LL-Parser: Fortgeschrittene Techniken"
 title: "LL-Parser: Fortgeschrittene Techniken"
 ---
 

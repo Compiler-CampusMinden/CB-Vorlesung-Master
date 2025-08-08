@@ -4,8 +4,6 @@ no_beamer: true
 title: Compiler-Projekt
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  project.md  -o xxx.md  -->
-
 # Zusammenfassung
 
 Im Rahmen dieses Projektes werden Sie sich mit der Analyse und Implementierung einer Programmiersprache zu beschäftigen.

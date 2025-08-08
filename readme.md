@@ -80,47 +80,29 @@ Abgabe der Übungsblätter jeweils **Dienstag bis 14:00 Uhr** im
 [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1421692&client_id=FH-Bielefeld). Vorstellung der Lösung im
 jeweiligen Praktikum in der Abgabewoche.
 
-| Monat | Tag | Vorlesung | Lead | Praktikum |
-|:-------------|:---|:-----------------------------------------------------------------------------|:----------|:-------------|
-| Oktober | 08\. | [Orga](https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#überblick-modulinhalte) (*Zoom*); [Überblick](lecture/00-intro/overview.md), [Sprachen](lecture/00-intro/languages.md), [Anwendungen](lecture/00-intro/applications.md) | Carsten, BC |  |
-|  | 15\. | [Reguläre Sprachen](lecture/01-lexing/regular.md), [CFG](lecture/02-parsing/cfg.md), [LL-Parser](lecture/02-parsing/ll-parser.md) | BC | Verteilung Themen |
-|  | 22\. | \[LR-Parser\] | BC | Status Workshop I |
-|  | 29\. | **[Workshop I](homework/project.md)**: Sprache und Features (auf Sprachebene) |  |  |
-|  | 29\. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding** | *Edmonton* |  |
-| November | 05\. | [Attributierte Grammatiken](lecture/03-semantics/attribgrammars.md) | BC | Status Workshop II |
-|  | 12\. | [Überblick Symboltabellen](lecture/03-semantics/symbtab0-intro.md), [Symboltabellen: Scopes](lecture/03-semantics/symbtab1-scopes.md), [Symboltabellen: Funktionen](lecture/03-semantics/symbtab2-functions.md), [Symboltabellen: Klassen](lecture/03-semantics/symbtab3-classes.md) | Carsten | Status Workshop II |
-|  | 19\. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter](lecture/06-interpretation/syntaxdriven.md), [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md), [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md) | Carsten | Status Workshop II |
-|  | 26\. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II](homework/project.md)**: Sprache und Features (aus Compiler-Sicht) | *Minden (MIF)* |  |
-| Dezember | 03\. | [Optimierung und Datenfluss- und Kontrollflussanalyse](lecture/05-optimization/optimization.md) | BC |  |
-| Dezember | 03\. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte** | *Edmonton* |  |
-|  | 10\. | [Projekt-Pitch](homework/project.md): Vorstellen und Diskussion der Projektinhalte/-konzepte | Carsten |  |
-|  | 17\. | *Freies Arbeiten* |  | Status Workshop III |
-|  | 24\. | *Weihnachtspause* |  |  |
-|  | 31\. | *Weihnachtspause* |  |  |
-| Januar | 07\. | *Freies Arbeiten* |  | Status Workshop III |
-|  | 14\. | *Freies Arbeiten* |  | Status Workshop III |
-|  | 21\. | *Freies Arbeiten* |  | Status Workshop III |
-| *(Prüfungsphase I)* | 31\. | **[Workshop III](homework/project.md): Projektvorstellung/-übergabe (10:00 - 12:30 Uhr, online)** |  |  |
-| *(Prüfungsphase I)* | 07\. | **Feedback-Gespräche (10:00 - 12:00 Uhr, online)** |  |  |
-| *(Prüfungsphase II)* |  | *Keine separate Prüfung* |  |  |
-
-[Tabellenbasierte Lexer](lecture/01-lexing/table.md) [Handcodierter Lexer](lecture/01-lexing/recursive.md) [Lexer mit
-ANTLR](lecture/01-lexing/antlr-lexing.md) [Lexer mit Flex](lecture/01-lexing/flex.md)
-
-[LL-Parser (Praxis)](lecture/02-parsing/ll-parser-impl.md) [LL(Fortgeschrittene
-Techniken](lecture/02-parsing/ll-advanced.md) [Parser mit ANTLR](lecture/02-parsing/antlr-parsing.md) [Parser mit
-Bison](lecture/02-parsing/bison.md) \[LR-Parser\]: lecture/02-parsing/lr-parser.md [LR-Parser (Teil
-1)](lecture/02-parsing/lr-parser1.md) [LR-Parser (Teil 2)](lecture/02-parsing/lr-parser2.md) [PEG-Parser,
-Pratt-Parser](lecture/02-parsing/parsercombinator.md) [Error Revocery](lecture/02-parsing/recovery.md) [Grenze Lexer und
-Parser](lecture/02-parsing/finalwords.md)
-
-[Überblick Zwischencode](lecture/04-intermediate/intro-ir.md) [LLVM als IR](lecture/04-intermediate/llvm-ir.md)
-
-[VM](lecture/06-interpretation/vm.md)
-
-[Bytecode](lecture/07-codegen/bytecode.md) [Maschinencode](lecture/07-codegen/machinecode.md)
-
-[Garbage Collection](lecture/08-memory/gc.md)
+| Monat                | Tag | Vorlesung                                                                                                                                                                                                                                                                            | Lead           | Praktikum           |
+|:---------------------|:----|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------|
+| Oktober              | 08. | [Orga](https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1603207/index.html#überblick-modulinhalte) (*Zoom*); [Überblick](lecture/00-intro/overview.md), [Sprachen](lecture/00-intro/languages.md), [Anwendungen](lecture/00-intro/applications.md)                         | Carsten, BC    |                     |
+|                      | 15. | [Reguläre Sprachen](lecture/01-lexing/regular.md), [CFG](lecture/02-parsing/cfg.md), [LL-Parser](lecture/02-parsing/ll-parser.md), [LL-Parser (Impl)](lecture/02-parsing/ll-parser-impl.md), [LL-Parser (Advanced)](lecture/02-parsing/ll-advanced.md)                               | BC             | Verteilung Themen   |
+|                      | 22. | [LR-Parser](lecture/02-parsing/lr-parser.md),[LR-Parser 1](lecture/02-parsing/lr-parser1.md), [LR-Parser 2](lecture/02-parsing/lr-parser2.md)                                                                                                                                        | BC             | Status Workshop I   |
+|                      | 29. | **[Workshop I](homework/project.md)**: Sprache und Features (auf Sprachebene)                                                                                                                                                                                                        |                |                     |
+|                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                                                                                                                                                                      | *Edmonton*     |                     |
+| November             | 05. | [Attributierte Grammatiken](lecture/03-semantics/attribgrammars.md)                                                                                                                                                                                                                  | BC             | Status Workshop II  |
+|                      | 12. | [Überblick Symboltabellen](lecture/03-semantics/symbtab0-intro.md), [Symboltabellen: Scopes](lecture/03-semantics/symbtab1-scopes.md), [Symboltabellen: Funktionen](lecture/03-semantics/symbtab2-functions.md), [Symboltabellen: Klassen](lecture/03-semantics/symbtab3-classes.md) | Carsten        | Status Workshop II  |
+|                      | 19. | **Start 15:30 Uhr**: [Syntaxgesteuerte Interpreter](lecture/06-interpretation/syntaxdriven.md), [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md), [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md)                               | Carsten        | Status Workshop II  |
+|                      | 26. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte: [Workshop II](homework/project.md)**: Sprache und Features (aus Compiler-Sicht)                                                                                                                               | *Minden (MIF)* |                     |
+| Dezember             | 03. | [Optimierung und Datenfluss- und Kontrollflussanalyse](lecture/05-optimization/optimization.md)                                                                                                                                                                                      | BC             |                     |
+| Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                                                                                                                                                           | *Edmonton*     |                     |
+|                      | 10. | [Projekt-Pitch](homework/project.md): Vorstellen und Diskussion der Projektinhalte/-konzepte                                                                                                                                                                                         | Carsten        |                     |
+|                      | 17. | *Freies Arbeiten*                                                                                                                                                                                                                                                                    |                | Status Workshop III |
+|                      | 24. | *Weihnachtspause*                                                                                                                                                                                                                                                                    |                |                     |
+|                      | 31. | *Weihnachtspause*                                                                                                                                                                                                                                                                    |                |                     |
+| Januar               | 07. | *Freies Arbeiten*                                                                                                                                                                                                                                                                    |                | Status Workshop III |
+|                      | 14. | *Freies Arbeiten*                                                                                                                                                                                                                                                                    |                | Status Workshop III |
+|                      | 21. | *Freies Arbeiten*                                                                                                                                                                                                                                                                    |                | Status Workshop III |
+| *(Prüfungsphase I)*  | 31. | **[Workshop III](homework/project.md): Projektvorstellung/-übergabe (10:00 - 12:30 Uhr, online)**                                                                                                                                                                                    |                |                     |
+| *(Prüfungsphase I)*  | 07. | **Feedback-Gespräche (10:00 - 12:00 Uhr, online)**                                                                                                                                                                                                                                   |                |                     |
+| *(Prüfungsphase II)* |     | *Keine separate Prüfung*                                                                                                                                                                                                                                                             |                |                     |
 
 # Prüfungsform, Note und Credits
 
