@@ -1,49 +1,41 @@
 ---
-title: "Bandbreite der Programmiersprachen"
-author: "Carsten Gips (HSBI)"
-readings:
-  - "@Aho2023: Kapitel 1 Introduction"
-  - "@Grune2012: Kapitel 1 Introduction"
-tldr: |
-  Am Beispiel des Abzählreims "99 Bottles of Beer" werden (ganz kurz) verschiedene
-  Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept
-  (Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene Strategie
-  zur Speicherverwaltung und Abarbeitung.
-
-  Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich,
-  dass Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
-outcomes:
-  - k1: "Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen"
-youtube:
-  - link: "https://youtu.be/prsc8cf4cJ8"
-    name: "VL Programmiersprachen"
+author: Carsten Gips (HSBI)
 fhmedia:
-  - link: "https://www.hsbi.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a"
-    name: "VL Programmiersprachen"
+- link: "https://www.hsbi.de/medienportal/m/00833ded94b0af9d20d6dc00034aeca1c2bcbbf42a8066615de06619fbd02206dfbac4a0cb447cf3cc08b615d818d49ee11cb187887eba435e81f09e6b142a9a"
+  name: VL Programmiersprachen
+title: Bandbreite der Programmiersprachen
 ---
 
+::: tldr
+Am Beispiel des Abzählreims "99 Bottles of Beer" werden (ganz kurz) verschiedene Programmiersprachen betrachtet. Jede
+der Sprachen hat ihr eigenes Sprachkonzept (Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene
+Strategie zur Speicherverwaltung und Abarbeitung.
+
+Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich, dass Compiler teilweise sehr
+unterschiedliche Konzepte "verstehen" müssen.
+:::
+
+::: youtube
+-   [VL Programmiersprachen](https://youtu.be/prsc8cf4cJ8)
+:::
 
 # 99 Bottles of Beer
 
-> 99 bottles of beer on the wall, 99 bottles of beer.
-> Take one down and pass it around, 98 bottles of beer on the wall.
+> 99 bottles of beer on the wall, 99 bottles of beer. Take one down and pass it around, 98 bottles of beer on the wall.
 >
-> 98 bottles of beer on the wall, 98 bottles of beer.
-> Take one down and pass it around, 97 bottles of beer on the wall.
+> 98 bottles of beer on the wall, 98 bottles of beer. Take one down and pass it around, 97 bottles of beer on the wall.
 >
-> [...]
+> \[...\]
 >
-> 2 bottles of beer on the wall, 2 bottles of beer.
-> Take one down and pass it around, 1 bottle of beer on the wall.
+> 2 bottles of beer on the wall, 2 bottles of beer. Take one down and pass it around, 1 bottle of beer on the wall.
 >
-> 1 bottle of beer on the wall, 1 bottle of beer.
-> Take one down and pass it around, no more bottles of beer on the wall.
+> 1 bottle of beer on the wall, 1 bottle of beer. Take one down and pass it around, no more bottles of beer on the wall.
 >
-> No more bottles of beer on the wall, no more bottles of beer.
-> Go to the store and buy some more, 99 bottles of beer on the wall.
+> No more bottles of beer on the wall, no more bottles of beer. Go to the store and buy some more, 99 bottles of beer on
+> the wall.
 
-[nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on 99-bottles-of-beer.net]{.origin}
-
+[nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on
+99-bottles-of-beer.net]{.origin}
 
 # Imperativ, Hardwarenah: C
 
@@ -70,20 +62,22 @@ fhmedia:
 [["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
-*   Imperativ
-*   Procedural
+-   Imperativ
 
-*   Statisches Typsystem
-*   Resourcenschonend, aber "unsicher": Programmierer muss wissen, was er tut
-*   Relativ hardwarenah
+-   Procedural
 
-*   Einsatz: Betriebssysteme, Systemprogrammierung
+-   Statisches Typsystem
+
+-   Resourcenschonend, aber "unsicher": Programmierer muss wissen, was er tut
+
+-   Relativ hardwarenah
+
+-   Einsatz: Betriebssysteme, Systemprogrammierung
 :::
-
 
 # Imperativ, Objektorientiert: Java
 
-```java
+``` java
 class bottles {
     public static void main(String args[]) {
         String s = "s";
@@ -103,27 +97,32 @@ class bottles {
 }
 ```
 
-[["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on 99-bottles-of-beer.net]{.origin}
+[["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on
+99-bottles-of-beer.net]{.origin}
 
 ::: notes
-*   Imperativ
-*   Objektorientiert
-*   Multi-Threading
+-   Imperativ
 
-*   Basiert auf C/C++
-*   Statisches Typsystem
-*   Automatische Garbage Collection
-*   "Sichere" Architektur: Laufzeitumgebung fängt viele Probleme ab
+-   Objektorientiert
 
-*   Architekturneutral: Nutzt Bytecode und eine JVM
+-   Multi-Threading
 
-*   Einsatz: High-Level All-Purpose Language
+-   Basiert auf C/C++
+
+-   Statisches Typsystem
+
+-   Automatische Garbage Collection
+
+-   "Sichere" Architektur: Laufzeitumgebung fängt viele Probleme ab
+
+-   Architekturneutral: Nutzt Bytecode und eine JVM
+
+-   Einsatz: High-Level All-Purpose Language
 :::
-
 
 # Logisch: Prolog
 
-```prolog
+``` prolog
 bottles :-
     bottles(99).
 
@@ -140,19 +139,20 @@ bottles(X) :-
     bottles(NX).
 ```
 
-[["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M\@ on 99-bottles-of-beer.net]{.origin}
+[["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M@ on
+99-bottles-of-beer.net]{.origin}
 
 ::: notes
-*   Deklarativ
-*   Logisch: Definition von Fakten und Regeln; eingebautes Beweissystem
+-   Deklarativ
 
-*   Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme, ...
+-   Logisch: Definition von Fakten und Regeln; eingebautes Beweissystem
+
+-   Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme, ...
 :::
-
 
 # Funktional: Haskell
 
-```haskell
+``` haskell
 bottles 0 = "no more bottles"
 bottles 1 = "1 bottle"
 bottles n = show n ++ " bottles"
@@ -167,81 +167,94 @@ verse n   = bottles n ++ " of beer on the wall, " ++ bottles n ++ " of beer.\n"
 main      = mapM (putStrLn . verse) [99,98..0]
 ```
 
-[["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on 99-bottles-of-beer.net]{.origin}
+[["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on
+99-bottles-of-beer.net]{.origin}
 
 ::: notes
-*   Deklarativ
-*   Funktional
-*   Lazy, pure
+-   Deklarativ
 
-*   Statisches Typsystem
-*   Typinferenz
+-   Funktional
 
-*   Algebraische Datentypen, Patternmatching
+-   Lazy, pure
 
-*   Einsatz: Compiler, DSL, Forschung
+-   Statisches Typsystem
+
+-   Typinferenz
+
+-   Algebraische Datentypen, Patternmatching
+
+-   Einsatz: Compiler, DSL, Forschung
 :::
-
 
 # Brainfuck
 
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
-[Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
+[Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech
+Tarnowski on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
-*   Imperativ
-*   Feldbasiert (analog zum Band der Turingmaschine)
+-   Imperativ
 
-*   8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe, Sprungbefehle
+-   Feldbasiert (analog zum Band der Turingmaschine)
+
+-   8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe, Sprungbefehle
 :::
-
-
 
 # Programmiersprache Lox
 
-```
-fun fib(x) {
-    if (x == 0) {
-        return 0;
-    } else {
-        if (x == 1) {
-            return 1;
+    fun fib(x) {
+        if (x == 0) {
+            return 0;
         } else {
-            fib(x - 1) + fib(x - 2);
+            if (x == 1) {
+                return 1;
+            } else {
+                fib(x - 1) + fib(x - 2);
+            }
         }
     }
-}
 
-var wuppie = fib;
-wuppie(4);
-```
+    var wuppie = fib;
+    wuppie(4);
 
 ::: notes
-*   Die Sprache "Lox" finden Sie hier: [craftinginterpreters.com/the-lox-language.html](https://www.craftinginterpreters.com/the-lox-language.html)
+-   Die Sprache "Lox" finden Sie hier:
+    [craftinginterpreters.com/the-lox-language.html](https://www.craftinginterpreters.com/the-lox-language.html)
 
-*   C-ähnliche Syntax
-*   Imperativ, objektorientiert, Funktionen als *First Class Citizens*, Closures
+-   C-ähnliche Syntax
 
-*   Dynamisch typisiert
-*   Garbage Collector
-*   Statements und Expressions
+-   Imperativ, objektorientiert, Funktionen als *First Class Citizens*, Closures
 
-*   (Kleine) Standardbibliothek eingebaut
+-   Dynamisch typisiert
 
-Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem
-Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren :)
-::::
+-   Garbage Collector
 
+-   Statements und Expressions
+
+-   (Kleine) Standardbibliothek eingebaut
+
+Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem Beispiel Themen wie
+Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren :)
+:::
 
 # Wrap-Up
 
-*   Compiler übersetzen formalen Text in ein anderes Format
+-   Compiler übersetzen formalen Text in ein anderes Format
 
 \bigskip
 
-*   Berücksichtigung von unterschiedlichen
+-   Berücksichtigung von unterschiedlichen
     -   Sprachkonzepten (Programmierparadigmen)
     -   Typ-Systemen
     -   Speicherverwaltungsstrategien
     -   Abarbeitungsstrategien
+
+::: readings
+-   @Aho2023: Kapitel 1 Introduction
+-   @Grune2012: Kapitel 1 Introduction
+:::
+
+::: outcomes
+-   k1: Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen
+:::
