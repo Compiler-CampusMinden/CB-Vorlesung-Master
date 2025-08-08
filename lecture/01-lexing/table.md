@@ -228,7 +228,7 @@ s0:
     consume()       # hole nächstes Zeichen (peek)
     lexeme += peek
     stack.push(s0)
-    if peek == '1' || ... || peek == "9":
+    if peek == '1' || ... || peek == "9":
         goto s1
     else:
         goto se

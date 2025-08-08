@@ -36,7 +36,7 @@ Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
         -   (Mehrfach-) Vererbung
         -   Traits
     -   Module/Importe (benannte Scopes)
-    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
+    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
 -   Funktional: Haskell
     -   Offside Rule
     -   Listen, List Comprehensions
@@ -82,7 +82,7 @@ auf die Laufzeitumgebung.
 Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beispielsweise
 
 1.  LR-Parsergeneratoren im Vergleich:
-    -   Flex und Bison vs. [Tree-Sitter](http://tree-sitter.github.io/tree-sitter/)
+    -   Flex und Bison vs. [Tree-Sitter](http://tree-sitter.github.io/tree-sitter/)
 2.  Advanced Parsing:
     -   Pratt-Parsing, PEG-Parser, Parser-Kombinatoren
     -   LALR-Parsing
@@ -93,12 +93,12 @@ Untersuchen Sie (passend zu Ihrer gewählten Sprache) spezielle Themen wie beisp
             analysis*](https://theantlrguy.atlassian.net/wiki/spaces/~admin/pages/524294/LL+grammar+analysis)
     -   [flap: A Deterministic Parser with Fused Lexing](https://dl.acm.org/doi/pdf/10.1145/3591269)
 3.  VM und Bytecode:
-    -   [AST vs. Bytecode: Interpreters in the Age of
+    -   [AST vs. Bytecode: Interpreters in the Age of
         Meta-Compilation](https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf)
     -   [An Introduction to Interpreters and JIT Compilation](https://stefan-marr.de/2023/09/pliss-summer-school/)
     -   [Optimizing the Order of Bytecode Handlers in Interpreters using a Genetic
         Algorithm](https://stefan-marr.de/downloads/acmsac23-huang-et-al-optimizing-the-order-of-bytecode-handlers-in-interpreters-using-a-genetic-algorithm.pdf)
-    -   WASM vs. Java-VM
+    -   WASM vs. Java-VM
 4.  Memory Management:
     -   Garbage Collection:
         -   [Unified Theory of Garbage

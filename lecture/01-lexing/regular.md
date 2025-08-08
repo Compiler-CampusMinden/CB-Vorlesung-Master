@@ -55,7 +55,7 @@ Hier entsteht ein Tafelbild.
 
 ## Akzeptierte Sprachen
 
-**Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
+**Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
 $L(A) = \lbrace\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\rbrace$
 

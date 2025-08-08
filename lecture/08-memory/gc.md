@@ -15,7 +15,7 @@ Anschließend iteriert man über die verkettete Liste aller Objekte in der VM un
 Schritt nicht markiert wurden.
 
 Wenn man GC zu selten durchführt, dauert ein GC-Lauf u.U. sehr lange (viele Objekte): hohe Latenz. Wenn man GC zu oft
-durchführt, dauert ein einzelner Lauf zwar nur recht kurz, aber das Verhältnis von Zeit im "User-Modus" vs. Zeit im
+durchführt, dauert ein einzelner Lauf zwar nur recht kurz, aber das Verhältnis von Zeit im "User-Modus" vs. Zeit im
 "GC-Modus" wird ebenfalls schlecht: niedriger Durchsatz. Hier kann man mit der Heuristik des "self-adjusting" Heaps
 arbeiten: Wenn die Gesamtgröße der allozierten Objekte einen Schwellwert überschreitet, führt man GC durch und
 vergrößert den Schwellwert: Größe der verbleibenden Objekte multipliziert mit einem Faktor.

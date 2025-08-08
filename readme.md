@@ -38,7 +38,7 @@ die Java-VM oder WASM ein.
     -   Symboltabellen
         -   Namen und Scopes
         -   Typen, Klassen, Polymorphie
-    -   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
+    -   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
     -   Typen, Typ-Inferenz, Type Checking
     -   Datenfluss- und Kontrollfluss-Analyse
     -   Optimierungen: Peephole u.a.

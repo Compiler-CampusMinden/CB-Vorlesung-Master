@@ -216,7 +216,7 @@ def rule():
     Regel/Alternative verlassen wird
 -   **Resynchronization Set**: Vereinigung der *Following Sets* für alle Regeln im aktuellen Aufruf-Stack
 
-[nach [@Parr2014, pp. 161-163]]{.origin}
+[nach [@Parr2014, pp. 161-163]]{.origin}
 :::
 
 \bigskip

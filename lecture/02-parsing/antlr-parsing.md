@@ -261,7 +261,7 @@ Die Multiplikation hat Vorrang von der Addition, und diese hat wiederum Vorrang 
 :::
 
 ::: notes
-## Direkte vs. indirekte Links-Rekursion
+## Direkte vs. indirekte Links-Rekursion
 
 ANTLR kann nur *direkte* Links-Rekursion auflösen. Regeln wie `r : r T U | V ;` stellen in ANTLR also kein Problem dar.
 

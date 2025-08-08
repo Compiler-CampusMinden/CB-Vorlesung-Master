@@ -47,7 +47,7 @@ void f() {
 
 ![](images/structscopesuml.png){width="80%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
 
 ::: notes
 Strukturen stellen wie Funktionen sowohl einen Scope als auch ein Symbol dar.
@@ -66,7 +66,7 @@ class Struct(Scope, Symbol, Type):
 
 \smallskip
 
-=\> Auflösen von "`a.b`"[ (im Listener in `exitMember()`)]{.notes}:
+=\> Auflösen von "`a.b`"[ (im Listener in `exitMember()`)]{.notes}:
 
 -   `a` im "normalen" Modus mit `resolve()` über den aktuellen Scope
 -   Typ von `a` ist `Struct` mit Verweis auf den eigenen Scope
@@ -103,7 +103,7 @@ void f() {
 :::
 
 ::: {.column width="54%"}
-![](images/structscopesuml.png){width="90%"} [Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
+![](images/structscopesuml.png){width="90%"} [Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
 :::
 ::::::
 :::::::
@@ -139,7 +139,7 @@ public
 
 ![](images/classscopesuml.png){width="80%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin}
 
 ::: notes
 Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die Elternklasse hinzu (in der Superklasse ist
@@ -169,7 +169,7 @@ class Clazz(Struct):
         else: return None
 ```
 
-[Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
+[Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
 
 ::: notes
 **Hinweis**: Die obige Implementierungsskizze soll vor allem das Prinzip demonstrieren - sie ist aus Gründen der

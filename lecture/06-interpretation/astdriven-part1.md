@@ -61,7 +61,7 @@ x = f(x);
 
 \smallskip
 
--   Speichern von Daten: Name+Wert vs. Adresse+Wert [(Erinnerung: Data-Segment und Stack im virtuellen
+-   Speichern von Daten: Name+Wert vs. Adresse+Wert [(Erinnerung: Data-Segment und Stack im virtuellen
     Speicher)]{.notes}
 -   Ausführen von Anweisungen [Text-Segment im virtuellen Speicher; hier über den AST]{.notes}
 -   Aufruf von Funktionen und Methoden [Kontextwechsel nötig: Was ist von wo aus sichtbar?]{.notes}

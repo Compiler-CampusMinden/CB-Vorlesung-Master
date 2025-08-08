@@ -40,7 +40,7 @@ Codegeneratoren entwickeln, statt *n x m* Compiler zu schreiben.
 
 ## Der Werdegang von LLVM
 
--   ab 2000 Forschungsprojekt zur Untersuchung dynamischer Kompilierung und Optimierungen von Prof. Vikram Adve an der
+-   ab 2000 Forschungsprojekt zur Untersuchung dynamischer Kompilierung und Optimierungen von Prof. Vikram Adve an der
     University of Illinois
 -   2002 Masterarbeit von Chris Lattner; "LLVM: An Infrastructure for Multi-Stage Optimization"
     -   Siehe auch: [LattnerMSThesis](http://llvm.org/pubs/2002-12-LattnerMSThesis.html)
@@ -64,11 +64,11 @@ Für das LLVM-Projekt haben 2012 Vikram Adve, Chris Lattner und Evan Chang den A
 
 ## Wer setzt es ein?
 
-Adobe      AMD      Apple      ARM      Google
+Adobe      AMD      Apple      ARM      Google
 
-IBM        Intel        Mozilla      Nvidia      Qualcomm
+IBM        Intel        Mozilla      Nvidia      Qualcomm
 
-Samsung       ...
+Samsung       ...
 
 # Komponenten (Projekte) von LLVM
 
@@ -157,9 +157,9 @@ und viele weitere Tools, z. B. zum Testen von Compilern.
 
 Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang): `\bigskip`{=tex}
 
-Cuda      Go     Haskell      Java      Julia      Kotlin
+Cuda      Go     Haskell      Java      Julia      Kotlin
 
-Lua      Numba      Python     Ruby      Rust      Swift      ...
+Lua      Numba      Python     Ruby      Rust      Swift      ...
 
 \bigskip
 
@@ -582,11 +582,11 @@ Einige Beispiele für Optimierungen, die von SSA profitieren:
 
 ## Unterstützte Prozessorarchitekturen
 
-x86      AMD64      PowerPC      PowerPC 64Bit      Thumb
+x86      AMD64      PowerPC      PowerPC 64Bit      Thumb
 
-SPARC      Alpha      CellSPU      PIC16      MIPS
+SPARC      Alpha      CellSPU      PIC16      MIPS
 
-MSP430     System z      XMOS      Xcore      ...
+MSP430     System z      XMOS      Xcore      ...
 
 # Wrap-Up
 

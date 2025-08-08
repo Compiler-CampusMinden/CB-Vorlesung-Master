@@ -51,7 +51,7 @@ Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.
 
 -   möglichst keine nachteiligen Effekte erzeugen
 
-## Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit
+## Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit
 
 -   Just-in-time-Compilierung (JIT), z. B. Java:
 
@@ -478,7 +478,7 @@ einen quadratischen Anstieg des Energieverbrauchs. $(P = U \times I, U = R \time
 
 Folgendes kann man ausnutzen:
 
-Die Verringerung der Spannung um 20% führt zu einer um 20% geringeren Prozessorgeschwindigkeit, d. h. das Programm
+Die Verringerung der Spannung um 20% führt zu einer um 20% geringeren Prozessorgeschwindigkeit, d. h. das Programm
 braucht 25% mehr Zeit, verbraucht aber 36% $(1-(1-0,2)^2)$ weniger Energie.
 
 =\> Wenn das Programm durch Optimierung um 25% schneller wird und die Prozessorspannung um 20% verringert wird,

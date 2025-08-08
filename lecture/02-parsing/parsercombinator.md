@@ -11,7 +11,7 @@ title: PEG-Parser, Pratt-Parser und Parser Combinators
 
 # PEG (Parsing Expression Grammar) - Parser
 
-## Generative Systeme vs. Recognition basierte Systeme
+## Generative Systeme vs. Recognition basierte Systeme
 
 -   Generative Systeme:
     -   formale Definition von Sprachen durch Regeln, die rekursiv angewendet Sätze/Strings der Sprache generieren
@@ -391,9 +391,9 @@ folgen, während der zweite Teil zutrifft wenn $n$ b's auf $n$ a's folgen.
 -   Shunting Yard verwendet einen Stack anstatt Rekursion
 -   Precedence Climbing wird am häufigsten eingesetzt
 
-## Vergleich TDOP vs. Precedence Climbing
+## Vergleich TDOP vs. Precedence Climbing
 
--   TDOP(Pratt Parsing) vs. Precedence Climbing
+-   TDOP(Pratt Parsing) vs. Precedence Climbing
     -   Eine While Schleife mit rekursiven Aufruf mit Abbruchbedingung (binding Power/precedence)
     -   Rechts-Assoziativität
         -   In precedence climbing: next_min_prec = prec + 1 für left Assoziativität

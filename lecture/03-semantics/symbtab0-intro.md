@@ -282,7 +282,7 @@ Wird bei objektorientierten Sprachen ein Objekt definiert, dessen Klassendefinit
 man die Definition des Objekts gleichzeitig als Deklaration der Klasse auffassen (Java).
 :::
 
-[[Definition vs. Deklaration]{.ex}]{.slides}
+[[Definition vs. Deklaration]{.ex}]{.slides}
 
 # Wo werden Verweise in Symboltabellen gebraucht?
 
