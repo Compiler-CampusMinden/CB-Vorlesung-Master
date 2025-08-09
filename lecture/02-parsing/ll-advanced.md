@@ -30,7 +30,7 @@ In ANTLR kann man *semantische Prädikate* benutzen, um Alternativen "abzuschalt
 Dies ist beispielsweise nützlich, wenn man nur eine Grammatik für unterschiedliche
 Versionen einer Sprache implementieren will.
 
-Eine gute Darstellung finden Sie in [@Parr2010] (Kapitel 3) und in \[Packrat2006\].
+Eine gute Darstellung finden Sie in [@Parr2010] (Kapitel 3) und in [@Packrat2006].
 :::
 
 ::: youtube
