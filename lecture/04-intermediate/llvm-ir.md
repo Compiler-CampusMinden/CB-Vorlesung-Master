@@ -15,8 +15,9 @@ title: LLVM als IR
 ## Motivation
 :::
 
-Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es sollen für zwei Programmiersprachen
-Compiler entwickelt werden, die diesen Befehlssatz als Ziel haben. Was tun?
+Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es
+sollen für zwei Programmiersprachen Compiler entwickelt werden, die diesen
+Befehlssatz als Ziel haben. Was tun?
 
 ## Themen für heute: Letzte Phase in Compiler-Pipeline
 
@@ -26,26 +27,33 @@ Compiler entwickelt werden, die diesen Befehlssatz als Ziel haben. Was tun?
 
 ## Was ist das Ziel von LLVM?
 
-LLVM ist ein Open-Source-Framework, welches die modulare Entwicklung von Compilern und ähnlichen sprachorientierten
-Programmen ermöglicht. Kernstücke sind LLVM IR (eine streng typisierte Zwischensprache), ein flexibel konfigurierbarer
-Optimierer, der zur Compilezeit, Linkzeit und Laufzeit eingesetzt werden kann und ein Codegenerator für zahlreiche
-Architekturen.
+LLVM ist ein Open-Source-Framework, welches die modulare Entwicklung von Compilern
+und ähnlichen sprachorientierten Programmen ermöglicht. Kernstücke sind LLVM IR
+(eine streng typisierte Zwischensprache), ein flexibel konfigurierbarer Optimierer,
+der zur Compilezeit, Linkzeit und Laufzeit eingesetzt werden kann und ein
+Codegenerator für zahlreiche Architekturen.
 
-Mit LLVM lassen sich sowohl AOT- als auch JIT-Compiler entwickeln. Die Idee ist, (mit Generatoren) ein Frontend zu
-entwickeln, das Programme über einen AST in LLVM IR übersetzt, und dann mit Hilfe der LLVM-Bibliotheken Maschinencode
-oder VM-Code zu generieren. Die Komponenten des Compilers sind entkoppelt und kommunizieren über APIs (Unabhängigkeit).
+Mit LLVM lassen sich sowohl AOT- als auch JIT-Compiler entwickeln. Die Idee ist,
+(mit Generatoren) ein Frontend zu entwickeln, das Programme über einen AST in LLVM
+IR übersetzt, und dann mit Hilfe der LLVM-Bibliotheken Maschinencode oder VM-Code zu
+generieren. Die Komponenten des Compilers sind entkoppelt und kommunizieren über
+APIs (Unabhängigkeit).
 
-Der Vorteil: Um *n* Sprachen für *m* Architekturen zu übersetzen, muss man bestenfalls *n* Frontends und *m*
-Codegeneratoren entwickeln, statt *n x m* Compiler zu schreiben.
+Der Vorteil: Um *n* Sprachen für *m* Architekturen zu übersetzen, muss man
+bestenfalls *n* Frontends und *m* Codegeneratoren entwickeln, statt *n x m* Compiler
+zu schreiben.
 
 ## Der Werdegang von LLVM
 
--   ab 2000 Forschungsprojekt zur Untersuchung dynamischer Kompilierung und Optimierungen von Prof. Vikram Adve an der
-    University of Illinois
--   2002 Masterarbeit von Chris Lattner; "LLVM: An Infrastructure for Multi-Stage Optimization"
-    -   Siehe auch: [LattnerMSThesis](http://llvm.org/pubs/2002-12-LattnerMSThesis.html)
+-   ab 2000 Forschungsprojekt zur Untersuchung dynamischer Kompilierung und
+    Optimierungen von Prof. Vikram Adve an der University of Illinois
+-   2002 Masterarbeit von Chris Lattner; "LLVM: An Infrastructure for Multi-Stage
+    Optimization"
+    -   Siehe auch:
+        [LattnerMSThesis](http://llvm.org/pubs/2002-12-LattnerMSThesis.html)
 -   Kern des Projekts: LLVM IR und Infrastruktur
--   ursprünglich **L**ow **L**evel **V**irtual **M**achine, wird aber nicht mehr als Akronym gesehen
+-   ursprünglich **L**ow **L**evel **V**irtual **M**achine, wird aber nicht mehr als
+    Akronym gesehen
 -   Chris Lattner ist weiterhin der führende Kopf des LLVM-Projekts
 
 ## Was ist daraus geworden?
@@ -60,21 +68,23 @@ Open Source - Framework (in C++ geschrieben) für die Entwicklung von
 -   Systemen zur statischen Analyse
 -   etc.
 
-Für das LLVM-Projekt haben 2012 Vikram Adve, Chris Lattner und Evan Chang den ACM Software System Award bekommen.
+Für das LLVM-Projekt haben 2012 Vikram Adve, Chris Lattner und Evan Chang den ACM
+Software System Award bekommen.
 
 ## Wer setzt es ein?
 
-Adobe      AMD      Apple      ARM      Google
+    Adobe   AMD     Apple       ARM     Google
 
-IBM        Intel        Mozilla      Nvidia      Qualcomm
+    IBM     Intel   Mozilla     Nvidia  Qualcomm
 
-Samsung       ...
+    Samsung ...
 
 # Komponenten (Projekte) von LLVM
 
 ## Der LLVM-Kern
 
-**LLVM Core**: Optimierer und Codegenerator für viele CPU- und auch GPU-Architekturen
+**LLVM Core**: Optimierer und Codegenerator für viele CPU- und auch
+GPU-Architekturen
 
 -   Optimierer arbeitet unabhängig von der Zielarchitektur (nur auf der LLVM IR)
 -   sehr gut dokumentiert
@@ -84,11 +94,13 @@ Samsung       ...
 
 ## Der Compiler Clang
 
-**Clang**: C/C++/Objective-C - Compiler auf Basis von LLVM mit aussagekräftigen Fehlermeldungen und Warnungen
+**Clang**: C/C++/Objective-C - Compiler auf Basis von LLVM mit aussagekräftigen
+Fehlermeldungen und Warnungen
 
 -   Plattform zur Entwicklung von Source Level Tools
 -   **Clang Static Analyzer**: Teil von Clang, aber auch separat zu benutzen
--   **Clang tidy**: analysiert ebenfalls Code statisch, einzelne Checks konfigurierbar
+-   **Clang tidy**: analysiert ebenfalls Code statisch, einzelne Checks
+    konfigurierbar
 
 ## Clang Toolchain
 
@@ -98,21 +110,26 @@ Samsung       ...
 
 **compiler-rt**: generiert Code, der zur Laufzeit benötigt wird:
 
--   **built-ins**: eine Bibliothek optimierter Implementierungen von Low-Level-Funktionen
+-   **built-ins**: eine Bibliothek optimierter Implementierungen von
+    Low-Level-Funktionen
     -   z.B. die Konvertierung von double nach int 64 auf einer 32-Bit-Architektur
--   **profile**: eine Bibliothek, die Informationen über Reichweiten (coverage information) erfasst
--   **BlocksRuntime**: implementiert maschinenunabhängig die Runtime-Schnittstellen von Apple "Blocks" (Objective-C)
--   **Sanitizer Runtimes**: Laufzeitbibliotheken, welche für die Einbettung und Verwendung von Sanitizern benötigt
-    werden
+-   **profile**: eine Bibliothek, die Informationen über Reichweiten (coverage
+    information) erfasst
+-   **BlocksRuntime**: implementiert maschinenunabhängig die Runtime-Schnittstellen
+    von Apple "Blocks" (Objective-C)
+-   **Sanitizer Runtimes**: Laufzeitbibliotheken, welche für die Einbettung und
+    Verwendung von Sanitizern benötigt werden
 
 ## Die Sanitizer in compiler-rt
 
-Sanitizer sind eine Methode zur Instrumentierung (Code der in das kompilierte Programm eingebettet wird), um die
-Lokalisierung und Analyse von verschiedensten Fehlerquellen zu erleichtern.
+Sanitizer sind eine Methode zur Instrumentierung (Code der in das kompilierte
+Programm eingebettet wird), um die Lokalisierung und Analyse von verschiedensten
+Fehlerquellen zu erleichtern.
 
 ::: slides
-Mithilfe der Sanitizer in der compiler-rt können z. B. Speicherfehler, Race Conditions, Speicherlecks und viele weitere
-Fehlerquellen gefunden und analysiert werden.
+Mithilfe der Sanitizer in der compiler-rt können z. B. Speicherfehler, Race
+Conditions, Speicherlecks und viele weitere Fehlerquellen gefunden und analysiert
+werden.
 :::
 
 ::: notes
@@ -120,30 +137,35 @@ Im Folgenden einige der verfügbaren Sanitizer:
 
 -   **AdressSanitizer**: entdeckt Speicherfehler, z. B. use-after-free
 -   **ThreadSanitizer**: entdeckt race conditions
--   **UndefinedBehaviorSanitizer**: fügt Code in das Programm ein, um zur Laufzeit undefiniertes Verhalten zu
-    erkennen, z. B.
+-   **UndefinedBehaviorSanitizer**: fügt Code in das Programm ein, um zur Laufzeit
+    undefiniertes Verhalten zu erkennen, z. B.
     -   Benutzung von Null-Pointern
     -   Overflow von Signed-Integer-Variablen
     -   Float-Konvertierungen, die zu einem Overflow führen können
 -   **MemorySanitizer** entdeckt die Benutzung von nicht-initialisierten Variablen
 -   **LeakSanitizer** entdeckt Speicherlöcher
--   **DataFlowSanitizer** liefert dem Compilerbauer Informationen über den Datenfluss in einem zu übersetzenden Programm
+-   **DataFlowSanitizer** liefert dem Compilerbauer Informationen über den
+    Datenfluss in einem zu übersetzenden Programm
 
-Die Benutzung der Sanitizer kann die Laufzeit stark erhöhen und ist speicherintensiv. Die Sanitizer sind auch in Clang
-enthalten. Nicht alle Sanitizer sind für alle Betriebssysteme verfügbar.
+Die Benutzung der Sanitizer kann die Laufzeit stark erhöhen und ist
+speicherintensiv. Die Sanitizer sind auch in Clang enthalten. Nicht alle Sanitizer
+sind für alle Betriebssysteme verfügbar.
 :::
 
 ## Weitere Komponenten von LLVM
 
 **LLDB**: Debugger innerhalb des LLVM-Systems
 
-**libc++ und libc++ABI**: hochperformante Implementierungen der C++-Standardbibliothek, auch für C++11 und C++14
+**libc++ und libc++ABI**: hochperformante Implementierungen der
+C++-Standardbibliothek, auch für C++11 und C++14
 
-**OpenMP**: eine zu linkende OpenMP-Bibliothek für Shared-Memory-Programmierung (Multiprozessorcomputer)
+**OpenMP**: eine zu linkende OpenMP-Bibliothek für Shared-Memory-Programmierung
+(Multiprozessorcomputer)
 
 **polly**: spezielle Schleifenoptimierungen auf Polyeder-Basis
 
-**libclc**: eine Bibliothek für OpenCl, um nichtgrafische Anwendungen auf Grafikprozessoren zu nutzen
+**libclc**: eine Bibliothek für OpenCl, um nichtgrafische Anwendungen auf
+Grafikprozessoren zu nutzen
 
 **klee**: zur automatischen Testgenerierung
 
@@ -155,15 +177,18 @@ und viele weitere Tools, z. B. zum Testen von Compilern.
 
 ## Externe LLVM-Projekte
 
-Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang): `\bigskip`{=tex}
-
-Cuda      Go     Haskell      Java      Julia      Kotlin
-
-Lua      Numba      Python     Ruby      Rust      Swift      ...
+Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):
 
 \bigskip
 
-Für weiter Projekte siehe [Projects built with LLVM](https://llvm.org/ProjectsWithLLVM/)
+    Crack   Go      Haskell     Java    Julia   Kotlin
+
+    Lua     Numba   Python      Ruby    Rust    Swift   ...
+
+\bigskip
+
+Für weiter Projekte siehe [Projects built with
+LLVM](https://llvm.org/ProjectsWithLLVM/)
 
 # LLVM IR
 
@@ -178,11 +203,14 @@ Für weiter Projekte siehe [Projects built with LLVM](https://llvm.org/ProjectsW
 
 ## LLVM IR (cnt.)
 
--   Instruktionsumfang der IR an RISC-Befehlssatz angelehnt (**R**educed **I**nstruction **S**et **C**omputer)
+-   Instruktionsumfang der IR an RISC-Befehlssatz angelehnt (**R**educed
+    **I**nstruction **S**et **C**omputer)
 -   IR ist immer in **S**ingle **S**tatic **A**ssignment-Form
 -   streng typisiert
--   keine Vorgaben bzgl. grundlegender Sprachkonzepte, wie z.B. Speichermanagement, Error Handling
--   Durchgängige Verwendung von Kontrollflussgraphen zur Unterstützung des Optimierers
+-   keine Vorgaben bzgl. grundlegender Sprachkonzepte, wie z.B. Speichermanagement,
+    Error Handling
+-   Durchgängige Verwendung von Kontrollflussgraphen zur Unterstützung des
+    Optimierers
 :::
 
 ::: notes
@@ -193,18 +221,22 @@ Für weiter Projekte siehe [Projects built with LLVM](https://llvm.org/ProjectsW
 -   Speicherung von Variablen stackbasiert oder in Registern
 -   Register können entweder nummeriert werden oder explizite Namen bekommen
 -   Register-Referenz: %1, Variablen-Referenz: \@1
--   Instruktionsumfang der IR an RISC-Befehlssatz angelehnt (**R**educed **I**nstruction **S**et **C**omputer)
+-   Instruktionsumfang der IR an RISC-Befehlssatz angelehnt (**R**educed
+    **I**nstruction **S**et **C**omputer)
 -   IR ist immer in **S**ingle **S**tatic **A**ssignment-Form
 -   streng typisiert
--   keine Vorgaben bzgl. grundlegender Sprachkonzepte, wie z.B. Speichermanagement, Error Handling
--   Durchgängige Verwendung von Kontrollflussgraphen zur Unterstützung des Optimierers
+-   keine Vorgaben bzgl. grundlegender Sprachkonzepte, wie z.B. Speichermanagement,
+    Error Handling
+-   Durchgängige Verwendung von Kontrollflussgraphen zur Unterstützung des
+    Optimierers
 :::
 
 Vgl. auch: [LLVM Dev Conference](https://www.youtube.com/watch?v=J5xExRGaIIY&t=215s)
 
 ## Darstellungsformen von LLVM IR
 
-LLVM IR existiert in drei Formen, die äquivalent sind und ineinander überführt werden können:
+LLVM IR existiert in drei Formen, die äquivalent sind und ineinander überführt
+werden können:
 
 -   menschenlesbar als Text (`.ll`)
 -   Bitcode (`.bc`)
@@ -214,7 +246,8 @@ LLVM IR existiert in drei Formen, die äquivalent sind und ineinander überführ
 
 ## Typen in LLVM IR
 
-LLVM IR-Typen sind plattformunabhängig und lassen sich direkt in optimalen Maschinencode übersetzen.
+LLVM IR-Typen sind plattformunabhängig und lassen sich direkt in optimalen
+Maschinencode übersetzen.
 
 \bigskip
 
@@ -351,7 +384,8 @@ bb6:                                              ; preds = %bb4, %bb2
 
 -   Die Basic Blocks einer Funktion sind durch Sprunginstruktionen verbunden
 -   Basic Blocks haben Vorgänger und Nachfolger
--   Der so entstehende Kontrollfluss wird von LLVM ständig durch einen Kontrollflussgraphen modelliert
+-   Der so entstehende Kontrollfluss wird von LLVM ständig durch einen
+    Kontrollflussgraphen modelliert
 
 Ausgabe des Kontrollflussgraphen im `.dot` Format:
 
@@ -365,14 +399,18 @@ Ausgabe des Kontrollflussgraphen im `.dot` Format:
 
 ## Essentiell: die Phi-Instruktion
 
--   Basierend auf dem Programmfluss können einer Variablen unterschiedliche Werte zugewiesen werden (`x` im vorherigen
-    Beispiel)
+-   Basierend auf dem Programmfluss können einer Variablen unterschiedliche Werte
+    zugewiesen werden (`x` im vorherigen Beispiel)
 -   SSA: jeder Variablen / jedem Register wird nur einmal ein Wert zugewiesen
--   Daher: virtuelle Register entsprechen nicht 1:1 den Variablen des kompilierten Progamms
--   Der Wert einer konditionell zugewiesenen Variablen kann daher in zwei unterschiedlichen virtuellen Registern stehen
-    (je nach durchlaufenem Programmzweig)
--   Problem: welches Register soll gelesen werden, um den Wert der Variablen weiter zu verwenden?
--   Lösung: Phi-Instruktion speichert Werte in einem neuen Register abhängig vom Vorgängerblock
+-   Daher: virtuelle Register entsprechen nicht 1:1 den Variablen des kompilierten
+    Progamms
+-   Der Wert einer konditionell zugewiesenen Variablen kann daher in zwei
+    unterschiedlichen virtuellen Registern stehen (je nach durchlaufenem
+    Programmzweig)
+-   Problem: welches Register soll gelesen werden, um den Wert der Variablen weiter
+    zu verwenden?
+-   Lösung: Phi-Instruktion speichert Werte in einem neuen Register abhängig vom
+    Vorgängerblock
 
 ## Phi-Instruktion: Beispiel
 
@@ -380,8 +418,8 @@ Ausgabe des Kontrollflussgraphen im `.dot` Format:
       %.0 = phi i64 [ %i3, %bb2 ], [ %i5, %bb4 ]
       ret i64 %.0
 
-Effekt: Speichert den Wert aus Register `%i3` in Register `%.0`, falls wir aus Block `%bb2` kommen, sonst wird der Wert
-aus Register `%i5` gespeichert
+Effekt: Speichert den Wert aus Register `%i3` in Register `%.0`, falls wir aus Block
+`%bb2` kommen, sonst wird der Wert aus Register `%i5` gespeichert
 
 ## Module
 
@@ -450,14 +488,15 @@ define i32 @main() #0 {
 :::
 
 ::: notes
-Es werden drei "virtuelle Register" %1, %2 und %3 definiert (32-bit Integer; align 4: alle Adressen sind Vielfache von
-4).
+Es werden drei "virtuelle Register" %1, %2 und %3 definiert (32-bit Integer; align
+4: alle Adressen sind Vielfache von 4).
 
-Mit store i32 0, ... wird in %1 der Wert 0 geschrieben (vergleichbar mit \*p = 0). In %2 wird analog der Wert 7
-geschrieben (x=7).
+Mit store i32 0, ... wird in %1 der Wert 0 geschrieben (vergleichbar mit \*p = 0).
+In %2 wird analog der Wert 7 geschrieben (x=7).
 
-Dann wird der Wert aus %2 in eine neues Register %4 geladen und das Ergebnis der Addition aus %4 und dem Wert 35 in ein
-weiteres neues Register %5 geschrieben. Der Wert dieser Variablen wird dann in dem Register %3 gespeichert (y = x+35).
+Dann wird der Wert aus %2 in eine neues Register %4 geladen und das Ergebnis der
+Addition aus %4 und dem Wert 35 in ein weiteres neues Register %5 geschrieben. Der
+Wert dieser Variablen wird dann in dem Register %3 gespeichert (y = x+35).
 :::
 
 ::: slides
@@ -517,19 +556,22 @@ main:                                   # @main
 -   Teil von LLVM Core
 -   kann zur Laufzeit, Compilezeit und Linkzeit eingesetzt werden
 -   nutzt auch Leerlaufzeit des Prozessors
--   läuft in einzelnen Pässen über den Code. Jeder Pass kann einzeln aufgerufen und konfiguriert werden.
+-   läuft in einzelnen Pässen über den Code. Jeder Pass kann einzeln aufgerufen und
+    konfiguriert werden.
 -   generiert in der Regel sehr schnellen Code
 -   arbeitet auf Basic Blocks und DAGs
 
 ## Arten von Pässen
 
-**Analysis passes** sammeln Informationen für andere Pässe, z. B. zum Debuggen oder Visualisieren
+**Analysis passes** sammeln Informationen für andere Pässe, z. B. zum Debuggen oder
+Visualisieren
 
 **Transform passes** verändern das Programm auf irgendeine Art und Weise
 
 **Utility passes** sind Hilfspässe, z. B. die Umformung des IR in Bitcode
 
-Vgl. auch: [LLVM's Analysis and Transform Passes](http://releases.llvm.org/9.0.0/docs/Passes.html)
+Vgl. auch: [LLVM's Analysis and Transform
+Passes](http://releases.llvm.org/9.0.0/docs/Passes.html)
 
 ## Einige Optimierungen in LLVM
 
@@ -541,12 +583,14 @@ Vgl. auch: [LLVM's Analysis and Transform Passes](http://releases.llvm.org/9.0.0
 -   Dead Store Elimination
 -   Dead Global Elimination
 
-Vgl. auch: [LLVM's Analysis and Transform Passes](http://releases.llvm.org/9.0.0/docs/Passes.html)
+Vgl. auch: [LLVM's Analysis and Transform
+Passes](http://releases.llvm.org/9.0.0/docs/Passes.html)
 
 ## SSA und Optimierung
 
-Der Optimierer profitiert stark von SSA. Der Wert einer Variablen wird nicht überschrieben, sodass sie niemals in der
-$kill$-Menge der Datenflussanalyse vorkommt, wodurch die Datenflussanalyse in vielen Punkten erleichtert wird.
+Der Optimierer profitiert stark von SSA. Der Wert einer Variablen wird nicht
+überschrieben, sodass sie niemals in der $kill$-Menge der Datenflussanalyse
+vorkommt, wodurch die Datenflussanalyse in vielen Punkten erleichtert wird.
 
 \medskip
 
@@ -554,17 +598,21 @@ $kill$-Menge der Datenflussanalyse vorkommt, wodurch die Datenflussanalyse in vi
 Einige Beispiele für Optimierungen, die von SSA profitieren:
 
 -   Constant propagation
-    -   Nutzt Reaching Definition Analysis, welche durch die SSA-Form vereinfacht wird (keine konkurrierenden
-        Zuweisungen)
+    -   Nutzt Reaching Definition Analysis, welche durch die SSA-Form vereinfacht
+        wird (keine konkurrierenden Zuweisungen)
 -   Sparse conditional constant propagation
     -   Propagiert Konstanten in Bedingungen von Programmabzweigungen
-    -   Markiert Programmzweige basierend auf Konstanten als ausführbar oder nicht ausführbar
-    -   Löscht die Argumente der Phi-Instruktion, welche mit nicht ausführbaren Zweigen zusammenhängen
+    -   Markiert Programmzweige basierend auf Konstanten als ausführbar oder nicht
+        ausführbar
+    -   Löscht die Argumente der Phi-Instruktion, welche mit nicht ausführbaren
+        Zweigen zusammenhängen
     -   Auch diese Form der Constant Propagation profitiert von SSA
 -   Global value numbering
     -   Hilft bei der Identifikation von äquivalenten Berechnungen
-    -   Nummerierung von Variablen und Werten, sodass gleichwertige Ausdrücke die gleiche Nummer erhalten
-    -   Vereinfacht durch SSA-Form, da keine erneute Zuweisung einer Variablen möglich ist
+    -   Nummerierung von Variablen und Werten, sodass gleichwertige Ausdrücke die
+        gleiche Nummer erhalten
+    -   Vereinfacht durch SSA-Form, da keine erneute Zuweisung einer Variablen
+        möglich ist
 :::
 
 # Die Codegenerierung
@@ -582,11 +630,11 @@ Einige Beispiele für Optimierungen, die von SSA profitieren:
 
 ## Unterstützte Prozessorarchitekturen
 
-x86      AMD64      PowerPC      PowerPC 64Bit      Thumb
+    x86   AMD64   PowerPC   PowerPC   64Bit   Thumb
 
-SPARC      Alpha      CellSPU      PIC16      MIPS
+    SPARC   Alpha   CellSPU   PIC16   MIPS
 
-MSP430     System z      XMOS      Xcore      ...
+    MSP430   System z   XMOS   Xcore   ...
 
 # Wrap-Up
 
@@ -594,8 +642,9 @@ MSP430     System z      XMOS      Xcore      ...
 ## Wrap-Up
 :::
 
--   LLVM ist eine (fast) komplette Infrastruktur zur Entwicklung Von Compilern und compilerähnlichen Programmen. Die
-    wichtigsten Bestandteile sind der Zwischencode LLVM IR und der LLVM Optimierer.
+-   LLVM ist eine (fast) komplette Infrastruktur zur Entwicklung Von Compilern und
+    compilerähnlichen Programmen. Die wichtigsten Bestandteile sind der Zwischencode
+    LLVM IR und der LLVM Optimierer.
 
 ::: readings
 -   @LLVM-org

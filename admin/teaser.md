@@ -1,17 +1,21 @@
 ---
-title: "Modulvorstellung CPL (Concepts of Programming Languages)"
-author: "BC George & Carsten Gips (HSBI)"
+author: BC George & Carsten Gips (HSBI)
+title: Modulvorstellung CPL (Concepts of Programming Languages)
 ---
 
 ::: youtube
-[Modulvorstellung CPL (Concepts of Programming Languages)](https://youtu.be/rpbaSy2iy00)
+[Modulvorstellung CPL (Concepts of Programming
+Languages)](https://youtu.be/rpbaSy2iy00)
 :::
 
 # Sprachen verstehen, (formale) Texte transformieren
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true){width="92%"}
 
-[[A Map of the Territory (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[[A Map of the Territory
+(mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
+by [Bob Nystrom](https://github.com/munificent) on Github.com
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 \bigskip
 \bigskip

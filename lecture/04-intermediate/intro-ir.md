@@ -4,10 +4,12 @@ title: Überblick Zwischencode
 ---
 
 ::: tldr
-Für den Zwischencode (**IR**) gibt es kein allgemein definiertes Format. In der Praxis trifft man auf eine große
-Bandbreite an Formaten, wobei teilweise bereits der AST selbst als "Zwischencode" betrachtet/benutzt wird. Typische
-Vertreter für IR sind beispielsweise der **LLVM IR**, diverse Arten von Bytecode (nebst passender virtueller Maschine)
-und schließlich als Vorstufe für die Erzeugung von Maschinencode der sogenannte "Drei-Adressen-Code" und Assemblercode.
+Für den Zwischencode (**IR**) gibt es kein allgemein definiertes Format. In der
+Praxis trifft man auf eine große Bandbreite an Formaten, wobei teilweise bereits der
+AST selbst als "Zwischencode" betrachtet/benutzt wird. Typische Vertreter für IR
+sind beispielsweise der **LLVM IR**, diverse Arten von Bytecode (nebst passender
+virtueller Maschine) und schließlich als Vorstufe für die Erzeugung von
+Maschinencode der sogenannte "Drei-Adressen-Code" und Assemblercode.
 :::
 
 ::: youtube
@@ -19,20 +21,24 @@ und schließlich als Vorstufe für die Erzeugung von Maschinencode der sogenannt
 ![](images/architektur_cb.png)
 
 ::: notes
-Die Schritte in der letzten Phase der Compiler-Pipeline können *sehr* unterschiedlich ausfallen.
+Die Schritte in der letzten Phase der Compiler-Pipeline können *sehr*
+unterschiedlich ausfallen.
 
-Beispielsweise könnte direkt aus dem AST der Ziel-Machine-Code erzeugt werden. Auf der anderen Seite könnte aus dem AST
-ein **Zwischenformat** erzeugt werden, darauf Optimierungen vorgenommen werden, daraus ein weiteres Zwischenformat
-erzeugt werden, darauf weitere Optimierungen vorgenommen werden, ..., bis schließlich nach mehreren Zwischenstufen das
-Zielformat erzeugt wird.
+Beispielsweise könnte direkt aus dem AST der Ziel-Machine-Code erzeugt werden. Auf
+der anderen Seite könnte aus dem AST ein **Zwischenformat** erzeugt werden, darauf
+Optimierungen vorgenommen werden, daraus ein weiteres Zwischenformat erzeugt werden,
+darauf weitere Optimierungen vorgenommen werden, ..., bis schließlich nach mehreren
+Zwischenstufen das Zielformat erzeugt wird.
 
-Nachfolgend betrachten wir verschiedene Beispiele, wie das Zwischenformat aussehen kann.
+Nachfolgend betrachten wir verschiedene Beispiele, wie das Zwischenformat aussehen
+kann.
 :::
 
 # AST als Zwischencode (Beispiel Pandoc)
 
 ::: notes
-Häufig wird der AST selbst als Zwischencode verwendet. Ein Beispiel dafür ist [Pandoc](https://pandoc.org/).
+Häufig wird der AST selbst als Zwischencode verwendet. Ein Beispiel dafür ist
+[Pandoc](https://pandoc.org/).
 :::
 
 ![](images/pandoc.png)
@@ -68,19 +74,21 @@ Dies ist ein Absatz mit
 "pandoc-api-version":[1,17,0,4],"meta":{}}
 ```
 
-Der Pandoc-AST spiegelt direkt die Dokumentstruktur wider. Im obigen Beispiel haben wir einen Absatz mit dem Text
-"`Dies ist ein Absatz mit`", der als `Para` repräsentiert wird mit einer Liste von Strings (`Str`) und Leerzeichen
-(`Space`).
+Der Pandoc-AST spiegelt direkt die Dokumentstruktur wider. Im obigen Beispiel haben
+wir einen Absatz mit dem Text "`Dies ist ein Absatz mit`", der als `Para`
+repräsentiert wird mit einer Liste von Strings (`Str`) und Leerzeichen (`Space`).
 
-Die Stichpunktliste besteht pro Stichpunkt aus einem `Plain`-Knoten mit dem eigentlichen Inhalt (wieder Strings und
-Leerzeichen).
+Die Stichpunktliste besteht pro Stichpunkt aus einem `Plain`-Knoten mit dem
+eigentlichen Inhalt (wieder Strings und Leerzeichen).
 
-Dieser AST ist der Dreh- und Angelpunkt in Pandoc. Verschiedene *Reader* können unterschiedliche Textformate parsen und
-in einen AST überführen.
+Dieser AST ist der Dreh- und Angelpunkt in Pandoc. Verschiedene *Reader* können
+unterschiedliche Textformate parsen und in einen AST überführen.
 
-Auf diesem kann man mit [Filtern](https://pandoc.org/filters.html) Transformationen vornehmen.
+Auf diesem kann man mit [Filtern](https://pandoc.org/filters.html) Transformationen
+vornehmen.
 
-Anschließend können diverse *Writer* den AST in das gewünschte Zielformat überführen.
+Anschließend können diverse *Writer* den AST in das gewünschte Zielformat
+überführen.
 :::
 
 [Konsole: pandoc hello.md -s -t native]{.ex
@@ -89,21 +97,25 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/l
 # Zwischenformat: Drei-Adressen-Code
 
 ::: notes
-Eine weitere häufig eingesetzte Zwischenform kurz vor der Code-Generierung ist der sogenannte "Drei-Adressen-Code".
-Dieser besteht jeweils aus einer Operation auf bis zu drei Adressen.
+Eine weitere häufig eingesetzte Zwischenform kurz vor der Code-Generierung ist der
+sogenannte "Drei-Adressen-Code". Dieser besteht jeweils aus einer Operation auf bis
+zu drei Adressen.
 
-Im Prinzip handelt es sich hier um eine Art "High-Level Assembler" mit beliebig vielen Registern ...
+Im Prinzip handelt es sich hier um eine Art "High-Level Assembler" mit beliebig
+vielen Registern ...
 
-Adressen sind dabei Namen, Konstanten oder vom Compiler generierte temporäre Werte. Die typische Form ist `x = y op z`
-(binäre Operationen) oder `x = op z` (unäre Operationen). Werte werden mit `x = y` kopiert. Jeder Teilausdruck erhält
-typischerweise eine eigene temporäre Variable zur Speicherung des Ergebnisses. Weiterhin gibt es bedingte und unbedingte
-Sprünge und Prozedur-Aufrufe.
+Adressen sind dabei Namen, Konstanten oder vom Compiler generierte temporäre Werte.
+Die typische Form ist `x = y op z` (binäre Operationen) oder `x = op z` (unäre
+Operationen). Werte werden mit `x = y` kopiert. Jeder Teilausdruck erhält
+typischerweise eine eigene temporäre Variable zur Speicherung des Ergebnisses.
+Weiterhin gibt es bedingte und unbedingte Sprünge und Prozedur-Aufrufe.
 
 Index-Zugriffe werden über Pointerarithmetik aufgelöst (s.u.).
 
-Eine Spezialform ist die sogenannte "Static Single-Assignment"-Form (*SSA*). Hierbei wird für jede Zuweisung eine neue
-temporäre Variable generiert, d.h. jede im IR-Code verwendete Adresse (temporäre Variable) hat genau eine Zuweisung.
-Dies wirkt sich günstig auf spezielle Optimierungen aus.
+Eine Spezialform ist die sogenannte "Static Single-Assignment"-Form (*SSA*). Hierbei
+wird für jede Zuweisung eine neue temporäre Variable generiert, d.h. jede im IR-Code
+verwendete Adresse (temporäre Variable) hat genau eine Zuweisung. Dies wirkt sich
+günstig auf spezielle Optimierungen aus.
 :::
 
 ::::: columns
@@ -127,10 +139,12 @@ Dies wirkt sich günstig auf spezielle Optimierungen aus.
 :::::
 
 ::: notes
-Im obigen Beispiel wurde davon ausgegangen, dass die Einträge im Array `a` 8 Bit breit sind. Das muss der Compiler
-wissen, um jeweils den korrekten Offset zu benutzen.
+Im obigen Beispiel wurde davon ausgegangen, dass die Einträge im Array `a` 8 Bit
+breit sind. Das muss der Compiler wissen, um jeweils den korrekten Offset zu
+benutzen.
 
-Außerdem könnte man den Code gleich noch optimieren und die Anzahl der Sprünge reduzieren:
+Außerdem könnte man den Code gleich noch optimieren und die Anzahl der Sprünge
+reduzieren:
 
         t1 = i + 1
         i  = t1
@@ -180,7 +194,8 @@ define i32 @main() #0 {
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
-Der obige Output ist auf die *relevanten Zeilen gekürzt*; der gesamte Output im LLVM-Format sieht wie folgt aus:
+Der obige Output ist auf die *relevanten Zeilen gekürzt*; der gesamte Output im
+LLVM-Format sieht wie folgt aus:
 
 ``` llvm
 ; ModuleID = 'hello.c'
@@ -210,15 +225,15 @@ attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sq
 !1 = !{!"clang version 6.0.0-1ubuntu2 (tags/RELEASE_600/final)"}
 ```
 
-Es werden drei "virtuelle Register" (Variablen) `%1`, `%2` und `%3` auf dem Stack angelegt (32-bit Integer; `align 4`:
-alle Adressen sind Vielfache von 4).
+Es werden drei "virtuelle Register" (Variablen) `%1`, `%2` und `%3` auf dem Stack
+angelegt (32-bit Integer; `align 4`: alle Adressen sind Vielfache von 4).
 
-Mit `store i32 0, ...` wird in `%1` der Wert `0` geschrieben (vergleichbar mit `*p = 0`). In `%2` wird analog der Wert
-`7` geschrieben (`x=7`).
+Mit `store i32 0, ...` wird in `%1` der Wert `0` geschrieben (vergleichbar mit
+`*p = 0`). In `%2` wird analog der Wert `7` geschrieben (`x=7`).
 
-Dann wird der Wert aus `%2` in eine neue Variable `%4` geladen und das Ergebnis der Addition aus `%4` und dem Wert `35`
-in eine weitere neue Variable `%5` geschrieben. Der Wert dieser Variablen wird dann auf dem Stack in `%3` gespeichert
-(`y = x+35`).
+Dann wird der Wert aus `%2` in eine neue Variable `%4` geladen und das Ergebnis der
+Addition aus `%4` und dem Wert `35` in eine weitere neue Variable `%5` geschrieben.
+Der Wert dieser Variablen wird dann auf dem Stack in `%3` gespeichert (`y = x+35`).
 
 Vgl. auch [LLVM Language Reference Manual](https://llvm.org/docs/LangRef.html) und
 [blog.regehr.org/archives/1453](https://blog.regehr.org/archives/1453).
@@ -251,21 +266,27 @@ y = x + 35
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.py"}
 
 ::: notes
-Python pflegt 3 Listen: `co_names` für die Namen plus `co_values` für die dazugehörigen Werte sowie `co_consts` für
-Konstanten. Die Listen der Namen und Werte sind gleich lang, ein Index bezieht sich jeweils auf das selbe Symbol. Werte
-werden über einen Stack verarbeitet. Die Opcodes stehen in einer weiteren Liste `co_code`. (Die Opcodes sind oben der
-besseren Lesbarkeit halber als Text ausgegeben, `LOAD_CONST` hat beispielsweise den Wert `100`.)
+Python pflegt 3 Listen: `co_names` für die Namen plus `co_values` für die
+dazugehörigen Werte sowie `co_consts` für Konstanten. Die Listen der Namen und Werte
+sind gleich lang, ein Index bezieht sich jeweils auf das selbe Symbol. Werte werden
+über einen Stack verarbeitet. Die Opcodes stehen in einer weiteren Liste `co_code`.
+(Die Opcodes sind oben der besseren Lesbarkeit halber als Text ausgegeben,
+`LOAD_CONST` hat beispielsweise den Wert `100`.)
 
-Nach dem Laden des Programms ist `x` in `co_names[0]`, `y` in `co_names[1]`. Der Wert `7` steht in `co_const[0]`, die
-`35` in `co_const[1]`.
+Nach dem Laden des Programms ist `x` in `co_names[0]`, `y` in `co_names[1]`. Der
+Wert `7` steht in `co_const[0]`, die `35` in `co_const[1]`.
 
-Das `LOAD_CONST 0` (`co_code[0]`) lädt den Inhalt von `co_consts[0]` auf den Stack (`push()`), d.h. der Wert `7` wird
-auf den Stack gepusht. Mit `STORE_NAME 0` (`co_code[3]`) wird der Inhalt des obersten Stackeintrags in `co_values[0]`
-geschrieben und der Eintrag vom Stack entfernt (`pop()`). Dies entspricht Zeile 1 im Quellcode: `x = 7`.
+Das `LOAD_CONST 0` (`co_code[0]`) lädt den Inhalt von `co_consts[0]` auf den Stack
+(`push()`), d.h. der Wert `7` wird auf den Stack gepusht. Mit `STORE_NAME 0`
+(`co_code[3]`) wird der Inhalt des obersten Stackeintrags in `co_values[0]`
+geschrieben und der Eintrag vom Stack entfernt (`pop()`). Dies entspricht Zeile 1 im
+Quellcode: `x = 7`.
 
-`LOAD_NAME 0` pusht `co_values[0]` auf den Stack (Wert von `x`), gefolgt von der `35` per `LOAD_CONST 1`
-(`co_const[1]`). Das `BINARY_ADD` entfernt die beiden obersten Einträge, addiert die Werte und pusht das Ergebnis wieder
-auf den Stack. Mit `STORE_NAME 1` wird der Wert in `co_values[1]` geschrieben, d.h. `y` bekommt den Wert zugewiesen.
+`LOAD_NAME 0` pusht `co_values[0]` auf den Stack (Wert von `x`), gefolgt von der
+`35` per `LOAD_CONST 1` (`co_const[1]`). Das `BINARY_ADD` entfernt die beiden
+obersten Einträge, addiert die Werte und pusht das Ergebnis wieder auf den Stack.
+Mit `STORE_NAME 1` wird der Wert in `co_values[1]` geschrieben, d.h. `y` bekommt den
+Wert zugewiesen.
 :::
 
 # Bytecode (Beispiel Java)
@@ -312,22 +333,28 @@ public class Hello {
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/Hello.java"}
 
 ::: notes
-Für jeden Methodenaufruf wird ein entsprechender Frame auf den Stack gepusht. Dieser enthält ein Array mit den lokalen
-Variablen, durchnummeriert von `0` bis `n-1`. (`long` und `double` bekommen je *2* lokale Variablen) Zusätzlich gibt es
-im Frame einen Operandenstack, auf dem Funktionsparameter und -rückgabewerte übergeben werden und auf dem die Operanden
-für die auszuführenden Operationen sowie deren Zwischenergebnisse hinterlegt werden.
+Für jeden Methodenaufruf wird ein entsprechender Frame auf den Stack gepusht. Dieser
+enthält ein Array mit den lokalen Variablen, durchnummeriert von `0` bis `n-1`.
+(`long` und `double` bekommen je *2* lokale Variablen) Zusätzlich gibt es im Frame
+einen Operandenstack, auf dem Funktionsparameter und -rückgabewerte übergeben werden
+und auf dem die Operanden für die auszuführenden Operationen sowie deren
+Zwischenergebnisse hinterlegt werden.
 
 -   `bipush 7`: Pushe den Integer-Wert 7 auf den Stack
--   `istore_1`: Poppe den ersten Wert vom Stack und speichere ihn in der lokalen Integer-Variable mit Index 1 (`x=7`)
+-   `istore_1`: Poppe den ersten Wert vom Stack und speichere ihn in der lokalen
+    Integer-Variable mit Index 1 (`x=7`)
 -   `iload_1`: Pushe lokale Integer-Variable mit Index 1 auf den Stack (`x`)
 -   `bipush 35`: Pushe den Integer-Wert 35 auf den Stack
--   `iadd`: Führe Integer-Addition aus mit den beiden obersten Werten auf Stack und ersetze diese mit dem Ergebnis
--   `istore_2`: Poppe den ersten Wert vom Stack und speichere ihn in der lokalen Integer-Variable mit Index 2 (`y=x+35`)
+-   `iadd`: Führe Integer-Addition aus mit den beiden obersten Werten auf Stack und
+    ersetze diese mit dem Ergebnis
+-   `istore_2`: Poppe den ersten Wert vom Stack und speichere ihn in der lokalen
+    Integer-Variable mit Index 2 (`y=x+35`)
 
-Die Konstanten `n` für `iconst_` funktionieren nur für kleinere Integer. Größere Werte muss man mit `bipush` auf den
-Stack pushen.
+Die Konstanten `n` für `iconst_` funktionieren nur für kleinere Integer. Größere
+Werte muss man mit `bipush` auf den Stack pushen.
 
-Vgl. auch [dzone.com/articles/introduction-to-java-bytecode](https://dzone.com/articles/introduction-to-java-bytecode)
+Vgl. auch
+[dzone.com/articles/introduction-to-java-bytecode](https://dzone.com/articles/introduction-to-java-bytecode)
 und
 [www.beyondjava.net/java-programmers-guide-java-byte-code](https://www.beyondjava.net/java-programmers-guide-java-byte-code).
 :::
@@ -381,23 +408,27 @@ main:
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
-Die Ausgabe unterscheidet sich je nach Architektur, auf dem der C-Code in Assembler-Code compiliert wird!
+Die Ausgabe unterscheidet sich je nach Architektur, auf dem der C-Code in
+Assembler-Code compiliert wird!
 
-Mit `.text` beginnt das Textsegment. `main:` ist eine Sprungmarke, die hier auch als Startpunkt für das Programm dient.
+Mit `.text` beginnt das Textsegment. `main:` ist eine Sprungmarke, die hier auch als
+Startpunkt für das Programm dient.
 
-Auf X86-64 stehen `%rbp` und `%rsp` für 8-Byte-Register. Mit `%eax` greift man auf die Bytes 0 bis 3 des
-8-Byte-Registers `%rax` zu.
+Auf X86-64 stehen `%rbp` und `%rsp` für 8-Byte-Register. Mit `%eax` greift man auf
+die Bytes 0 bis 3 des 8-Byte-Registers `%rax` zu.
 
-Da in `%rbp` Werte übergeben werden (können), wird das Register mit `pushq %rbp` auf den Stack gesichert und am Ende mit
-`popq %rbp` wiederhergestellt.
+Da in `%rbp` Werte übergeben werden (können), wird das Register mit `pushq %rbp` auf
+den Stack gesichert und am Ende mit `popq %rbp` wiederhergestellt.
 
-Ansonsten kann man die Bedeutung erraten: `movl $7, -8(%rbp)` entspricht `mem[rbp-8] = 7`, `movl -8(%rbp), %eax`
-entspricht `eax = mem[rbp-8]`, `addl $35, %eax` entspricht `eax = eax + 35`, `movl %eax, -4(%rbp)` entspricht
+Ansonsten kann man die Bedeutung erraten: `movl $7, -8(%rbp)` entspricht
+`mem[rbp-8] = 7`, `movl -8(%rbp), %eax` entspricht `eax = mem[rbp-8]`,
+`addl $35, %eax` entspricht `eax = eax + 35`, `movl %eax, -4(%rbp)` entspricht
 `mem[rbp-4] = eax`.
 
 Vgl. auch
 [cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf](https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf)
-und [en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax](https://en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax).
+und
+[en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax](https://en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax).
 :::
 
 # Wrap-Up

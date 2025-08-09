@@ -9,12 +9,12 @@ Ergebnisse:
 
 ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
 
-|  | Phase | Ergebnis |
-|:-----|:--------------------------|:--------------------------------------------------|
-| 0 | Lexer/Parser | AST |
+|   | Phase                          | Ergebnis                                                        |
+|:--|:-------------------------------|:----------------------------------------------------------------|
+| 0 | Lexer/Parser                   | AST                                                             |
 | 1 | Semantische Analyse, Def-Phase | Symboltabelle (Definitionen), Verknüpfung Scopes mit AST-Knoten |
-| 2 | Semantische Analyse, Ref-Phase | Prüfung auf nicht definierte Referenzen |
-| 3 | Interpreter | Abarbeitung, Nutzung von AST und Symboltabelle |
+| 2 | Semantische Analyse, Ref-Phase | Prüfung auf nicht definierte Referenzen                         |
+| 3 | Interpreter                    | Abarbeitung, Nutzung von AST und Symboltabelle                  |
 
 Das Erzeugen der Symboltabelle wird häufig in zwei Phasen aufgeteilt: Zunächst
 werden die Definitionen abgearbeitet und in der zweiten Phase wird noch einmal über
