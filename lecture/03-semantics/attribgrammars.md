@@ -41,8 +41,9 @@ Welcher Ausdruck hat welchen Typ?
 =\> Wie den Ausdruck **ausrechnen**?
 
 ::: notes
-*Anmerkung*: Heute geht es um die einfachste Form der semantischen Analyse: Anreichern einer Grammatik um Attribute und
-Aktionen, die während des Parsens oder bei der Traversierung des Parse-Trees ausgewertet werden.
+*Anmerkung*: Heute geht es um die einfachste Form der semantischen Analyse:
+Anreichern einer Grammatik um Attribute und Aktionen, die während des Parsens oder
+bei der Traversierung des Parse-Trees ausgewertet werden.
 :::
 
 # Semantische Analyse
@@ -51,7 +52,8 @@ Aktionen, die während des Parsens oder bei der Traversierung des Parse-Trees au
 
 Wir haben den AST vorliegen.
 
-Idealerweise enthält er bei jedem Bezeichner einen Verweis in sogenannte Symboltabellen (siehe spätere Veranstaltung).
+Idealerweise enthält er bei jedem Bezeichner einen Verweis in sogenannte
+Symboltabellen (siehe spätere Veranstaltung).
 
 ## Was kann beim Parsen schon überprüft / bestimmt werden?
 
@@ -71,11 +73,11 @@ Hier entsteht ein Tafelbild.
 
 ## Typisierung
 
--   stark oder statisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen finden in der semantischen Analyse
-    statt (C, C++, Java)
+-   stark oder statisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen
+    finden in der semantischen Analyse statt (C, C++, Java)
 
--   schwach oder dynamisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen finden zur Laufzeit statt (Python,
-    Lisp, Perl)
+-   schwach oder dynamisch typisierte Sprachen: Alle oder fast alle Typüberprüfungen
+    finden zur Laufzeit statt (Python, Lisp, Perl)
 
 -   untypisierte Sprachen: keinerlei Typüberprüfungen (Maschinensprache)
 
@@ -97,7 +99,8 @@ Ausdrücke können hier sein:
 
 ## Typinferenz
 
-**Def.:** *Typinferenz* ist die Bestimmung des Datentyps jedes Bezeichners und jedes Ausdrucks im Code.
+**Def.:** *Typinferenz* ist die Bestimmung des Datentyps jedes Bezeichners und jedes
+Ausdrucks im Code.
 
 -   Die Typen von Unterausdrücken bestimmen den Typ eines Ausdrucks
 
@@ -105,7 +108,8 @@ Ausdrücke können hier sein:
 
     $$\frac{f:s \rightarrow t\ \ \ \ \ x:s}{f(x) : t}$$
 
-    *(Wenn f den Typ $s \rightarrow t$ hat und x den Typ s, dann hat der Ausdruck f(x) den Typ t.)*
+    *(Wenn f den Typ $s \rightarrow t$ hat und x den Typ s, dann hat der Ausdruck
+    f(x) den Typ t.)*
 
 -   z.  B. zur Auflösung von Überladung und Polymorphie zur Laufzeit
 
@@ -123,7 +127,8 @@ Ausdrücke können hier sein:
 
 ## Typkonvertierungen
 
--   Der Compiler kann implizite Typkonvertierungen vornehmen, um einen Ausdruck zu verifizieren (siehe Sprachdefiniton)
+-   Der Compiler kann implizite Typkonvertierungen vornehmen, um einen Ausdruck zu
+    verifizieren (siehe Sprachdefiniton)
 
 -   Typerweiterungen, z.B. von *int* nach *float* oder
 
@@ -148,14 +153,15 @@ Ausdrücke können hier sein:
 
 Die Syntaxanalyse kann keine kontextsensitiven Analysen durchführen
 
--   Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von cs-Grammatiken ist *PSPACE-complete*
+-   Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von
+    cs-Grammatiken ist *PSPACE-complete*
 
--   Parsergenerator *Bison*: generiert LALR(1)-Parser, aber auch sog. *Generalized LR (GLR) Parser*, die bei
-    nichtlösbaren Konflikten in der Grammatik (Reduce/Reduce oder Shift/Reduce) parallel den Input mit jede der
-    Möglichkeiten weiterparsen
+-   Parsergenerator *Bison*: generiert LALR(1)-Parser, aber auch sog. *Generalized LR
+    (GLR) Parser*, die bei nichtlösbaren Konflikten in der Grammatik (Reduce/Reduce
+    oder Shift/Reduce) parallel den Input mit jede der Möglichkeiten weiterparsen
 
--   Anderer Ansatz: Berücksichtigung kontextsensitiver Abhängigkeiten mit Hilfe attributierter Grammatiken, zur
-    Typanalyse, auch zur Codegenerierung
+-   Anderer Ansatz: Berücksichtigung kontextsensitiver Abhängigkeiten mit Hilfe
+    attributierter Grammatiken, zur Typanalyse, auch zur Codegenerierung
 
 -   Weitergabe von Informationen im Baum
 
@@ -179,9 +185,11 @@ auch "*syntax-directed definition*"
 
 Anreichern einer CFG:
 
--   Zuordnung einer Menge von Attributen zu den Symbolen (Terminal- und Nicht-Terminal-Symbole)
+-   Zuordnung einer Menge von Attributen zu den Symbolen (Terminal- und
+    Nicht-Terminal-Symbole)
 
--   Zuordnung einer Menge von *semantischen Regeln* (Evaluationsregeln) zu den Produktionen
+-   Zuordnung einer Menge von *semantischen Regeln* (Evaluationsregeln) zu den
+    Produktionen
 
 ## Definition: Attributierte Grammatik
 
@@ -191,7 +199,8 @@ Eine *attributierte Grammatik* *AG = (G,A,R)* besteht aus folgenden Komponenten:
 
 -   *G = (N, T, P, S)* ist eine cf-Grammatik
 
--   A = $\bigcup\limits_{X \in (T \cup N)} A(X)$ mit $A(X) \cap A(Y) \neq \emptyset \Rightarrow X = Y$
+-   A = $\bigcup\limits_{X \in (T \cup N)} A(X)$ mit
+    $A(X) \cap A(Y) \neq \emptyset \Rightarrow X = Y$
 
 -   R = $\bigcup\limits_{p \in P} R(p)$ mit
     $R(p) = \lbrace X_i.a = f(\ldots) \vert p : X_0 \rightarrow X_1 \ldots X_n \in P, X_i.a \in A(X_i), 0 \leq i \leq n\rbrace$
@@ -203,14 +212,17 @@ Die in einer Produktion p definierten Attribute sind
 *AF(p)* =
 $\lbrace X_i.a \ \vert\  p : X_0 \rightarrow X_1 \ldots X_n \in P,  0 \leq i \leq n, X_i.a = f(\ldots) \in R(p)\rbrace$
 
-Disjunkte Teilmengen der Attribute: abgeleitete (synthesized) Attributen *AS(X)* und ererbte (inherited) Attributen
-*AI(X)*:
+Disjunkte Teilmengen der Attribute: abgeleitete (synthesized) Attributen *AS(X)* und
+ererbte (inherited) Attributen *AI(X)*:
 
--   *AS(X)* = $\lbrace X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)\rbrace$
+-   *AS(X)* =
+    $\lbrace X.a\ \vert \ \exists p : X \rightarrow X_1 \ldots X_n \in P, X.a \in AF(p)\rbrace$
 
--   *AI(X)* = $\lbrace X.a\ \vert \ \exists q : Y \rightarrow uXv \in P, X.a\in AF(q)\rbrace$
+-   *AI(X)* =
+    $\lbrace X.a\ \vert \ \exists q : Y \rightarrow uXv \in P, X.a\in AF(q)\rbrace$
 
-Abgeleitete Attribute geben Informationen von unten nach oben weiter, geerbte von oben nach unten.
+Abgeleitete Attribute geben Informationen von unten nach oben weiter, geerbte von
+oben nach unten.
 
 *Abhängigkeitsgraphen* stellen die Abhängigkeiten der Attribute dar.
 
@@ -231,14 +243,16 @@ Abgeleitete Attribute geben Informationen von unten nach oben weiter, geerbte vo
 |                       | `t'.syn = t'1.syn`            |
 | `t' :` $\epsilon$ `;` | `t'.syn = t'.inh`             |
 
-Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die Vorkommen nummeriert. (t, t1; t', t'1)
+Wenn ein Nichtterminal mehr als einmal in einer Produktion vorkommt, werden die
+Vorkommen nummeriert. (t, t1; t', t'1)
 
 # S-Attributgrammatiken und L-Attributgrammatiken
 
 ## S-Attributgrammatiken
 
-*S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich während des Parsens mit LR-Parsern
-beim Reduzieren berechnen (Tiefensuche mit Postorder-Evaluation):
+*S-Attributgrammatiken*: Grammatiken mit nur abgeleiteten Attributen, lassen sich
+während des Parsens mit LR-Parsern beim Reduzieren berechnen (Tiefensuche mit
+Postorder-Evaluation):
 
 ``` python
 def visit(N):
@@ -249,7 +263,8 @@ def visit(N):
 
 ## L-Attributgrammatiken
 
--   Grammatiken, deren geerbte Atribute nur von einem Elternknoten oder einem linken Geschwisterknoten abhängig sind
+-   Grammatiken, deren geerbte Atribute nur von einem Elternknoten oder einem linken
+    Geschwisterknoten abhängig sind
 
 -   können während des Parsens mit LL-Parsern berechnet werden
 
@@ -290,8 +305,8 @@ def visit(N):
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
 
 ::: notes
-Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie `5*8+2`, hier umformuliert ohne Links-Rekursion und mit
-berechneten und geerbten Attributen:
+Teil der vorigen SDD zum Parsen und Berechnen von Ausdrücken wie `5*8+2`, hier
+umformuliert ohne Links-Rekursion und mit berechneten und geerbten Attributen:
 :::
 
 ::: center
@@ -315,7 +330,8 @@ berechneten und geerbten Attributen:
 :::
 
 ::: {.column width="45%"}
-![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur Multiplikation)](images/annotatedparsetree2.png)
+![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur
+Multiplikation)](images/annotatedparsetree2.png)
 :::
 :::::
 ::::::
@@ -339,9 +355,9 @@ berechneten und geerbten Attributen:
 
 *Syntax-directed translation scheme*:
 
-Zu den Attributen kommen **Semantische Aktionen**: Code-Fragmente als zusätzliche Knoten im Parse Tree an beliebigen
-Stellen in einer Produktion, die, wenn möglich, während des Parsens, ansonsten in weiteren Baumdurchläufen ausgeführt
-werden.
+Zu den Attributen kommen **Semantische Aktionen**: Code-Fragmente als zusätzliche
+Knoten im Parse Tree an beliebigen Stellen in einer Produktion, die, wenn möglich,
+während des Parsens, ansonsten in weiteren Baumdurchläufen ausgeführt werden.
 
     e : e1  {print e1.val;}
         '+' {print "+";}
@@ -382,14 +398,16 @@ Die Aktionen werden am Ende jeder Produktion eingefügt ("postfix SDT").
 
 ## L-attributierte SDD, LL-Grammatik: Top-Down-Parsierbar (2/2)
 
--   LL-Grammatik: Jede L-attributierte SDD direkt während des Top-Down-Parsens implementierbar/berechenbar
+-   LL-Grammatik: Jede L-attributierte SDD direkt während des Top-Down-Parsens
+    implementierbar/berechenbar
 
 -   SDT dazu:
 
-    -   Aktionen, die ein berechnetes Attribut des Kopfes einer Produktion berechnen, an das Ende der Produktion anfügen
+    -   Aktionen, die ein berechnetes Attribut des Kopfes einer Produktion berechnen,
+        an das Ende der Produktion anfügen
 
-    -   Aktionen, die geerbte Attribute für ein Nicht-Terminalsymbol $A$ berechnen, direkt vor dem Auftreten von $A$ im
-        Körper der Produktion eingefügen
+    -   Aktionen, die geerbte Attribute für ein Nicht-Terminalsymbol $A$ berechnen,
+        direkt vor dem Auftreten von $A$ im Körper der Produktion eingefügen
 
 # Implementierung im rekursiven Abstieg
 
@@ -427,8 +445,8 @@ T t'(T inh) {
 
     -   L-attributierte SDD, LL-Grammatik: top-down-parsebar
 
-    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw. AST, integriert und bei einer
-    (späteren) Traversierung abgearbeitet.
+    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw.
+    AST, integriert und bei einer (späteren) Traversierung abgearbeitet.
 
 ::: readings
 -   @Aho2023: Kapitel 2.3 und 5
@@ -436,7 +454,8 @@ T t'(T inh) {
 :::
 
 ::: outcomes
--   k2: Konzept der attributierten Grammatiken: Anreicherung mit Attributen und semantischen Regeln
+-   k2: Konzept der attributierten Grammatiken: Anreicherung mit Attributen und
+    semantischen Regeln
 -   k2: Unterschied zwischen geerbten und berechneten Attributen
 -   k2: Umsetzung von SDD mit Hilfe von SDT
 -   k3: Einfache semantische Analyse mit Hilfe von attributierten Grammatiken

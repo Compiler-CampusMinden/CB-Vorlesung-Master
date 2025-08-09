@@ -4,12 +4,12 @@ title: "SymbTab3: Strukturen und Klassen"
 ---
 
 ::: tldr
-Strukturen und Klassen bilden jeweils einen eigenen verschachtelten Scope, worin die Attribute und Methoden definiert
-werden.
+Strukturen und Klassen bilden jeweils einen eigenen verschachtelten Scope, worin die
+Attribute und Methoden definiert werden.
 
-Bei der Namensauflösung muss man dies beachten und darf beim Zugriff auf Attribute und Methoden nicht einfach in den
-übergeordneten Scope schauen. Zusätzlich müssen hier Vererbungshierarchien in der Struktur der Symboltabelle
-berücksichtigt werden.
+Bei der Namensauflösung muss man dies beachten und darf beim Zugriff auf Attribute
+und Methoden nicht einfach in den übergeordneten Scope schauen. Zusätzlich müssen
+hier Vererbungshierarchien in der Struktur der Symboltabelle berücksichtigt werden.
 :::
 
 ::: youtube
@@ -47,13 +47,13 @@ void f() {
 
 ![](images/structscopesuml.png){width="80%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
 
 ::: notes
 Strukturen stellen wie Funktionen sowohl einen Scope als auch ein Symbol dar.
 
-Zusätzlich stellt eine Struktur (-definition) aber auch einen neuen Typ dar, weshalb `Struct` auch noch das Interface
-`Type` "implementiert".
+Zusätzlich stellt eine Struktur (-definition) aber auch einen neuen Typ dar, weshalb
+`Struct` auch noch das Interface `Type` "implementiert".
 :::
 
 # Strukturen: Auflösen von Namen
@@ -66,18 +66,19 @@ class Struct(Scope, Symbol, Type):
 
 \smallskip
 
-=\> Auflösen von "`a.b`"[ (im Listener in `exitMember()`)]{.notes}:
+=\> Auflösen von "`a.b`"[(im Listener in `exitMember()`)]{.notes}:
 
 -   `a` im "normalen" Modus mit `resolve()` über den aktuellen Scope
 -   Typ von `a` ist `Struct` mit Verweis auf den eigenen Scope
 -   `b` nur innerhalb des `Struct`-Scopes mit `resolveMember()`
 
 ::: notes
-In der Grammatik würde es eine Regel `member` geben, die auf eine Struktur der Art `ID.ID` anspricht (d.h. eigentlich
-den Teil `.ID`), und entsprechend zu Methoden `enterMember()` und `exitMember()` im Listener führt.
+In der Grammatik würde es eine Regel `member` geben, die auf eine Struktur der Art
+`ID.ID` anspricht (d.h. eigentlich den Teil `.ID`), und entsprechend zu Methoden
+`enterMember()` und `exitMember()` im Listener führt.
 
-Das Symbol für `a` hat als `type`-Attribut eine Referenz auf die `Struct`, die ja einen eigenen Scope hat
-(`symbols`-Map). Darin muss dann `b` aufgelöst werden.
+Das Symbol für `a` hat als `type`-Attribut eine Referenz auf die `Struct`, die ja
+einen eigenen Scope hat (`symbols`-Map). Darin muss dann `b` aufgelöst werden.
 :::
 
 \bigskip
@@ -103,7 +104,8 @@ void f() {
 :::
 
 ::: {.column width="54%"}
-![](images/structscopesuml.png){width="90%"} [Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin}
+![](images/structscopesuml.png){width="90%"} [Eigene Modellierung nach einer Idee in
+[@Parr2010, p. 162]]{.origin}
 :::
 ::::::
 :::::::
@@ -139,11 +141,11 @@ public
 
 ![](images/classscopesuml.png){width="80%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin}
 
 ::: notes
-Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die Elternklasse hinzu (in der Superklasse ist
-der Wert `None`).
+Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die
+Elternklasse hinzu (in der Superklasse ist der Wert `None`).
 :::
 
 # Klassen: Auflösen von Namen
@@ -169,14 +171,15 @@ class Clazz(Struct):
         else: return None
 ```
 
-[Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
+[Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin}
 
 ::: notes
-**Hinweis**: Die obige Implementierungsskizze soll vor allem das Prinzip demonstrieren - sie ist aus Gründen der
-Lesbarkeit nicht besonders effizient: beispielsweise wird `parentClazz.resolve(name)` mehrfach evaluiert ...
+**Hinweis**: Die obige Implementierungsskizze soll vor allem das Prinzip
+demonstrieren - sie ist aus Gründen der Lesbarkeit nicht besonders effizient:
+beispielsweise wird `parentClazz.resolve(name)` mehrfach evaluiert ...
 
-Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst gesucht werden, anschließend in der
-Elternklasse.
+Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst gesucht
+werden, anschließend in der Elternklasse.
 
 Beispiel (mit den obigen Klassen `A` und `B`):
 
@@ -185,12 +188,14 @@ B foo;
 foo.x = 42;
 ```
 
-Hier wird analog zu den Structs zuerst `foo` mit `resolve()` im lokalen Scope aufgelöst. Der Typ des Symbols `foo` ist
-ein `Clazz`, was zugleich ein Scope ist. In diesem Scope wird nun mit `resolveMember()` nach dem Symbol `x` gesucht.
-Falls es hier nicht gefunden werden kann, wird in der Elternklasse (sofern vorhanden) weiter mit`resolveMember()`
-gesucht.
+Hier wird analog zu den Structs zuerst `foo` mit `resolve()` im lokalen Scope
+aufgelöst. Der Typ des Symbols `foo` ist ein `Clazz`, was zugleich ein Scope ist. In
+diesem Scope wird nun mit `resolveMember()` nach dem Symbol `x` gesucht. Falls es
+hier nicht gefunden werden kann, wird in der Elternklasse (sofern vorhanden) weiter
+mit`resolveMember()` gesucht.
 
-Die normale Namensauflösung wird ebenfalls erweitert um die Auflösung in der Elternklasse.
+Die normale Namensauflösung wird ebenfalls erweitert um die Auflösung in der
+Elternklasse.
 
 Beispiel:
 
@@ -210,15 +215,18 @@ public
 };
 ```
 
-Hier würde `wuppie` als Symbol im globalen Scope definiert werden. Beim Verarbeiten von `int z = x+y+wuppie;` würde mit
-`resolve()` nach `wuppie` gesucht: Zuerst im lokalen Scope unterhalb der Funktion, dann im Funktions-Scope, dann im
-Klassen-Scope von `B`. Hier sucht `resolve()` auch zunächst lokal, geht dann aber die Vererbungshierarchie entlang
-(sofern wie hier vorhanden). Erst in der Superklasse (wenn der `parentClazz`-Zeiger `None` ist), löst `resolve()` wieder
-normal auf und sucht um umgebenden Scope. Auf diese Weise kann man wie gezeigt in Klassen (Methoden) auf globale
-Variablen verweisen ...
+Hier würde `wuppie` als Symbol im globalen Scope definiert werden. Beim Verarbeiten
+von `int z = x+y+wuppie;` würde mit `resolve()` nach `wuppie` gesucht: Zuerst im
+lokalen Scope unterhalb der Funktion, dann im Funktions-Scope, dann im Klassen-Scope
+von `B`. Hier sucht `resolve()` auch zunächst lokal, geht dann aber die
+Vererbungshierarchie entlang (sofern wie hier vorhanden). Erst in der Superklasse
+(wenn der `parentClazz`-Zeiger `None` ist), löst `resolve()` wieder normal auf und
+sucht um umgebenden Scope. Auf diese Weise kann man wie gezeigt in Klassen (Methoden)
+auf globale Variablen verweisen ...
 
-*Anmerkung*: Durch dieses Vorgehen wird im Prinzip in Methoden aus dem Zugriff auf ein Feld `x` implizit ein `this.x`
-aufgelöst, wobei `this` die Klasse auflöst und `x` als Attribut darin.
+*Anmerkung*: Durch dieses Vorgehen wird im Prinzip in Methoden aus dem Zugriff auf
+ein Feld `x` implizit ein `this.x` aufgelöst, wobei `this` die Klasse auflöst und `x`
+als Attribut darin.
 :::
 
 # Wrap-Up
@@ -237,7 +245,8 @@ aufgelöst, wobei `this` die Klasse auflöst und `x` als Attribut darin.
 :::
 
 ::: outcomes
--   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener
+-   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit
+    einem Listener
 -   k3: Attribute von Klassen und Strukturen auflösen
 :::
 
@@ -247,7 +256,8 @@ aufgelöst, wobei `this` die Klasse auflöst und `x` als Attribut darin.
 Betrachten Sie folgenden Java-Code:
 
 1.  Umkreisen Sie alle Symbole.
-2.  Zeichen Sie Pfeile von Symbol-Referenzen zur jeweiligen Definition (falls vorhanden).
+2.  Zeichen Sie Pfeile von Symbol-Referenzen zur jeweiligen Definition (falls
+    vorhanden).
 3.  Identifizieren Sie alle benannten Scopes.
 4.  Identifizieren Sie alle anonymen Scopes.
 5.  Geben Sie die resultierende Symboltabelle an (Strukturen wie in VL besprochen).

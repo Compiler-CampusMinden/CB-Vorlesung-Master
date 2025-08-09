@@ -6,21 +6,24 @@ title: LL-Parser selbst implementiert
 ::: tldr
 ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/images/architektur_cb_parser.png?raw=true)
 
-LL-Parser können über einen "rekursiven Abstieg" direkt aus einer Grammatik implementiert werden:
+LL-Parser können über einen "rekursiven Abstieg" direkt aus einer Grammatik
+implementiert werden:
 
 -   Zu jeder Produktionsregel erstellt man eine gleichnamige Funktion.
--   Wenn in der Produktionsregel andere Regeln "aufgerufen" werden, erfolgt in der Funktion an dieser Stelle der
-    entsprechende Funktionsaufruf.
+-   Wenn in der Produktionsregel andere Regeln "aufgerufen" werden, erfolgt in der
+    Funktion an dieser Stelle der entsprechende Funktionsaufruf.
 -   Bei Terminalsymbolen wird das erwartete Token geprüft.
 
-Dabei findet man wie bereits im Lexer die Funktionen `match` und `consume`, die sich hier aber auf den Tokenstrom
-beziehen. LL(1)-Parser schauen dabei immer das nächste Token an, LL(k) haben ein entsprechendes Look-Ahead von $k$
-Token. Dies kann man mit einem Ringpuffer für die Token realisieren.
+Dabei findet man wie bereits im Lexer die Funktionen `match` und `consume`, die sich
+hier aber auf den Tokenstrom beziehen. LL(1)-Parser schauen dabei immer das nächste
+Token an, LL(k) haben ein entsprechendes Look-Ahead von $k$ Token. Dies kann man mit
+einem Ringpuffer für die Token realisieren.
 
-Zur Beachtung der Vorrang- und Assoziativitätsregeln muss die Grammatik entsprechend umgebaut werden. LL-Parser haben
-durch die Betrachtung des aktuellen Vorschau-Tokens ein Problem mit Linksrekursion in der Grammatik, diese muss zunächst
-beseitigt werden. (ANTLR bietet hier gewisse Vereinfachungen an, kann aber mit indirekter Linksrekursion auch nicht
-umgehen.)
+Zur Beachtung der Vorrang- und Assoziativitätsregeln muss die Grammatik entsprechend
+umgebaut werden. LL-Parser haben durch die Betrachtung des aktuellen Vorschau-Tokens
+ein Problem mit Linksrekursion in der Grammatik, diese muss zunächst beseitigt
+werden. (ANTLR bietet hier gewisse Vereinfachungen an, kann aber mit indirekter
+Linksrekursion auch nicht umgehen.)
 
 Eine gute Darstellung finden Sie in [@Parr2010] (Kapitel 2).
 :::
@@ -55,10 +58,12 @@ def consume():
 ```
 
 ::: notes
-Erinnerung: Der Lexer arbeitet direkt auf dem Zeichenstrom und versucht über längste Matches daraus einen Tokenstrom zu
-erzeugen. Dabei wird immer das nächste Zeichen angeschaut (Funktion `match`) und mit `consume` das aktuelle Zeichen
-"verbraucht" und das nächste Zeichen geladen. Hier kann man über die Doppel-Puffer-Strategie das Einlesen einzelner
-Zeichen aus einer Datei vermeiden und immer blockweise in den Puffer einlesen.
+Erinnerung: Der Lexer arbeitet direkt auf dem Zeichenstrom und versucht über längste
+Matches daraus einen Tokenstrom zu erzeugen. Dabei wird immer das nächste Zeichen
+angeschaut (Funktion `match`) und mit `consume` das aktuelle Zeichen "verbraucht" und
+das nächste Zeichen geladen. Hier kann man über die Doppel-Puffer-Strategie das
+Einlesen einzelner Zeichen aus einer Datei vermeiden und immer blockweise in den
+Puffer einlesen.
 :::
 
 # Grundidee LL-Parser
@@ -81,14 +86,17 @@ def r():
 ```
 
 ::: notes
--   Für jede Regel in der Grammatik wird eine Methode/Funktion mit dem selben Namen definiert
--   Referenzen auf ein Token `T` werden durch den Aufruf der Methode `match(T)` aufgelöst
-    -   `match(T)` "konsumiert" das aktuelle Token, falls dieses mit `T` übereinstimmt
+-   Für jede Regel in der Grammatik wird eine Methode/Funktion mit dem selben Namen
+    definiert
+-   Referenzen auf ein Token `T` werden durch den Aufruf der Methode `match(T)`
+    aufgelöst
+    -   `match(T)` "konsumiert" das aktuelle Token, falls dieses mit `T`
+        übereinstimmt
     -   Anderenfalls löst `match()` eine Exception aus
 -   Referenzen auf Regeln `s` werden durch Methodenaufrufe `s()` aufgelöst
 
-*Erinnerung*: In ANTLR werden Parser-Regeln (non-Terminale) mit einem kleinen und Lexer-Regeln (Terminale/Token) mit
-einem großen Anfangsbuchstaben geschrieben.
+*Erinnerung*: In ANTLR werden Parser-Regeln (non-Terminale) mit einem kleinen und
+Lexer-Regeln (Terminale/Token) mit einem großen Anfangsbuchstaben geschrieben.
 :::
 
 ::: notes
@@ -111,11 +119,13 @@ switch (lookahead):
     default: raise Error()
 ```
 
-Dabei ist `lookahead` eine globale Variable, die das zu betrachtende Token enthält (vergleichbar mit `peek` beim Lexer).
+Dabei ist `lookahead` eine globale Variable, die das zu betrachtende Token enthält
+(vergleichbar mit `peek` beim Lexer).
 
-Das Prädikat `predicting_a` soll andeuten, dass man mit dem aktuellen Token eine Vorhersage für die Regel `a` versucht
-(hier kommen die FIRST- und FOLLOW-Mengen ins Spiel ...). Wenn das der Fall ist, springt man entsprechend in die
-Funktion bzw. Methode `a()`.
+Das Prädikat `predicting_a` soll andeuten, dass man mit dem aktuellen Token eine
+Vorhersage für die Regel `a` versucht (hier kommen die FIRST- und FOLLOW-Mengen ins
+Spiel ...). Wenn das der Fall ist, springt man entsprechend in die Funktion bzw.
+Methode `a()`.
 :::
 
 ::: notes
@@ -160,12 +170,12 @@ INT      : ('0'..'9')+ ;
 ```
 
 ::: notes
-Formal berechnet man die Lookahead-Mengen mit `FIRST` und `FOLLOW`, um eine Entscheidung für die nächste Regel zu
-treffen. Praktisch betrachtet kann man sich fragen, welche(s) Token eine Phrase in der aktuellen Alternative starten
-können.
+Formal berechnet man die Lookahead-Mengen mit `FIRST` und `FOLLOW`, um eine
+Entscheidung für die nächste Regel zu treffen. Praktisch betrachtet kann man sich
+fragen, welche(s) Token eine Phrase in der aktuellen Alternative starten können.
 
-Für LL(1)-Parser betrachtet man immer das **aktuelle** Token (**genau *EIN* Lookahead-Token**), um eine Entscheidung zu
-treffen.
+Für LL(1)-Parser betrachtet man immer das **aktuelle** Token (**genau *EIN*
+Lookahead-Token**), um eine Entscheidung zu treffen.
 :::
 
 \pause
@@ -193,7 +203,7 @@ def consume():
     lookahead = lexer.nextToken()
 ```
 
-[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 43]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 43]]{.origin}
 
 ::: notes
 Dabei setzt man in der Klasse `Parser` zwei Attribute voraus:
@@ -204,18 +214,20 @@ class Parser:
     Token lookahead
 ```
 
-Starten würde man den Parser nach dem Erzeugen einer Instanz (dabei wird ein Lexer mit durchgereicht) über den Aufruf
-der Start-Regel, also beispielsweise `parser.list()`.
+Starten würde man den Parser nach dem Erzeugen einer Instanz (dabei wird ein Lexer
+mit durchgereicht) über den Aufruf der Start-Regel, also beispielsweise
+`parser.list()`.
 
-*Anmerkung*: Mit dem generierten Parse-Tree bzw. *AST* beschäftigen wir uns später (=\> [AST-basierte
-Interpreter](../06-interpretation/astdriven-part1.md)).
+*Anmerkung*: Mit dem generierten Parse-Tree bzw. *AST* beschäftigen wir uns später
+(=\> [AST-basierte Interpreter](../06-interpretation/astdriven-part1.md)).
 :::
 
 # Vorrangregeln
 
     1+2*3 == 1+(2*3) != (1+2)*3
 
-[Die Eingabe `1+2*3` muss als `1+(2*3)` interpretiert werden, da `*` Vorrang vor `+` hat.]{.notes}
+[Die Eingabe `1+2*3` muss als `1+(2*3)` interpretiert werden, da `*` Vorrang vor `+`
+hat.]{.notes}
 
 [[Tafel: Unterschiede im AST]{.ex}]{.slides}
 
@@ -233,9 +245,10 @@ term : term '*' INT
 ```
 
 ::: notes
-ANTLR nutzt die Strategie des ["*precedence climbing*"](https://www.antlr.org/papers/Clarke-expr-parsing-1986.pdf) und
-löst nach der *Reihenfolge der Alternativen* in einer Regel auf. Entsprechend könnte man die obige Grammatik unter
-Beibehaltung der Vorrangregeln so in ANTLR (v4) formulieren:
+ANTLR nutzt die Strategie des ["*precedence
+climbing*"](https://www.antlr.org/papers/Clarke-expr-parsing-1986.pdf) und löst nach
+der *Reihenfolge der Alternativen* in einer Regel auf. Entsprechend könnte man die
+obige Grammatik unter Beibehaltung der Vorrangregeln so in ANTLR (v4) formulieren:
 :::
 
 \pause
@@ -251,8 +264,8 @@ expr : expr '*' expr
 # Linksrekursion
 
 ::: notes
-Normalerweise sind linksrekursive Grammatiken nicht mit einem LL-Parser behandelbar. Man muss die Linksrekursion manuell
-auflösen und die Grammatik umschreiben.
+Normalerweise sind linksrekursive Grammatiken nicht mit einem LL-Parser behandelbar.
+Man muss die Linksrekursion manuell auflösen und die Grammatik umschreiben.
 
 **Beispiel**:
 :::
@@ -263,7 +276,8 @@ expr : expr '*' expr | expr '+' expr | INT ;
 
 \bigskip
 
-[Diese linksrekursive Grammatik könnte man (unter Beachtung der Vorrangregeln) etwa so umformulieren:]{.notes}
+[Diese linksrekursive Grammatik könnte man (unter Beachtung der Vorrangregeln) etwa
+so umformulieren:]{.notes}
 
 ``` antlr
 expr     : addExpr ;
@@ -272,10 +286,11 @@ multExpr : INT ('*' INT)* ;
 ```
 
 ::: notes
-ANTLR (v4) kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere Versionen von ANTLR muss man die
-Rekursion manuell beseitigen.
+ANTLR (v4) kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere
+Versionen von ANTLR muss man die Rekursion manuell beseitigen.
 
-Vergleiche ["ALL(\*)" bzw. "Adaptive LL(\*)"](https://www.antlr.org/papers/allstar-techreport.pdf).
+Vergleiche ["ALL(\*)" bzw. "Adaptive
+LL(\*)"](https://www.antlr.org/papers/allstar-techreport.pdf).
 :::
 
 \bigskip
@@ -295,13 +310,14 @@ expM : expr '*' expr ;
 ::: notes
 # Assoziativität
 
-Die Eingabe `2^3^4` sollte als `2^(3^4)` geparst werden. [Analog sollte `a=b=c` in C als `a=(b=c)` verstanden
-werden.]{.notes}
+Die Eingabe `2^3^4` sollte als `2^(3^4)` geparst werden. [Analog sollte `a=b=c` in C
+als `a=(b=c)` verstanden werden.]{.notes}
 
 \bigskip
 
-Per Default werden Operatoren wie `+` in ANTLR *links-assoziativ* behandelt, d.h. die Eingabe `1+2+3` wird als `(1+2)+3`
-gelesen. Für *rechts-assoziative* Operatoren muss man ANTLR dies in der Grammatik mitteilen:
+Per Default werden Operatoren wie `+` in ANTLR *links-assoziativ* behandelt, d.h. die
+Eingabe `1+2+3` wird als `(1+2)+3` gelesen. Für *rechts-assoziative* Operatoren muss
+man ANTLR dies in der Grammatik mitteilen:
 
 ``` antlr
 expr : expr '^'<assoc=right> expr
@@ -309,9 +325,11 @@ expr : expr '^'<assoc=right> expr
      ;
 ```
 
-*Anmerkung*: Laut [Doku](https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md) gilt die Angabe
-`<assoc=right>` immer für die jeweilige Alternative und muss seit Version 4.2 an den Alternativen-Operator `|`
-geschrieben werden. In der Übergangsphase sei die Annotation an Tokenreferenzen noch zulässig, würde aber ignoriert?!
+*Anmerkung*: Laut
+[Doku](https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md) gilt die
+Angabe `<assoc=right>` immer für die jeweilige Alternative und muss seit Version 4.2
+an den Alternativen-Operator `|` geschrieben werden. In der Übergangsphase sei die
+Annotation an Tokenreferenzen noch zulässig, würde aber ignoriert?!
 :::
 
 # LL(k)-Parser
@@ -323,9 +341,10 @@ expr : ID '++'    // x++
 ```
 
 ::: notes
-Die obige Regel ist für einen LL(1)-Parser nicht deterministisch behandelbar, da die Alternativen mit dem selben Token
-beginnen (die Lookahead-Mengen überlappen sich). Entweder benötigt man zwei Lookahead-Tokens, also einen LL(2)-Parser,
-oder man muss die Regel in eine äquivalente LL(1)-Grammatik umschreiben:
+Die obige Regel ist für einen LL(1)-Parser nicht deterministisch behandelbar, da die
+Alternativen mit dem selben Token beginnen (die Lookahead-Mengen überlappen sich).
+Entweder benötigt man zwei Lookahead-Tokens, also einen LL(2)-Parser, oder man muss
+die Regel in eine äquivalente LL(1)-Grammatik umschreiben:
 :::
 
 \bigskip
@@ -339,10 +358,11 @@ expr : ID ('++' | '--') ;    // x++ oder x--
 # LL(k)-Parser: Implementierung mit Ringpuffer
 
 ::: notes
-Für einen größeren Lookahead benötigt man einen Puffer für die Token. Für einen Lookahead von $k$ Token (also einen
-LL(k)-Parser) würde man einen Puffer mit $k$ Plätzen anlegen und diesen wie einen Ringpuffer benutzen. Dabei ist `start`
-der Index des aktuellen Lookahead-Tokens. Über die neue Funktion `lookahead(1)` ist dieses aktuelle Lookahead-Token
-abrufbar.
+Für einen größeren Lookahead benötigt man einen Puffer für die Token. Für einen
+Lookahead von $k$ Token (also einen LL(k)-Parser) würde man einen Puffer mit $k$
+Plätzen anlegen und diesen wie einen Ringpuffer benutzen. Dabei ist `start` der Index
+des aktuellen Lookahead-Tokens. Über die neue Funktion `lookahead(1)` ist dieses
+aktuelle Lookahead-Token abrufbar.
 
 ``` python
 class Parser:
@@ -366,7 +386,7 @@ def lookahead(i):
     return lookahead[(start+i-1) % k]  # i==1: start
 ```
 
-[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 47]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 47]]{.origin}
 
 [[Tafel: Beispiel mit Ringpuffer: k=3 und "\[1,2,3,4,5\]"]{.ex}]{.slides}
 
@@ -392,10 +412,11 @@ def lookahead(i):
 :::
 
 ::: challenges
--   Wie kann man aus einer LL(1)-Grammatik einen LL(1)-Parser mit rekursivem Abstieg implementieren? Wie "übersetzt" man
-    dabei Token und Regeln?
+-   Wie kann man aus einer LL(1)-Grammatik einen LL(1)-Parser mit rekursivem Abstieg
+    implementieren? Wie "übersetzt" man dabei Token und Regeln?
 -   Wie geht man mit Alternativen um? Wie mit optionalen Subregeln?
--   Warum ist Linksrekursion i.A. bei LL-Parsern nicht erlaubt? Wie kann man Linksrekursion beseitigen?
+-   Warum ist Linksrekursion i.A. bei LL-Parsern nicht erlaubt? Wie kann man
+    Linksrekursion beseitigen?
 -   Wie kann man Vorrangregeln implementieren?
 -   Wann braucht man mehr als ein Token Lookahead? Geben Sie ein Beispiel an.
 :::

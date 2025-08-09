@@ -25,7 +25,8 @@ title: Optimierung und Datenflussanalyse
 
 ## Was ist Optimierung in Compilern?
 
-Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem Ziel,
+Verändern von Quellcode, Zwischencode oder Maschinencode eines Programms mit dem
+Ziel,
 
 -   Laufzeit,
 -   Speicherplatz oder
@@ -35,13 +36,15 @@ zu verbessern.
 
 ## Was ist machbar?
 
-Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder stromsparender.
+Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder
+stromsparender.
 
 Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.
 
 -   Heuristiken kommen zum Einsatz.
 
--   Der Code wird verbessert, nicht in jedem Fall optimiert, manchmal auch verschlechtert.
+-   Der Code wird verbessert, nicht in jedem Fall optimiert, manchmal auch
+    verschlechtert.
 
 -   Der Einsatz eines Debuggers ist meist nicht mehr möglich.
 
@@ -51,19 +54,22 @@ Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.
 
 -   möglichst keine nachteiligen Effekte erzeugen
 
-## Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit
+## Optimierung zur Übersetzungszeit vs. Optimierung zur Laufzeit
 
 -   Just-in-time-Compilierung (JIT), z. B. Java:
 
-    Fast alle Optimierungsmaßnahmen finden in der virtuellen Maschine zur Laufzeit statt.
+    Fast alle Optimierungsmaßnahmen finden in der virtuellen Maschine zur Laufzeit
+    statt.
 
 -   Ahead-of-time-Compilierung (AOT), z. B. C:
 
-    Der Compiler erzeugt Maschinencode, die Optimierung findet zur Übersetzungszeit statt.
+    Der Compiler erzeugt Maschinencode, die Optimierung findet zur Übersetzungszeit
+    statt.
 
 \bigskip
 
-Beide haben ihre eigenen Optimierungsmöglichkeiten, es gibt aber auch Methoden, die bei beiden einsetzbar sind.
+Beide haben ihre eigenen Optimierungsmöglichkeiten, es gibt aber auch Methoden, die
+bei beiden einsetzbar sind.
 
 ## Welcher Code wird optimiert?
 
@@ -71,9 +77,11 @@ Beide haben ihre eigenen Optimierungsmöglichkeiten, es gibt aber auch Methoden,
 
 -   Maschinenunabhängige Optimierung: Transformationen des Zwischencodes
 
--   Maschinenabhängige Optimierung: Transformationen des Assemblercodes oder Maschinencodes
+-   Maschinenabhängige Optimierung: Transformationen des Assemblercodes oder
+    Maschinencodes
 
-Viele Transformationen sind auf mehr als einer Ebene möglich. Wir wenden hier die meisten auf den Zwischencode an.
+Viele Transformationen sind auf mehr als einer Ebene möglich. Wir wenden hier die
+meisten auf den Zwischencode an.
 
 ## Welche Arten von Transformationen sind möglich?
 
@@ -83,7 +91,8 @@ Viele Transformationen sind auf mehr als einer Ebene möglich. Wir wenden hier d
 
 ## Basisblöcke und Flussgraphen
 
-**Def.:** Ein *Basisblock* ist eine Sequenz maximaler Länge von Anweisungen, die immer hintereinander ausgeführt werden.
+**Def.:** Ein *Basisblock* ist eine Sequenz maximaler Länge von Anweisungen, die
+immer hintereinander ausgeführt werden.
 
 Ein Sprungbefehl kann nur der letzte Befehl eines Basisblocks sein.
 
@@ -103,11 +112,12 @@ Hier entsteht ein Tafelbild.
 
 ## Häufig benutzte Strategie: Peephole-Optimierung
 
-Ein Fenster mit wenigen Zeilen Inhalt gleitet über den Quellcode, Zwischencode oder den Maschinencode. Der jeweils
-sichtbare Code wird mit Hilfe verschiedener Verfahren optimiert, wenn möglich.
+Ein Fenster mit wenigen Zeilen Inhalt gleitet über den Quellcode, Zwischencode oder
+den Maschinencode. Der jeweils sichtbare Code wird mit Hilfe verschiedener Verfahren
+optimiert, wenn möglich.
 
-Peephole-Optimierung ist zunächst ein lokales Verfahren, kann aber auch auf den gesamten Kontrollflussgraphen erweitert
-werden.
+Peephole-Optimierung ist zunächst ein lokales Verfahren, kann aber auch auf den
+gesamten Kontrollflussgraphen erweitert werden.
 
 =\> Anwendung von Graphalgorithmen!
 
@@ -131,7 +141,8 @@ Sei $s = 2^a + 2^b$ die Summe zweier Zweierpotenzen:
 
 \medskip
 
-Diese Umformungen können zusätzlich mittels Peephole-Optimierung in späteren Optimierungsphasen durchgeführt werden.
+Diese Umformungen können zusätzlich mittels Peephole-Optimierung in späteren
+Optimierungsphasen durchgeführt werden.
 
 # Maschinenunabhängige Optimierung
 
@@ -139,7 +150,8 @@ Diese Umformungen können zusätzlich mittels Peephole-Optimierung in späteren 
 
 -   lokal (= innerhalb eines Basisblocks), z. B. Peephole-Optimierung
 
-    Einige Strategien sind auch global einsetzbar (ohne die sog. Datenflussanalyse s. u.)
+    Einige Strategien sind auch global einsetzbar (ohne die sog. Datenflussanalyse s.
+    u.)
 
 -   global, braucht nicht-lokale Informationen
 
@@ -215,7 +227,8 @@ Hier werden sog. *DAG*s benötigt:
 
 Ein DAG *directed acyclic graph* ist ein gerichteter, kreisfreier Graph.
 
-DAGs werden für Berechnungen in Basisblöcken generiert, um gemeinsame Teilausdrücke zu erkennen.
+DAGs werden für Berechnungen in Basisblöcken generiert, um gemeinsame Teilausdrücke
+zu erkennen.
 
 *Bsp.:* a = (b + c) \* (b + c) / 2
 
@@ -251,7 +264,8 @@ DAGs werden für Berechnungen in Basisblöcken generiert, um gemeinsame Teilausd
 
     \bigskip
 
-Wenn auf *a* vor seiner nächsten Zuweisung nicht mehr lesend zugegriffen wird, kann *a* hier entfallen.
+Wenn auf *a* vor seiner nächsten Zuweisung nicht mehr lesend zugegriffen wird, kann
+*a* hier entfallen.
 
 # Globale Optimierung
 
@@ -303,8 +317,9 @@ Code Hoisting:
 
 ## Datenflussanalyse
 
-Die Datenflussanalyse (auf 3-Adress-Code) basiert auf dem Wissen der Verfügbarkeit von Variablen und Ausdrücken am
-Anfang oder Ende von Basisblöcken, und zwar für alle möglichen Programmläufe.
+Die Datenflussanalyse (auf 3-Adress-Code) basiert auf dem Wissen der Verfügbarkeit
+von Variablen und Ausdrücken am Anfang oder Ende von Basisblöcken, und zwar für alle
+möglichen Programmläufe.
 
 Man unterscheidet:
 
@@ -314,31 +329,38 @@ Man unterscheidet:
 
 In beiden Fällen gibt es zwei Varianten:
 
--   any analysis: Es wird die Vereinigung von Informationen benachbarter Block berücksichtigt.
+-   any analysis: Es wird die Vereinigung von Informationen benachbarter Block
+    berücksichtigt.
 
--   all analysis: Es wird die Schnittmenge von Informationen benachbarter Block berücksichtigt.
+-   all analysis: Es wird die Schnittmenge von Informationen benachbarter Block
+    berücksichtigt.
 
 ## Forward-any-analysis
 
-Diese Analyse wird zur Propagation von Konstanten und Variablen benutzt und bildet sukzessive Mengen von Zeilen mit
-Variablendefinitionen.
+Diese Analyse wird zur Propagation von Konstanten und Variablen benutzt und bildet
+sukzessive Mengen von Zeilen mit Variablendefinitionen.
 
 $$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$
 
-$out(B_i)$: alle Zeilennummern von Variablendefinitionen, die am Ende von $B_i$ gültig sind
+$out(B_i)$: alle Zeilennummern von Variablendefinitionen, die am Ende von $B_i$
+gültig sind
 
-$in(B_i)$: alle Zeilennummern von Variablendefinitionen, die am Ende von Vorgängerblöcken von $B_i$ gültig sind
+$in(B_i)$: alle Zeilennummern von Variablendefinitionen, die am Ende von
+Vorgängerblöcken von $B_i$ gültig sind
 
 $gen(B_i)$: alle Zeilennummern von letzten Variablendefinitionen in $B_i$
 
-$kill(B_i)$: alle Zeilennummern von Variablendefinitionen außerhalb von $B_i$, die in $B_i$ überschrieben werden
+$kill(B_i)$: alle Zeilennummern von Variablendefinitionen außerhalb von $B_i$, die in
+$B_i$ überschrieben werden
 
-Zunächst ist $in(B_1) = \emptyset$, danach ist $in(B_i) = \bigcup  out(B_j)$ mit $B_j$ ist Vorgänger von $B_i$.
+Zunächst ist $in(B_1) = \emptyset$, danach ist $in(B_i) = \bigcup  out(B_j)$ mit
+$B_j$ ist Vorgänger von $B_i$.
 
 ## Forward-all-analysis
 
-Diese Analyse wird zur Berechnung verfügbarer Ausdrücke der Form $x = y\ op\ z$ für die Eliminierung redundanter
-Berechnungen benutzt und bildet sukzessive Mengen von Ausdrücken.
+Diese Analyse wird zur Berechnung verfügbarer Ausdrücke der Form $x = y\ op\ z$ für
+die Eliminierung redundanter Berechnungen benutzt und bildet sukzessive Mengen von
+Ausdrücken.
 
 $$out(B_i) = gen(B_i) \cup (in(B_i) - kill(B_i))$$
 
@@ -348,14 +370,16 @@ $in(B_i)$: alle Ausdrücke, die am Anfang von $B_i$ verfügbar sind
 
 $gen(B_i)$: alle in $B_i$ berechneten Ausdrücke
 
-$kill(B_i)$: alle Ausdrücke $x\ op\ y$ mit einer Definition von $x$ oder $y$ in $B_i$ und $x\ op\ y$ ist nicht in $B_i$
+$kill(B_i)$: alle Ausdrücke $x\ op\ y$ mit einer Definition von $x$ oder $y$ in $B_i$
+und $x\ op\ y$ ist nicht in $B_i$
 
-Zunächst ist $gen(B_1) = \emptyset$, danach ist $in(B_i) = \bigcap  out(B_j)$ mit $B_j$ ist Vorgänger von $B_i$.
+Zunächst ist $gen(B_1) = \emptyset$, danach ist $in(B_i) = \bigcap  out(B_j)$ mit
+$B_j$ ist Vorgänger von $B_i$.
 
 ## Backward-any-analysis
 
-Diese Analyse dient der Ermittlung von lebenden und toten Variablen (für die Registerzuweisung) und bildet sukzessive
-Mengen von Variablen.
+Diese Analyse dient der Ermittlung von lebenden und toten Variablen (für die
+Registerzuweisung) und bildet sukzessive Mengen von Variablen.
 
 $$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$
 
@@ -363,17 +387,20 @@ $out(B_i)$: alle Variablen, die am Ende von $B_i$ lebendig sind
 
 $in(B_i)$: alle Variablen, die am Ende von Vorgängerblöcken von $B_i$ lebendig sind
 
-$gen(B_i)$: alle Variablen, deren erstes Vorkommen auf der echten Seite einer Zuweisung steht
+$gen(B_i)$: alle Variablen, deren erstes Vorkommen auf der echten Seite einer
+Zuweisung steht
 
 $kill(B_i)$: alle Variablen, denen in $B_i$ Werte zugewiesen werden.
 
-Zunächst ist $out(B_n) = \emptyset$, danach ist $out(B_i) = \bigcup in(B_j)$ mit $B_j$ ist Nachfolger von $B_i$.
+Zunächst ist $out(B_n) = \emptyset$, danach ist $out(B_i) = \bigcup in(B_j)$ mit
+$B_j$ ist Nachfolger von $B_i$.
 
 ## Backward-all-analysis
 
-Diese Analyse wird zur Berechnung von "very busy" Ausdrücken der Form $x = y\ op\ z$, die auf allen möglichen Wegen im
-Flussgraphen vom aktuellen Basisblock aus mindestens einmal benutzt werden. Ausdrücke sollten dort berechnet werden, wo
-sie very busy sind, um den Code kürzer zu machen.
+Diese Analyse wird zur Berechnung von "very busy" Ausdrücken der Form $x = y\ op\ z$,
+die auf allen möglichen Wegen im Flussgraphen vom aktuellen Basisblock aus mindestens
+einmal benutzt werden. Ausdrücke sollten dort berechnet werden, wo sie very busy
+sind, um den Code kürzer zu machen.
 
 $$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$
 
@@ -383,9 +410,11 @@ $in(B_i)$: alle Ausdrücke, die am Anfang von $B_i$ very busy sind
 
 $gen(B_i)$: alle in $B_i$ benutzen Ausdrücke
 
-$kill(B_i)$: alle Ausdrücke $x\ op\ y$, deren Operanden in $B_i$ nicht redefiniert werden.
+$kill(B_i)$: alle Ausdrücke $x\ op\ y$, deren Operanden in $B_i$ nicht redefiniert
+werden.
 
-Zunächst ist $out(B_n) = \emptyset$, danach ist $out(B_i) = \bigcap in(B_j)$ mit $B_j$ ist Nachfolger von $B_i$.
+Zunächst ist $out(B_n) = \emptyset$, danach ist $out(B_i) = \bigcap in(B_j)$ mit
+$B_j$ ist Nachfolger von $B_i$.
 
 # Maschinenabhängige Optimierung
 
@@ -436,8 +465,8 @@ Es wird ein Graph $G = (V, E)$ erzeugt mit
 $V = \lbrace v \ \vert \ v \text{ ist eine benötigte Variable} \rbrace$ und
 $E = \lbrace (v_1, v_2)\ \vert \ v_1  \text{ und } v_2 \text{ sind zur selben Zeit "lebendig"} \rbrace$
 
-Heuristisch wird jetzt die minimale Anzahl von Farben für Knoten bestimmt, bei der benachbarte Knoten nicht dieselbe
-Farbe bekommen.
+Heuristisch wird jetzt die minimale Anzahl von Farben für Knoten bestimmt, bei der
+benachbarte Knoten nicht dieselbe Farbe bekommen.
 
 =\> Das Ergebnis ist die Zahl der benötigten Register.
 
@@ -445,8 +474,8 @@ Farbe bekommen.
 
 Registerinhalte temporär in den Speicher auslagern ("*Spilling*").
 
-Kandidaten dafür werden mit Heuristiken gefunden, z. B. Register mit vielen Konflikten (= Kanten) oder Register mit
-selten genutzten Variablen.
+Kandidaten dafür werden mit Heuristiken gefunden, z. B. Register mit vielen
+Konflikten (= Kanten) oder Register mit selten genutzten Variablen.
 
 In Schleifen genutzte Variablen werden eher nicht ausgelagert.
 
@@ -454,12 +483,14 @@ In Schleifen genutzte Variablen werden eher nicht ausgelagert.
 
 ## Energieverbrauch verschiedener Maschinenbefehle
 
-Maschinenoperationen, die nur auf Registern arbeiten, verbrauchen die wenigste Energie.
+Maschinenoperationen, die nur auf Registern arbeiten, verbrauchen die wenigste
+Energie.
 
-Operationen, die nur lesend auf Speicherzellen zugreifen, verbrauchen ca. ein Drittel mehr Energie.
+Operationen, die nur lesend auf Speicherzellen zugreifen, verbrauchen ca. ein Drittel
+mehr Energie.
 
-Operationen, die Speicherzellen beschreiben, benötigen zwei Drittel mehr Energie als die Operationen ausschließlich auf
-Register.
+Operationen, die Speicherzellen beschreiben, benötigen zwei Drittel mehr Energie als
+die Operationen ausschließlich auf Register.
 
 ## Energieeinsparung durch laufzeitbezogene Optimierung
 
@@ -471,18 +502,22 @@ Umgekehrt: Energiebezogene Optimierung führt in der Regel zu kürzeren Laufzeit
 
 ## Prozessorspannung variieren
 
-Viele Prozessoren ermöglichen es, die Betriebsspannung per Maschinenbefehl zu verändern.
+Viele Prozessoren ermöglichen es, die Betriebsspannung per Maschinenbefehl zu
+verändern.
 
-Eine höhere Spannung bewirkt eine proportionale Steigerung der Prozessorgeschwindigkeit und des fließenden Stroms, aber
-einen quadratischen Anstieg des Energieverbrauchs. $(P = U \times I, U = R \times I)$
+Eine höhere Spannung bewirkt eine proportionale Steigerung der
+Prozessorgeschwindigkeit und des fließenden Stroms, aber einen quadratischen Anstieg
+des Energieverbrauchs. $(P = U \times I, U = R \times I)$
 
 Folgendes kann man ausnutzen:
 
-Die Verringerung der Spannung um 20% führt zu einer um 20% geringeren Prozessorgeschwindigkeit, d. h. das Programm
-braucht 25% mehr Zeit, verbraucht aber 36% $(1-(1-0,2)^2)$ weniger Energie.
+Die Verringerung der Spannung um 20% führt zu einer um 20% geringeren
+Prozessorgeschwindigkeit, d. h. das Programm braucht 25% mehr Zeit, verbraucht aber
+36% $(1-(1-0,2)^2)$ weniger Energie.
 
-=\> Wenn das Programm durch Optimierung um 25% schneller wird und die Prozessorspannung um 20% verringert wird,
-verändert sich die Laufzeit des Programms nicht, man spart aber 36% Energie.
+=\> Wenn das Programm durch Optimierung um 25% schneller wird und die
+Prozessorspannung um 20% verringert wird, verändert sich die Laufzeit des Programms
+nicht, man spart aber 36% Energie.
 
 # Wrap-Up
 

@@ -4,12 +4,13 @@ title: "SymbTab2: Funktionen"
 ---
 
 ::: tldr
-Eine Funktion sind selbst ein Symbol, welches in einem Scope gilt und entsprechend in der Symboltabelle eingetragen
-wird. Darüber hinaus bildet sie einen neuen verschachtelten Scope, in dem die Funktionsparameter und der Funktionskörper
+Eine Funktion sind selbst ein Symbol, welches in einem Scope gilt und entsprechend in
+der Symboltabelle eingetragen wird. Darüber hinaus bildet sie einen neuen
+verschachtelten Scope, in dem die Funktionsparameter und der Funktionskörper
 definiert werden müssen.
 
-Entsprechend müssen die Strukturen für die Symboltabellen sowie das Eintragen und das Auflösen von Symbolen erweitert
-werden.
+Entsprechend müssen die Strukturen für die Symboltabellen sowie das Eintragen und das
+Auflösen von Symbolen erweitert werden.
 :::
 
 ::: youtube
@@ -45,29 +46,33 @@ void g(int z){}
 ::: notes
 ## Behandlung von Funktionsdefinitionen
 
--   Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine Variable, eine Funktion, ... handelt.
-    Alternativ eine eigene Klasse ableiten ...
--   Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion definiert wird.
--   Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die Parameter.
--   Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den Rückgabetypen.
+-   Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine
+    Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ...
+-   Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in
+    dem die Funktion definiert wird.
+-   Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die
+    Parameter.
+-   Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den
+    Rückgabetypen.
 -   Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt.
--   Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der Funktion angelegt and entsprechend
-    als Parameter gekennzeichnet.
+-   Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der
+    Funktion angelegt and entsprechend als Parameter gekennzeichnet.
 
 ## Behandlung von Funktionsaufrufen
 
--   Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem die Funktion aufgerufen wird und
-    wird als Aufruf gekennzeichnet.
--   Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die aktuellen Parameter.
--   Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben) und ein Verweis darauf in der
-    Symboltabelle gespeichert.
+-   Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in
+    dem die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet.
+-   Der Symboltabelleneintrag für den Funktionsnamen enthält Verweise auf die
+    aktuellen Parameter.
+-   Die Definition der Funktion wird in den zugänglichen Scopes gesucht (wie oben)
+    und ein Verweis darauf in der Symboltabelle gespeichert.
 :::
 
 # Erweiterung des Klassendiagramms für Funktions-Scopes
 
 ![](images/functionscopesuml.png){width="80%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
+[Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
 
 # Funktionen sind Symbole *und* Scopes
 
@@ -151,18 +156,20 @@ def exitCall(Parser.CallContext ctx):
         error(name + " is not a function")
 ```
 
-[*Anmerkung*: Um den Code auf die Folie zu bekommen, ist dies wieder ein Mix aus Java und Python geworden. Sry
-;)]{.notes}
+[*Anmerkung*: Um den Code auf die Folie zu bekommen, ist dies wieder ein Mix aus Java
+und Python geworden. Sry ;)]{.notes}
 :::
 :::::
 
 ::: notes
-Im Vergleich zu den einfachen *nested scopes* kommt hier nur ein weiterer Scope für den Funktionskopf dazu. Dieser
-spielt eine Doppelrolle: Er ist sowohl ein Symbol (welches im Elternscope bekannt ist) als auch ein eigener (lokaler)
-Scope für die Funktionsparameter.
+Im Vergleich zu den einfachen *nested scopes* kommt hier nur ein weiterer Scope für
+den Funktionskopf dazu. Dieser spielt eine Doppelrolle: Er ist sowohl ein Symbol
+(welches im Elternscope bekannt ist) als auch ein eigener (lokaler) Scope für die
+Funktionsparameter.
 
-Um später im Interpreter eine Funktion tatsächlich auswerten zu können, muss im Scope der Funktion zusätzlich der
-AST-Knoten der Funktionsdefinition gespeichert werden (weiteres Feld/Attribut in `Function`)!
+Um später im Interpreter eine Funktion tatsächlich auswerten zu können, muss im Scope
+der Funktion zusätzlich der AST-Knoten der Funktionsdefinition gespeichert werden
+(weiteres Feld/Attribut in `Function`)!
 :::
 
 # Wrap-Up
@@ -181,7 +188,8 @@ AST-Knoten der Funktionsdefinition gespeichert werden (weiteres Feld/Attribut in
 :::
 
 ::: outcomes
--   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit einem Listener
+-   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit
+    einem Listener
 -   k3: Attribute von Klassen und Strukturen auflösen
 :::
 
@@ -190,10 +198,14 @@ Diskutieren Sie folgende Fragen:
 
 -   Warum werden überhaupt Symboltabellen eingesetzt?
 -   Warum muss man zwischen Deklaration und Definition unterscheiden?
--   Erklären Sie die Verbindung einer Symboltabelle zu den einzelnen Phasen einer Compiler-Pipeline.
+-   Erklären Sie die Verbindung einer Symboltabelle zu den einzelnen Phasen einer
+    Compiler-Pipeline.
 -   Wo liegen die Grenzen der semantischen Analyse?
--   Warum kann man im Allgemeinen nicht die Symboltabellen nutzen, um die Werte von Symbolen mit zu speichern?
+-   Warum kann man im Allgemeinen nicht die Symboltabellen nutzen, um die Werte von
+    Symbolen mit zu speichern?
 -   Wieso sind Funktionen Scope und Symbol gleichzeitig?
--   Skizzieren Sie für eine Funktionsdeklaration mit Parametern die resultierende Symboltabelle.
--   Erklären Sie, wie man beim Funktionsaufruf vorgehen würde. Werden dabei Einträge in der Symboltabelle erzeugt?
+-   Skizzieren Sie für eine Funktionsdeklaration mit Parametern die resultierende
+    Symboltabelle.
+-   Erklären Sie, wie man beim Funktionsaufruf vorgehen würde. Werden dabei Einträge
+    in der Symboltabelle erzeugt?
 :::

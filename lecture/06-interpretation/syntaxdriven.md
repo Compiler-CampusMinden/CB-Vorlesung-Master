@@ -4,31 +4,36 @@ title: Syntaxgesteuerte Interpreter
 ---
 
 ::: tldr
-Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen Ergebnisse:
+Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen
+Ergebnisse:
 
 ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
 
-|     | Phase                          | Ergebnis                                                        |
-|:----|:-------------------------------|:----------------------------------------------------------------|
-| 0   | Lexer/Parser                   | AST                                                             |
-| 1   | Semantische Analyse, Def-Phase | Symboltabelle (Definitionen), Verknüpfung Scopes mit AST-Knoten |
-| 2   | Semantische Analyse, Ref-Phase | Prüfung auf nicht definierte Referenzen                         |
-| 3   | Interpreter                    | Abarbeitung, Nutzung von AST und Symboltabelle                  |
+|  | Phase | Ergebnis |
+|:----|:--------------------------|:----------------------------------------------------|
+| 0 | Lexer/Parser | AST |
+| 1 | Semantische Analyse, Def-Phase | Symboltabelle (Definitionen), Verknüpfung Scopes mit AST-Knoten |
+| 2 | Semantische Analyse, Ref-Phase | Prüfung auf nicht definierte Referenzen |
+| 3 | Interpreter | Abarbeitung, Nutzung von AST und Symboltabelle |
 
-Das Erzeugen der Symboltabelle wird häufig in zwei Phasen aufgeteilt: Zunächst werden die Definitionen abgearbeitet und
-in der zweiten Phase wird noch einmal über den AST iteriert und die Referenzen werden geprüft. Dies hat den Vorteil,
-dass man mit Vorwärtsreferenzen arbeiten kann ...
+Das Erzeugen der Symboltabelle wird häufig in zwei Phasen aufgeteilt: Zunächst werden
+die Definitionen abgearbeitet und in der zweiten Phase wird noch einmal über den AST
+iteriert und die Referenzen werden geprüft. Dies hat den Vorteil, dass man mit
+Vorwärtsreferenzen arbeiten kann ...
 
-Für die semantische Analyse kann man gut mit Listenern arbeiten, für den Interpreter werden oft Visitors eingesetzt.
+Für die semantische Analyse kann man gut mit Listenern arbeiten, für den Interpreter
+werden oft Visitors eingesetzt.
 
-Die einfachste Form von Interpretern sind die "syntaxgesteuerten Interpreter". Durch den Einsatz von attributierten
-Grammatiken und eingebetteten Aktionen kann in einfachen Fällen der Programmcode bereits beim Parsen interpretiert
-werden, d.h. nach dem Parsen steht das Ergebnis fest.
+Die einfachste Form von Interpretern sind die "syntaxgesteuerten Interpreter". Durch
+den Einsatz von attributierten Grammatiken und eingebetteten Aktionen kann in
+einfachen Fällen der Programmcode bereits beim Parsen interpretiert werden, d.h. nach
+dem Parsen steht das Ergebnis fest.
 
-Normalerweise traversiert man in Interpretern aber den AST, etwa mit dem Listener- oder Visitor-Pattern. Die in dieser
-Sitzung gezeigten einfachen Beispiele der syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung
-mit dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber zusätzlich noch Speicherstrukturen,
-die wir in [AST-basierte Interpreter:
+Normalerweise traversiert man in Interpretern aber den AST, etwa mit dem Listener-
+oder Visitor-Pattern. Die in dieser Sitzung gezeigten einfachen Beispiele der
+syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung mit
+dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber
+zusätzlich noch Speicherstrukturen, die wir in [AST-basierte Interpreter:
 Basics](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part1.md)
 und [AST-basierte Interpreter: Funktionen und
 Klassen](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part2.md)
@@ -44,9 +49,9 @@ betrachten.
 ![](images/interpreter.png){width="60%"}
 
 ::: notes
-Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es wird kein Code erzeugt, stattdessen
-führt der Interpreter die Anweisungen im AST bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt
-werden.
+Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es
+wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST bzw.
+IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
 
 Es gibt verschiedene Varianten, beispielsweise:
 :::
@@ -58,8 +63,8 @@ Es gibt verschiedene Varianten, beispielsweise:
 
     ::: notes
     -   Einfachste Variante, wird direkt im Parser mit abgearbeitet
-    -   Keine Symboltabellen, d.h. auch keine Typprüfung oder Vorwärtsdeklarationen o.ä. (d.h. erlaubt nur
-        vergleichsweise einfache Sprachen)
+    -   Keine Symboltabellen, d.h. auch keine Typprüfung oder Vorwärtsdeklarationen
+        o.ä. (d.h. erlaubt nur vergleichsweise einfache Sprachen)
     -   Beispiel: siehe nächste Folie
     :::
 
@@ -73,21 +78,26 @@ Es gibt verschiedene Varianten, beispielsweise:
 -   Stack-basierte Interpreter
 
     ::: notes
-    -   Simuliert eine *Stack Machine*, d.h. hält alle (temporären) Werte auf einem Stack
-    -   Arbeitet typischerweise auf bereits stark vereinfachtem Zwischencode (IR), etwa Bytecode
+    -   Simuliert eine *Stack Machine*, d.h. hält alle (temporären) Werte auf einem
+        Stack
+    -   Arbeitet typischerweise auf bereits stark vereinfachtem Zwischencode (IR),
+        etwa Bytecode
     :::
 
 -   Register-basierte Interpreter
 
     ::: notes
-    -   Simuliert eine *Register Machine*, d.h. hält alle (temporären) Werte in virtuellen Prozessor-Registern
-    -   Arbeitet typischerweise auf bereits stark vereinfachtem Zwischencode (IR), etwa Bytecode
+    -   Simuliert eine *Register Machine*, d.h. hält alle (temporären) Werte in
+        virtuellen Prozessor-Registern
+    -   Arbeitet typischerweise auf bereits stark vereinfachtem Zwischencode (IR),
+        etwa Bytecode
     :::
 
 ::: notes
-Weiterhin kann man Interpreter danach unterscheiden, ob sie interaktiv sind oder nicht. Python kann beispielsweise
-direkt komplette Dateien verarbeiten oder interaktiv Eingaben abarbeiten. Letztlich kommen dabei aber die oben
-dargestellten Varianten zum Einsatz.
+Weiterhin kann man Interpreter danach unterscheiden, ob sie interaktiv sind oder
+nicht. Python kann beispielsweise direkt komplette Dateien verarbeiten oder
+interaktiv Eingaben abarbeiten. Letztlich kommen dabei aber die oben dargestellten
+Varianten zum Einsatz.
 :::
 
 # Syntaxgesteuerte Interpreter: Attributierte Grammatiken
@@ -105,26 +115,32 @@ DIGIT : [0-9] ;
 ```
 
 ::: notes
-Die einfachste Form des Interpreters wird direkt beim Parsen ausgeführt und kommt ohne AST aus. Der Nachteil ist, dass
-der AST dabei nicht vorverarbeitet werden kann, insbesondere entfallen semantische Prüfungen weitgehend.
+Die einfachste Form des Interpreters wird direkt beim Parsen ausgeführt und kommt
+ohne AST aus. Der Nachteil ist, dass der AST dabei nicht vorverarbeitet werden kann,
+insbesondere entfallen semantische Prüfungen weitgehend.
 
-Über `returns [int v]` fügt man der Regel `expr` ein Attribut `v` (Integer) hinzu, welches man im jeweiligen Kontext
-abfragen bzw. setzen kann (agiert als Rückgabewert der generierten Methode). Auf diesen Wert kann in den Aktionen mit
-`$v` zugegriffen werden.
+Über `returns [int v]` fügt man der Regel `expr` ein Attribut `v` (Integer) hinzu,
+welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert als Rückgabewert
+der generierten Methode). Auf diesen Wert kann in den Aktionen mit `$v` zugegriffen
+werden.
 
-Da in den Alternativen der Regel `expr` jeweils zwei "Aufrufe" dieser Regel auftauchen, muss man per "`e1=expr`" bzw.
-"`e2=expr`" eindeutige Namen für die "Aufrufe" vergeben, hier `e1` und `e2`.
+Da in den Alternativen der Regel `expr` jeweils zwei "Aufrufe" dieser Regel
+auftauchen, muss man per "`e1=expr`" bzw. "`e2=expr`" eindeutige Namen für die
+"Aufrufe" vergeben, hier `e1` und `e2`.
 :::
 
 # Eingebettete Aktionen in ANTLR I
 
 ::: notes
-Erinnerung: ANTLR generiert einen LL-Parser, d.h. es wird zu jeder Regel eine entsprechende Methode generiert.
+Erinnerung: ANTLR generiert einen LL-Parser, d.h. es wird zu jeder Regel eine
+entsprechende Methode generiert.
 
-Analog zum Rückgabewert der Regel (Methode) `expr()` kann auf die Eigenschaften der Token und Sub-Regeln zugegriffen
-werden: `$name.eigenschaft`. Dabei gibt es bei Token Eigenschaften wie `text` (gematchter Text bei Token), `type` (Typ
-eines Tokens), `int` (Integerwert eines Tokens, entspricht `Integer.valueOf($Token.text)`). Parser-Regeln haben u.a. ein
-`text`-Attribut und ein spezielles Kontext-Objekt (`ctx`).
+Analog zum Rückgabewert der Regel (Methode) `expr()` kann auf die Eigenschaften der
+Token und Sub-Regeln zugegriffen werden: `$name.eigenschaft`. Dabei gibt es bei Token
+Eigenschaften wie `text` (gematchter Text bei Token), `type` (Typ eines Tokens),
+`int` (Integerwert eines Tokens, entspricht `Integer.valueOf($Token.text)`).
+Parser-Regeln haben u.a. ein `text`-Attribut und ein spezielles Kontext-Objekt
+(`ctx`).
 
 Die allgemeine Form lautet:
 :::
@@ -132,7 +148,8 @@ Die allgemeine Form lautet:
     rulename[args] returns [retvals] locals [localvars] : ... ;
 
 ::: notes
-Dabei werden die in "`[...]`" genannten Parameter mit Komma getrennt (Achtung: Abhängig von Zielsprache!).
+Dabei werden die in "`[...]`" genannten Parameter mit Komma getrennt (Achtung:
+Abhängig von Zielsprache!).
 
 Beispiel:
 :::
@@ -162,20 +179,22 @@ DIGIT : [0-9] ;
 ```
 
 ::: notes
-Mit `@members { ... }` können im generierten Parser weitere Attribute angelegt werden, die in den Regeln normal genutzt
-werden können.
+Mit `@members { ... }` können im generierten Parser weitere Attribute angelegt
+werden, die in den Regeln normal genutzt werden können.
 
-Die mit `@after` markierte Aktion wird am Ende der Regel `list` ausgeführt. Analog existiert `@init`.
+Die mit `@after` markierte Aktion wird am Ende der Regel `list` ausgeführt. Analog
+existiert `@init`.
 :::
 
 ::: notes
 # ANTLR: Traversierung des AST und Auslesen von Kontext-Objekten
 
-Mit dem obigen Beispiel, welches dem Einsatz einer L-attributierten SDD in ANTLR entspricht, können einfache Aufgaben
-bereits beim Parsen erledigt werden.
+Mit dem obigen Beispiel, welches dem Einsatz einer L-attributierten SDD in ANTLR
+entspricht, können einfache Aufgaben bereits beim Parsen erledigt werden.
 
-Für den etwas komplexeren Einsatz von attributierten Grammatiken kann man die von ANTLR erzeugten Kontext-Objekte für
-die einzelnen AST-Knoten nutzen und über den AST mit dem Visitor- oder dem Listener-Pattern iterieren.
+Für den etwas komplexeren Einsatz von attributierten Grammatiken kann man die von
+ANTLR erzeugten Kontext-Objekte für die einzelnen AST-Knoten nutzen und über den AST
+mit dem Visitor- oder dem Listener-Pattern iterieren.
 
 Die Techniken sollen im Folgenden kurz vorgestellt werden.
 :::
@@ -199,19 +218,21 @@ expr : e '*' e ;
 ![](images/ParserRuleContext.png)
 
 ::: notes
-Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt zurück. Darüber kann man das/die
-Kontextobjekt(e) der Sub-Regeln abfragen.
+Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt zurück.
+Darüber kann man das/die Kontextobjekt(e) der Sub-Regeln abfragen.
 
-Die Regel `s()` liefert entsprechend ein `SContext`-Objekt und die Regel `expr()` liefert ein `ExprContext`-Objekt
-zurück.
+Die Regel `s()` liefert entsprechend ein `SContext`-Objekt und die Regel `expr()`
+liefert ein `ExprContext`-Objekt zurück.
 
 In der Aktion fragt man das Kontextobjekt über `ctx` ab.
 
-Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein einziges Kontextobjekt (statt einer Liste) zurück.
+Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein einziges
+Kontextobjekt (statt einer Liste) zurück.
 
-**Anmerkung**: ANTLR generiert nur dann Felder für die Regel-Elemente im Kontextobjekt, wenn diese in irgendeiner Form
-referenziert werden. Dies kann beispielsweise durch Benennung (Definition eines Labels, siehe nächste Folie) oder durch
-Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
+**Anmerkung**: ANTLR generiert nur dann Felder für die Regel-Elemente im
+Kontextobjekt, wenn diese in irgendeiner Form referenziert werden. Dies kann
+beispielsweise durch Benennung (Definition eines Labels, siehe nächste Folie) oder
+durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 :::
 
 ::: notes
@@ -234,9 +255,10 @@ public static class ReturnContext extends StatContext {
 public static class BreakContext extends StatContext { ... }
 ```
 
-Mit `value=e` wird der Aufruf der Regel `e` mit dem Label `value` belegt, d.h. man kann mit `$e.text` oder `$value.text`
-auf das `text`-Attribut von `e` zugreifen. Falls es in einer Produktion mehrere Aufrufe einer anderen Regel gibt,
-**muss** man für den Zugriff auf die Attribute eindeutige Label vergeben.
+Mit `value=e` wird der Aufruf der Regel `e` mit dem Label `value` belegt, d.h. man
+kann mit `$e.text` oder `$value.text` auf das `text`-Attribut von `e` zugreifen.
+Falls es in einer Produktion mehrere Aufrufe einer anderen Regel gibt, **muss** man
+für den Zugriff auf die Attribute eindeutige Label vergeben.
 
 Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 :::
@@ -250,12 +272,13 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 :::
 
 ::: notes
-ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und leere Basisimplementierung). Beim
-Traversieren mit dem Default-`ParseTreeWalker` wird der Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt
-in bzw. beim Austritt aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt aufgerufen.
+ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und leere
+Basisimplementierung). Beim Traversieren mit dem Default-`ParseTreeWalker` wird der
+Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in bzw. beim Austritt
+aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt aufgerufen.
 
-Damit kann man die Grammatik "für sich" halten, d.h. unabhängig von einer konkreten Zielsprache und die Aktionen über
-die Listener (oder Visitors, s.u.) ausführen.
+Damit kann man die Grammatik "für sich" halten, d.h. unabhängig von einer konkreten
+Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.) ausführen.
 :::
 
 ``` {.antlr size="footnotesize"}
@@ -268,12 +291,14 @@ expr : e1=expr '*' e2=expr      # MULT
 \smallskip
 
 ::: notes
-ANTLR kann zu dieser Grammatik einen passenden Listener (Interface `calcListener`) generieren. Weiterhin generiert ANTLR
-eine leere Basisimplementierung (Klasse `calcBaseListener`):
+ANTLR kann zu dieser Grammatik einen passenden Listener (Interface `calcListener`)
+generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
+`calcBaseListener`):
 
 ![](images/ParseTreeListener.png)
 
-Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert die Methoden, die man benötigt.
+Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert die
+Methoden, die man benötigt.
 :::
 
 ``` {.java size="footnotesize"}
@@ -334,9 +359,10 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/l
 :::
 
 ::: notes
-ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren (Interface und leere Basisimplementierung). Hier
-muss man allerdings selbst für eine geeignete Traversierung des Parse-Trees sorgen. Dafür hat man mehr Freiheiten im
-Vergleich zum Listener-Pattern, insbesondere im Hinblick auf Rückgabewerte.
+ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren (Interface
+und leere Basisimplementierung). Hier muss man allerdings selbst für eine geeignete
+Traversierung des Parse-Trees sorgen. Dafür hat man mehr Freiheiten im Vergleich zum
+Listener-Pattern, insbesondere im Hinblick auf Rückgabewerte.
 :::
 
 ``` {.antlr size="footnotesize"}
@@ -349,13 +375,15 @@ expr : e1=expr '*' e2=expr      # MULT
 \bigskip
 
 ::: notes
-ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface `calcVisitor<T>`) generieren. Weiterhin generiert
-ANTLR eine leere Basisimplementierung (Klasse `calcBaseVisitor<T>`):
+ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface `calcVisitor<T>`)
+generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
+`calcBaseVisitor<T>`):
 
 ![](images/ParseTreeVisitor.png)
 
-Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt die Methoden, die man benötigt. Wichtig ist,
-dass man selbst für das "Besuchen" der Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode `visit()`).
+Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt die
+Methoden, die man benötigt. Wichtig ist, dass man selbst für das "Besuchen" der
+Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode `visit()`).
 :::
 
 ``` {.java size="footnotesize"}
@@ -406,7 +434,8 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/l
 \smallskip
 
 -   Syntaxgesteuerter Interpreter (attributierte Grammatiken)
--   Beispiel ANTLR: Eingebettete Aktionen, Kontextobjekte, Visitors/Listeners (AST-Traversierung)
+-   Beispiel ANTLR: Eingebettete Aktionen, Kontextobjekte, Visitors/Listeners
+    (AST-Traversierung)
 
 ::: readings
 -   @Nystrom2021: Kapitel: A Tree-Walk Interpreter
@@ -417,6 +446,8 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/l
 
 ::: outcomes
 -   k3: Attribute und eingebettete Aktionen in Bison und ANTLR
--   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns
--   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns
+-   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des
+    Listener-Patterns
+-   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des
+    Visitor-Patterns
 :::

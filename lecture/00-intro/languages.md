@@ -4,12 +4,13 @@ title: Bandbreite der Programmiersprachen
 ---
 
 ::: tldr
-Am Beispiel des Abzählreims "99 Bottles of Beer" werden (ganz kurz) verschiedene Programmiersprachen betrachtet. Jede
-der Sprachen hat ihr eigenes Sprachkonzept (Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene
-Strategie zur Speicherverwaltung und Abarbeitung.
+Am Beispiel des Abzählreims "99 Bottles of Beer" werden (ganz kurz) verschiedene
+Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept
+(Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene Strategie
+zur Speicherverwaltung und Abarbeitung.
 
-Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich, dass Compiler teilweise sehr
-unterschiedliche Konzepte "verstehen" müssen.
+Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich, dass
+Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
 :::
 
 ::: youtube
@@ -18,20 +19,25 @@ unterschiedliche Konzepte "verstehen" müssen.
 
 # 99 Bottles of Beer
 
-> 99 bottles of beer on the wall, 99 bottles of beer. Take one down and pass it around, 98 bottles of beer on the wall.
+> 99 bottles of beer on the wall, 99 bottles of beer. Take one down and pass it
+> around, 98 bottles of beer on the wall.
 >
-> 98 bottles of beer on the wall, 98 bottles of beer. Take one down and pass it around, 97 bottles of beer on the wall.
+> 98 bottles of beer on the wall, 98 bottles of beer. Take one down and pass it
+> around, 97 bottles of beer on the wall.
 >
 > \[...\]
 >
-> 2 bottles of beer on the wall, 2 bottles of beer. Take one down and pass it around, 1 bottle of beer on the wall.
+> 2 bottles of beer on the wall, 2 bottles of beer. Take one down and pass it around,
+> 1 bottle of beer on the wall.
 >
-> 1 bottle of beer on the wall, 1 bottle of beer. Take one down and pass it around, no more bottles of beer on the wall.
+> 1 bottle of beer on the wall, 1 bottle of beer. Take one down and pass it around,
+> no more bottles of beer on the wall.
 >
-> No more bottles of beer on the wall, no more bottles of beer. Go to the store and buy some more, 99 bottles of beer on
-> the wall.
+> No more bottles of beer on the wall, no more bottles of beer. Go to the store and
+> buy some more, 99 bottles of beer on the wall.
 
-[nach ["Lyrics of the song 99 Bottles of Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on
+[nach ["Lyrics of the song 99 Bottles of
+Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on
 99-bottles-of-beer.net]{.origin}
 
 # Imperativ, Hardwarenah: C
@@ -56,7 +62,8 @@ unterschiedliche Konzepte "verstehen" müssen.
  }
 ```
 
-[["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein on 99-bottles-of-beer.net]{.origin}
+[["Language C"](https://www.99-bottles-of-beer.net/language-c-116.html) by Bill Wein
+on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 -   Imperativ
@@ -94,8 +101,8 @@ class bottles {
 }
 ```
 
-[["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean Russell on
-99-bottles-of-beer.net]{.origin}
+[["Language Java"](https://www.99-bottles-of-beer.net/language-java-4.html) by Sean
+Russell on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 -   Imperativ
@@ -136,15 +143,16 @@ bottles(X) :-
     bottles(NX).
 ```
 
-[["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by M@ on
-99-bottles-of-beer.net]{.origin}
+[["Language Prolog"](https://www.99-bottles-of-beer.net/language-prolog-965.html) by
+M@ on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 -   Deklarativ
 
 -   Logisch: Definition von Fakten und Regeln; eingebautes Beweissystem
 
--   Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme, ...
+-   Einsatz: Theorem-Beweisen, Natural Language Programming (NLP), Expertensysteme,
+    ...
 :::
 
 # Funktional: Haskell
@@ -164,8 +172,8 @@ verse n   = bottles n ++ " of beer on the wall, " ++ bottles n ++ " of beer.\n"
 main      = mapM (putStrLn . verse) [99,98..0]
 ```
 
-[["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html) by Iavor on
-99-bottles-of-beer.net]{.origin}
+[["Language Haskell"](https://www.99-bottles-of-beer.net/language-haskell-1070.html)
+by Iavor on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 -   Deklarativ
@@ -187,15 +195,17 @@ main      = mapM (putStrLn . verse) [99,98..0]
 
 ![](images/screenshot_brainfuck_99bottles.png){width="15%"}
 
-[Screenshot of ["Language Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal Wojciech
-Tarnowski on 99-bottles-of-beer.net]{.origin}
+[Screenshot of ["Language
+Brainfuck"](https://99-bottles-of-beer.net/language-brainfuck-2542.html) by Michal
+Wojciech Tarnowski on 99-bottles-of-beer.net]{.origin}
 
 ::: notes
 -   Imperativ
 
 -   Feldbasiert (analog zum Band der Turingmaschine)
 
--   8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe, Sprungbefehle
+-   8 Befehle: Zeiger und Zellen inkrementieren/dekrementieren, Aus- und Eingabe,
+    Sprungbefehle
 :::
 
 # Programmiersprache Lox
@@ -231,8 +241,9 @@ Tarnowski on 99-bottles-of-beer.net]{.origin}
 
 -   (Kleine) Standardbibliothek eingebaut
 
-Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem Beispiel Themen wie
-Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren :)
+Die Sprache ähnelt stark anderen modernen Sprachen und ist gut geeignet, um an ihrem
+Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studieren
+:)
 :::
 
 # Wrap-Up
