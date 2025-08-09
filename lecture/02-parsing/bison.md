@@ -1,7 +1,6 @@
 ---
-title: "Bison (Parsergenerator)"
+title: Bison (Parsergenerator)
 ---
-
 
 -- Vortragsthema -- (gehört zu [Flex: Lexer generieren](../01-lexing/flex.md))
 

@@ -1,35 +1,39 @@
 ---
-title: "Blatt 01: CFG, LL"
-author: "BC George, Carsten Gips (HSBI)"
+author: BC George, Carsten Gips (HSBI)
 no_beamer: true
+title: "Blatt 01: CFG, LL"
 ---
-
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  sheet01.md  -o xxx.md  -->
-
 
 # A1.1: Grammatik
 
-Erstellen Sie eine Grammatik für [**Mini-Python**].
+Erstellen Sie eine Grammatik für
+[**Mini-Python**](https://github.com/Compiler-CampusMinden/Mini-Python-Builder).
 
-Der in der [Dokumentation] definierte [syntaktische] und [semantische]
-Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden.
-Dabei ist die Funktionalität wie in Python mit folgenden Ausnahmen:
+Der in der
+[Dokumentation](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs)
+definierte
+[syntaktische](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/syntax_definition.md)
+und
+[semantische](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/semantic_definition.md)
+Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden. Dabei ist die
+Funktionalität wie in Python mit folgenden Ausnahmen:
 
-*   Einrückung ist für die Funktionalität irrelevant
-*   Schleifen, Funktionen und Klassen werden mit `#end` beendet
+-   Einrückung ist für die Funktionalität irrelevant
+-   Schleifen, Funktionen und Klassen werden mit `#end` beendet
 
-Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
+Nachfolgend einige Beispiele in Ergänzung zur
+[Dokumentation](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs):
 
 1.  Beispiele für IF-Statements:
 
-    ```python
+    ``` python
     a= 2
     if a == 2:
         print("a is ", a)
     #end
     ```
 
-    ```python
+    ``` python
     if a == 2:
     print("a is ", a)
     elif a == 3:
@@ -41,7 +45,7 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
 
 2.  Beispiel für Schleifen:
 
-    ```python
+    ``` python
     while(x>y):
         print(x ,"is bigger than ",y)
         x=x-1
@@ -50,7 +54,7 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
 
 3.  Beispiel für Funktionen:
 
-    ```python
+    ``` python
     def foo():
     print("ich bin eine Funktion")
     #end
@@ -58,7 +62,7 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
 
 4.  Beispiele für Klassen:
 
-    ```python
+    ``` python
     class A:
     def foo(self):
         print("Ich bin eine Methode von A")
@@ -66,7 +70,7 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
     #end
     ```
 
-    ```python
+    ``` python
     class B(A): #Vererbung B erbt von A
     def foo(self):
         print("Ich bin eine Methode von B")
@@ -74,22 +78,15 @@ Nachfolgend einige Beispiele in Ergänzung zur [Dokumentation]:
     #end
     ```
 
-[**Mini-Python**]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
-[Dokumentation]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs
-[syntaktische]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/syntax_definition.md
-[semantische]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/semantic_definition.md
-
-
 # A1.2: ANTLR
 
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für
 die folgenden Aufgaben nutzen.
-
 
 # A1.3: AST
 
 Entwickeln Sie ein Konzept für einen AST.
 
 Begründen und diskutieren Sie im Praktikum Ihre Entscheidungen: Warum haben Sie
-welche Elemente weggelassen, warum sieht Ihr AST so aus, wie er aussieht? Wie
-kommen Sie vom Parse-Tree zum AST?
+welche Elemente weggelassen, warum sieht Ihr AST so aus, wie er aussieht? Wie kommen
+Sie vom Parse-Tree zum AST?
