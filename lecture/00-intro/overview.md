@@ -6,12 +6,12 @@ title: Struktur eines Compilers
 ::: tldr
 Compiler übersetzen (formalen) Text in ein anderes Format.
 
-Typischerweise kann man diesen Prozess in verschiedene Stufen/Phasen einteilen. Dabei
-verarbeitet jede Phase den Output der vorangegangenen Phase und erzeugt ein
-(kompakteres) Ergebnis, welches an die nächste Phase weitergereicht wird. Dabei nimmt
-die Abstraktion von Stufe zu Stufe zu: Der ursprüngliche Input ist ein Strom von
-Zeichen, daraus wird ein Strom von Wörtern (Token), daraus ein Baum (Parse Tree),
-Zwischencode (IC), ...
+Typischerweise kann man diesen Prozess in verschiedene Stufen/Phasen einteilen.
+Dabei verarbeitet jede Phase den Output der vorangegangenen Phase und erzeugt ein
+(kompakteres) Ergebnis, welches an die nächste Phase weitergereicht wird. Dabei
+nimmt die Abstraktion von Stufe zu Stufe zu: Der ursprüngliche Input ist ein Strom
+von Zeichen, daraus wird ein Strom von Wörtern (Token), daraus ein Baum (Parse
+Tree), Zwischencode (IC), ...
 
 ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/00-intro/images/architektur_cb.png?raw=true)
 
@@ -40,7 +40,8 @@ Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:
 -   Wörter: Zeichenketten mit bestimmten Buchstaben, getrennt durch bestimmte andere
     Zeichen; Wörter könnten im Wörterbuch nachgeschlagen werden
 
--   Sätze: Anordnung von Wörtern nach einer bestimmten Grammatik, Grenze: Satzzeichen
+-   Sätze: Anordnung von Wörtern nach einer bestimmten Grammatik, Grenze:
+    Satzzeichen
 
     Hier (vereinfacht): Ein Satz besteht aus Subjekt und Prädikat. Das Subjekt
     besteht aus einem oder keinen Artikel und einem Substantiv. Das Prädikat besteht
@@ -87,9 +88,9 @@ sind. Dies sind in der Regel der Scanner, der Parser und die semantische Analyse
 -   Parser, Syntaxanalyse
 
     Der Parser erhält als Eingabe die Folge der Token und versucht mit Hilfe einer
-    Grammatik zu bestimmen, ob es sich bei der Tokensequenz um gültige Sätze im Sinne
-    der Grammatik handelt. Hier gibt es viele Algorithmen, die im Wesentlichen in die
-    Klassen "top-down" und "bottom-up" fallen.
+    Grammatik zu bestimmen, ob es sich bei der Tokensequenz um gültige Sätze im
+    Sinne der Grammatik handelt. Hier gibt es viele Algorithmen, die im Wesentlichen
+    in die Klassen "top-down" und "bottom-up" fallen.
 
 -   Semantische Analyse, Kontexthandling
 
@@ -106,9 +107,9 @@ sind. Dies sind in der Regel der Scanner, der Parser und die semantische Analyse
 
 ## Backend, Synthese
 
-Die hinteren Stufen eines Compilers, die mit der **Synthese** der Ausgabe beschäftigt
-sind. Dies sind in der Regel verschiedene Optimierungen und letztlich die
-Code-Generierung
+Die hinteren Stufen eines Compilers, die mit der **Synthese** der Ausgabe
+beschäftigt sind. Dies sind in der Regel verschiedene Optimierungen und letztlich
+die Code-Generierung
 
 -   Codegenerierung
 
@@ -130,8 +131,9 @@ Code-Generierung
 
 -   Parse Tree, Concrete Syntax Tree
 
-    Repräsentiert die Struktur eines Satzes, wobei jeder Knoten dem Namen einer Regel
-    der Grammatik entspricht. Die Blätter bestehen aus den Token samt ihren Werten.
+    Repräsentiert die Struktur eines Satzes, wobei jeder Knoten dem Namen einer
+    Regel der Grammatik entspricht. Die Blätter bestehen aus den Token samt ihren
+    Werten.
 
 -   AST, (Abstract) Syntax Tree
 
@@ -140,16 +142,16 @@ Code-Generierung
 
 -   Annotierter AST
 
-    Anmerkungen am AST, die für spätere Verarbeitungsstufen interessant sein könnten:
-    Typ-Informationen, Optimierungsinformationen, ...
+    Anmerkungen am AST, die für spätere Verarbeitungsstufen interessant sein
+    könnten: Typ-Informationen, Optimierungsinformationen, ...
 
 -   Zwischen-Code, IC
 
-    Zwischensprache, die abstrakter ist als die dem AST zugrunde liegenden Konstrukte
-    der Ausgangssprache. Beispielsweise könnten `while`-Schleifen durch entsprechende
-    Label und Sprünge ersetzt werden. Wie genau dieser Zwischen-Code aussieht, muss
-    der Compilerdesigner entscheiden. Oft findet man den Assembler-ähnlichen
-    "3-Adressen-Code".
+    Zwischensprache, die abstrakter ist als die dem AST zugrunde liegenden
+    Konstrukte der Ausgangssprache. Beispielsweise könnten `while`-Schleifen durch
+    entsprechende Label und Sprünge ersetzt werden. Wie genau dieser Zwischen-Code
+    aussieht, muss der Compilerdesigner entscheiden. Oft findet man den
+    Assembler-ähnlichen "3-Adressen-Code".
 
 -   Sprache
 
@@ -158,16 +160,16 @@ Code-Generierung
 
 -   Grammatik
 
-    Eine Grammatik beschreibt formal die Syntaxregeln für eine Sprache. Jede Regel in
-    der Grammatik beschreibt dabei die Struktur eines Satzes oder einer Phrase.
+    Eine Grammatik beschreibt formal die Syntaxregeln für eine Sprache. Jede Regel
+    in der Grammatik beschreibt dabei die Struktur eines Satzes oder einer Phrase.
 :::
 
 # Lexikalische Analyse: Wörter ("*Token*") erkennen
 
 ::: notes
 Die lexikalische Analyse (auch *Scanner* oder *Lexer* oder *Tokenizer* genannt)
-zerteilt den Zeichenstrom in eine Folge von Wörtern ("*Token*"). Die geschieht i.d.R.
-mit Hilfe von *regulären Ausdrücken*.
+zerteilt den Zeichenstrom in eine Folge von Wörtern ("*Token*"). Die geschieht
+i.d.R. mit Hilfe von *regulären Ausdrücken*.
 
 Dabei müssen unsinnige/nicht erlaubte Wörter erkannt werden.
 
@@ -224,15 +226,15 @@ erzeugen. Wenn dies gelingt, ist der Satz (also die Tokensequenz) ein gültiger 
 im Sinne der Grammatik. Dabei sind die Token aus der lexikalischen Analyse die hier
 betrachteten Wörter!
 
-Dabei entsteht ein sogenannter *Parse-Tree* (oder auch "*Syntax Tree*"; in der obigen
-Darstellung der linke Baum). In diesen Bäumen spiegeln sich die Regeln der Grammatik
-wider, d.h. zu einem Satz kann es durchaus verschiedene Parse-Trees geben.
+Dabei entsteht ein sogenannter *Parse-Tree* (oder auch "*Syntax Tree*"; in der
+obigen Darstellung der linke Baum). In diesen Bäumen spiegeln sich die Regeln der
+Grammatik wider, d.h. zu einem Satz kann es durchaus verschiedene Parse-Trees geben.
 
 Beim *AST* ("*Abstract Syntax Tree*") werden die Knoten um alle später nicht mehr
 benötigten Informationen bereinigt (in der obigen Darstellung der rechte Baum).
 
-*Anmerkung*: Die Begriffe werden oft nicht eindeutig verwendet. Je nach Anwendung ist
-das Ergebnis des Parsers ein AST oder ein Parse-Tree.
+*Anmerkung*: Die Begriffe werden oft nicht eindeutig verwendet. Je nach Anwendung
+ist das Ergebnis des Parsers ein AST oder ein Parse-Tree.
 
 *Anmerkung*: Man könnte statt `OP` auch etwa ein `ASSIGN` nutzen und müsste dann das
 "`=`" nicht extra als Inhalt speichern, d.h. man würde die Information im Token-Typ

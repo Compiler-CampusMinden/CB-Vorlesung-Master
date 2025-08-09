@@ -164,10 +164,10 @@ def sync(i):
 
 ::: notes
 `consume` holt wie immer das nächste Token, hier indem der Index `start` weiter
-gesetzt wird und ein weiteres Token über `sync` in den Puffer geladen wird. Falls wir
-nicht am Spekulieren sind und das Ende des Puffers erreicht haben, nutzen wir die
-Gelegenheit und setzen den Puffer zurück. (Dies geht nicht, wenn wir spekulieren --
-hier müssen wir ja ggf. ein Rollback vornehmen und benötigen also den aktuellen
+gesetzt wird und ein weiteres Token über `sync` in den Puffer geladen wird. Falls
+wir nicht am Spekulieren sind und das Ende des Puffers erreicht haben, nutzen wir
+die Gelegenheit und setzen den Puffer zurück. (Dies geht nicht, wenn wir spekulieren
+-- hier müssen wir ja ggf. ein Rollback vornehmen und benötigen also den aktuellen
 Puffer dann noch.)
 
 Die Funktion `sync` stellt sicher, dass ab der Position `start` noch `i`
@@ -176,13 +176,13 @@ unverbrauchte Token im Puffer sind.
 ## Hinweis
 
 Die Methode `count` liefert die Anzahl der aktuell gespeicherten Elemente in
-`lookahead` zurück (nicht die Gesamtzahl der Plätze in der Liste -- diese kann größer
-sein). Mit der Methode `add` wird ein Element hinten an die Liste angefügt, dabei
-wird das Token auf den nächsten Index-Platz (`count`) geschrieben und ggf. die Liste
-ggf. automatisch um weitere Speicherplätze ergänzt. Über `clear` werden die Elemente
-in der Liste gelöscht, aber der Speicherplatz erhalten (d.h. `count()` liefert den
-Wert 0, aber ein `add` müsste nicht erst die Liste mit weiteren Plätzen erweitern,
-sondern könnte direkt an Index 0 das Token schreiben).
+`lookahead` zurück (nicht die Gesamtzahl der Plätze in der Liste -- diese kann
+größer sein). Mit der Methode `add` wird ein Element hinten an die Liste angefügt,
+dabei wird das Token auf den nächsten Index-Platz (`count`) geschrieben und ggf. die
+Liste ggf. automatisch um weitere Speicherplätze ergänzt. Über `clear` werden die
+Elemente in der Liste gelöscht, aber der Speicherplatz erhalten (d.h. `count()`
+liefert den Wert 0, aber ein `add` müsste nicht erst die Liste mit weiteren Plätzen
+erweitern, sondern könnte direkt an Index 0 das Token schreiben).
 :::
 
 [[Tafel: Beispiel mit dynamisch wachsendem Puffer]{.ex}]{.slides}
@@ -202,16 +202,16 @@ sondern könnte direkt an Index 0 das Token schreiben).
 
 ::: notes
 Bei der Eingabe `wuppie();` wird zunächst spekulativ die erste Alternative `fdef`
-untersucht und ein `head` gematcht. Da die Alternative nicht komplett passt (es kommt
-ein ";" statt einem "{"), muss die Spekulation rückgängig gemacht werden und die
-zweite Alternative `fdecl` untersucht werden. Dabei muss man den selben Input erneut
-auf `head` matchen! (Und wenn die Spekulation (irgendwann) erfolgreich war, muss noch
-einmal ein `head` gematcht werden ...)
+untersucht und ein `head` gematcht. Da die Alternative nicht komplett passt (es
+kommt ein ";" statt einem "{"), muss die Spekulation rückgängig gemacht werden und
+die zweite Alternative `fdecl` untersucht werden. Dabei muss man den selben Input
+erneut auf `head` matchen! (Und wenn die Spekulation (irgendwann) erfolgreich war,
+muss noch einmal ein `head` gematcht werden ...)
 
 Idee: Wenn `head` sich merken würde, ob damit ein bestimmter Teil des Tokenstroms
 bereits behandelt wurde (erfolgreich oder nicht), könnte man das Spekulieren
-effizienter gestalten. Jede Regel muss also durch eine passende Regel mit Speicherung
-ergänzt werden.
+effizienter gestalten. Jede Regel muss also durch eine passende Regel mit
+Speicherung ergänzt werden.
 
 Dies wird auch als ["Memoization"](https://en.wikipedia.org/wiki/Memoization)
 bezeichnet und ist eine zentrales Technik des Packrat Parsers (vgl. @Packrat2006).
@@ -238,8 +238,8 @@ def head():
 
 ::: notes
 -   Wenn bereits untersucht (Eintrag vorhanden): Vorspulen bzw. Exception werfen
--   Sonst (aktuelle Position noch nicht in der Tabelle =\> Regel noch nicht an dieser
-    Position getestet):
+-   Sonst (aktuelle Position noch nicht in der Tabelle =\> Regel noch nicht an
+    dieser Position getestet):
     -   Original-Regel ausführen
     -   Exception: Regel hatte keinen Erfolg =\> merken und Exception weiter reichen
 -   Ergebnis für diese Startposition und diese Regel merken:
@@ -317,17 +317,18 @@ ID   : [a-zA-Z]+ ;
 ```
 
 ::: notes
-Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der Lexer
-keine Vorhersage macht, sondern nach dem längsten Match sucht und die Entscheidung
-erst trifft, wenn das ganze Token gesehen wurde. Bei Parser-Regeln steht das Prädikat
-links vor der entsprechenden Alternative, da der Parser mit Hilfe des Lookaheads
-Vorhersagen trifft, welche Regel/Alternative zutrifft.
+Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der
+Lexer keine Vorhersage macht, sondern nach dem längsten Match sucht und die
+Entscheidung erst trifft, wenn das ganze Token gesehen wurde. Bei Parser-Regeln
+steht das Prädikat links vor der entsprechenden Alternative, da der Parser mit Hilfe
+des Lookaheads Vorhersagen trifft, welche Regel/Alternative zutrifft.
 
 *Anmerkung*: Hier wurden nur Variablen eingesetzt, es können aber auch
 Methoden/Funktionen genutzt werden. In Verbindung mit einer Symboltabelle
-(["Symboltabellen"](cb_symboltabellen1.html)) und/oder mit Attributen und Aktionen in
-der Grammatik (["Attribute"](cb_attribute.html) und ["Interpreter:
-Attribute+Aktionen"](cb_interpreter2.html)) hat man hier ein mächtiges Hilfswerkzeug!
+(["Symboltabellen"](cb_symboltabellen1.html)) und/oder mit Attributen und Aktionen
+in der Grammatik (["Attribute"](cb_attribute.html) und ["Interpreter:
+Attribute+Aktionen"](cb_interpreter2.html)) hat man hier ein mächtiges
+Hilfswerkzeug!
 :::
 
 # Wrap-Up

@@ -178,8 +178,8 @@ class Clazz(Struct):
 demonstrieren - sie ist aus Gründen der Lesbarkeit nicht besonders effizient:
 beispielsweise wird `parentClazz.resolve(name)` mehrfach evaluiert ...
 
-Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst gesucht
-werden, anschließend in der Elternklasse.
+Beim Auflösen von Attributen oder Methoden muss zunächst in der Klasse selbst
+gesucht werden, anschließend in der Elternklasse.
 
 Beispiel (mit den obigen Klassen `A` und `B`):
 
@@ -221,17 +221,18 @@ lokalen Scope unterhalb der Funktion, dann im Funktions-Scope, dann im Klassen-S
 von `B`. Hier sucht `resolve()` auch zunächst lokal, geht dann aber die
 Vererbungshierarchie entlang (sofern wie hier vorhanden). Erst in der Superklasse
 (wenn der `parentClazz`-Zeiger `None` ist), löst `resolve()` wieder normal auf und
-sucht um umgebenden Scope. Auf diese Weise kann man wie gezeigt in Klassen (Methoden)
-auf globale Variablen verweisen ...
+sucht um umgebenden Scope. Auf diese Weise kann man wie gezeigt in Klassen
+(Methoden) auf globale Variablen verweisen ...
 
 *Anmerkung*: Durch dieses Vorgehen wird im Prinzip in Methoden aus dem Zugriff auf
-ein Feld `x` implizit ein `this.x` aufgelöst, wobei `this` die Klasse auflöst und `x`
-als Attribut darin.
+ein Feld `x` implizit ein `this.x` aufgelöst, wobei `this` die Klasse auflöst und
+`x` als Attribut darin.
 :::
 
 # Wrap-Up
 
--   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
+-   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über
+    Bezeichner)
 
 \smallskip
 

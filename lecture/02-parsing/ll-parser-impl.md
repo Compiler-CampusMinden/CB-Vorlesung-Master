@@ -60,8 +60,8 @@ def consume():
 ::: notes
 Erinnerung: Der Lexer arbeitet direkt auf dem Zeichenstrom und versucht über längste
 Matches daraus einen Tokenstrom zu erzeugen. Dabei wird immer das nächste Zeichen
-angeschaut (Funktion `match`) und mit `consume` das aktuelle Zeichen "verbraucht" und
-das nächste Zeichen geladen. Hier kann man über die Doppel-Puffer-Strategie das
+angeschaut (Funktion `match`) und mit `consume` das aktuelle Zeichen "verbraucht"
+und das nächste Zeichen geladen. Hier kann man über die Doppel-Puffer-Strategie das
 Einlesen einzelner Zeichen aus einer Datei vermeiden und immer blockweise in den
 Puffer einlesen.
 :::
@@ -315,9 +315,9 @@ als `a=(b=c)` verstanden werden.]{.notes}
 
 \bigskip
 
-Per Default werden Operatoren wie `+` in ANTLR *links-assoziativ* behandelt, d.h. die
-Eingabe `1+2+3` wird als `(1+2)+3` gelesen. Für *rechts-assoziative* Operatoren muss
-man ANTLR dies in der Grammatik mitteilen:
+Per Default werden Operatoren wie `+` in ANTLR *links-assoziativ* behandelt, d.h.
+die Eingabe `1+2+3` wird als `(1+2)+3` gelesen. Für *rechts-assoziative* Operatoren
+muss man ANTLR dies in der Grammatik mitteilen:
 
 ``` antlr
 expr : expr '^'<assoc=right> expr
@@ -360,9 +360,9 @@ expr : ID ('++' | '--') ;    // x++ oder x--
 ::: notes
 Für einen größeren Lookahead benötigt man einen Puffer für die Token. Für einen
 Lookahead von $k$ Token (also einen LL(k)-Parser) würde man einen Puffer mit $k$
-Plätzen anlegen und diesen wie einen Ringpuffer benutzen. Dabei ist `start` der Index
-des aktuellen Lookahead-Tokens. Über die neue Funktion `lookahead(1)` ist dieses
-aktuelle Lookahead-Token abrufbar.
+Plätzen anlegen und diesen wie einen Ringpuffer benutzen. Dabei ist `start` der
+Index des aktuellen Lookahead-Tokens. Über die neue Funktion `lookahead(1)` ist
+dieses aktuelle Lookahead-Token abrufbar.
 
 ``` python
 class Parser:

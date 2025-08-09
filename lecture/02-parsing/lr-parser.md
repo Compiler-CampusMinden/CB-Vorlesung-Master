@@ -40,8 +40,8 @@ Fehlerbehandlung.
 
 # Von unten nach oben
 
-Bei der Bottom-Up-Analyse wird der Parse Tree wird von unten nach oben aufgebaut, von
-links nach rechts. Dabei entsteht eine *Rechtsableitung*.
+Bei der Bottom-Up-Analyse wird der Parse Tree wird von unten nach oben aufgebaut,
+von links nach rechts. Dabei entsteht eine *Rechtsableitung*.
 
 **Def.:** Bei einer kontextfreien Grammatik $G$ ist die *Rechtsableitung* von
 $\alpha \in (N \cup T)^{\ast}$ die Ableitung, die man erhält, wenn das am weitesten
@@ -139,11 +139,11 @@ $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 
 1.  Bilde die Hülle von $S' \rightarrow S$ und mache sie zum ersten Zustand.
 
-2.  Für jedes noch nicht betrachtete $\cdot X, X \in (N \cup T)$ in einem Zustand $q$
-    des Automaten berechne $GOTO_0(q, X)$ und mache $GOTO_0(q, X)$ zu einem neuen
-    Zustand $r$. Verbinde $q$ mit einem Pfeil mit $r$ und schreibe $X$ an den Pfeil.
-    Ist ein zu $r$ identischer Zustand schon vorhanden, wird $p$ mit diesem verbunden
-    und kein neuer erzeugt.
+2.  Für jedes noch nicht betrachtete $\cdot X, X \in (N \cup T)$ in einem Zustand
+    $q$ des Automaten berechne $GOTO_0(q, X)$ und mache $GOTO_0(q, X)$ zu einem
+    neuen Zustand $r$. Verbinde $q$ mit einem Pfeil mit $r$ und schreibe $X$ an den
+    Pfeil. Ist ein zu $r$ identischer Zustand schon vorhanden, wird $p$ mit diesem
+    verbunden und kein neuer erzeugt.
 
 ## Konstruktion der Parse Table
 
@@ -159,9 +159,9 @@ $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 3.  Schreibe beim Zustand $[S' \rightarrow S \cdot]$ ein $accept$ bei dem Symbol
     $\bot$.
 
-4.  Für jedes Item mit $[A \rightarrow \beta \cdot]$ aus allen Zuständen schreibe für
-    alle Terminals $reduce$ und die Nummer der entsprechenden Grammatikregel in die
-    Tabelle.
+4.  Für jedes Item mit $[A \rightarrow \beta \cdot]$ aus allen Zuständen schreibe
+    für alle Terminals $reduce$ und die Nummer der entsprechenden Grammatikregel in
+    die Tabelle.
 
 ## Ein Beispiel zum Nachvollziehen
 
@@ -215,8 +215,8 @@ Folgendes kann bei Mehrdeutigkeiten helfen:
 
 -   Voreinstellung des Parsergenearators: z. B. Shiften bei Shift-Reduce-Konflikten
 
--   Voreinstellung des Parsergenearators: z. B. Reduzieren nach der Regel, die in der
-    Grammatik zuerst kommt bei Reduce-Reduce-Konflikten
+-   Voreinstellung des Parsergenearators: z. B. Reduzieren nach der Regel, die in
+    der Grammatik zuerst kommt bei Reduce-Reduce-Konflikten
 
 # Hierarchie der kontextfreien Sprachen
 

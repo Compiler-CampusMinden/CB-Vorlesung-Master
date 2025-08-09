@@ -9,8 +9,8 @@ Programmiersprachen betrachtet. Jede der Sprachen hat ihr eigenes Sprachkonzept
 (Programmierparadigma) und auch ein eigenes Typ-System sowie ihre eigene Strategie
 zur Speicherverwaltung und Abarbeitung.
 
-Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich, dass
-Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
+Auch wenn die Darstellung längst nicht vollständig ist, macht sie doch deutlich,
+dass Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
 :::
 
 ::: youtube
@@ -27,8 +27,8 @@ Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
 >
 > \[...\]
 >
-> 2 bottles of beer on the wall, 2 bottles of beer. Take one down and pass it around,
-> 1 bottle of beer on the wall.
+> 2 bottles of beer on the wall, 2 bottles of beer. Take one down and pass it
+> around, 1 bottle of beer on the wall.
 >
 > 1 bottle of beer on the wall, 1 bottle of beer. Take one down and pass it around,
 > no more bottles of beer on the wall.

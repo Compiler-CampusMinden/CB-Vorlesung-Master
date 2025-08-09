@@ -26,8 +26,8 @@ genutzte Varianten sind dabei:
 ::: notes
 Wie oben diskutiert: Der Sourcecode durchläuft alle Phasen des Compilers, am Ende
 fällt ein ausführbares Programm heraus. Dieses kann man starten und ggf. mit
-Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm läuft
-i.d.R. nur auf einer bestimmten Plattform.
+Inputdaten versehen und erhält den entsprechenden Output. Das erzeugte Programm
+läuft i.d.R. nur auf einer bestimmten Plattform.
 
 Beispiele: gcc, clang, ...
 :::
@@ -38,8 +38,8 @@ Beispiele: gcc, clang, ...
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es
-wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST bzw.
-IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
+wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST
+bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
 Typischerweise hat man hier eine "Read-Eval-Print-Loop" (*REPL*).
 
 Beispiele: Python
@@ -115,9 +115,9 @@ Beispiele: SpotBugs, Checkstyle, ESLint, ...
 ::: notes
 [Pandoc](https://pandoc.org/) ist ein universeller und modular aufgebauter
 Textkonverter, der mit Hilfe verschiedener *Reader* unterschiedliche Textformate
-einlesen und in ein Zwischenformat (hier JSON) transformieren kann. Über verschiedene
-*Writer* können aus dem Zwischenformat dann Dokumente in den gewünschten Zielformaten
-erzeugt werden.
+einlesen und in ein Zwischenformat (hier JSON) transformieren kann. Über
+verschiedene *Writer* können aus dem Zwischenformat dann Dokumente in den
+gewünschten Zielformaten erzeugt werden.
 
 Die Reader entsprechen der Analyse-Phase und die Writer der Synthese-Phase eines
 Compilers. Anstelle eines ausführbaren Programms (Maschinencode) wird ein anderes
@@ -213,8 +213,9 @@ Weitere Beispiele:
     Informatikausbildung ...
 -   Aufgrund seiner Reife gibt es hervorragende Beispiele von formaler Spezifikation
     im Compilerbau.
--   Mit dem Gebiet der formalen Sprachen berührt der Compilerbau interessante Aspekte
-    moderner Linguistik. Damit ergibt sich letztlich eine Verbindung zur KI ...
+-   Mit dem Gebiet der formalen Sprachen berührt der Compilerbau interessante
+    Aspekte moderner Linguistik. Damit ergibt sich letztlich eine Verbindung zur KI
+    ...
 -   Die Unterscheidung von Syntax und Semantik ist eine grundlegende Technik in fast
     allen formalen Systeme.
 
@@ -225,8 +226,8 @@ Diese Tools könnte man beispielsweise nutzen, um seine eigene Sprache zu bastel
 -   ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for
     reading, processing, executing, or translating structured text or binary files:
     [github.com/antlr/antlr4](https://github.com/antlr/antlr4)
--   Grammars written for ANTLR v4; expectation that the grammars are free of actions:
-    [github.com/antlr/grammars-v4](https://github.com/antlr/grammars-v4)
+-   Grammars written for ANTLR v4; expectation that the grammars are free of
+    actions: [github.com/antlr/grammars-v4](https://github.com/antlr/grammars-v4)
 -   An incremental parsing system for programmings tools:
     [github.com/tree-sitter/tree-sitter](https://github.com/tree-sitter/tree-sitter)
 -   Flex, the Fast Lexical Analyzer - scanner generator for lexing in C and C++:
@@ -250,8 +251,8 @@ Als Startpunkt für eigene Ideen. Oder Verbessern/Erweitern der Projekte ...
     Java code: [github.com/spotbugs/spotbugs](https://github.com/spotbugs/spotbugs)
 -   An extensible cross-language static code analyzer:
     [github.com/pmd/pmd](https://github.com/pmd/pmd)
--   Checkstyle is a development tool to help programmers write Java code that adheres
-    to a coding standard:
+-   Checkstyle is a development tool to help programmers write Java code that
+    adheres to a coding standard:
     [github.com/checkstyle/checkstyle](https://github.com/checkstyle/checkstyle)
 -   JaCoCo - Java Code Coverage Library:
     [github.com/jacoco/jacoco](https://github.com/jacoco/jacoco)

@@ -72,8 +72,8 @@ NFAs sind so nicht zu programmieren, aber:
 
 \medskip
 
-**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird von
-einem DFA akzeptiert.
+**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird
+von einem DFA akzeptiert.
 
 D. h. es existieren Algorithmen zur
 
@@ -84,8 +84,8 @@ D. h. es existieren Algorithmen zur
 
 ## Reguläre Ausdrücke
 
-**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von ihnen
-repräsentierten Sprache **L**:
+**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von
+ihnen repräsentierten Sprache **L**:
 
 -   Basis:
 
@@ -96,7 +96,8 @@ repräsentierten Sprache **L**:
 
 -   Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
 
-    -   $E+F$ ist ein regex und bezeichnet die Vereinigung $L(E + F) = L(E)\cup L(F)$
+    -   $E+F$ ist ein regex und bezeichnet die Vereinigung
+        $L(E + F) = L(E)\cup L(F)$
     -   $EF$ ist ein regex und bezeichnet die Konkatenation $L(EF) = L(E)L(F)$
     -   $E^{\ast}$ ist ein regex und bezeichnet die Kleene-Hülle
         $L(E^{\ast})=(L(E))^{\ast}$

@@ -6,8 +6,8 @@ title: "SymbTab1: Nested Scopes"
 ::: tldr
 In Symboltabellen werden Informationen über Bezeichner verwaltet. Wenn es in der zu
 übersetzenden Sprache *Nested Scopes* gibt, spiegelt sich dies in den Symboltabellen
-wider: Auch hier wird eine entsprechende hierarchische Organisation notwendig. In der
-Regel nutzt man Tabellen, die untereinander verlinkt sind.
+wider: Auch hier wird eine entsprechende hierarchische Organisation notwendig. In
+der Regel nutzt man Tabellen, die untereinander verlinkt sind.
 
 Eine wichtige Aufgabe ist das Binden von Bezeichner gleichen Namens an ihren
 jeweiligen Scope =\> `bind()`. Zusätzlich müssen Symboltabellen auch das Abrufen von
@@ -24,8 +24,8 @@ Bezeichnern aus dem aktuellen Scope oder den Elternscopes unterstützen =\>
 
 **Def.:** Unter dem *Gültigkeitsbereich* (Sichtbarkeitsbereich, Scope) eines
 Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und
-nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene Scopes,
-die ein eigenes Element dieses Namens benutzen.
+nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene
+Scopes, die ein eigenes Element dieses Namens benutzen.
 
 Scopes sind fast immer hierarchisch angeordnet.
 
@@ -93,10 +93,10 @@ benutzt werden.
 ::: notes
 ## Grundlegendes Vorgehen
 
-Das Element, das einen neuen Scope definiert, steht selbst in dem aktuell behandelten
-Scope. Wenn dieses Element selbst ein Bezeichner ist, gehört dieser in den aktuellen
-Scope. Nur das, was nur innerhalb des oben genannten Elements oder Bezeichners
-definiert wird, gehört in den Scope des Elements oder Bezeichners.
+Das Element, das einen neuen Scope definiert, steht selbst in dem aktuell
+behandelten Scope. Wenn dieses Element selbst ein Bezeichner ist, gehört dieser in
+den aktuellen Scope. Nur das, was nur innerhalb des oben genannten Elements oder
+Bezeichners definiert wird, gehört in den Scope des Elements oder Bezeichners.
 :::
 
 # Nested Scopes: Symbole und Scopes
@@ -134,9 +134,9 @@ Für die Scopes wird eine Klasse `Scope` definiert mit den Methoden `bind()` (zu
 Definieren von Symbolen im Scope) und `resolve()` (zum Abrufen von Symbolen aus dem
 Scope oder dem umgebenden Scope).
 
-Für lokale Scopes wird eine Instanz dieser Klasse angelegt, die eine Referenz auf den
-einschließenden Scope im Attribut `enclosingScope` hält. Für den globalen Scope ist
-diese Referenz einfach leer (`None`).
+Für lokale Scopes wird eine Instanz dieser Klasse angelegt, die eine Referenz auf
+den einschließenden Scope im Attribut `enclosingScope` hält. Für den globalen Scope
+ist diese Referenz einfach leer (`None`).
 
 ## Klassen und Interfaces für Symbole
 
@@ -160,7 +160,8 @@ Typ-Symbole unterscheiden zu können.
     Symboltabelle auf den Stack gepackt.
 -   Die Suche von Bezeichnern in umliegenden Scopes erfordert ein Durchsuchen des
     Stacks von oben nach unten.
--   Beim Verlassen eines Scopes beim Baumdurchlauf wird der Scope vom Stack entfernt.
+-   Beim Verlassen eines Scopes beim Baumdurchlauf wird der Scope vom Stack
+    entfernt.
 :::
 
 # Nested Scopes: Definieren und Auflösen von Namen
@@ -186,8 +187,8 @@ class Scope:
 
 ::: notes
 **Anmerkung**: In der Klasse `Symbol` kann man ein Feld `scope` vom Typ `Scope`
-implementieren. Damit "weiss" jedes Symbol, in welchem Scope es definiert ist und man
-muss sich auf der Suche nach dem Scope eines Symbols ggf. nicht erst durch die
+implementieren. Damit "weiss" jedes Symbol, in welchem Scope es definiert ist und
+man muss sich auf der Suche nach dem Scope eines Symbols ggf. nicht erst durch die
 Baumstruktur hangeln. Aus technischer Sicht verhindert das Attribut das Aufräumen
 eines lokalen Scopes durch den Garbage Collector, wenn man den lokalen Scope wieder
 verlässt: Jeder Scope hat eine Referenz auf den umgebenden (Eltern-) Scope (Feld
@@ -280,11 +281,11 @@ Python geworden. Sry ;)]{.notes}
 
 ::: notes
 In der Methode `exitVar()` wird das Variablensymbol beim Ablaufen des AST lediglich
-aufgelöst und ein Fehler geworfen, wenn das Variablensymbol (noch) nicht bekannt ist.
-Hier könnte man weiteres Type-Checking und/oder -Propagation ansetzen.
+aufgelöst und ein Fehler geworfen, wenn das Variablensymbol (noch) nicht bekannt
+ist. Hier könnte man weiteres Type-Checking und/oder -Propagation ansetzen.
 
-Später im Interpreter muss an dieser Stelle dann aber auch der **Wert** der Variablen
-abgerufen werden ...
+Später im Interpreter muss an dieser Stelle dann aber auch der **Wert** der
+Variablen abgerufen werden ...
 :::
 
 ::: notes
@@ -293,14 +294,15 @@ abgerufen werden ...
 Möglicherweise sind die Symboltabellen nach der Identifizierungsphase der Elemente
 überflüssig, weil die zusammengetragenen Informationen als Attribute im AST stehen.
 Die Knoten enthalten dann Verweise auf definierende Knoten von Elementen, nicht mehr
-auf Einträge in den Symboltabellen. In diesem Fall können die Symboltabellen nach der
-Identifizierung gelöscht werden, wenn sie nicht z.B. für einen symbolischen Debugger
-noch gebraucht werden.
+auf Einträge in den Symboltabellen. In diesem Fall können die Symboltabellen nach
+der Identifizierung gelöscht werden, wenn sie nicht z.B. für einen symbolischen
+Debugger noch gebraucht werden.
 :::
 
 # Wrap-Up
 
--   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
+-   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über
+    Bezeichner)
 
 \smallskip
 

@@ -22,13 +22,13 @@ das gewünschte Ergebnis.
 Für Blöcke und Variablen muss man analog zum Aufbau von Symboltabellen wieder Scopes
 berücksichtigen, d.h. man benötigt Strukturen ähnlich zu den Symboltabellen (hier
 "Umgebung" (*Environment*) genannt). Es gibt eine globale Umgebung, und mit dem
-Betreten eines neuen Blocks wird eine neue Umgebung aufgemacht, deren Eltern-Umgebung
-die bisherige Umgebung ist.
+Betreten eines neuen Blocks wird eine neue Umgebung aufgemacht, deren
+Eltern-Umgebung die bisherige Umgebung ist.
 
 Zu jedem Namen kann man in einer Umgebung einen Wert definieren bzw. abrufen. Dabei
-muss man je nach Semantik der zu interpretierenden Sprache unterscheiden zwischen der
-"Definition" und der "Zuweisung" einer Variablen: Die Definition erfolgt i.d.R. in
-der aktuellen Umgebung, bei der Zuweisung sucht man ausgehend von der aktuellen
+muss man je nach Semantik der zu interpretierenden Sprache unterscheiden zwischen
+der "Definition" und der "Zuweisung" einer Variablen: Die Definition erfolgt i.d.R.
+in der aktuellen Umgebung, bei der Zuweisung sucht man ausgehend von der aktuellen
 Umgebung bis hoch zur globalen Umgebung nach dem ersten Vorkommen der Variablen und
 setzt den Wert in der gefundenen Umgebung. Bei Sprachen, die Variablen beim ersten
 Zugriff definieren, muss man dieses Verhalten entsprechend anpassen.
@@ -41,10 +41,10 @@ Zugriff definieren, muss man dieses Verhalten entsprechend anpassen.
 # Aufgaben im Interpreter
 
 ::: notes
-Im Allgemeinen reichen einfache syntaxgesteuerte Interpreter nicht aus. Normalerweise
-simuliert ein Interpreter die Ausführung eines Programms durch den Computer. D.h. der
-Interpreter muss über die entsprechenden Eigenschaften verfügen: Prozessor,
-Code-Speicher, Datenspeicher, Stack ...
+Im Allgemeinen reichen einfache syntaxgesteuerte Interpreter nicht aus.
+Normalerweise simuliert ein Interpreter die Ausführung eines Programms durch den
+Computer. D.h. der Interpreter muss über die entsprechenden Eigenschaften verfügen:
+Prozessor, Code-Speicher, Datenspeicher, Stack ...
 :::
 
 ::::: columns
@@ -110,9 +110,9 @@ Die `eval()`-Methode bildet das Kernstück des (AST-traversierenden) Interpreter
 Hier wird passend zum aktuellen AST-Knoten die passende Methode des Interpreters
 aufgerufen.
 
-**Hinweis**: Im obigen Beispiel wird nicht zwischen der Auswertung von Ausdrücken und
-Anweisungen unterschieden, es wird die selbe Methode `eval()` genutzt. Allerdings
-liefern Ausdrücke einen Wert zurück (erkennbar am `return` im jeweiligen
+**Hinweis**: Im obigen Beispiel wird nicht zwischen der Auswertung von Ausdrücken
+und Anweisungen unterschieden, es wird die selbe Methode `eval()` genutzt.
+Allerdings liefern Ausdrücke einen Wert zurück (erkennbar am `return` im jeweiligen
 `switch/case`-Zweig), während Anweisungen keinen Wert liefern.
 
 In den folgenden Beispielen wird davon ausgegangen, dass ein komplettes Programm
@@ -122,8 +122,8 @@ Für einen interaktiven Interpreter würde man in einer Schleife die Eingaben le
 parsen und vorverarbeiten und dann interpretieren. Dabei würde jeweils der AST und
 die Symboltabelle *ergänzt*, damit die neuen Eingaben auf frühere verarbeitete
 Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen -- Verarbeiten
--- Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw. "*Read-Eval-Print-Loop*"
-(**REPL**) eingebürgert.
+-- Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
+"*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
 :::
 
 # Auswertung von Literalen und Ausdrücken
@@ -134,9 +134,9 @@ Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen -- Verarb
     Die in der Zielsprache verwendeten (primitiven) Typen müssen auf passende Typen
     der Sprache, in der der Interpreter selbst implementiert ist, abgebildet werden.
 
-    Beispielsweise könnte man den Typ `nil` der Zielsprache auf den Typ `null` des in
-    Java implementierten Interpreters abbilden, oder den Typ `number` der Zielsprache
-    auf den Typ `Double` in Java mappen.
+    Beispielsweise könnte man den Typ `nil` der Zielsprache auf den Typ `null` des
+    in Java implementierten Interpreters abbilden, oder den Typ `number` der
+    Zielsprache auf den Typ `Double` in Java mappen.
     :::
 
 \smallskip
@@ -234,23 +234,23 @@ float y;
 Das erinnert nicht nur zufällig an den Aufbau der Symboltabellen :-)
 
 Und so lange es nur um Variablen ginge, könnte man die Symboltabellen für das
-Speichern der Werte nutzen. Allerdings müssen wir noch Funktionen und Strukturen bzw.
-Klassen realisieren, und spätestens dann kann man die Symboltabelle nicht mehr zum
-Speichern von Werten einsetzen. Also lohnt es sich, direkt neue Strukturen für das
-Halten von Variablen und Werten aufzubauen.
+Speichern der Werte nutzen. Allerdings müssen wir noch Funktionen und Strukturen
+bzw. Klassen realisieren, und spätestens dann kann man die Symboltabelle nicht mehr
+zum Speichern von Werten einsetzen. Also lohnt es sich, direkt neue Strukturen für
+das Halten von Variablen und Werten aufzubauen.
 :::
 
 # Detail: Felder im Interpreter
 
 ::: notes
-Eine mögliche Implementierung für einen Interpreter basierend auf einem ANTLR-Visitor
-ist nachfolgend gezeigt.
+Eine mögliche Implementierung für einen Interpreter basierend auf einem
+ANTLR-Visitor ist nachfolgend gezeigt.
 
 **Hinweis**: Bei der Ableitung des `BaseVisitor<T>` muss der Typ `T` festgelegt
-werden. Dieser fungiert als Rückgabetyp für die Visitor-Methoden. Entsprechend können
-alle Methoden nur einen gemeinsamen (Ober-) Typ zurückliefern, weshalb man sich an
-der Stelle oft mit `Object` behilft und dann manuell den konkreten Typ abfragen und
-korrekt casten muss.
+werden. Dieser fungiert als Rückgabetyp für die Visitor-Methoden. Entsprechend
+können alle Methoden nur einen gemeinsamen (Ober-) Typ zurückliefern, weshalb man
+sich an der Stelle oft mit `Object` behilft und dann manuell den konkreten Typ
+abfragen und korrekt casten muss.
 :::
 
 ``` python
@@ -323,18 +323,18 @@ by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
-Wenn wir bei der Traversierung des AST mit `eval()` bei einer Zuweisung vorbeikommen,
-also etwa `x = 7;` oder `x = wuppie + fluppie;`, dann wird zunächst im aktuellen
-Environment die rechte Seite der Zuweisung ausgewertet (Aufruf von `eval()`).
-Anschließend wird der Wert für die Variable im Environment eingetragen: Entweder sie
-wurde im aktuellen Environment früher bereits definiert, dann wird der neue Wert hier
-eingetragen. Ansonsten wird entlang der Verschachtelungshierarchie gesucht und
-entsprechend eingetragen. Falls die Variable nicht gefunden werden kann, wird eine
-Exception ausgelöst.
+Wenn wir bei der Traversierung des AST mit `eval()` bei einer Zuweisung
+vorbeikommen, also etwa `x = 7;` oder `x = wuppie + fluppie;`, dann wird zunächst im
+aktuellen Environment die rechte Seite der Zuweisung ausgewertet (Aufruf von
+`eval()`). Anschließend wird der Wert für die Variable im Environment eingetragen:
+Entweder sie wurde im aktuellen Environment früher bereits definiert, dann wird der
+neue Wert hier eingetragen. Ansonsten wird entlang der Verschachtelungshierarchie
+gesucht und entsprechend eingetragen. Falls die Variable nicht gefunden werden kann,
+wird eine Exception ausgelöst.
 
-An dieser Stelle kann man über die Methode `assign` in der Klasse `Environment` dafür
-sorgen, dass nur bereits deklarierte Variablen zugewiesen werden dürfen. Wenn man
-stattdessen wie etwa in Python das implizite Erzeugen neuer Variablen erlaubten
+An dieser Stelle kann man über die Methode `assign` in der Klasse `Environment`
+dafür sorgen, dass nur bereits deklarierte Variablen zugewiesen werden dürfen. Wenn
+man stattdessen wie etwa in Python das implizite Erzeugen neuer Variablen erlaubten
 möchte, würde man statt `Environment#assign` einfach `Environment#define` nutzen ...
 
 *Anmerkung*: Der gezeigte Code funktioniert nur für normale Variablen, nicht für
@@ -399,6 +399,6 @@ muss am Ende die ursprüngliche Umgebung wieder hergestellt werden (`finally`-Bl
     Visitor-Patterns
 -   k3: Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog
     zu den Symboltabellen
--   k3: Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung
-    mit einem Visitor
+-   k3: Code-Ausführung im Interpreter durch eine Read-Eval-Schleife:
+    Implementierung mit einem Visitor
 :::

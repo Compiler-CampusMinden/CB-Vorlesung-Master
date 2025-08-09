@@ -12,9 +12,10 @@ Identifikation und Sammlung von Bezeichnern und die Zuordnung zur richtigen Eben
 müssen beispielsweise Variablen und Funktionen vor ihrer Benutzung zumindest
 deklariert sein; Funktionen sollten sich nicht wie Variablen benutzen lassen, ...
 
-Als Werkzeug werden (hierarchische) Tabellen eingesetzt, um die verschiedenen Symbole
-und Informationen darüber zu verwalten. Dabei werden die Symboltabelleneinträge oft
-an verschiedenen Stellen im Compiler generiert und benutzt.
+Als Werkzeug werden (hierarchische) Tabellen eingesetzt, um die verschiedenen
+Symbole und Informationen darüber zu verwalten. Dabei werden die
+Symboltabelleneinträge oft an verschiedenen Stellen im Compiler generiert und
+benutzt.
 :::
 
 ::: youtube
@@ -204,16 +205,16 @@ werden dann die Referenzen aufgelöst.
 Verwaltung von bezeichneten Elementen.
 
 Die Organisation der Symboltabellen ist stark anwendungsabhängig. Je nach
-Sprachkonzept gibt es eine oder mehrere Symboltabellen, deren Einträge vom Lexer oder
-Parser angelegt werden. Die jeweiligen Inhalte jedes einzelnen Eintrags kommen aus
-den verschiedenen Phasen der Compilierung. Symboltabellen werden oft als Hashtables
-oder auch als Bäume implementiert, manchmal als verkettete Listen. In seltenen Fällen
-kommt man auch mit einem Stack aus.
+Sprachkonzept gibt es eine oder mehrere Symboltabellen, deren Einträge vom Lexer
+oder Parser angelegt werden. Die jeweiligen Inhalte jedes einzelnen Eintrags kommen
+aus den verschiedenen Phasen der Compilierung. Symboltabellen werden oft als
+Hashtables oder auch als Bäume implementiert, manchmal als verkettete Listen. In
+seltenen Fällen kommt man auch mit einem Stack aus.
 
 Eine Symboltabelle enthält benutzerdefinierte Bezeichner (oder Verweise in eine
 Hashtable mit allen vorkommenden Namen), manchmal auch die Schlüsselwörter der
-Programmiersprache. Die einzelnen Felder eines Eintrags variieren stark, abhängig vom
-Typ des Bezeichners (= Bezeichnerklasse).
+Programmiersprache. Die einzelnen Felder eines Eintrags variieren stark, abhängig
+vom Typ des Bezeichners (= Bezeichnerklasse).
 
 Manchmal gibt es für Datentypen eine Extra-Tabelle, ebenso eine für die Werte von
 Konstanten.
@@ -290,9 +291,9 @@ Bezeichners oder ein angewandtes Vorkommen ist.
 Programm generiert einen neuen Bezeichner und legt für ihn seinem Typ entsprechend
 Speicherplatz an.
 
-**Def.:** Unter der *Deklaration* eines (bereits existierenden) Bezeichners verstehen
-wir seine Bekanntmachung, damit er benutzt werden kann. Er ist oft in einem anderen
-Scope definiert und bekommt dort Speicherplatz zugeteilt.
+**Def.:** Unter der *Deklaration* eines (bereits existierenden) Bezeichners
+verstehen wir seine Bekanntmachung, damit er benutzt werden kann. Er ist oft in
+einem anderen Scope definiert und bekommt dort Speicherplatz zugeteilt.
 
 Insbesondere werden auch Typen deklariert. Hier gibt es in der Regel gar keine
 Speicherplatzzuweisung.
@@ -305,12 +306,12 @@ Namensraum mit angegeben.
 Java-Literatur der Begriff *Deklaration* anstelle von *Definition*.
 
 **Anmerkung**: Deklarationen beziehen sich auf Definitionen, die woanders in einer
-Symboltabelle stehen, evtl. in einer anderen Datei, also in diesem Compilerlauf nicht
-zugänglich sind und erst von Linker aufgelöst werden können. Beim Auftreten einer
-Deklaration muss die dazugehörige Definition gesucht werden,und wenn vorhanden, im
-Symboltabelleneintrag für den deklarierten Bezeichner festgehalten werden. Hier ist
-evtl. ein zweiter Baumdurchlauf nötig, um alle offenen Deklarationen, die sich auf
-Definitionen in derselben Datei beziehen, aufzulösen.
+Symboltabelle stehen, evtl. in einer anderen Datei, also in diesem Compilerlauf
+nicht zugänglich sind und erst von Linker aufgelöst werden können. Beim Auftreten
+einer Deklaration muss die dazugehörige Definition gesucht werden,und wenn
+vorhanden, im Symboltabelleneintrag für den deklarierten Bezeichner festgehalten
+werden. Hier ist evtl. ein zweiter Baumdurchlauf nötig, um alle offenen
+Deklarationen, die sich auf Definitionen in derselben Datei beziehen, aufzulösen.
 
 Wird bei objektorientierten Sprachen ein Objekt definiert, dessen Klassendefinition
 in einer anderen Datei liegt, kann man die Definition des Objekts gleichzeitig als
@@ -344,8 +345,8 @@ Analyse nicht überprüfen?**
 -   Wie äußert sich das im Fehlerfall?
 
 ::: notes
-Dinge, die erst durch eine Ausführung/Interpretation eines Programms berechnet werden
-können.
+Dinge, die erst durch eine Ausführung/Interpretation eines Programms berechnet
+werden können.
 
 Beispielsweise können Werte von Ausdrücken oft erst zur Laufzeit bestimmt werden.
 Insbesondere kann die semantische Analyse in der Regel nicht feststellen, ob ein
@@ -363,7 +364,8 @@ Null-Pointer übergeben wird und anschließend dereferenziert wird.
 
 \smallskip
 
--   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
+-   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über
+    Bezeichner)
 -   Symboltabelleneinträge werden an verschiedenen Stellen des Compilers generiert
     und benutzt
 

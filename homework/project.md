@@ -40,7 +40,8 @@ Wählen Sie eine Programmiersprache aus den folgenden Kategorien:
         -   (Mehrfach-) Vererbung
         -   Traits
     -   Module/Importe (benannte Scopes)
-    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type Coercion
+    -   Duck-Typing (dynamisches vs. statisches Binden), Type-Checking, Type
+        Coercion
 -   Funktional: Haskell
     -   Offside Rule
     -   Listen, List Comprehensions
@@ -161,8 +162,8 @@ beispielsweise
 
 Führen Sie eine eigenständige Recherche durch und arbeiten Sie die Themen durch.
 
-Bereiten Sie pro Team eine kurze Präsentation (ca. 20 bis 30 Minuten) vor, in der Sie
-die Konzepte vorstellen und deren Arbeitsweise an ausgewählten Beispielen
+Bereiten Sie pro Team eine kurze Präsentation (ca. 20 bis 30 Minuten) vor, in der
+Sie die Konzepte vorstellen und deren Arbeitsweise an ausgewählten Beispielen
 verdeutlichen.
 
 Die Präsentation findet im Rahmen des zweiten Edmonton-Treffens ("Edmonton II", 26.
@@ -173,11 +174,11 @@ November) und wird von Ihnen in englischer Sprache gehalten.
 Entwickeln Sie einen kleinen Compiler für die gewählte Programmiersprache. Die
 Implementierung sollte grundlegende Sprachfeatures unterstützen (z.B. einfache
 Datentypen, Kontrollstrukturen) und eine einfache Codegenerierung (etwa nach C oder
-Java, oder nach WASM o.ä.) beinhalten. Berücksichtigen Sie dabei nach Möglichkeit die
-von Ihnen in Workshop II vorgestellten Techniken und Algorithmen.
+Java, oder nach WASM o.ä.) beinhalten. Berücksichtigen Sie dabei nach Möglichkeit
+die von Ihnen in Workshop II vorgestellten Techniken und Algorithmen.
 
-Sie finden in [@Grune2012] in den Kapiteln 11 bis 13 wertvolle Ideen zu verschiedenen
-Sprachparadigmen.
+Sie finden in [@Grune2012] in den Kapiteln 11 bis 13 wertvolle Ideen zu
+verschiedenen Sprachparadigmen.
 
 Dokumentieren Sie den Entwicklungsprozess, die Herausforderungen und die Lösungen,
 die Sie gefunden haben.
@@ -203,17 +204,17 @@ Die Bewertung erfolgt anhand der Qualität der Präsentationen, der Tiefe der An
 der technischen Umsetzung des Compilers sowie der Reflexion über den gesamten
 Prozess.
 
-Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser Programmiersprachen
-auf Compiler-Designs und beschreiben Sie eventuelle Inspirationsquellen oder
-alternative Ansätze.
+Berücksichtigen Sie bei Ihrer Analyse auch die Einflüsse diverser
+Programmiersprachen auf Compiler-Designs und beschreiben Sie eventuelle
+Inspirationsquellen oder alternative Ansätze.
 
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
 Wir freuen uns darauf, Sie in diesem herausfordernden und spannenden Projekt zu
 begleiten und wünschen Ihnen viel Erfolg!
 
-Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie sich
-aktiv Feedback.
+Stimmen Sie alle Schritte und Ergebnisse mit Ihren Dozent:innen ab und holen Sie
+sich aktiv Feedback.
 
 **Hinweis**: Wir werden in der Vorlesung nicht alle benötigten Techniken besprechen
 können (und auch möglicherweise nicht rechtzeitig). Es besteht die Erwartung, dass

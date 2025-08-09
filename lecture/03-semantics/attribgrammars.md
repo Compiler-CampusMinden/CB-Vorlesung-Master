@@ -156,9 +156,10 @@ Die Syntaxanalyse kann keine kontextsensitiven Analysen durchführen
 -   Kontextsensitive Grammatiken benutzen: Laufzeitprobleme, das Parsen von
     cs-Grammatiken ist *PSPACE-complete*
 
--   Parsergenerator *Bison*: generiert LALR(1)-Parser, aber auch sog. *Generalized LR
-    (GLR) Parser*, die bei nichtlösbaren Konflikten in der Grammatik (Reduce/Reduce
-    oder Shift/Reduce) parallel den Input mit jede der Möglichkeiten weiterparsen
+-   Parsergenerator *Bison*: generiert LALR(1)-Parser, aber auch sog. *Generalized
+    LR (GLR) Parser*, die bei nichtlösbaren Konflikten in der Grammatik
+    (Reduce/Reduce oder Shift/Reduce) parallel den Input mit jede der Möglichkeiten
+    weiterparsen
 
 -   Anderer Ansatz: Berücksichtigung kontextsensitiver Abhängigkeiten mit Hilfe
     attributierter Grammatiken, zur Typanalyse, auch zur Codegenerierung
@@ -403,8 +404,8 @@ Die Aktionen werden am Ende jeder Produktion eingefügt ("postfix SDT").
 
 -   SDT dazu:
 
-    -   Aktionen, die ein berechnetes Attribut des Kopfes einer Produktion berechnen,
-        an das Ende der Produktion anfügen
+    -   Aktionen, die ein berechnetes Attribut des Kopfes einer Produktion
+        berechnen, an das Ende der Produktion anfügen
 
     -   Aktionen, die geerbte Attribute für ein Nicht-Terminalsymbol $A$ berechnen,
         direkt vor dem Auftreten von $A$ im Körper der Produktion eingefügen
@@ -413,7 +414,8 @@ Die Aktionen werden am Ende jeder Produktion eingefügt ("postfix SDT").
 
 ## Implementierung im rekursiven Abstieg
 
--   Geerbte Attribute sind Parameter für die Funktionen für die Nicht-Terminalsymbole
+-   Geerbte Attribute sind Parameter für die Funktionen für die
+    Nicht-Terminalsymbole
 
 -   berechnete Attribute sind Rückgabewerte dieser Funktionen.
 
@@ -445,8 +447,8 @@ T t'(T inh) {
 
     -   L-attributierte SDD, LL-Grammatik: top-down-parsebar
 
-    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree, bzw.
-    AST, integriert und bei einer (späteren) Traversierung abgearbeitet.
+    Ansonsten werden die Attribute und eingebetteten Aktionen in den Parse-Tree,
+    bzw. AST, integriert und bei einer (späteren) Traversierung abgearbeitet.
 
 ::: readings
 -   @Aho2023: Kapitel 2.3 und 5

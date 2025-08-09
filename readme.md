@@ -9,8 +9,8 @@ title: "MIF 1.5: Concepts of Programming Languages (Winter 2025/26)"
 # Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin
-der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen
-und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen
+Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
 In diesem Modul geht es um ein fortgeschrittenes Verständnis für interessante
 Konzepte im Compilerbau sowie um grundlegende Konzepte von Programmiersprachen und
@@ -22,8 +22,8 @@ Programmiersprachen für die Java-VM oder WASM ein.
 
 1.  Lexikalische Analyse: Scanner/Lexer
     -   Reguläre Sprachen
-    -   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction), NFA nach DFA
-        (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
+    -   Klassisches Vorgehen: RegExp nach NFA (Thompson's Construction), NFA nach
+        DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft's Algorithm)
     -   Manuelle Implementierung, Generierung mit ANTLR oder Flex
 2.  Syntaxanalyse: Parser
     -   Kontextfreie Grammatiken (CFG), Chomsky
@@ -31,7 +31,8 @@ Programmiersprachen für die Java-VM oder WASM ein.
         -   FIRST, FOLLOW
         -   Tabellenbasierte Verfahren, rekursiver Abstieg
         -   LL(1), LL(k), LL(\*)
-        -   Umgang mit Vorrang-Regeln, Assoziativität und linksrekursiven Grammatiken
+        -   Umgang mit Vorrang-Regeln, Assoziativität und linksrekursiven
+            Grammatiken
     -   LR-Parser (Bottom-Up-Parser)
         -   Shift-Reduce
         -   LR(0), SLR(1), LR(1), LALR
@@ -120,7 +121,8 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 -   **Gesamtnote**:
 
-    Die Workshops werden bewertet und ergeben in folgender Gewichtung die Gesamtnote:
+    Die Workshops werden bewertet und ergeben in folgender Gewichtung die
+    Gesamtnote:
 
     -   20% [Workshop I](homework/project.md),
     -   30% [Workshop II](homework/project.md),
@@ -132,8 +134,8 @@ Die Bearbeitung der Aufgaben (Workshops) erfolgt in 2er Teams.
 
 1.  ["**Compilers: Principles, Techniques, and
     Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
-    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson
-    India, 2023. ISBN
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S.,
+    Pearson India, 2023. ISBN
     [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
     [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/)
     über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
@@ -180,7 +182,7 @@ Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für be
 Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache
 durchgeführt.)
 
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
 # LICENSE
 

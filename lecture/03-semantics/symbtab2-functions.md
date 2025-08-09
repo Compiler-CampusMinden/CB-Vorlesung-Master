@@ -4,13 +4,13 @@ title: "SymbTab2: Funktionen"
 ---
 
 ::: tldr
-Eine Funktion sind selbst ein Symbol, welches in einem Scope gilt und entsprechend in
-der Symboltabelle eingetragen wird. Darüber hinaus bildet sie einen neuen
+Eine Funktion sind selbst ein Symbol, welches in einem Scope gilt und entsprechend
+in der Symboltabelle eingetragen wird. Darüber hinaus bildet sie einen neuen
 verschachtelten Scope, in dem die Funktionsparameter und der Funktionskörper
 definiert werden müssen.
 
-Entsprechend müssen die Strukturen für die Symboltabellen sowie das Eintragen und das
-Auflösen von Symbolen erweitert werden.
+Entsprechend müssen die Strukturen für die Symboltabellen sowie das Eintragen und
+das Auflösen von Symbolen erweitert werden.
 :::
 
 ::: youtube
@@ -55,8 +55,8 @@ void g(int z){}
 -   Der Symboltabelleneintrag für den Funktionsnamen enthält Angaben über den
     Rückgabetypen.
 -   Jede Funktion wird grundsätzlich wie ein neuer Scope behandelt.
--   Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der
-    Funktion angelegt and entsprechend als Parameter gekennzeichnet.
+-   Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope
+    der Funktion angelegt and entsprechend als Parameter gekennzeichnet.
 
 ## Behandlung von Funktionsaufrufen
 
@@ -156,8 +156,8 @@ def exitCall(Parser.CallContext ctx):
         error(name + " is not a function")
 ```
 
-[*Anmerkung*: Um den Code auf die Folie zu bekommen, ist dies wieder ein Mix aus Java
-und Python geworden. Sry ;)]{.notes}
+[*Anmerkung*: Um den Code auf die Folie zu bekommen, ist dies wieder ein Mix aus
+Java und Python geworden. Sry ;)]{.notes}
 :::
 :::::
 
@@ -167,14 +167,15 @@ den Funktionskopf dazu. Dieser spielt eine Doppelrolle: Er ist sowohl ein Symbol
 (welches im Elternscope bekannt ist) als auch ein eigener (lokaler) Scope für die
 Funktionsparameter.
 
-Um später im Interpreter eine Funktion tatsächlich auswerten zu können, muss im Scope
-der Funktion zusätzlich der AST-Knoten der Funktionsdefinition gespeichert werden
-(weiteres Feld/Attribut in `Function`)!
+Um später im Interpreter eine Funktion tatsächlich auswerten zu können, muss im
+Scope der Funktion zusätzlich der AST-Knoten der Funktionsdefinition gespeichert
+werden (weiteres Feld/Attribut in `Function`)!
 :::
 
 # Wrap-Up
 
--   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
+-   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über
+    Bezeichner)
 
 \smallskip
 

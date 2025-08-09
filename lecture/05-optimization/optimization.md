@@ -36,8 +36,8 @@ zu verbessern.
 
 ## Was ist machbar?
 
-Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner oder
-stromsparender.
+Manche Optimierungen machen den Code nur in bestimmten Fällen schneller, kleiner
+oder stromsparender.
 
 Den optimalen Code zu finden, ist oft NP-vollständig oder sogar unentscheidbar.
 
@@ -150,8 +150,8 @@ Optimierungsphasen durchgeführt werden.
 
 -   lokal (= innerhalb eines Basisblocks), z. B. Peephole-Optimierung
 
-    Einige Strategien sind auch global einsetzbar (ohne die sog. Datenflussanalyse s.
-    u.)
+    Einige Strategien sind auch global einsetzbar (ohne die sog.
+    Datenflussanalyse s. u.)
 
 -   global, braucht nicht-lokale Informationen
 
@@ -211,7 +211,8 @@ Optimierungsphasen durchgeführt werden.
     ::: {.column width="31%"}
     \vspace{7mm}
 
-    ersetze mit (falls in `...` keine weiteren Zuweisungen an `x`, `y`, `z` erfolgen)
+    ersetze mit (falls in `...` keine weiteren Zuweisungen an `x`, `y`, `z`
+    erfolgen)
     :::
 
     ::: {.column width="18%"}
@@ -350,8 +351,8 @@ Vorgängerblöcken von $B_i$ gültig sind
 
 $gen(B_i)$: alle Zeilennummern von letzten Variablendefinitionen in $B_i$
 
-$kill(B_i)$: alle Zeilennummern von Variablendefinitionen außerhalb von $B_i$, die in
-$B_i$ überschrieben werden
+$kill(B_i)$: alle Zeilennummern von Variablendefinitionen außerhalb von $B_i$, die
+in $B_i$ überschrieben werden
 
 Zunächst ist $in(B_1) = \emptyset$, danach ist $in(B_i) = \bigcup  out(B_j)$ mit
 $B_j$ ist Vorgänger von $B_i$.
@@ -370,8 +371,8 @@ $in(B_i)$: alle Ausdrücke, die am Anfang von $B_i$ verfügbar sind
 
 $gen(B_i)$: alle in $B_i$ berechneten Ausdrücke
 
-$kill(B_i)$: alle Ausdrücke $x\ op\ y$ mit einer Definition von $x$ oder $y$ in $B_i$
-und $x\ op\ y$ ist nicht in $B_i$
+$kill(B_i)$: alle Ausdrücke $x\ op\ y$ mit einer Definition von $x$ oder $y$ in
+$B_i$ und $x\ op\ y$ ist nicht in $B_i$
 
 Zunächst ist $gen(B_1) = \emptyset$, danach ist $in(B_i) = \bigcap  out(B_j)$ mit
 $B_j$ ist Vorgänger von $B_i$.
@@ -397,10 +398,10 @@ $B_j$ ist Nachfolger von $B_i$.
 
 ## Backward-all-analysis
 
-Diese Analyse wird zur Berechnung von "very busy" Ausdrücken der Form $x = y\ op\ z$,
-die auf allen möglichen Wegen im Flussgraphen vom aktuellen Basisblock aus mindestens
-einmal benutzt werden. Ausdrücke sollten dort berechnet werden, wo sie very busy
-sind, um den Code kürzer zu machen.
+Diese Analyse wird zur Berechnung von "very busy" Ausdrücken der Form
+$x = y\ op\ z$, die auf allen möglichen Wegen im Flussgraphen vom aktuellen
+Basisblock aus mindestens einmal benutzt werden. Ausdrücke sollten dort berechnet
+werden, wo sie very busy sind, um den Code kürzer zu machen.
 
 $$in(B_i) = gen(B_i) \cup (out(B_i) - kill(B_i))$$
 
@@ -486,8 +487,8 @@ In Schleifen genutzte Variablen werden eher nicht ausgelagert.
 Maschinenoperationen, die nur auf Registern arbeiten, verbrauchen die wenigste
 Energie.
 
-Operationen, die nur lesend auf Speicherzellen zugreifen, verbrauchen ca. ein Drittel
-mehr Energie.
+Operationen, die nur lesend auf Speicherzellen zugreifen, verbrauchen ca. ein
+Drittel mehr Energie.
 
 Operationen, die Speicherzellen beschreiben, benötigen zwei Drittel mehr Energie als
 die Operationen ausschließlich auf Register.

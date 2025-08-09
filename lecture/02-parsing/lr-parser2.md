@@ -181,8 +181,8 @@ Folgendes kann trotzdem helfen:
 -   Angabe von Vorrangregeln
 -   Angabe von Assoziativität
 -   Voreinstellung des Parsergenearators: z. B. Shiften bei Shift-Reduce-Konflikten
--   Voreinstellung des Parsergenearators: z. B. Reduzieren nach der Regel, die in der
-    Grammatik zuerst kommt bei Reduce-Reduce-Konflikten
+-   Voreinstellung des Parsergenearators: z. B. Reduzieren nach der Regel, die in
+    der Grammatik zuerst kommt bei Reduce-Reduce-Konflikten
 
 # Hierarchie der kontextfreien Sprachen
 

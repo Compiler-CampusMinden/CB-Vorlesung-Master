@@ -10,24 +10,24 @@ Ergebnisse:
 ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
 
 |  | Phase | Ergebnis |
-|:----|:--------------------------|:----------------------------------------------------|
+|:-----|:--------------------------|:--------------------------------------------------|
 | 0 | Lexer/Parser | AST |
 | 1 | Semantische Analyse, Def-Phase | Symboltabelle (Definitionen), Verknüpfung Scopes mit AST-Knoten |
 | 2 | Semantische Analyse, Ref-Phase | Prüfung auf nicht definierte Referenzen |
 | 3 | Interpreter | Abarbeitung, Nutzung von AST und Symboltabelle |
 
-Das Erzeugen der Symboltabelle wird häufig in zwei Phasen aufgeteilt: Zunächst werden
-die Definitionen abgearbeitet und in der zweiten Phase wird noch einmal über den AST
-iteriert und die Referenzen werden geprüft. Dies hat den Vorteil, dass man mit
-Vorwärtsreferenzen arbeiten kann ...
+Das Erzeugen der Symboltabelle wird häufig in zwei Phasen aufgeteilt: Zunächst
+werden die Definitionen abgearbeitet und in der zweiten Phase wird noch einmal über
+den AST iteriert und die Referenzen werden geprüft. Dies hat den Vorteil, dass man
+mit Vorwärtsreferenzen arbeiten kann ...
 
 Für die semantische Analyse kann man gut mit Listenern arbeiten, für den Interpreter
 werden oft Visitors eingesetzt.
 
 Die einfachste Form von Interpretern sind die "syntaxgesteuerten Interpreter". Durch
 den Einsatz von attributierten Grammatiken und eingebetteten Aktionen kann in
-einfachen Fällen der Programmcode bereits beim Parsen interpretiert werden, d.h. nach
-dem Parsen steht das Ergebnis fest.
+einfachen Fällen der Programmcode bereits beim Parsen interpretiert werden, d.h.
+nach dem Parsen steht das Ergebnis fest.
 
 Normalerweise traversiert man in Interpretern aber den AST, etwa mit dem Listener-
 oder Visitor-Pattern. Die in dieser Sitzung gezeigten einfachen Beispiele der
@@ -50,8 +50,8 @@ betrachten.
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es
-wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST bzw.
-IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
+wird kein Code erzeugt, stattdessen führt der Interpreter die Anweisungen im AST
+bzw. IC aus. Dazu muss der Interpreter mit den Eingabedaten beschickt werden.
 
 Es gibt verschiedene Varianten, beispielsweise:
 :::
@@ -136,11 +136,11 @@ Erinnerung: ANTLR generiert einen LL-Parser, d.h. es wird zu jeder Regel eine
 entsprechende Methode generiert.
 
 Analog zum Rückgabewert der Regel (Methode) `expr()` kann auf die Eigenschaften der
-Token und Sub-Regeln zugegriffen werden: `$name.eigenschaft`. Dabei gibt es bei Token
-Eigenschaften wie `text` (gematchter Text bei Token), `type` (Typ eines Tokens),
-`int` (Integerwert eines Tokens, entspricht `Integer.valueOf($Token.text)`).
-Parser-Regeln haben u.a. ein `text`-Attribut und ein spezielles Kontext-Objekt
-(`ctx`).
+Token und Sub-Regeln zugegriffen werden: `$name.eigenschaft`. Dabei gibt es bei
+Token Eigenschaften wie `text` (gematchter Text bei Token), `type` (Typ eines
+Tokens), `int` (Integerwert eines Tokens, entspricht
+`Integer.valueOf($Token.text)`). Parser-Regeln haben u.a. ein `text`-Attribut und
+ein spezielles Kontext-Objekt (`ctx`).
 
 Die allgemeine Form lautet:
 :::
@@ -274,8 +274,9 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 ::: notes
 ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und leere
 Basisimplementierung). Beim Traversieren mit dem Default-`ParseTreeWalker` wird der
-Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in bzw. beim Austritt
-aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt aufgerufen.
+Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in bzw. beim
+Austritt aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt
+aufgerufen.
 
 Damit kann man die Grammatik "für sich" halten, d.h. unabhängig von einer konkreten
 Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.) ausführen.

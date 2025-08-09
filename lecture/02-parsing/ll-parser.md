@@ -61,8 +61,8 @@ $A \overset{\ast}{\Rightarrow} w$.
 keine nutzlosen oder unerreichbaren Nichtterminale in *N* gibt.
 
 Bevor mit einer Grammatik weitergearbeitet wird, müssen erst alle nutzlosen und dann
-alle unerreichbaren Symbole eliminiert werden. Wir betrachten ab jetzt nur reduzierte
-Grammatiken.
+alle unerreichbaren Symbole eliminiert werden. Wir betrachten ab jetzt nur
+reduzierte Grammatiken.
 
 # Algorithmus: Rekursiver Abstieg
 
@@ -174,7 +174,8 @@ Grammatik *G'* gibt mit $L(G) = L(G')$.
 
 In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente
 Parsergeneratoren, deren Eingabe eine LL(k)- (meist LL(1)-) Grammatik ist, und die
-als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
+als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers
+generieren.
 
 ## Algorithmus: Konstruktion einer LL-Parsertabelle {#algorithmus-konstruktion-einer-ll-parsertabelle .fragile}
 
@@ -194,15 +195,16 @@ $Follow(\alpha)$ geschrieben.
 
 Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt (bei
 einem Recursive-Descent-Parser, aber auch bei der Parsertabelle). Diesen Stack kann
-man auch "selbst programmieren", d. h. einen PDA implementieren. Dabei wird ebenfalls
-die oben genannte Tabelle zur Bestimmung der nächsten anzuwendenden Produktion
-benutzt. Der Stack enthält die zu erwartenden Eingabezeichen, wenn immer eine
-Linksableitung gebildet wird. Diese Zeichen im Stack werden mit dem Input gematcht.
+man auch "selbst programmieren", d. h. einen PDA implementieren. Dabei wird
+ebenfalls die oben genannte Tabelle zur Bestimmung der nächsten anzuwendenden
+Produktion benutzt. Der Stack enthält die zu erwartenden Eingabezeichen, wenn immer
+eine Linksableitung gebildet wird. Diese Zeichen im Stack werden mit dem Input
+gematcht.
 
 ## Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA {#algorithmus-tabellengesteuertes-ll-parsen-mit-einem-pda .fragile}
 
-**Eingabe:** Eine Grammatik G = (N, T, P, S), eine Parsertabelle *P* mit $w\perp$ als
-initialem Kellerinhalt
+**Eingabe:** Eine Grammatik G = (N, T, P, S), eine Parsertabelle *P* mit $w\perp$
+als initialem Kellerinhalt
 
 **Ausgabe:** Wenn $w \in L(G)$, eine Linksableitung von $w$, Fehler sonst
 
@@ -213,8 +215,8 @@ initialem Kellerinhalt
 -   Syntaxanalyse wird mit deterministisch kontextfreien Grammatiken durchgeführt.
 -   Eine Teilmenge der dazu gehörigen Sprachen lässt sich top-down parsen.
 -   Ein einfacher Recursive-Descent-Parser arbeitet mit Backtracking.
--   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus einer
-    LL(k)-Grammatik generiert werden.
+-   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus
+    einer LL(k)-Grammatik generiert werden.
 -   Der Parser liefert in der Regel einen abstrakten Syntaxbaum (AST).
 
 ::: readings

@@ -4,8 +4,8 @@ title: "AST-basierte Interpreter: Funktionen und Klassen"
 ---
 
 ::: tldr
-Üblicherweise können Funktionen auf die Umgebung zurückgreifen, in der die Definition
-der Funktion erfolgt ist
+Üblicherweise können Funktionen auf die Umgebung zurückgreifen, in der die
+Definition der Funktion erfolgt ist
 (["**Closure**"](https://en.wikipedia.org/wiki/Closure_(computer_programming))).
 Deshalb wird beim Interpretieren einer Funktionsdefinition der jeweilige AST-Knoten
 (mit dem Block des Funktionskörpers) und die aktuelle Umgebung in einer Struktur
@@ -20,18 +20,18 @@ Funktionsparameter werden ebenfalls in der aktuellen Umgebung aufgelöst (Aufruf
 Funktion legt man sich eine neue Umgebung an, deren Eltern-Umgebung die Closure der
 Funktion ist, definiert die Funktionsparameter (Name und eben ermittelter Wert) in
 dieser neuen Umgebung und interpretiert dann den AST-Kindknoten des Funktionsblocks
-in dieser neuen Umgebung. Für den Rückgabewert muss man ein wenig tricksen: Ein Block
-hat normalerweise keinen Wert. Eine Möglichkeit wäre, bei der Interpretation eines
-`return`-Statements eine Exception mit dem Wert des Ausdruck hinter dem "`return`" zu
-werfen und im `eval()` des Funktionsblock zu fangen.
+in dieser neuen Umgebung. Für den Rückgabewert muss man ein wenig tricksen: Ein
+Block hat normalerweise keinen Wert. Eine Möglichkeit wäre, bei der Interpretation
+eines `return`-Statements eine Exception mit dem Wert des Ausdruck hinter dem
+"`return`" zu werfen und im `eval()` des Funktionsblock zu fangen.
 
-Für Klassen kann man analog verfahren. Methoden sind zunächst einfach Funktionen, die
-in einem Klassenobjekt gesammelt werden. Das Erzeugen einer Instanz einer Klasse ist
-die Interpretation eines "Aufrufs" der Klasse (analog zum Aufruf einer Funktion):
-Dabei wird ein spezielles Instanzobjekt erzeugt, welches auf die Klasse verweist und
-welches die Werte der Attribute hält. Beim Aufruf von Methoden auf einem
-Instanzobjekt wird der Name der Funktion über das Klassenobjekt aufgelöst, eine neue
-Umgebung erzeugt mit der Closure der Funktion als Eltern-Umgebung und das
+Für Klassen kann man analog verfahren. Methoden sind zunächst einfach Funktionen,
+die in einem Klassenobjekt gesammelt werden. Das Erzeugen einer Instanz einer Klasse
+ist die Interpretation eines "Aufrufs" der Klasse (analog zum Aufruf einer
+Funktion): Dabei wird ein spezielles Instanzobjekt erzeugt, welches auf die Klasse
+verweist und welches die Werte der Attribute hält. Beim Aufruf von Methoden auf
+einem Instanzobjekt wird der Name der Funktion über das Klassenobjekt aufgelöst,
+eine neue Umgebung erzeugt mit der Closure der Funktion als Eltern-Umgebung und das
 Instanzobjekt wird in dieser Umgebung definiert als "`this`" oder "`self`".
 Anschließend wird ein neues Funktionsobjekt mit der eben erzeugten Umgebung und dem
 Funktions-AST erzeugt und zurückgeliefert. Dieses neue Funktionsobjekt wird dann wie
@@ -42,7 +42,8 @@ verweisen.
 :::
 
 ::: youtube
--   [VL AST-basierte Interpreter (Funktionen, Klassen)](https://youtu.be/LTqk7ifB-V0)
+-   [VL AST-basierte Interpreter (Funktionen,
+    Klassen)](https://youtu.be/LTqk7ifB-V0)
 :::
 
 # Funktionen
@@ -119,8 +120,8 @@ by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
-Man definiert im aktuellen Environment den Funktionsnamen und hält dazu den aktuellen
-Kontext (aktuelles Environment) sowie den AST-Knoten mit der eigentlichen
+Man definiert im aktuellen Environment den Funktionsnamen und hält dazu den
+aktuellen Kontext (aktuelles Environment) sowie den AST-Knoten mit der eigentlichen
 Funktionsdefinition fest.
 
 Für *Closures* ist der aktuelle Kontext wichtig, sobald man die Funktion ausführen
@@ -221,8 +222,8 @@ und
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
-Rückgabewerte für den Funktionsaufruf werden innerhalb von `block` berechnet, wo eine
-Reihe von Anweisungen interpretiert werden, weshalb `block` ursprünglich keinen
+Rückgabewerte für den Funktionsaufruf werden innerhalb von `block` berechnet, wo
+eine Reihe von Anweisungen interpretiert werden, weshalb `block` ursprünglich keinen
 Rückgabewert hat. Im Prinzip könnte man `block` etwas zurück geben lassen, was durch
 die möglicherweise tiefe Rekursion relativ umständlich werden kann.
 
@@ -268,14 +269,14 @@ Normalerweise wird beim Interpretieren eines Funktionsaufrufs der Funktionskörp
 (repräsentiert durch den entsprechenden AST-Teilbaum) durch einen rekursiven Aufruf
 von `eval` ausgewertet.
 
-Für native Funktionen, die im Interpreter eingebettet sind, klappt das nicht mehr, da
-hier kein AST vorliegt.
+Für native Funktionen, die im Interpreter eingebettet sind, klappt das nicht mehr,
+da hier kein AST vorliegt.
 
 Man erstellt ein neues Interface `Callable` mit der Hauptmethode `call()` und leitet
 die frühere Klasse `Fun` davon ab: `class Fun(Callable)`. Die Methode `funcCall()`
 des Interpreters ruft nun statt der `eval()`-Methode die `call()`-Methode des
-Funktionsobjekts auf und übergibt den Interpreter (== Zustand) und die Argumente. Die
-`call()`-Methode der Klasse `Fun` muss nun ihrerseits im Normalfall den im
+Funktionsobjekts auf und übergibt den Interpreter (== Zustand) und die Argumente.
+Die `call()`-Methode der Klasse `Fun` muss nun ihrerseits im Normalfall den im
 Funktionsobjekt referenzierten AST-Teilbaum des Funktionskörpers mit dem Aufruf von
 `eval()` interpretieren ...
 
@@ -437,8 +438,8 @@ TODO
     Visitor-Patterns
 -   k3: Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog
     zu den Symboltabellen
--   k3: Code-Ausführung im Interpreter durch eine Read-Eval-Schleife: Implementierung
-    mit einem Visitor
+-   k3: Code-Ausführung im Interpreter durch eine Read-Eval-Schleife:
+    Implementierung mit einem Visitor
 :::
 
 ::: challenges

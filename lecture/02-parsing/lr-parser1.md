@@ -45,14 +45,15 @@ kontextfreien Sprachen parsen kann.
 ## Von unten nach oben
 
 Bei $LL$-Sprachen muss man nach den ersten $k$ Eingabezeichen entscheiden, welche
-Ableitung ganz oben im Baum als erste durchgeführt wird, also eine, die im Syntaxbaum
-ganz weit weg ist von den Terminalen, die die Entschiedung bestimmen.Es gibt
-deterministisch kontextfreie Sprachen, die nicht $LL(k)$ sind für irgendein *k*.
+Ableitung ganz oben im Baum als erste durchgeführt wird, also eine, die im
+Syntaxbaum ganz weit weg ist von den Terminalen, die die Entschiedung bestimmen.Es
+gibt deterministisch kontextfreie Sprachen, die nicht $LL(k)$ sind für irgendein
+*k*.
 
-Bei der Bottom-Up-Analyse geht man den umgekehrten Weg. Der Parse Tree wird von unten
-nach oben aufgebaut, die Entscheidung, welche Produktion angewandt wird, erfolgt
-"näher" am Terminal. Mit Hilfe der Produktionen und der Vorschautoken werden die
-Ableitungen "rückwärts" angewandt und "Reduktionen" genannt.
+Bei der Bottom-Up-Analyse geht man den umgekehrten Weg. Der Parse Tree wird von
+unten nach oben aufgebaut, die Entscheidung, welche Produktion angewandt wird,
+erfolgt "näher" am Terminal. Mit Hilfe der Produktionen und der Vorschautoken werden
+die Ableitungen "rückwärts" angewandt und "Reduktionen" genannt.
 
 Fehlermeldungen können näher am Programmtext erfolgen.
 
@@ -78,10 +79,10 @@ Hier entsteht ein Tafelbild.
 
 ## Mehrdeutigkeiten = Konflikte beim Parsen
 
-Es gibt Grammatiken, bei denen nicht aus dem Inhalt des Stacks und dem Eingabezeichen
-entschieden werden kann, wie fortgefahren wird, auch nicht, wenn man, wie auch schon
-im Fall $LL$, eine feste Zahl $k$ von Vorschautoken berücksichtigt. Diese Grammatiken
-können mehrdeutig sein.
+Es gibt Grammatiken, bei denen nicht aus dem Inhalt des Stacks und dem
+Eingabezeichen entschieden werden kann, wie fortgefahren wird, auch nicht, wenn man,
+wie auch schon im Fall $LL$, eine feste Zahl $k$ von Vorschautoken berücksichtigt.
+Diese Grammatiken können mehrdeutig sein.
 
 Folgen von falschen Entscheidungen:
 
@@ -116,9 +117,9 @@ steht.
     Dort weiter.
 
 -   nein: Reduzieren nach der Regel aus dem aktuellen Zustand mit dem Punkt hinten,
-    d. h. so viele Zustände poppen, wie die Regel Elemente auf der rechten Seite hat.
-    Der Zustand darunter wird aktuell, dem Pfeil mit dem zu reduzierenden Nonterminal
-    der linken Seite der Regel folgen und pushen.
+    d. h. so viele Zustände poppen, wie die Regel Elemente auf der rechten Seite
+    hat. Der Zustand darunter wird aktuell, dem Pfeil mit dem zu reduzierenden
+    Nonterminal der linken Seite der Regel folgen und pushen.
 
 Am Schluss kann nur noch mit $\bot$ akzeptiert werden.
 
@@ -191,17 +192,17 @@ Bottomzeichen, oft auch $\$$). Es ist nicht nötig, Symbole zu stacken.
 Wichtig: Das Handle, d. h. die rechte Seite einer zu reduzierenden Regel, erscheint
 oben auf dem Stack, nie weiter unten.
 
-Je nach Anwendungsfall müssen beim Reduzieren von Handles weitere Aktionen ausgeführt
-werden: z. B. Syntaxbäume aufgebaut, Werte in Tabellen geschrieben werden, usw. Nicht
-alle rechten Seiten von Produktionen, die oben auf dem Stack stehen, sind auch
-Handles, manchmal muss nur geshiftet werden.
+Je nach Anwendungsfall müssen beim Reduzieren von Handles weitere Aktionen
+ausgeführt werden: z. B. Syntaxbäume aufgebaut, Werte in Tabellen geschrieben
+werden, usw. Nicht alle rechten Seiten von Produktionen, die oben auf dem Stack
+stehen, sind auch Handles, manchmal muss nur geshiftet werden.
 
 Bsp: Steht bei der Beispielgrammatik von Folie 8 oben auf dem Stack ein $T$ mit dem
 nächsten Eingabezeichen $\ast$, darf $T$ nicht zu $E$ reduziert werden.
 
-Lösung: Der Parser merkt sich, wo er steht in noch nicht komplett reduzierten Regeln.
-Dazu benutzt er sogenannte *Items* oder *LR(0)-Items*, auch *dotted Items* oder
-*(kanonische) LR(0)-Elemente* genannt.
+Lösung: Der Parser merkt sich, wo er steht in noch nicht komplett reduzierten
+Regeln. Dazu benutzt er sogenannte *Items* oder *LR(0)-Items*, auch *dotted Items*
+oder *(kanonische) LR(0)-Elemente* genannt.
 
 ## Items
 
@@ -245,11 +246,11 @@ $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 
 1.  Bilde die Hülle von $S' \rightarrow S$ und mache sie zum ersten Zustand.
 
-2.  Für jedes noch nicht betrachtete $\cdot X, X \in (N \cup T)$ in einem Zustand $q$
-    des Automaten berechne $GOTO_0(q, X)$ und mache $GOTO_0(q, X)$ zu einem neuen
-    Zustand $r$. Verbinde $q$ mit einem Pfeil mit $r$ und schreibe $X$ an den Pfeil.
-    Ist ein zu $r$ identischer Zustand schon vorhanden, wird $p$ mit diesem verbunden
-    und kein neuer erzeugt.
+2.  Für jedes noch nicht betrachtete $\cdot X, X \in (N \cup T)$ in einem Zustand
+    $q$ des Automaten berechne $GOTO_0(q, X)$ und mache $GOTO_0(q, X)$ zu einem
+    neuen Zustand $r$. Verbinde $q$ mit einem Pfeil mit $r$ und schreibe $X$ an den
+    Pfeil. Ist ein zu $r$ identischer Zustand schon vorhanden, wird $p$ mit diesem
+    verbunden und kein neuer erzeugt.
 
 ## Konstruktion der Parse Table
 
@@ -265,9 +266,9 @@ $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 3.  Schreibe beim Zustand $[S' \rightarrow S \cdot]$ ein $accept$ bei dem Symbol
     $\bot$.
 
-4.  Für jedes Item mit $[A \rightarrow \beta \cdot]$ aus allen Zuständen schreibe für
-    alle Terminals $reduce$ und die Nummer der entsprechenden Grammatikregel in die
-    Tabelle.
+4.  Für jedes Item mit $[A \rightarrow \beta \cdot]$ aus allen Zuständen schreibe
+    für alle Terminals $reduce$ und die Nummer der entsprechenden Grammatikregel in
+    die Tabelle.
 
 ## Und wenn in einer Zelle schon ein Eintrag ist?
 
