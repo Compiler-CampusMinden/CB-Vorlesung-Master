@@ -26,9 +26,9 @@ Behandeln von Fehlern in Schleifen sowie zur Vermeidung von
 Endlos-Fehlerbehebungsschleifen ("Fail-Save"). In Bison wird dagegen mit einem
 speziellen *error*-Token gearbeitet und man fügt an "strategischen" Stellen Regeln
 der Form Regel $A \to
-\operatorname{error} \alpha$ hinzu. Dabei ist $\alpha$ ein Token, welches zur
+\mathop{\text{error}} \alpha$ hinzu. Dabei ist $\alpha$ ein Token, welches zur
 Synchronisierung genutzt werden soll. Im Fehlerfall werden so lange Token vom Stack
-entfernt, bis man eine Regel $A \to \operatorname{error}
+entfernt, bis man eine Regel $A \to \mathop{\text{error}}
 \alpha$ anwenden kann und das *error*-Token shiften kann. Danach werden ggf. so
 lange Token aus dem Eingabestrom entfernt, bis das Token $\alpha$ auftaucht und man
 die Regel mit einem *reduce* abschließen kann. Diese Form der Behandlung stellt
@@ -386,7 +386,7 @@ Synchronisationspunkt in der Grammatik zu definieren, von dem aus man
 
 Der Parser wird mit diesen Produktionen generiert wie mit normalen Token auch. Im
 Fehlerfall werden so lange Symbole vom Stack entfernt, bis eine Regel der Form
-$A \to \operatorname{error} \alpha$ anwendbar ist. Dann wird das Token `error` auf
+$A \to \mathop{\text{error}} \alpha$ anwendbar ist. Dann wird das Token `error` auf
 den Stack geschoben und so lange Eingabe-Token gelesen und verworfen, bis eines
 gefunden wird, welches auf das `error`-Token folgen kann. Dies nennt Bison
 "Resynchronisation". Anschließend wird im Recovery-Modus normal fortgefahren, bis
