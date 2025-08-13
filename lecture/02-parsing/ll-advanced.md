@@ -4,7 +4,7 @@ title: "LL-Parser: Fortgeschrittene Techniken"
 ---
 
 ::: tldr
-![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/images/architektur_cb_parser.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/images/architektur_cb_parser.png?raw=true)
 
 Man kann einen LL(k)-Parser bei Bedarf um ein "spekulatives Matching" ergänzen. Dies
 ist in Situationen relevant, wo man das $k$ nicht vorhersehen kann, etwa bei der

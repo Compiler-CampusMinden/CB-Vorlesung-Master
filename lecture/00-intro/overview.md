@@ -13,7 +13,7 @@ nimmt die Abstraktion von Stufe zu Stufe zu: Der ursprüngliche Input ist ein St
 von Zeichen, daraus wird ein Strom von Wörtern (Token), daraus ein Baum (Parse
 Tree), Zwischencode (IC), ...
 
-![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/00-intro/images/architektur_cb.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/00-intro/images/architektur_cb.png?raw=true)
 
 Die gezeigten Phasen werden traditionell unterschieden. Je nach Aufgabe können
 verschiedene Stufen zusammengefasst werden oder sogar gar nicht auftreten.

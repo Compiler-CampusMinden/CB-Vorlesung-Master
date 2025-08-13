@@ -7,7 +7,7 @@ title: Syntaxgesteuerte Interpreter
 Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen
 Ergebnisse:
 
-![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
 
 |   | Phase                          | Ergebnis                                                        |
 |:--|:-------------------------------|:----------------------------------------------------------------|
@@ -34,9 +34,9 @@ oder Visitor-Pattern. Die in dieser Sitzung gezeigten einfachen Beispiele der
 syntaxgesteuerten Interpreter werden erweitert auf die jeweilige Traversierung mit
 dem Listener- bzw. Visitor-Pattern. Für nicht so einfache Fälle braucht man aber
 zusätzlich noch Speicherstrukturen, die wir in [AST-basierte Interpreter:
-Basics](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part1.md)
+Basics](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part1.md)
 und [AST-basierte Interpreter: Funktionen und
-Klassen](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part2.md)
+Klassen](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/astdriven-part2.md)
 betrachten.
 :::
 
@@ -348,7 +348,7 @@ public class TestMyListener {
 ```
 
 [Beispiel: TestMyListener.java und calc.g4]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyListener.java"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyListener.java"}
 :::
 
 ::: notes
@@ -425,7 +425,7 @@ public class TestMyVisitor {
 ```
 
 [Beispiel: TestMyVisitor.java und calc.g4]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyVisitor.java"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/src/TestMyVisitor.java"}
 :::
 
 # Wrap-Up

@@ -189,9 +189,9 @@ durchgeführt.)
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
 Unless otherwise noted, [this
-work](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master) by [BC
+work](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master) by [BC
 George](https://github.com/bcg7), [Carsten Gips](https://github.com/cagix) and
-[contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/graphs/contributors)
+[contributors](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/graphs/contributors)
 is licensed under [CC BY-SA
-4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/LICENSE.md).
+4.0](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/LICENSE.md).
 See the [credits](CREDITS.md) for a detailed list of contributing projects.

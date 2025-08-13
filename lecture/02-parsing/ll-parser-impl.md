@@ -4,7 +4,7 @@ title: LL-Parser selbst implementiert
 ---
 
 ::: tldr
-![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/images/architektur_cb_parser.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/images/architektur_cb_parser.png?raw=true)
 
 LL-Parser können über einen "rekursiven Abstieg" direkt aus einer Grammatik
 implementiert werden:

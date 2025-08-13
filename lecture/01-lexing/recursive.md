@@ -4,14 +4,14 @@ title: "Lexer: Handcodierte Implementierung"
 ---
 
 ::: tldr
-![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/01-lexing/images/architektur_cb_lexer.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/01-lexing/images/architektur_cb_lexer.png?raw=true)
 
 Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token zerlegen.
 Zur Spezifikation der Token werden reguläre Ausdrücke verwendet.
 
 Von Hand implementierte Lexer arbeiten üblicherweise rekursiv und verarbeiten immer
 das nächste Zeichen im Eingabestrom. Die Arbeitsweise erinnert an LL-Parser (vgl.
-[LL-Parser](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/ll-parser-impl.md)).
+[LL-Parser](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/ll-parser-impl.md)).
 
 Lexer müssen sehr effizient sein, da sie noch direkt auf der niedrigsten
 Abstraktionsstufe arbeiten und u.U. oft durchlaufen werden. Deshalb setzt man hier

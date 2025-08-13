@@ -92,7 +92,7 @@ Anschließend können diverse *Writer* den AST in das gewünschte Zielformat
 :::
 
 [Konsole: pandoc hello.md -s -t native]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.md"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.md"}
 
 # Zwischenformat: Drei-Adressen-Code
 
@@ -191,7 +191,7 @@ define i32 @main() #0 {
 :::::
 
 [Beispiel: clang -emit-llvm -S -o - hello.c]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
 Der obige Output ist auf die *relevanten Zeilen gekürzt*; der gesamte Output im
@@ -263,7 +263,7 @@ y = x + 35
 :::::
 
 [Beispiel: python -m dis hello.py]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.py"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.py"}
 
 ::: notes
 Python pflegt 3 Listen: `co_names` für die Namen plus `co_values` für die
@@ -330,7 +330,7 @@ public class Hello {
 :::::
 
 [Beispiel: javac Hello.java && javap -c Hello.class]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/Hello.java"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/04-intermediate/src/Hello.java"}
 
 ::: notes
 Für jeden Methodenaufruf wird ein entsprechender Frame auf den Stack gepusht. Dieser
@@ -405,7 +405,7 @@ main:
 :::::
 
 [Beispiel: gcc -S -o - hello.c]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/04-intermediate/src/hello.c"}
 
 ::: notes
 Die Ausgabe unterscheidet sich je nach Architektur, auf dem der C-Code in

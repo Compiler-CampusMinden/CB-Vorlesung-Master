@@ -71,7 +71,7 @@ WS    : [ \t\n]+ -> skip ;
 ```
 
 [Konsole: Hello (grun, Parse-Tree)]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/Hello.g4"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/src/Hello.g4"}
 
 ::: notes
 ## Starten des Parsers
@@ -484,7 +484,7 @@ public class TestMyListener {
 ```
 
 [Beispiel: TestMyListener.java und calc.g4]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyListener.java"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyListener.java"}
 
 In [Syntaxgesteuerte Interpreter](../06-interpretation/syntaxdriven.md) werden wir
 damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
@@ -561,7 +561,7 @@ public class TestMyVisitor {
 ```
 
 [Beispiel: TestMyVisitor.java und calc.g4]{.ex
-href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyVisitor.java"}
+href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/02-parsing/src/TestMyVisitor.java"}
 
 In [Syntaxgesteuerte Interpreter](../06-interpretation/syntaxdriven.md) werden wir
 damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
