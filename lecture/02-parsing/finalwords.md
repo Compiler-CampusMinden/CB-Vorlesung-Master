@@ -159,5 +159,6 @@ sind hier nicht dargestellt.
 :::
 
 ::: outcomes
--   k2: Grenze zwischen Lexer und Parser: Was mache ich auf welcher Stufe?
+-   k2: Ich kann die Grenze zwischen Lexer und Parser erklären und an einem Beispiel
+    diskutieren, was man auf welcher Stufe machen kann mit welchen Auswirkungen
 :::
