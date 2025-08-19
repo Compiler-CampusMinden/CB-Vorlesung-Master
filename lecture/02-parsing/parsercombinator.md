@@ -275,13 +275,7 @@ folgen.
 
 ## Dijkstras Shunting Yard Algorithmus (SY): Stack statt Rekursion
 
-::: slides
-![](images/shuntingyardStack.png){width="50%"}
-:::
-
-::: notes
-![](images/shuntingyardStack.png){width="90%"}
-:::
+![](images/shuntingyardStack.png){width="50%" web_width="90%"}
 
 ## Dijkstras Shunting Yard Algorithmus
 
