@@ -209,14 +209,10 @@ Folgendes kann trotzdem helfen:
 :::
 
 ::: outcomes
--   k1: Prinzipien der Bottom-Up-Analyse
--   k1: Items
--   k1: Closure
--   k1: Parse Table
--   k2: LR(0)-Parsing
--   k2: SLR-Parsing
--   k2: LR(1)-Parsing
--   k2: LALR-Parsing
--   k3: Konstruktion der Parse Tables
--   k3: Durchführen des Parsens
+-   k1: Ich kenne die Prinzipien der Bottom-Up-Analyse
+-   k1: Ich kenne die Begriffe Item, Closure und Parse Table
+-   k2: Ich kann LR(0)-, SLR-, LR(1)- und LALR-Parsing an einem Beispiel erklären
+-   k3: Ich kann die Konstruktion der Parse Tables durchführen
+-   k3: Ich kann das Parsen mit einem LR(0)-, SLR-, LR(1)- oder LALR-Parser
+    durchführen
 :::

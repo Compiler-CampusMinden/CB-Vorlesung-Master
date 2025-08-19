@@ -319,7 +319,7 @@ Hier entsteht ein Tafelbild.
 
 ::: outcomes
 -   k1: Ich kenne die Prinzipien der Bottom-Up-Analyse
--   k1: Ich kenne die Begriffe Items, Closure und Parse Table
+-   k1: Ich kenne die Begriffe Item, Closure und Parse Table
 -   k2: Ich kann LR(0)-Parsing an einem Beispiel erklären
 -   k3: Ich kann die Konstruktion der Parse Tables durchführen
 -   k3: Ich kann das Parsen mit einem LR(0)-Parser durchführen
