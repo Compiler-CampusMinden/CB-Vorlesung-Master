@@ -582,8 +582,8 @@ Top Down Parsing von Ausdrücken:
 :::
 
 ::: outcomes
--   k1: PEG-Parser
--   k1: Operator Prcedence Parser
--   k1: Top Down Operator Precedence (Pratt) Parser
--   k1: Parser-Kombinatoren
+-   k1: Ich kenne die Arbeitsweise eines PEG-Parsers
+-   k1: Ich kenne die Arbeitsweise von Shunting Yard vs. Precedence Climbing vs.
+    Pratt-Parser
+-   k1: Ich kenne die Arbeitsweise von Parser-Kombinatoren
 :::
