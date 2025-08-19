@@ -15,7 +15,7 @@ title: "Syntaxanalyse: LR-Parser (Teil 2)"
 
 Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 
-![](images/pda.png){width="60%"}
+![](images/pda.png){width="60%" web_width="45%"}
 
 ## Top-Down-Analyse
 
@@ -71,11 +71,11 @@ Nonterminals auf der linken Seite der Regel enthalten sind.
 
 ## Die SLR-Parsertabelle der Grammatik G1
 
-![SLR(1)-Parsertabelle](images/SLR_1-Table.png){width="60%"}
+![SLR(1)-Parsertabelle](images/SLR_1-Table.png){width="60%" web_width="45%"}
 
 ## Zum Vergleich: Die LR(0)-Tabelle von G1 (letzte Vorlesung)
 
-![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%"}
+![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%" web_width="45%"}
 
 # Kanonische LR(1)-Syntaxanalyse
 
@@ -142,7 +142,7 @@ LOOKAHEAD-Menge der entsprechenden Regel enthalten sind.
 
 ## Die LR(1)-Parsertabelle der Grammatik G2
 
-![LR(1)-Parsertabelle](images/LR_1-Table.png){width="45%"}
+![LR(1)-Parsertabelle](images/LR_1-Table.png){width="45%" web_width="45%"}
 
 # Lookahead-LR = LALR
 
@@ -156,11 +156,11 @@ Parsergeneratoren generieren oft direkt aus einem LR(0)- einen LALR(1)-Zustands-
 
 ## Der LALR-Automat der Grammatik G2
 
-![LALR(1)-Automat](images/LALR-Automat.png)
+![LALR(1)-Automat](images/LALR-Automat.png){width="80%"}
 
 ## Die LALR-Parsertabelle der Grammatik G2
 
-![LALR(1)-Parsertabelle](images/LALR-Table.png){width="60%"}
+![LALR(1)-Parsertabelle](images/LALR-Table.png){width="60%" web_width="45%"}
 
 # $k \geq 2$ Vorschautoken
 
@@ -186,7 +186,7 @@ Folgendes kann trotzdem helfen:
 
 # Hierarchie der kontextfreien Sprachen
 
-![Sprachenhierarchie](images/CFG-Hierarchy.png){width="80%"}
+![Sprachenhierarchie](images/CFG-Hierarchy.png){width="80%" web_width="70%"}
 
 # Wrap-Up
 
