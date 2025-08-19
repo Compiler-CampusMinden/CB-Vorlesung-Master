@@ -161,7 +161,7 @@ Mehrdeutige Grammatiken können nicht *LR* sein.
 
 ## Steuerung des Parsens mittels der Parse Table
 
-![Parser Schema](images/ParserProgram.png){width="80%"}
+![Parser Schema](images/ParserProgram.png){width="80%" web_width="70%"}
 
 ## Arbeitsweise
 
@@ -294,7 +294,7 @@ Hier entsteht ein Tafelbild.
 
 ## Die LR(0)-Parsertabelle zu G1
 
-![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%"}
+![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%" web_width="45%"}
 
 # Wrap-Up
 
