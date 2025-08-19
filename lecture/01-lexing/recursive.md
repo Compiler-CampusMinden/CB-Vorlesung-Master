@@ -362,12 +362,15 @@ Optionen:
 :::
 
 ::: outcomes
--   k1: Aufgaben eines Lexers
--   k2: Manuelle Implementierung: Rekursiver Abstieg
--   k2: Umgang mit dem Doppel-Puffer
--   k2: Varianten bei der Erkennung von Schlüsselwörtern
--   k2: Fehler und Lösungsansätze in der lexikalischen Analyse
--   k3: Typische Einteilung von Token
--   k3: Implementierung eines Top-Down-Lexers mit Read-Ahead und intelligenter
-    Pufferung
+-   k1: Ich kenne die Aufgaben eines Lexers
+-   k2: Ich kann die manuelle Implementierung eines Lexers mit Hilfe von rekursivem
+    Abstieg erklären
+-   k2: Ich kann den Umgang mit dem Doppel-Puffer erklären
+-   k2: Ich kann die Varianten bei der Erkennung von Schlüsselwörtern an einem
+    Beispiel verdeutlichen
+-   k2: Ich kann typische Fehler und Lösungsansätze in der lexikalischen Analyse
+    erklären
+-   k3: Ich kann für ein Problem eine typische Einteilung von Token vornehmen
+-   k3: Ich kann einen Top-Down-Lexer mit Read-Ahead und intelligenter Pufferung
+    implementieren
 :::
