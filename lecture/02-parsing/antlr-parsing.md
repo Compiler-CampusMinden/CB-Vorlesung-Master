@@ -633,13 +633,15 @@ geschrieben
 :::
 
 ::: outcomes
--   k2: Aufbau der Parser-Regeln
--   k3: Alternativen und optionale/mehrfache Regelteile in Parser-Regeln
--   k3: Vorrang von Alternativen (bei Mehrdeutigkeiten)
--   k3: Benannte Alternativen und Regel-Elemente
--   k2: Aufbau des Parse-Tree
--   k3: Umgang mit Kontext-Objekten
--   k3: Traversierung des Parse-Tree mit den generierten Listenern oder Visitors
+-   k2: Ich kann den Aufbau der Parser-Regeln an einem Beispiel erklären
+-   k3: Ich kann Alternativen und optionale/mehrfache Regelteile in Parser-Regeln
+    umsetzen
+-   k3: Ich kann den Vorrang von Alternativen (bei Mehrdeutigkeiten) definieren
+-   k3: Ich kann Benannte Alternativen und Regel-Elemente zielgerichtet einsetzen
+-   k2: Ich kann den Aufbau des Parse-Tree von ANTLR erklären
+-   k3: Ich kann mit den Kontext-Objekten von ANTLR umgehen
+-   k3: Ich kann den Parse-Tree mit den generierten Listenern oder Visitors
+    traversieren und bearbeiten
 :::
 
 ::: challenges
