@@ -181,7 +181,7 @@ $X \in N \cup T, A \in N, \alpha, \beta \in (N \cup T)^{\ast}$.
 
 ## Die LR(0)-Parsertabelle zu G1
 
-![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%"}
+![LR(0)-Parsertabelle](images/LR_0-Table.png){width="60%" web_width="45%"}
 
 # Und was gibt es noch?
 
@@ -220,7 +220,7 @@ Folgendes kann bei Mehrdeutigkeiten helfen:
 
 # Hierarchie der kontextfreien Sprachen
 
-![Sprachenhierarchie](images/CFG-Hierarchy.png){width="80%"}
+![Sprachenhierarchie](images/CFG-Hierarchy.png){width="80%" web_width="60%"}
 
 # Wrap-Up
 
