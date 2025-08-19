@@ -563,13 +563,14 @@ erzeugten `<name>.output`-File überprüfen.
 :::
 
 ::: outcomes
--   k2: Varianten der Fehler bei Parsern
--   k2: Fehlerbehandlung bei LL-Parsern: single token deletion, single token
-    insertion, sync-and-return
--   k2: Berechnung und Anwendung des Resynchronization Sets
--   k3: Ändern der Fehlermeldungen bei ANTLR
--   k3: Eigene Errorhandler in ANTLR-Parser bauen und einbinden
--   k3: Nutzen von speziellen Fehler-Alternativen in Grammatiken
+-   k2: Ich kann die Varianten der Fehler bei Parsern erklären
+-   k2: Ich kann die typischen Fehlerbehandlung bei LL-Parsern erklären,
+    insb. *single token deletion*, *single token insertion*, *sync-and-return*
+-   k2: Ich kann die Berechnung und Anwendung des Resynchronization Sets an einem
+    Beispiel erklären
+-   k3: Ich kann die Fehlermeldungen bei ANTLR aktiv anpassen
+-   k3: Ich kann eigene Errorhandler in ANTLR-Parsern bauen und einbinden
+-   k3: Ich kann spezielle Fehler-Alternativen in Grammatiken nutzen
 :::
 
 ::: challenges
