@@ -103,7 +103,7 @@ Lexer, obwohl die Erstellung der Lexer auch durch Generatoren erledigt werden k�
 
 # Erkennung mit RE und DFA
 
-![](images/lexer.png)
+![](images/lexer.png){web_width="75%"}
 
 ::: notes
 Die obige Skizze ist eine Kurzzusammenfassung der Theorie-Vorlesung in der letzten
@@ -142,7 +142,7 @@ damit den Kreis schließen :-)
 
 # Erkennen von Zeichenketten für Strickmuster: "10LRL"
 
-![](images/dfa.png){width="45%"}
+![](images/dfa.png){width="45%" web_width="35%"}
 
 ::: notes
 DFA zur Erkennung von Strickanweisungen: Das erste Zeichen muss ein Digit im Bereich
@@ -160,7 +160,7 @@ Kategorie zugewiesen, der Rest wird als "`*`" zusammengefasst.
 \bigskip
 \pause
 
-![](images/delta.png)
+![](images/delta.png){web_width="20%"}
 
 ::: notes
 Für jeden Zustand wird in der Tabelle vermerkt, in welchen Folgezustand beim
