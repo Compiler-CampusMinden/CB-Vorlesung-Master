@@ -332,6 +332,6 @@ Hier noch ein Framework, welches auf das Erstellen von DSL spezialisiert ist:
 :::
 
 ::: outcomes
--   k1: Verschiedene Anwendungen für Compiler durch Einsatz bestimmter Stufen der
-    Compiler-Pipeline
+-   k1: Ich kenne verschiedene Anwendungen für Compiler durch Einsatz bestimmter
+    Stufen der Compiler-Pipeline
 :::
