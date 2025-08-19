@@ -289,7 +289,8 @@ einen Generator aus einer Grammatik o.ä. erzeugt wird.
 :::
 
 ::: outcomes
--   k1: Aufgaben eines Lexers
--   k2: Erkennen von Lexemen mit RE und DFA
--   k2: DFA-nahe Implementierung: Tabellenbasiert und direkt codiert
+-   k1: Ich kenne die Aufgaben eines Lexers
+-   k2: Ich kann das Erkennen von Lexemen mit RE und DFA erklären
+-   k2: Ich kann DFA-nahe Implementierungsvarianten (Tabellen-basiert und direkt
+    codiert) an einem Beispiel erklären
 :::
