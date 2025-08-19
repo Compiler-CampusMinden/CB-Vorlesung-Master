@@ -164,7 +164,7 @@ Betrachten wir erneut die obige Grammatik.
 
 Die Eingabe von "`a = 42;`" führt zu folgendem Parse-Tree:
 
-![](images/hello_ex1.png)
+![](images/hello_ex1.png){width="60%" web_width="30%"}
 
 Diese Eingabe führt zur Erkennung der Token `[ID, WS, =, WS, NUM, ;]`, wobei die
 `WS`-Token verworfen werden und der Parser den Tokenstream `[ID, =, NUM, ;]` erhält.
@@ -193,7 +193,7 @@ recht komplexen Strukturen aber später nicht mehr und vereinfacht den Baum zu e
 Betrachten wir nun die Eingabe `foo = 2+3*4; bar = 3*4+2;`. Diese führt zu folgendem
 Parse-Tree:
 
-![](images/hello_ex2.png)
+![](images/hello_ex2.png){width="60%" web_width="35%"}
 
 Wie man sehen kann, sind in der Grammatik die üblichen Vorrangregeln für die
 Operationen `+` und `*` berücksichtigt - die Multiplikation wird in beiden Fällen
@@ -438,7 +438,7 @@ ANTLR kann zu dieser Grammatik `calc.g4` einen passenden Listener (Interface
 `calcListener`) generieren (Option `-listener` beim Aufruf von `antlr`). Weiterhin
 generiert ANTLR eine leere Basisimplementierung (Klasse `calcBaseListener`):
 
-![](images/ParseTreeListener.png){width="80%"}
+![](images/ParseTreeListener.png){width="80%" web_width="70%"}
 
 (Nur "interessante" Methoden gezeigt.)
 
@@ -515,7 +515,7 @@ ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface `calcVisitor<T
 generieren (Option `-visitor` beim Aufruf von `antlr`). Weiterhin generiert ANTLR
 eine leere Basisimplementierung (Klasse `calcBaseVisitor<T>`):
 
-![](images/ParseTreeVisitor.png){width="80%"}
+![](images/ParseTreeVisitor.png){width="80%" web_width="60%"}
 
 (Nur "interessante" Methoden gezeigt.)
 
