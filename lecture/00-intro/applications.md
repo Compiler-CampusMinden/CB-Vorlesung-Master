@@ -60,7 +60,7 @@ Beispiel: Java mit seiner JVM
 
 # Anwendung: C-Toolchain
 
-![](images/c-toolchain.png){width="80%"}
+![](images/c-toolchain.png){width="80%" web_width="70%"}
 
 ::: notes
 Erinnern Sie sich an die LV "Systemprogrammierung" im dritten Semester :-)
@@ -76,7 +76,7 @@ Beispiele: gcc, clang, ...
 
 # Anwendung: C++-Compiler
 
-![](images/cpp-toolchain.png){width="80%"}
+![](images/cpp-toolchain.png){width="80%" web_width="60%"}
 
 ::: notes
 C++ hat meist keinen eigenen (vollständigen) Compiler :-)
@@ -92,7 +92,7 @@ Beispiel: g++
 
 # Anwendung: Bugfinder
 
-![](images/findbugs.png){width="80%"}
+![](images/findbugs.png){width="80%" web_width="60%"}
 
 ::: notes
 Tools wie FindBugs analysieren den (Java-) Quellcode und suchen nach bekannten
