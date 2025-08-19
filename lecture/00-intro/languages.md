@@ -36,7 +36,7 @@ dass Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
 > No more bottles of beer on the wall, no more bottles of beer. Go to the store and
 > buy some more, 99 bottles of beer on the wall.
 
-[nach ["Lyrics of the song 99 Bottles of
+[Abzählreim "99 Bottles of Beer" nach ["Lyrics of the song 99 Bottles of
 Beer"](https://www.99-bottles-of-beer.net/lyrics.html) on
 99-bottles-of-beer.net]{.origin}
 
