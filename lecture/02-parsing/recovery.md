@@ -48,7 +48,7 @@ ausführbares Programm übersetzt werden darf.
 
 # Fehler beim Parsen
 
-![](images/bc_xml-parsing-error.png)
+![](images/bc_xml-parsing-error.png){web_width="40%"}
 
 [Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC
 George](mailto:bc.george@hsbi.de) ([CC BY-SA
@@ -134,7 +134,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 
 # Überblick Recovery bei Parser-Fehlern
 
-![](images/recovery.png)
+![](images/recovery.png){web_width="30%"}
 
 ::: notes
 -   Fehler im Lexer (hier nicht weiter betrachtet):
@@ -340,7 +340,7 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 ## Ändern der Fehlerbehandlungs-Strategie (global)
 
-![](images/handler.png)
+![](images/handler.png){web_width="60%"}
 
 Sie überschreiben die Klasse `DefaultErrorStrategy` und müssen die oben gezeigten
 Methoden `recover()` und `recoverInline()`aufrufen. Die eigene Fehlerbehandlung
@@ -360,7 +360,7 @@ geänderte Modus nur für die eine Regel auswirkt.
 
 ## Ändern der Fehler-Meldungen
 
-![](images/listener.png)
+![](images/listener.png){web_width="60%"}
 
 Für einen eigenen Listener leitet man sinnvollerweise von `BaseErrorListener` ab und
 überschreibt die leere Implementierung von `syntaxError()`.
