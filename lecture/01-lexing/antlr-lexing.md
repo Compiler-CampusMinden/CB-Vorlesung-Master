@@ -536,14 +536,15 @@ Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrie
 :::
 
 ::: outcomes
--   k3: Lexer-Regeln in ANTLR formulieren und einsetzen
--   k2: Verhalten des Lexers: längste Matches, Reihenfolge
--   k3: Nutzung von Lexer-Aktionen
--   k3: Einsatz von Fragmenten
--   k3: Nutzung von Lexer-Kommandos
--   k3: Zustandsbehaftete Lexer (Modes)
--   k3: Nutzung von Channels
--   k2: Importieren von Grammatiken
+-   k3: Ich kann Lexer-Regeln in ANTLR formulieren und einsetzen
+-   k2: Ich kann das Verhalten des Lexers erklären, insbesondere längste Matches und
+    der Einfluss der Reihenfolge der Regeln
+-   k3: Ich kann Lexer-Aktionen einsetzen
+-   k3: Ich kann Fragmente nutzen
+-   k3: Ich kann Lexer-Kommandos nutzen
+-   k3: Ich kann zustandsbehaftete Lexer (Modes) definieren
+-   k3: Ich kann Channels nutzen
+-   k2: Ich kann erklären, wie Grammatiken importiert werden können
 :::
 
 ::: challenges
