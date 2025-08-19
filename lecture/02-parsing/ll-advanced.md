@@ -347,9 +347,9 @@ Hilfswerkzeug!
 :::
 
 ::: outcomes
--   k3: Implementierung von LL(1)- und LL(k)-Parsern
--   k3: Dynamischer Lookahead mittels Backtracking; Verbesserung der
-    Laufzeiteigenschaften mit Packrat
--   k3: Einsatz von semantischen Prädikaten zum (De-) Aktivieren von Regeln oder
-    Token
+-   k3: Ich kann LL(1)- und LL(k)-Parser implementieren
+-   k3: Ich kann einen dynamischen Lookahead mittels Backtracking erreichen und die
+    Laufzeiteigenschaften mit Packrat verbessern
+-   k3: Ich kann semantische Prädikate zum (De-) Aktivieren von Regeln oder Token
+    einsetzen
 :::
