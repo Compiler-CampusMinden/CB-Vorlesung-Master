@@ -242,7 +242,7 @@ def rule():
 -   **Resynchronization Set**: Vereinigung der *Following Sets* für alle Regeln im
     aktuellen Aufruf-Stack
 
-[nach [@Parr2014, pp. 161-163]]{.origin}
+Definition von *Following/Resynchronization Set* nach [@Parr2014, pp. 161-163]]{.origin}
 :::
 
 \bigskip
