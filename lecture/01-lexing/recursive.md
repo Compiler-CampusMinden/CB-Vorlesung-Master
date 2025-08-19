@@ -136,7 +136,7 @@ Vergleiche auch [Wikipedia: "Circular
 Buffer"](https://en.wikipedia.org/wiki/Circular_buffer).
 :::
 
-![](images/doublebuffer.png){width="80%" web_width="60%"}
+![](images/doublebuffer.png){width="80%" web_width="65%"}
 
 ``` python
 start = 0; end = 0; fill(buffer[0:n])
