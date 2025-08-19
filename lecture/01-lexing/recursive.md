@@ -136,7 +136,7 @@ Vergleiche auch [Wikipedia: "Circular
 Buffer"](https://en.wikipedia.org/wiki/Circular_buffer).
 :::
 
-![](images/doublebuffer.png){width="80%"}
+![](images/doublebuffer.png){width="80%" web_width="60%"}
 
 ``` python
 start = 0; end = 0; fill(buffer[0:n])
@@ -252,7 +252,7 @@ Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch
 Tokennamen eindeutig rekonstruierbar ist.
 
 | Token     | Beschreibung                                         | Beispiel-Lexeme      |
-|:-----------|:--------------------------------------------------|:---------------------|
+|:----------|:-----------------------------------------------------|:---------------------|
 | `if`      | Zeichen `i` und `f`                                  | `if`                 |
 | `relop`   | `<` oder `>` oder `<=` oder `>=` oder `==` oder `!=` | `<`, `<=`            |
 | `id`      | Buchstabe, gefolgt von Buchstaben oder Ziffern       | `pi`, `count`, `x3`  |
