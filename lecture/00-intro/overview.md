@@ -52,7 +52,7 @@ Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:
 
 # Compiler: Big Picture
 
-![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true){width="80%"}
 
 [[A Map of the Territory
 (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
@@ -71,7 +71,7 @@ verschiedenen Stufen und den zwischen den Stufen ausgetauschten Artefakten
 # Compiler: Prinzipieller Aufbau
 :::
 
-![](images/architektur_cb.png){width="80%"}
+![](images/architektur_cb.png){width="80%" web_width="70%"}
 
 ::: notes
 ## Frontend, Analyse
