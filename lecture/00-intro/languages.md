@@ -264,5 +264,6 @@ Beispiel Themen wie Scanner/Parser/AST, Interpreter, Object Code und VM zu studi
 :::
 
 ::: outcomes
--   k1: Verschiedene Beispiele für verschiedene Programmiersprachen und Paradigmen
+-   k1: Ich kenne verschiedene Beispiele für verschiedene Programmiersprachen und
+    Paradigmen
 :::
