@@ -456,9 +456,11 @@ T t'(T inh) {
 :::
 
 ::: outcomes
--   k2: Konzept der attributierten Grammatiken: Anreicherung mit Attributen und
-    semantischen Regeln
--   k2: Unterschied zwischen geerbten und berechneten Attributen
--   k2: Umsetzung von SDD mit Hilfe von SDT
--   k3: Einfache semantische Analyse mit Hilfe von attributierten Grammatiken
+-   k2: Ich kann das Konzept der attributierten Grammatiken erklären und in einem
+    Beispiel die Anreicherung mit Attributen und semantischen Regeln demonstrieren
+-   k2: Ich kann den Unterschied zwischen geerbten und berechneten Attributen
+    erklären
+-   k2: Ich kann die Umsetzung von SDD mit Hilfe von SDT erklären
+-   k3: Ich kann eine einfache semantische Analyse mit Hilfe von attributierten
+    Grammatiken durchführen
 :::
