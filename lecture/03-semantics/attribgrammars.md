@@ -286,7 +286,7 @@ def visit(N):
 
 ## Beispiel: Annotierter Syntaxbaum für `5*8+2`
 
-![Annotierter Parse-Tree](images/annotatedparsetree.png)
+![Annotierter Parse-Tree](images/annotatedparsetree.png){width="40%"}
 
 ## Erzeugung des AST aus dem Parse-Tree für `5*8+2`
 
@@ -301,7 +301,7 @@ def visit(N):
 
 \normalsize
 
-![AST](images/ast.png){width="30%"}
+![AST](images/ast.png){width="30%" web_width="20%"}
 
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
 
@@ -332,7 +332,7 @@ umformuliert ohne Links-Rekursion und mit berechneten und geerbten Attributen:
 
 ::: {.column width="45%"}
 ![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur
-Multiplikation)](images/annotatedparsetree2.png)
+Multiplikation)](images/annotatedparsetree2.png){web_width="40%"}
 :::
 :::::
 ::::::
