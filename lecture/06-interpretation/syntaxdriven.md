@@ -7,7 +7,7 @@ title: Syntaxgesteuerte Interpreter
 Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen
 Ergebnisse:
 
-![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
+![](https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true){width="60%"}
 
 |   | Phase                          | Ergebnis                                                        |
 |:--|:-------------------------------|:----------------------------------------------------------------|
@@ -46,7 +46,7 @@ betrachten.
 
 # Überblick Interpreter
 
-![](images/interpreter.png){width="60%"}
+![](images/interpreter.png){width="60%" web_width="50%"}
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse. Es
