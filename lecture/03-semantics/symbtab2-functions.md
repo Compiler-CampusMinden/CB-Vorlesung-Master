@@ -70,7 +70,7 @@ void g(int z){}
 
 # Erweiterung des Klassendiagramms für Funktions-Scopes
 
-![](images/functionscopesuml.png){width="80%"}
+![](images/functionscopesuml.png){width="80%" web_width="65%"}
 
 [Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
 
