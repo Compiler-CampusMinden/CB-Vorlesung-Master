@@ -395,10 +395,11 @@ muss am Ende die ursprüngliche Umgebung wieder hergestellt werden (`finally`-Bl
 :::
 
 ::: outcomes
--   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des
-    Visitor-Patterns
--   k3: Interpreter müssen Namen und Werte speichern: Environment-Strukturen analog
-    zu den Symboltabellen
--   k3: Code-Ausführung im Interpreter durch eine Read-Eval-Schleife:
-    Implementierung mit einem Visitor
+-   k3: Ich kann die Traversierung von Parse-Trees implementieren und dabei mit
+    Hilfe des Visitor-Patterns Aktionen ausführen
+-   k3: Ich kann Environment-Strukturen analog zu den Symboltabellen aufbauen, um
+    Namen und Werte dynamisch zu speichern
+-   k3: Ich kann eine Read-Eval-Schleife implementieren und dabei durch
+    Traversierung des AST die dort abgelegten Anweisungen und Ausdrücke und
+    Kontrollstrukturen ausführen
 :::
