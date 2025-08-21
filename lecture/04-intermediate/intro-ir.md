@@ -18,7 +18,7 @@ Maschinencode der sogenannte "Drei-Adressen-Code" und Assemblercode.
 
 # Einordnung
 
-![](images/architektur_cb.png)
+![](images/architektur_cb.png){web_width="60%"}
 
 ::: notes
 Die Schritte in der letzten Phase der Compiler-Pipeline können *sehr*
@@ -41,7 +41,7 @@ Häufig wird der AST selbst als Zwischencode verwendet. Ein Beispiel dafür ist
 [Pandoc](https://pandoc.org/).
 :::
 
-![](images/pandoc.png)
+![](images/pandoc.png){web_width="80%"}
 
 ::: notes
 ``` markdown
