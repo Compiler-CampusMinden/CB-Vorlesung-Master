@@ -536,8 +536,8 @@ nicht, man spart aber 36% Energie.
 :::
 
 ::: outcomes
--   k1: Algebraische Optimierungen
--   k1: Maschinenunabhängige Optimierungen
--   k1: Maschinenabhängige Optimierungen
--   k1: Datenflussanalyse auf 3-Adress-Code
+-   k1: Ich kenne verschiedene algebraische Optimierungen
+-   k1: Ich kenne verschiedene maschinenunabhängige Optimierungen
+-   k1: Ich kenne verschiedene maschinenabhängige Optimierungen
+-   k1: Ich kenne Datenflussanalyse auf 3-Adress-Code
 :::
