@@ -446,9 +446,9 @@ href="https://github.com/Compiler-CampusMinden/CPL-Vorlesung-Master/blob/master/
 :::
 
 ::: outcomes
--   k3: Attribute und eingebettete Aktionen in Bison und ANTLR
--   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des
+-   k3: Ich kann Attribute und eingebettete Aktionen in ANTLR einsetzen
+-   k3: Ich kann Parse-Trees traversieren und Aktionen implementieren mit Hilfe des
     Listener-Patterns
--   k3: Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des
+-   k3: Ich kann Parse-Trees traversieren und Aktionen implementieren mit Hilfe des
     Visitor-Patterns
 :::
