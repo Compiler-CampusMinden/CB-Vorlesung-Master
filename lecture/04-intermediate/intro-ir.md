@@ -449,5 +449,6 @@ und
 :::
 
 ::: outcomes
--   k1: Varianten von Zwischencode, Vor- und Nachteile
+-   k1: Ich kenne verschiedene Varianten von Zwischencode und kann deren Vor- und
+    Nachteile benennen
 :::
