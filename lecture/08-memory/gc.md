@@ -79,7 +79,7 @@ werden.
 
 # Erreichbarkeit
 
-![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png?raw=true)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png?raw=true){width="80%"}
 
 [[reachable.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
@@ -108,7 +108,7 @@ Das führt zu einem zweistufigen Algorithmus:
 2.  **Sweep**: Lösche alle anderen Objekte.
 :::
 
-![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png?raw=true)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png?raw=true){width="80%"}
 
 [[mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
@@ -396,7 +396,7 @@ anderweitig auf dieses Objekt referenziert wird.
 :::: {.column width="50%"}
 \pause
 
-![](images/delete_example.png)
+![](images/delete_example.png){width="80%"}
 
 ::: notes
 Im Beispiel wird `delete(A)` ausgeführt: Der Referenz-Zähler (*RC*) von A wird
