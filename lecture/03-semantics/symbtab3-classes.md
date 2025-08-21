@@ -247,9 +247,9 @@ ein Feld `x` implizit ein `this.x` aufgelöst, wobei `this` die Klasse auflöst 
 :::
 
 ::: outcomes
--   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit
-    einem Listener
--   k3: Attribute von Klassen und Strukturen auflösen
+-   k3: Ich kann Symboltabellen für Nested Scopes implementieren unter Nutzung von
+    passenden Strukturen/Klassen und einem Listener
+-   k3: Ich kann Attribute von Klassen und Strukturen auflösen
 :::
 
 ::: challenges
