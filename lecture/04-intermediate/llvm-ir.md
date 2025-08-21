@@ -21,7 +21,7 @@ Befehlssatz als Ziel haben. Was tun?
 
 ## Themen für heute: Letzte Phase in Compiler-Pipeline
 
-![Compiler-Pipeline](images/architektur_cb.png)
+![Compiler-Pipeline](images/architektur_cb.png){web_width="60%"}
 
 # LLVM - Ein Überblick
 
@@ -104,7 +104,7 @@ Fehlermeldungen und Warnungen
 
 ## Clang Toolchain
 
-![](./images/opt_chain.png)
+![](images/opt_chain.png){width="80%"}
 
 ## Die Compiler-Runtime-Bibliothek
 
@@ -282,7 +282,7 @@ Ein Beispiel:
 
 Die LLVM IR ist hierarchisch aufgebaut:
 
-![](./images/hierarchy.png)
+![](images/hierarchy.png){width="80%" web_width="60%"}
 
 ## Instruktionen
 
@@ -395,7 +395,7 @@ Ausgabe des Kontrollflussgraphen im `.dot` Format:
 ## Kontrollflussgraph (Ergebnis)
 :::
 
-![](./images/func_cfg.png){width="60%"}
+![](images/func_cfg.png){width="60%" web_width="50%"}
 
 ## Essentiell: die Phi-Instruktion
 
