@@ -518,5 +518,5 @@ JVM](https://ionutbalosin.com/2019/12/jvm-garbage-collectors-benchmarks-report-1
 :::
 
 ::: outcomes
--   k3: Prinzipien der Garbage Collection
+-   k2: Ich kann die Prinzipien der Garbage Collection an einem Beispiel erklären
 :::
