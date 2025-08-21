@@ -425,6 +425,6 @@ Skizze zur Erzeugung von Assembler-Code
 :::
 
 ::: outcomes
--   k3: Code-Generierung (Maschinencode) erfordert Auflösung von Speicheradressen
-    und -breiten
+-   k2: Ich kann an einem Beispiel erklären, wie bei der Generierung von
+    Maschinencode die Speicheradressen aufgelöst werden
 :::
