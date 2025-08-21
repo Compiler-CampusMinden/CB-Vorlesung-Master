@@ -148,7 +148,7 @@ Typ-Symbole unterscheiden zu können.
 
 ![](images/nestedscopesuml.png){width="80%" web_width="60%"}
 
-[Eigene Modellierung nach einer Idee in [@Parr2010, p. 142]]{.origin}
+[Nested Scopes: Eigene Modellierung nach einer Idee in [@Parr2010, p. 142]]{.origin}
 
 ::: notes
 ## Alternative Implementierung über einen Stack
@@ -183,7 +183,7 @@ class Scope:
         symbol.scope = self     # track the scope in each symbol
 ```
 
-[Eigene Implementierung nach einer Idee in [@Parr2010, p. 169]]{.origin}
+[Nested Scopes: Eigene Implementierung nach einer Idee in [@Parr2010, p. 169]]{.origin}
 
 ::: notes
 **Anmerkung**: In der Klasse `Symbol` kann man ein Feld `scope` vom Typ `Scope`
