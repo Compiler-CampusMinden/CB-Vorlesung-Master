@@ -30,7 +30,7 @@ der Instruction-Pointer mit auf dem Stack abgelegt werden.
 
 # Einordnung
 
-![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true)
+![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true){width="80%"}
 
 [[A Map of the Territory
 (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
@@ -83,7 +83,7 @@ Ausführung gebracht.
 
 # Virtueller Speicher
 
-![](images/virtueller-speicher.png){width="40%"}
+![](images/virtueller-speicher.png){width="40%" web_width="30%"}
 
 ::: notes
 -   Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu\
@@ -299,13 +299,7 @@ R:  x = Stack[SP+4]     ;; Hole Rückgabewert
 :::
 
 ::::: {.column width="20%"}
-::: slides
-![](images/f-stackframe.png)
-:::
-
-::: notes
-![](images/f-stackframe.png){width="30%"}
-:::
+![](images/f-stackframe.png){web_width="30%"}
 :::::
 :::::::
 
@@ -396,13 +390,7 @@ Register laden und entsprechend den *SP* hochzählen.
 :::
 
 ::::: {.column width="20%"}
-::: slides
-![](images/f-epilog.png)
-:::
-
-::: notes
-![](images/f-epilog.png){width="30%"}
-:::
+![](images/f-epilog.png){web_width="30%"}
 :::::
 :::::::
 
