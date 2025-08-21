@@ -146,7 +146,7 @@ eingebauten Typen wird ein "Marker-Interface" `Type` erstellt, um Variablen- und
 Typ-Symbole unterscheiden zu können.
 :::
 
-![](images/nestedscopesuml.png){width="80%"}
+![](images/nestedscopesuml.png){width="80%" web_width="60%"}
 
 [Eigene Modellierung nach einer Idee in [@Parr2010, p. 142]]{.origin}
 
