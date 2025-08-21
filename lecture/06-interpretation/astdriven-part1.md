@@ -261,7 +261,7 @@ class Interpreter(BaseVisitor<Object>):
         self.env = Environment()
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[AST-Interpreter: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
@@ -317,7 +317,7 @@ class Environment:
         else: raise RuntimeError(n, "undefined variable")
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Evaluieren einer Zuweisung: Eigener Code basierend auf einer Idee nach
 [Environment.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Environment.java#L38)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
@@ -361,7 +361,7 @@ def block(self, AST t):
     return None;
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Nested Environments: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L92)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
