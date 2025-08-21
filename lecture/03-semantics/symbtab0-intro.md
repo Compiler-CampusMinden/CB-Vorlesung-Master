@@ -370,6 +370,7 @@ Null-Pointer übergeben wird und anschließend dereferenziert wird.
 :::
 
 ::: outcomes
--   k2: Aufgaben der semantischen Analyse
--   k2: Bedeutung von Symboltabellen: Aufgaben, Verbindung zu Compiler-Phasen
+-   k2: Ich kann die Aufgaben der semantischen Analyse an einem Beispiel erklären
+-   k2: Ich kann die Bedeutung von Symboltabellen erklären und die Aufgaben und
+    Verbindung zu den Compiler-Phasen verdeutlichen
 :::
