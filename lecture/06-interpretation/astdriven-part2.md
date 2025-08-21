@@ -114,7 +114,7 @@ def funcDecl(self, AST t):
 :::
 :::::
 
-[Eigener Code basierend auf einer Idee nach
+[Funktionsdeklaration: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
@@ -154,7 +154,7 @@ def funcCall(self, AST t):
     self.env = prev
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Funktionsaufruf: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L57)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
@@ -215,7 +215,7 @@ def funcCall(self, AST t):
 :::::
 
 ::: notes
-[Eigener Code basierend auf einer Idee nach
+[Rückgabewerte: Eigener Code basierend auf einer Idee nach
 [Return.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Return.java#L4)
 und
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L74)
@@ -257,7 +257,7 @@ def funcCall(self, AST t):
     ...
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Native Funktionen: Eigener Code basierend auf einer Idee nach
 [LoxCallable.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxCallable.java#L6)
 und
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6)
@@ -307,7 +307,7 @@ def classDef(self, AST t):
     self.env.define(t.ID().getText(), clazz)
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Klassen: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L115)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
@@ -340,7 +340,7 @@ class Instance:
         raise RuntimeError(name, "undefined method")
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Instanzen: Eigener Code basierend auf einer Idee nach
 [LoxClass.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxClass.java#L11)
 und
 [LoxInstance.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxInstance.java#L7)
@@ -388,7 +388,7 @@ class Fun(Callable):
         return Fun(self.decl, e)
 ```
 
-[Eigener Code basierend auf einer Idee nach
+[Methodenaufruf: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L31)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
 ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
