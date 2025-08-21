@@ -318,8 +318,8 @@ Debugger noch gebraucht werden.
 :::
 
 ::: outcomes
--   k3: Aufbau von Symboltabellen für Nested Scopes inkl. Strukturen/Klassen mit
-    einem Listener
--   k3: Auflösen von Symbolen über die Scopes
--   k3: Einfache statische Prüfungen anhand der Symboltabellen
+-   k3: Ich kann Symboltabellen für Nested Scopes implementieren unter Nutzung von
+    passenden Strukturen/Klassen und einem Listener
+-   k3: Ich kann Symbole über die Scopes auflösen
+-   k3: Ich kann einfache statische Prüfungen anhand der Symboltabellen durchführen
 :::
