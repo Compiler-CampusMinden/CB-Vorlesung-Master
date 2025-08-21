@@ -40,7 +40,7 @@ x = f(x);
 :::
 
 ::: {.column width="70%"}
-![](images/parsetree.png){width="80%"}
+![](images/parsetree.png){width="80%" web_width="70%"}
 :::
 :::::
 
@@ -94,7 +94,7 @@ Oft werden gar nicht alle Phasen und alle Zwischendarstellungen benötigt.
 
 # Semantische Analyse und Symboltabellen
 
-![](images/architektur_cb.png){width="80%"}
+![](images/architektur_cb.png){width="80%" web_width="60%"}
 
 # Syntax und Semantik
 
@@ -240,13 +240,7 @@ for (i=0; i<10; i++) {
 :::
 
 ::::: {.column width="20%"}
-::: slides
-![](images/simpletable.png){width="80%"}
-:::
-
-::: notes
-![](images/simpletable.png){width="20%"}
-:::
+![](images/simpletable.png){width="80%" web_width="10%"}
 :::::
 :::::::
 
