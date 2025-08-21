@@ -6,7 +6,7 @@ title: "Syntaxanalyse: LR-Parser (LR(0), LALR)"
 
 ::: attachments
 -   [Annotierte Folien:
-    LR-Parser1](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lr-parser1.ann.ma.pdf)
+    LR-Parser](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lr-parser.ann.ma.pdf)
 :::
 
 # Wiederholung
