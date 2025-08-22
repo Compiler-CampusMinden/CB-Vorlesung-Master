@@ -203,7 +203,7 @@ def consume():
     lookahead = lexer.nextToken()
 ```
 
-[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 43]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 43]]{.origin nolist=true}
 
 ::: notes
 Dabei setzt man in der Klasse `Parser` zwei Attribute voraus:
@@ -386,7 +386,7 @@ def lookahead(i):
     return lookahead[(start+i-1) % k]  # i==1: start
 ```
 
-[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 47]]{.origin}
+[Eigener Code basierend auf einer Idee nach [@Parr2010, p. 47]]{.origin nolist=true}
 
 [[Tafel: Beispiel mit Ringpuffer: k=3 und "\[1,2,3,4,5\]"]{.ex}]{.slides}
 

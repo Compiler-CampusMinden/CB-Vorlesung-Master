@@ -52,7 +52,7 @@ ausführbares Programm übersetzt werden darf.
 
 [Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC
 George](mailto:bc.george@hsbi.de) ([CC BY-SA
-4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin}
+4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin nolist=true}
 
 ::: notes
 -   Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern
@@ -242,7 +242,7 @@ def rule():
 -   **Resynchronization Set**: Vereinigung der *Following Sets* für alle Regeln im
     aktuellen Aufruf-Stack
 
-Definition von *Following/Resynchronization Set* nach [@Parr2014, pp. 161-163]]{.origin}
+[Definition von *Following/Resynchronization Set* nach [@Parr2014, pp. 161-163]]{.origin}
 :::
 
 \bigskip

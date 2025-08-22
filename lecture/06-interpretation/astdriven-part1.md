@@ -264,7 +264,7 @@ class Interpreter(BaseVisitor<Object>):
 [AST-Interpreter: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L21)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 # Ausführen einer Variablendeklaration
 
@@ -320,7 +320,7 @@ class Environment:
 [Evaluieren einer Zuweisung: Eigener Code basierend auf einer Idee nach
 [Environment.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Environment.java#L38)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Wenn wir bei der Traversierung des AST mit `eval()` bei einer Zuweisung
@@ -364,7 +364,7 @@ def block(self, AST t):
 [Nested Environments: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L92)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Beim Interpretieren von Blöcken muss man einfach nur eine weitere

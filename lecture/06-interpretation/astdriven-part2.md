@@ -117,7 +117,7 @@ def funcDecl(self, AST t):
 [Funktionsdeklaration: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Man definiert im aktuellen Environment den Funktionsnamen und hält dazu den
@@ -157,7 +157,7 @@ def funcCall(self, AST t):
 [Funktionsaufruf: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L57)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Zunächst wird die `ID` im aktuellen Kontext ausgewertet. In der obigen Grammatik ist
@@ -220,7 +220,7 @@ def funcCall(self, AST t):
 und
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L74)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 Rückgabewerte für den Funktionsaufruf werden innerhalb von `block` berechnet, wo
 eine Reihe von Anweisungen interpretiert werden, weshalb `block` ursprünglich keinen
@@ -262,7 +262,7 @@ def funcCall(self, AST t):
 und
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L6)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Normalerweise wird beim Interpretieren eines Funktionsaufrufs der Funktionskörper
@@ -310,7 +310,7 @@ def classDef(self, AST t):
 [Klassen: Eigener Code basierend auf einer Idee nach
 [Interpreter.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/Interpreter.java#L115)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 **Anmerkung**: In dieser Darstellung wird der Einfachheit halber nur auf Methoden
@@ -345,7 +345,7 @@ class Instance:
 und
 [LoxInstance.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxInstance.java#L7)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Instanzen einer Klasse werden durch den funktionsartigen "Aufruf" der Klassen
@@ -391,7 +391,7 @@ class Fun(Callable):
 [Methodenaufruf: Eigener Code basierend auf einer Idee nach
 [LoxFunction.java](https://github.com/munificent/craftinginterpreters/blob/master/java/com/craftinginterpreters/lox/LoxFunction.java#L31)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin nolist=true}
 
 ::: notes
 Nach dem Interpretieren von Klassendefinitionen sind die Methoden in der Klasse
