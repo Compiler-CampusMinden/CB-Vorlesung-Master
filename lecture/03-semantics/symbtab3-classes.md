@@ -47,7 +47,7 @@ void f() {
 
 ![](images/structscopesuml.png){width="80%"}
 
-[Structs: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin nolist=true}
+[Structs: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.credits nolist=true}
 
 ::: notes
 Strukturen stellen wie Funktionen sowohl einen Scope als auch ein Symbol dar.
@@ -106,7 +106,7 @@ void f() {
 ::: {.column width="54%"}
 ![](images/structscopesuml.png){width="90%"}
 
-[Structs: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.origin nolist=true}
+[Structs: Eigene Modellierung nach einer Idee in [@Parr2010, p. 162]]{.credits nolist=true}
 :::
 ::::::
 :::::::
@@ -142,7 +142,7 @@ public
 
 ![](images/classscopesuml.png){width="80%"}
 
-[Klassen: Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.origin nolist=true}
+[Klassen: Eigene Modellierung nach einer Idee in [@Parr2010, p. 167]]{.credits nolist=true}
 
 ::: notes
 Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die
@@ -172,7 +172,7 @@ class Clazz(Struct):
         else: return None
 ```
 
-[Klassen: Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.origin nolist=true}
+[Klassen: Eigene Implementierung nach einer Idee in [@Parr2010, p. 172]]{.credits nolist=true}
 
 ::: notes
 **Hinweis**: Die obige Implementierungsskizze soll vor allem das Prinzip

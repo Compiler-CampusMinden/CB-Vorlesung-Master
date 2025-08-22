@@ -57,7 +57,7 @@ Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:
 [[A Map of the Territory
 (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.credits}
 
 ::: notes
 **Begriffe und Phasen**

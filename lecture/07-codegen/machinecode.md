@@ -35,7 +35,7 @@ der Instruction-Pointer mit auf dem Stack abgelegt werden.
 [[A Map of the Territory
 (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
 by [Bob Nystrom](https://github.com/munificent) on Github.com
-([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.credits}
 
 ::: notes
 Die Erzeugung von Maschinencode ist in gewisser Weise ein "Parallelweg" zum Erzeugen
@@ -58,7 +58,7 @@ Hier der Vollständigkeit halber ein Ausblick ...
 
 [[Intel i80286 arch](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg)
 by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa) on Wikimedia.org
-([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0))]{.origin}
+([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0))]{.credits}
 
 ::: notes
 Am Beispiel der noch übersichtlichen Struktur des Intel i80286 lassen sich
