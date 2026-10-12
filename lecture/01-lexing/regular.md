@@ -91,7 +91,7 @@ ihnen repräsentierten Sprache **L**:
 
     -   $\epsilon$ und $\emptyset$ sind reguläre Ausdrücke mit $L(\epsilon) =
           \lbrace \epsilon\rbrace$, $L(\emptyset)=\emptyset$
-    -   Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit
+    -   Sei $a$ ein Symbol $\Rightarrow a$ ist ein regex mit
         $L(a) = \lbrace a\rbrace$
 
 -   Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
@@ -124,7 +124,7 @@ $\qquad X \rightarrow Y\ \text{mit}\ X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast
 ## Ableitungen
 
 **Def.:** Sei $G = (N, T, P, S)$ eine Grammatik, sei $\alpha A \beta$ eine
-Zeichenkette über $(N \cup T)^{\ast}$ und sei $A$ $\rightarrow \gamma$ eine
+Zeichenkette über $(N \cup T)^{\ast}$ und sei $A \rightarrow \gamma$ eine
 Produktion von $G$.
 
 Wir schreiben: $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$
