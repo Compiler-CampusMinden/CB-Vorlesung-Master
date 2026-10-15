@@ -51,12 +51,12 @@ Potentiell interessante Literatur im Bereich DSL:
 
 # Projektanregungen
 
-## Escape-Rooms
+## Escape-Rooms mit MiniJava-Auswertung
 
 Parsen und Interpretieren von MiniJava-Code im
 [Dungeon](https://github.com/Dungeon-CampusMinden/Dungeon)
 
-![](images/DungeonCompiler.png){width="55%"}
+![](images/dungeon-interpreter.png){width="50%"}
 
 ::: details
 Im [Dungeon-Projekt](https://github.com/Dungeon-CampusMinden/Dungeon) wurden
@@ -92,11 +92,11 @@ Gestaltung der Fehlermeldungen auf die Lösungszeit/Fehlerrate auswirkt.
 Dieses Projekt kann auch mit den nachfolgenden Projekt-Anregungen kombiniert werden.
 :::
 
-## Einsteiger-IDE
+## Einsteiger-IDE für Escape-Rooms
 
 Text-Widget mit LSP als Einsteiger-IDE
 
-![](images/DungeonCompiler.png){width="55%"}
+![](images/dungeon-mini-ide.png){width="50%"}
 
 ::: details
 Für die Code-Eingabe im
