@@ -110,9 +110,9 @@ Zu diesen Leistungen soll ein **Lerntagebuch** (s.u.) geführt und abgegeben wer
 (**jede Person individuell**).
 
 Das Exposé, die Slides (Edmonton-Talk, Kurzvortrag, Fachvortrag,
-Abschlusspräsentation) und das Lerntagebuch sind im
-**[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1738006)** als PDF abzugeben.
-Bitte beachtet die jeweiligen Abgabefristen im ILIAS!
+Abschlusspräsentation), das Projekt (via GitHub-Link im Lerntagebuch) und das
+Lerntagebuch sind im **[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1738006)**
+als PDF abzugeben. Bitte beachtet die jeweiligen Abgabefristen im ILIAS!
 
 ### **Gesamtnote**: Mündliche Prüfung (einzeln, ca. 45 Minuten)
 
