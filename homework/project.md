@@ -62,9 +62,9 @@ Parsen und Interpretieren von MiniJava-Code im
 Im [Dungeon-Projekt](https://github.com/Dungeon-CampusMinden/Dungeon) wurden
 verschiedene Escape-Room-Rätsel realisiert. In einigen dieser Rätseln sollen die
 Spieler:innen Aufgaben lösen, indem sie MiniJava-Code (ein eingeschränkter
-Sub-Dialekt von Java) in einem Textfenster eingeben. Dieser Code muss syntaktisch
-und semantisch korrekt sein und soll geeignet evaluiert werden. Man sieht dabei live
-die Auswertung und die Auswirkung auf das Spiel. Diese Rätsel richten sich an
+Sub-Dialekt von Java) in ein Textfenster eingeben. Dieser Code muss syntaktisch und
+semantisch korrekt sein und soll geeignet evaluiert werden. Man sieht dabei live die
+Auswertung und die Auswirkung auf das Spiel. Diese Rätsel richten sich an
 Programmier-Einsteiger:innen, und zur Lösung der Rätsel sollen beispielsweise
 Kontrollstrukturen, Schleifen, Funktionen und ggf. auch Klassen definiert und
 eingesetzt werden.
@@ -78,7 +78,7 @@ wenn damit die Aufgabe inhaltlich korrekt gelöst werden würde.
 Ziel dieses Projekt-Vorschlags ist zunächst die Erstellung eines inkrementellen
 Interpreters für die MiniJava-Eingaben. Der Interpreter muss dabei vorausgegangene
 Eingaben berücksichtigen (Session-Kontext oder Re-Initialisierung) und zu einer
-Einabe ein Ergebnis liefern oder verständliche Fehlermeldungen. In einer zweiten
+Eingabe ein Ergebnis liefern oder verständliche Fehlermeldungen. In einer zweiten
 Phase soll eine "Welt-Interaktion" (Interaktion des Interpreters mit dem Dungeon)
 realisiert werden: Über "eingebaute" Funktionen ("native functions") sollen
 Spieler:innen direkt in ihrem MiniJava-Code Einfluss auf Elemente im Dungeon nehmen
