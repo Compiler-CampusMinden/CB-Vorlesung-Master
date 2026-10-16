@@ -123,6 +123,11 @@ mündliche Prüfung wird über Zoom durchgeführt und dauert ca. 45 Minuten.
 
 ### Hinweise
 
+-   Die mündliche Prüfung und die Studienleistung sind zwei unabhängige
+    Prüfungsleistungen und werden separat im CAT angemeldet. Die Studienleistung
+    schaltet die Credits für das Modul frei, die mündliche Prüfung ergibt die
+    Modulnote. Die Studienleistung ist **keine** Vorleistung für die mündliche
+    Prüfung.
 -   Die Bearbeitung der Leistungen erfolgt im Team.
 -   Ein Team umfasst 3 Personen.
 -   Es gibt keine Aufgabenblätter. Stattdessen haben wir verschiedene Vorträge und
