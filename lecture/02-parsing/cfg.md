@@ -31,7 +31,7 @@ beschreiben, die unendlich viele Werte annehmen können.
 
 -   $a^ib^{2*i}$ für $0 \leq i \leq 3$ ist regulär
 
--   Wo finden sich die oben genannten VAriablen bei einem DFA wieder?
+-   Wo finden sich die oben genannten Variablen bei einem DFA wieder?
 
 -   Warum ist die erste Sprache oben nicht regulär, die zweite aber?
 
@@ -86,8 +86,8 @@ Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 
 -   $\delta(q, a, X)$ hat höchstens ein Element für jedes $q \in Q, a \in\Sigma$
     oder $(a = \epsilon$ und $X \in \Gamma)$.
--   Wenn $\delta (q, a, x)$ nicht leer ist für ein $a \in \Sigma$, dann muss
-    $\delta (q, \epsilon, x)$ leer sein.
+-   Wenn $\delta (q, a, X)$ nicht leer ist für ein $a \in \Sigma$, dann muss
+    $\delta (q, \epsilon, X)$ leer sein.
 
 Deterministische PDAs werden auch *DPDAs* genannt.
 
