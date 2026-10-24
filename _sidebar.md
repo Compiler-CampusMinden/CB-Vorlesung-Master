@@ -1,0 +1,29 @@
+- [**Syllabus**](readme.md)
+- **Vorlesungsunterlagen**
+  - **Überblick**
+    - [Struktur eines Compilers](lecture/00-intro/overview.md)
+    - [Bandbreite der Programmiersprachen](lecture/00-intro/languages.md)
+    - [Anwendungen](lecture/00-intro/applications.md)
+  - **Lexikalische Analyse**
+    - [Reguläre Sprachen, Ausdrucksstärke](lecture/01-lexing/regular.md)
+    - [Lexer: Handcodierte Implementierung](lecture/01-lexing/recursive.md)
+  - **Syntaktische Analyse**
+    - [CFG](lecture/02-parsing/cfg.md)
+    - [LL-Parser](lecture/02-parsing/ll-parser.md)
+    - [LL-Parser selbst implementiert](lecture/02-parsing/ll-parser-impl.md)
+    - [Syntaxanalyse: LR-Parser (LR(0), LALR)](lecture/02-parsing/lr-parser.md)
+  - **Semantische Analyse**
+    - [SymbTab0: Überblick Symboltabellen](lecture/03-semantics/symbtab0-intro.md)
+    - [SymbTab1: Nested Scopes](lecture/03-semantics/symbtab1-scopes.md)
+    - [SymbTab2: Funktionen](lecture/03-semantics/symbtab2-functions.md)
+    - [SymbTab3: Strukturen und Klassen](lecture/03-semantics/symbtab3-classes.md)
+    - [Typen, Type Checking und Attributierte Grammatiken](lecture/03-semantics/attribgrammars.md)
+  - **Interpreter**
+    - [AST-basierte Interpreter: Basics](lecture/06-interpretation/astdriven-part1.md)
+    - [AST-basierte Interpreter: Funktionen und Klassen](lecture/06-interpretation/astdriven-part2.md)
+    - [Syntaxgesteuerte Interpreter](lecture/06-interpretation/syntaxdriven.md)
+  - **Optimierung**
+    - [Optimierung und Datenflussanalyse](lecture/05-optimization/optimization.md)
+- **Praktikum**
+  - [Seminaristischer Unterricht: Vortragsthemen Kurzvortrag/Fachvortrag](homework/talk.md)
+  - [DSL-Projekt: Sprachen und Compiler](homework/project.md)
